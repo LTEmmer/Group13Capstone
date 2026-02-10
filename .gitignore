@@ -4,6 +4,7 @@
 .nomedia
 
 # Godot-specific ignores
+*.uid
 .import/
 export.cfg
 export_credentials.cfg
@@ -15,3 +16,20 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Build output (DO NOT COMMIT)
+bin/
+obj/
+
+# ===== IDE =====
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+
+# ===== OS / LOCAL =====
+Thumbs.db
+.DS_Store
+*.lnk
+
