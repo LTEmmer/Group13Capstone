@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://b7hgirpfx6iw2"]
 
-[ext_resource type="Script" uid="uid://dbsk2rbel58a7" path="res://game/ui/pause_menue/PauseMenu.cs" id="1_f48la"]
+[ext_resource type="Script" uid="uid://qr0ptjsgc05a" path="res://game/ui/pause_menue/PauseMenu.cs" id="1_f48la"]
+[ext_resource type="Theme" uid="uid://b5r6t2u2mi7tl" path="res://game/ui/pause_menue/CardTheme.tres" id="2_h8w6g"]
+[ext_resource type="Shader" uid="uid://x7hlq5qbs4m5" path="res://game/ui/pause_menue/blur.gdshader" id="2_scxh3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1n6di"]
+shader = ExtResource("2_scxh3")
+shader_parameter/radius = 2
+shader_parameter/strength = 1.0
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1620896989]
 script = ExtResource("1_f48la")
@@ -18,47 +25,80 @@ offset_right = 150.0
 offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 
-[node name="ButtonPanel" type="VBoxContainer" parent="ButtonPanelContainer" unique_id=694776155]
+[node name="ButtonPanel" type="Panel" parent="ButtonPanelContainer" unique_id=1124337736]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_h8w6g")
+
+[node name="Blur" type="Panel" parent="ButtonPanelContainer/ButtonPanel" unique_id=2147014097]
+material = SubResource("ShaderMaterial_1n6di")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_h8w6g")
+
+[node name="MarginContainer" type="MarginContainer" parent="ButtonPanelContainer/ButtonPanel" unique_id=1628028525]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ButtonContainer" type="VBoxContainer" parent="ButtonPanelContainer/ButtonPanel/MarginContainer" unique_id=694776155]
+layout_mode = 2
+theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Resume" type="Button" parent="ButtonPanelContainer/ButtonPanel" unique_id=1895204069]
+[node name="Resume" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=1895204069]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("2_h8w6g")
 text = "Resume"
 
-[node name="Options" type="Button" parent="ButtonPanelContainer/ButtonPanel" unique_id=218642742]
+[node name="Options" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=218642742]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("2_h8w6g")
 text = "Options
 "
 
-[node name="Abandon Run" type="Button" parent="ButtonPanelContainer/ButtonPanel" unique_id=178363380]
+[node name="Abandon Run" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=178363380]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("2_h8w6g")
 text = "Abandon Run
 "
 
-[node name="Main Menu" type="Button" parent="ButtonPanelContainer/ButtonPanel" unique_id=2111338140]
+[node name="Main Menu" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=2111338140]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("2_h8w6g")
 text = "Main Menu
 "
 
-[node name="Quit" type="Button" parent="ButtonPanelContainer/ButtonPanel" unique_id=948793584]
+[node name="Quit" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=948793584]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("2_h8w6g")
 text = "Quit
 "
 
-[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/Abandon Run" to="." method="_on_abandon_run_pressed"]
-[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/Main Menu" to="." method="_on_main_menu_pressed"]
-[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Abandon Run" to="." method="_on_abandon_run_pressed"]
+[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Main Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Quit" to="." method="_on_quit_pressed"]
