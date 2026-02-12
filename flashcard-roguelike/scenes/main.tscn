@@ -1,3 +1,10 @@
 [gd_scene format=3 uid="uid://bp3i7yge2i8cs"]
 
+[ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="1_o5qli"]
+
 [node name="main" type="Node3D" unique_id=1018561427]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1280069400]
+
+[node name="PauseMenue" parent="Camera3D" unique_id=1867929211 instance=ExtResource("1_o5qli")]
+visible = false
