@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://08j36rswj4qd"]
+
+[ext_resource type="Script" uid="uid://c10vqqj6pm34j" path="res://game/entity/dungeon_generator/DungeonGenerator.cs" id="1_fs5hr"]
+[ext_resource type="PackedScene" uid="uid://bw5gdsxslid3h" path="res://game/entity/dungeon_generator/rooms/entrance_room.tscn" id="2_7n4qh"]
+[ext_resource type="PackedScene" uid="uid://ho30grmj7jcn" path="res://game/entity/dungeon_generator/rooms/exit_room.tscn" id="3_qh65i"]
+[ext_resource type="PackedScene" uid="uid://b2px6jxwb8r7o" path="res://game/entity/dungeon_generator/rooms/combat_room.tscn" id="4_qj5ly"]
+[ext_resource type="PackedScene" uid="uid://vd10ptbbqu0x" path="res://game/entity/dungeon_generator/rooms/event_room.tscn" id="5_a7trn"]
+[ext_resource type="PackedScene" uid="uid://bggjji1cywnnh" path="res://game/entity/dungeon_generator/rooms/treasure_room.tscn" id="6_wm4nc"]
+[ext_resource type="PackedScene" uid="uid://273l427ermxg" path="res://game/entity/connections/room_connection.tscn" id="7_qh65i"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fs5hr"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_5xteu"]
+sky_material = SubResource("ProceduralSkyMaterial_fs5hr")
+
+[sub_resource type="Environment" id="Environment_yy663"]
+background_mode = 2
+sky = SubResource("Sky_5xteu")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Dungeon" type="Node3D" unique_id=1224795912]
+script = ExtResource("1_fs5hr")
+EntranceRoomScene = ExtResource("2_7n4qh")
+ExitRoomScene = ExtResource("3_qh65i")
+CombatRoomScenes = Array[PackedScene]([ExtResource("4_qj5ly")])
+EventRoomScenes = Array[PackedScene]([ExtResource("5_a7trn")])
+TreasureRoomScenes = Array[PackedScene]([ExtResource("6_wm4nc")])
+ConnectionScene = ExtResource("7_qh65i")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1921656492]
+environment = SubResource("Environment_yy663")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=899137666]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
