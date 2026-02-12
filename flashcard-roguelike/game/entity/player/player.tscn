@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://ceim8jmtkr6d5"]
+[gd_scene load_steps=3 format=3 uid="uid://ceim8jmtkr6d5"]
+
+[ext_resource type="Script" path="res://game/entity/player/Player.cs" id="1_script"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
+radius = 0.4
+height = 1.8
 
 [node name="Player" type="Node3D" unique_id=890248695]
+script = ExtResource("1_script")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_player")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]

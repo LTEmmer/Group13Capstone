@@ -1,3 +1,10 @@
 [gd_scene format=3 uid="uid://bp3i7yge2i8cs"]
 
+[ext_resource type="PackedScene" uid="uid://c3l0enl6d88r5" path="res://scenes/test_room.tscn" id="1_room"]
+[ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="2_player"]
+
 [node name="main" type="Node3D" unique_id=1018561427]
+
+[node name="TestRoom" parent="." unique_id=1912321636 instance=ExtResource("1_room")]
+
+[node name="Player" parent="." unique_id=997404849 instance=ExtResource("2_player")]
