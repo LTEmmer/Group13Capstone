@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Godot;
 
 public enum RoomTypes
 {
@@ -40,13 +41,15 @@ public sealed class DungeonGraph
 
 		Rooms = new List<DungeonRoom>(roomCount);
 		Rooms.Add(new DungeonRoom(0, RoomTypes.Entrance)); // Ensure the first room is always an entrance
-		Rooms.Add(new DungeonRoom(roomCount - 1, RoomTypes.Exit)); // Ensure the last room is always an exit
 
 		for (int i = 1; i < roomCount - 1; i++)
 		{
-			type = (RoomTypes)rand.Next(1, Enum.GetNames(typeof(RoomTypes)).Length);
+			type = (RoomTypes)rand.Next(1, Enum.GetNames(typeof(RoomTypes)).Length - 1);
 			Rooms.Add(new DungeonRoom(i, type));
+			GD.Print($"Created room {i} of type {type}");
 		}
+
+		Rooms.Add(new DungeonRoom(roomCount - 1, RoomTypes.Exit)); // Ensure the last room is always an exit
 	}
 
 	public DungeonRoom GetRoom(int id)
@@ -82,5 +85,19 @@ public sealed class DungeonGraph
 		roomA.OutgoingConnections.Add(to);
 		roomB.IncomingConnections.Add(from);
 		return true;
+	}
+
+	public void PrintGraph()
+	{
+		GD.Print("=== DUNGEON GRAPH ===");
+
+		foreach (DungeonRoom room in Rooms)
+		{
+			string outgoing = room.OutgoingConnections.Count > 0 ? string.Join(", ", room.OutgoingConnections) : "none";
+			string incoming = room.IncomingConnections.Count > 0 ? string.Join(", ", room.IncomingConnections): "none";
+			GD.Print($"Room {room.Id} [{room.RoomType}] | Out → {outgoing} | In ← {incoming}");
+		}
+
+		GD.Print("=====================");
 	}
 }
