@@ -83,6 +83,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3992662, -1.7729723, -7.297
 
 [node name="3" type="Marker3D" parent="Exits" unique_id=897839084]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.57488, -1.7729723, -7.2970276)
-
-[node name="TempPlayer" parent="." unique_id=1982469892 instance=ExtResource("1_fij0k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4657373, 0)
