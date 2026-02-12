@@ -69,21 +69,21 @@ public sealed class DungeonGraph
 			return false;
 		}
 
-		DungeonRoom roomA = Rooms[from];
-		DungeonRoom roomB = Rooms[to];
+		DungeonRoom fromRoom = Rooms[from];
+		DungeonRoom toRoom = Rooms[to];
 
-		if (roomA.OutgoingConnections.Count >= maxConnections || roomB.IncomingConnections.Count >= maxConnections)
+		if (fromRoom.OutgoingConnections.Count >= maxConnections || toRoom.IncomingConnections.Count >= maxConnections)
 		{
 			return false;
 		}
 
-		if (roomA.OutgoingConnections.Contains(to))
+		if (fromRoom.OutgoingConnections.Contains(to))
 		{
 			return false;
 		}
 
-		roomA.OutgoingConnections.Add(to);
-		roomB.IncomingConnections.Add(from);
+		fromRoom.OutgoingConnections.Add(to);
+		toRoom.IncomingConnections.Add(from);
 		return true;
 	}
 
