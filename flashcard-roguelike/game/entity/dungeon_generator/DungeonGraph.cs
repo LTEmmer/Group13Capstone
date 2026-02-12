@@ -33,9 +33,9 @@ public sealed class DungeonGraph
 		RoomTypes type;
 		Random rand = new Random();
 
-		if (roomCount <= 0)
+		if (roomCount <= 1)
 		{
-			throw new ArgumentOutOfRangeException(nameof(roomCount), "Room count must be positive.");
+			throw new ArgumentOutOfRangeException(nameof(roomCount), "Room count must be greater than 1.");
 		}
 
 		Rooms = new List<DungeonRoom>(roomCount);
@@ -44,7 +44,7 @@ public sealed class DungeonGraph
 
 		for (int i = 1; i < roomCount - 1; i++)
 		{
-			type = (RoomTypes)rand.Next(1, Enum.GetNames(typeof(RoomTypes)).Length + 1);
+			type = (RoomTypes)rand.Next(1, Enum.GetNames(typeof(RoomTypes)).Length);
 			Rooms.Add(new DungeonRoom(i, type));
 		}
 	}
