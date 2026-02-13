@@ -26,16 +26,33 @@ public partial class Player : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event is InputEventMouseMotion motion)
+		if (Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
-			// Horizontal: rotate the whole player (yaw)
-			RotateY(-motion.Relative.X * MouseSensitivity);
+			if (@event is InputEventMouseMotion motion)
+			{
+				// Horizontal: rotate the whole player (yaw)
+				RotateY(-motion.Relative.X * MouseSensitivity);
 
-			// Vertical: rotate only the camera (pitch)
-			_pitch -= motion.Relative.Y * MouseSensitivity;
-			_pitch = Mathf.Clamp(_pitch, -Mathf.DegToRad(MaxPitchDegrees), Mathf.DegToRad(MaxPitchDegrees));
-			_cameraPivot.Rotation = new Vector3(_pitch, 0, 0);
+				// Vertical: rotate only the camera (pitch)
+				_pitch -= motion.Relative.Y * MouseSensitivity;
+				_pitch = Mathf.Clamp(_pitch, -Mathf.DegToRad(MaxPitchDegrees), Mathf.DegToRad(MaxPitchDegrees));
+				_cameraPivot.Rotation = new Vector3(_pitch, 0, 0);
+			}
 		}
+	}
+	public override void _UnhandledInput(InputEvent @event)
+	{
+    	if (@event.IsActionPressed("ui_cancel"))
+    	{
+			if (Input.MouseMode == Input.MouseModeEnum.Captured)
+			{
+    			Input.MouseMode = Input.MouseModeEnum.Visible;
+			}
+			else
+			{
+    			Input.MouseMode = Input.MouseModeEnum.Captured;
+			}
+    	}
 	}
 
 

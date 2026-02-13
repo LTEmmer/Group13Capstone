@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ceim8jmtkr6d5"]
 
-[ext_resource type="Script" uid="uid://uc2jvp48gwdm" path="res://game/entity/player/Player.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://het36bkur8tc" path="res://game/entity/player/Player.cs" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="2_0b5cm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
 radius = 0.4
@@ -20,6 +21,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6670784, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=102823933]
 current = true
+
+[node name="PauseMenu" parent="CameraPivot/Camera3D" unique_id=1620896989 instance=ExtResource("2_0b5cm")]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")
