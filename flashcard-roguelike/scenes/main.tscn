@@ -8,3 +8,4 @@
 [node name="TestRoom" parent="." unique_id=1912321636 instance=ExtResource("1_room")]
 
 [node name="Player" parent="." unique_id=997404849 instance=ExtResource("2_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0119679, 0)
