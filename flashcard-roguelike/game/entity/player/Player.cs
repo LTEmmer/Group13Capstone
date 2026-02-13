@@ -36,7 +36,6 @@ public partial class Player : CharacterBody3D
 			_pitch = Mathf.Clamp(_pitch, -Mathf.DegToRad(MaxPitchDegrees), Mathf.DegToRad(MaxPitchDegrees));
 			_cameraPivot.Rotation = new Vector3(_pitch, 0, 0);
 		}
-		
 	}
 
 
