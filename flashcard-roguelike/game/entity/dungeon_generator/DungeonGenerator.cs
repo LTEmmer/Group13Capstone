@@ -37,7 +37,7 @@ public partial class DungeonGenerator : Node3D
 			_rng.Seed = (ulong)Seed;
 		}
 
-		int roomCount = _rng.RandiRange(3, MaxRoomCount);
+		int roomCount = _rng.RandiRange(4, MaxRoomCount);
 		DungeonGraph graph = new DungeonGraph(roomCount);
 
 		List<int> connected = new List<int>();
