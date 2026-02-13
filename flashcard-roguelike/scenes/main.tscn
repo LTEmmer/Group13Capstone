@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c3l0enl6d88r5" path="res://scenes/test_room.tscn" id="1_room"]
 [ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="1_o5qli"]
 
 [node name="main" type="Node3D" unique_id=1018561427]
 
@@ -9,7 +10,6 @@
 
 [node name="Player" parent="." unique_id=997404849 instance=ExtResource("2_player")]
 
-[ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="1_o5qli"]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1280069400]
 
