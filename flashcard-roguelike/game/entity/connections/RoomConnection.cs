@@ -50,7 +50,7 @@ public partial class RoomConnection : Node3D
 
     private void OnBodyEntered(Node body)
     {
-        if (body is Node3D node && body.Name == "TempPlayer")
+        if (body is Node3D node && body.Name == "Player")
         {
             _playerInRange = true;
             _player = node;

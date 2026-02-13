@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bw5gdsxslid3h"]
 
-[ext_resource type="PackedScene" uid="uid://dbe7emnrsj8i4" path="res://game/entity/dungeon_generator/temp_player.tscn" id="1_fij0k"]
+[ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="1_fij0k"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fij0k"]
 _surfaces = [{
@@ -83,3 +83,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3992662, -1.7729723, -7.297
 
 [node name="3" type="Marker3D" parent="Exits" unique_id=897839084]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.57488, -1.7729723, -7.2970276)
+
+[node name="Player" parent="." unique_id=249236073 instance=ExtResource("1_fij0k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.187, 5.766)
