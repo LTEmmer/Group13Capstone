@@ -8,3 +8,10 @@
 [node name="TestRoom" parent="." unique_id=1912321636 instance=ExtResource("1_room")]
 
 [node name="Player" parent="." unique_id=997404849 instance=ExtResource("2_player")]
+
+[ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="1_o5qli"]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1280069400]
+
+[node name="PauseMenue" parent="Camera3D" unique_id=1867929211 instance=ExtResource("1_o5qli")]
+visible = false

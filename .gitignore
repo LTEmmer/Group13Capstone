@@ -27,6 +27,7 @@ obj/
 *.user
 *.suo
 *.userprefs
+.vscode/
 
 # ===== OS / LOCAL =====
 Thumbs.db
