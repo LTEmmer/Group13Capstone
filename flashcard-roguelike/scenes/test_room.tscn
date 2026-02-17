@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://c3l0enl6d88r5"]
 
-[ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="1_im37l"]
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_im37l"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -141,6 +139,3 @@ shape = SubResource("BoxShape_hurdle")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Hurdle3" unique_id=1495453109]
 mesh = SubResource("BoxMesh_hurdle")
-
-[node name="Player" parent="." unique_id=249236073 instance=ExtResource("1_im37l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0119679, 0)
