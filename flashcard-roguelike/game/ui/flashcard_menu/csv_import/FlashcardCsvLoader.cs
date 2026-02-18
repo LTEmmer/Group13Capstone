@@ -9,8 +9,8 @@ using System.Linq;
 
 public sealed class FlashcardCsvLoader
 {
-    // For now assume at least 2 columns: Question and Answer, can be expanded later
-    private readonly int _columnMinimum = 2; 
+    // For now assume at most 2 columns: Question and Answer, can be expanded later
+    private readonly int _columnMaximum = 2; 
 
     public FlashcardSet ImportCsv(string filePath, string setName = null)
     {   
@@ -25,7 +25,7 @@ public sealed class FlashcardCsvLoader
         int headerStatus = HasValidHeaders(filePath);
         if (headerStatus == -1)
         {
-            GD.PrintErr("Incorrect amount of columns in CSV file: " + filePath);
+            GD.PrintErr("Excessive amount of columns in CSV file: " + filePath);
             return null;
         }
         bool validHeaders = headerStatus == 1;
@@ -67,7 +67,7 @@ public sealed class FlashcardCsvLoader
             // Handle blanks in this way for now, skip
             if (string.IsNullOrWhiteSpace(record.Question) || string.IsNullOrWhiteSpace(record.Answer))
             {
-                GD.PrintErr("Skipping record with blank question or answer. Question: " + record.Question + " Answer: " + record.Answer);
+                GD.PrintErr("Skipping record with blank question or answer from CSV file: " + filePath + ". Question: " + record.Question + " Answer: " + record.Answer);
                 continue;
             }
 
@@ -117,7 +117,7 @@ public sealed class FlashcardCsvLoader
         }
 
         string[] firstRow = tmpCsv.Parser.Record;
-        if (firstRow.Length < _columnMinimum)
+        if (firstRow.Length > _columnMaximum)
         {
             return -1; // Not enough columns, not valid
         }
