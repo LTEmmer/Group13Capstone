@@ -10,10 +10,13 @@ public sealed class FlashcardCsvRecord
 // Maps column names in the CSV to properties on FlashcardCsvRecord, can be expanded to support more column name variations if needed
 public sealed class FlashcardMap : ClassMap<FlashcardCsvRecord>
 {
+    public static readonly string[] ValidQuestionHeaders = { "question", "front", "q", "term" };
+    public static readonly string[] ValidAnswerHeaders = { "answer", "back", "a", "definition" };
+    
     public FlashcardMap()
     {
-        Map(m => m.Question).Name("question", "front", "q", "term"); // Map the Question property to any of these question headers
-        Map(m => m.Answer).Name("answer", "back", "a", "definition"); // Map the Answer property to any of these answer headers
+        Map(m => m.Question).Name(ValidQuestionHeaders); // Map the Question property to any of these question headers
+        Map(m => m.Answer).Name(ValidAnswerHeaders); // Map the Answer property to any of these answer headers
     }
 }
 

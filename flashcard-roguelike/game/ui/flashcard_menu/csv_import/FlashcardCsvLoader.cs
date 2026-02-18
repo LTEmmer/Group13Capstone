@@ -83,10 +83,6 @@ public sealed class FlashcardCsvLoader
     private int HasValidHeaders(string path)
     {   
         // -1 indicates not enough columns, 0 indicates no valid headers, 1 indicates valid headers
-        // Define the possible headers for questions and answers
-        string[] questionHeaders = { "question", "front", "q", "term" };
-        string[] answerHeaders   = { "answer", "back", "a", "definition" };
-
         // Create a reader to check for headers since CsvHelper doesn't do it out the box easily
         using var tmpReader = new StreamReader(path);
         using var tmpCsv = new CsvReader(tmpReader, new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -114,8 +110,8 @@ public sealed class FlashcardCsvLoader
         }
 
         // Check if any of the headers in the first row match the expected question and answer headers, both must be present to be valid
-        bool hasQuestionHeader = cleanedFirstRow.Any(h => questionHeaders.Contains(h));
-        bool hasAnswerHeader = cleanedFirstRow.Any(h => answerHeaders.Contains(h));
+        bool hasQuestionHeader = cleanedFirstRow.Any(h => FlashcardMap.ValidQuestionHeaders.Contains(h));
+        bool hasAnswerHeader = cleanedFirstRow.Any(h => FlashcardMap.ValidAnswerHeaders.Contains(h));
 
         return hasQuestionHeader && hasAnswerHeader ? 1 : 0;
     }
