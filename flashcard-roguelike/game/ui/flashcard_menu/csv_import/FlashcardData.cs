@@ -8,7 +8,6 @@ public sealed class Flashcard
 
 public sealed class FlashcardSet
 {
-    public int Id { get; set; }
     public string DisplayName { get; set; }
     public List<Flashcard> Cards { get; set; }
 }
