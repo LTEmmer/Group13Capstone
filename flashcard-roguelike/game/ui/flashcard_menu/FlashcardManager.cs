@@ -22,9 +22,9 @@ public partial class FlashcardManager : Node
     // Singleton method to handle importing and saving flashcards from CSV files and add them to the available sets, input the path and name
     public void ImportAndSave(string csvPath, string setName = null)
     {
-        FlashcardSet set = new FlashcardCsvLoader().ImportCsv(csvPath);
+        FlashcardSet set = new FlashcardCsvLoader().ImportCsv(csvPath, setName);
 
-        _persistence.SaveSet(set, setName);
+        _persistence.SaveSet(set);
         _availableSets.Add(set);
     }
 }

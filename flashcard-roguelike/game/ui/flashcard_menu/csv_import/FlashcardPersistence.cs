@@ -10,18 +10,14 @@ public sealed class FlashcardPersistence
     private const string SaveDirectory = "user://flashcards/";
 
     // Save a set of flashcards to its own .json file to the save directory
-    public void SaveSet(FlashcardSet set, string name = null)
+    public void SaveSet(FlashcardSet set)
     {
         // GlobalizePath converts the "user://" path to an actual file system path, then ensure the directory exists
         string dir = ProjectSettings.GlobalizePath(SaveDirectory);
         Directory.CreateDirectory(dir);
 
-        // Combine the directory with the set name to create a path for the file, then serialize the set to JSON and write it to the path
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            name = set.DisplayName;
-        }
-        string path = Path.Combine(dir, $"{name}.json");
+        // Create the full path for the set using its DisplayName and serialize the FlashcardSet to JSON, then write it to a file
+        string path = Path.Combine(dir, $"{set.DisplayName}.json");
         string json = JsonSerializer.Serialize(set, new JsonSerializerOptions
         {
             WriteIndented = true

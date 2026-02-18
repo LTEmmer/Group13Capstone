@@ -9,7 +9,7 @@ using System.Linq;
 
 public sealed class FlashcardCsvLoader
 {
-    public FlashcardSet ImportCsv(string filePath)
+    public FlashcardSet ImportCsv(string filePath, string setName = null)
     {   
         // Check if the file exists
         if (!File.Exists(filePath))
@@ -35,7 +35,11 @@ public sealed class FlashcardCsvLoader
             HasHeaderRecord = validHeaders, // Set based on whether the CSV has valid headers
             TrimOptions = TrimOptions.Trim, // Trim whitespace
             PrepareHeaderForMatch = args => args.Header.Trim().ToLower(), // Make header matching case-insensitive w/o extra whitespace
-            MissingFieldFound = null // Disable missing field validation to allow for blank handling
+            MissingFieldFound = null, // Disable missing field validation to allow for blank handling
+            BadDataFound = context =>
+            {
+                GD.PrintErr($"Check for unescaped quotes or mismatched columns. Bad data found on row : {context.RawRecord}");
+            },
         });
 
         if (validHeaders)
@@ -72,10 +76,23 @@ public sealed class FlashcardCsvLoader
             });
         }
 
+        // If no valid cards were found, return null to indicate failure
+        if (cards.Count == 0)
+        {
+            GD.PrintErr("No valid flashcards found in CSV file: " + filePath);
+            return null;
+        }
+
+        // If no set name was provided, use the file name without extension as the set name
+        if (string.IsNullOrWhiteSpace(setName))
+        {
+            setName = Path.GetFileNameWithoutExtension(filePath);
+        }
+
         // Create and return a FlashcardSet with the list of cards named after the CSV
         return new FlashcardSet
         {
-            DisplayName = Path.GetFileNameWithoutExtension(filePath),
+            DisplayName = setName,
             Cards = cards
         };
     }
