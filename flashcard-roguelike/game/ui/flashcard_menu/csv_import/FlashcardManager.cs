@@ -19,12 +19,12 @@ public partial class FlashcardManager : Node
     // Expose the available sets as a read-only list for other code to access, other code should not modify the list
     public IReadOnlyList<FlashcardSet> AvailableSets => _availableSets;
 
-    // Singleton method to handle importing and saving flashcards from CSV files and add them to the available sets, input the path
-    public void ImportAndSave(string csvPath)
+    // Singleton method to handle importing and saving flashcards from CSV files and add them to the available sets, input the path and name
+    public void ImportAndSave(string csvPath, string setName = null)
     {
         FlashcardSet set = new FlashcardCsvLoader().ImportCsv(csvPath);
 
-        _persistence.SaveSet(set);
+        _persistence.SaveSet(set, setName);
         _availableSets.Add(set);
     }
 }

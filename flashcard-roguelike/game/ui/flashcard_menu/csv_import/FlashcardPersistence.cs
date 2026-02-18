@@ -2,6 +2,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
 using Godot;
+using System.Dynamic;
 
 public sealed class FlashcardPersistence
 {
@@ -9,14 +10,18 @@ public sealed class FlashcardPersistence
     private const string SaveDirectory = "user://flashcards/";
 
     // Save a set of flashcards to its own .json file to the save directory
-    public void SaveSet(FlashcardSet set)
+    public void SaveSet(FlashcardSet set, string name = null)
     {
         // GlobalizePath converts the "user://" path to an actual file system path, then ensure the directory exists
         string dir = ProjectSettings.GlobalizePath(SaveDirectory);
         Directory.CreateDirectory(dir);
 
         // Combine the directory with the set name to create a path for the file, then serialize the set to JSON and write it to the path
-        string path = Path.Combine(dir, $"{set.DisplayName}.json");
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            name = set.DisplayName;
+        }
+        string path = Path.Combine(dir, $"{name}.json");
         string json = JsonSerializer.Serialize(set, new JsonSerializerOptions
         {
             WriteIndented = true
