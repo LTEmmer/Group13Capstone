@@ -22,7 +22,7 @@ public sealed class FlashcardMap : ClassMap<FlashcardCsvRecord>
     }
 }
 
-// Maps columns by index in case of no headers, assume the first col is the question
+// Maps columns by index in case of no headers, assume the first col is the question by default
 public sealed class HeaderlessFlashcardMap : ClassMap<FlashcardCsvRecord>
 {
     public HeaderlessFlashcardMap()

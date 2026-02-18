@@ -9,6 +9,9 @@ using System.Linq;
 
 public sealed class FlashcardCsvLoader
 {
+    // For now assume at least 2 columns: Question and Answer, can be expanded later
+    private readonly int _columnMinimum = 2; 
+
     public FlashcardSet ImportCsv(string filePath, string setName = null)
     {   
         // Check if the file exists
@@ -22,7 +25,7 @@ public sealed class FlashcardCsvLoader
         int headerStatus = HasValidHeaders(filePath);
         if (headerStatus == -1)
         {
-            GD.PrintErr("Not enough columns in CSV file: " + filePath);
+            GD.PrintErr("Incorrect amount of columns in CSV file: " + filePath);
             return null;
         }
         bool validHeaders = headerStatus == 1;
@@ -38,7 +41,7 @@ public sealed class FlashcardCsvLoader
             MissingFieldFound = null, // Disable missing field validation to allow for blank handling
             BadDataFound = context =>
             {
-                GD.PrintErr($"Check for unescaped quotes or mismatched columns. Bad data found on row : {context.RawRecord}");
+                GD.PrintErr($"Check for unescaped quotes or invalid characters (like emojis). Bad data found on row : {context.RawRecord}");
             },
         });
 
@@ -64,11 +67,11 @@ public sealed class FlashcardCsvLoader
             // Handle blanks in this way for now, skip
             if (string.IsNullOrWhiteSpace(record.Question) || string.IsNullOrWhiteSpace(record.Answer))
             {
-                GD.PrintErr("Skipping record with blank question or answer: " + record.Question + " - " + record.Answer);
+                GD.PrintErr("Skipping record with blank question or answer. Question: " + record.Question + " Answer: " + record.Answer);
                 continue;
             }
 
-            // Add the flashcard to the list trimming any extra whitespace
+            // Add the flashcard to the list
             cards.Add(new Flashcard
             {
                 Question = record.Question,
@@ -89,7 +92,7 @@ public sealed class FlashcardCsvLoader
             setName = Path.GetFileNameWithoutExtension(filePath);
         }
 
-        // Create and return a FlashcardSet with the list of cards named after the CSV
+        // Create and return a FlashcardSet with the list of cards and setName as the display name
         return new FlashcardSet
         {
             DisplayName = setName,
@@ -100,23 +103,23 @@ public sealed class FlashcardCsvLoader
     private int HasValidHeaders(string path)
     {   
         // -1 indicates not enough columns, 0 indicates no valid headers, 1 indicates valid headers
-        // Create a reader to check for headers since CsvHelper doesn't do it out the box easily
+        // Create a reader to handle headers since CsvHelper doesn't do it out the box easily
         using var tmpReader = new StreamReader(path);
         using var tmpCsv = new CsvReader(tmpReader, new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             HasHeaderRecord = false, // Don't treat the first row as headers, we want to check them manually
         });
 
-        // Read the first row, check if empty and clean it for comparison, trim whitespace and convert to lowercase, check for length and spaces
+        // Read the first row, check if empty and clean it for comparison
         if (!tmpCsv.Read())
         {
             return -1; // Empty CSV, not valid
         }
 
         string[] firstRow = tmpCsv.Parser.Record;
-        if (firstRow.Length < 2)
+        if (firstRow.Length < _columnMinimum)
         {
-            return -1; // Not enough columns to be valid
+            return -1; // Not enough columns, not valid
         }
 
         List<string> cleanedFirstRow = new();

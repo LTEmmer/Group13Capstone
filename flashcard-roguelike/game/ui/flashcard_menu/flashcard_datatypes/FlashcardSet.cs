@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-// Basic representation of a flashcard set with a name
+// Basic representation of a flashcard set
 public sealed class FlashcardSet
 {
     public string DisplayName { get; set; }

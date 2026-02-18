@@ -2,7 +2,6 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
 using Godot;
-using System.Dynamic;
 
 public sealed class FlashcardPersistence
 {
@@ -28,21 +27,38 @@ public sealed class FlashcardPersistence
 
     public List<FlashcardSet> LoadAllSets()
     {
-        // Globalize the path and check the save directory for any sets, return an empty list if the directory doesn't exist
+        // Globalize the path and check the save directory for any sets 
+        // Create the directory and return an empty list if the directory doesn't exist
         string dir = ProjectSettings.GlobalizePath(SaveDirectory);
         if (!Directory.Exists(dir))
+        {
+            GD.PrintErr("No flashcard sets found, save directory does not exist. Creating directory: " + dir);
+            Directory.CreateDirectory(dir);
             return new List<FlashcardSet>();
+        }
 
         List<FlashcardSet> sets = new();
+        int setsFound = 0;
 
         // For each JSON file, read the file and deserialize it into FlashcardSet objects then return the list of sets
         foreach (string file in Directory.GetFiles(dir, "*.json"))
         {
             string json = File.ReadAllText(file);
             FlashcardSet set = JsonSerializer.Deserialize<FlashcardSet>(json);
+
+            // Check if deserialization was successful, if not print an error and skip the file
+            if (set == null)
+            {
+                GD.PrintErr("Failed to deserialize flashcard set from file: " + file);
+                continue;
+            }
+
+            // Add the set to the list of sets to return 
             sets.Add(set);
+            ++setsFound;
         }
 
+        GD.Print("Loaded " + setsFound + " flashcard sets.");
         return sets;
     }
 }
