@@ -71,6 +71,12 @@ size_flags_vertical = 3
 theme = ExtResource("2_h8w6g")
 text = "Resume"
 
+[node name="View Imported Flashcards" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=3012948571]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_h8w6g")
+text = "View Imported Flashcards"
+
 [node name="Options" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=218642742]
 layout_mode = 2
 size_flags_vertical = 3
@@ -99,7 +105,77 @@ theme = ExtResource("2_h8w6g")
 text = "Quit
 "
 
+[node name="ViewFlashcardsPanelContainer" type="Control" parent="." unique_id=4012948572]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="ViewFlashcardsPanelContainer" unique_id=4012948573]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_h8w6g")
+
+[node name="Blur" type="Panel" parent="ViewFlashcardsPanelContainer/Panel" unique_id=4012948574]
+material = SubResource("ShaderMaterial_1n6di")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_h8w6g")
+
+[node name="MarginContainer" type="MarginContainer" parent="ViewFlashcardsPanelContainer/Panel" unique_id=4012948575]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer" unique_id=4012948576]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=4012948577]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FlashcardListContainer" type="VBoxContainer" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=4012948578]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=4012948579]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_h8w6g")
+text = "Back"
+
+[connection signal="pressed" from="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/Back" to="." method="_on_flashcards_back_pressed"]
+
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/View Imported Flashcards" to="." method="_on_view_flashcards_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Abandon Run" to="." method="_on_abandon_run_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Main Menu" to="." method="_on_main_menu_pressed"]
