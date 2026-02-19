@@ -61,4 +61,31 @@ public sealed class FlashcardPersistence
         GD.Print("Loaded " + setsFound + " flashcard sets.");
         return sets;
     }
+
+    // Delete a flashcard set from the save directory by its display name
+	public bool DeleteSet(string setDisplayName)
+	{
+		string dir = ProjectSettings.GlobalizePath(SaveDirectory);
+		string path = Path.Combine(dir, $"{setDisplayName}.json");
+
+		if (File.Exists(path))
+		{
+			try
+			{
+				File.Delete(path);
+				GD.Print($"Successfully deleted flashcard set: {setDisplayName}");
+				return true;
+			}
+			catch (System.Exception ex)
+			{
+				GD.PrintErr($"Failed to delete flashcard set '{setDisplayName}': {ex.Message}");
+				return false;
+			}
+		}
+		else
+		{
+			GD.PrintErr($"Flashcard set file not found: {path}");
+			return false;
+		}
+	}
 }
