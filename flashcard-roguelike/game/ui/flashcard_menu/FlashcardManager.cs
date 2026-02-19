@@ -34,5 +34,15 @@ public partial class FlashcardManager : Node
             _persistence.SaveSet(set);
             AvailableSets.Add(set);
         }
+    }    
+
+    public List<FlashcardSet> getActiveFlashCardLists()
+    {
+        if (Instance == null)
+        {
+            return new List<FlashcardSet>();
+        }
+        
+        return Instance.AvailableSets;
     }
 }
