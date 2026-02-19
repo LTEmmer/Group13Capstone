@@ -42,17 +42,17 @@ public partial class Player : CharacterBody3D
 	}
 	public override void _UnhandledInput(InputEvent @event)
 	{
-    	if (@event.IsActionPressed("ui_cancel"))
-    	{
+		if (@event.IsActionPressed("ui_cancel"))
+		{
 			if (Input.MouseMode == Input.MouseModeEnum.Captured)
 			{
-    			Input.MouseMode = Input.MouseModeEnum.Visible;
+				Input.MouseMode = Input.MouseModeEnum.Visible;
 			}
 			else
 			{
-    			Input.MouseMode = Input.MouseModeEnum.Captured;
+				Input.MouseMode = Input.MouseModeEnum.Captured;
 			}
-    	}
+		}
 	}
 
 

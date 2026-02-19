@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://gm2414av5j4l"]
+
+[ext_resource type="Script" uid="uid://ccyye3jxuq1fg" path="res://game/entity/flash_card_entity/FlashCardInteractable.cs" id="1_nqbih"]
+[ext_resource type="PackedScene" uid="uid://bkmeb0akwerrp" path="res://game/entity/flash_card_entity/flash_card_entity.tscn" id="2_81qqu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_f0b8r"]
+radius = 2.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_lhrw7"]
+
+[node name="FlashCardInteractable" type="Node3D" unique_id=1162592200]
+script = ExtResource("1_nqbih")
+FlashCardEntityScene = ExtResource("2_81qqu")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1766979387]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=449046921]
+shape = SubResource("SphereShape3D_f0b8r")
+
+[node name="Label" type="Label3D" parent="." unique_id=8490049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7912991, 0)
+billboard = 1
+text = "Flash card"
+font_size = 94
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1663813606]
+mesh = SubResource("PrismMesh_lhrw7")
+
+[node name="FlashCardContainer" type="Node3D" parent="." unique_id=833101844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.017403, 0)
