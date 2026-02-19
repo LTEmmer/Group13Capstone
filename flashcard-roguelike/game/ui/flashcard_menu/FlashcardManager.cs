@@ -6,7 +6,7 @@ public partial class FlashcardManager : Node
     // Singleton of FlashcardManager for access from anywhere
     public static FlashcardManager Instance { get; private set; }
     private FlashcardPersistence _persistence = new();
-    public List<FlashcardSet> AvailableSets = new();
+    private List<FlashcardSet> AvailableSets = new();
 
     public override void _Ready()
     {
@@ -36,13 +36,18 @@ public partial class FlashcardManager : Node
         }
     }    
 
-    public List<FlashcardSet> getActiveFlashCardLists()
+    public List<FlashcardSet> ActiveFlashCardLists
     {
-        if (Instance == null)
+        get {
+            if (Instance == null)
+            {
+                return new List<FlashcardSet>();
+            }
+            return Instance.AvailableSets;
+        } set
         {
-            return new List<FlashcardSet>();
+            if (value == null) return;
+            Instance.AvailableSets = value;
         }
-        
-        return Instance.AvailableSets;
     }
 }
