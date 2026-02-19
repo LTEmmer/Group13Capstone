@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b7hgirpfx6iw2"]
 
 [ext_resource type="Script" uid="uid://qr0ptjsgc05a" path="res://game/ui/pause_menue/PauseMenu.cs" id="1_f48la"]
+[ext_resource type="PackedScene" uid="uid://h18wimcwtwvr" path="res://game/ui/main_menu/main_menu.tscn" id="2_1n6di"]
 [ext_resource type="Theme" uid="uid://b5r6t2u2mi7tl" path="res://game/ui/pause_menue/CardTheme.tres" id="2_h8w6g"]
 [ext_resource type="Shader" uid="uid://x7hlq5qbs4m5" path="res://game/ui/pause_menue/blur.gdshader" id="2_scxh3"]
 
@@ -11,6 +12,7 @@ shader_parameter/strength = 1.0
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1620896989]
 script = ExtResource("1_f48la")
+MainMenu = ExtResource("2_1n6di")
 
 [node name="ButtonPanelContainer" type="Control" parent="." unique_id=1746979678]
 layout_mode = 3

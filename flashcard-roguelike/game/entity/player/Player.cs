@@ -4,6 +4,9 @@ using System;
 public partial class Player : CharacterBody3D
 {
 	[Export]
+	public CanvasLayer PauseMenu;
+	
+	[Export]
 	// _speed of camera
 	public float MouseSensitivity { get; set; } = 0.002f;
 
@@ -40,19 +43,24 @@ public partial class Player : CharacterBody3D
 			}
 		}
 	}
+	public void toggleMouseLock()
+	{
+		if (Input.MouseMode == Input.MouseModeEnum.Captured)
+		{
+    		Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		else
+		{
+    		Input.MouseMode = Input.MouseModeEnum.Captured;
+		}
+		PauseMenu.Visible = (PauseMenu.Visible == true)? false : true;
+	}
 	public override void _UnhandledInput(InputEvent @event)
 	{
     	if (@event.IsActionPressed("ui_cancel"))
-    	{
-			if (Input.MouseMode == Input.MouseModeEnum.Captured)
-			{
-    			Input.MouseMode = Input.MouseModeEnum.Visible;
-			}
-			else
-			{
-    			Input.MouseMode = Input.MouseModeEnum.Captured;
-			}
-    	}
+		{
+			toggleMouseLock();
+		}
 	}
 
 

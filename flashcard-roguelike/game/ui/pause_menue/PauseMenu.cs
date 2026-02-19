@@ -4,19 +4,12 @@ using System.Threading;
 
 public partial class PauseMenu : CanvasLayer 
 {
-
-	public override void _UnhandledInput(InputEvent @event)
-	{
-    	if (@event.IsActionPressed("ui_cancel"))
-    	{
-			this.Visible = (this.Visible == true)? false : true;
-    	}
-	}
+	[Export] PackedScene MainMenu;
+	[Signal] delegate void ToggleMouseLockEventHandler();
 	public void _on_resume_pressed()
 	{
 		GD.Print("Resume Pressed");
-		this.Visible = false;
-		
+		EmitSignal(SignalName.ToggleMouseLock);
 	}
 	public void _on_options_pressed()
 	{
@@ -29,6 +22,7 @@ public partial class PauseMenu : CanvasLayer
 	public void _on_main_menu_pressed()
 	{
 		GD.Print("Main Menue Pressed");
+		GetTree().ChangeSceneToPacked(MainMenu);
 	}
 	public void _on_quit_pressed()
 	{
