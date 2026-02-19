@@ -53,16 +53,7 @@ public partial class Player : CharacterBody3D
 		{
     		Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
-		PauseMenu.Visible = (PauseMenu.Visible == true)? false : true;
 	}
-	public override void _UnhandledInput(InputEvent @event)
-	{
-    	if (@event.IsActionPressed("ui_cancel"))
-		{
-			toggleMouseLock();
-		}
-	}
-
 
 public override void _PhysicsProcess(double delta)
 	{

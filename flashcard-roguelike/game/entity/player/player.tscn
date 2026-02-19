@@ -9,9 +9,8 @@ height = 1.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0b5cm"]
 
-[node name="Player" type="CharacterBody3D" unique_id=249236073 node_paths=PackedStringArray("PauseMenu")]
+[node name="Player" type="CharacterBody3D" unique_id=249236073]
 script = ExtResource("1_script")
-PauseMenu = NodePath("CameraPivot/Camera3D/PauseMenu")
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=1450744592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03734237, 0)
