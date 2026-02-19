@@ -8,6 +8,9 @@ public partial class FlashCardInteractable : Node3D
 	public PackedScene FlashCardEntityScene {get; set;}
 	[Export]
 	public Node3D FlashCardContainer {get; set;}
+	[Export]
+	public CharacterBody3D Player {get; set;}
+	
 	
 	private bool _playerInRange = false;
 	private Node3D _player;
@@ -24,7 +27,7 @@ public partial class FlashCardInteractable : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		return;
+		FlashCardContainer.LookAt(Player.GlobalPosition);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -41,7 +44,7 @@ public partial class FlashCardInteractable : Node3D
 	public void revealFlashCard()
 	{
 		// Get FlashCard singleton and access flashcard set associated to this study session
-		List<FlashcardSet> activeFlashCardSetList = FlashcardManager.getActiveFlashCardLists();
+		List<FlashcardSet> activeFlashCardSetList = FlashcardManager.Instance.ActiveFlashCardLists;
 		FlashcardSet flashCardSet;
 		
 		// Get random flashcard set from active flash card sets

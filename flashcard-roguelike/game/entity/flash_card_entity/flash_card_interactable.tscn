@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://gm2414av5j4l"]
+[gd_scene format=3 uid="uid://ncone6wihg1s"]
 
-[ext_resource type="Script" uid="uid://ccyye3jxuq1fg" path="res://game/entity/flash_card_entity/FlashCardInteractable.cs" id="1_nqbih"]
+[ext_resource type="Script" uid="uid://c748sgq6l80id" path="res://game/entity/flash_card_entity/FlashCardInteractable.cs" id="1_nqbih"]
 [ext_resource type="PackedScene" uid="uid://bkmeb0akwerrp" path="res://game/entity/flash_card_entity/flash_card_entity.tscn" id="2_81qqu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f0b8r"]
@@ -8,9 +8,10 @@ radius = 2.0
 
 [sub_resource type="PrismMesh" id="PrismMesh_lhrw7"]
 
-[node name="FlashCardInteractable" type="Node3D" unique_id=1162592200]
+[node name="FlashCardInteractable" type="Node3D" unique_id=1162592200 node_paths=PackedStringArray("FlashCardContainer")]
 script = ExtResource("1_nqbih")
 FlashCardEntityScene = ExtResource("2_81qqu")
+FlashCardContainer = NodePath("FlashCardContainer")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1766979387]
 

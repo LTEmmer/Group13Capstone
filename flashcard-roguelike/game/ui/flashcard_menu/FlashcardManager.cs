@@ -3,18 +3,11 @@ using System.Collections.Generic;
 
 public partial class FlashcardManager : Node
 {
-<<<<<<< HEAD
 	// Singleton of FlashcardManager for access from anywhere
 	public static FlashcardManager Instance { get; private set; }
 	private FlashcardPersistence _persistence = new();
-	public List<FlashcardSet> AvailableSets = new();
-=======
-    // Singleton of FlashcardManager for access from anywhere
-    public static FlashcardManager Instance { get; private set; }
-    private FlashcardPersistence _persistence = new();
-    private List<FlashcardSet> AvailableSets = new();
->>>>>>> main
-
+	private List<FlashcardSet> AvailableSets = new();
+	
 	public override void _Ready()
 	{
 		Instance = this;
@@ -36,35 +29,25 @@ public partial class FlashcardManager : Node
 	{
 		FlashcardSet set = new FlashcardCsvLoader().ImportCsv(csvPath, setName);
 
-<<<<<<< HEAD
 		if (set != null)
 		{
 			_persistence.SaveSet(set);
 			AvailableSets.Add(set);
 		}
+	}    
+
+	public List<FlashcardSet> ActiveFlashCardLists
+	{
+		get {
+			if (Instance == null)
+			{
+				return new List<FlashcardSet>();
+			}
+			return Instance.AvailableSets;
+		} set
+		{
+			if (value == null) return;
+			Instance.AvailableSets = value;
+		}
 	}
 }
-=======
-        if (set != null)
-        {
-            _persistence.SaveSet(set);
-            AvailableSets.Add(set);
-        }
-    }    
-
-    public List<FlashcardSet> ActiveFlashCardLists
-    {
-        get {
-            if (Instance == null)
-            {
-                return new List<FlashcardSet>();
-            }
-            return Instance.AvailableSets;
-        } set
-        {
-            if (value == null) return;
-            Instance.AvailableSets = value;
-        }
-    }
-}
->>>>>>> main

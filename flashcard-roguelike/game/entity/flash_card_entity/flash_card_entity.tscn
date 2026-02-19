@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bkmeb0akwerrp"]
 
-[ext_resource type="Script" uid="uid://u4gxivctxkw6" path="res://game/entity/flash_card_entity/FlashCardEntity.cs" id="1_37n7g"]
+[ext_resource type="Script" uid="uid://bsvlsvcitipko" path="res://game/entity/flash_card_entity/FlashCardEntity.cs" id="1_37n7g"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_37n7g"]
+[sub_resource type="BoxMesh" id="BoxMesh_37n7g"]
 
 [node name="FlashCard" type="Node3D" unique_id=1422440911 node_paths=PackedStringArray("question", "answer")]
 script = ExtResource("1_37n7g")
@@ -10,15 +10,15 @@ question = NodePath("Question")
 answer = NodePath("Answer")
 
 [node name="Question" type="Label3D" parent="." unique_id=2100964047]
-transform = Transform3D(2.3782415, 0, 0, 0, 1, 0, 0, 0, 1, 0.0013338327, -0.23856318, 0.06996751)
+transform = Transform3D(-2.3782415, 0, 8.742278e-08, 0, 1, 0, -2.0791248e-07, 0, -1, 0.0013338327, -0.18233281, -0.2812401)
 text = "Answer"
 font_size = 15
 
 [node name="Answer" type="Label3D" parent="." unique_id=698094153]
-transform = Transform3D(2.3782415, 0, 0, 0, 1, 0, 0, 0, 1, -0.0005477071, 0.22195747, 0.061744213)
+transform = Transform3D(-2.3782415, 0, 8.742278e-08, 0, 1, 0, -2.0791248e-07, 0, -1, -0.0005477071, 0.27818784, -0.2894634)
 text = "Question"
 font_size = 12
 
 [node name="Background" type="MeshInstance3D" parent="." unique_id=2117130331]
-transform = Transform3D(2.3782415, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("QuadMesh_37n7g")
+transform = Transform3D(2.3782415, 0, 0, 0, 1, 0, 0, 0, -0.100000024, 0, 0, 0)
+mesh = SubResource("BoxMesh_37n7g")
