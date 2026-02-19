@@ -15,6 +15,10 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://shared/icon.svg"
 
+[autoload]
+
+FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
+
 [display]
 
 window/size/mode=2
