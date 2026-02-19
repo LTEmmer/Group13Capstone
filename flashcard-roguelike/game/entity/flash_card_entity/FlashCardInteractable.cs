@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class FlashCardInteractable : Node3D
 {
@@ -40,30 +41,36 @@ public partial class FlashCardInteractable : Node3D
 	public void revealFlashCard()
 	{
 		// Get FlashCard singleton and access flashcard set associated to this study session
-		// Array activeFlashCardList = FlashCardSingleton.getActiveFlashCardList()
-		// Array flashCardSet
-		// if activeFlashCardList.length() > 1{
-			// flashCardSet = (activeFlashCardList[0])
-		//}
-		//else{
-			// int randomFlashCardSetIndex = (GD.Randi() % activeFlashCardList.length()
-			//flashCardSet = (activeFlashCardList[randomFlashCardSetIndex]
-		//}
+		List<FlashcardSet> activeFlashCardSetList = FlashcardManager.getActiveFlashCardLists();
+		FlashcardSet flashCardSet;
+		
+		// Get random flashcard set from active flash card sets
+		if (activeFlashCardSetList.Count > 1){
+			flashCardSet = (activeFlashCardSetList[0]);
+		}
+		else{
+			int randomFlashCardSetIndex = (int)(GD.Randi() % activeFlashCardSetList.Count);
+			flashCardSet = activeFlashCardSetList[randomFlashCardSetIndex];
+		}
+		
 		// generate random number and get flash card based on random number
-		// int randomFlashCardIndex = (GD.Randi() % flashCardSet.length()
-		// FlashCardObj? flashCardSet = flashCardSet[randomFlashCardIndex]
+		int randomFlashCardIndex = (int)(GD.Randi() % flashCardSet.Cards.Count);
+		Flashcard flashCardData = flashCardSet.Cards[randomFlashCardIndex];
+		
 		// Construct flash_card_entity based on info gathered from flash card 
-		// FlashCardEntity flashcard = FlashCardEntityScene.instantiate()
-		// flashcard.setLabels(flashCardSet.question,flashCardSet.answer)
+		FlashCardEntity flashcard = FlashCardEntityScene.Instantiate() as FlashCardEntity;
+		flashcard.setLabels(flashCardData.Question,flashCardData.Answer);
+		
 		// If a flashcard entity already exists remove that child
-		// if FlashCardContainer.GetChildren().Count() > 0
-		//{
-			// Node child = (FlashCardContainer.GetChildren())[0]
-			//FlashCardContainer.RemoveChild(child)
-		//}
-		//FlashCardContainer.AddChild(flashcard)
+		if (FlashCardContainer.GetChildren().Count > 0)
+		{
+			Node flashcard_child = (FlashCardContainer.GetChildren())[0];
+			FlashCardContainer.RemoveChild(flashcard_child);
+		}
+		
 		// Add flashcard entity to be a child of the flashcardcontainer
-		// flashcontainer already has proper position
+		// flashcardcontainer already has proper position
+		FlashCardContainer.AddChild(flashcard);
 		
 	}
 	

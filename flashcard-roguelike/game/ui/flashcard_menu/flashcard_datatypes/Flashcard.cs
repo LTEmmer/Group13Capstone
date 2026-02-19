@@ -4,6 +4,6 @@ If expanded, ensure to update the FlashcardCsvRecord and mapping in FlashcardMap
 HeaderlessFlashcardMap to properly map the new properties to the correct columns. */
 public sealed class Flashcard
 {
-    public string Question { get; set; }
-    public string Answer { get; set; }
+	public string Question { get; set; }
+	public string Answer { get; set; }
 }

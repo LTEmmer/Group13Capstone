@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://c3l0enl6d88r5"]
 
+[ext_resource type="PackedScene" uid="uid://gm2414av5j4l" path="res://game/entity/flash_card_entity/flash_card_interactable.tscn" id="1_im37l"]
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_im37l"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -139,3 +141,5 @@ shape = SubResource("BoxShape_hurdle")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Hurdle3" unique_id=1495453109]
 mesh = SubResource("BoxMesh_hurdle")
+
+[node name="FlashCardInteractable" parent="." unique_id=1162592200 instance=ExtResource("1_im37l")]

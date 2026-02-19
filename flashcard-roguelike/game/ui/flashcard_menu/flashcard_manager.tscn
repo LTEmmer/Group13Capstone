@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://0txif6o4ottl"]
 
-[ext_resource type="Script" path="res://game/ui/flashcard_menu/FlashcardManager.cs" id="1_r66g5"]
+[ext_resource type="Script" uid="uid://biwlo3yanbm8n" path="res://game/ui/flashcard_menu/FlashcardManager.cs" id="1_r66g5"]
 
 [node name="FlashcardManager" type="Node3D" unique_id=519563416]
 script = ExtResource("1_r66g5")
