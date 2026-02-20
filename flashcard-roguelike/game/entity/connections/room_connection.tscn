@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://273l427ermxg"]
 
-[ext_resource type="Script" uid="uid://dd32akpltkruj" path="res://game/entity/connections/RoomConnection.cs" id="1_ndbvl"]
+[ext_resource type="Script" uid="uid://c3thstymhl7ko" path="res://game/entity/connections/RoomConnection.cs" id="1_ndbvl"]
 [ext_resource type="PackedScene" uid="uid://cyxldil5hs7k6" path="res://game/entity/connections/connection_types/sphere.tscn" id="2_dfhhp"]
 [ext_resource type="PackedScene" uid="uid://cqgcdegamf600" path="res://game/entity/connections/connection_types/donut.tscn" id="3_jjg55"]
 [ext_resource type="PackedScene" uid="uid://mcpr3xoc22ml" path="res://game/entity/connections/connection_types/cube.tscn" id="4_6qhxk"]

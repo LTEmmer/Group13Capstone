@@ -58,7 +58,7 @@ public partial class PauseMenu : CanvasLayer
 			child.QueueFree();
 		}
 
-		if (FlashcardManager.Instance == null || FlashcardManager.Instance.AvailableSets == null || FlashcardManager.Instance.AvailableSets.Count == 0)
+		if (FlashcardManager.Instance == null || FlashcardManager.Instance.ActiveFlashCardLists == null || FlashcardManager.Instance.ActiveFlashCardLists.Count == 0)
 		{
 			var emptyLabel = new Label();
 			emptyLabel.Text = "No imported flashcards";
@@ -66,7 +66,7 @@ public partial class PauseMenu : CanvasLayer
 			return;
 		}
 
-		foreach (FlashcardSet set in FlashcardManager.Instance.AvailableSets)
+		foreach (FlashcardSet set in FlashcardManager.Instance.ActiveFlashCardLists)
 		{
 			// Create a horizontal container for the set name and delete button
 			var setHeaderContainer = new HBoxContainer();
