@@ -68,10 +68,23 @@ public partial class PauseMenu : CanvasLayer
 
 		foreach (FlashcardSet set in FlashcardManager.Instance.ActiveFlashCardLists)
 		{
+			// Create a horizontal container for the set name and delete button
+			var setHeaderContainer = new HBoxContainer();
+			_flashcardListContainer.AddChild(setHeaderContainer);
+
 			var setNameLabel = new Label();
 			setNameLabel.Text = set.DisplayName ?? "(Unnamed set)";
 			setNameLabel.AddThemeFontSizeOverride("font_size", 18);
-			_flashcardListContainer.AddChild(setNameLabel);
+			setNameLabel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+			setHeaderContainer.AddChild(setNameLabel);
+
+			// Add delete button next to the set name
+			var deleteButton = new Button();
+			deleteButton.Text = "Delete";
+			deleteButton.CustomMinimumSize = new Vector2(60, 0);
+			string setName = set.DisplayName; // Capture for lambda
+			deleteButton.Pressed += () => OnDeleteSetPressed(setName);
+			setHeaderContainer.AddChild(deleteButton);
 
 			if (set.Cards == null)
 				continue;
@@ -88,6 +101,15 @@ public partial class PauseMenu : CanvasLayer
 			var spacer = new Control();
 			spacer.CustomMinimumSize = new Vector2(0, 12);
 			_flashcardListContainer.AddChild(spacer);
+		}
+	}
+
+	private void OnDeleteSetPressed(string setDisplayName)
+	{
+		if (FlashcardManager.Instance.DeleteSet(setDisplayName))
+		{
+			// Refresh the list to reflect the deletion
+			PopulateFlashcardList();
 		}
 	}
 
