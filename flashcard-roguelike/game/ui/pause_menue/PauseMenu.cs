@@ -1,13 +1,56 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 public partial class PauseMenu : CanvasLayer
 {
+	[Signal]
+	public delegate void ToggleMouseLockEventHandler();
+
+	[Export] PackedScene MainMenu;
 	private Control _buttonPanelContainer;
 	private Control _viewFlashcardsPanelContainer;
 	private VBoxContainer _flashcardListContainer;
+	
+	private Stack<Control> _panelStack = new Stack<Control>();
+
+	/*
+	* Methods to handel opening multiple Control node windows from the pause menu
+	*/
+	private void PushPanel(Control panel)
+	{
+		// Hide the current top panel if any
+		if (_panelStack.Count > 0)
+		{
+			_panelStack.Peek().Hide();
+		}
+		
+		// Push and show the new panel
+		_panelStack.Push(panel);
+		panel.Show();
+	}
+
+	private void PopPanel()
+	{
+		if (_panelStack.Count > 0)
+		{
+			_panelStack.Pop().Hide();
+			
+			// Show the new top panel if any
+			if (_panelStack.Count > 0)
+			{
+				_panelStack.Peek().Show();
+			}
+		}
+	}
+
+	private void CloseAll(){
+		if (_panelStack.Count > 0)
+		{
+			_panelStack.Pop().Hide();
+			_panelStack.Clear();
+		}
+	}
 
 	public override void _Ready()
 	{
@@ -20,13 +63,23 @@ public partial class PauseMenu : CanvasLayer
 	{
 		if (@event.IsActionPressed("ui_cancel"))
 		{
-			if (_viewFlashcardsPanelContainer.Visible)
+			if (_panelStack.Count == 0)
 			{
-				_on_flashcards_back_pressed();
+				EmitSignal(SignalName.ToggleMouseLock);
+				Visible = true;
+				PushPanel(_buttonPanelContainer);
 			}
 			else
 			{
-				Visible = !Visible;
+				// Close the top panel
+				PopPanel();
+				
+				if (_panelStack.Count == 0)
+				{
+					// All panels closed, hide the pause menu
+					Visible = false;
+					EmitSignal(SignalName.ToggleMouseLock);
+				}
 			}
 		}
 	}
@@ -34,20 +87,19 @@ public partial class PauseMenu : CanvasLayer
 	public void _on_resume_pressed()
 	{
 		GD.Print("Resume Pressed");
-		Visible = false;
+		CloseAll();
+		EmitSignal(SignalName.ToggleMouseLock);
 	}
 
 	public void _on_view_flashcards_pressed()
 	{
-		_buttonPanelContainer.Visible = false;
-		_viewFlashcardsPanelContainer.Visible = true;
 		PopulateFlashcardList();
+		PushPanel(_viewFlashcardsPanelContainer);
 	}
 
 	public void _on_flashcards_back_pressed()
 	{
-		_viewFlashcardsPanelContainer.Visible = false;
-		_buttonPanelContainer.Visible = true;
+		PopPanel();
 	}
 
 	private void PopulateFlashcardList()
@@ -126,6 +178,7 @@ public partial class PauseMenu : CanvasLayer
 	public void _on_main_menu_pressed()
 	{
 		GD.Print("Main Menue Pressed");
+		GetTree().ChangeSceneToPacked(MainMenu);
 	}
 
 	public void _on_quit_pressed()

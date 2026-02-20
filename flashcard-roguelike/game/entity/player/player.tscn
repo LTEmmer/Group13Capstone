@@ -27,3 +27,5 @@ visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")
+
+[connection signal="ToggleMouseLock" from="CameraPivot/Camera3D/PauseMenu" to="." method="toggleMouseLock"]
