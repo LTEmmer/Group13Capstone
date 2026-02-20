@@ -50,4 +50,28 @@ public partial class FlashcardManager : Node
             Instance.AvailableSets = value;
         }
     }
+
+    // Delete a flashcard set from available sets and from the file system
+	public bool DeleteSet(string setDisplayName)
+	{
+		// Find the set in the available sets list
+		FlashcardSet setToRemove = AvailableSets.Find(set => set.DisplayName == setDisplayName);
+
+		if (setToRemove != null)
+		{
+			// Delete the set from the file system
+			if (_persistence.DeleteSet(setDisplayName))
+			{
+				// Remove from available sets list only if deletion was successful
+				AvailableSets.Remove(setToRemove);
+				return true;
+			}
+		}
+		else
+		{
+			GD.PrintErr($"Flashcard set '{setDisplayName}' not found in available sets");
+		}
+
+		return false;
+	}
 }
