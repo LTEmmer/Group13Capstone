@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using System.IO;
-using System.Xml;
 
 public partial class SceneData : Node
 {
