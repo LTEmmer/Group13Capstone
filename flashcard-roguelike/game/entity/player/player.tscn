@@ -22,10 +22,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6670784, 0)
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=102823933]
 current = true
 
-[node name="PauseMenu" parent="CameraPivot/Camera3D" unique_id=1620896989 instance=ExtResource("2_0b5cm")]
+[node name="CanvasLayer" type="CanvasLayer" parent="CameraPivot/Camera3D" unique_id=1934846964]
+
+[node name="PauseMenu" parent="CameraPivot/Camera3D/CanvasLayer" unique_id=1620896989 instance=ExtResource("2_0b5cm")]
 visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")
 
-[connection signal="ToggleMouseLock" from="CameraPivot/Camera3D/PauseMenu" to="." method="toggleMouseLock"]
+[connection signal="ToggleMouseLock" from="CameraPivot/Camera3D/CanvasLayer/PauseMenu" to="." method="toggleMouseLock"]

@@ -18,6 +18,7 @@ config/icon="res://shared/icon.svg"
 [autoload]
 
 FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
+GameController="*uid://djv2f8gvt83b7"
 
 [display]
 

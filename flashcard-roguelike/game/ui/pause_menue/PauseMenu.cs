@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class PauseMenu : CanvasLayer
+public partial class PauseMenu : Control 
 {
 	[Signal]
 	public delegate void ToggleMouseLockEventHandler();
@@ -178,7 +178,9 @@ public partial class PauseMenu : CanvasLayer
 	public void _on_main_menu_pressed()
 	{
 		GD.Print("Main Menue Pressed");
-		GetTree().ChangeSceneToPacked(MainMenu);
+		// GetTree().ChangeSceneToPacked(MainMenu);
+		SceneManager.Instance.GoTo(SceneNames.MainMenu);
+		SceneManager.Instance.Unload(SceneNames.Dungeon);
 	}
 
 	public void _on_quit_pressed()

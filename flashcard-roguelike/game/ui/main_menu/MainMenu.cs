@@ -23,7 +23,8 @@ public partial class MainMenu : Control
 
 	private void OnPlayPressed()
 	{
-		GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
+		//GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
+		SceneManager.Instance.ReplaceScene(SceneNames.Dungeon);
 	}
 
 	private void OnQuitPressed()
