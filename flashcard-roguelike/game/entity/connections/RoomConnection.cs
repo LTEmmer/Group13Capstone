@@ -68,7 +68,7 @@ public partial class RoomConnection : Node3D
 
 	public void TeleportPlayer(Node3D player)
 	{
-		DungeonGenerator gen = SceneManager.Instance.GetScene<DungeonGenerator>(SceneNames.Dungeon);
+		DungeonGenerator gen = SceneManager.Instance.Get<DungeonGenerator>(SceneNames.Dungeon);
 		if (gen == null)        
 		{
 			GD.PushError("RoomConnection could not find DungeonGenerator in the scene tree. Teleportation failed.");

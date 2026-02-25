@@ -9,7 +9,17 @@ public partial class Main : Node
 
     private void StartGame()
     {
-        SceneManager.Instance.GoTo(SceneNames.MainMenu);
+        SceneManager.Instance.Navigate(SceneNames.MainMenu);
         // SceneManager.Instance.Preload(SceneNames.Dungeon);
     }
+
+    // public override void _UnhandledInput(InputEvent @event)
+	// {
+	// 	if (@event.IsActionPressed("ui_cancel"))
+    //     {
+    //         SceneManager.Instance.SetVisibility(SceneNames.PauseMenu, true);
+    //     }
+    // }
+
+    
 }
