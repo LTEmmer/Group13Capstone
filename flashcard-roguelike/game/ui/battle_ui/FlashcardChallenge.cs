@@ -9,13 +9,14 @@ public partial class FlashcardChallenge : Control
 	public delegate void OnAnswerSubmittedEventHandler(bool isCorrect);
 
 	[Export] public float ShowDuration = 0.3f;
-	[Export] public float HideDuration = 0.2f;
+	[Export] public float HideDuration = 0.3f;
 
 	private Panel _challengePanel;
 	private Label _questionLabel;
 	private LineEdit _answerInput;
 	private Button _submitButton;
 	private Label _contextLabel;
+    private Label _answerLabel;
 
 	private Flashcard _currentCard;
 	private bool _isActive = false;
@@ -28,6 +29,7 @@ public partial class FlashcardChallenge : Control
 		_answerInput = GetNode<LineEdit>("ChallengePanel/MarginContainer/VBoxContainer/AnswerInput");
 		_contextLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
 		_submitButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/SubmitButton");
+        _answerLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/AnswerLabel");
 
 		// Connect signals
 		_submitButton.Pressed += OnSubmitPressed;
@@ -35,10 +37,9 @@ public partial class FlashcardChallenge : Control
 
 		// Start hidden
 		Visible = false;
-		_challengePanel.Modulate = new Color(1, 1, 1, 0); // Start fully transparent
 	}
 
-	public void ShowChallenge(Flashcard card, string context = "Answer correctly to continue")
+	public void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...")
 	{
 		if (_isActive || card == null) return; // Already active or no card to show
 
@@ -49,6 +50,7 @@ public partial class FlashcardChallenge : Control
 		_questionLabel.Text = card.Question;
 		_contextLabel.Text = context;
 		_answerInput.Text = "";
+        _answerLabel.Text = "Your Answer:";
 		_answerInput.Editable = true;
 		_submitButton.Disabled = false;
 
@@ -113,11 +115,12 @@ public partial class FlashcardChallenge : Control
 		else
 		{
 			_answerInput.Modulate = new Color(1.0f, 0.5f, 0.5f); // Red tint
-			_contextLabel.Text = $"Incorrect! The answer was: {correctAnswer}";
+			_contextLabel.Text = $"Incorrect!";
+            _answerLabel.Text = $"Correct Answer: {_currentCard.Answer}";
 		}
 
 		// Wait a moment then hide and emit result
-		GetTree().CreateTimer(1.0).Timeout += () =>
+        GetTree().CreateTimer(4.0f).Timeout += () =>
 		{
 			_answerInput.Modulate = Colors.White;
 			HideChallenge(() => EmitSignal(SignalName.OnAnswerSubmitted, isCorrect));

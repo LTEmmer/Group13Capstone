@@ -101,18 +101,6 @@ layout_mode = 2
 text = "HP: 100/100"
 horizontal_alignment = 1
 
-[node name="Separator" type="HSeparator" parent="StatusPanel/MarginContainer/VBoxContainer" unique_id=1363423484]
-layout_mode = 2
-
-[node name="EnemiesLabel" type="Label" parent="StatusPanel/MarginContainer/VBoxContainer" unique_id=1002934984]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Enemies:"
-horizontal_alignment = 1
-
-[node name="EnemiesStatus" type="VBoxContainer" parent="StatusPanel/MarginContainer/VBoxContainer" unique_id=184526980]
-layout_mode = 2
-
 [node name="CombatLogPanel" type="Panel" parent="." unique_id=1020423969]
 layout_mode = 1
 anchors_preset = 1
@@ -121,7 +109,7 @@ anchor_right = 1.0
 offset_left = -320.0
 offset_top = 20.0
 offset_right = -20.0
-offset_bottom = 220.0
+offset_bottom = 423.0
 grow_horizontal = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="CombatLogPanel" unique_id=339924127]

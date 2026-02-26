@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 
 public partial class BattleUI : Control
 {
@@ -15,7 +14,6 @@ public partial class BattleUI : Control
 	private Button _runButton;
 	private Button _itemsButton;
 	private Label _playerHealthLabel;
-	private VBoxContainer _enemiesHealthContainer;
 	private Label _combatLogLabel;
 
 	private Vector2 _hiddenPosition;
@@ -30,7 +28,6 @@ public partial class BattleUI : Control
 		_runButton = GetNode<Button>("ActionPanel/ActionsContainer/RunButton");
 		_itemsButton = GetNode<Button>("ActionPanel/ActionsContainer/ItemsButton");
 		_playerHealthLabel = GetNode<Label>("StatusPanel/MarginContainer/VBoxContainer/PlayerStatus/HealthLabel");
-		_enemiesHealthContainer = GetNode<VBoxContainer>("StatusPanel/MarginContainer/VBoxContainer/EnemiesStatus");
 		_combatLogLabel = GetNode<Label>("CombatLogPanel/MarginContainer/VBoxContainer/ScrollContainer/LogLabel");
 
 		// Connect button signals
@@ -101,24 +98,6 @@ public partial class BattleUI : Control
 	public void UpdatePlayerHealth(float current, float max)
 	{
 		_playerHealthLabel.Text = $"Player HP: {Mathf.Ceil(current)}/{max}";
-	}
-
-	public void UpdateEnemiesHealth(List<(string name, float current, float max)> enemiesData)
-	{
-        // Dirty way to do it for now, later enemies will handle their own UI
-		// Clear existing enemy health labels
-		foreach (Node child in _enemiesHealthContainer.GetChildren())
-		{
-			child.QueueFree();
-		}
-
-		// Create new labels for each enemy
-		foreach (var enemy in enemiesData)
-		{
-			Label enemyLabel = new Label();
-			enemyLabel.Text = $"{enemy.name}: {Mathf.Ceil(enemy.current)}/{enemy.max} HP";
-			_enemiesHealthContainer.AddChild(enemyLabel);
-		}
 	}
 
 	public void AddCombatLog(string message)

@@ -23,6 +23,7 @@ public partial class BattleManager : Node
 	private List<EnemyExample> _aliveEnemies = new List<EnemyExample>();
 	private Dictionary<EnemyExample, AttackComponent> _enemyAttackComponents = new Dictionary<EnemyExample, AttackComponent>();
     private Dictionary<EnemyExample, HealthComponent> _enemyHealthComponents = new Dictionary<EnemyExample, HealthComponent>();
+	private Dictionary<EnemyExample, EnemyStatusComponent> _enemyStatusComponents = new Dictionary<EnemyExample, EnemyStatusComponent>();
 	private bool _inCombat = false;
 	private bool _waitingForAction = false;
 	private bool _waitingForFlashcard = false;
@@ -94,6 +95,8 @@ public partial class BattleManager : Node
 			return;
 		}
 
+        _canEnterBattle = false; // Set to false to prevent entering another battle until cooldown ends
+
         // Find the battle area based off the room
         if (room != null)
         {
@@ -117,6 +120,11 @@ public partial class BattleManager : Node
 		_player = player;
 		_aliveEnemies = enemies;
 
+        // Disable player input immediately to prevent any actions during the transition into battle, also stop movement
+        _player.SetAcceptKeyboardInput(false);
+        _player.Velocity = Vector3.Zero;
+        Input.MouseMode = Input.MouseModeEnum.Visible;
+
 		// Get player attack component
 		_playerAttack = player.GetNode<AttackComponent>("AttackComponent");
 		if (_playerAttack == null)
@@ -139,6 +147,7 @@ public partial class BattleManager : Node
         // Clear old components (just in case) and get new enemy attack components, subscribe to their death signals
 		_enemyAttackComponents.Clear();
         _enemyHealthComponents.Clear();
+		_enemyStatusComponents.Clear();
 		foreach (var enemy in _aliveEnemies)
 		{   
             // Get and store attack component for each enemy, log error if missing
@@ -165,14 +174,27 @@ public partial class BattleManager : Node
             {
                 GD.PrintErr($"BattleManager: Enemy {enemy.Name} missing HealthComponent.");
             }
+
+			var statusComp = enemy.GetNode<EnemyStatusComponent>("EnemyStatusComponent");
+			if (statusComp != null)
+			{
+				_enemyStatusComponents.Add(enemy, statusComp);
+			}
+			else
+			{
+				GD.PrintErr($"BattleManager: Enemy {enemy.Name} missing EnemyStatusComponent.");
+			}
 		}
 
         // Start the transition with the first enemy as the focus
 		EnemyExample focusEnemy = _aliveEnemies[0];
-		_transition.Cover(focusEnemy, _player, () =>
+		_transition.Cover(focusEnemy.GlobalPosition, _player, () =>
 		{
 			SetupBattleArea(); // Move player and enemies to battle positions
-			_transition.Reveal(() => InitializeCombat()); // After transition, start combat
+			_transition.Reveal(() => // After transition, start combat
+                {
+                    InitializeCombat(); // Disable player input during transition
+                }); 
 		});
 	}
 
@@ -209,10 +231,8 @@ public partial class BattleManager : Node
 
 	private void InitializeCombat()
 	{
-        // Set combat state and disable player movement, unlock mouse
+        // Set combat state
 		_inCombat = true;
-		_player.SetPhysicsProcess(false);
-        Input.MouseMode = Input.MouseModeEnum.Visible;
 
 		// Show Battle UI
 		if (_battleUI != null)
@@ -220,8 +240,20 @@ public partial class BattleManager : Node
 			_battleUI.ClearCombatLog(); // Clear any old logs
 			_battleUI.AddCombatLog("Battle started!");
 			_battleUI.SlideIn(); // Animate UI sliding in
-			UpdateHealthUI(); // Initial health display
 		}
+
+		// Slide in enemy status UI near their models
+		foreach (var enemy in _aliveEnemies)
+		{
+            var status = _enemyStatusComponents[enemy];
+            var health = _enemyHealthComponents[enemy];
+            var attack = _enemyAttackComponents[enemy];
+
+            status.Initialize(enemy, health, attack);
+            status.SlideIn();
+		}
+
+		UpdateHealthUI(); // Initial health display
 
 		// Start first turn
 		StartPlayerTurn();
@@ -474,9 +506,12 @@ public partial class BattleManager : Node
 		UpdateHealthUI();
         _aliveEnemies.Remove(enemy);
 
-        // Remove the corresponding attack and health component for the defeated enemy, using the name set earlier
+        // Remove the corresponding components for the defeated enemy, using the name set earlier
         _enemyAttackComponents.Remove(enemy);
         _enemyHealthComponents.Remove(enemy);
+
+        _enemyStatusComponents[enemy].SlideOut();
+        _enemyStatusComponents.Remove(enemy);
 	}
 
 	private void OnPlayerDeath()
@@ -485,25 +520,21 @@ public partial class BattleManager : Node
         EndBattle(false);
 	}
 
-    // Mainly used for dev purposes, this type of display will not be used in the final product
+	// Update player and enemy health readouts
 	private void UpdateHealthUI()
 	{
-		if (_battleUI == null) return;
-
 		// Update player health
-		_battleUI.UpdatePlayerHealth(_playerHealth.CurrentHealth, _playerHealth.MaxHealth);
-
-		// Update enemies health, for now we just send a list of enemy names and their health to the UI, 
-        // it will be up to the UI to display them properly, 
-        // later each enemy will maintain its own health bar in the UI that gets updated individually
-		List<(string name, float current, float max)> enemiesData = new List<(string, float, float)>();
-		for (int i = 0; i < _aliveEnemies.Count; i++)
+		if (_battleUI != null)
 		{
-            var enemy = _aliveEnemies[i];
-			var health = _enemyHealthComponents[enemy];
-			enemiesData.Add((enemy.Name, health.CurrentHealth, health.MaxHealth));
+			_battleUI.UpdatePlayerHealth(_playerHealth.CurrentHealth, _playerHealth.MaxHealth);
 		}
-		_battleUI.UpdateEnemiesHealth(enemiesData);
+
+		// Update enemy status components (health)
+		foreach (var enemy in _aliveEnemies)
+		{
+            var status = _enemyStatusComponents[enemy];
+            status.SetHealth(_enemyHealthComponents[enemy].CurrentHealth, _enemyHealthComponents[enemy].MaxHealth);
+		}
 	}
 
 	private void EndBattle(bool victory, bool ran = false)
@@ -512,7 +543,6 @@ public partial class BattleManager : Node
 		_inCombat = false;
 		_waitingForAction = false;
 		_waitingForFlashcard = false;
-        _canEnterBattle = false;
         _battleCooldownTimer.Start(); // Start cooldown timer to prevent immediate re-entry into battle
 
         // Show end battle message and slide out UI, then reset positions and clean up battle state
@@ -531,20 +561,20 @@ public partial class BattleManager : Node
 				_battleUI.AddCombatLog("Defeat! You were overwhelmed...");
 			}
 
+            SlideOutEnemyStatus();
+
 			// Hide UI after a delay
 			GetTree().CreateTimer(2.0).Timeout += () =>
 			{
 				_battleUI.SlideOut(() =>
 				{
-                    // After UI is hidden, reset player and enemy positions, re-enable player movement, 
-                    // and clean up battle state
-					_player.SetPhysicsProcess(true);
+                    // After UI is hidden, reset player and enemy positions
                     Input.MouseMode = Input.MouseModeEnum.Captured;
 
                     if (ran)
                     {
                         // If player ran, enemies are still alive, reset their positions
-                        ResetPlayerEnemyPositions(_player, _aliveEnemies, false); 
+                        ResetPlayerEnemyPositions(_player, _aliveEnemies, true); 
                     }
                     else
                     {
@@ -554,13 +584,23 @@ public partial class BattleManager : Node
                     }
 					
 					CleanupBattle();
-				});
-			};
+
+                    // Play transition out
+                    _transition.SliceOut();
+
+                    // Re-enable player input after transition is done, use short time for better feel
+                    GetTree().CreateTimer(0.5).Timeout += () =>
+                    {
+                        _player.SetAcceptKeyboardInput(true);
+                    };
+			    });
+            };
 		}
 		else // If no BattleUI assigned, just reset positions and clean up immediately, shouldn't happen
 		{
+			SlideOutEnemyStatus();
 			ResetPlayerEnemyPositions(_player, _aliveEnemies, true);
-			_player.SetPhysicsProcess(true);
+            _player.SetAcceptKeyboardInput(true);
 			CleanupBattle();
 		}
 	}
@@ -577,6 +617,16 @@ public partial class BattleManager : Node
 		_aliveEnemies.Clear();
         _enemyAttackComponents.Clear();
 		_enemyHealthComponents.Clear();
+		_enemyStatusComponents.Clear();
+	}
+
+	private void SlideOutEnemyStatus()
+	{
+        // Slide out each enemy status
+		foreach (var status in _enemyStatusComponents)
+		{
+			status.Value.SlideOut();
+		}
 	}
 
 	private void ResetPlayerEnemyPositions(Player player, List<EnemyExample> enemies, bool enemiesAlive)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b1awrh787m3pg"]
 
 [ext_resource type="Script" uid="uid://mfx0vx74xj68" path="res://game/entity/enemy_example/EnemyExample.cs" id="1_enemy"]
+[ext_resource type="PackedScene" uid="uid://c6v5m2p9s1t4q" path="res://shared/components/enemy_status/enemy_status_component.tscn" id="2_enemy_status"]
 [ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="2_health"]
 [ext_resource type="PackedScene" uid="uid://ci0hdg6g3o0ny" path="res://shared/components/attack/attack_component.tscn.tscn" id="3_fgc6a"]
 
@@ -28,6 +29,8 @@ mesh = SubResource("CapsuleMesh_fgc6a")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1530422744]
 shape = SubResource("CapsuleShape3D_o5vbe")
+
+[node name="EnemyStatusComponent" parent="." instance=ExtResource("2_enemy_status")]
 
 [node name="HealthComponent" parent="." unique_id=1527490394 instance=ExtResource("2_health")]
 MaxHealth = 20.0
