@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://c3l0enl6d88r5"]
 
+[ext_resource type="PackedScene" uid="uid://b8g15b4a5ec36" path="res://game/entity/battle/battle_manager.tscn" id="1_503t6"]
 [ext_resource type="PackedScene" uid="uid://ncone6wihg1s" path="res://game/entity/flash_card_entity/flash_card_interactable.tscn" id="1_im37l"]
 [ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="2_4adyp"]
+[ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="4_503t6"]
+[ext_resource type="PackedScene" uid="uid://b1awrh787m3pg" path="res://game/entity/enemy_example/enemy_example.tscn" id="4_enemy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_im37l"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -47,6 +50,9 @@ size = Vector3(1.5, 1, 0.5)
 size = Vector3(1.5, 1, 0.5)
 
 [node name="TestRoom" type="Node3D" unique_id=1556408090]
+
+[node name="BattleManager" parent="." unique_id=787401934 node_paths=PackedStringArray("BattleArea") instance=ExtResource("1_503t6")]
+BattleArea = NodePath("../BattleArea")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1876038787]
 environment = SubResource("Environment_h8avn")
@@ -147,5 +153,11 @@ mesh = SubResource("BoxMesh_hurdle")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4498606, 1.004235, 0)
 Player = NodePath("../Player")
 
+[node name="EnemyExample" parent="." unique_id=144248635 instance=ExtResource("4_enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -7.9797363)
+
+[node name="BattleArea" parent="." unique_id=1408501426 instance=ExtResource("4_503t6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.270627, 4.7683716e-07, 3.5250633)
+
 [node name="Player" parent="." unique_id=249236073 instance=ExtResource("2_4adyp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1211181, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.046477795, 0.93734235, 1.9412074)

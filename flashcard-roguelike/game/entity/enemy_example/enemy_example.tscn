@@ -1,3 +1,24 @@
 [gd_scene format=3 uid="uid://b1awrh787m3pg"]
 
-[node name="EnemyExample" type="Node3D" unique_id=144248635]
+[ext_resource type="Script" uid="uid://mfx0vx74xj68" path="res://game/entity/enemy_example/EnemyExample.cs" id="1_enemy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5vbe"]
+albedo_color = Color(1, 0, 0.023529412, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7spa5"]
+material = SubResource("StandardMaterial3D_o5vbe")
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o5vbe"]
+radius = 0.4
+height = 1.8
+
+[node name="EnemyExample" type="CharacterBody3D" unique_id=592527612]
+script = ExtResource("1_enemy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1089955308]
+mesh = SubResource("CapsuleMesh_7spa5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1530422744]
+shape = SubResource("CapsuleShape3D_o5vbe")
