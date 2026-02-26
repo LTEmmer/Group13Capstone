@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ncone6wihg1s"]
 
-[ext_resource type="Script" uid="uid://c748sgq6l80id" path="res://game/entity/flash_card_entity/FlashCardInteractable.cs" id="1_nqbih"]
+[ext_resource type="Script" uid="uid://cp3h11r42tmm" path="res://game/entity/flash_card_entity/FlashCardInteractable.cs" id="1_nqbih"]
 [ext_resource type="PackedScene" uid="uid://bkmeb0akwerrp" path="res://game/entity/flash_card_entity/flash_card_entity.tscn" id="2_81qqu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f0b8r"]

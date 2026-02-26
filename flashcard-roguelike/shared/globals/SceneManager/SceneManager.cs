@@ -31,7 +31,6 @@ public enum SceneNames
 /// SceneManager.Instance.SetVisible(SceneNames.Hud, true); // show alongside current scene
 /// </code>
 /// </summary>
-[GlobalClass]
 public partial class SceneManager : Node
 {
     public static SceneManager Instance { get; private set; }
