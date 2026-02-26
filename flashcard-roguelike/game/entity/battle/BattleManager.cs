@@ -28,6 +28,8 @@ public partial class BattleManager : Node
 	private bool _waitingForFlashcard = false;
 	private string _pendingAction = "";
 	private int _currentEnemyIndex = 0;
+    private Timer _battleCooldownTimer;
+    private bool _canEnterBattle = true; // Flag to control battle entry, set to false during cooldown
 
 	public override void _Ready()
 	{
@@ -40,6 +42,14 @@ public partial class BattleManager : Node
         AddChild(_battleUI);
         _flashcardChallenge = GD.Load<PackedScene>("res://game/ui/battle_ui/flashcard_challenge.tscn").Instantiate<FlashcardChallenge>();
         AddChild(_flashcardChallenge);
+
+        // Set up the timer for battle cooldown to prevent immediate re-entry into battle after one ends, 
+        // can be adjusted as needed
+        _battleCooldownTimer = new Timer();
+        _battleCooldownTimer.WaitTime = 3.0; // Adjust the cooldown duration as needed
+        _battleCooldownTimer.OneShot = true;
+        _battleCooldownTimer.Timeout += OnBattleCooldownTimeout;
+        AddChild(_battleCooldownTimer);
 
         if (_transition == null || _battleUI == null || _flashcardChallenge == null)
         {
@@ -60,6 +70,12 @@ public partial class BattleManager : Node
 
 	public void StartBattle(Player player, List<EnemyExample> enemies, Node3D room)
 	{
+        if (!_canEnterBattle)
+        {
+            GD.Print("Cannot enter battle yet. Still in cooldown.");
+            return;
+        }
+
 		if (_transition == null)
 		{
 			GD.PrintErr("BattleManager: Transition is not assigned.");
@@ -496,6 +512,8 @@ public partial class BattleManager : Node
 		_inCombat = false;
 		_waitingForAction = false;
 		_waitingForFlashcard = false;
+        _canEnterBattle = false;
+        _battleCooldownTimer.Start(); // Start cooldown timer to prevent immediate re-entry into battle
 
         // Show end battle message and slide out UI, then reset positions and clean up battle state
 		if (_battleUI != null)
@@ -547,6 +565,13 @@ public partial class BattleManager : Node
 		}
 	}
 
+    private void OnBattleCooldownTimeout()
+    {
+        // This function is called when the battle cooldown timer finishes, allowing the player to enter battle again
+        GD.Print("Battle cooldown ended. Player can enter battle again.");
+        _canEnterBattle = true;
+    }
+
 	private void CleanupBattle()
 	{
 		_aliveEnemies.Clear();
@@ -578,7 +603,7 @@ public partial class BattleManager : Node
 
     /* For testing purposes, can be removed later, should only be used in test room to trigger battle 
     without needing to interact with an object
-    
+
 	public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed("ui_accept"))

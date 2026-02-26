@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public partial class EnemyExample : CharacterBody3D
 {
 	[Export] public Area3D DetectionArea;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
