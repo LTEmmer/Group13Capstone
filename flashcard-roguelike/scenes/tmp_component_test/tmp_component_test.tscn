@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://d8axjh7q5ugo"]
+
+[ext_resource type="Script" uid="uid://dlf3uovd4r1qi" path="res://scenes/tmp_component_test/ComponentTestScript.cs" id="1_myjbb"]
+[ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="1_x520u"]
+[ext_resource type="PackedScene" uid="uid://ci0hdg6g3o0ny" path="res://shared/components/attack/attack_component.tscn.tscn" id="2_myjbb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x46pg"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ep5sw"]
+sky_material = SubResource("ProceduralSkyMaterial_x46pg")
+
+[sub_resource type="Environment" id="Environment_3udum"]
+background_mode = 2
+sky = SubResource("Sky_ep5sw")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e7ly5"]
+albedo_color = Color(0.2, 0.120000005, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j2mhj"]
+material = SubResource("StandardMaterial3D_e7ly5")
+size = Vector2(1000, 1000)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1aw5g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6fyjw"]
+albedo_color = Color(8.663535e-07, 0.45334703, 0.18833214, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_h4w33"]
+material = SubResource("StandardMaterial3D_6fyjw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c3vsd"]
+albedo_color = Color(1, 0.26, 0.27233315, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7e6xo"]
+material = SubResource("StandardMaterial3D_c3vsd")
+
+[node name="TmpComponentTest" type="Node3D" unique_id=2095413768 node_paths=PackedStringArray("player", "enemy")]
+script = ExtResource("1_myjbb")
+player = NodePath("Player")
+enemy = NodePath("Enemy")
+
+[node name="ENV" type="Node3D" parent="." unique_id=1469496313]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="ENV" unique_id=1166107554]
+environment = SubResource("Environment_3udum")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="ENV" unique_id=485970608]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+metadata/_edit_group_ = true
+
+[node name="Floor" type="StaticBody3D" parent="ENV" unique_id=522297525]
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ENV/Floor" unique_id=1140685001]
+mesh = SubResource("PlaneMesh_j2mhj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ENV/Floor" unique_id=1971671427]
+shape = SubResource("WorldBoundaryShape3D_1aw5g")
+
+[node name="Player" type="Node3D" parent="." unique_id=1370681162]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="HealthComponent" parent="Player" unique_id=1678835764 instance=ExtResource("1_x520u")]
+
+[node name="AttackComponent" parent="Player" unique_id=333012664 instance=ExtResource("2_myjbb")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=872739374]
+mesh = SubResource("CapsuleMesh_h4w33")
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=680911345]
+transform = Transform3D(0.9945018, 0.042332612, -0.095781595, 0, 0.9146495, 0.40424782, 0.10471946, -0.40202516, 0.9096206, 1.2052387, 2.670661, 3.5997984)
+fov = 55.982845
+
+[node name="DeathDialog" type="AcceptDialog" parent="Player/Camera3D" unique_id=1776534214]
+oversampling_override = 1.0
+initial_position = 4
+size = Vector2i(104, 100)
+ok_button_text = "Continue"
+dialog_text = "You Died :P"
+
+[node name="Enemy" type="Node3D" parent="." unique_id=839016290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5139117, 0.5, -6.9240913)
+
+[node name="HealthComponent" parent="Enemy" unique_id=736138892 instance=ExtResource("1_x520u")]
+
+[node name="AttackComponent" parent="Enemy" unique_id=1686854547 instance=ExtResource("2_myjbb")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1318685591]
+mesh = SubResource("BoxMesh_7e6xo")
+
+[connection signal="_OnDeath" from="Player/HealthComponent" to="Player/Camera3D/DeathDialog" method="show"]
+[connection signal="_OnDeath" from="Enemy/HealthComponent" to="Enemy" method="queue_free"]
