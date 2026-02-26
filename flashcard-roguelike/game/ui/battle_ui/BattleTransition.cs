@@ -6,6 +6,8 @@ public partial class BattleTransition : CanvasLayer
     [Export] public int SliceCount = 5;
     [Export] public float SliceDuration = 1f;
     [Export] public float StaggerDelay = 0.1f;
+    [Export] public Player Player;
+    [Export] public EnemyExample Enemy;
 
     public override void _Ready()
     {
@@ -13,8 +15,9 @@ public partial class BattleTransition : CanvasLayer
     }
 
     // Call this to slam the slices shut, onComplete will be called after all slices have finished sliding in
-    public void Cover(Action onComplete = null)
-    {
+    public void Cover(EnemyExample enemy, Player player, Action onComplete = null)
+    {   
+
         // Capture the current screen as a texture and determine slice sizes
         ImageTexture screenTexture = CaptureScreen();
         Vector2 screenSize = GetViewport().GetVisibleRect().Size;
@@ -57,7 +60,12 @@ public partial class BattleTransition : CanvasLayer
 
         // Chain a callback after all slices have finished sliding in
         // Callable.From is used to convert the lambda to a Callable that can be used in the tween
-        tween.Chain().TweenCallback(Callable.From(() => onComplete?.Invoke())).SetDelay(totalDuration);
+        tween.Chain().TweenCallback(Callable.From(() => 
+        {
+            // Look at the enemy to set the correct view for the transition
+            player.LookAt(enemy.GlobalTransform.Origin, Vector3.Up);
+            onComplete?.Invoke();
+        })).SetDelay(totalDuration);
     }
 
     // Call this when done to reveal screen, onComplete will be called after all slices have finished sliding off
@@ -104,15 +112,18 @@ public partial class BattleTransition : CanvasLayer
     }
 
     // Example input to trigger the transition for testing
+    /*
     public override void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("ui_accept")) // spacebar by default
         {
-            Cover(() =>
+            Cover(Enemy, Player, () =>
             {
                 GD.Print("Covered!");
                 Reveal(() => GD.Print("Revealed!"));
+
             });
         }
     }
+    */
 }
