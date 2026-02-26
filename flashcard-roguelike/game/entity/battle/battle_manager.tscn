@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://ync4kubpqeah" path="res://game/entity/battle/BattleManager.cs" id="1_ridui"]
 [ext_resource type="PackedScene" uid="uid://cydjrbd8x3kvj" path="res://game/ui/battle_ui/battle_transition.tscn" id="2_bqx57"]
+[ext_resource type="PackedScene" uid="uid://brak2x5m7n8p3" path="res://game/ui/battle_ui/battle_ui.tscn" id="3_battle_ui"]
+[ext_resource type="PackedScene" uid="uid://cx4p8q7nak2n5" path="res://game/ui/battle_ui/flashcard_challenge.tscn" id="4_flashcard"]
 
-[node name="BattleManager" type="Node" unique_id=787401934 node_paths=PackedStringArray("Transition")]
+[node name="BattleManager" type="Node" unique_id=787401934]
 script = ExtResource("1_ridui")
-Transition = NodePath("BattleTransition")
-
-[node name="BattleTransition" parent="." unique_id=1034174715 instance=ExtResource("2_bqx57")]
+Transition = ExtResource("2_bqx57")
+BattleUI = ExtResource("3_battle_ui")
+FlashcardChallenge = ExtResource("4_flashcard")

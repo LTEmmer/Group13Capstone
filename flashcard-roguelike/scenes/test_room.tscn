@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://c3l0enl6d88r5"]
 
-[ext_resource type="PackedScene" uid="uid://b8g15b4a5ec36" path="res://game/entity/battle/battle_manager.tscn" id="1_503t6"]
 [ext_resource type="PackedScene" uid="uid://ncone6wihg1s" path="res://game/entity/flash_card_entity/flash_card_interactable.tscn" id="1_im37l"]
 [ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="2_4adyp"]
 [ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="4_503t6"]
@@ -50,9 +49,6 @@ size = Vector3(1.5, 1, 0.5)
 size = Vector3(1.5, 1, 0.5)
 
 [node name="TestRoom" type="Node3D" unique_id=1556408090]
-
-[node name="BattleManager" parent="." unique_id=787401934 node_paths=PackedStringArray("BattleArea") instance=ExtResource("1_503t6")]
-BattleArea = NodePath("../BattleArea")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1876038787]
 environment = SubResource("Environment_h8avn")
@@ -161,3 +157,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.270627, 4.7683716e-07, 3.5
 
 [node name="Player" parent="." unique_id=249236073 instance=ExtResource("2_4adyp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.046477795, 0.93734235, 1.9412074)
+
+[editable path="EnemyExample"]

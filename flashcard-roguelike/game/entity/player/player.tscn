@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://het36bkur8tc" path="res://game/entity/player/Player.cs" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="2_0b5cm"]
+[ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="3_health"]
+[ext_resource type="PackedScene" uid="uid://ci0hdg6g3o0ny" path="res://shared/components/attack/attack_component.tscn.tscn" id="4_dmj0o"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
 radius = 0.4
@@ -27,5 +29,9 @@ visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")
+
+[node name="HealthComponent" parent="." unique_id=1636756935 instance=ExtResource("3_health")]
+
+[node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("4_dmj0o")]
 
 [connection signal="ToggleMouseLock" from="CameraPivot/Camera3D/PauseMenu" to="." method="toggleMouseLock"]

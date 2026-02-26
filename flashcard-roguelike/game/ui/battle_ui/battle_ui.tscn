@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://brak2x5m7n8p3"]
+
+[ext_resource type="Script" uid="uid://c8y7x4k6m3p2h" path="res://game/ui/battle_ui/BattleUI.cs" id="1_battle_ui"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_x52vn"]
+font_size = 13
+
+[node name="BattleUI" type="Control" unique_id=1960394992]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_battle_ui")
+
+[node name="ActionPanel" type="Panel" parent="." unique_id=1579467721]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -120.0
+offset_right = 200.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ActionsContainer" type="HBoxContainer" parent="ActionPanel" unique_id=633386375]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -35.0
+offset_right = 180.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="AttackButton" type="Button" parent="ActionPanel/ActionsContainer" unique_id=3669184]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+text = "Attack"
+
+[node name="ItemsButton" type="Button" parent="ActionPanel/ActionsContainer" unique_id=1513973748]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+text = "Items"
+
+[node name="RunButton" type="Button" parent="ActionPanel/ActionsContainer" unique_id=633085695]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+text = "Run"
+
+[node name="StatusPanel" type="Panel" parent="." unique_id=1854288722]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -180.0
+offset_right = 270.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="StatusPanel" unique_id=1159361136]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatusPanel/MarginContainer" unique_id=55729302]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="PlayerStatus" type="VBoxContainer" parent="StatusPanel/MarginContainer/VBoxContainer" unique_id=1938659599]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="StatusPanel/MarginContainer/VBoxContainer/PlayerStatus" unique_id=719325504]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Player:"
+horizontal_alignment = 1
+
+[node name="HealthLabel" type="Label" parent="StatusPanel/MarginContainer/VBoxContainer/PlayerStatus" unique_id=355642044]
+layout_mode = 2
+text = "HP: 100/100"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="StatusPanel/MarginContainer/VBoxContainer" unique_id=1363423484]
+layout_mode = 2
+
+[node name="EnemiesLabel" type="Label" parent="StatusPanel/MarginContainer/VBoxContainer" unique_id=1002934984]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Enemies:"
+horizontal_alignment = 1
+
+[node name="EnemiesStatus" type="VBoxContainer" parent="StatusPanel/MarginContainer/VBoxContainer" unique_id=184526980]
+layout_mode = 2
+
+[node name="CombatLogPanel" type="Panel" parent="." unique_id=1020423969]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 220.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CombatLogPanel" unique_id=339924127]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CombatLogPanel/MarginContainer" unique_id=1127884597]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CombatLogPanel/MarginContainer/VBoxContainer" unique_id=406951929]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Combat Log"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CombatLogPanel/MarginContainer/VBoxContainer" unique_id=435481788]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="LogLabel" type="Label" parent="CombatLogPanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1799267968]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Combat Started!"
+label_settings = SubResource("LabelSettings_x52vn")
+autowrap_mode = 3
