@@ -98,9 +98,9 @@ public partial class BattleManager : Node
             return;
         }
 
-        if (enemies == null || enemies.Count == 0)
+        if (enemies == null || enemies.Count <= 0 || enemies.Count > 3)
         {
-            GD.PrintErr("BattleManager: No enemies provided.");
+            GD.PrintErr("BattleManager: No enemies provided or too many provided.");
             return;
         }
 
