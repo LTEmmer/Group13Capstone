@@ -29,7 +29,7 @@ public partial class EnemyExample : CharacterBody3D
 
 			// For now grab this specific enemy, but eventually we will want to grab all enemies in the room
 			// Maybe each room can store enemies in an enemies node so we can easily grab all enemies
-			// by: GetParent().GetNode("Enemies").GetChildren() or something like that
+			// by: GetParent().GetNode("Enemies").GetChildren() or something like that and put them in a list.
 			BattleManager.Instance.StartBattle(player, new List<EnemyExample> { this }, GetParent<Node3D>());
 		}
 	}
