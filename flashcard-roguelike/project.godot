@@ -17,6 +17,7 @@ config/icon="res://shared/icon.svg"
 
 [autoload]
 
+CurrentRoomManager="*res://game/current_room_manager.tscn"
 FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
 
 [display]

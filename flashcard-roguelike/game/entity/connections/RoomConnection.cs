@@ -99,6 +99,8 @@ public partial class RoomConnection : Node3D
 		}
 
 		player.GlobalPosition = dest;
+		if (CurrentRoomManager.Instance != null)
+			CurrentRoomManager.Instance.CurrentRoomId = TargetRoomId;
 	}
 
 	public void SetLabel(bool isEntrance, int id, string roomType)

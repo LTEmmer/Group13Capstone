@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://het36bkur8tc" path="res://game/entity/player/Player.cs" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="2_0b5cm"]
+[ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="3_health"]
+[ext_resource type="PackedScene" uid="uid://bqxhud_flashcard_roguelike" path="res://game/ui/hud/hud.tscn" id="4_hud"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
 radius = 0.4
@@ -11,6 +13,8 @@ height = 1.8
 
 [node name="Player" type="CharacterBody3D" unique_id=249236073]
 script = ExtResource("1_script")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_health")]
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=1450744592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03734237, 0)
@@ -24,6 +28,8 @@ current = true
 
 [node name="PauseMenu" parent="CameraPivot/Camera3D" unique_id=1620896989 instance=ExtResource("2_0b5cm")]
 visible = false
+
+[node name="HUD" parent="CameraPivot/Camera3D" instance=ExtResource("4_hud")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")
