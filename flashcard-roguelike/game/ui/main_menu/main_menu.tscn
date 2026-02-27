@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://h18wimcwtwvr"]
 
-[ext_resource type="Script" uid="uid://c6ww1v7faml4b" path="res://game/ui/main_menu/main_menu.gd" id="1_gof3u"]
+[ext_resource type="Script" uid="uid://caoaflolr46co" path="res://game/ui/main_menu/MainMenu.cs" id="1_gof3u"]
 
 [node name="main menu" type="Control" unique_id=1885237886]
 layout_mode = 3
@@ -30,6 +30,19 @@ text = "Flash Card Roguelike"
 [node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1296768342]
 layout_mode = 2
 text = "Start Game"
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer" unique_id=628858375]
+layout_mode = 2
+text = "Enter Path
+"
+
+[node name="SetNameInput" type="LineEdit" parent="CenterContainer/VBoxContainer" unique_id=544894052]
+layout_mode = 2
+
+[node name="CardUpload" type="Button" parent="CenterContainer/VBoxContainer" unique_id=455458912]
+layout_mode = 2
+text = "Card Upload
+"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1567657475]
 layout_mode = 2

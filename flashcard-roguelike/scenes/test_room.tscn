@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://ncone6wihg1s" path="res://game/entity/flash_card_entity/flash_card_interactable.tscn" id="1_im37l"]
 [ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="2_4adyp"]
+[ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="4_503t6"]
+[ext_resource type="PackedScene" uid="uid://b1awrh787m3pg" path="res://game/entity/enemy_example/enemy_example.tscn" id="4_enemy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_im37l"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -147,5 +149,11 @@ mesh = SubResource("BoxMesh_hurdle")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4498606, 1.004235, 0)
 Player = NodePath("../Player")
 
+[node name="BattleArea" parent="." unique_id=1408501426 instance=ExtResource("4_503t6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0990133, 4.7683716e-07, 1.5176296)
+
 [node name="Player" parent="." unique_id=249236073 instance=ExtResource("2_4adyp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1211181, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.870005, 0.93734235, 5.833741)
+
+[node name="EnemyExample" parent="." unique_id=592527612 instance=ExtResource("4_enemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04052472, 0.9000002, -8.206493)

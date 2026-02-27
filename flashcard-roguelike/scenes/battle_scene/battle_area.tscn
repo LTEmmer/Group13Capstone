@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dtutg34hih1q2"]
+
+[node name="BattleArea" type="Node3D" unique_id=1408501426]
+
+[node name="PlayerSpot" type="Marker3D" parent="." unique_id=491776094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+
+[node name="EnemySpot0" type="Marker3D" parent="." unique_id=222075097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="EnemySpot1" type="Marker3D" parent="." unique_id=386690271]
+transform = Transform3D(0.66101074, 0, 0.75037646, 0, 1, 0, -0.75037646, 0, 0.66101074, -3, 0, -4)
+
+[node name="EnemySpot2" type="Marker3D" parent="." unique_id=875573413]
+transform = Transform3D(0.10379934, 0, -0.99459827, 0, 1, 0, 0.99459827, 0, 0.10379934, 3, 0, -4)

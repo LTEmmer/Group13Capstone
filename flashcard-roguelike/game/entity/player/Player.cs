@@ -4,6 +4,9 @@ using System;
 public partial class Player : CharacterBody3D
 {
 	[Export]
+	public CanvasLayer PauseMenu;
+	
+	[Export]
 	// _speed of camera
 	public float MouseSensitivity { get; set; } = 0.002f;
 
@@ -17,6 +20,7 @@ public partial class Player : CharacterBody3D
 	private Vector3 _targetVelocity = Vector3.Zero;
 	private int _speed { get; set; } = 10;
 	private int _sprintSpeed = 2;
+	private bool _acceptKeyboardInput = true;
 	
 	public override void _Ready()
 	{
@@ -40,37 +44,42 @@ public partial class Player : CharacterBody3D
 			}
 		}
 	}
-	public override void _UnhandledInput(InputEvent @event)
+	public void toggleMouseLock()
 	{
-		if (@event.IsActionPressed("ui_cancel"))
+		if (Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
-			if (Input.MouseMode == Input.MouseModeEnum.Captured)
-			{
-				Input.MouseMode = Input.MouseModeEnum.Visible;
-			}
-			else
-			{
-				Input.MouseMode = Input.MouseModeEnum.Captured;
-			}
-		}
-	}
-
-
-public override void _PhysicsProcess(double delta)
-	{
-		Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-		if (direction != Vector3.Zero)
-		{
-			Velocity = new Vector3(direction.X * _speed, Velocity.Y, direction.Z * _speed);
-			if (Input.IsActionPressed("sprint")){
-				Velocity = Velocity * _sprintSpeed;
-			}
+    		Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
 		else
 		{
-			Velocity = new Vector3(Mathf.MoveToward(Velocity.X, 0, _speed), Velocity.Y, Mathf.MoveToward(Velocity.Z, 0, _speed));
+    		Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
+	}
+
+	public void SetAcceptKeyboardInput(bool accept)
+	{
+		_acceptKeyboardInput = accept;
+	}
+
+public override void _PhysicsProcess(double delta)
+	{
+		if (_acceptKeyboardInput)
+		{
+			Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
+			Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+			if (direction != Vector3.Zero)
+			{
+				Velocity = new Vector3(direction.X * _speed, Velocity.Y, direction.Z * _speed);
+				if (Input.IsActionPressed("sprint")){
+					Velocity = Velocity * _sprintSpeed;
+				}
+			}
+			else
+			{
+				Velocity = new Vector3(Mathf.MoveToward(Velocity.X, 0, _speed), Velocity.Y, Mathf.MoveToward(Velocity.Z, 0, _speed));
+			}
+		}
+
 		MoveAndSlide();
 	}
 }
