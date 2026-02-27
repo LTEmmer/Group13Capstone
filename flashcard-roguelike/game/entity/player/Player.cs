@@ -25,6 +25,15 @@ public partial class Player : CharacterBody3D
 	{
 		_cameraPivot = GetNode<Node3D>("CameraPivot");
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+		SceneManager.Instance.Load(SceneNames.PauseMenu);
+	}
+
+    public override void _Process(double delta)
+	{
+		if(!SceneManager.Instance.IsVisible(SceneNames.PauseMenu))
+		{
+    		Input.MouseMode = Input.MouseModeEnum.Captured;
+		}
 	}
 
 	public override void _Input(InputEvent @event)
@@ -41,6 +50,15 @@ public partial class Player : CharacterBody3D
 				_pitch = Mathf.Clamp(_pitch, -Mathf.DegToRad(MaxPitchDegrees), Mathf.DegToRad(MaxPitchDegrees));
 				_cameraPivot.Rotation = new Vector3(_pitch, 0, 0);
 			}
+		}
+	}
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event.IsActionPressed("ui_cancel"))
+		{
+			SceneManager.Instance.ToggleVisability(SceneNames.PauseMenu);
+			toggleMouseLock();
 		}
 	}
 	public void toggleMouseLock()

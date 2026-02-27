@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class PauseMenu : CanvasLayer 
+public partial class PauseMenu : Control 
 {
 	[Signal]
 	public delegate void ToggleMouseLockEventHandler();
@@ -42,6 +42,9 @@ public partial class PauseMenu : CanvasLayer
 				_panelStack.Peek().Show();
 			}
 		}
+
+		if(_panelStack.Count == 0)
+			SceneManager.Instance.SetVisibility(SceneNames.PauseMenu, false);
 	}
 
 	private void CloseAll(){
@@ -49,6 +52,7 @@ public partial class PauseMenu : CanvasLayer
 		{
 			_panelStack.Pop().Hide();
 			_panelStack.Clear();
+			SceneManager.Instance.SetVisibility(SceneNames.PauseMenu, false);
 		}
 	}
 
@@ -65,7 +69,6 @@ public partial class PauseMenu : CanvasLayer
 		{
 			if (_panelStack.Count == 0)
 			{
-				EmitSignal(SignalName.ToggleMouseLock);
 				Visible = true;
 				PushPanel(_buttonPanelContainer);
 			}
@@ -73,13 +76,6 @@ public partial class PauseMenu : CanvasLayer
 			{
 				// Close the top panel
 				PopPanel();
-				
-				if (_panelStack.Count == 0)
-				{
-					// All panels closed, hide the pause menu
-					Visible = false;
-					EmitSignal(SignalName.ToggleMouseLock);
-				}
 			}
 		}
 	}
@@ -88,7 +84,6 @@ public partial class PauseMenu : CanvasLayer
 	{
 		GD.Print("Resume Pressed");
 		CloseAll();
-		EmitSignal(SignalName.ToggleMouseLock);
 	}
 
 	public void _on_view_flashcards_pressed()
@@ -181,6 +176,8 @@ public partial class PauseMenu : CanvasLayer
 		// GetTree().ChangeSceneToPacked(MainMenu);
 		SceneManager.Instance.Navigate(SceneNames.MainMenu);
 		SceneManager.Instance.Free(SceneNames.Dungeon);
+		SceneManager.Instance.SetVisibility(SceneNames.PauseMenu, false);
+		SceneManager.Instance.Free(SceneNames.PauseMenu);
 	}
 
 	public void _on_quit_pressed()

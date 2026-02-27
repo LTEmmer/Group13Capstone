@@ -10,12 +10,18 @@ shader = ExtResource("2_scxh3")
 shader_parameter/radius = 2
 shader_parameter/strength = 2.0
 
-[node name="PauseMenu" type="CanvasLayer" unique_id=2134669883]
+[node name="PauseMenu" type="Control" unique_id=885057537]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_f48la")
 MainMenu = ExtResource("2_1n6di")
 
 [node name="ButtonPanelContainer" type="Control" parent="." unique_id=1746979678]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -108,7 +114,7 @@ text = "Quit
 
 [node name="ViewFlashcardsPanelContainer" type="Control" parent="." unique_id=-282018724]
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -173,6 +179,7 @@ size_flags_vertical = 3
 theme = ExtResource("2_h8w6g")
 text = "Back"
 
+[connection signal="visibility_changed" from="." to="." method="CloseAll"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/View Imported Flashcards" to="." method="_on_view_flashcards_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Options" to="." method="_on_options_pressed"]

@@ -4,3 +4,9 @@
 
 [node name="Main" type="Node" unique_id=122905419]
 script = ExtResource("1_hyk8p")
+
+[node name="World3D" type="Node3D" parent="." unique_id=358377135]
+
+[node name="World2D" type="Node2D" parent="." unique_id=2075324139]
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=368621594]
