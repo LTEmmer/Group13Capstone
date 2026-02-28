@@ -22,7 +22,7 @@ SceneManager="*uid://djv2f8gvt83b7"
 
 [display]
 
-window/size/mode=2
+window/size/initial_position_type=3
 
 [dotnet]
 

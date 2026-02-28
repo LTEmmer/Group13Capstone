@@ -4,14 +4,9 @@ using System;
 public partial class Player : CharacterBody3D
 {
 	[Export]
-	public CanvasLayer PauseMenu;
-	
-	[Export]
-	// _speed of camera
 	public float MouseSensitivity { get; set; } = 0.002f;
 
 	[Export]
-	// High/Low angle player can look (currently almost straight up/down)
 	public float MaxPitchDegrees { get; set; } = 89f;
 	
 	private Node3D _cameraPivot;
@@ -25,15 +20,8 @@ public partial class Player : CharacterBody3D
 	{
 		_cameraPivot = GetNode<Node3D>("CameraPivot");
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		SceneManager.Instance.Load(SceneNames.PauseMenu);
-	}
-
-    public override void _Process(double delta)
-	{
-		if(!SceneManager.Instance.IsVisible(SceneNames.PauseMenu))
-		{
-    		Input.MouseMode = Input.MouseModeEnum.Captured;
-		}
+		SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ButtonPanel);
+		SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ViewFlashcards);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -42,10 +30,7 @@ public partial class Player : CharacterBody3D
 		{
 			if (@event is InputEventMouseMotion motion)
 			{
-				// Horizontal: rotate the whole player (yaw)
 				RotateY(-motion.Relative.X * MouseSensitivity);
-
-				// Vertical: rotate only the camera (pitch)
 				_pitch -= motion.Relative.Y * MouseSensitivity;
 				_pitch = Mathf.Clamp(_pitch, -Mathf.DegToRad(MaxPitchDegrees), Mathf.DegToRad(MaxPitchDegrees));
 				_cameraPivot.Rotation = new Vector3(_pitch, 0, 0);
@@ -55,34 +40,34 @@ public partial class Player : CharacterBody3D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (@event.IsActionPressed("ui_cancel"))
+		// Only open the pause menu if no UI is currently open.
+		// If UI is already open, let it handle ESC itself.
+		if (@event.IsActionPressed("ui_cancel") && SceneManager.Instance.CurrentUI == null)
 		{
-			SceneManager.Instance.ToggleVisability(SceneNames.PauseMenu);
-			toggleMouseLock();
-		}
-	}
-	public void toggleMouseLock()
-	{
-		if (Input.MouseMode == Input.MouseModeEnum.Captured)
-		{
-    		Input.MouseMode = Input.MouseModeEnum.Visible;
-		}
-		else
-		{
-    		Input.MouseMode = Input.MouseModeEnum.Captured;
+			OpenPauseMenu();
 		}
 	}
 
-public override void _PhysicsProcess(double delta)
+	private void OpenPauseMenu()
+	{
+		SceneManager.Instance.SetUI(SceneNames.PauseMenu_ButtonPanel);
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+	}
+
+	public static void CaptureMouse()
+	{
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+	}
+
+	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		if (direction != Vector3.Zero)
 		{
 			Velocity = new Vector3(direction.X * _speed, Velocity.Y, direction.Z * _speed);
-			if (Input.IsActionPressed("sprint")){
+			if (Input.IsActionPressed("sprint"))
 				Velocity = Velocity * _sprintSpeed;
-			}
 		}
 		else
 		{

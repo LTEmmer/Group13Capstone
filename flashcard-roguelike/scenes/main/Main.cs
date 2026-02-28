@@ -9,7 +9,7 @@ public partial class Main : Node
 
     private void StartGame()
     {
-        SceneManager.Instance.Navigate(SceneNames.MainMenu);
+        SceneManager.Instance.SetUI(SceneNames.MainMenu);
         // SceneManager.Instance.Preload(SceneNames.Dungeon);
     }
 

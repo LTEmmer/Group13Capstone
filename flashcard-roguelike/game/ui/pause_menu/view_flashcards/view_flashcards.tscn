@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://b6nuorbcg3s11"]
+
+[ext_resource type="Theme" uid="uid://b5r6t2u2mi7tl" path="res://game/ui/pause_menu/CardTheme.tres" id="1_338vu"]
+[ext_resource type="Script" uid="uid://cstblqlo0hu7q" path="res://game/ui/pause_menu/view_flashcards/ViewFlashcards.cs" id="1_ycatj"]
+[ext_resource type="Shader" uid="uid://x7hlq5qbs4m5" path="res://game/ui/pause_menu/blur.gdshader" id="2_ycatj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1n6di"]
+shader = ExtResource("2_ycatj")
+shader_parameter/radius = 2
+shader_parameter/strength = 2.0
+
+[node name="ViewFlashcards" type="Control" unique_id=1041405274 node_paths=PackedStringArray("_flashcardListContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_ycatj")
+_flashcardListContainer = NodePath("ViewFlashcardsContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/FlashcardListContainer")
+
+[node name="ViewFlashcardsContainer" type="Control" parent="." unique_id=1454779851]
+layout_mode = 1
+anchor_left = 0.26500002
+anchor_top = 0.11100001
+anchor_right = 0.735
+anchor_bottom = 0.88900006
+offset_left = -0.2800293
+offset_top = 0.07199097
+offset_right = 0.27996826
+offset_bottom = -0.072021484
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="ViewFlashcardsContainer" unique_id=1425116877]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_338vu")
+
+[node name="Blur" type="Panel" parent="ViewFlashcardsContainer/Panel" unique_id=570938502]
+material = SubResource("ShaderMaterial_1n6di")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_338vu")
+
+[node name="MarginContainer" type="MarginContainer" parent="ViewFlashcardsContainer/Panel" unique_id=1176970433]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewFlashcardsContainer/Panel/MarginContainer" unique_id=1500409864]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ViewFlashcardsContainer/Panel/MarginContainer/VBoxContainer" unique_id=1027792573]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FlashcardListContainer" type="VBoxContainer" parent="ViewFlashcardsContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=253923926]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="ViewFlashcardsContainer/Panel/MarginContainer/VBoxContainer" unique_id=1905643866]
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("1_338vu")
+text = "Back"
+
+[connection signal="pressed" from="ViewFlashcardsContainer/Panel/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

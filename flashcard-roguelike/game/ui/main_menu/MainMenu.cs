@@ -24,8 +24,8 @@ public partial class MainMenu : Control
 	private void OnPlayPressed()
 	{
 		//GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
-		SceneManager.Instance.Navigate(SceneNames.Dungeon);
-		SceneManager.Instance.Free(SceneNames.MainMenu);
+		SceneManager.Instance.ChangeScene(SceneNames.Dungeon);
+		SceneManager.Instance.FreeUI(SceneNames.MainMenu);
 	}
 
 	private void OnQuitPressed()
