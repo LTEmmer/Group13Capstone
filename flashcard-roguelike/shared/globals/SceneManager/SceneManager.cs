@@ -16,7 +16,7 @@ public enum SceneNames
 
 // ── Lifecycle interface ───────────────────────────────────────────────────────
 // Implement this on any scene root to receive add/remove callbacks.
-// Both methods are optional — only implement what you need.
+// Both methods are optional, only implement what you need.
 public interface ISceneLifecycle
 {
     void OnSceneAdded()   { }   // called after the node enters the tree
@@ -29,22 +29,23 @@ public interface ISceneLifecycle
 /// Register every scene in the <see cref="SceneNames"/> enum and the
 /// <see cref="Scenes"/> dictionary below.
 /// <br/><br/>
-/// <b>World scenes</b> (3D / 2D) — only one active per slot at a time:
+/// <b>World scenes</b> (3D / 2D), only one active per slot at a time:
 /// <code>
-/// SceneManager.Instance.ChangeScene(SceneNames.Dungeon);
-/// SceneManager.Instance.FreeScene(SceneNames.Dungeon);
+/// ChangeScene(SceneNames key)
+/// FreeScene(SceneNames key)
+/// FreeAll()
 /// </code>
-/// <b>UI scenes</b> — one current at a time, others kept hidden in memory:
+/// <b>UI scenes</b>, one current at a time, others kept hidden in memory:
 /// <code>
-/// SceneManager.Instance.SetUI(SceneNames.MainMenu);     // no current → push. has current → swap
-/// SceneManager.Instance.HideUI();                        // hide current, current = null
-/// SceneManager.Instance.FreeUI(SceneNames.MainMenu);    // free specific instance
-/// SceneManager.Instance.ClearUI();                       // free all instances
+/// SetUI(SceneNames.MainMenu);       // Sets the current UI
+/// HideUI();                         // hide current, current = null
+/// FreeUI(SceneNames.MainMenu);      // free specific instance
+/// ClearUI();                        // free all instances
 /// </code>
-/// <b>Preloading:</b>
+/// <b>Preloading</b> Loads a scene as hidden:
 /// <code>
-/// SceneManager.Instance.PreloadScene(SceneNames.Dungeon);
-/// SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ButtonPanel);
+/// PreloadScene(SceneNames.Dungeon);
+/// PreloadUI(SceneNames.MainMenu);
 /// </code>
 /// <b>Getting instances:</b>
 /// <code>
@@ -161,7 +162,7 @@ public partial class SceneManager : Node
             _threadedLoads.Remove(key);
     }
 
-    // ── Public API — World ────────────────────────────────────────────────────
+    // ── Public API, World ────────────────────────────────────────────────────
 
     /// <summary>
     /// Switches to a world scene (3D or 2D), detected from the scene's root node type.
@@ -210,7 +211,7 @@ public partial class SceneManager : Node
 
     /// <summary>
     /// Begins loading a world scene on a background thread.
-    /// Call <see cref="ChangeScene"/> afterward — it will use the cached result if ready,
+    /// Call <see cref="ChangeScene"/> afterward, it will use the cached result if ready,
     /// or block until the load finishes if it is still in progress.
     /// </summary>
     public void PreloadScene(SceneNames key)
@@ -228,7 +229,7 @@ public partial class SceneManager : Node
         GD.Print($"[SceneManager] Preload started: '{key}'");
     }
 
-    // ── Public API — UI ───────────────────────────────────────────────────────
+    // ── Public API, UI ───────────────────────────────────────────────────────
 
     /// <summary>
     /// Shows a UI scene and sets it as current.
@@ -303,7 +304,7 @@ public partial class SceneManager : Node
     /// <summary>Frees all UI instances and clears current.</summary>
     public void ClearUI()
     {
-        foreach (var (key, node) in _uiInstances)
+        foreach (var (_, node) in _uiInstances)
         {
             (node as ISceneLifecycle)?.OnSceneRemoved();
             node.QueueFree();
