@@ -53,4 +53,5 @@ public partial class EnemyExample : CharacterBody3D
 			BattleManager.Instance.StartBattle(player, new List<EnemyExample> { this }, GetParent<Node3D>());
 		}
 	}
+	
 }

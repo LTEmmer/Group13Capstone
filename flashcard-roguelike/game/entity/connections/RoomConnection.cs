@@ -6,12 +6,15 @@ using Vector3 = Godot.Vector3;
 public partial class RoomConnection : Node3D
 {
 	[Export] public PackedScene[] ConnectionVisuals;
+	
 	public int TargetRoomId { get; set; }
 	public bool IsEntrance { get; set; }
+	public bool connection_enabled = true; // New attribute to toggle connection availability
 	private bool _playerInRange = false;
 	private Node3D _player;
 	private Area3D _area;
-
+	
+	
 	public override void _Ready()
 	{
 		// Spawn random visual
@@ -29,11 +32,12 @@ public partial class RoomConnection : Node3D
 		_area = GetNode<Area3D>("Area3D");
 		_area.BodyEntered += OnBodyEntered;
 		_area.BodyExited += OnBodyExited;
+		EventManager.Instance.listen("on_battle_victory", new Callable(this, MethodName.on_battle_victory));
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		if (!_playerInRange)
+		if (!_playerInRange || !connection_enabled)// If either player not in range or connection are not enabled return
 			return;
 
 		if (@event.IsActionPressed("interact"))
@@ -108,5 +112,10 @@ public partial class RoomConnection : Node3D
 		{
 			label.Text = isEntrance ? $"From Room {id} : {roomType} (In)" : $"To Room {id} : {roomType} (Out)";
 		}
+	}
+	
+	private void on_battle_victory(string test){
+		this.Visible = true;
+		this.connection_enabled = true;
 	}
 }

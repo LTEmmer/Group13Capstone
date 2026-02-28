@@ -31,6 +31,10 @@ public partial class HealthComponent : Node
 	private void Die()
 	{
 		GD.Print($"{GetParent().Name} died!");
+		
+		// Death will queue_free for now
+		GetParent().QueueFree();
+		
 		// Connect this signal from the signal pannel to function on the parent
 		// node that you want it to do.
 		// For example, if you want it to despawn make it run

@@ -16,7 +16,7 @@ public partial class FlashcardChallenge : Control
 	private LineEdit _answerInput;
 	private Button _submitButton;
 	private Label _contextLabel;
-    private Label _answerLabel;
+	private Label _answerLabel;
 
 	private Flashcard _currentCard;
 	private bool _isActive = false;
@@ -29,7 +29,7 @@ public partial class FlashcardChallenge : Control
 		_answerInput = GetNode<LineEdit>("ChallengePanel/MarginContainer/VBoxContainer/AnswerInput");
 		_contextLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
 		_submitButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/SubmitButton");
-        _answerLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/AnswerLabel");
+		_answerLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/AnswerLabel");
 
 		// Connect signals
 		_submitButton.Pressed += OnSubmitPressed;
@@ -50,7 +50,7 @@ public partial class FlashcardChallenge : Control
 		_questionLabel.Text = card.Question;
 		_contextLabel.Text = context;
 		_answerInput.Text = "";
-        _answerLabel.Text = "Your Answer:";
+		_answerLabel.Text = "Your Answer:";
 		_answerInput.Editable = true;
 		_submitButton.Disabled = false;
 
@@ -96,7 +96,7 @@ public partial class FlashcardChallenge : Control
 	{
 		if (!_isActive || _currentCard == null) return; // Not active or no card to check against
 
-        // Check the player's answer against the correct answer, ignoring case and trimming whitespace
+		// Check the player's answer against the correct answer, ignoring case and trimming whitespace
 		string playerAnswer = _answerInput.Text.Trim();
 		string correctAnswer = _currentCard.Answer.Trim();
 
@@ -116,11 +116,11 @@ public partial class FlashcardChallenge : Control
 		{
 			_answerInput.Modulate = new Color(1.0f, 0.5f, 0.5f); // Red tint
 			_contextLabel.Text = $"Incorrect!";
-            _answerLabel.Text = $"Correct Answer: {_currentCard.Answer}";
+			_answerLabel.Text = $"Correct Answer: {_currentCard.Answer}";
 		}
 
 		// Wait a moment then hide and emit result
-        GetTree().CreateTimer(4.0f).Timeout += () =>
+		GetTree().CreateTimer(4.0f).Timeout += () =>
 		{
 			_answerInput.Modulate = Colors.White;
 			HideChallenge(() => EmitSignal(SignalName.OnAnswerSubmitted, isCorrect));
@@ -141,7 +141,7 @@ public partial class FlashcardChallenge : Control
 		// Collect all cards from all active sets
 		List<Flashcard> allCards = new List<Flashcard>();
 
-        // Loop through each set and add its cards to the allCards list, checking for null to avoid errors
+		// Loop through each set and add its cards to the allCards list, checking for null to avoid errors
 		foreach (var set in sets)
 		{
 			if (set.Cards != null)
