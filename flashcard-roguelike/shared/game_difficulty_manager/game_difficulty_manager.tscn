@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dkx6uc0ob350c"]
 
-[ext_resource type="Script" path="res://shared/game_difficulty_manager/GameDifficultyManager.cs" id="1_t75yo"]
+[ext_resource type="Script" uid="uid://cncmvg00u0fvf" path="res://shared/game_difficulty_manager/GameDifficultyManager.cs" id="1_t75yo"]
 
 [node name="GameDifficultyManager" type="Node" unique_id=1918159076]
 script = ExtResource("1_t75yo")
