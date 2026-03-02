@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ceim8jmtkr6d5"]
 
 [ext_resource type="Script" uid="uid://het36bkur8tc" path="res://game/entity/player/Player.cs" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="2_0b5cm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
 radius = 0.4
@@ -23,3 +24,5 @@ current = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")
+
+[connection signal="ToggleMouseLock" from="CameraPivot/Camera3D/PauseMenu" to="." method="toggleMouseLock"]
