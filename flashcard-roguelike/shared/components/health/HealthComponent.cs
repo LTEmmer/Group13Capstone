@@ -36,6 +36,7 @@ public partial class HealthComponent : Node
 		// For example, if you want it to despawn make it run
 		// .. :: queue_free
 		// from the signal pannel in godot
+		GetParent().QueueFree();
 		EmitSignal(SignalName._OnDeath);
 	}
 }

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class DifficultyManager : Node
+public partial class GameDifficultyManager : Node
 {
 	private float _currentDifficultyScore = 0.0F;
 	private float _baselineDifficultyScore = 1.0F;
