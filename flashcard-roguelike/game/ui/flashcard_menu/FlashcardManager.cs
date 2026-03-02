@@ -36,22 +36,22 @@ public partial class FlashcardManager : Node
 		}
 	}    
 
-	public List<FlashcardSet> ActiveFlashCardLists
-	{
-		get {
-			if (Instance == null)
-			{
-				return new List<FlashcardSet>();
-			}
-			return Instance.AvailableSets;
-		} set
-		{
-			if (value == null) return;
-			Instance.AvailableSets = value;
-		}
-	}
+    public List<FlashcardSet> ActiveFlashCardLists
+    {
+        get {
+            if (Instance == null)
+            {
+                return new List<FlashcardSet>();
+            }
+            return Instance.AvailableSets;
+        } set
+        {
+            if (value == null) return;
+            Instance.AvailableSets = value;
+        }
+    }
 
-	// Delete a flashcard set from available sets and from the file system
+    // Delete a flashcard set from available sets and from the file system
 	public bool DeleteSet(string setDisplayName)
 	{
 		// Find the set in the available sets list
@@ -75,3 +75,4 @@ public partial class FlashcardManager : Node
 		return false;
 	}
 }
+

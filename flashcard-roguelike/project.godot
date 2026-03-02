@@ -18,7 +18,6 @@ config/icon="res://shared/icon.svg"
 [autoload]
 
 FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
-EventManager="*uid://bl1wta1debjk4"
 
 [display]
 
