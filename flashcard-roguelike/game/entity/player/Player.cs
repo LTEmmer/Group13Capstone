@@ -46,6 +46,13 @@ public partial class Player : CharacterBody3D
 		if (@event.IsActionPressed("ui_cancel") && SceneManager.Instance.CurrentUI == null)
 		{
 			OpenPauseMenu();
+		if (Input.MouseMode == Input.MouseModeEnum.Captured)
+		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		else
+		{
+			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 	}
 
