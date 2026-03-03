@@ -2,6 +2,18 @@ using Godot;
 using System;
 
 /// <summary>
+/// Item rarity levels that affect appearance and value.
+/// </summary>
+public enum ItemRarity
+{
+	Common,
+	Uncommon,
+	Rare,
+	Epic,
+	Legendary
+}
+
+/// <summary>
 /// Represents a collectible treasure item that the player can pick up.
 /// </summary>
 public partial class TreasureItem : Node3D
@@ -143,16 +155,4 @@ public partial class TreasureItem : Node3D
 			}
 		}
 	}
-}
-
-/// <summary>
-/// Item rarity levels that affect appearance and value.
-/// </summary>
-public enum ItemRarity
-{
-	Common,
-	Uncommon,
-	Rare,
-	Epic,
-	Legendary
 }

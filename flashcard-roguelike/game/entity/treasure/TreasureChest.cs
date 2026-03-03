@@ -1,5 +1,38 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+
+/// <summary>
+/// Represents item data for treasure generation.
+/// </summary>
+public class ItemData
+{
+	public string Name { get; set; }
+	public int Value { get; set; }
+	public string Description { get; set; }
+	
+	public ItemData(string name, int value, string description)
+	{
+		Name = name;
+		Value = value;
+		Description = description;
+	}
+}
+
+/// <summary>
+/// Represents rarity tier configuration with chance and available items.
+/// </summary>
+public class RarityTier
+{
+	public float Chance { get; set; }
+	public List<ItemData> Items { get; set; }
+	
+	public RarityTier(float chance, List<ItemData> items)
+	{
+		Chance = chance;
+		Items = items;
+	}
+}
 
 /// <summary>
 /// A treasure chest that can be opened to reveal items inside.
@@ -29,12 +62,55 @@ public partial class TreasureChest : Node3D
 	private Node3D _itemSpawnPoint;
 	private RandomNumberGenerator _rng = new RandomNumberGenerator();
 	
-	// Item name pools by rarity
-	private static readonly string[] CommonItems = { "Gold Coin", "Silver Coin", "Bronze Coin", "Small Gem" };
-	private static readonly string[] UncommonItems = { "Ruby", "Sapphire", "Emerald", "Ancient Coin" };
-	private static readonly string[] RareItems = { "Diamond", "Golden Idol", "Magic Scroll", "Enchanted Ring" };
-	private static readonly string[] EpicItems = { "Dragon Scale", "Phoenix Feather", "Mystic Orb", "Crown Fragment" };
-	private static readonly string[] LegendaryItems = { "Legendary Artifact", "Ancient Relic", "Divine Treasure", "Cosmic Gem" };
+	// Item dictionary organized by rarity with chances and item pools
+	private static readonly Dictionary<ItemRarity, RarityTier> ItemDict = new()
+	{
+		{
+			ItemRarity.Common, new RarityTier(0.50f, new List<ItemData>
+			{
+				new("Gold Coin", 10, "A shiny gold coin"),
+				new("Silver Coin", 8, "A polished silver coin"),
+				new("Bronze Coin", 5, "An old bronze coin"),
+				new("Small Gem", 15, "A small uncut gem")
+			})
+		},
+		{
+			ItemRarity.Uncommon, new RarityTier(0.25f, new List<ItemData>
+			{
+				new("Ruby", 35, "A deep red ruby"),
+				new("Sapphire", 40, "A brilliant blue sapphire"),
+				new("Emerald", 45, "A vivid green emerald"),
+				new("Ancient Coin", 50, "A coin from a forgotten era")
+			})
+		},
+		{
+			ItemRarity.Rare, new RarityTier(0.15f, new List<ItemData>
+			{
+				new("Diamond", 100, "A flawless diamond"),
+				new("Golden Idol", 125, "An idol of pure gold"),
+				new("Magic Scroll", 150, "A scroll imbued with magic"),
+				new("Enchanted Ring", 140, "A ring with mystical properties")
+			})
+		},
+		{
+			ItemRarity.Epic, new RarityTier(0.08f, new List<ItemData>
+			{
+				new("Dragon Scale", 300, "A scale from an ancient dragon"),
+				new("Phoenix Feather", 350, "A feather that glows with inner fire"),
+				new("Mystic Orb", 400, "An orb pulsing with arcane energy"),
+				new("Crown Fragment", 375, "A piece of a legendary crown")
+			})
+		},
+		{
+			ItemRarity.Legendary, new RarityTier(0.02f, new List<ItemData>
+			{
+				new("Legendary Artifact", 750, "An artifact of immense power"),
+				new("Ancient Relic", 850, "A relic from the dawn of time"),
+				new("Divine Treasure", 1000, "A treasure blessed by the gods"),
+				new("Cosmic Gem", 900, "A gem containing starlight")
+			})
+		}
+	};
 	
 	public override void _Ready()
 	{
@@ -59,6 +135,26 @@ public partial class TreasureChest : Node3D
 		if (@event.IsActionPressed("interact"))
 		{
 			OpenChest();
+		}
+	}
+	
+	private void OnBodyEntered(Node body)
+	{
+		if (body is CharacterBody3D && body.Name == "Player")
+		{
+			_playerInRange = true;
+			_player = body as Node3D;
+			UpdateLabel();
+		}
+	}
+	
+	private void OnBodyExited(Node body)
+	{
+		if (body == _player)
+		{
+			_playerInRange = false;
+			_player = null;
+			UpdateLabel();
 		}
 	}
 	
@@ -106,12 +202,14 @@ public partial class TreasureChest : Node3D
 			TreasureItem item = TreasureItemScene.Instantiate() as TreasureItem;
 			if (item == null) continue;
 			
-			// Determine rarity
+			// Determine rarity and get random item from dictionary
 			ItemRarity rarity = RollRarity();
+			ItemData itemData = GetRandomItem(rarity);
+			
 			item.Rarity = rarity;
-			item.ItemName = GetRandomItemName(rarity);
-			item.Value = GetValueForRarity(rarity);
-			item.ItemDescription = $"A {rarity.ToString().ToLower()} treasure worth {item.Value} gold.";
+			item.ItemName = itemData.Name;
+			item.Value = itemData.Value;
+			item.ItemDescription = itemData.Description;
 			
 			// Position items in an arc above the chest
 			float angle = (i / (float)itemCount) * Mathf.Pi - Mathf.Pi / 2f;
@@ -132,41 +230,23 @@ public partial class TreasureChest : Node3D
 	private ItemRarity RollRarity()
 	{
 		float roll = _rng.Randf();
+		float cumulative = 0f;
 		
-		// Rarity chances: Common 50%, Uncommon 25%, Rare 15%, Epic 8%, Legendary 2%
-		if (roll < 0.02f) return ItemRarity.Legendary;
-		if (roll < 0.10f) return ItemRarity.Epic;
-		if (roll < 0.25f) return ItemRarity.Rare;
-		if (roll < 0.50f) return ItemRarity.Uncommon;
+		// Roll through rarities from rarest to most common using dictionary chances
+		foreach (var rarity in new[] { ItemRarity.Legendary, ItemRarity.Epic, ItemRarity.Rare, ItemRarity.Uncommon, ItemRarity.Common })
+		{
+			cumulative += ItemDict[rarity].Chance;
+			if (roll < cumulative)
+				return rarity;
+		}
+		
 		return ItemRarity.Common;
 	}
 	
-	private string GetRandomItemName(ItemRarity rarity)
+	private ItemData GetRandomItem(ItemRarity rarity)
 	{
-		string[] pool = rarity switch
-		{
-			ItemRarity.Common => CommonItems,
-			ItemRarity.Uncommon => UncommonItems,
-			ItemRarity.Rare => RareItems,
-			ItemRarity.Epic => EpicItems,
-			ItemRarity.Legendary => LegendaryItems,
-			_ => CommonItems
-		};
-		
-		return pool[_rng.RandiRange(0, pool.Length - 1)];
-	}
-	
-	private int GetValueForRarity(ItemRarity rarity)
-	{
-		return rarity switch
-		{
-			ItemRarity.Common => _rng.RandiRange(5, 15),
-			ItemRarity.Uncommon => _rng.RandiRange(20, 50),
-			ItemRarity.Rare => _rng.RandiRange(75, 150),
-			ItemRarity.Epic => _rng.RandiRange(200, 400),
-			ItemRarity.Legendary => _rng.RandiRange(500, 1000),
-			_ => 10
-		};
+		var items = ItemDict[rarity].Items;
+		return items[_rng.RandiRange(0, items.Count - 1)];
 	}
 	
 	private void UpdateLabel()
@@ -184,26 +264,6 @@ public partial class TreasureChest : Node3D
 		else
 		{
 			_label.Text = "Treasure Chest";
-		}
-	}
-	
-	private void OnBodyEntered(Node body)
-	{
-		if (body is CharacterBody3D && body.Name == "Player")
-		{
-			_playerInRange = true;
-			_player = body as Node3D;
-			UpdateLabel();
-		}
-	}
-	
-	private void OnBodyExited(Node body)
-	{
-		if (body == _player)
-		{
-			_playerInRange = false;
-			_player = null;
-			UpdateLabel();
 		}
 	}
 }
