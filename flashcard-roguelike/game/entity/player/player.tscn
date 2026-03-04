@@ -27,7 +27,6 @@ current = true
 shape = SubResource("CapsuleShape3D_0b5cm")
 
 [node name="HealthComponent" parent="." unique_id=1636756935 instance=ExtResource("3_dmj0o")]
-MaxHealth = 20.0
 IsPlayer = true
 
 [node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("3_p8n2y")]
