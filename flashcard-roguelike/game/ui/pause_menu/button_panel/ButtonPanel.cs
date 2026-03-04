@@ -17,7 +17,7 @@ public partial class ButtonPanel : Control
 	{
 		GD.Print("Resume Pressed");
 		SceneManager.Instance.HideUI();
-		Player.CaptureMouse();
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	public void _on_view_flashcards_pressed()

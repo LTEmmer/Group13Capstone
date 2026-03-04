@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://b2px6jxwb8r7o"]
 
 [ext_resource type="PackedScene" uid="uid://b1awrh787m3pg" path="res://game/entity/enemy_example/enemy_example.tscn" id="1_14lci"]
-[ext_resource type="Script" uid="uid://c8fl78a1ygu1q" path="res://game/entity/dungeon_generator/rooms/Room.cs" id="1_os7nw"]
+[ext_resource type="Script" uid="uid://bvi274x44ayaj" path="res://game/entity/dungeon_generator/rooms/Room.cs" id="1_os7nw"]
 [ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="2_p3pul"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_j4xo5"]
@@ -88,6 +88,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3992662, -1.7729723, -7.297
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.57488, -1.7729723, -7.2970276)
 
 [node name="EnemyExample" parent="." unique_id=592527612 instance=ExtResource("1_14lci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6790719, 0)
 
 [node name="BattleArea" parent="." unique_id=1408501426 instance=ExtResource("2_p3pul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.816615, 0, 0)

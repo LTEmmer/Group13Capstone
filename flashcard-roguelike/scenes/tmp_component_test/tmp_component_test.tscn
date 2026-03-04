@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d8axjh7q5ugo"]
 
-[ext_resource type="Script" uid="uid://dlf3uovd4r1qi" path="res://scenes/tmp_component_test/ComponentTestScript.cs" id="1_myjbb"]
+[ext_resource type="Script" uid="uid://p4k2sythynvx" path="res://scenes/tmp_component_test/ComponentTestScript.cs" id="1_myjbb"]
 [ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="1_x520u"]
-[ext_resource type="PackedScene" uid="uid://ci0hdg6g3o0ny" path="res://shared/components/attack/attack_component.tscn.tscn" id="2_myjbb"]
+[ext_resource type="PackedScene" uid="uid://ci0hdg6g3o0ny" path="res://shared/components/attack/attack_component.tscn" id="2_myjbb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x46pg"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

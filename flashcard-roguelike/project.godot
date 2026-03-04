@@ -11,18 +11,17 @@ config_version=5
 [application]
 
 config/name="FlashcardRoguelike"
-run/main_scene="uid://h18wimcwtwvr"
+run/main_scene="uid://bp3i7yge2i8cs"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://shared/icon.svg"
 
 [autoload]
 
-FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
+EventManager="*uid://dv7rf2n53ca24"
 SceneManager="*uid://djv2f8gvt83b7"
-BattleManager="*uid://b8g15b4a5ec36"
-EventManager="*uid://u328qtrmmpqj"
-DifficultyManager="*uid://cgpb16u2nxry2"
-GameDifficultyManager="*uid://cgpb16u2nxry2"
+GameDifficultyManager="*uid://f8ry0h64gsqb"
+BattleManager="*uid://tcdfpy3chbj2"
+FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
 
 [display]
 
