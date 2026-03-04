@@ -9,7 +9,9 @@ public enum SceneNames
     MainMenu,
     Dungeon,
     TestArea,
+    Player,
     PlayerHUD,
+    GameOver,
     PauseMenu_ButtonPanel,
     PauseMenu_ViewFlashcards,
 }
@@ -65,7 +67,9 @@ public partial class SceneManager : Node
         { SceneNames.MainMenu,                 new SceneData("res://game/ui/main_menu/main_menu.tscn") },
         { SceneNames.Dungeon,                  new SceneData("res://game/entity/dungeon_generator/dungeon_generator.tscn") },
         { SceneNames.TestArea,                 new SceneData("res://scenes/test_room.tscn") },
+        { SceneNames.Player,                   new SceneData("res://game/entity/player/player.tscn") },
         { SceneNames.PlayerHUD,                new SceneData("res://game/ui/player_hud/player_hud.tscn") },
+        {SceneNames.GameOver,                  new SceneData("res://game/ui/game_over/game_over_menu.tscn") },
         { SceneNames.PauseMenu_ButtonPanel,    new SceneData("res://game/ui/pause_menu/button_panel/button_panel.tscn") },
         { SceneNames.PauseMenu_ViewFlashcards, new SceneData("res://game/ui/pause_menu/view_flashcards/view_flashcards.tscn") },
     };
@@ -191,6 +195,9 @@ public partial class SceneManager : Node
     /// <summary>Frees a specific world scene if it is currently active.</summary>
     public void FreeScene(SceneNames key)
     {
+        _preloadedScenes.Remove(key);
+        _threadedLoads.Remove(key);
+
         if (_current3DKey == key)
         {
             FreeNode(ref _current3D);
@@ -293,6 +300,7 @@ public partial class SceneManager : Node
             (node as ISceneLifecycle)?.OnSceneRemoved();
             node.QueueFree();
             _uiInstances.Remove(key);
+            _preloadedUI.Remove(key);
             GD.Print($"[SceneManager] UI freed: '{key}'");
         }
         else
@@ -311,6 +319,7 @@ public partial class SceneManager : Node
         }
 
         _uiInstances.Clear();
+        _preloadedUI.Clear();
         _currentUI = null;
         GD.Print("[SceneManager] UI cleared.");
     }
@@ -328,15 +337,21 @@ public partial class SceneManager : Node
     /// Caches the PackedScene resource for a UI scene so the first
     /// <see cref="SetUI"/> instantiates without a disk read.
     /// </summary>
-    public void PreloadUI(SceneNames key)
+    /// <param name="loadHidden">If true, instantiates and adds the scene hidden to the UI layer, ready for <see cref="SetUI"/> to reuse.</param>
+    public void PreloadUI(SceneNames key, bool loadHidden = false)
     {
         if (!Scenes.ContainsKey(key)) { GD.PrintErr($"[SceneManager] '{key}' is not registered."); return; }
-        if (_preloadedUI.ContainsKey(key)) return;
-
+        if (_preloadedUI.ContainsKey(key) || _uiInstances.ContainsKey(key)) return;
         var packed = GD.Load<PackedScene>(Scenes[key].Path);
         if (packed == null) { GD.PrintErr($"[SceneManager] PreloadUI failed: '{key}' at '{Scenes[key].Path}'"); return; }
-
         _preloadedUI[key] = packed;
+        if (loadHidden)
+        {
+            var instance = packed.Instantiate<CanvasItem>();
+            instance.Visible = false;
+            _ui.AddChild(instance);
+            _uiInstances[key] = instance;
+        }
         GD.Print($"[SceneManager] UI preloaded: '{key}'");
     }
 

@@ -56,18 +56,18 @@ public partial class HealthComponent : Node
 	private void ShowGameOver()
 	{
 		// Try to find GameOverMenu in the scene tree
-		var gameOverMenu = GetTree().Root.GetNodeOrNull<CanvasLayer>("GameOverMenu");
+		var gameOverMenu = SceneManager.Instance.Get<Control>(SceneNames.GameOver);
 		
-		if (gameOverMenu == null)
-		{
-			// Load and instantiate the game over menu
-			var gameOverScene = GD.Load<PackedScene>("res://game/ui/game_over/game_over_menu.tscn");
-			if (gameOverScene != null)
-			{
-				gameOverMenu = gameOverScene.Instantiate<CanvasLayer>();
-				GetTree().Root.AddChild(gameOverMenu);
-			}
-		}
+		// if (gameOverMenu == null)
+		// {
+		// 	// Load and instantiate the game over menu
+		// 	var gameOverScene = GD.Load<PackedScene>("res://game/ui/game_over/game_over_menu.tscn");
+		// 	if (gameOverScene != null)
+		// 	{
+		// 		gameOverMenu = gameOverScene.Instantiate<CanvasLayer>();
+		// 		GetTree().Root.AddChild(gameOverMenu);
+		// 	}
+		// }
 		
 		// Show the game over screen
 		if (gameOverMenu != null && gameOverMenu.HasMethod("ShowGameOver"))

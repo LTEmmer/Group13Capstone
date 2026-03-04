@@ -21,8 +21,9 @@ public partial class Player : CharacterBody3D
 	{
 		_cameraPivot = GetNode<Node3D>("CameraPivot");
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ButtonPanel);
-		SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ViewFlashcards);
+		SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ButtonPanel, true);
+		SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ViewFlashcards, true);
+		SceneManager.Instance.PreloadUI(SceneNames.GameOver, true);
 	}
 
 	public override void _Input(InputEvent @event)

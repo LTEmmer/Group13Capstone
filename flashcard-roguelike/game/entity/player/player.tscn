@@ -26,9 +26,8 @@ current = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")
 
-[node name="HealthComponent" parent="." unique_id=1636756935 instance=ExtResource("3_health")]
+[node name="HealthComponent" parent="." unique_id=1636756935 instance=ExtResource("3_dmj0o")]
+MaxHealth = 20.0
 IsPlayer = true
-
-[node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("4_dmj0o")]
 
 [node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("3_p8n2y")]

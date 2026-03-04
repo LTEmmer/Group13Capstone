@@ -1,19 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://game_over_menu"]
+[gd_scene format=3 uid="uid://cipiibpksub5v"]
 
-[ext_resource type="Script" path="res://game/ui/game_over/GameOverMenu.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://b8bystywoxvc" path="res://game/ui/game_over/GameOverMenu.cs" id="1_script"]
 
-[node name="GameOverMenu" type="CanvasLayer"]
+[node name="GameOverMenu" type="Control" unique_id=556568214]
 process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1221386349]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="Panel"]
+[node name="ColorRect" type="ColorRect" parent="Panel" unique_id=325825930]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.7)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=750529067]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -37,14 +44,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer" unique_id=879254608]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MessageLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="MessageLabel" type="Label" parent="Panel/VBoxContainer" unique_id=354432793]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "You have fallen in the dungeon..."
@@ -52,23 +59,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Spacer" type="Control" parent="Panel/VBoxContainer"]
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer" unique_id=1313696400]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="RestartButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="Panel/VBoxContainer" unique_id=1942086417]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Try Again"
 
-[node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer" unique_id=164536135]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Main Menu"
 
-[node name="QuitButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="Panel/VBoxContainer" unique_id=428070137]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
