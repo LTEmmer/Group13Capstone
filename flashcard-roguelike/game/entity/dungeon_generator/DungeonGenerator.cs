@@ -35,7 +35,11 @@ public partial class DungeonGenerator : Node3D
 		graph.PrintGraph();
 		Dictionary<int, Vector3> positions = GenerateLayout(graph); // Generate world positions for rooms
 		SpawnRooms(graph, positions); // Instantiate room scenes and connections based on the graph and layout
-    }
+
+		if (CurrentRoomManager.Instance != null)
+			CurrentRoomManager.Instance.CurrentRoomId = 0;
+	}
+
 
 	public DungeonGraph GenerateGraph()
 	{
@@ -120,6 +124,18 @@ public partial class DungeonGenerator : Node3D
 	public Node3D GetRoomNode(int roomId)
 	{
 		return GetNodeOrNull<Node3D>($"Rooms/Room_{roomId}");
+	}
+
+	public string GetRoomDisplayName(int roomId)
+	{
+		Node3D roomNode = GetRoomNode(roomId);
+		if (roomNode == null)
+			return "Unknown";
+		if (!roomNode.HasMeta("RoomId") || !roomNode.HasMeta("RoomType"))
+			return $"Room {roomId}";
+		int id = (int)roomNode.GetMeta("RoomId");
+		string type = (string)roomNode.GetMeta("RoomType");
+		return $"Room {id} ({type})";
 	}
 
 	private Dictionary<int, Vector3> GenerateLayout(DungeonGraph graph)
@@ -284,6 +300,7 @@ public partial class DungeonGenerator : Node3D
 		{
 			roomNode.Name = $"Room_{roomId}";
 			roomNode.SetMeta("RoomId", roomId);
+			roomNode.SetMeta("RoomType", type.ToString());
 		}
 		else
 		{
