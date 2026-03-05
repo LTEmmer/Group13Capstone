@@ -32,12 +32,10 @@ public partial class InventoryUI : Control
 	// 	}
 	// }
 
-	private void OnInventoryChanged()
+	public void OnInventoryChanged()
 	{
-		if (Visible)
-		{
-			RefreshInventoryList();
-		}
+		GD.Print("[Inventory UI] Inventory Changed");
+		RefreshInventoryList();
 	}
 
 	private void RefreshInventoryList()

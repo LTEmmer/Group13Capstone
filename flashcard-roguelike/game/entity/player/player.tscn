@@ -32,3 +32,5 @@ shape = SubResource("CapsuleShape3D_0b5cm")
 [node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("4_dmj0o")]
 
 [node name="InventoryComponent" parent="." unique_id=1964187468 instance=ExtResource("5_inventory")]
+
+[connection signal="InventoryChanged" from="InventoryComponent" to="." method="_on_inventory_changed"]

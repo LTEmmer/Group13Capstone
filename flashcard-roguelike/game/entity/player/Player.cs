@@ -97,4 +97,9 @@ public partial class Player : CharacterBody3D
 
 		MoveAndSlide();
 	}
+
+	private void _on_inventory_changed()
+	{
+		inv.OnInventoryChanged();
+	}
 }
