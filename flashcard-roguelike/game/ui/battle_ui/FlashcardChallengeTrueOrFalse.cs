@@ -128,7 +128,8 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 		{
 			_trueButton.Modulate = new Color(1.0f, 0.5f, 0.5f);
 			_falseButton.Modulate = new Color(1.0f, 0.5f, 0.5f);
-			_contextLabel.Text = "Incorrect!";
+			_contextLabel.Text = "Incorrect! The correct answer for:";
+            _answerLabel.Text = $"Answer:\n{_currentCard.Answer}";
 		}
 
 		// Wait a moment then hide and emit result
