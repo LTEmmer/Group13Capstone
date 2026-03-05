@@ -10,7 +10,8 @@ public enum SceneNames
     Dungeon,
     TestArea,
     Player,
-    PlayerHUD,
+    HUD,
+    Inventory,
     GameOver,
     PauseMenu_ButtonPanel,
     PauseMenu_ViewFlashcards,
@@ -64,14 +65,15 @@ public partial class SceneManager : Node
 
     private readonly Dictionary<SceneNames, SceneData> Scenes = new()
     {
-        { SceneNames.MainMenu,                 new SceneData("res://game/ui/main_menu/main_menu.tscn") },
-        { SceneNames.Dungeon,                  new SceneData("res://game/entity/dungeon_generator/dungeon_generator.tscn") },
-        { SceneNames.TestArea,                 new SceneData("res://scenes/test_room.tscn") },
-        { SceneNames.Player,                   new SceneData("res://game/entity/player/player.tscn") },
-        { SceneNames.PlayerHUD,                new SceneData("res://game/ui/player_hud/player_hud.tscn") },
-        {SceneNames.GameOver,                  new SceneData("res://game/ui/game_over/game_over_menu.tscn") },
-        { SceneNames.PauseMenu_ButtonPanel,    new SceneData("res://game/ui/pause_menu/button_panel/button_panel.tscn") },
-        { SceneNames.PauseMenu_ViewFlashcards, new SceneData("res://game/ui/pause_menu/view_flashcards/view_flashcards.tscn") },
+        { SceneNames.MainMenu,                  new SceneData("res://game/ui/main_menu/main_menu.tscn") },
+        { SceneNames.Dungeon,                   new SceneData("res://game/entity/dungeon_generator/dungeon_generator.tscn") },
+        { SceneNames.TestArea,                  new SceneData("res://scenes/test_room.tscn") },
+        { SceneNames.Player,                    new SceneData("res://game/entity/player/player.tscn") },
+        { SceneNames.HUD,                       new SceneData("res://game/ui/hud/hud.tscn") },
+        { SceneNames.Inventory,                 new SceneData("res://game/ui/inventory_ui/inventory_ui.tscn") },
+        { SceneNames.GameOver,                  new SceneData("res://game/ui/game_over/game_over_menu.tscn") },
+        { SceneNames.PauseMenu_ButtonPanel,     new SceneData("res://game/ui/pause_menu/button_panel/button_panel.tscn") },
+        { SceneNames.PauseMenu_ViewFlashcards,  new SceneData("res://game/ui/pause_menu/view_flashcards/view_flashcards.tscn") },
     };
 
     // ── Signals ───────────────────────────────────────────────────────────────

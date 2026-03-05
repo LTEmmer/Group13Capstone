@@ -80,7 +80,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2964153, -1.7729723, -7.29
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3992662, -1.7729723, -7.2970276)
 
 [node name="Player" parent="." unique_id=249236073 instance=ExtResource("1_fij0k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.187, 5.766)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
 [node name="HealthPack" parent="." unique_id=936069260 instance=ExtResource("2_pickup")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.9860811, 8)

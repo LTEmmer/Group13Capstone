@@ -16,7 +16,7 @@ public partial class ButtonPanel : Control
 	public void _on_resume_pressed()
 	{
 		GD.Print("Resume Pressed");
-		SceneManager.Instance.HideUI();
+		SceneManager.Instance.SetUI(SceneNames.HUD);
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 

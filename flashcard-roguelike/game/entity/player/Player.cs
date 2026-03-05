@@ -4,12 +4,6 @@ using System;
 public partial class Player : CharacterBody3D
 {
 	[Export]
-	public CanvasLayer PauseMenu;
-
-	[Export]
-	public InventoryUI InventoryUI;
-	
-	[Export]
 	// _speed of camera
 	public float MouseSensitivity { get; set; } = 0.002f;
 
@@ -23,6 +17,8 @@ public partial class Player : CharacterBody3D
 	private int _speed { get; set; } = 10;
 	private int _sprintSpeed = 2;
 	private bool _acceptKeyboardInput = true;
+	private InventoryUI inv;
+	private HUD HUD;
 	
 	public override void _Ready()
 	{
@@ -31,21 +27,17 @@ public partial class Player : CharacterBody3D
 		SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ButtonPanel, true);
 		SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ViewFlashcards, true);
 		SceneManager.Instance.PreloadUI(SceneNames.GameOver, true);
-		// Ensure we have a reference to InventoryUI
-		if (InventoryUI == null)
-			InventoryUI = GetNodeOrNull<InventoryUI>("CameraPivot/Camera3D/InventoryUI");
+		SceneManager.Instance.PreloadUI(SceneNames.Inventory, true);
+		SceneManager.Instance.SetUI(SceneNames.HUD);
+
+		inv = SceneManager.Instance.Get<InventoryUI>(SceneNames.Inventory);
+		HUD = SceneManager.Instance.Get<HUD>(SceneNames.HUD);
+		inv.SetPlayer(this);
+		HUD.SetPlayer(this);
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		if (InventoryUI != null)
-		{
-			if (@event.IsActionPressed("inventory_toggle"))
-				InventoryUI.SetVisible(true);
-			else if (@event.IsActionReleased("inventory_toggle"))
-				InventoryUI.SetVisible(false);
-		}
-
 		if (Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
 			if (@event is InputEventMouseMotion motion)
@@ -60,27 +52,24 @@ public partial class Player : CharacterBody3D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		// Only open the pause menu if no UI is currently open.
-		// If UI is already open, let it handle ESC itself.
-		if (@event.IsActionPressed("ui_cancel") && SceneManager.Instance.CurrentUI == null)
+		if (@event.IsActionPressed("ui_cancel"))
 		{
-			OpenPauseMenu();
-			if (Input.MouseMode == Input.MouseModeEnum.Captured)
+			SceneManager.Instance.SetUI(SceneNames.PauseMenu_ButtonPanel);
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		else if (@event.IsActionPressed("inventory_toggle") && (SceneManager.Instance.CurrentUI == SceneNames.HUD || inv.Visible))
+		{
+			if (inv.Visible)
 			{
-				Input.MouseMode = Input.MouseModeEnum.Visible;
-			}
-			else
-			{
+				SceneManager.Instance.SetUI(SceneNames.HUD);			
 				Input.MouseMode = Input.MouseModeEnum.Captured;
+			} else
+			{
+				SceneManager.Instance.SetUI(SceneNames.Inventory);	
+				Input.MouseMode = Input.MouseModeEnum.Visible;
 			}
 		}
 
-	}
-
-	private void OpenPauseMenu()
-	{
-		SceneManager.Instance.SetUI(SceneNames.PauseMenu_ButtonPanel);
-		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	public void SetAcceptKeyboardInput(bool accept)

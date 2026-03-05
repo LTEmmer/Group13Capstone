@@ -1,14 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://inventoryui"]
+[gd_scene format=3 uid="uid://inventoryui"]
 
-[ext_resource type="Script" path="res://game/ui/inventory_ui/InventoryUI.cs" id="1"]
+[ext_resource type="Script" uid="uid://cimbfn6l2mraq" path="res://game/ui/inventory_ui/InventoryUI.cs" id="1"]
+[ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="2_c6eap"]
 
-[node name="InventoryUI" type="CanvasLayer"]
+[node name="InventoryUI" type="Control" unique_id=906417445]
 visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1")
+player = ExtResource("2_c6eap")
 
-[node name="Panel" type="Panel" parent="."]
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="Panel" type="Panel" parent="." unique_id=645804766]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 80.0
@@ -16,9 +24,8 @@ offset_top = 80.0
 offset_right = -80.0
 offset_bottom = -80.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
-anchor_left = 0.0
-anchor_top = 0.0
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1567687221]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
@@ -26,27 +33,18 @@ offset_top = 16.0
 offset_right = -16.0
 offset_bottom = -16.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=75594626]
+layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=742179594]
+layout_mode = 2
 text = "Inventory"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=545153413]
+layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ItemsContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer"]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 0.0
+[node name="ItemsContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=995119469]
+layout_mode = 2
 size_flags_horizontal = 3
-

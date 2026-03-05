@@ -1,66 +1,36 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
-public partial class InventoryUI : CanvasLayer
+public partial class InventoryUI : Control 
 {
-	[Export] public NodePath InventoryComponentPath;
 
 	private InventoryComponent _inventory;
+	private Player _player;
 	private VBoxContainer _itemsContainer;
 
 	public override void _Ready()
 	{
 		_itemsContainer = GetNodeOrNull<VBoxContainer>("Panel/MarginContainer/VBoxContainer/ScrollContainer/ItemsContainer");
-
-		if (!InventoryComponentPath.IsEmpty)
-		{
-			_inventory = GetNodeOrNull<InventoryComponent>(InventoryComponentPath);
-		}
-		else
-		{
-			// Try to locate the player and its InventoryComponent similar to HUD
-			Node parent = GetParent();
-			if (parent != null)
-				parent = parent.GetParent();
-			if (parent != null)
-				parent = parent.GetParent();
-
-			if (parent is Player player)
-			{
-				_inventory = player.GetNodeOrNull<InventoryComponent>("InventoryComponent");
-			}
-		}
-
-		if (_inventory != null)
-		{
-			_inventory.Connect(InventoryComponent.SignalName.InventoryChanged, Callable.From(OnInventoryChanged));
-			RefreshInventoryList();
-		}
-
 		Visible = false;
 	}
 
-	//Resolve the player's InventoryComponent (in case it wasn't ready at _Ready).
-	private void EnsureInventory()
+	public void SetPlayer(Player player)
 	{
-		if (_inventory != null) return;
-		Node parent = GetParent();
-		if (parent != null) parent = parent.GetParent();
-		if (parent != null) parent = parent.GetParent();
-		if (parent is Player player)
-			_inventory = player.GetNodeOrNull<InventoryComponent>("InventoryComponent");
+		_player = player;
+		_inventory = _player.GetNodeOrNull<InventoryComponent>("InventoryComponent");
 	}
 
-	//>Show or hide the inventory. Used for hold-TAB-to-view.
-	public void SetVisible(bool visible)
-	{
-		Visible = visible;
-		if (visible)
-		{
-			EnsureInventory();
-			RefreshInventoryList();
-		}
-	}
+	// //>Show or hide the inventory. Used for hold-TAB-to-view.
+	// public void SetVisible(bool visible)
+	// {
+	// 	Visible = visible;
+	// 	if (visible)
+	// 	{
+	// 		EnsureInventory();
+	// 		RefreshInventoryList();
+	// 	}
+	// }
 
 	private void OnInventoryChanged()
 	{
@@ -72,7 +42,6 @@ public partial class InventoryUI : CanvasLayer
 
 	private void RefreshInventoryList()
 	{
-		EnsureInventory();
 		if (_itemsContainer == null || _inventory == null)
 			return;
 

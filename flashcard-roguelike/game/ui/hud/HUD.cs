@@ -1,9 +1,10 @@
 using Godot;
 
-public partial class HUD : CanvasLayer
+public partial class HUD :	Control 
 {
 	private Label _roomNameLabel;
 	private Label _healthLabel;
+	[Export] PackedScene _playerScene;
 	private Player _player;
 	private HealthComponent _healthComponent;
 
@@ -11,20 +12,17 @@ public partial class HUD : CanvasLayer
 	{
 		_roomNameLabel = GetNode<Label>("MarginContainer/VBoxContainer/RoomNameLabel");
 		_healthLabel = GetNode<Label>("MarginContainer/VBoxContainer/HealthLabel");
+	}
 
-		// HUD is under Camera3D -> CameraPivot -> Player
-		Node parent = GetParent();
-		if (parent != null)
-			parent = parent.GetParent();
-		if (parent != null)
-			parent = parent.GetParent();
-		_player = parent as Player;
-		if (_player != null)
-			_healthComponent = _player.GetNodeOrNull<HealthComponent>("HealthComponent");
+	public void SetPlayer(Player player)
+	{
+		_player = player;
+		_healthComponent = _player.GetNodeOrNull<HealthComponent>("HealthComponent");
 	}
 
 	public override void _Process(double delta)
 	{
+		// TODO: this could be done with an update signal when health changes
 		// Health
 		if (_healthComponent != null)
 			_healthLabel.Text = $"HP: {_healthComponent.CurrentHealth:F0} / {_healthComponent.MaxHealth:F0}";
