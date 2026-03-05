@@ -20,6 +20,7 @@ public partial class Player : CharacterBody3D
 	private Vector3 _targetVelocity = Vector3.Zero;
 	private int _speed { get; set; } = 10;
 	private int _sprintSpeed = 2;
+	private bool _acceptKeyboardInput = true;
 	
 	public override void _Ready()
 	{
@@ -55,21 +56,30 @@ public partial class Player : CharacterBody3D
 		}
 	}
 
+	public void SetAcceptKeyboardInput(bool accept)
+	{
+		_acceptKeyboardInput = accept;
+	}
+
 public override void _PhysicsProcess(double delta)
 	{
-		Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-		if (direction != Vector3.Zero)
+		if (_acceptKeyboardInput)
 		{
-			Velocity = new Vector3(direction.X * _speed, Velocity.Y, direction.Z * _speed);
-			if (Input.IsActionPressed("sprint")){
-				Velocity = Velocity * _sprintSpeed;
+			Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
+			Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+			if (direction != Vector3.Zero)
+			{
+				Velocity = new Vector3(direction.X * _speed, Velocity.Y, direction.Z * _speed);
+				if (Input.IsActionPressed("sprint")){
+					Velocity = Velocity * _sprintSpeed;
+				}
+			}
+			else
+			{
+				Velocity = new Vector3(Mathf.MoveToward(Velocity.X, 0, _speed), Velocity.Y, Mathf.MoveToward(Velocity.Z, 0, _speed));
 			}
 		}
-		else
-		{
-			Velocity = new Vector3(Mathf.MoveToward(Velocity.X, 0, _speed), Velocity.Y, Mathf.MoveToward(Velocity.Z, 0, _speed));
-		}
+
 		MoveAndSlide();
 	}
 }

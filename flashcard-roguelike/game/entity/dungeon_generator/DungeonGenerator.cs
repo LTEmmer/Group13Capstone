@@ -117,7 +117,7 @@ public partial class DungeonGenerator : Node3D
 		ClearChildren(roomsRoot);
 
 		foreach (DungeonRoom room in graph.Rooms)
-		{	
+		{
 			Node3D roomNode = CreateRoomNode(room.Id, room.RoomType);
 			roomNode.Position = positions[room.Id];
 			
@@ -141,6 +141,7 @@ public partial class DungeonGenerator : Node3D
 				connInstance.IsEntrance = true;
 				connInstance.SetLabel(true, origin, graph.GetRoom(origin).RoomType.ToString());
 				entrances.GetChildOrNull<Marker3D>(entranceIndex++)?.AddChild(connInstance);
+				connInstance.connection_enabled = true;
 			}
 
 			foreach (int destination in room.OutgoingConnections)
@@ -151,6 +152,10 @@ public partial class DungeonGenerator : Node3D
 				connInstance.IsEntrance = false;
 				connInstance.SetLabel(false, destination, graph.GetRoom(destination).RoomType.ToString());
 				exits.GetChildOrNull<Marker3D>(exitIndex++)?.AddChild(connInstance);
+				if(room.RoomType == RoomTypes.Combat) { // Combat rooms are the only "gated" rooms for now 
+					connInstance.connection_enabled = false;
+					connInstance.Visible = false; //Setting to true for testing purposes
+				}
 			}
 
 			Label3D label = new Label3D();
@@ -159,8 +164,7 @@ public partial class DungeonGenerator : Node3D
 			label.Billboard = BaseMaterial3D.BillboardModeEnum.Enabled;
 			label.FontSize = 94;
 			roomNode.AddChild(label);
-			
-			roomsRoot.AddChild(roomNode);		
+			roomsRoot.AddChild(roomNode);
 		}
 	}
 

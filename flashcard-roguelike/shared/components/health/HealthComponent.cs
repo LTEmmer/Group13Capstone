@@ -5,8 +5,13 @@ public partial class HealthComponent : Node
 {
 	[Signal]
 	public delegate void _OnDeathEventHandler();
+	
+	[Signal]
+	public delegate void PlayerDiedEventHandler();
 
 	[Export] public float MaxHealth = 100f;
+	[Export] public bool IsPlayer = false;
+	
 	public float CurrentHealth { get; private set; }
 
 	public override void _Ready()
@@ -31,11 +36,43 @@ public partial class HealthComponent : Node
 	private void Die()
 	{
 		GD.Print($"{GetParent().Name} died!");
-		// Connect this signal from the signal pannel to function on the parent
-		// node that you want it to do.
-		// For example, if you want it to despawn make it run
-		// .. :: queue_free
-		// from the signal pannel in godot
+		
+		if (IsPlayer)
+		{
+			// Trigger game over for player death
+			GD.Print("Player has died - Game Over!");
+			EmitSignal(SignalName.PlayerDied);
+			ShowGameOver();
+		}
+		else
+		{
+			// Non-player entities get removed
+			GetParent().QueueFree();
+		}
+		
 		EmitSignal(SignalName._OnDeath);
+	}
+	
+	private void ShowGameOver()
+	{
+		// Try to find GameOverMenu in the scene tree
+		var gameOverMenu = GetTree().Root.GetNodeOrNull<CanvasLayer>("GameOverMenu");
+		
+		if (gameOverMenu == null)
+		{
+			// Load and instantiate the game over menu
+			var gameOverScene = GD.Load<PackedScene>("res://game/ui/game_over/game_over_menu.tscn");
+			if (gameOverScene != null)
+			{
+				gameOverMenu = gameOverScene.Instantiate<CanvasLayer>();
+				GetTree().Root.AddChild(gameOverMenu);
+			}
+		}
+		
+		// Show the game over screen
+		if (gameOverMenu != null && gameOverMenu.HasMethod("ShowGameOver"))
+		{
+			gameOverMenu.Call("ShowGameOver", "You have fallen in the dungeon...");
+		}
 	}
 }

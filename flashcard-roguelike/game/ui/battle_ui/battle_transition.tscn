@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cydjrbd8x3kvj"]
+
+[ext_resource type="Script" uid="uid://c4apl87sdm1h3" path="res://game/ui/battle_ui/BattleTransition.cs" id="1_0oia3"]
+
+[node name="BattleTransition" type="CanvasLayer" unique_id=1034174715]
+script = ExtResource("1_0oia3")
