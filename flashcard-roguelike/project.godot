@@ -21,6 +21,7 @@ EventManager="*uid://dv7rf2n53ca24"
 SceneManager="*uid://djv2f8gvt83b7"
 GameDifficultyManager="*uid://f8ry0h64gsqb"
 BattleManager="*uid://tcdfpy3chbj2"
+CurrentRoomManager="*res://game/current_room_manager.tscn"
 FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
 
 [display]
@@ -61,6 +62,11 @@ sprint={
 interact={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
+]
+}
+inventory_toggle={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

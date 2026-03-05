@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://crm_current_room_manager"]
+
+[ext_resource type="Script" path="res://game/CurrentRoomManager.cs" id="1_script"]
+
+[node name="CurrentRoomManager" type="Node"]
+script = ExtResource("1_script")

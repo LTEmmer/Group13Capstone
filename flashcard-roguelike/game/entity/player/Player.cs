@@ -4,6 +4,13 @@ using System;
 public partial class Player : CharacterBody3D
 {
 	[Export]
+	public CanvasLayer PauseMenu;
+
+	[Export]
+	public InventoryUI InventoryUI;
+	
+	[Export]
+	// _speed of camera
 	public float MouseSensitivity { get; set; } = 0.002f;
 
 	[Export]
@@ -24,10 +31,21 @@ public partial class Player : CharacterBody3D
 		SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ButtonPanel, true);
 		SceneManager.Instance.PreloadUI(SceneNames.PauseMenu_ViewFlashcards, true);
 		SceneManager.Instance.PreloadUI(SceneNames.GameOver, true);
+		// Ensure we have a reference to InventoryUI
+		if (InventoryUI == null)
+			InventoryUI = GetNodeOrNull<InventoryUI>("CameraPivot/Camera3D/InventoryUI");
 	}
 
 	public override void _Input(InputEvent @event)
 	{
+		if (InventoryUI != null)
+		{
+			if (@event.IsActionPressed("inventory_toggle"))
+				InventoryUI.SetVisible(true);
+			else if (@event.IsActionReleased("inventory_toggle"))
+				InventoryUI.SetVisible(false);
+		}
+
 		if (Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
 			if (@event is InputEventMouseMotion motion)

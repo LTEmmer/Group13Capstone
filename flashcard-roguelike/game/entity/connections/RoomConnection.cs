@@ -105,7 +105,8 @@ public partial class RoomConnection : Node3D
 		GetParent().GetParent().GetParent().RemoveChild(player);
 		targetRoom.AddChild(player);
 		player.GlobalPosition = dest;
-
+		if (CurrentRoomManager.Instance != null)
+			CurrentRoomManager.Instance.CurrentRoomId = TargetRoomId;
 	}
 
 	public void SetLabel(bool isEntrance, int id, string roomType)

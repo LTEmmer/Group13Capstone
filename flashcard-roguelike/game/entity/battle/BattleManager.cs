@@ -19,6 +19,9 @@ public partial class BattleManager : Node
 	private BattleTransition _transition;
 	private BattleUI _battleUI;
 	private FlashcardChallenge _flashcardChallenge;
+	private FlashcardChallengeTrueOrFalse _flashcardChallengeTrueOrFalse;
+	private FlashcardChallengeMultipleChoice _flashcardChallengeMultipleChoice;
+	private FlashcardChallengeManager _flashcardChallengeManager;
 	
 	// Cooldown management
 	private Timer _battleCooldownTimer;
@@ -45,15 +48,26 @@ public partial class BattleManager : Node
 		_flashcardChallenge = GD.Load<PackedScene>("res://game/ui/battle_ui/flashcard_challenge.tscn").Instantiate<FlashcardChallenge>();
 		AddChild(_flashcardChallenge);
 
-		if (_transition == null || _battleUI == null || _flashcardChallenge == null)
+		_flashcardChallengeTrueOrFalse = GD.Load<PackedScene>("res://game/ui/battle_ui/flashcard_challenge_true_false.tscn").Instantiate<FlashcardChallengeTrueOrFalse>();
+		AddChild(_flashcardChallengeTrueOrFalse);
+
+		_flashcardChallengeMultipleChoice = GD.Load<PackedScene>("res://game/ui/battle_ui/flashcard_challenge_multiple_choice.tscn").Instantiate<FlashcardChallengeMultipleChoice>();
+		AddChild(_flashcardChallengeMultipleChoice);
+
+		if (_transition == null || _battleUI == null || _flashcardChallenge == null || _flashcardChallengeTrueOrFalse == null || _flashcardChallengeMultipleChoice == null)
 		{
 			GD.PrintErr("BattleManager: Failed to load one or more UI scenes.");
 		}
 
+		// Initialize challenge manager
+		_flashcardChallengeManager = new FlashcardChallengeManager();
+		_flashcardChallengeManager.Initialize(_flashcardChallenge, _flashcardChallengeTrueOrFalse, _flashcardChallengeMultipleChoice);
+		_flashcardChallengeManager.SetAnswerSubmittedCallback(OnFlashcardAnswered);
+
 		// Initialize manager dependencies
 		_uiCoordinator.Initialize(_battleUI, _state);
 		_turnController.Initialize(_state, _uiCoordinator, _combatResolver);
-		_combatResolver.Initialize(_state, _uiCoordinator, _flashcardChallenge, _turnController);
+		_combatResolver.Initialize(_state, _uiCoordinator, _flashcardChallengeManager, _turnController);
 
 		// Connect UI signals
 		if (_battleUI != null)

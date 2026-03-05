@@ -8,33 +8,34 @@ public class CombatResolver
 {
     private BattleState _state;
     private BattleUICoordinator _uiCoordinator;
-    private FlashcardChallenge _flashcardChallenge;
+    private FlashcardChallengeManager _flashcardChallengeManager;
     private TurnController _turnController;
     
     public event Action<bool> OnBattleEnded; // bool: victory
     public event Action<bool> OnBattleEndedWithRun; // bool: successfully ran
     
     public void Initialize(BattleState state, BattleUICoordinator uiCoordinator, 
-        FlashcardChallenge flashcardChallenge, TurnController turnController)
+        FlashcardChallengeManager flashcardChallengeManager, TurnController turnController)
     {
         _state = state;
         _uiCoordinator = uiCoordinator;
-        _flashcardChallenge = flashcardChallenge;
+        _flashcardChallengeManager = flashcardChallengeManager;
         _turnController = turnController;
     }
     
     // Start attack sequence with flashcard challenge
     public void StartAttackSequence()
     {
-        if (_flashcardChallenge != null)
+        float difficulty = GameDifficultyManager.Instance.getCurrentDifficultyScore();
+        if (_flashcardChallengeManager != null)
         {
             // Load a random flashcard for the attack challenge
-            Flashcard card = _flashcardChallenge.LoadRandomCard();
+            Flashcard card = _flashcardChallengeManager.LoadRandomCard();
             if (card != null)
             {
-                // Set state to wait for flashcard answer and show challenge
+                // Set state to wait for flashcard answer and show challenge with difficulty
                 _state.WaitingForFlashcard = true;
-                _flashcardChallenge.ShowChallenge(card, "Answer correctly to attack!");
+                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to attack!", difficulty);
             }
             else
             {
@@ -45,8 +46,8 @@ public class CombatResolver
         }
         else
         {
-            // If flashcard challenge UI is not assigned, log an error and execute attack as if it succeeded, shouldnt happen
-            GD.PrintErr("CombatResolver: FlashcardChallenge is not assigned. Skipping attack challenge.");
+            // If flashcard challenge manager is not assigned, log an error and execute attack as if it succeeded, shouldnt happen
+            GD.PrintErr("CombatResolver: FlashcardChallengeManager is not assigned. Skipping attack challenge.");
             ExecutePlayerAttack(true);
         }
     }
@@ -56,15 +57,15 @@ public class CombatResolver
     {
         _state.PendingAction = "defend";
         
-        if (_flashcardChallenge != null)
+        if (_flashcardChallengeManager != null)
         {
             // Load a random flashcard for the defense challenge
-            Flashcard card = _flashcardChallenge.LoadRandomCard();
+            Flashcard card = _flashcardChallengeManager.LoadRandomCard();
             if (card != null)
             {
-                // Set state to wait for flashcard answer and show challenge
+                // Set state to wait for flashcard answer and show challenge with default difficulty (0 = text)
                 _state.WaitingForFlashcard = true;
-                _flashcardChallenge.ShowChallenge(card, "Answer correctly to defend!");
+                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to defend!", 0);
             }
             else
             {
@@ -75,8 +76,8 @@ public class CombatResolver
         }
         else
         {
-            // If flashcard challenge UI is not assigned, log an error and execute attack as if defense failed, shouldnt happen
-            GD.PrintErr("CombatResolver: FlashcardChallenge is not assigned. Skipping defense challenge.");
+            // If flashcard challenge manager is not assigned, log an error and execute attack as if defense failed, shouldnt happen
+            GD.PrintErr("CombatResolver: FlashcardChallengeManager is not assigned. Skipping defense challenge.");
             ExecuteEnemyAttack(false);
         }
     }
