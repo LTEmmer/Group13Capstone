@@ -205,7 +205,28 @@ public partial class DungeonGenerator : Node3D
 			roomNode.AddChild(label);
 			
 			// Add the room to the Rooms node in the scene tree
-			roomsRoot.AddChild(roomNode);		
+			roomsRoot.AddChild(roomNode);	
+
+			// If it is a combat room, spawn enemies randomly in the enemy area node based off difficulty
+			if (room.RoomType == RoomTypes.Combat)
+			{
+				int enemyCount = GameDifficultyManager.Instance.getEnemyCount();
+				var enemyNode = roomNode.GetNodeOrNull<Node3D>("Enemies");
+				List<Marker3D> spawnPoints = roomNode.GetNodeOrNull<Node3D>("EnemySpawnArea").GetChildren().OfType<Marker3D>().ToList();
+
+				for (int i = 0; i < enemyCount; i++)
+				{
+					// For testing purposes we will just spawn generic enemy instances at random positions in the enemy area
+					// In the future, we can use the difficulty score to determine the type and strength of enemies to spawn
+					// Maybe we define a list of enemies somewhere with associated difficulty ratings
+					EnemyExample enemyInstance = GD.Load<PackedScene>("res://game/entity/enemy_example/enemy_example.tscn").Instantiate() as EnemyExample;
+					enemyInstance.Name = $"Enemy_{i}";
+					enemyNode.AddChild(enemyInstance);
+					enemyInstance.GlobalPosition = spawnPoints[i].GlobalPosition;
+				}
+
+				GD.Print($"Spawned {enemyCount} enemies in Room {room.Id} based on difficulty score of {GameDifficultyManager.Instance.getCurrentDifficultyScore()}.");
+			}	
 		}
 	}
 

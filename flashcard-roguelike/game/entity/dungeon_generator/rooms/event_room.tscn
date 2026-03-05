@@ -27,7 +27,7 @@ size = Vector3(50, 0.5, 50)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_68786"]
 points = PackedVector3Array(-25, -0.25, -25, -25, 0.25, -25, 25, -0.25, -25, -25, -0.25, 25, -25, 0.25, 25, 25, 0.25, -25, 25, -0.25, 25, 25, 0.25, 25)
 
-[node name="EntranceRoom2" type="Node3D" unique_id=1298955981]
+[node name="EventRoom" type="Node3D" unique_id=1298955981]
 
 [node name="Walls" type="MeshInstance3D" parent="." unique_id=2043454782]
 mesh = SubResource("ArrayMesh_68786")
