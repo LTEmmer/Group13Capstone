@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="2_0b5cm"]
 [ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="3_health"]
 [ext_resource type="PackedScene" uid="uid://bqxhud_flashcard_roguelike" path="res://game/ui/hud/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://shared/components/inventory/inventory_component.tscn" id="5_inventory"]
+[ext_resource type="PackedScene" path="res://game/ui/inventory_ui/inventory_ui.tscn" id="6_inventory_ui"]
 [ext_resource type="PackedScene" uid="uid://ci0hdg6g3o0ny" path="res://shared/components/attack/attack_component.tscn.tscn" id="4_dmj0o"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_player"]
@@ -16,6 +18,8 @@ height = 1.8
 script = ExtResource("1_script")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_health")]
+
+[node name="InventoryComponent" parent="." instance=ExtResource("5_inventory")]
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=1450744592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03734237, 0)
@@ -31,6 +35,8 @@ current = true
 visible = false
 
 [node name="HUD" parent="CameraPivot/Camera3D" instance=ExtResource("4_hud")]
+
+[node name="InventoryUI" parent="CameraPivot/Camera3D" instance=ExtResource("6_inventory_ui")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")
