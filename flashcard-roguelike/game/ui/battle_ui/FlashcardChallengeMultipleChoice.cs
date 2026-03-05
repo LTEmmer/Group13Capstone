@@ -1,0 +1,247 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChallenge
+{
+	private Panel _challengePanel;
+	private Label _questionLabel;
+	private Button _optionAButton;
+	private Button _optionBButton;
+	private Button _optionCButton;
+	private Button _optionDButton;
+	private Label _contextLabel;
+
+	private Flashcard _currentCard;
+	private Button[] _optionButtons;
+	private string _correctAnswer;
+	private bool _isActive = false;
+	private float _showDuration = 0.3f;
+	private float _hideDuration = 0.3f;
+
+	private Action<bool> _onAnswerSubmitted;
+
+	public bool Visibility => Visible;
+
+	public override void _Ready()
+	{
+		// Get UI elements
+		_challengePanel = GetNode<Panel>("ChallengePanel");
+		_questionLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/QuestionLabel");
+		_contextLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
+		_optionAButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionAButton");
+		_optionBButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionBButton");
+		_optionCButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionCButton");
+		_optionDButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionDButton");
+
+		_optionButtons = new Button[] { _optionAButton, _optionBButton, _optionCButton, _optionDButton };
+
+		// Connect signals
+		_optionAButton.Pressed += () => OnOptionSelected(_optionAButton.Text);
+		_optionBButton.Pressed += () => OnOptionSelected(_optionBButton.Text);
+		_optionCButton.Pressed += () => OnOptionSelected(_optionCButton.Text);
+		_optionDButton.Pressed += () => OnOptionSelected(_optionDButton.Text);
+
+		// Start hidden
+		Visible = false;
+	}
+
+	public void ConnectAnswerSubmitted(Action<bool> callback)
+	{
+		_onAnswerSubmitted = callback;
+	}
+
+	public void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...")
+	{
+		if (_isActive || card == null) return;
+
+		_currentCard = card;
+		_correctAnswer = card.Answer;
+		_isActive = true;
+
+		// Get three incorrect answers from other cards
+		List<string> allOptions = GetWrongAnswers(card, 3);
+
+		// Create a list of all options (1 correct + 3 wrong)  
+        allOptions.Add(_correctAnswer);
+
+		// Shuffle the options
+		ShuffleList(allOptions);
+
+		// Assign options to buttons
+		for (int i = 0; i < _optionButtons.Length; i++)
+		{
+			_optionButtons[i].Text = allOptions[i];
+			_optionButtons[i].Disabled = false;
+		}
+
+		_questionLabel.Text = card.Question;
+		_contextLabel.Text = context;
+
+		// Show with fade-in animation
+		Visible = true;
+		Tween tween = CreateTween();
+		tween.TweenProperty(_challengePanel, "modulate:a", 1.0f, _showDuration)
+			 .SetTrans(Tween.TransitionType.Quad)
+			 .SetEase(Tween.EaseType.Out);
+
+		// Focus the first button
+		CallDeferred("FocusFirstButton");
+	}
+
+	private void FocusFirstButton()
+	{
+		_optionAButton.GrabFocus();
+	}
+
+	public void HideChallenge(Action onComplete = null)
+	{
+		if (!_isActive) return;
+
+		_isActive = false;
+		foreach (var button in _optionButtons)
+		{
+			button.Disabled = true;
+		}
+
+		// Hide with fade-out animation
+		Tween tween = CreateTween();
+		tween.TweenProperty(_challengePanel, "modulate:a", 0.0f, _hideDuration)
+			 .SetTrans(Tween.TransitionType.Quad)
+			 .SetEase(Tween.EaseType.In);
+
+		tween.TweenCallback(Callable.From(() =>
+		{
+			Visible = false;
+			_currentCard = null;
+			onComplete?.Invoke();
+		}));
+	}
+
+	private void OnOptionSelected(string selectedAnswer)
+	{
+		if (!_isActive || _currentCard == null) return;
+
+		// Disable all buttons
+		foreach (var button in _optionButtons)
+		{
+			button.Disabled = true;
+		}
+
+		// Check if the answer is correct
+		bool isCorrect = selectedAnswer.Equals(_correctAnswer, StringComparison.OrdinalIgnoreCase);
+
+		// Visual feedback - highlight all buttons
+		Color correctColor = new Color(0.5f, 1.0f, 0.5f); // Green for correct
+		Color wrongColor = new Color(1.0f, 0.5f, 0.5f);   // Red for wrong
+		Color neutralColor = Colors.White;
+
+		foreach (var button in _optionButtons)
+		{
+			if (button.Text.Equals(_correctAnswer, StringComparison.OrdinalIgnoreCase))
+			{
+				button.Modulate = correctColor; // Highlight the correct answer
+			}
+			else if (!isCorrect && button.Text.Equals(selectedAnswer, StringComparison.OrdinalIgnoreCase))
+			{
+				button.Modulate = wrongColor; // Highlight the selected wrong answer
+			}
+			else 
+			{
+				button.Modulate = neutralColor; // Keep unselected wrong answers neutral
+			}
+		}
+
+		if (!isCorrect)
+		{
+			_contextLabel.Text = $"Incorrect! The correct answer is: {_correctAnswer}";
+		}
+
+		// Wait a moment then hide and emit result
+		GetTree().CreateTimer(4.0f).Timeout += () =>
+		{
+			foreach (var button in _optionButtons)
+			{
+				button.Modulate = Colors.White;
+			}
+			HideChallenge(() => _onAnswerSubmitted?.Invoke(isCorrect));
+		};
+	}
+
+	public Flashcard LoadRandomCard()
+	{
+		List<FlashcardSet> sets = FlashcardManager.Instance?.ActiveFlashCardLists;
+
+		if (sets == null || sets.Count == 0)
+		{
+			GD.PrintErr("FlashcardChallengeMultipleChoice: No flashcard sets available.");
+			return null;
+		}
+
+        // Get a random card
+		List<Flashcard> allCards = new List<Flashcard>();
+		foreach (var set in sets)
+		{
+			if (set.Cards != null)
+				allCards.AddRange(set.Cards);
+		}
+
+		if (allCards.Count == 0)
+		{
+			GD.PrintErr("FlashcardChallengeMultipleChoice: No flashcards available in sets.");
+			return null;
+		}
+
+		Random random = new Random();
+		return allCards[random.Next(allCards.Count)];
+	}
+
+	private List<string> GetWrongAnswers(Flashcard excludeCard, int count)
+	{
+		List<FlashcardSet> sets = FlashcardManager.Instance.ActiveFlashCardLists;
+		List<string> wrongAnswers = new List<string>();
+
+		if (sets == null || sets.Count == 0) return wrongAnswers;
+
+        // Get all cards excluding the current one
+		List<Flashcard> otherCards = new List<Flashcard>();
+		foreach (var set in sets)
+		{
+            foreach (var card in set.Cards)
+            {
+                if (card == excludeCard) continue; // Skip the card we want to exclude
+                otherCards.Add(card);
+            }
+		}
+
+		Random random = new Random();
+
+		// Get up to 'count' wrong answers
+		for (int i = 0; i < count && otherCards.Count > 0; i++)
+		{
+			int randomIndex = random.Next(otherCards.Count);
+			wrongAnswers.Add(otherCards[randomIndex].Answer);
+			otherCards.RemoveAt(randomIndex);
+		}
+
+		// If we don't have enough wrong answers, add filler (shouldn't happen with real data)
+		while (wrongAnswers.Count < count && otherCards.Count > 0)
+		{
+			wrongAnswers.Add("No other cards available");
+		}
+
+		return wrongAnswers;
+	}
+
+	private void ShuffleList(List<string> list)
+	{
+        // Basic shuffling
+		Random random = new Random();
+		for (int i = list.Count - 1; i > 0; i--)
+		{
+			int randomIndex = random.Next(i + 1);
+			(list[i], list[randomIndex]) = (list[randomIndex], list[i]);
+		}
+	}
+}
