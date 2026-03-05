@@ -52,32 +52,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59409785, 16.44909)
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=1595695969]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44763565, -17.54694)
 
-[node name="Entrances" type="Node3D" parent="." unique_id=346511184]
+[node name="Entrances" type="Node3D" parent="." unique_id=1488867071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 16.374111)
 
-[node name="0" type="Marker3D" parent="Entrances" unique_id=707015329]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.549403, -1.7729723, 4.9187107)
-
-[node name="1" type="Marker3D" parent="Entrances" unique_id=112222844]
+[node name="0" type="Marker3D" parent="Entrances" unique_id=107664402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2964153, -1.7729723, 4.9187107)
 
-[node name="2" type="Marker3D" parent="Entrances" unique_id=2120414536]
+[node name="1" type="Marker3D" parent="Entrances" unique_id=434136577]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3992662, -1.7729723, 4.9187107)
 
-[node name="3" type="Marker3D" parent="Entrances" unique_id=59496419]
+[node name="2" type="Marker3D" parent="Entrances" unique_id=244678228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.549403, -1.7729723, 4.9187107)
+
+[node name="3" type="Marker3D" parent="Entrances" unique_id=426542712]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.57488, -1.7729723, 4.9187107)
 
-[node name="Exits" type="Node3D" parent="." unique_id=476148545]
+[node name="Exits" type="Node3D" parent="." unique_id=81102973]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -13.484043)
 
-[node name="0" type="Marker3D" parent="Exits" unique_id=162859324]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.549403, -1.7729723, -7.2970276)
-
-[node name="1" type="Marker3D" parent="Exits" unique_id=1154018645]
+[node name="0" type="Marker3D" parent="Exits" unique_id=603689357]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2964153, -1.7729723, -7.2970276)
 
-[node name="2" type="Marker3D" parent="Exits" unique_id=454553864]
+[node name="1" type="Marker3D" parent="Exits" unique_id=1108421066]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3992662, -1.7729723, -7.2970276)
 
-[node name="3" type="Marker3D" parent="Exits" unique_id=897839084]
+[node name="2" type="Marker3D" parent="Exits" unique_id=630323280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.549403, -1.7729723, -7.2970276)
+
+[node name="3" type="Marker3D" parent="Exits" unique_id=150472824]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.57488, -1.7729723, -7.2970276)

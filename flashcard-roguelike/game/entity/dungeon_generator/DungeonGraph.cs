@@ -101,10 +101,37 @@ public sealed class DungeonGraph
 		DungeonRoom fromRoom = Rooms[from];
 		DungeonRoom toRoom = Rooms[to];
 
+		bool fromIsEntrance = fromRoom.RoomType == RoomTypes.Entrance;
+		bool toIsExit = toRoom.RoomType == RoomTypes.Exit;
+
+		// Prevent entrance from having too many outgoing connections, 2 for now
+		if (fromIsEntrance && fromRoom.OutgoingConnections.Count >= 2)
+		{
+			return false; 
+		}
+
+		// Prevent exit from having having too many incoming connections, 2 for now
+		if (toIsExit && toRoom.IncomingConnections.Count >= 2)
+		{
+			return false; 
+		}
+
+		// Prevent direct connection from entrance to exit
+		if (fromIsEntrance && toIsExit)
+		{
+			return false; 
+		}
+
+		// Ensure exits don't go out, and entrances don't allow in
+		if (fromRoom.RoomType == RoomTypes.Exit || toRoom.RoomType == RoomTypes.Entrance)
+		{
+			return false;
+		}
+
 		// Ensure rooms only go "deeper"
 		if (toRoom.Depth <= fromRoom.Depth)
 		{
-			return false; 
+			toRoom.Depth = fromRoom.Depth + 1; // Update depth to maintain proper layering
 		}
 
 		// Ensure rooms don't exceed max connections

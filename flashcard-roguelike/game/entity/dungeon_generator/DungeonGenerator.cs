@@ -21,21 +21,21 @@ public partial class DungeonGenerator : Node3D
 
 	private readonly RandomNumberGenerator _rng = new RandomNumberGenerator();
 
-	// Move stuff from Ready to a separate GenerateDungeon method that can be called 
-	// whenever we want to generate a new dungeon, such as when the player enters a new floor or restarts after death.
-	// Everytime we generate the graph, each room should be assigned a difficulty rating from the 
-	// difficulty singleton. This determins the amount of enemies in combat rooms, the quality of loot in treasure rooms, 
-	// and the difficulty of flashcard challenges in event rooms. Difficulty can be assigned in the 
-	// spawn rooms method, and can be stored in the DungeonRoom class as a property. 
-	// This way, the difficulty of each room can be easily accessed when spawning the room and its contents, 
-	// and can also be used by the UI to display the difficulty of each room to the player.
-	public override void _Ready()
-	{
-		DungeonGraph graph = GenerateGraph(); // Generate the dungeon graph structure
+    // Move stuff from Ready to a separate GenerateDungeon method that can be called 
+    // whenever we want to generate a new dungeon, such as when the player enters a new floor or restarts after death.
+    // Everytime we generate the graph, each room should be assigned a difficulty rating from the 
+    // difficulty singleton. This determins the amount of enemies in combat rooms, the quality of loot in treasure rooms, 
+    // and the difficulty of flashcard challenges in event rooms. Difficulty can be assigned in the 
+    // spawn rooms method, and can be stored in the DungeonRoom class as a property. 
+    // This way, the difficulty of each room can be easily accessed when spawning the room and its contents, 
+    // and can also be used by the UI to display the difficulty of each room to the player.
+    public override void _Ready()
+    {
+        DungeonGraph graph = GenerateGraph(); // Generate the dungeon graph structure
 		graph.PrintGraph();
 		Dictionary<int, Vector3> positions = GenerateLayout(graph); // Generate world positions for rooms
 		SpawnRooms(graph, positions); // Instantiate room scenes and connections based on the graph and layout
-	}
+    }
 
 	public DungeonGraph GenerateGraph()
 	{
@@ -60,8 +60,6 @@ public partial class DungeonGenerator : Node3D
 
 		// Create the dungeon graph with the specified number of rooms and minimum room type requirements
 		DungeonGraph graph = new DungeonGraph(roomCount, MinCombatRooms, MinEventRooms, MinTreasureRooms);
-
-		// Connect rooms ensuring that all rooms are reachable from the entrance
 		HashSet<int> connected = new HashSet<int> { 0 }; // Start with entrance
 		List<int> toConnect = new List<int>();
 
@@ -79,12 +77,6 @@ public partial class DungeonGenerator : Node3D
 			int destIndex = _rng.RandiRange(0, toConnect.Count - 1);
 			int to = toConnect[destIndex];
 
-			// Ensure exits don't go out, and entrances don't allow in
-			if (graph.GetRoom(from).RoomType == RoomTypes.Exit || graph.GetRoom(to).RoomType == RoomTypes.Entrance)
-			{
-				continue;
-			}
-
 			// Try to connect the rooms, and if successful move the room from toConnect to connected
 			if (graph.TryConnect(from, to, MaxConnections))
 			{
@@ -93,6 +85,7 @@ public partial class DungeonGenerator : Node3D
 			}
 		}
 
+		/* Keep commented out for now to more easily see the graph
 		// Add some extra random connections for more interconnectivity and non-linearity
 		int targetExtraEdges = roomCount / 3; 
 		int attempts = roomCount * roomCount / 2; 
@@ -109,6 +102,7 @@ public partial class DungeonGenerator : Node3D
 				added++;
 			}
 		}
+		*/
 
 		// Check if all rooms are reachable from the entrance and print a warning if not. 
 		if (!graph.AreAllRoomsReachable())
@@ -294,9 +288,10 @@ public partial class DungeonGenerator : Node3D
 
 	private void ClearChildren(Node root)
 	{
-		// Clear all children of this root node
+		// Clear all children of this root node immediately to prevent issues with stale connections
 		foreach (Node child in root.GetChildren())
 		{
+			root.RemoveChild(child);
 			child.QueueFree();
 		}
 	}
