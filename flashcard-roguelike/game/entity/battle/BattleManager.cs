@@ -126,6 +126,7 @@ public partial class BattleManager : Node
 			GD.PrintErr("BattleManager: Failed to find battle area in the room.");
 			return;
 		}
+		SceneManager.Instance.HideUI();
 
 		// Initialize state with entities
 		_state.Initialize(player, enemies);
@@ -343,6 +344,7 @@ public partial class BattleManager : Node
 				});
 			};
 		});
+		SceneManager.Instance.SetUI(SceneNames.HUD);
 		
 		// When battle over if player wins activate room exit
 		if(victory == true){ //victory increases difficulty
