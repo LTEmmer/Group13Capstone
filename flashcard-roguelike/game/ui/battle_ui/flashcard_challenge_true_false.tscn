@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://cnitj3uodab4s"]
+
+[ext_resource type="Script" uid="uid://dpfa5elccyad0" path="res://game/ui/battle_ui/FlashcardChallengeTrueOrFalse.cs" id="1_true_false"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dark_panel"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.45, 0.45, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="FlashcardChallengeTrueOrFalse" type="Control" unique_id=228099819]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_true_false")
+
+[node name="ChallengePanel" type="Panel" parent="." unique_id=1086843691]
+self_modulate = Color(0.3, 0.3, 0.3, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dark_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="ChallengePanel" unique_id=1987394491]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChallengePanel/MarginContainer" unique_id=428053506]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="ChallengePanel/MarginContainer/VBoxContainer" unique_id=391179865]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "True or False?"
+horizontal_alignment = 1
+
+[node name="ContextLabel" type="Label" parent="ChallengePanel/MarginContainer/VBoxContainer" unique_id=761066353]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Answer correctly to continue"
+horizontal_alignment = 1
+
+[node name="Separator1" type="HSeparator" parent="ChallengePanel/MarginContainer/VBoxContainer" unique_id=1125238984]
+layout_mode = 2
+
+[node name="QuestionLabel" type="Label" parent="ChallengePanel/MarginContainer/VBoxContainer" unique_id=1273361382]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+text = "Question will appear here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="AnswerLabel" type="Label" parent="ChallengePanel/MarginContainer/VBoxContainer" unique_id=81422707]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+text = "Answer will appear here"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Separator2" type="HSeparator" parent="ChallengePanel/MarginContainer/VBoxContainer" unique_id=1368987894]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="ChallengePanel/MarginContainer/VBoxContainer" unique_id=457254837]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TrueButton" type="Button" parent="ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=978703684]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TRUE"
+
+[node name="FalseButton" type="Button" parent="ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=46954838]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FALSE"

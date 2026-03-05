@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class FlashcardChallenge : Control
+public partial class FlashcardChallenge : Control, IFlashcardChallenge
 {
 	[Signal]
 	public delegate void OnAnswerSubmittedEventHandler(bool isCorrect);
@@ -20,6 +20,7 @@ public partial class FlashcardChallenge : Control
 
 	private Flashcard _currentCard;
 	private bool _isActive = false;
+	private Action<bool> _onAnswerSubmittedCallback;
 
 	public override void _Ready()
 	{
@@ -37,6 +38,13 @@ public partial class FlashcardChallenge : Control
 
 		// Start hidden
 		Visible = false;
+	}
+
+	public bool Visibility => Visible;
+
+	public void ConnectAnswerSubmitted(Action<bool> callback)
+	{
+		_onAnswerSubmittedCallback = callback;
 	}
 
 	public void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...")
@@ -123,7 +131,11 @@ public partial class FlashcardChallenge : Control
         GetTree().CreateTimer(4.0f).Timeout += () =>
 		{
 			_answerInput.Modulate = Colors.White;
-			HideChallenge(() => EmitSignal(SignalName.OnAnswerSubmitted, isCorrect));
+			HideChallenge(() => 
+			{
+				EmitSignal(SignalName.OnAnswerSubmitted, isCorrect);
+				_onAnswerSubmittedCallback?.Invoke(isCorrect);
+			});
 		};
 	}
 

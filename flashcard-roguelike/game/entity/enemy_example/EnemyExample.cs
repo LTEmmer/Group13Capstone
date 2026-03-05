@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class EnemyExample : CharacterBody3D
 {
@@ -49,8 +50,9 @@ public partial class EnemyExample : CharacterBody3D
 			You would get the room via GetParent().GetParent() assuming the structure is Room -> Enemies -> EnemyExample, 
 			and then get all enemies from the Enemies node. I tested it this way and it worked
 			*/
-
-			BattleManager.Instance.StartBattle(player, new List<EnemyExample> { this }, GetParent<Node3D>());
+			var room = GetParent<Node3D>().GetParent<Node3D>();
+			List<EnemyExample> enemiesInRoom = GetParent<Node3D>().GetChildren().OfType<EnemyExample>().ToList();
+			BattleManager.Instance.StartBattle(player, enemiesInRoom, room);
 		}
 	}
 }
