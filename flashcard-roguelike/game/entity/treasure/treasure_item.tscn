@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://d2jqpx8kv7hnt"]
+
+[ext_resource type="Script" path="res://game/entity/treasure/TreasureItem.cs" id="1_item"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_item"]
+radius = 1.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_item"]
+radius = 0.3
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_item"]
+albedo_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="TreasureItem" type="Node3D"]
+script = ExtResource("1_item")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_item")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_item")
+surface_material_override/0 = SubResource("StandardMaterial3D_item")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+billboard = 1
+text = "Treasure"
+font_size = 64

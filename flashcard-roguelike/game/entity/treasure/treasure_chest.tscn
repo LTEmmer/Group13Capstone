@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://c3kbm7x2yvqpn"]
+
+[ext_resource type="Script" path="res://game/entity/treasure/TreasureChest.cs" id="1_chest"]
+[ext_resource type="PackedScene" uid="uid://d2jqpx8kv7hnt" path="res://game/entity/treasure/treasure_item.tscn" id="2_item"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_chest"]
+radius = 2.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_body"]
+size = Vector3(1.5, 0.8, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_body"]
+albedo_color = Color(0.4, 0.25, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lid"]
+size = Vector3(1.6, 0.3, 1.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lid"]
+albedo_color = Color(0.5, 0.3, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lock"]
+size = Vector3(0.2, 0.3, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lock"]
+albedo_color = Color(0.85, 0.7, 0.1, 1)
+metallic = 0.8
+roughness = 0.3
+
+[node name="TreasureChest" type="Node3D"]
+script = ExtResource("1_chest")
+TreasureItemScene = ExtResource("2_item")
+MinItems = 1
+MaxItems = 3
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_chest")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("BoxMesh_body")
+surface_material_override/0 = SubResource("StandardMaterial3D_body")
+
+[node name="Lid" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -0.4)
+mesh = SubResource("BoxMesh_lid")
+surface_material_override/0 = SubResource("StandardMaterial3D_lid")
+
+[node name="Lock" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.55)
+mesh = SubResource("BoxMesh_lock")
+surface_material_override/0 = SubResource("StandardMaterial3D_lock")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+billboard = 1
+text = "Treasure Chest"
+font_size = 64
+
+[node name="ItemSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

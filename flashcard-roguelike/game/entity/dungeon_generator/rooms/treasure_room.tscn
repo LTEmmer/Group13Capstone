@@ -1,5 +1,7 @@
 [gd_scene format=4 uid="uid://bggjji1cywnnh"]
 
+[ext_resource type="PackedScene" uid="uid://c3kbm7x2yvqpn" path="res://game/entity/treasure/treasure_chest.tscn" id="1_chest"]
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_5xbyn"]
 _surfaces = [{
 "aabb": AABB(-26, -0.1726656, -26, 52, 10, 52),
@@ -81,3 +83,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.549403, -1.7729723, -7.29
 
 [node name="3" type="Marker3D" parent="Exits" unique_id=150472824]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.57488, -1.7729723, -7.2970276)
+
+[node name="Treasure" type="Node3D" parent="."]
+
+[node name="TreasureChest1" parent="Treasure" instance=ExtResource("1_chest")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="TreasureChest2" parent="Treasure" instance=ExtResource("1_chest")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, -5)
+
+[node name="TreasureChest3" parent="Treasure" instance=ExtResource("1_chest")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -5)
