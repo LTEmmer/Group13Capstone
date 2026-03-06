@@ -318,8 +318,11 @@ public partial class BattleManager : Node
 			{
 				_uiCoordinator.SlideOutBattleUI(() =>
 				{
-					// Reset mouse mode
-					Input.MouseMode = Input.MouseModeEnum.Captured;
+					// Reset mouse mode only if we're still alive
+					if (!(victory == false && ran == false))
+					{
+						Input.MouseMode = Input.MouseModeEnum.Captured;
+					}
 
 					// Reset positions
 					if (ran)
