@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://08j36rswj4qd"]
 
-[ext_resource type="Script" uid="uid://cmi6vm0odpni" path="res://game/entity/dungeon_generator/DungeonGenerator.cs" id="1_fs5hr"]
+[ext_resource type="Script" uid="uid://c10vqqj6pm34j" path="res://game/entity/dungeon_generator/DungeonGenerator.cs" id="1_fs5hr"]
 [ext_resource type="PackedScene" uid="uid://bw5gdsxslid3h" path="res://game/entity/dungeon_generator/rooms/entrance_room.tscn" id="2_7n4qh"]
 [ext_resource type="PackedScene" uid="uid://ho30grmj7jcn" path="res://game/entity/dungeon_generator/rooms/exit_room.tscn" id="3_qh65i"]
 [ext_resource type="PackedScene" uid="uid://b2px6jxwb8r7o" path="res://game/entity/dungeon_generator/rooms/combat_room.tscn" id="4_qj5ly"]
-[ext_resource type="PackedScene" uid="uid://vd10ptbbqu0x" path="res://game/entity/dungeon_generator/rooms/event_room.tscn" id="5_a7trn"]
+[ext_resource type="PackedScene" uid="uid://vd10ptbbqu0x" path="res://game/entity/dungeon_generator/rooms/event_rooms/event_room.tscn" id="5_a7trn"]
 [ext_resource type="PackedScene" uid="uid://bggjji1cywnnh" path="res://game/entity/dungeon_generator/rooms/treasure_room.tscn" id="6_wm4nc"]
 [ext_resource type="PackedScene" uid="uid://273l427ermxg" path="res://game/entity/connections/room_connection.tscn" id="7_qh65i"]
 
