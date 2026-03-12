@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cm05m68d10agu"]
+
+[ext_resource type="Script" uid="uid://bmr8hh6yx1bj4" path="res://game/entity/npcs/BaseNPC.cs" id="1_4jotm"]
+
+[node name="BaseNPC" type="Node3D" unique_id=1000981014]
+script = ExtResource("1_4jotm")
