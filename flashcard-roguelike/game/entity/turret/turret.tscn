@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b7wy76j44w6iv"]
+
+[ext_resource type="Script" uid="uid://bgb7q0ooa51ev" path="res://game/entity/turret/Turret.cs" id="1_n4edd"]
+
+[node name="Turret" type="Node3D" unique_id=2031055064]
+script = ExtResource("1_n4edd")
+
+[node name="TurretBase" type="Node3D" parent="." unique_id=1686748680]
+
+[node name="TurretHead" type="Node3D" parent="TurretBase" unique_id=495763971]
+
+[node name="BarrelVisual" type="MeshInstance3D" parent="TurretBase/TurretHead" unique_id=477722597]
+
+[node name="BarrelTip" type="Marker3D" parent="TurretBase/TurretHead" unique_id=419912479]
+
+[node name="FiringFX" type="GPUParticles3D" parent="TurretBase/TurretHead" unique_id=1277481673]
+
+[node name="TurretView" type="Camera3D" parent="TurretBase/TurretHead" unique_id=1426981805]
+
+[node name="TurretCollision" type="StaticBody3D" parent="." unique_id=1271815986]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TurretCollision" unique_id=296909046]

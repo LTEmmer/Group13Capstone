@@ -20,6 +20,8 @@ public partial class ShootingEventRoom : Room, IEventRoom
         // For testing, just complete the event immediately with success.
         GD.Print("Shooting event triggered! Starting challenge...");
         CompleteEvent(true);
+
+        // Later move to turret to shoot
     }
 
     public void CompleteEvent(bool success)
