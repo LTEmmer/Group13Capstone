@@ -33,7 +33,7 @@ public partial class Jump : BaseState
 
 	public override void Update(InputPackage input, double delta)
 	{
-		RotationalVelocityCalculation(input, delta);
+		//RotationalVelocityCalculation(input, delta);
 		if (WorksLongerThan(JumpTiming))
 		{
 			if (_jumped == false)
@@ -48,25 +48,25 @@ public partial class Jump : BaseState
 		player.MoveAndSlide();
 	}
 
-	public void RotationalVelocityCalculation(InputPackage input, double delta)
-	{
-		Vector3 direction = (player.Transform.Basis * new Vector3(input.InputDirection.X, 0, input.InputDirection.Y)).Normalized();
-		Vector3 facingDirection = player.Basis.Z;
-		float angle = facingDirection.SignedAngleTo(direction,Vector3.Up);
-		if (Math.Abs(angle) >= AngularSpeed * (float)delta)
-		{
-			player.Velocity = player.Velocity.Rotated(Vector3.Up, Math.Sign(angle) * AngularSpeed * (float)delta);
-		}
-		else
-		{
-			player.Velocity = player.Velocity.Rotated(Vector3.Up, angle);
-		}
-		
-	}
+	//public void RotationalVelocityCalculation(InputPackage input, double delta) //Gives more aircontrol but going to refine later
+	//{
+		//Vector3 direction = (player.Transform.Basis * new Vector3(input.InputDirection.X, 0, input.InputDirection.Y)).Normalized();
+		//Vector3 facingDirection = player.Basis.Z;
+		//float angle = facingDirection.SignedAngleTo(direction,Vector3.Up);
+		//if (Math.Abs(angle) >= AngularSpeed * (float)delta)
+		//{
+			//player.Velocity = player.Velocity.Rotated(Vector3.Up, Math.Sign(angle) * AngularSpeed * (float)delta);
+		//}
+		//else
+		//{
+			//player.Velocity = player.Velocity.Rotated(Vector3.Up, angle);
+		//}
+		//
+	//}
 
 	public override void OnEnterState()
 	{
 		player.staminaComponent.CurrentStamina -= StaminaDrain; //Update player stamina
-		player.Velocity = player.Velocity.Normalized() * Speed;
+		//player.Velocity = player.Velocity.Normalized() * Speed;
 	}
 }

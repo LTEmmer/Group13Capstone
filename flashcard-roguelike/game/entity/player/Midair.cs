@@ -17,7 +17,8 @@ public partial class Midair : BaseState
 	public double DoubleJumpTiming = 0.2;
 	public Vector3 JumpDirection;
 	
-	private const float GRAVITY_GOING_DOWN = 29.4F;
+	private const float GRAVITY_GOING_DOWN = 30.0F;
+	
 	public override Array CheckRelevance(InputPackage input, double delta)
 	{
 		Vector3 floorPoint = DownCastRay.GetCollisionPoint();
@@ -43,25 +44,25 @@ public partial class Midair : BaseState
 
 	public override void Update(InputPackage input, double delta)
 	{
-		RotationalVelocityCalculation(input, delta);
+		//RotationalVelocityCalculation(input, delta);
 		Vector3 velocity = player.Velocity;
 		velocity.Y -= GRAVITY_GOING_DOWN * (float)delta;
 		player.Velocity = velocity;
 		player.MoveAndSlide();
 	}
 
-	public void RotationalVelocityCalculation(InputPackage input, double delta)
-	{
-		Vector3 direction = (player.Transform.Basis * new Vector3(input.InputDirection.X, 0, input.InputDirection.Y)).Normalized();
-		Vector3 InputDeltaVector = direction * DeltaVectorLength;
-		JumpDirection = (JumpDirection + InputDeltaVector).LimitLength(player.Velocity.Length());
-		Vector3 NewVelocity = (player.Velocity + InputDeltaVector).LimitLength(player.Velocity.Length());
-		player.Velocity = NewVelocity;
-	}
+	//public void RotationalVelocityCalculation(InputPackage input, double delta) //Gives more aircontrol but going to refine later
+	//{
+		//Vector3 direction = (player.Transform.Basis * new Vector3(input.InputDirection.X, 0, input.InputDirection.Y)).Normalized();
+		//Vector3 InputDeltaVector = direction * DeltaVectorLength;
+		//JumpDirection = (JumpDirection + InputDeltaVector).LimitLength(player.Velocity.Length());
+		//Vector3 NewVelocity = (player.Velocity + InputDeltaVector).LimitLength(player.Velocity.Length());
+		//player.Velocity = NewVelocity;
+	//}
 
 	public override void OnEnterState()
 	{
-		//JumpDirection = player.Basis.Z * Math.Clamp(player.Velocity.Length(), 1, 999999);
-		//JumpDirection.Y = 0;
+		JumpDirection = player.Basis.Z * Math.Clamp(player.Velocity.Length(), 1, 999999);
+		JumpDirection.Y = 0;
 	}
 }
