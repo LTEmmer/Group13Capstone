@@ -33,7 +33,7 @@ public partial class RoomConnection : Node3D
 		_area = GetNode<Area3D>("Area3D");
 		_area.BodyEntered += OnBodyEntered;
 		_area.BodyExited += OnBodyExited;
-		EventManager.Instance.listen("on_battle_victory", new Callable(this, MethodName.on_battle_victory));
+		EventManager.Instance.listen("on_room_clear", new Callable(this, MethodName.on_room_clear));
 	}
 
 	public override void _Input(InputEvent @event)
@@ -118,7 +118,7 @@ public partial class RoomConnection : Node3D
 		}
 	}
 	
-	private void on_battle_victory(string test){
+	private void on_room_clear(string test){
 		if(PlayerInRoom == true){
 			this.Visible = true;
 			this.connection_enabled = true;
