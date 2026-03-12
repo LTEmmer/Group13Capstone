@@ -5,7 +5,7 @@ using System.Linq;
 
 public partial class DungeonGenerator : Node3D
 {
-	[Export] public int MaxRoomCount = 8;
+	[Export] public int MaxRoomCount = 5;
 	[Export] public int MaxConnections = 4;
 	[Export] public int MinCombatRooms = 1;
 	[Export] public int MinEventRooms = 1;
