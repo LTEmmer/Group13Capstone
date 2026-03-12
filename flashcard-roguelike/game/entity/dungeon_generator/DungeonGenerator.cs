@@ -204,9 +204,10 @@ public partial class DungeonGenerator : Node3D
 				connInstance.SetLabel(false, outgoing, graph.GetRoom(outgoing).RoomType.ToString());
 				// Add the connection to this room's exits
 				exits.GetChildOrNull<Marker3D>(exitIndex++)?.AddChild(connInstance);
-				if(room.RoomType == RoomTypes.Combat) 
+
+				// Gate combat and event rooms until cleared
+				if(room.RoomType == RoomTypes.Combat || room.RoomType == RoomTypes.Event) 
 				{ 
-					// Combat rooms are the only "gated" rooms for now 
 					connInstance.connection_enabled = false;
 					connInstance.Visible = false; //Setting to true for testing purposes
 				}
