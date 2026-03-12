@@ -1,16 +1,31 @@
 using Godot;
 using System;
-
+using Array = Godot.Collections.Array;
 [Tool]
 public partial class Landing : BaseState
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	private const float TRANSITION_TIME = 0.2F;
+	private const float GRAVITY_GOING_DOWN = 29.4F;
+	public override Array CheckRelevance(InputPackage input, double delta)
 	{
+		if (WorksLongerThan(TRANSITION_TIME))
+		{
+			return BestNextInput(input);
+		}
+		else
+		{
+			return [false];
+		}
+
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void Update(InputPackage input, double delta)
 	{
+		Vector3 UpdatedVelocity = player.Velocity;
+		UpdatedVelocity.Y -= GRAVITY_GOING_DOWN * (float)delta;
+		UpdatedVelocity.Z = 0.0F;
+		UpdatedVelocity.X = 0.0F;
+		player.Velocity = UpdatedVelocity;
+		player.MoveAndSlide();
 	}
 }

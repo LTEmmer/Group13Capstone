@@ -12,9 +12,10 @@ public partial class Jump : BaseState
 	[Export]
 	public float AngularSpeed = 7.0F;
 	[Export]
-	public double TransitionTiming = 0.8;
+	public double TransitionTiming = 0.5;
 	[Export]
-	public double JumpTiming = 0.1;
+	public double JumpTiming = 0.2;
+	
 	private bool _jumped = false;
 
 	public override Array CheckRelevance(InputPackage input, double delta)
@@ -35,7 +36,7 @@ public partial class Jump : BaseState
 		RotationalVelocityCalculation(input, delta);
 		if (WorksLongerThan(JumpTiming))
 		{
-			if (!_jumped)
+			if (_jumped == false)
 			{
 				Vector3 velocity = player.Velocity;
 				velocity.Y += VerticalSpeedAdded;
@@ -52,21 +53,20 @@ public partial class Jump : BaseState
 		Vector3 direction = (player.Transform.Basis * new Vector3(input.InputDirection.X, 0, input.InputDirection.Y)).Normalized();
 		Vector3 facingDirection = player.Basis.Z;
 		float angle = facingDirection.SignedAngleTo(direction,Vector3.Up);
-		if (Math.Abs(angle) >= AngularSpeed * delta)
+		if (Math.Abs(angle) >= AngularSpeed * (float)delta)
 		{
 			player.Velocity = player.Velocity.Rotated(Vector3.Up, Math.Sign(angle) * AngularSpeed * (float)delta);
-			facingDirection = facingDirection.Rotated(Vector3.Up, Math.Sign(angle)* AngularSpeed * (float)delta);
 		}
 		else
 		{
 			player.Velocity = player.Velocity.Rotated(Vector3.Up, angle);
-			facingDirection = facingDirection.Rotated(Vector3.Up, angle);
 		}
-		player.LookAt(player.GlobalPosition - facingDirection);
+		
 	}
 
 	public override void OnEnterState()
 	{
+		player.staminaComponent.CurrentStamina -= StaminaDrain; //Update player stamina
 		player.Velocity = player.Velocity.Normalized() * Speed;
 	}
 }

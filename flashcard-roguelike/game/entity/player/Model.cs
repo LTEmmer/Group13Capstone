@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class Model : Node3D
 {
 	[Export]
-	public CharacterBody3D player;
+	public Player player;
 	[Export]
 	public AnimationPlayer animator;
 	[Export]

@@ -11,12 +11,13 @@ public partial class BaseState : Node
 	public String StateName;
 	[Export]
 	public AnimationPlayer animator;
+	[Export]
+	public double StaminaDrain = 0.0;
 	
-	public CharacterBody3D player;
+	public Player player;
 	public Dictionary<string,BaseState> States = new Dictionary<string,BaseState>();
 
 	protected double _enterStateTime; 
-	
 	static protected Dictionary<string,int> StatesPriority  = new Dictionary<string,int>{
 		{StateNames.idle , 1},
 		{StateNames.run , 2},
@@ -76,6 +77,14 @@ public partial class BaseState : Node
 		return [false,"ERROR: StatesContainer does not contain idle"];
 	}
 	
+	public bool InputCanBePaid(String inputName){
+		if(States[inputName].StaminaDrain <= player.staminaComponent.CurrentStamina){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	public virtual void OnEnterState(){
 		return;
 	}
@@ -95,8 +104,15 @@ public partial class BaseState : Node
 		return now - _enterStateTime;
 	}
 	
-	public bool WorksLongerThan(double TimeStamp){
+	public bool WorksLessThan(double TimeStamp){
 		if(GetProgress() < TimeStamp){
+			return true;
+		}
+		return false;
+	}
+	
+	public bool WorksLongerThan(double TimeStamp){
+		if(GetProgress() >= TimeStamp){
 			return true;
 		}
 		return false;

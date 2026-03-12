@@ -8,7 +8,9 @@ public partial class Player : CharacterBody3D
 
 	[Export]
 	public InventoryUI InventoryUI;
-	
+
+	[Export] 
+	public Node3D CameraMount;
 	[Export]
 	// _speed of camera
 	public float MouseSensitivity { get; set; } = 0.002f;
@@ -31,6 +33,8 @@ public partial class Player : CharacterBody3D
 	public HealthComponent healthComponent;
 	[Export]
 	public InventoryComponent inventoryComponent;
+	[Export]
+	public StaminaComponent staminaComponent;
 	
 	private Node3D _cameraPivot;
 	private float _pitch;
