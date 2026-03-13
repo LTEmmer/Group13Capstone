@@ -97,10 +97,13 @@ public partial class Player : CharacterBody3D
 public override void _PhysicsProcess(double delta)
 	{
 		//Get input 
-		InputPackage input = inputGatherer.GatherInput();
-		playerModel.Update(input,delta);
-		input.QueueFree();
-		
+		if (_acceptKeyboardInput){
+			InputPackage input = inputGatherer.GatherInput();
+			playerModel.Update(input,delta);
+			input.QueueFree();
+		}else{
+			playerModel.SwitchTo(StateNames.idle);
+		}
 		//Old Code
 		//if (_acceptKeyboardInput)
 		//{
