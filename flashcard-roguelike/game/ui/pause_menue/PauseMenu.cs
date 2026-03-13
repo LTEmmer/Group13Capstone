@@ -9,9 +9,6 @@ public partial class PauseMenu : CanvasLayer
 
 	[Export] PackedScene MainMenu;
 	private Control _buttonPanelContainer;
-	private Control _viewFlashcardsPanelContainer;
-	private VBoxContainer _flashcardListContainer;
-	
 	private Stack<Control> _panelStack = new Stack<Control>();
 
 	/*
@@ -55,8 +52,6 @@ public partial class PauseMenu : CanvasLayer
 	public override void _Ready()
 	{
 		_buttonPanelContainer = GetNode<Control>("ButtonPanelContainer");
-		_viewFlashcardsPanelContainer = GetNode<Control>("ViewFlashcardsPanelContainer");
-		_flashcardListContainer = GetNode<VBoxContainer>("ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/FlashcardListContainer");
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -93,76 +88,6 @@ public partial class PauseMenu : CanvasLayer
 
 	public void _on_view_flashcards_pressed()
 	{
-		PopulateFlashcardList();
-		PushPanel(_viewFlashcardsPanelContainer);
-	}
-
-	public void _on_flashcards_back_pressed()
-	{
-		PopPanel();
-	}
-
-	private void PopulateFlashcardList()
-	{
-		foreach (Node child in _flashcardListContainer.GetChildren())
-		{
-			_flashcardListContainer.RemoveChild(child);
-			child.QueueFree();
-		}
-
-		if (FlashcardManager.Instance == null || FlashcardManager.Instance.ActiveFlashCardLists == null || FlashcardManager.Instance.ActiveFlashCardLists.Count == 0)
-		{
-			var emptyLabel = new Label();
-			emptyLabel.Text = "No imported flashcards";
-			_flashcardListContainer.AddChild(emptyLabel);
-			return;
-		}
-
-		foreach (FlashcardSet set in FlashcardManager.Instance.ActiveFlashCardLists)
-		{
-			// Create a horizontal container for the set name and delete button
-			var setHeaderContainer = new HBoxContainer();
-			_flashcardListContainer.AddChild(setHeaderContainer);
-
-			var setNameLabel = new Label();
-			setNameLabel.Text = set.DisplayName ?? "(Unnamed set)";
-			setNameLabel.AddThemeFontSizeOverride("font_size", 18);
-			setNameLabel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-			setHeaderContainer.AddChild(setNameLabel);
-
-			// Add delete button next to the set name
-			var deleteButton = new Button();
-			deleteButton.Text = "Delete";
-			deleteButton.CustomMinimumSize = new Vector2(60, 0);
-			string setName = set.DisplayName; // Capture for lambda
-			deleteButton.Pressed += () => OnDeleteSetPressed(setName);
-			setHeaderContainer.AddChild(deleteButton);
-
-			if (set.Cards == null)
-				continue;
-
-			foreach (Flashcard card in set.Cards)
-			{
-				var cardLabel = new Label();
-				cardLabel.Text = (string.IsNullOrEmpty(card.Question) ? "(no question)" : card.Question) + "  →  " + (string.IsNullOrEmpty(card.Answer) ? "(no answer)" : card.Answer);
-				cardLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
-				cardLabel.CustomMinimumSize = new Vector2(340, 0);
-				_flashcardListContainer.AddChild(cardLabel);
-			}
-
-			var spacer = new Control();
-			spacer.CustomMinimumSize = new Vector2(0, 12);
-			_flashcardListContainer.AddChild(spacer);
-		}
-	}
-
-	private void OnDeleteSetPressed(string setDisplayName)
-	{
-		if (FlashcardManager.Instance.DeleteSet(setDisplayName))
-		{
-			// Refresh the list to reflect the deletion
-			PopulateFlashcardList();
-		}
 	}
 
 	public void _on_options_pressed()

@@ -1,18 +1,14 @@
 using Godot;
 using System;
-using System.Collections;
 
 /// <summary>
-/// Game over screen displayed when the player dies.
-/// Allows the player to restart or return to the main menu.
+/// Victory screen displayed when the player completes the dungeon.
+/// Allows the player to start a new run or return to the main menu.
 /// </summary>
-public partial class GameOverMenu : CanvasLayer
+public partial class VictoryMenu : CanvasLayer
 {
 	[Export]
 	public PackedScene MainMenuScene { get; set; }
-	
-	[Export]
-	public PackedScene GameScene { get; set; }
 	
 	private Control _panel;
 	private Label _titleLabel;
@@ -24,17 +20,25 @@ public partial class GameOverMenu : CanvasLayer
 		_titleLabel = GetNodeOrNull<Label>("Panel/VBoxContainer/TitleLabel");
 		_messageLabel = GetNodeOrNull<Label>("Panel/VBoxContainer/MessageLabel");
 		
-		// Start hidden
-		Visible = false;
-		
-		// Ensure mouse is visible when game over shows
+		// Ensure mouse is visible when victory shows
 		ProcessMode = ProcessModeEnum.Always;
+		
+		// If running this scene directly (for preview), show immediately
+		if (GetTree().CurrentScene == this)
+		{
+			ShowVictory();
+		}
+		else
+		{
+			// Start hidden when loaded as part of another scene
+			Visible = false;
+		}
 	}
 	
 	/// <summary>
-	/// Shows the game over screen with an optional custom message.
+	/// Shows the victory screen with an optional custom message.
 	/// </summary>
-	public void ShowGameOver(string message = "You have fallen in the dungeon...")
+	public void ShowVictory(string message = "Congratulations! You conquered the dungeon!")
 	{
 		if (_messageLabel != null)
 		{
@@ -46,11 +50,10 @@ public partial class GameOverMenu : CanvasLayer
 		GetTree().Paused = true;
 	}
 	
-	public void _on_restart_pressed()
+	public void _on_new_run_pressed()
 	{
-		GD.Print("Restarting game...");
+		GD.Print("Starting new run...");
 		GetTree().Paused = false;
-		Visible = false;
 		GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
 	}
 	
@@ -58,7 +61,6 @@ public partial class GameOverMenu : CanvasLayer
 	{
 		GD.Print("Returning to main menu...");
 		GetTree().Paused = false;
-		Visible = false;
 		
 		if (MainMenuScene != null)
 		{
