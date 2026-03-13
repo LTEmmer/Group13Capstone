@@ -6,31 +6,32 @@ using System.Linq;
 public partial class DungeonGenerator : Node3D
 {
 	[Export] public int MaxRoomCount = 8;
-	[Export] public int MaxConnections = 4;
 	[Export] public int MinCombatRooms = 1;
 	[Export] public int MinEventRooms = 1;
 	[Export] public int MinTreasureRooms = 1;
 	[Export] public bool UseRandomSeed = true;
 	[Export] public int Seed = 1234;
-	[Export] public PackedScene EntranceRoomScene;
-	[Export] public PackedScene ExitRoomScene;
-	[Export] public PackedScene[] CombatRoomScenes;
-	[Export] public PackedScene[] EventRoomScenes;
-	[Export] public PackedScene[] TreasureRoomScenes;
+	[Export] public RoomConfig EntranceConfig;
+	[Export] public RoomConfig ExitConfig;
+	[Export] public RoomConfig[] CombatConfigs;
+	[Export] public RoomConfig[] EventConfigs;
+	[Export] public RoomConfig[] TreasureConfigs;
 	[Export] public PackedScene ConnectionScene;
 
 	private readonly RandomNumberGenerator _rng = new RandomNumberGenerator();
 
-    // Move stuff from Ready to a separate GenerateDungeon method that can be called 
-    // whenever we want to generate a new dungeon, such as when the player enters a new floor or restarts after death.
-    // Everytime we generate the graph, each room should be assigned a difficulty rating from the 
-    // difficulty singleton. This determins the amount of enemies in combat rooms, the quality of loot in treasure rooms, 
-    // and the difficulty of flashcard challenges in event rooms. Difficulty can be assigned in the 
-    // spawn rooms method, and can be stored in the DungeonRoom class as a property. 
-    // This way, the difficulty of each room can be easily accessed when spawning the room and its contents, 
-    // and can also be used by the UI to display the difficulty of each room to the player.
     public override void _Ready()
     {
+		// Initialize random number generator with seed
+		if (UseRandomSeed)
+		{
+			_rng.Randomize();
+		}
+		else
+		{
+			_rng.Seed = (ulong)Seed;
+		}
+
         DungeonGraph graph = GenerateGraph(); // Generate the dungeon graph structure
 		graph.PrintGraph();
 		Dictionary<int, Vector3> positions = GenerateLayout(graph); // Generate world positions for rooms
@@ -43,16 +44,6 @@ public partial class DungeonGenerator : Node3D
 
 	public DungeonGraph GenerateGraph()
 	{
-		// Initialize random number generator with seed
-		if (UseRandomSeed)
-		{
-			_rng.Randomize();
-		}
-		else
-		{
-			_rng.Seed = (ulong)Seed;
-		}
-
 		// Ensure that MaxRoomCount is sufficient to accommodate the minimum required rooms
 		int minRoomCount = MinCombatRooms + MinEventRooms + MinTreasureRooms + 2; // +2 for entrance and exit
 		if (MaxRoomCount < minRoomCount)
@@ -62,53 +53,85 @@ public partial class DungeonGenerator : Node3D
 		}
 		int roomCount = _rng.RandiRange(minRoomCount, MaxRoomCount);
 
-		// Create the dungeon graph with the specified number of rooms and minimum room type requirements
-		DungeonGraph graph = new DungeonGraph(roomCount, MinCombatRooms, MinEventRooms, MinTreasureRooms);
-		HashSet<int> connected = new HashSet<int> { 0 }; // Start with entrance
-		List<int> toConnect = new List<int>();
+		// Build ordered config list: entrance first, middle shuffled, exit last
+		List<RoomConfig> configs = new List<RoomConfig>();
+		configs.Add(EntranceConfig); // Added first to ensure its at the start
 
-		// Initially, all rooms except the entrance are in the toConnect list
-		for (int i = 1; i < roomCount; i++)
+		for (int i = 0; i < MinCombatRooms; i++) // Add minimum required combat rooms
 		{
-			toConnect.Add(i);
+			configs.Add(CombatConfigs[_rng.RandiRange(0, CombatConfigs.Length - 1)]);
+		}
+			
+		for (int i = 0; i < MinEventRooms; i++) // Add minimum required event rooms
+		{
+			configs.Add(EventConfigs[_rng.RandiRange(0, EventConfigs.Length - 1)]);
+		}
+			
+		for (int i = 0; i < MinTreasureRooms; i++) // Add minimum required treasure rooms
+		{
+			configs.Add(TreasureConfigs[_rng.RandiRange(0, TreasureConfigs.Length - 1)]);
+		}
+			
+		// Create a pool for extra rooms to use
+		RoomConfig[][] pools = { CombatConfigs, EventConfigs, TreasureConfigs };
+		int remaining = roomCount - 2 - (MinCombatRooms + MinEventRooms + MinTreasureRooms);
+
+		for (int i = 0; i < remaining; i++)
+		{
+			RoomConfig[] pool = pools[_rng.RandiRange(0, pools.Length - 1)];
+			RoomConfig config = pool[_rng.RandiRange(0, pool.Length - 1)];
+			GD.Print($"Adding extra room of type {config.RoomType} to meet MaxRoomCount.");
+			configs.Add(config);
 		}
 
-		// Connect every room to at least one other room, ensuring connectivity from the entrance
-		while (toConnect.Count > 0)
+		// Shuffle middle room configs (index 1 to end, entrance stays at 0)
+		for (int i = configs.Count - 1; i > 1; i--)
 		{
-			// Randomly select a from room from the connected set and a to room from the toConnect list
-			int from = connected.Count <= 0 ? 0 : connected.ElementAt(_rng.RandiRange(0, connected.Count - 1));
-			int destIndex = _rng.RandiRange(0, toConnect.Count - 1);
-			int to = toConnect[destIndex];
-
-			// Try to connect the rooms, and if successful move the room from toConnect to connected
-			if (graph.TryConnect(from, to, MaxConnections))
-			{
-				connected.Add(to);
-				toConnect.RemoveAt(destIndex);
-			}
+			int j = _rng.RandiRange(1, i);
+			(configs[i], configs[j]) = (configs[j], configs[i]);
 		}
 
-		/* Keep commented out for now to more easily see the graph
-		// Add some extra random connections for more interconnectivity and non-linearity
-		int targetExtraEdges = roomCount / 3; 
-		int attempts = roomCount * roomCount / 2; 
+		configs.Add(ExitConfig); // Added last to ensure it's at the end
+		DungeonGraph graph = new DungeonGraph(configs);
+
+		// Build a shuffled chain: entrance -> [random middle rooms] -> exit.
+		// Connecting in order guarantees every room is reachable with no retries or deadlocks.
+		int exitId = configs.Count - 1;
+		List<int> order = [0]; // entrance first
+		for (int i = 1; i < exitId; i++)
+			order.Add(i);
+		order.Add(exitId); // exit last
+
+		// Shuffle only the middle rooms (keep entrance at [0] and exit at [end])
+		for (int i = order.Count - 2; i > 1; i--)
+		{
+			int j = _rng.RandiRange(1, i);
+			(order[i], order[j]) = (order[j], order[i]);
+		}
+
+		// Connect each room to the next in the chain
+		for (int i = 0; i < order.Count - 1; i++)
+			graph.TryConnect(order[i], order[i + 1]);
+
+		// Add extra random connections for branching. TryConnect silently rejects invalid ones
+		// (duplicate, over MaxConnections, type violations), so no deadlock risk here.
+		int targetExtraEdges = configs.Count / 3;
+		GD.Print("Adding up to " + targetExtraEdges + " extra random connections for branching.");
+
+		// We allow more attempts than target edges because many attempts will be rejected, 
+		// especially as rooms fill up their connection limits.
+		int attempts = configs.Count * configs.Count / 2;
+
 		int added = 0;
-
-		// Randomly connect rooms until we reach the target number of extra edges or exhaust attempts to prevent infinite loops
 		while (added < targetExtraEdges && attempts-- > 0)
 		{
-			int from = _rng.RandiRange(0, roomCount - 1);
-			int to = _rng.RandiRange(0, roomCount - 1);
-
-			if (graph.TryConnect(from, to, MaxConnections))
-			{
+			int from = _rng.RandiRange(1, exitId - 1);
+			int to = _rng.RandiRange(1, exitId - 1);
+			if (graph.TryConnect(from, to))
 				added++;
-			}
 		}
-		*/
 
-		// Check if all rooms are reachable from the entrance and print a warning if not. 
+		// Check if all rooms are reachable from the entrance and print a warning if not.
 		if (!graph.AreAllRoomsReachable())
 		{
 			GD.PushWarning("Not all rooms are reachable in the generated dungeon graph.");
@@ -163,7 +186,7 @@ public partial class DungeonGenerator : Node3D
 		foreach (DungeonRoom room in graph.Rooms)
 		{	
 			// Create a new room node and set its postition
-			Node3D roomNode = CreateRoomNode(room.Id, room.RoomType);
+			Node3D roomNode = CreateRoomNode(room.Id, room.Config);
 			roomNode.Position = positions[room.Id];
 			
 			// Get the entrances and exits nodes and check for null
@@ -247,69 +270,19 @@ public partial class DungeonGenerator : Node3D
 		}
 	}
 
-	private Node3D CreateRoomNode(int roomId, RoomTypes type)
-	{	
-		// Instantiate rooms based off the room type using switch statement
-		Node3D instance = null;
-		Node3D roomNode;
-
-		switch (type)
+	private Node3D CreateRoomNode(int roomId, RoomConfig config)
+	{
+		if (config?.Scene == null)
 		{
-			case RoomTypes.Entrance:
-				if (EntranceRoomScene != null)
-				{
-					instance = EntranceRoomScene.Instantiate() as Node3D;
-				}
-				break;
-
-			case RoomTypes.Exit:
-				if (ExitRoomScene != null)
-				{
-					instance = ExitRoomScene.Instantiate() as Node3D;
-				}
-				break;
-
-			case RoomTypes.Combat:
-				if (CombatRoomScenes != null && CombatRoomScenes.Length > 0)
-				{
-					PackedScene scene = CombatRoomScenes[_rng.RandiRange(0, CombatRoomScenes.Length - 1)];
-					instance = scene.Instantiate() as Node3D;
-				}
-				break;
-
-			case RoomTypes.Event:
-				if (EventRoomScenes != null && EventRoomScenes.Length > 0)
-				{
-					PackedScene scene = EventRoomScenes[_rng.RandiRange(0, EventRoomScenes.Length - 1)];
-					instance = scene.Instantiate() as Node3D;
-				}
-				break;
-
-			case RoomTypes.Treasure:
-				if (TreasureRoomScenes != null && TreasureRoomScenes.Length > 0)
-				{
-					PackedScene scene = TreasureRoomScenes[_rng.RandiRange(0, TreasureRoomScenes.Length - 1)];
-					instance = scene.Instantiate() as Node3D;
-				}
-				break;
-		}	
-
-		// Assign the instance and metadata, if null print a warning and free the instance to prevent memory leaks
-		roomNode = instance;
-
-		if (roomNode != null)
-		{
-			roomNode.Name = $"Room_{roomId}";
-			roomNode.SetMeta("RoomId", roomId);
-			roomNode.SetMeta("RoomType", type.ToString());
-		}
-		else
-		{
-			instance.QueueFree();
-			GD.PushWarning($"No scene found for room type {type}. Room {roomId} will not be instantiated.");
+			GD.PushWarning($"RoomConfig for room {roomId} has no Scene assigned.");
+			return null;
 		}
 
-		return roomNode;
+		Node3D instance = config.Scene.Instantiate<Node3D>();
+		instance.Name = $"Room_{roomId}";
+		instance.SetMeta("RoomId", roomId);
+		instance.SetMeta("RoomType", config.RoomType.ToString());
+		return instance;
 	}
 	
 	private Node3D GetOrCreateRoot(string name)

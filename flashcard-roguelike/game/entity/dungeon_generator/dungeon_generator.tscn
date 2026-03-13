@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://08j36rswj4qd"]
 
 [ext_resource type="Script" uid="uid://c10vqqj6pm34j" path="res://game/entity/dungeon_generator/DungeonGenerator.cs" id="1_fs5hr"]
-[ext_resource type="PackedScene" uid="uid://bw5gdsxslid3h" path="res://game/entity/dungeon_generator/rooms/entrance_room.tscn" id="2_7n4qh"]
-[ext_resource type="PackedScene" uid="uid://ho30grmj7jcn" path="res://game/entity/dungeon_generator/rooms/exit_room.tscn" id="3_qh65i"]
-[ext_resource type="PackedScene" uid="uid://b2px6jxwb8r7o" path="res://game/entity/dungeon_generator/rooms/combat_room.tscn" id="4_qj5ly"]
-[ext_resource type="PackedScene" uid="uid://vd10ptbbqu0x" path="res://game/entity/dungeon_generator/rooms/event_rooms/event_room.tscn" id="5_a7trn"]
-[ext_resource type="PackedScene" uid="uid://bggjji1cywnnh" path="res://game/entity/dungeon_generator/rooms/treasure_room.tscn" id="6_wm4nc"]
+[ext_resource type="Resource" uid="uid://b7iskl1jhu6x" path="res://game/entity/dungeon_generator/room_configs/examples/example_entrance_config.tres" id="2_qj5ly"]
+[ext_resource type="Resource" uid="uid://rv51y1ntj6fs" path="res://game/entity/dungeon_generator/room_configs/examples/example_exit_config.tres" id="3_a7trn"]
+[ext_resource type="Resource" uid="uid://f2mdjwt1wmg0" path="res://game/entity/dungeon_generator/room_configs/examples/example_combat_config.tres" id="4_wm4nc"]
+[ext_resource type="Resource" uid="uid://qbni4gx8gmkh" path="res://game/entity/dungeon_generator/room_configs/event_rooms/panel_shoot_event_config.tres" id="6_6rcja"]
 [ext_resource type="PackedScene" uid="uid://273l427ermxg" path="res://game/entity/connections/room_connection.tscn" id="7_qh65i"]
+[ext_resource type="Resource" uid="uid://vinykelr35nl" path="res://game/entity/dungeon_generator/room_configs/examples/treasure_config.tres" id="7_wt1qt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fs5hr"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -23,11 +23,11 @@ glow_enabled = true
 
 [node name="Dungeon" type="Node3D" unique_id=1224795912]
 script = ExtResource("1_fs5hr")
-EntranceRoomScene = ExtResource("2_7n4qh")
-ExitRoomScene = ExtResource("3_qh65i")
-CombatRoomScenes = Array[PackedScene]([ExtResource("4_qj5ly")])
-EventRoomScenes = Array[PackedScene]([ExtResource("5_a7trn")])
-TreasureRoomScenes = Array[PackedScene]([ExtResource("6_wm4nc")])
+EntranceConfig = ExtResource("2_qj5ly")
+ExitConfig = ExtResource("3_a7trn")
+CombatConfigs = Array[Object]([ExtResource("4_wm4nc")])
+EventConfigs = Array[Object]([ExtResource("6_6rcja")])
+TreasureConfigs = Array[Object]([ExtResource("7_wt1qt")])
 ConnectionScene = ExtResource("7_qh65i")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1921656492]
