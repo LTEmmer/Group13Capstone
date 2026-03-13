@@ -65,7 +65,8 @@ public class CombatResolver
             {
                 // Set state to wait for flashcard answer and show challenge with default difficulty (0 = text)
                 _state.WaitingForFlashcard = true;
-                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to defend!", 0);
+                // Use the current game difficulty so defense challenges scale like attacks
+                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to defend!", GameDifficultyManager.Instance.getCurrentDifficultyScore());
             }
             else
             {

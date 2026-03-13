@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 
 /// <summary>
 /// Game over screen displayed when the player dies.
@@ -49,6 +50,7 @@ public partial class GameOverMenu : CanvasLayer
 	{
 		GD.Print("Restarting game...");
 		GetTree().Paused = false;
+		Visible = false;
 		GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
 	}
 	
@@ -56,6 +58,7 @@ public partial class GameOverMenu : CanvasLayer
 	{
 		GD.Print("Returning to main menu...");
 		GetTree().Paused = false;
+		Visible = false;
 		
 		if (MainMenuScene != null)
 		{

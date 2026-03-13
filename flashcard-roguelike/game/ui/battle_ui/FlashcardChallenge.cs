@@ -133,7 +133,6 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 			_answerInput.Modulate = Colors.White;
 			HideChallenge(() => 
 			{
-				EmitSignal(SignalName.OnAnswerSubmitted, isCorrect);
 				_onAnswerSubmittedCallback?.Invoke(isCorrect);
 			});
 		};

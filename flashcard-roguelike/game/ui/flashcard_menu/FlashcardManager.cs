@@ -19,9 +19,10 @@ public partial class FlashcardManager : Node
 		should be saved successfully to available sets and to: user://flashcards/ 
 		The example CSV files are located in example_csv. 
 		REMOVE when actual implementation for adding from menu is ready. */
-		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/LabeledHeaders_Valid.csv"), "LabeledTest");
-		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/UnlabeledHeaders_Valid.csv"), "UnlabeledTest");
-		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/TooManyColumns_Invalid.csv"), "FailureTest");
+		//ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/LabeledHeaders_Valid.csv"), "LabeledTest");
+		//ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/UnlabeledHeaders_Valid.csv"), "UnlabeledTest");
+		//ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/TooManyColumns_Invalid.csv"), "FailureTest");
+		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/SampleCards.csv"));
 	}
 
 	// Singleton method to handle importing and saving flashcards from CSV files and add them to the available sets

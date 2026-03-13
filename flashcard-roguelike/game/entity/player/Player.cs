@@ -8,7 +8,9 @@ public partial class Player : CharacterBody3D
 
 	[Export]
 	public InventoryUI InventoryUI;
-	
+
+	[Export] 
+	public Node3D CameraMount;
 	[Export]
 	// _speed of camera
 	public float MouseSensitivity { get; set; } = 0.002f;
@@ -16,6 +18,23 @@ public partial class Player : CharacterBody3D
 	[Export]
 	// High/Low angle player can look (currently almost straight up/down)
 	public float MaxPitchDegrees { get; set; } = 89f;
+	
+	//Input and PlayerModel
+	[Export]
+	public InputGatherer inputGatherer;
+	[Export]
+	public Model playerModel;
+	
+	
+	// player components
+	[Export]
+	public AttackComponent attackComponent;
+	[Export]
+	public HealthComponent healthComponent;
+	[Export]
+	public InventoryComponent inventoryComponent;
+	[Export]
+	public StaminaComponent staminaComponent;
 	
 	private Node3D _cameraPivot;
 	private float _pitch;
@@ -77,23 +96,29 @@ public partial class Player : CharacterBody3D
 
 public override void _PhysicsProcess(double delta)
 	{
-		if (_acceptKeyboardInput)
-		{
-			Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
-			Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-			if (direction != Vector3.Zero)
-			{
-				Velocity = new Vector3(direction.X * _speed, Velocity.Y, direction.Z * _speed);
-				if (Input.IsActionPressed("sprint")){
-					Velocity = Velocity * _sprintSpeed;
-				}
-			}
-			else
-			{
-				Velocity = new Vector3(Mathf.MoveToward(Velocity.X, 0, _speed), Velocity.Y, Mathf.MoveToward(Velocity.Z, 0, _speed));
-			}
-		}
-
-		MoveAndSlide();
+		//Get input 
+		InputPackage input = inputGatherer.GatherInput();
+		playerModel.Update(input,delta);
+		input.QueueFree();
+		
+		//Old Code
+		//if (_acceptKeyboardInput)
+		//{
+			//Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
+			//Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+			//if (direction != Vector3.Zero)
+			//{
+				//Velocity = new Vector3(direction.X * _speed, Velocity.Y, direction.Z * _speed);
+				//if (Input.IsActionPressed("sprint")){
+					//Velocity = Velocity * _sprintSpeed;
+				//}
+			//}
+			//else
+			//{
+				//Velocity = new Vector3(Mathf.MoveToward(Velocity.X, 0, _speed), Velocity.Y, Mathf.MoveToward(Velocity.Z, 0, _speed));
+			//}
+		//}
+//
+		//MoveAndSlide();
 	}
 }
