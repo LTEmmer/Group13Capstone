@@ -1,37 +1,45 @@
+
 using Godot;
 using System;
 
 public partial class MainMenu : Control
 {
-	private LineEdit _setNameInput;
 	private Control _mainMenuContainer;
+	private Control _uploadPanelContainer;
 	private Control _viewFlashcardsPanelContainer;
+
 	private VBoxContainer _flashcardListContainer;
 
 	public override void _Ready()
 	{
 		_mainMenuContainer = GetNodeOrNull<Control>("CenterContainer");
+		_uploadPanelContainer = GetNodeOrNull<Control>("UploadPanelContainer");
+		_viewFlashcardsPanelContainer = GetNodeOrNull<Control>("ViewFlashcardsPanelContainer");
 
-		var playButton   = GetNodeOrNull<Button>("CenterContainer/VBoxContainer/PlayButton");
-		var quitButton   = GetNodeOrNull<Button>("CenterContainer/VBoxContainer/QuitButton");
+		_flashcardListContainer = GetNodeOrNull<VBoxContainer>(
+			"ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/FlashcardListContainer"
+		);
+
+		var playButton = GetNodeOrNull<Button>("CenterContainer/VBoxContainer/PlayButton");
+		var quitButton = GetNodeOrNull<Button>("CenterContainer/VBoxContainer/QuitButton");
 		var uploadButton = GetNodeOrNull<Button>("CenterContainer/VBoxContainer/CardUpload");
 		var viewFlashcardsButton = GetNodeOrNull<Button>("CenterContainer/VBoxContainer/ViewImportedFlashcards");
 
-		_viewFlashcardsPanelContainer = GetNodeOrNull<Control>("ViewFlashcardsPanelContainer");
-		_flashcardListContainer = GetNodeOrNull<VBoxContainer>("ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/FlashcardListContainer");
+		var flashcardsBackButton = GetNodeOrNull<Button>(
+			"ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/Back"
+		);
 
-		_setNameInput = GetNodeOrNull<LineEdit>("CenterContainer/VBoxContainer/SetNameInput");
-
-		if (playButton != null)           playButton.Pressed += OnPlayPressed;
-		if (quitButton != null)           quitButton.Pressed += OnQuitPressed;
-		if (uploadButton != null)         uploadButton.Pressed += OnUploadPressed;
+		if (playButton != null) playButton.Pressed += OnPlayPressed;
+		if (quitButton != null) quitButton.Pressed += OnQuitPressed;
+		if (uploadButton != null) uploadButton.Pressed += OnOpenUploadScreenPressed;
 		if (viewFlashcardsButton != null) viewFlashcardsButton.Pressed += OnViewFlashcardsPressed;
+		if (flashcardsBackButton != null) flashcardsBackButton.Pressed += OnFlashcardsBackPressed;
 
-		var backButton = GetNodeOrNull<Button>("ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/Back");
-		if (backButton != null) backButton.Pressed += OnFlashcardsBackPressed;
+		if (_uploadPanelContainer != null)
+			_uploadPanelContainer.Visible = false;
 
-		GD.Print("MainMenu _Ready ran");
-		GD.Print($"SetNameInput null? {_setNameInput == null}");
+		if (_viewFlashcardsPanelContainer != null)
+			_viewFlashcardsPanelContainer.Visible = false;
 	}
 
 	private void OnPlayPressed()
@@ -44,31 +52,16 @@ public partial class MainMenu : Control
 		GetTree().Quit();
 	}
 
-	private void OnUploadPressed()
+	private void OnOpenUploadScreenPressed()
 	{
-		GD.Print("Upload button pressed");
-		string csvPath = _setNameInput?.Text?.Trim() ?? "";
+		if (_mainMenuContainer != null)
+			_mainMenuContainer.Visible = false;
 
-		if (string.IsNullOrEmpty(csvPath))
-		{
-			GD.PushError("No CSV path entered.");
-			return;
-		}
+		if (_viewFlashcardsPanelContainer != null)
+			_viewFlashcardsPanelContainer.Visible = false;
 
-		string setName = System.IO.Path.GetFileNameWithoutExtension(csvPath);
-
-		var manager = GetNodeOrNull<Node>("/root/FlashcardManager");
-		GD.Print($"Manager found? {manager != null}");
-
-		if (manager == null)
-		{
-			GD.PushError("No /root/FlashcardManager.");
-			return;
-		}
-
-		GD.Print($"[UI] Calling manager.LoadSetFromCsv(path={csvPath}, setName={setName})");
-		manager.Call("LoadSetFromCsv", csvPath, setName);
-		GD.Print($"Sent to FlashcardManager: {setName}");
+		if (_uploadPanelContainer != null)
+			_uploadPanelContainer.Visible = true;
 	}
 
 	private void OnViewFlashcardsPressed()
@@ -80,24 +73,23 @@ public partial class MainMenu : Control
 		}
 
 		PopulateFlashcardList();
+
 		if (_mainMenuContainer != null)
-		{
 			_mainMenuContainer.Visible = false;
-		}
+
+		if (_uploadPanelContainer != null)
+			_uploadPanelContainer.Visible = false;
+
 		_viewFlashcardsPanelContainer.Visible = true;
 	}
 
 	private void OnFlashcardsBackPressed()
 	{
 		if (_viewFlashcardsPanelContainer != null)
-		{
 			_viewFlashcardsPanelContainer.Visible = false;
-		}
 
 		if (_mainMenuContainer != null)
-		{
 			_mainMenuContainer.Visible = true;
-		}
 	}
 
 	private void PopulateFlashcardList()
@@ -108,7 +100,9 @@ public partial class MainMenu : Control
 			child.QueueFree();
 		}
 
-		if (FlashcardManager.Instance == null || FlashcardManager.Instance.ActiveFlashCardLists == null || FlashcardManager.Instance.ActiveFlashCardLists.Count == 0)
+		if (FlashcardManager.Instance == null ||
+			FlashcardManager.Instance.ActiveFlashCardLists == null ||
+			FlashcardManager.Instance.ActiveFlashCardLists.Count == 0)
 		{
 			var emptyLabel = new Label();
 			emptyLabel.Text = "No imported flashcards";
@@ -130,6 +124,7 @@ public partial class MainMenu : Control
 			var deleteButton = new Button();
 			deleteButton.Text = "Delete";
 			deleteButton.CustomMinimumSize = new Vector2(60, 0);
+
 			string setName = set.DisplayName;
 			deleteButton.Pressed += () => OnDeleteSetPressed(setName);
 			setHeaderContainer.AddChild(deleteButton);
@@ -140,7 +135,11 @@ public partial class MainMenu : Control
 			foreach (Flashcard card in set.Cards)
 			{
 				var cardLabel = new Label();
-				cardLabel.Text = (string.IsNullOrEmpty(card.Question) ? "(no question)" : card.Question) + "  →  " + (string.IsNullOrEmpty(card.Answer) ? "(no answer)" : card.Answer);
+				cardLabel.Text =
+					(string.IsNullOrEmpty(card.Question) ? "(no question)" : card.Question)
+					+ "  →  " +
+					(string.IsNullOrEmpty(card.Answer) ? "(no answer)" : card.Answer);
+
 				cardLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
 				cardLabel.CustomMinimumSize = new Vector2(340, 0);
 				_flashcardListContainer.AddChild(cardLabel);
@@ -155,8 +154,6 @@ public partial class MainMenu : Control
 	private void OnDeleteSetPressed(string setDisplayName)
 	{
 		if (FlashcardManager.Instance.DeleteSet(setDisplayName))
-		{
 			PopulateFlashcardList();
-		}
 	}
 }
