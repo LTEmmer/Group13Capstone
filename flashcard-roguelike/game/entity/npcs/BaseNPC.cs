@@ -8,6 +8,7 @@ public partial class BaseNPC : Node3D
 
     private Area3D _area;
     private bool _playerInRange = false;
+    private bool _interactionTriggered = false;
 
     public override void _Ready()
     {
@@ -18,9 +19,10 @@ public partial class BaseNPC : Node3D
 
     public override void _Input(InputEvent @event)
 	{
-		if (@event.IsActionPressed("interact") && _playerInRange)
+		if (@event.IsActionPressed("interact") && _playerInRange && _interactionTriggered == false)
 		{
 			EmitSignal(nameof(OnInteraction));
+			_interactionTriggered = true;
 		}
 	}
 
