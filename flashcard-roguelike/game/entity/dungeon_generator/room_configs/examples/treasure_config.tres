@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomConfig" format=3 uid="uid://vinykelr35nl"]
+
+[ext_resource type="PackedScene" uid="uid://bggjji1cywnnh" path="res://game/entity/dungeon_generator/rooms/treasure_room.tscn" id="1_y5h7c"]
+[ext_resource type="Script" uid="uid://c82grg7jausf5" path="res://game/entity/dungeon_generator/room_configs/RoomConfig.cs" id="2_agfit"]
+
+[resource]
+script = ExtResource("2_agfit")
+RoomType = 3
+Scene = ExtResource("1_y5h7c")
+metadata/_custom_type_script = "uid://c82grg7jausf5"

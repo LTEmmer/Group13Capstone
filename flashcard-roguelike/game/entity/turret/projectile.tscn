@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://caj1odipgljkv"]
+
+[ext_resource type="Script" uid="uid://dnr1ew2112ab5" path="res://game/entity/turret/Projectile.cs" id="1_iooqv"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_iooqv"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1g4rt"]
+radius = 0.05
+
+[node name="Projectile" type="Area3D" unique_id=1367369620]
+script = ExtResource("1_iooqv")
+
+[node name="Visual" type="MeshInstance3D" parent="." unique_id=1331831976]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_iooqv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1070419966]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("SphereShape3D_1g4rt")

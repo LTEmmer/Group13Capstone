@@ -349,7 +349,8 @@ public partial class BattleManager : Node
 		
 		// When battle over if player wins activate room exit
 		if(victory == true){ //victory increases difficulty
-			EventManager.Instance.raise("on_battle_victory","test"); //No arg needed just added placeholder for now
+			EventManager.Instance.raise("on_battle_victory","test"); // Update difficulty 
+			EventManager.Instance.raise("on_room_clear","test"); // Tell connections to open
 			return;
 		}
 		if(ran == true){ //running lowers difficulty

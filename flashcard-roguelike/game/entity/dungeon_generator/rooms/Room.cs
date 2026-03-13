@@ -5,6 +5,9 @@ using System.Collections.Generic;
 public partial class Room : Node3D
 {
 	private List<RoomConnection> _exitRoomConnections = new List<RoomConnection>(); 
+
+	protected Player _player;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -15,6 +18,10 @@ public partial class Room : Node3D
 
 	public void OnChildEnteredTree(Node body){
 		if(body is Node3D node && body.Name == "Player"){
+			// Save player reference for use in event rooms, etc.
+			_player = body as Player;
+			GD.Print("Player entered room: " + Name + " with player reference: " + _player.Name);
+
 			Node3D Exits = GetNode<Node3D>("Exits");
 			var children = Exits.GetChildren();
 			foreach(Node child in children){
@@ -30,7 +37,11 @@ public partial class Room : Node3D
 	}
 	
 	public void OnChildExitedTree(Node body){
-		if(body is Node3D node && body.Name == "Player"){
+		if(body is Node3D node && body.Name == "Player")
+		{
+			// Clear player reference when they leave the room
+			_player = null;
+
 			foreach(RoomConnection room_conn in _exitRoomConnections){
 				room_conn.PlayerInRoom = false;
 			}
