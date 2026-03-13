@@ -1,18 +1,18 @@
-[gd_scene format=3 uid="uid://y0gn0fhbhapn"]
+[gd_scene format=3 uid="uid://cayaqtl6ocmoa"]
 
-[ext_resource type="Script" uid="uid://b8p0cgcvrqskm" path="res://game/entity/qa_panel/QAPanel.cs" id="1_auvah"]
+[ext_resource type="Script" path="res://game/entity/qa_panel/QAPanel.cs" id="1_auvah"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o2wsp"]
-size = Vector3(12, 2.5, 0.25)
+size = Vector3(12, 2.5, 0.5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_auvah"]
-points = PackedVector3Array(6, 1.25, 0.125, 6, 1.25, -0.125, -6, 1.25, 0.125, 6, -1.25, 0.125, 6, -1.25, -0.125, -6, 1.25, -0.125, -6, -1.25, 0.125, -6, -1.25, -0.125)
+points = PackedVector3Array(6, 1.25, 0.25, 6, 1.25, -0.25, -6, 1.25, 0.25, 6, -1.25, 0.25, 6, -1.25, -0.25, -6, 1.25, -0.25, -6, -1.25, 0.25, -6, -1.25, -0.25)
 
 [node name="QAPanel" type="Area3D" unique_id=487236728]
 script = ExtResource("1_auvah")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=1868814699]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -0.17129493)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -0.3161323)
 shaded = true
 double_sided = false
 text = "TEST"
@@ -24,5 +24,5 @@ width = 2250.0
 [node name="Panel" type="MeshInstance3D" parent="." unique_id=335669479]
 mesh = SubResource("BoxMesh_o2wsp")
 
-[node name="Collision" type="CollisionShape3D" parent="." unique_id=1834842148]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=886622993]
 shape = SubResource("ConvexPolygonShape3D_auvah")
