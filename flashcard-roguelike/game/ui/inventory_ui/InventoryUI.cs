@@ -103,4 +103,3 @@ public partial class InventoryUI : CanvasLayer
 		}
 	}
 }
-

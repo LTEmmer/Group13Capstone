@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://08j36rswj4qd"]
 
-[ext_resource type="Script" uid="uid://c10vqqj6pm34j" path="res://game/entity/dungeon_generator/DungeonGenerator.cs" id="1_fs5hr"]
+[ext_resource type="Script" uid="uid://cmi6vm0odpni" path="res://game/entity/dungeon_generator/DungeonGenerator.cs" id="1_fs5hr"]
 [ext_resource type="Resource" uid="uid://b7iskl1jhu6x" path="res://game/entity/dungeon_generator/room_configs/examples/example_entrance_config.tres" id="2_qj5ly"]
 [ext_resource type="Resource" uid="uid://rv51y1ntj6fs" path="res://game/entity/dungeon_generator/room_configs/examples/example_exit_config.tres" id="3_a7trn"]
 [ext_resource type="Resource" uid="uid://f2mdjwt1wmg0" path="res://game/entity/dungeon_generator/room_configs/examples/example_combat_config.tres" id="4_wm4nc"]

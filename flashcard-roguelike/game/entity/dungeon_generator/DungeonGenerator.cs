@@ -20,8 +20,8 @@ public partial class DungeonGenerator : Node3D
 
 	private readonly RandomNumberGenerator _rng = new RandomNumberGenerator();
 
-    public override void _Ready()
-    {
+	public override void _Ready()
+	{
 		// Initialize random number generator with seed
 		if (UseRandomSeed)
 		{
@@ -32,7 +32,7 @@ public partial class DungeonGenerator : Node3D
 			_rng.Seed = (ulong)Seed;
 		}
 
-        DungeonGraph graph = GenerateGraph(); // Generate the dungeon graph structure
+		DungeonGraph graph = GenerateGraph(); // Generate the dungeon graph structure
 		graph.PrintGraph();
 		Dictionary<int, Vector3> positions = GenerateLayout(graph); // Generate world positions for rooms
 		SpawnRooms(graph, positions); // Instantiate room scenes and connections based on the graph and layout
@@ -259,10 +259,11 @@ public partial class DungeonGenerator : Node3D
 					// For testing purposes we will just spawn generic enemy instances at random positions in the enemy area
 					// In the future, we can use the difficulty score to determine the type and strength of enemies to spawn
 					// Maybe we define a list of enemies somewhere with associated difficulty ratings
-					EnemyExample enemyInstance = GD.Load<PackedScene>("res://game/entity/enemy_example/enemy_example.tscn").Instantiate() as EnemyExample;
+					//EnemyExample enemyInstance = GD.Load<PackedScene>("res://game/entity/enemy_example/enemy_example.tscn").Instantiate() as EnemyExample;
+					EnemyFSM enemyInstance = GD.Load<PackedScene>("res://game/entity/enemy_fsm/enemy_fsm.tscn").Instantiate() as EnemyFSM;
 					enemyInstance.Name = $"Enemy_{i}";
 					enemyNode.AddChild(enemyInstance);
-					enemyInstance.GlobalPosition = spawnPoints[i].GlobalPosition;
+					enemyInstance.GlobalPosition = spawnPoints[i].GlobalPosition + new Vector3(0,0.9F,0); // Spawner was spawning enemy at waist height
 				}
 
 				GD.Print($"Spawned {enemyCount} enemies in Room {room.Id} based on difficulty score of {GameDifficultyManager.Instance.getCurrentDifficultyScore()}.");

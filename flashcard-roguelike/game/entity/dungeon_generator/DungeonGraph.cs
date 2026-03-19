@@ -78,7 +78,7 @@ public sealed class DungeonGraph
 
 		// Each room enforces its own MaxConnections from its config
 		if (fromRoom.OutgoingConnections.Count >= fromRoom.MaxConnections ||
-		    toRoom.IncomingConnections.Count >= toRoom.MaxConnections)
+			toRoom.IncomingConnections.Count >= toRoom.MaxConnections)
 			return false;
 
 		// Ensure the connection doesn't already exist
@@ -108,31 +108,31 @@ public sealed class DungeonGraph
 
 	public bool AreAllRoomsReachable()
 	{
-	    if (Rooms.Count == 0) return true;
+		if (Rooms.Count == 0) return true;
 	
-	    HashSet<int> visited = new HashSet<int>();
-	    Queue<int> toVisit = new Queue<int>();
+		HashSet<int> visited = new HashSet<int>();
+		Queue<int> toVisit = new Queue<int>();
 	
-	    // Start from the entrance (room 0)
-	    toVisit.Enqueue(0);
-	    visited.Add(0);
+		// Start from the entrance (room 0)
+		toVisit.Enqueue(0);
+		visited.Add(0);
 	
-	    // BFS traversal following outgoing connections
-	    while (toVisit.Count > 0)
-	    {
-	        int current = toVisit.Dequeue();
-	        DungeonRoom room = Rooms[current];
+		// BFS traversal following outgoing connections
+		while (toVisit.Count > 0)
+		{
+			int current = toVisit.Dequeue();
+			DungeonRoom room = Rooms[current];
 	
-	        foreach (int nextRoomId in room.OutgoingConnections)
-	        {
-	            if (!visited.Contains(nextRoomId))
-	            {
-	                visited.Add(nextRoomId);
-	                toVisit.Enqueue(nextRoomId);
-	            }
-	        }
-	    }
+			foreach (int nextRoomId in room.OutgoingConnections)
+			{
+				if (!visited.Contains(nextRoomId))
+				{
+					visited.Add(nextRoomId);
+					toVisit.Enqueue(nextRoomId);
+				}
+			}
+		}
 	
-	    return visited.Count == Rooms.Count;
+		return visited.Count == Rooms.Count;
 	}
 }

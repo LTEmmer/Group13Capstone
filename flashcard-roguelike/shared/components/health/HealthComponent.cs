@@ -8,9 +8,13 @@ public partial class HealthComponent : Node
 	
 	[Signal]
 	public delegate void PlayerDiedEventHandler();
-
+	
+	[Signal]
+	public delegate void EnemyDiedEventHandler();
+	
 	[Export] public float MaxHealth = 100f;
 	[Export] public bool IsPlayer = false;
+	[Export] public bool IsEnemy = false;
 	
 	public float CurrentHealth { get; private set; }
 
@@ -43,6 +47,10 @@ public partial class HealthComponent : Node
 			GD.Print("Player has died - Game Over!");
 			EmitSignal(SignalName.PlayerDied);
 			ShowGameOver();
+		}
+		else if (IsEnemy)
+		{
+			EmitSignal(SignalName.EnemyDied);
 		}
 		else
 		{

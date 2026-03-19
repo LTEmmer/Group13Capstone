@@ -16,7 +16,7 @@ public class BattleSetup
     }
     
     // Move player and enemies to their battle positions and store original transforms
-    public void SetupBattlePositions(Player player, List<EnemyExample> enemies)
+    public void SetupBattlePositions(Player player, List<EnemyFSM> enemies)
     {
         if (_battleArea == null)
         {
@@ -40,15 +40,15 @@ public class BattleSetup
         // Move each enemy to their respective spots
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].GlobalTransform = _battleArea.GetNode<Marker3D>($"EnemySpot{i}").GlobalTransform;
+            enemies[i].GlobalPosition = _battleArea.GetNode<Marker3D>($"EnemySpot{i}").GlobalPosition +  new Vector3(0, 1.25F, 0);
         }
     }
     
     // Initialize enemy status UI components
-    public void InitializeEnemyStatusUI(List<EnemyExample> enemies, 
-        Dictionary<EnemyExample, HealthComponent> healthComponents,
-        Dictionary<EnemyExample, AttackComponent> attackComponents,
-        Dictionary<EnemyExample, EnemyStatusComponent> statusComponents)
+    public void InitializeEnemyStatusUI(List<EnemyFSM> enemies, 
+        Dictionary<EnemyFSM, HealthComponent> healthComponents,
+        Dictionary<EnemyFSM, AttackComponent> attackComponents,
+        Dictionary<EnemyFSM, EnemyStatusComponent> statusComponents)
     {
         foreach (var enemy in enemies)
         {
@@ -62,7 +62,7 @@ public class BattleSetup
     }
     
     // Reset player and enemy positions to their original locations
-    public void ResetPositions(Player player, List<EnemyExample> enemies, bool enemiesAlive)
+    public void ResetPositions(Player player, List<EnemyFSM> enemies, bool enemiesAlive)
     {
         // Reset player position
         player.GlobalTransform = _originalPlayerTransform;
