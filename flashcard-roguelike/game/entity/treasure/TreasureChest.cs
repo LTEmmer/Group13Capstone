@@ -90,6 +90,7 @@ public partial class TreasureChest : Node3D
             if (item == null) { GD.PushWarning("TreasureChest: Instantiate<Item>() returned null — is the scene root typed as Item?"); continue; }
 
             item.Resource = entry;
+			item.TopLevel = true;
             GetParent().AddChild(item);
 
             float t = itemCount > 1 ? i / (float)(itemCount - 1) : 0.5f;

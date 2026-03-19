@@ -9,6 +9,7 @@ radius = 1.6565362
 [sub_resource type="CylinderMesh" id="CylinderMesh_0ak7e"]
 
 [node name="Item" type="Node3D" unique_id=1116861116 node_paths=PackedStringArray("_collectibleComponent", "_meshInstance")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_7x45u")
 _collectibleComponent = NodePath("CollectibleComponent")
 _meshInstance = NodePath("MeshInstance3D")
