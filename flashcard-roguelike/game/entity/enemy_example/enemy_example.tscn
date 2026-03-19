@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://b1awrh787m3pg"]
 
-[ext_resource type="Script" uid="uid://wbslxcdimmc8" path="res://game/entity/enemy_example/EnemyExample.cs" id="1_enemy"]
+[ext_resource type="Script" uid="uid://mfx0vx74xj68" path="res://game/entity/enemy_example/EnemyExample.cs" id="1_enemy"]
 [ext_resource type="PackedScene" uid="uid://c6v5m2qas1t4q" path="res://shared/components/enemy_status/enemy_status_component.tscn" id="2_enemy_status"]
 [ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="2_health"]
 [ext_resource type="PackedScene" uid="uid://ci0hdg6g3o0ny" path="res://shared/components/attack/attack_component.tscn.tscn" id="3_fgc6a"]
+[ext_resource type="AudioStream" uid="uid://d2coynpsu6sb8" path="res://assets/audio/player_sfx/hurt_sfx/hurt_1.mp3" id="4_6aj32"]
+[ext_resource type="AudioStream" uid="uid://burg4bbfb6ifw" path="res://assets/audio/player_sfx/death_sfx/death_2.mp3" id="5_fjk3d"]
+[ext_resource type="AudioStream" uid="uid://b08qg74r2ar44" path="res://assets/audio/player_sfx/attack_sfx/attack_1.mp3" id="7_cpc1u"]
+[ext_resource type="AudioStream" uid="uid://dmfepttsspixn" path="res://assets/audio/player_sfx/attack_sfx/attack_2.mp3" id="8_gxs41"]
+[ext_resource type="AudioStream" uid="uid://nebj16ptcck6" path="res://assets/audio/player_sfx/miss_sfx/miss_1.mp3" id="9_bdbtm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fgc6a"]
 albedo_color = Color(1, 0, 0, 1)
@@ -35,8 +40,12 @@ shape = SubResource("CapsuleShape3D_o5vbe")
 
 [node name="HealthComponent" parent="." unique_id=1527490394 instance=ExtResource("2_health")]
 MaxHealth = 20.0
+HurtSounds = Array[AudioStream]([ExtResource("4_6aj32")])
+DeathSound = Array[AudioStream]([ExtResource("5_fjk3d")])
 
 [node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("3_fgc6a")]
+AttackSounds = Array[AudioStream]([ExtResource("7_cpc1u"), ExtResource("8_gxs41")])
+MissSounds = Array[AudioStream]([ExtResource("9_bdbtm")])
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1063468503]
 

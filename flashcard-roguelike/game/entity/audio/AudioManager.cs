@@ -11,8 +11,11 @@ public partial class AudioManager : Node
     [Export] public AudioStream CorrectSound;
     [Export] public AudioStream WrongSound;
 
+    [Export] public AudioStream GameOverSound;
+
     private AudioStreamPlayer _buttonSoundsPlayer;
     private AudioStreamPlayer _correctSoundsPlayer;
+    private AudioStreamPlayer _gameConditionsPlayer;
 
     public override void _Ready()
     {
@@ -20,9 +23,10 @@ public partial class AudioManager : Node
 
         _buttonSoundsPlayer = new AudioStreamPlayer();
         _correctSoundsPlayer = new AudioStreamPlayer();
+        _gameConditionsPlayer = new AudioStreamPlayer();
         AddChild(_buttonSoundsPlayer);
         AddChild(_correctSoundsPlayer);
-
+        AddChild(_gameConditionsPlayer);
 
     }
 
@@ -67,6 +71,15 @@ public partial class AudioManager : Node
         {
             _correctSoundsPlayer.Stream = WrongSound;
             _correctSoundsPlayer.Play();
+        }
+    }
+
+    public void PlayGameOverSound()
+    {
+        if (GameOverSound != null)
+        {
+            _gameConditionsPlayer.Stream = GameOverSound;
+            _gameConditionsPlayer.Play();
         }
     }
 }

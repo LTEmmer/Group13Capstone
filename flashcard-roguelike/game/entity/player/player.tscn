@@ -16,8 +16,17 @@
 [ext_resource type="Script" uid="uid://df41wfekyp1yg" path="res://game/entity/player/states/Jump.cs" id="8_vp686"]
 [ext_resource type="Script" uid="uid://dntnvhh4bccxr" path="res://game/entity/player/states/Midair.cs" id="9_ka5uw"]
 [ext_resource type="Script" uid="uid://sjpebhc72dj6" path="res://game/entity/player/states/Landing.cs" id="10_vqr5b"]
+[ext_resource type="AudioStream" uid="uid://b08qg74r2ar44" path="res://assets/audio/player_sfx/attack_sfx/attack_1.mp3" id="12_4j27x"]
+[ext_resource type="AudioStream" uid="uid://dmfepttsspixn" path="res://assets/audio/player_sfx/attack_sfx/attack_2.mp3" id="13_0jrw7"]
+[ext_resource type="AudioStream" uid="uid://d2coynpsu6sb8" path="res://assets/audio/player_sfx/hurt_sfx/hurt_1.mp3" id="13_cawmy"]
+[ext_resource type="AudioStream" uid="uid://i8krsufunhyo" path="res://assets/audio/player_sfx/hurt_sfx/hurt_2.mp3" id="14_chnj6"]
+[ext_resource type="AudioStream" uid="uid://nebj16ptcck6" path="res://assets/audio/player_sfx/miss_sfx/miss_1.mp3" id="14_je5mu"]
+[ext_resource type="AudioStream" uid="uid://cm3fhaq8d5563" path="res://assets/audio/player_sfx/death_sfx/death_1.mp3" id="15_kmnjn"]
 [ext_resource type="PackedScene" uid="uid://c7ytlo0422m6u" path="res://shared/components/stamina/stamina_component.tscn" id="15_vqr5b"]
+[ext_resource type="AudioStream" uid="uid://burg4bbfb6ifw" path="res://assets/audio/player_sfx/death_sfx/death_2.mp3" id="16_4j27x"]
 [ext_resource type="Script" uid="uid://biabnuibn3bqn" path="res://game/entity/player/DownCast.cs" id="17_vp686"]
+[ext_resource type="AudioStream" uid="uid://ngqq6fvv50gx" path="res://assets/audio/player_sfx/block_sfx/block_1.mp3" id="18_je5mu"]
+[ext_resource type="AudioStream" uid="uid://ddj6jvcje4wqe" path="res://assets/audio/player_sfx/block_sfx/block_2.mp3" id="19_k8egu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43spn"]
 resource_name = "M_Main"
@@ -18013,9 +18022,14 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_f4oo1")
 
 [node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("4_dmj0o")]
+AttackSounds = Array[AudioStream]([ExtResource("12_4j27x"), ExtResource("13_0jrw7")])
+MissSounds = Array[AudioStream]([ExtResource("14_je5mu")])
 
 [node name="HealthComponent" parent="." unique_id=58685042 instance=ExtResource("3_health")]
 IsPlayer = true
+HurtSounds = Array[AudioStream]([ExtResource("13_cawmy"), ExtResource("14_chnj6")])
+BlockSounds = Array[AudioStream]([ExtResource("18_je5mu"), ExtResource("19_k8egu")])
+DeathSound = Array[AudioStream]([ExtResource("15_kmnjn"), ExtResource("16_4j27x")])
 
 [node name="InventoryComponent" parent="." unique_id=288412274 instance=ExtResource("5_inventory")]
 

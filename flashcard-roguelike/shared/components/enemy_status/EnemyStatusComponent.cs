@@ -54,7 +54,7 @@ public partial class EnemyStatusComponent : Node3D
 
 		if (_attack != null)
 		{
-			_statsLabel.Text = $"ATK: {Mathf.Ceil(_attack.BaseDamage)}  ACC: {Mathf.Ceil(_attack.Accuracy)}%";
+			_statsLabel.Text = $"ATK: {Mathf.Ceil(_attack.BaseDamage)}";
 		}
 
 		if (_health != null)
