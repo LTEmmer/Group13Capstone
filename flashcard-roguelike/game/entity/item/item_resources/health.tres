@@ -10,7 +10,11 @@ script = ExtResource("2_b80tv")
 Amount = 20
 metadata/_custom_type_script = "uid://yjsca1igu4yh"
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfbec"]
+albedo_color = Color(0.013984438, 0.65015376, 0, 1)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_b80tv"]
+material = SubResource("StandardMaterial3D_yfbec")
 
 [resource]
 script = ExtResource("4_yfbec")
