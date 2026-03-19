@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://ceim8jmtkr6d5"]
 
-[ext_resource type="Script" uid="uid://uc2jvp48gwdm" path="res://game/entity/player/Player.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://bd1l7xc6cbgd5" path="res://game/entity/player/Player.cs" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="2_0b5cm"]
 [ext_resource type="Script" uid="uid://btg7o2uoiswpk" path="res://game/entity/player/InputGatherer.cs" id="2_7qfun"]
 [ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="3_health"]
@@ -18032,7 +18032,9 @@ visible = false
 
 [node name="HUD" parent="CameraPivot/Camera3D" unique_id=816940577 instance=ExtResource("4_hud")]
 
-[node name="InventoryUI" parent="CameraPivot/Camera3D" unique_id=1987012151 instance=ExtResource("6_inventory_ui")]
+[node name="InventoryUI" parent="CameraPivot/Camera3D" unique_id=1987012151 node_paths=PackedStringArray("_player", "_inventory") instance=ExtResource("6_inventory_ui")]
+_player = NodePath("../../..")
+_inventory = NodePath("../../../InventoryComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")

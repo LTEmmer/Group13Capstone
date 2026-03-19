@@ -73,7 +73,7 @@ public partial class Pickup : Node3D
 		if (inventory != null)
 		{
 			var (name, description) = GetItemDisplayInfo();
-			inventory.AddItem(name, description);
+			// inventory.AddItem(name, description);
 			GD.Print($"Added '{name}' to inventory.");
 		}
 
