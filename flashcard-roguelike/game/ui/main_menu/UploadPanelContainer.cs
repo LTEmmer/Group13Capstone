@@ -11,20 +11,26 @@ public partial class UploadPanelContainer : Control
 
 	public override void _Ready()
 	{
-		_pathInput = GetNodeOrNull<LineEdit>("VBoxContainer/LineEdit");
-		_browseButton = GetNodeOrNull<Button>("VBoxContainer/BrowseButton");
-		_importButton = GetNodeOrNull<Button>("VBoxContainer/ImportButton");
-		_backButton = GetNodeOrNull<Button>("VBoxContainer/BackButton");
+		_pathInput = GetNodeOrNull<LineEdit>("WhiteboardPanel/MarginContainer/VBoxContainer/LineEdit");
+		_browseButton = GetNodeOrNull<Button>("WhiteboardPanel/MarginContainer/VBoxContainer/BrowseButton");
+		_importButton = GetNodeOrNull<Button>("WhiteboardPanel/MarginContainer/VBoxContainer/ImportButton");
+		_backButton = GetNodeOrNull<Button>("WhiteboardPanel/MarginContainer/VBoxContainer/BackButton");
 		_csvFileDialog = GetNodeOrNull<FileDialog>("CsvFileDialog");
 
 		if (_browseButton != null)
+		{
 			_browseButton.Pressed += OnBrowsePressed;
+		}
 
 		if (_importButton != null)
+		{
 			_importButton.Pressed += OnImportPressed;
+		}
 
 		if (_backButton != null)
+		{
 			_backButton.Pressed += OnBackPressed;
+		}
 
 		AudioManager.Instance?.RegisterButton(_browseButton);
 		AudioManager.Instance?.RegisterButton(_importButton);
