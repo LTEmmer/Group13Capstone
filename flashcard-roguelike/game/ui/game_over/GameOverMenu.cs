@@ -23,6 +23,14 @@ public partial class GameOverMenu : CanvasLayer
 		_panel = GetNodeOrNull<Control>("Panel");
 		_titleLabel = GetNodeOrNull<Label>("Panel/VBoxContainer/TitleLabel");
 		_messageLabel = GetNodeOrNull<Label>("Panel/VBoxContainer/MessageLabel");
+
+		Button _restartButton = GetNodeOrNull<Button>("Panel/VBoxContainer/RestartButton");
+		Button _mainMenuButton = GetNodeOrNull<Button>("Panel/VBoxContainer/MainMenuButton");
+		Button _quitButton = GetNodeOrNull<Button>("Panel/VBoxContainer/QuitButton");
+
+		AudioManager.Instance?.RegisterButton(_restartButton);
+		AudioManager.Instance?.RegisterButton(_mainMenuButton);
+		AudioManager.Instance?.RegisterButton(_quitButton);
 		
 		// Start hidden
 		Visible = false;

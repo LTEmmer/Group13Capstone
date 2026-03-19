@@ -36,6 +36,9 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 		_trueButton.Pressed += () => OnAnswerSelected(true);
 		_falseButton.Pressed += () => OnAnswerSelected(false);
 
+		AudioManager.Instance?.RegisterButton(_trueButton);
+		AudioManager.Instance?.RegisterButton(_falseButton);
+
 		// Start hidden
 		Visible = false;
 	}

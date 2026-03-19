@@ -35,6 +35,7 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 		// Connect signals
 		_submitButton.Pressed += OnSubmitPressed;
 		_answerInput.TextSubmitted += (text) => OnSubmitPressed();
+		AudioManager.Instance?.RegisterButton(_submitButton);
 
 		// Start hidden
 		Visible = false;

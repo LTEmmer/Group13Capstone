@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://ceim8jmtkr6d5"]
 
-[ext_resource type="Script" uid="uid://uc2jvp48gwdm" path="res://game/entity/player/Player.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://het36bkur8tc" path="res://game/entity/player/Player.cs" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="2_0b5cm"]
 [ext_resource type="Script" uid="uid://btg7o2uoiswpk" path="res://game/entity/player/InputGatherer.cs" id="2_7qfun"]
 [ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="3_health"]
@@ -18015,6 +18015,7 @@ libraries/ = SubResource("AnimationLibrary_f4oo1")
 [node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("4_dmj0o")]
 
 [node name="HealthComponent" parent="." unique_id=58685042 instance=ExtResource("3_health")]
+IsPlayer = true
 
 [node name="InventoryComponent" parent="." unique_id=288412274 instance=ExtResource("5_inventory")]
 

@@ -43,6 +43,11 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 		_optionCButton.Pressed += () => OnOptionSelected(_optionCButton.Text);
 		_optionDButton.Pressed += () => OnOptionSelected(_optionDButton.Text);
 
+		AudioManager.Instance?.RegisterButton(_optionAButton);
+		AudioManager.Instance?.RegisterButton(_optionBButton);
+		AudioManager.Instance?.RegisterButton(_optionCButton);
+		AudioManager.Instance?.RegisterButton(_optionDButton);
+
 		// Start hidden
 		Visible = false;
 	}

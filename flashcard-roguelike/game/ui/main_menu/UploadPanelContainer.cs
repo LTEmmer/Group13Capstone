@@ -26,6 +26,10 @@ public partial class UploadPanelContainer : Control
 		if (_backButton != null)
 			_backButton.Pressed += OnBackPressed;
 
+		AudioManager.Instance?.RegisterButton(_browseButton);
+		AudioManager.Instance?.RegisterButton(_importButton);
+		AudioManager.Instance?.RegisterButton(_backButton);
+
 		if (_csvFileDialog != null)
 		{
 			_csvFileDialog.FileMode = FileDialog.FileModeEnum.OpenFile;

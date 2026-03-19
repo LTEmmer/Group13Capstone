@@ -35,6 +35,12 @@ public partial class MainMenu : Control
 		if (viewFlashcardsButton != null) viewFlashcardsButton.Pressed += OnViewFlashcardsPressed;
 		if (flashcardsBackButton != null) flashcardsBackButton.Pressed += OnFlashcardsBackPressed;
 
+		AudioManager.Instance?.RegisterButton(playButton);
+		AudioManager.Instance?.RegisterButton(quitButton);
+		AudioManager.Instance?.RegisterButton(uploadButton);
+		AudioManager.Instance?.RegisterButton(viewFlashcardsButton);
+		AudioManager.Instance?.RegisterButton(flashcardsBackButton);
+
 		if (_uploadPanelContainer != null)
 			_uploadPanelContainer.Visible = false;
 
@@ -124,6 +130,7 @@ public partial class MainMenu : Control
 			var deleteButton = new Button();
 			deleteButton.Text = "Delete";
 			deleteButton.CustomMinimumSize = new Vector2(60, 0);
+			AudioManager.Instance?.RegisterButton(deleteButton);
 
 			string setName = set.DisplayName;
 			deleteButton.Pressed += () => OnDeleteSetPressed(setName);
