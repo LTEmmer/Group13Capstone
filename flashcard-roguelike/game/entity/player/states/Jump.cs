@@ -68,5 +68,6 @@ public partial class Jump : BaseState
 	{
 		player.staminaComponent.CurrentStamina -= StaminaDrain; //Update player stamina
 		//player.Velocity = player.Velocity.Normalized() * Speed;
+		player.PlayJumpSound();
 	}
 }

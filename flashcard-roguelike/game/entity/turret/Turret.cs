@@ -10,6 +10,7 @@ public partial class Turret : Node3D
     [Export] public float TurretSensitivity = 0.002f;
     [Export] public float PitchLimitDegrees = 80f;
     [Export] public float ZoomFov = 30f;
+    [Export] public AudioStream[] ShootSounds;
 
     private Node3D _turretBase;
     private Node3D _turretHead;
@@ -19,6 +20,7 @@ public partial class Turret : Node3D
     private float _defaultFov;
     private float _currentPitch = 0f;
     private bool _isActive = false;
+    private AudioStreamPlayer3D _audioPlayer;
 
     public override void _Ready()
     {
@@ -26,6 +28,7 @@ public partial class Turret : Node3D
         _turretHead = _turretBase.GetNode<Node3D>("TurretHead");
         _turretCamera = _turretHead.GetNode<Camera3D>("TurretView");
         _barrelTip = _turretHead.GetNode<Marker3D>("BarrelTip");
+        _audioPlayer = _turretHead.GetNode<AudioStreamPlayer3D>("AudioPlayer");
 
         _defaultFov = _turretCamera.Fov;
     }
@@ -46,6 +49,13 @@ public partial class Turret : Node3D
         {
             EmitSignal(nameof(OutOfAmmo));
             return;
+        }
+
+        // Play shoot sound
+        if (ShootSounds != null && ShootSounds.Length > 0)
+        {
+            _audioPlayer.Stream = ShootSounds[GD.Randi() % ShootSounds.Length];
+            _audioPlayer.Play();
         }
 
         // Create and initialize projectile

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://4rhky336pfbs"]
+
+[ext_resource type="Script" uid="uid://quntfit7ys0o" path="res://game/entity/audio/AudioManager.cs" id="1_s8cgb"]
+[ext_resource type="AudioStream" uid="uid://cvse3etpgodp8" path="res://assets/audio/menu_sfx/hover.mp3" id="2_eh7ei"]
+[ext_resource type="AudioStream" uid="uid://cjtl257lx5uif" path="res://assets/audio/menu_sfx/click.mp3" id="3_u5kqu"]
+[ext_resource type="AudioStream" uid="uid://bj0cir78vmoaj" path="res://assets/audio/flashcard_sfx/correct.mp3" id="4_u5kqu"]
+[ext_resource type="AudioStream" uid="uid://bfy4ic88v3rho" path="res://assets/audio/flashcard_sfx/incorrect.mp3" id="5_8kl0b"]
+[ext_resource type="AudioStream" uid="uid://dtxupy17wk6sj" path="res://assets/audio/game_conditions_sfx/game_over.mp3" id="6_8kl0b"]
+[ext_resource type="AudioStream" uid="uid://kt5eycw6af18" path="res://assets/audio/music/menu_music/Cakeflaps - Cate.ogg" id="7_fd0pu"]
+[ext_resource type="AudioStream" uid="uid://c075uxfa12bk7" path="res://assets/audio/music/background_music/headscratcher.mp3" id="8_vsw76"]
+[ext_resource type="AudioStream" uid="uid://ct41e6odq0op7" path="res://assets/audio/music/battle_music/Memoraphile - So Many Spiders.mp3" id="9_3vlp5"]
+[ext_resource type="AudioStream" uid="uid://wjycjtx7efh4" path="res://assets/audio/music/stinger/dragon-studio-scary-scream-401725.mp3" id="10_hcsh6"]
+
+[node name="AudioManager" type="Node" unique_id=81914917]
+script = ExtResource("1_s8cgb")
+HoverSound = ExtResource("2_eh7ei")
+ClickSound = ExtResource("3_u5kqu")
+CorrectSound = ExtResource("4_u5kqu")
+WrongSound = ExtResource("5_8kl0b")
+GameOverSound = ExtResource("6_8kl0b")
+MainMenuMusic = ExtResource("7_fd0pu")
+AmbientMusic = Array[AudioStream]([ExtResource("8_vsw76")])
+BattleMusic = ExtResource("9_3vlp5")
+BattleStinger = ExtResource("10_hcsh6")
+
+[node name="ButtonSounds" type="AudioStreamPlayer" parent="." unique_id=1607889941]
+
+[node name="CorrectSounds" type="AudioStreamPlayer" parent="." unique_id=2028219655]
+
+[node name="GameConditions" type="AudioStreamPlayer" parent="." unique_id=1729431443]
+
+[node name="Stinger" type="AudioStreamPlayer" parent="." unique_id=306049734]
+
+[node name="MusicPlayerA" type="AudioStreamPlayer" parent="." unique_id=166056914]
+
+[node name="MusicPlayerB" type="AudioStreamPlayer" parent="." unique_id=1403319376]
