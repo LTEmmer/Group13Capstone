@@ -37,6 +37,8 @@ public class TurnController
     // Execute the next enemy's turn
     public void ExecuteNextEnemyTurn()
     {
+        if (!_state.InCombat) return; // Safety check: battle may have ended (e.g. player died)
+
         if (_state.CurrentEnemyIndex >= _state.AliveEnemies.Count)
         {
             // All enemies have taken their turn
