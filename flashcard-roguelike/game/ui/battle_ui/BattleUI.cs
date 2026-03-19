@@ -35,6 +35,10 @@ public partial class BattleUI : Control
 		_runButton.Pressed += () => OnActionButtonPressed("run");
 		_itemsButton.Pressed += () => OnActionButtonPressed("items");
 
+		AudioManager.Instance?.RegisterButton(_attackButton);
+		AudioManager.Instance?.RegisterButton(_runButton);
+		AudioManager.Instance?.RegisterButton(_itemsButton);
+
 		// Setup positions for sliding animation
 		_visiblePosition = _actionPanel.Position;
 		_hiddenPosition = new Vector2(_actionPanel.Position.X, GetViewportRect().Size.Y);

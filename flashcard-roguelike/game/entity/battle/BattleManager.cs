@@ -16,8 +16,8 @@ public partial class BattleManager : Node
 	private BattleUICoordinator _uiCoordinator;
 	
 	// UI Components
-	private BattleTransition _transition;
-	private BattleUI _battleUI;
+	public BattleTransition Transitions;
+	public BattleUI ActiveUI;
 	private FlashcardChallenge _flashcardChallenge;
 	private FlashcardChallengeTrueOrFalse _flashcardChallengeTrueOrFalse;
 	private FlashcardChallengeMultipleChoice _flashcardChallengeMultipleChoice;
@@ -39,11 +39,11 @@ public partial class BattleManager : Node
 		_uiCoordinator = new BattleUICoordinator();
 
 		// Load UI scenes
-		_transition = GD.Load<PackedScene>("res://game/ui/battle_ui/battle_transition.tscn").Instantiate<BattleTransition>();
-		AddChild(_transition);
+		Transitions = GD.Load<PackedScene>("res://game/ui/battle_ui/battle_transition.tscn").Instantiate<BattleTransition>();
+		AddChild(Transitions);
 
-		_battleUI = GD.Load<PackedScene>("res://game/ui/battle_ui/battle_ui.tscn").Instantiate<BattleUI>();
-		AddChild(_battleUI);
+		ActiveUI = GD.Load<PackedScene>("res://game/ui/battle_ui/battle_ui.tscn").Instantiate<BattleUI>();
+		AddChild(ActiveUI);
 
 		_flashcardChallenge = GD.Load<PackedScene>("res://game/ui/battle_ui/flashcard_challenge.tscn").Instantiate<FlashcardChallenge>();
 		AddChild(_flashcardChallenge);
@@ -54,7 +54,7 @@ public partial class BattleManager : Node
 		_flashcardChallengeMultipleChoice = GD.Load<PackedScene>("res://game/ui/battle_ui/flashcard_challenge_multiple_choice.tscn").Instantiate<FlashcardChallengeMultipleChoice>();
 		AddChild(_flashcardChallengeMultipleChoice);
 
-		if (_transition == null || _battleUI == null || _flashcardChallenge == null || _flashcardChallengeTrueOrFalse == null || _flashcardChallengeMultipleChoice == null)
+		if (Transitions == null || ActiveUI == null || _flashcardChallenge == null || _flashcardChallengeTrueOrFalse == null || _flashcardChallengeMultipleChoice == null)
 		{
 			GD.PrintErr("BattleManager: Failed to load one or more UI scenes.");
 		}
@@ -65,14 +65,14 @@ public partial class BattleManager : Node
 		_flashcardChallengeManager.SetAnswerSubmittedCallback(OnFlashcardAnswered);
 
 		// Initialize manager dependencies
-		_uiCoordinator.Initialize(_battleUI, _state);
+		_uiCoordinator.Initialize(ActiveUI, _state);
 		_turnController.Initialize(_state, _uiCoordinator, _combatResolver);
 		_combatResolver.Initialize(_state, _uiCoordinator, _flashcardChallengeManager, _turnController);
 
 		// Connect UI signals
-		if (_battleUI != null)
+		if (ActiveUI != null)
 		{
-			_battleUI.OnActionSelected += OnPlayerActionSelected;
+			ActiveUI.OnActionSelected += OnPlayerActionSelected;
 		}
 
 		if (_flashcardChallenge != null)
@@ -100,7 +100,7 @@ public partial class BattleManager : Node
 			return;
 		}
 
-		if (_transition == null)
+		if (Transitions == null)
 		{
 			GD.PrintErr("BattleManager: Transition is not assigned.");
 			return;
@@ -127,6 +127,14 @@ public partial class BattleManager : Node
 			return;
 		}
 
+		// Make visible
+		Transitions.Visible = true;
+		ActiveUI.Visible = true;
+
+		// Play stinger and music
+		AudioManager.Instance?.PlayBattleStinger();
+		AudioManager.Instance?.PlayBattleMusic();
+
 		// Initialize state with entities
 		_state.Initialize(player, enemies);
 
@@ -152,10 +160,10 @@ public partial class BattleManager : Node
 		EnemyFSM focusEnemy = enemies[0];
 
 		// Play transition animation and initialize combat after transition completes and positions are set
-		_transition.Cover(focusEnemy.GlobalPosition, player, () =>
+		Transitions.Cover(focusEnemy.GlobalPosition, player, () =>
 		{
 			_setup.SetupBattlePositions(player, _state.AliveEnemies);
-			_transition.Reveal(() =>
+			Transitions.Reveal(() =>
 			{
 				InitializeCombat();
 			});
@@ -335,7 +343,10 @@ public partial class BattleManager : Node
 					}
 
 					// Play transition out
-					_transition.SliceOut();
+					Transitions.SliceOut();
+
+					// Transition music
+					AudioManager.Instance?.PlayDungeonMusic(1.5f);
 
 					// Re-enable player input after transition (BEFORE state reset to avoid null reference)
 					GetTree().CreateTimer(0.5).Timeout += () =>

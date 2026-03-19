@@ -6,6 +6,7 @@ public partial class QAPanel : Area3D
 {
     [Signal]
     public delegate void OnPanelHitEventHandler(QAPanel panel);
+
     
     private Label3D _label;
     private Flashcard _card;
@@ -70,5 +71,12 @@ public partial class QAPanel : Area3D
         mat.Emission = new Color(1, 1, 0); // yellow
         mat.EmissionEnergyMultiplier = 1f;
         mesh.MaterialOverride = mat;
+    }
+
+    public void SetAndPlaySound(AudioStream sound)
+    {
+        AudioStreamPlayer3D player = GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D");
+        player.Stream = sound;
+        player.Play();
     }
 }

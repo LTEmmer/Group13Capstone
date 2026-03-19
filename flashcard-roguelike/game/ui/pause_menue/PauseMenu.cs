@@ -52,6 +52,13 @@ public partial class PauseMenu : CanvasLayer
 	public override void _Ready()
 	{
 		_buttonPanelContainer = GetNode<Control>("ButtonPanelContainer");
+
+		const string btnPath = "ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/";
+		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Resume"));
+		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Options"));
+		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Abandon Run"));
+		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Main Menu"));
+		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Quit"));
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
@@ -103,7 +110,7 @@ public partial class PauseMenu : CanvasLayer
 	public void _on_main_menu_pressed()
 	{
 		GD.Print("Main Menue Pressed");
-		GetTree().ChangeSceneToPacked(MainMenu);
+		SceneTransition.FadeOut(this, () => GetTree().ChangeSceneToPacked(MainMenu));
 	}
 
 	public void _on_quit_pressed()

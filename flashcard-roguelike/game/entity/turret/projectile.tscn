@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://caj1odipgljkv"]
 
-[ext_resource type="Script" uid="uid://dnr1ew2112ab5" path="res://game/entity/turret/Projectile.cs" id="1_iooqv"]
+[ext_resource type="Script" uid="uid://q43vq3ch84a" path="res://game/entity/turret/Projectile.cs" id="1_iooqv"]
+[ext_resource type="AudioStream" uid="uid://bwfsei4acw4q8" path="res://assets/audio/turret_sfx/splat_1.mp3" id="2_0bw6l"]
+[ext_resource type="AudioStream" uid="uid://bshuoq7gdeath" path="res://assets/audio/turret_sfx/splat_2.mp3" id="3_71wb1"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_iooqv"]
 radius = 0.05
@@ -11,6 +13,7 @@ radius = 0.05
 
 [node name="Projectile" type="Area3D" unique_id=1367369620]
 script = ExtResource("1_iooqv")
+ImpactSounds = Array[AudioStream]([ExtResource("2_0bw6l"), ExtResource("3_71wb1")])
 
 [node name="Visual" type="MeshInstance3D" parent="." unique_id=1331831976]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
@@ -19,3 +22,5 @@ mesh = SubResource("SphereMesh_iooqv")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1070419966]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("SphereShape3D_1g4rt")
+
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1599618073]

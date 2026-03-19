@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b31w7r83d3ycp"]
+
+[ext_resource type="Script" uid="uid://byw06psy00eal" path="res://game/entity/item/Item.cs" id="1_7x45u"]
+[ext_resource type="PackedScene" uid="uid://liceqttxegox" path="res://shared/components/collectible/collectible_component.tscn" id="1_k2hop"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nwg37"]
+radius = 1.6565362
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0ak7e"]
+
+[node name="Item" type="Node3D" unique_id=1116861116 node_paths=PackedStringArray("_collectibleComponent", "_meshInstance")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_7x45u")
+_collectibleComponent = NodePath("CollectibleComponent")
+_meshInstance = NodePath("MeshInstance3D")
+
+[node name="CollectibleComponent" parent="." unique_id=120460810 instance=ExtResource("1_k2hop")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=62324122]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2085220173]
+shape = SubResource("SphereShape3D_nwg37")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1647908511]
+transform = Transform3D(0.83045584, -0.24577151, 0.4999395, 0.28378105, 0.9588891, 0, -0.47938654, 0.14187336, 0.8660603, 0, 0, 0)
+mesh = SubResource("CylinderMesh_0ak7e")
+
+[connection signal="area_entered" from="Area3D" to="CollectibleComponent" method="Collect"]
+[connection signal="body_entered" from="Area3D" to="CollectibleComponent" method="Collect"]

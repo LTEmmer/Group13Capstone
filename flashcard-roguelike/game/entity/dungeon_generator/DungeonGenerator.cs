@@ -19,9 +19,10 @@ public partial class DungeonGenerator : Node3D
 	[Export] public PackedScene ConnectionScene;
 
 	private readonly RandomNumberGenerator _rng = new RandomNumberGenerator();
-
-	public override void _Ready()
-	{
+	
+    public override void _Ready()
+    {
+		AudioManager.Instance?.PlayDungeonMusic();
 		// Initialize random number generator with seed
 		if (UseRandomSeed)
 		{
@@ -39,6 +40,8 @@ public partial class DungeonGenerator : Node3D
 
 		if (CurrentRoomManager.Instance != null)
 			CurrentRoomManager.Instance.CurrentRoomId = 0;
+
+		SceneTransition.FadeIn(this);
 	}
 
 

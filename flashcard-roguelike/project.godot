@@ -13,9 +13,13 @@ config_version=5
 config/name="FlashcardRoguelike"
 run/main_scene="uid://h18wimcwtwvr"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
-config/icon="res://shared/icon.svg"
+config/icon="res://assets/sprites/icon.svg"
 
 [autoload]
+
+
+AudioManager="*uid://4rhky336pfbs"
+CurrentRoomManager="*res://game/current_room_manager.tscn"
 
 FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
 BattleManager="*uid://b8g15b4a5ec36"
@@ -83,3 +87,4 @@ jump={
 
 rendering_device/driver.windows="d3d12"
 anti_aliasing/quality/msaa_3d=3
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
