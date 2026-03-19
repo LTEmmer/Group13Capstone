@@ -5,14 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="4_503t6"]
 [ext_resource type="PackedScene" uid="uid://b1awrh787m3pg" path="res://game/entity/enemy_example/enemy_example.tscn" id="4_enemy"]
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="5_503t6"]
-[ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="6_jumof"]
-[ext_resource type="Script" uid="uid://yjsca1igu4yh" path="res://game/entity/item/effects/HealEffect.cs" id="7_xsufa"]
-[ext_resource type="Texture2D" uid="uid://cmyjgorgq77fl" path="res://assets/sprites/heart-plus.svg" id="8_w86v4"]
-[ext_resource type="Script" uid="uid://573w4ti026as" path="res://game/entity/item/ItemResource.cs" id="9_kobp4"]
-[ext_resource type="Script" uid="uid://77xek2w3qdie" path="res://game/entity/item/effects/HurtEffect.cs" id="10_kobp4"]
-[ext_resource type="Script" uid="uid://cqbcvcg8j61s5" path="res://game/entity/item/effects/PickupEffect.cs" id="11_l3qxk"]
-[ext_resource type="Texture2D" uid="uid://2du3e6kvj42w" path="res://assets/sprites/sword.svg" id="12_l3qxk"]
-[ext_resource type="Texture2D" uid="uid://bsfwg1c0g1w5x" path="res://assets/sprites/shield-plus.svg" id="13_4bnm5"]
+[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/health.tres" id="6_jumof"]
+[ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/shield.tres" id="8_p0w5i"]
+[ext_resource type="Resource" uid="uid://cqh570ewgdsiw" path="res://game/entity/item/item_resources/sword.tres" id="10_kobp4"]
+[ext_resource type="PackedScene" uid="uid://c3kbm7x2yvqpn" path="res://game/entity/treasure/treasure_chest.tscn" id="12_w86v4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_im37l"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -44,70 +40,6 @@ size = Vector3(1.5, 1, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_hurdle"]
 size = Vector3(1.5, 1, 0.5)
-
-[sub_resource type="Resource" id="Resource_w86v4"]
-script = ExtResource("7_xsufa")
-Amount = 20
-metadata/_custom_type_script = "uid://yjsca1igu4yh"
-
-[sub_resource type="Resource" id="Resource_l3qxk"]
-script = ExtResource("9_kobp4")
-Name = "Health"
-Icon = ExtResource("8_w86v4")
-Behavior = 1
-Effects = Array[ExtResource("6_jumof")]([SubResource("Resource_w86v4")])
-metadata/_custom_type_script = "uid://573w4ti026as"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w86v4"]
-albedo_color = Color(1.5883148e-06, 0.7197558, 0.07178906, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_l3qxk"]
-material = SubResource("StandardMaterial3D_w86v4")
-
-[sub_resource type="Resource" id="Resource_4bnm5"]
-script = ExtResource("10_kobp4")
-Amount = 60
-metadata/_custom_type_script = "uid://77xek2w3qdie"
-
-[sub_resource type="Resource" id="Resource_fqsy6"]
-script = ExtResource("11_l3qxk")
-Amount = 1
-metadata/_custom_type_script = "uid://cqbcvcg8j61s5"
-
-[sub_resource type="Resource" id="Resource_jumof"]
-script = ExtResource("9_kobp4")
-Name = "Sword"
-Icon = ExtResource("12_l3qxk")
-Description = "A sword to attack 1 enemy for 60"
-MaxUses = 1
-Effects = Array[ExtResource("6_jumof")]([SubResource("Resource_4bnm5"), SubResource("Resource_fqsy6")])
-metadata/_custom_type_script = "uid://573w4ti026as"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4bnm5"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_jcauo"]
-material = SubResource("StandardMaterial3D_4bnm5")
-
-[sub_resource type="Resource" id="Resource_4ixbf"]
-script = ExtResource("11_l3qxk")
-Amount = 3
-metadata/_custom_type_script = "uid://cqbcvcg8j61s5"
-
-[sub_resource type="Resource" id="Resource_jcauo"]
-script = ExtResource("9_kobp4")
-Name = "Shield"
-Icon = ExtResource("13_4bnm5")
-Description = "3 Shields to block damage"
-MaxUses = 1
-Effects = Array[ExtResource("6_jumof")]([SubResource("Resource_4ixbf")])
-metadata/_custom_type_script = "uid://573w4ti026as"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqsy6"]
-albedo_color = Color(0.21225405, 0.46752214, 1, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_4ixbf"]
-material = SubResource("StandardMaterial3D_fqsy6")
 
 [node name="TestRoom" type="Node3D" unique_id=1556408090]
 
@@ -196,16 +128,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0990133, 4.7683716e-07, 1.
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.6066217, 0.49696064, 0)
 
 [node name="Item" parent="Items" unique_id=1116861116 instance=ExtResource("5_503t6")]
-transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0, 1.3232231e-05, 0)
-Resource = SubResource("Resource_l3qxk")
-_mesh = SubResource("CylinderMesh_l3qxk")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3232231e-05, 0)
+Resource = ExtResource("6_jumof")
 
 [node name="Item2" parent="Items" unique_id=1846056995 instance=ExtResource("5_503t6")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 8.624807, 0, -4.3191986)
-Resource = SubResource("Resource_jumof")
-_mesh = SubResource("CylinderMesh_jcauo")
+Resource = ExtResource("10_kobp4")
 
 [node name="Item3" parent="Items" unique_id=2118227672 instance=ExtResource("5_503t6")]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 4.4146576, 0, -13.751855)
-Resource = SubResource("Resource_jcauo")
-_mesh = SubResource("CylinderMesh_4ixbf")
+Resource = ExtResource("8_p0w5i")
+
+[node name="TreasureChest" parent="Items" unique_id=292700749 instance=ExtResource("12_w86v4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 28.186129, -1.6565225, 1.5531316)

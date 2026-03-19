@@ -17548,8 +17548,10 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0b5cm"]
 
-[node name="Player" type="CharacterBody3D" unique_id=249236073 node_paths=PackedStringArray("CameraMount", "inputGatherer", "playerModel", "attackComponent", "healthComponent", "inventoryComponent", "staminaComponent")]
+[node name="Player" type="CharacterBody3D" unique_id=249236073 node_paths=PackedStringArray("PauseMenu", "InventoryUI", "CameraMount", "inputGatherer", "playerModel", "attackComponent", "healthComponent", "inventoryComponent", "staminaComponent")]
 script = ExtResource("1_script")
+PauseMenu = NodePath("CameraPivot/Camera3D/PauseMenu")
+InventoryUI = NodePath("CameraPivot/Camera3D/InventoryUI")
 CameraMount = NodePath("CameraPivot")
 inputGatherer = NodePath("InputGatherer")
 playerModel = NodePath("Model")

@@ -4,6 +4,7 @@ public partial class CollectibleComponent : Node
 {
 	[Export] public bool IsCollectible = true;
 	[Signal] public delegate void CollectedEventHandler(Node collector);
+	public ItemResource Item;
 
 	public void Collect(Node collector = null)
 	{
