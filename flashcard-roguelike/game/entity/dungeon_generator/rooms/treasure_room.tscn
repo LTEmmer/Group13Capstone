@@ -84,13 +84,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.549403, -1.7729723, -7.29
 [node name="3" type="Marker3D" parent="Exits" unique_id=150472824]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.57488, -1.7729723, -7.2970276)
 
-[node name="Treasure" type="Node3D" parent="."]
+[node name="Treasure" type="Node3D" parent="." unique_id=1150015518]
 
-[node name="TreasureChest1" parent="Treasure" instance=ExtResource("1_chest")]
+[node name="TreasureChest1" parent="Treasure" unique_id=1582763372 instance=ExtResource("1_chest")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="TreasureChest2" parent="Treasure" instance=ExtResource("1_chest")]
+[node name="TreasureChest2" parent="Treasure" unique_id=1169850034 instance=ExtResource("1_chest")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, -5)
 
-[node name="TreasureChest3" parent="Treasure" instance=ExtResource("1_chest")]
+[node name="TreasureChest3" parent="Treasure" unique_id=418054516 instance=ExtResource("1_chest")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -5)
