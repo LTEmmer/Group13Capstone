@@ -110,7 +110,7 @@ public partial class PauseMenu : CanvasLayer
 	public void _on_main_menu_pressed()
 	{
 		GD.Print("Main Menue Pressed");
-		GetTree().ChangeSceneToPacked(MainMenu);
+		SceneTransition.FadeOut(this, () => GetTree().ChangeSceneToPacked(MainMenu));
 	}
 
 	public void _on_quit_pressed()

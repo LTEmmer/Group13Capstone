@@ -36,13 +36,25 @@ public partial class Player : CharacterBody3D
 	[Export]
 	public StaminaComponent staminaComponent;
 	
+	[Export] public AudioStream[] FootstepSounds;
+	[Export] public AudioStream[] JumpSounds;
+	[Export] public AudioStream[] LandSounds;
+
 	private Node3D _cameraPivot;
 	private float _pitch;
-	
+
 	private Vector3 _targetVelocity = Vector3.Zero;
 	private int _speed { get; set; } = 10;
 	private int _sprintSpeed = 2;
 	private bool _acceptKeyboardInput = true;
+
+	private AudioStreamPlayer3D _footstepSoundPlayer;
+	private float _footstepTimer = 0f;
+	private const float WalkStepInterval = 0.5f;
+	private const float SprintStepInterval = 0.3f;
+	private const float WalkPitch = 0.9f;
+	private const float SprintPitch = 1.2f;
+	private const float PitchVariance = 0.08f;
 	
 	public override void _Ready()
 	{
@@ -51,6 +63,8 @@ public partial class Player : CharacterBody3D
 		// Ensure we have a reference to InventoryUI
 		if (InventoryUI == null)
 			InventoryUI = GetNodeOrNull<InventoryUI>("CameraPivot/Camera3D/InventoryUI");
+
+		_footstepSoundPlayer = GetNode<AudioStreamPlayer3D>("FootstepSoundPlayer");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -101,6 +115,7 @@ public override void _PhysicsProcess(double delta)
 			InputPackage input = inputGatherer.GatherInput();
 			playerModel.Update(input,delta);
 			input.QueueFree();
+			TickFootsteps((float)delta);
 		}else{
 			playerModel.SwitchTo(StateNames.idle);
 		}
@@ -123,5 +138,58 @@ public override void _PhysicsProcess(double delta)
 		//}
 //
 		//MoveAndSlide();
+	}
+
+	public void PlayJumpSound()
+	{
+		if (JumpSounds == null || JumpSounds.Length == 0) return;
+
+		// Create a temporary AudioStreamPlayer3D to play the jump sound without footsteps interfering
+		AudioStreamPlayer3D jumpSoundPlayer = new AudioStreamPlayer3D();
+		jumpSoundPlayer.Finished += jumpSoundPlayer.QueueFree;
+
+		AddChild(jumpSoundPlayer);
+		jumpSoundPlayer.Stream = JumpSounds[GD.Randi() % (uint)JumpSounds.Length];
+		jumpSoundPlayer.PitchScale = 1.0f + GD.Randf() * PitchVariance * 2f - PitchVariance;
+		jumpSoundPlayer.Play();
+	}
+
+	public void PlayLandSound()
+	{
+		if (LandSounds == null || LandSounds.Length == 0) return;
+
+		// Create a temporary AudioStreamPlayer3D to play the landing sound without footsteps interfering
+		AudioStreamPlayer3D landSoundPlayer = new AudioStreamPlayer3D();
+		landSoundPlayer.Finished += landSoundPlayer.QueueFree;
+
+		AddChild(landSoundPlayer);
+		landSoundPlayer.Stream = LandSounds[GD.Randi() % (uint)LandSounds.Length];
+		landSoundPlayer.PitchScale = 1.0f + GD.Randf() * PitchVariance * 2f - PitchVariance;
+		landSoundPlayer.Play();
+	}
+
+	private void TickFootsteps(float delta)
+	{
+		float speed = Velocity.Length();
+		bool isSprinting = speed > 15f;
+
+		if (!IsOnFloor() || speed <= 0.5f)
+		{
+			_footstepTimer = 0f;
+			return;
+		}
+
+		_footstepTimer -= delta;
+		if (_footstepTimer > 0f) return;
+
+		if (FootstepSounds != null && FootstepSounds.Length > 0)
+		{
+			float basePitch = isSprinting ? SprintPitch : WalkPitch;
+			_footstepSoundPlayer.Stream = FootstepSounds[GD.Randi() % (uint)FootstepSounds.Length];
+			_footstepSoundPlayer.PitchScale = basePitch + GD.Randf() * PitchVariance * 2f - PitchVariance;
+			_footstepSoundPlayer.Play();
+		}
+
+		_footstepTimer = isSprinting ? SprintStepInterval : WalkStepInterval;
 	}
 }

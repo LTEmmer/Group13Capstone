@@ -105,9 +105,6 @@ public partial class HealthComponent : Node
 				GetTree().Root.AddChild(gameOverMenu);
 			}
 		}
-
-		// Play game over sound
-		AudioManager.Instance?.PlayGameOverSound();
 		
 		// Show the game over screen
 		if (gameOverMenu != null && gameOverMenu.HasMethod("ShowGameOver"))

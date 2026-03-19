@@ -50,7 +50,9 @@ public partial class MainMenu : Control
 
 	private void OnPlayPressed()
 	{
-		GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
+		SceneTransition.FadeOut(this, () =>
+			GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn")
+		);
 	}
 
 	private void OnQuitPressed()

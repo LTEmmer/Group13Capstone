@@ -20,6 +20,7 @@ public partial class AudioManager : Node
     public override void _Ready()
     {
         Instance = this;
+        ProcessMode = ProcessModeEnum.Always;
 
         _buttonSoundsPlayer = new AudioStreamPlayer();
         _correctSoundsPlayer = new AudioStreamPlayer();
@@ -27,7 +28,6 @@ public partial class AudioManager : Node
         AddChild(_buttonSoundsPlayer);
         AddChild(_correctSoundsPlayer);
         AddChild(_gameConditionsPlayer);
-
     }
 
     // Wire both signals for a button in one call

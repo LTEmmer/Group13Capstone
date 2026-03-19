@@ -39,6 +39,8 @@ public partial class DungeonGenerator : Node3D
 
 		if (CurrentRoomManager.Instance != null)
 			CurrentRoomManager.Instance.CurrentRoomId = 0;
+
+		SceneTransition.FadeIn(this);
 	}
 
 
