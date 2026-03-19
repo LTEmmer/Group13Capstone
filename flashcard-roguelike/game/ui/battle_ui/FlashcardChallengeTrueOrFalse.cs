@@ -121,6 +121,16 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 		// The statement shown was either the correct answer or an incorrect one
 		bool isCorrect = DetermineIfCorrect(selectedTrue);
 
+		// Play sound
+		if (isCorrect)
+		{
+			AudioManager.Instance?.PlayCorrectSound();
+		}
+		else
+		{
+			AudioManager.Instance?.PlayWrongSound();
+		}
+
 		// Visual feedback
 		if (isCorrect)
 		{

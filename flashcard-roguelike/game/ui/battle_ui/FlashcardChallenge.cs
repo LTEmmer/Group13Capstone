@@ -112,6 +112,16 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 		// Simple case-insensitive comparison
 		bool isCorrect = string.Equals(playerAnswer, correctAnswer, StringComparison.OrdinalIgnoreCase);
 
+		// Play sound
+		if (isCorrect)
+		{
+			AudioManager.Instance?.PlayCorrectSound();
+		}
+		else
+		{
+			AudioManager.Instance?.PlayWrongSound();
+		}
+		
 		// Disable input while processing
 		_answerInput.Editable = false;
 		_submitButton.Disabled = true;

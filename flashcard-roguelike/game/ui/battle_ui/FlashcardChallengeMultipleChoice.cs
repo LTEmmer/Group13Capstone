@@ -137,6 +137,16 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 		// Check if the answer is correct
 		bool isCorrect = selectedAnswer.Equals(_correctAnswer, StringComparison.OrdinalIgnoreCase);
 
+		// Play sound
+		if (isCorrect)
+		{
+			AudioManager.Instance?.PlayCorrectSound();
+		}
+		else
+		{
+			AudioManager.Instance?.PlayWrongSound();
+		}
+
 		// Visual feedback - highlight all buttons
 		Color correctColor = new Color(0.5f, 1.0f, 0.5f); // Green for correct
 		Color wrongColor = new Color(1.0f, 0.5f, 0.5f);   // Red for wrong

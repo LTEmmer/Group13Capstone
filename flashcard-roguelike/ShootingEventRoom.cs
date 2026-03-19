@@ -6,6 +6,8 @@ public partial class ShootingEventRoom : Room, IEventRoom
 {
     [Export] public BaseNPC TriggerNPC;
     [Export] public Turret RoomTurret;
+    [Export] public AudioStream CorrectSound;
+    [Export] public AudioStream WrongSound;
 
     public bool IsCompleted { get; private set; }
     public float Difficulty { get; private set; }
@@ -160,12 +162,14 @@ public partial class ShootingEventRoom : Room, IEventRoom
             ++_matches;
             panel1.ShowResult(true);
             panel2.ShowResult(true);
+            panel2.SetAndPlaySound(CorrectSound); // Play correct sound on second panel hit for better feedback timing
         }
         else
         {
             GD.Print($"Incorrect match: '{panel1.GetPanelText()}' -> '{panel2.GetPanelText()}'");
             panel1.ShowResult(false);
             panel2.ShowResult(false);
+            panel2.SetAndPlaySound(WrongSound); // Play wrong sound on second panel hit for better feedback timing
         }
 
         // Reset current pair tracking for next selection
