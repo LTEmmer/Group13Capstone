@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cayaqtl6ocmoa"]
 
-[ext_resource type="Script" path="res://game/entity/qa_panel/QAPanel.cs" id="1_auvah"]
+[ext_resource type="Script" uid="uid://dercwou1yu8ty" path="res://game/entity/qa_panel/QAPanel.cs" id="1_auvah"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o2wsp"]
 size = Vector3(12, 2.5, 0.5)
@@ -26,3 +26,5 @@ mesh = SubResource("BoxMesh_o2wsp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=886622993]
 shape = SubResource("ConvexPolygonShape3D_auvah")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=53834061]

@@ -22,6 +22,8 @@ public partial class DungeonGenerator : Node3D
 
     public override void _Ready()
     {
+		AudioManager.Instance?.PlayDungeonMusic();
+		
 		// Initialize random number generator with seed
 		if (UseRandomSeed)
 		{
@@ -39,6 +41,8 @@ public partial class DungeonGenerator : Node3D
 
 		if (CurrentRoomManager.Instance != null)
 			CurrentRoomManager.Instance.CurrentRoomId = 0;
+
+		SceneTransition.FadeIn(this);
 	}
 
 

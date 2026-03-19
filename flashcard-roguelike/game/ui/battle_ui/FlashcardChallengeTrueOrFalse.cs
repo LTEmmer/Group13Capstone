@@ -36,6 +36,9 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 		_trueButton.Pressed += () => OnAnswerSelected(true);
 		_falseButton.Pressed += () => OnAnswerSelected(false);
 
+		AudioManager.Instance?.RegisterButton(_trueButton);
+		AudioManager.Instance?.RegisterButton(_falseButton);
+
 		// Start hidden
 		Visible = false;
 	}
@@ -117,6 +120,16 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 		// Determine if answer is correct
 		// The statement shown was either the correct answer or an incorrect one
 		bool isCorrect = DetermineIfCorrect(selectedTrue);
+
+		// Play sound
+		if (isCorrect)
+		{
+			AudioManager.Instance?.PlayCorrectSound();
+		}
+		else
+		{
+			AudioManager.Instance?.PlayWrongSound();
+		}
 
 		// Visual feedback
 		if (isCorrect)

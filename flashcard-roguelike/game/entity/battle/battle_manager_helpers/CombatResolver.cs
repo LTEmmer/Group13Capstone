@@ -113,6 +113,9 @@ public class CombatResolver
         }
         else
         {
+            // Play miss sound
+            _state.PlayerAttack.PlayMissSound();
+
             _uiCoordinator.LogMessage("Attack missed!");
         }
         
@@ -133,6 +136,11 @@ public class CombatResolver
     // Execute player defense
     private void ExecutePlayerDefense(bool success, SceneTree tree)
     {
+        if (success) // Play block sound if defense successful
+        {
+            _state.PlayerHealth.PlayBlockSound();
+        }
+
         // If successful defense, no damage; otherwise take full damage
         // Then advance to next enemy's turn regardless of defense outcome
         ExecuteEnemyAttack(!success);
@@ -142,16 +150,19 @@ public class CombatResolver
     // Execute enemy attack
     private void ExecuteEnemyAttack(bool fullDamage)
     {
+        var enemy = _state.AliveEnemies[_state.CurrentEnemyIndex];
         // If fullDamage is true, enemy attacks player for full damage; 
         // if false, player successfully defends and takes no damage
         if (fullDamage)
         {
-            var enemy = _state.AliveEnemies[_state.CurrentEnemyIndex];
             _state.EnemyAttackComponents[enemy].Attack(_state.Player);
+
             _uiCoordinator.LogMessage("Failed to defend! Taking full damage!");
         }
         else
         {
+            // Just play attack sound
+            _state.EnemyAttackComponents[enemy].PlayAttackSound();
             _uiCoordinator.LogMessage("Defended successfully! Taking no damage!");
         }
         
