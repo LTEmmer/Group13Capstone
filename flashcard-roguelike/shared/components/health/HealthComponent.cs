@@ -22,9 +22,18 @@ public partial class HealthComponent : Node
 	public override void _Ready()
 	{
 		CurrentHealth = MaxHealth;
-
 		// Create an AudioStreamPlayer3D for playing hurt/death sounds
 		_audioPlayer = new AudioStreamPlayer3D();
+
+		if (IsPlayer)
+		{
+			_audioPlayer.VolumeDb = -30f; // Make player death sound louder
+		}
+		else
+		{
+			_audioPlayer.VolumeDb = -10f; // Reduce volume for enemy sounds
+		}
+
 		GetParent().CallDeferred(Node.MethodName.AddChild, _audioPlayer);
 	}
 
@@ -59,6 +68,7 @@ public partial class HealthComponent : Node
 		{
 			var deathSound = DeathSound[GD.Randi() % DeathSound.Length];
 			_audioPlayer.Stream = deathSound;
+
 			_audioPlayer.Play();
 
 			if (IsPlayer)

@@ -8,13 +8,13 @@ public partial class EnemyStatusComponent : Node3D
     // These positions are relative to the EnemyStatusComponent's position, 
     // which should be set to the enemy's head or desired label anchor point in the scene
     // You can adjust these offsets in the editor to position the labels correctly above the enemy
-    [Export] public Vector3 NameOnScreenPos = new Vector3(0, 0, 0);
-    [Export] public Vector3 StatsOnScreenPos = new Vector3(0, 0, 0);
-    [Export] public Vector3 HealthOnScreenPos = new Vector3(0, 0, 0);
-
 	private Label3D _nameLabel;
 	private Label3D _statsLabel;
 	private Label3D _healthLabel;
+
+	private Vector3 _nameOnScreenPos;
+	private Vector3 _statsOnScreenPos;
+	private Vector3 _healthOnScreenPos;
 
 	private EnemyExample _enemy;
 	private HealthComponent _health;
@@ -27,6 +27,10 @@ public partial class EnemyStatusComponent : Node3D
 		_nameLabel = GetNode<Label3D>("NameLabel");
 		_statsLabel = GetNode<Label3D>("StatsLabel");
 		_healthLabel = GetNode<Label3D>("HealthLabel");
+
+		_nameOnScreenPos = _nameLabel.Position;
+		_statsOnScreenPos = _statsLabel.Position;
+		_healthOnScreenPos = _healthLabel.Position;
 
 		Visible = false;
 		_isVisible = false;
@@ -90,12 +94,12 @@ public partial class EnemyStatusComponent : Node3D
 
         // Animate each label sliding in to its on-screen position with a slight delay between them for a staggered effect
         tween.SetParallel(true);
-        tween.TweenProperty(_nameLabel, "position", NameOnScreenPos, SlideDuration)
+        tween.TweenProperty(_nameLabel, "position", _nameOnScreenPos, SlideDuration)
              .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
-        tween.TweenProperty(_statsLabel, "position", StatsOnScreenPos, SlideDuration)
+        tween.TweenProperty(_statsLabel, "position", _statsOnScreenPos, SlideDuration)
              .SetDelay(0.05f)
              .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
-        tween.TweenProperty(_healthLabel, "position", HealthOnScreenPos, SlideDuration)
+        tween.TweenProperty(_healthLabel, "position", _healthOnScreenPos, SlideDuration)
              .SetDelay(0.1f)
              .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
     }

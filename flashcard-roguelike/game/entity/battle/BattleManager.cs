@@ -131,6 +131,10 @@ public partial class BattleManager : Node
 		Transitions.Visible = true;
 		ActiveUI.Visible = true;
 
+		// Play stinger and music
+		AudioManager.Instance?.PlayBattleStinger();
+		AudioManager.Instance?.PlayBattleMusic();
+
 		// Initialize state with entities
 		_state.Initialize(player, enemies);
 
@@ -340,6 +344,9 @@ public partial class BattleManager : Node
 
 					// Play transition out
 					Transitions.SliceOut();
+
+					// Transition music
+					AudioManager.Instance?.PlayDungeonMusic(1.5f);
 
 					// Re-enable player input after transition (BEFORE state reset to avoid null reference)
 					GetTree().CreateTimer(0.5).Timeout += () =>

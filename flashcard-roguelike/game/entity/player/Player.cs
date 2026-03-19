@@ -49,6 +49,7 @@ public partial class Player : CharacterBody3D
 	private bool _acceptKeyboardInput = true;
 
 	private AudioStreamPlayer3D _footstepSoundPlayer;
+	private AudioStreamPlayer3D _jumpSoundPlayer;
 	private float _footstepTimer = 0f;
 	private const float WalkStepInterval = 0.5f;
 	private const float SprintStepInterval = 0.3f;
@@ -65,6 +66,7 @@ public partial class Player : CharacterBody3D
 			InventoryUI = GetNodeOrNull<InventoryUI>("CameraPivot/Camera3D/InventoryUI");
 
 		_footstepSoundPlayer = GetNode<AudioStreamPlayer3D>("FootstepSoundPlayer");
+		_jumpSoundPlayer = GetNode<AudioStreamPlayer3D>("JumpSoundPlayer");
 	}
 
 	public override void _Input(InputEvent @event)
@@ -144,28 +146,18 @@ public override void _PhysicsProcess(double delta)
 	{
 		if (JumpSounds == null || JumpSounds.Length == 0) return;
 
-		// Create a temporary AudioStreamPlayer3D to play the jump sound without footsteps interfering
-		AudioStreamPlayer3D jumpSoundPlayer = new AudioStreamPlayer3D();
-		jumpSoundPlayer.Finished += jumpSoundPlayer.QueueFree;
-
-		AddChild(jumpSoundPlayer);
-		jumpSoundPlayer.Stream = JumpSounds[GD.Randi() % (uint)JumpSounds.Length];
-		jumpSoundPlayer.PitchScale = 1.0f + GD.Randf() * PitchVariance * 2f - PitchVariance;
-		jumpSoundPlayer.Play();
+		_jumpSoundPlayer.Stream = JumpSounds[GD.Randi() % (uint)JumpSounds.Length];
+		_jumpSoundPlayer.PitchScale = 1.0f + GD.Randf() * PitchVariance * 2f - PitchVariance;
+		_jumpSoundPlayer.Play();
 	}
 
 	public void PlayLandSound()
 	{
 		if (LandSounds == null || LandSounds.Length == 0) return;
 
-		// Create a temporary AudioStreamPlayer3D to play the landing sound without footsteps interfering
-		AudioStreamPlayer3D landSoundPlayer = new AudioStreamPlayer3D();
-		landSoundPlayer.Finished += landSoundPlayer.QueueFree;
-
-		AddChild(landSoundPlayer);
-		landSoundPlayer.Stream = LandSounds[GD.Randi() % (uint)LandSounds.Length];
-		landSoundPlayer.PitchScale = 1.0f + GD.Randf() * PitchVariance * 2f - PitchVariance;
-		landSoundPlayer.Play();
+		_jumpSoundPlayer.Stream = LandSounds[GD.Randi() % (uint)LandSounds.Length];
+		_jumpSoundPlayer.PitchScale = 1.0f + GD.Randf() * PitchVariance * 2f - PitchVariance;
+		_jumpSoundPlayer.Play();
 	}
 
 	private void TickFootsteps(float delta)

@@ -17578,7 +17578,12 @@ JumpSounds = Array[AudioStream]([ExtResource("5_mb70y"), ExtResource("6_b6ajd")]
 LandSounds = Array[AudioStream]([ExtResource("7_02rvq"), ExtResource("8_20bnd")])
 
 [node name="FootstepSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=894622732]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8912029, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.53172886, 0)
+volume_db = -25.0
+
+[node name="JumpSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=918913796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.64052594, 0)
+volume_db = -23.0
 
 [node name="InputGatherer" type="Node" parent="." unique_id=581474012]
 script = ExtResource("2_7qfun")

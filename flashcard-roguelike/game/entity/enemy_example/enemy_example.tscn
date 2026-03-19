@@ -38,6 +38,12 @@ shape = SubResource("CapsuleShape3D_o5vbe")
 
 [node name="EnemyStatusComponent" parent="." unique_id=1993457061 instance=ExtResource("2_enemy_status")]
 
+[node name="NameLabel" parent="EnemyStatusComponent" index="0" unique_id=1158691251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.859, 0.8, 0)
+
+[node name="HealthLabel" parent="EnemyStatusComponent" index="2" unique_id=234038543]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8488562, 0.79999995, 0)
+
 [node name="HealthComponent" parent="." unique_id=1527490394 instance=ExtResource("2_health")]
 MaxHealth = 20.0
 HurtSounds = Array[AudioStream]([ExtResource("4_6aj32")])
@@ -51,3 +57,5 @@ MissSounds = Array[AudioStream]([ExtResource("9_bdbtm")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1666970950]
 shape = SubResource("SphereShape3D_fgc6a")
+
+[editable path="EnemyStatusComponent"]
