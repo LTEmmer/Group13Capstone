@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://d1k3ywv6qs5j8"]
+
+[ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="1_yfbec"]
+[ext_resource type="Script" uid="uid://yjsca1igu4yh" path="res://game/entity/item/effects/HealEffect.cs" id="2_b80tv"]
+[ext_resource type="Texture2D" uid="uid://cmyjgorgq77fl" path="res://assets/sprites/heart-plus.svg" id="3_lgush"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_yfbec"]
+
+[sub_resource type="Resource" id="Resource_w86v4"]
+script = ExtResource("2_b80tv")
+Amount = 20
+metadata/_custom_type_script = "uid://yjsca1igu4yh"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfbec"]
+albedo_color = Color(0.013984438, 0.65015376, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b80tv"]
+material = SubResource("StandardMaterial3D_yfbec")
+
+[resource]
+script = ExtResource("4_yfbec")
+Name = "Health"
+Icon = ExtResource("3_lgush")
+Mesh = SubResource("CylinderMesh_b80tv")
+Description = "Heals the player"
+Behavior = 1
+Effects = Array[ExtResource("1_yfbec")]([SubResource("Resource_w86v4")])
+metadata/_custom_type_script = "uid://573w4ti026as"
