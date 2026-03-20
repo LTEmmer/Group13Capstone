@@ -118,10 +118,10 @@ public override void _PhysicsProcess(double delta)
 			
 			InputPackage input = inputGatherer.GatherInput();
 			playerModel.Update(input,delta);
+			TickFootsteps((float)delta);
 			input.QueueFree();
 		}else{
 			playerModel.SwitchTo(StateNames.idle);
-			TickFootsteps((float)delta);
 		}
 	}
 
