@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://qr0ptjsgc05a" path="res://game/ui/pause_menue/PauseMenu.cs" id="1_f48la"]
 [ext_resource type="PackedScene" uid="uid://h18wimcwtwvr" path="res://game/ui/main_menu/main_menu.tscn" id="2_1n6di"]
-[ext_resource type="Theme" uid="uid://b5r6t2u2mi7tl" path="res://game/ui/pause_menue/CardTheme.tres" id="2_h8w6g"]
 [ext_resource type="Shader" uid="uid://x7hlq5qbs4m5" path="res://game/ui/pause_menue/blur.gdshader" id="2_scxh3"]
+[ext_resource type="Theme" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="3_whiteboard"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1n6di"]
 shader = ExtResource("2_scxh3")
@@ -28,6 +28,7 @@ offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+theme = ExtResource("3_whiteboard")
 
 [node name="ButtonPanel" type="Panel" parent="ButtonPanelContainer" unique_id=1124337736]
 layout_mode = 1
@@ -36,7 +37,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_h8w6g")
 
 [node name="Blur" type="Panel" parent="ButtonPanelContainer/ButtonPanel" unique_id=2147014097]
 material = SubResource("ShaderMaterial_1n6di")
@@ -46,7 +46,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_h8w6g")
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0.05)
 
 [node name="MarginContainer" type="MarginContainer" parent="ButtonPanelContainer/ButtonPanel" unique_id=1628028525]
 layout_mode = 1
@@ -68,34 +69,34 @@ alignment = 1
 [node name="Resume" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=1895204069]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
+custom_minimum_size = Vector2(240, 56)
 text = "Resume"
 
 [node name="Options" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=218642742]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
+custom_minimum_size = Vector2(240, 56)
 text = "Options
 "
 
 [node name="Abandon Run" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=178363380]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
+custom_minimum_size = Vector2(240, 56)
 text = "Abandon Run
 "
 
 [node name="Main Menu" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=2111338140]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
+custom_minimum_size = Vector2(240, 56)
 text = "Main Menu
 "
 
 [node name="Quit" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=948793584]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
+custom_minimum_size = Vector2(240, 56)
 text = "Quit
 "
 

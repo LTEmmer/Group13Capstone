@@ -80,15 +80,16 @@ public partial class MainMenu : Control
 		_mainMenuContainer = GetNodeOrNull<Control>("CenterContainer");
 		_uploadPanelContainer = GetNodeOrNull<Control>("UploadPanelContainer");
 		_viewFlashcardsPanelContainer = GetNodeOrNull<Control>("ViewFlashcardsPanelContainer");
+		ApplyDefaultFontToFlashcardsPanel();
 
 		_flashcardListContainer = GetNodeOrNull<VBoxContainer>(
 			"ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/FlashcardListContainer"
 		);
 
-		var playButton = GetNodeOrNull<Button>("CenterContainer/VBoxContainer/PlayButton");
-		var quitButton = GetNodeOrNull<Button>("CenterContainer/VBoxContainer/QuitButton");
-		var uploadButton = GetNodeOrNull<Button>("CenterContainer/VBoxContainer/CardUpload");
-		var viewFlashcardsButton = GetNodeOrNull<Button>("CenterContainer/VBoxContainer/ViewImportedFlashcards");
+		var playButton = GetNodeOrNull<Button>("CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer/PlayButton");
+		var quitButton = GetNodeOrNull<Button>("CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer/QuitButton");
+		var uploadButton = GetNodeOrNull<Button>("CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer/CardUpload");
+		var viewFlashcardsButton = GetNodeOrNull<Button>("CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer/ViewImportedFlashcards");
 
 		var flashcardsBackButton = GetNodeOrNull<Button>(
 			"ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/Back"
@@ -191,12 +192,16 @@ public partial class MainMenu : Control
 			var setNameLabel = new Label();
 			setNameLabel.Text = set.DisplayName ?? "(Unnamed set)";
 			setNameLabel.AddThemeFontSizeOverride("font_size", 18);
+			if (ThemeDB.FallbackFont != null)
+				setNameLabel.AddThemeFontOverride("font", ThemeDB.FallbackFont);
 			setNameLabel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
 			setHeaderContainer.AddChild(setNameLabel);
 
 			var deleteButton = new Button();
 			deleteButton.Text = "Delete";
 			deleteButton.CustomMinimumSize = new Vector2(60, 0);
+			if (ThemeDB.FallbackFont != null)
+				deleteButton.AddThemeFontOverride("font", ThemeDB.FallbackFont);
 			AudioManager.Instance?.RegisterButton(deleteButton);
 
 			string setName = set.DisplayName;
@@ -213,6 +218,8 @@ public partial class MainMenu : Control
 					(string.IsNullOrEmpty(card.Question) ? "(no question)" : card.Question)
 					+ "  →  " +
 					(string.IsNullOrEmpty(card.Answer) ? "(no answer)" : card.Answer);
+				if (ThemeDB.FallbackFont != null)
+					cardLabel.AddThemeFontOverride("font", ThemeDB.FallbackFont);
 
 				cardLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
 				cardLabel.CustomMinimumSize = new Vector2(340, 0);
@@ -223,6 +230,8 @@ public partial class MainMenu : Control
 			spacer.CustomMinimumSize = new Vector2(0, 12);
 			_flashcardListContainer.AddChild(spacer);
 		}
+
+		ApplyDefaultFontToFlashcardsPanel();
 	}
 
 	private void OnDeleteSetPressed(string setDisplayName)
@@ -257,5 +266,24 @@ public partial class MainMenu : Control
 			_light.Position = pos;
 			_light.LookAt(target);
 		}
+	}
+
+	private void ApplyDefaultFontToFlashcardsPanel()
+	{
+		if (_viewFlashcardsPanelContainer == null || ThemeDB.FallbackFont == null)
+			return;
+
+		ApplyDefaultFontRecursive(_viewFlashcardsPanelContainer);
+	}
+
+	private static void ApplyDefaultFontRecursive(Node node)
+	{
+		if (node is Label label)
+			label.AddThemeFontOverride("font", ThemeDB.FallbackFont);
+		else if (node is Button button)
+			button.AddThemeFontOverride("font", ThemeDB.FallbackFont);
+
+		foreach (Node child in node.GetChildren())
+			ApplyDefaultFontRecursive(child);
 	}
 }
