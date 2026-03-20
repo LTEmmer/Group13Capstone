@@ -67,6 +67,7 @@ public partial class MainMenu : Control
 				vp.GetNodeOrNull<Camera3D>("Cam6"),
 				vp.GetNodeOrNull<Camera3D>("Cam7"),
 				vp.GetNodeOrNull<Camera3D>("Cam8"),
+				vp.GetNodeOrNull<Camera3D>("Cam9"),
 			};
 			_light = vp.GetNodeOrNull<SpotLight3D>("SpotLight3D");
 		}

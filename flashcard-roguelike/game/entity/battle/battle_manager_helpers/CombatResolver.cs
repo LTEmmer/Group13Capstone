@@ -144,6 +144,10 @@ public class CombatResolver
         // If successful defense, no damage; otherwise take full damage
         // Then advance to next enemy's turn regardless of defense outcome
         ExecuteEnemyAttack(!success);
+
+        // Player may have died during the attack — don't advance if battle already ended
+        if (!_state.InCombat) return;
+
         _turnController.AdvanceToNextEnemy(tree);
     }
     

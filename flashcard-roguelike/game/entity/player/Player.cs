@@ -99,8 +99,9 @@ public partial class Player : CharacterBody3D
 		{
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
-		else
+		else if (BattleManager.Instance == null || !BattleManager.Instance.IsInCombat)
 		{
+			// Only recapture the mouse if we're not in combat (combat keeps mouse visible for UI interaction)
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 	}

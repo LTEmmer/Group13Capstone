@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public partial class BattleManager : Node
 {
 	public static BattleManager Instance { get; private set; }
+	public bool IsInCombat => _state?.InCombat ?? false;
 
 	// Specialized managers
 	private BattleState _state;
@@ -316,6 +317,7 @@ public partial class BattleManager : Node
 		_state.InCombat = false;
 		_state.WaitingForAction = false;
 		_state.WaitingForFlashcard = false;
+		_flashcardChallengeManager.HideChallenge(); // Immediately clear any active flashcard (e.g. player died mid-challenge)
 		_battleCooldownTimer.Start();
 
 		// Handle UI end sequence
