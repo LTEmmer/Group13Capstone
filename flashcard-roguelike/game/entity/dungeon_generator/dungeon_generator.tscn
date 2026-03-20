@@ -5,6 +5,7 @@
 [ext_resource type="Resource" uid="uid://rv51y1ntj6fs" path="res://game/entity/dungeon_generator/room_configs/examples/example_exit_config.tres" id="3_a7trn"]
 [ext_resource type="Resource" uid="uid://f2mdjwt1wmg0" path="res://game/entity/dungeon_generator/room_configs/examples/example_combat_config.tres" id="4_wm4nc"]
 [ext_resource type="Resource" uid="uid://qbni4gx8gmkh" path="res://game/entity/dungeon_generator/room_configs/event_rooms/panel_shoot_event_config.tres" id="6_6rcja"]
+[ext_resource type="Resource" uid="uid://c2kbiufvcusr0" path="res://game/entity/dungeon_generator/room_configs/event_rooms/parkour_event_room.tres" id="6_qj5ly"]
 [ext_resource type="PackedScene" uid="uid://273l427ermxg" path="res://game/entity/connections/room_connection.tscn" id="7_qh65i"]
 [ext_resource type="Resource" uid="uid://vinykelr35nl" path="res://game/entity/dungeon_generator/room_configs/examples/treasure_config.tres" id="7_wt1qt"]
 
@@ -26,7 +27,7 @@ script = ExtResource("1_fs5hr")
 EntranceConfig = ExtResource("2_qj5ly")
 ExitConfig = ExtResource("3_a7trn")
 CombatConfigs = Array[Object]([ExtResource("4_wm4nc")])
-EventConfigs = Array[Object]([ExtResource("6_6rcja")])
+EventConfigs = Array[Object]([ExtResource("6_6rcja"), ExtResource("6_qj5ly")])
 TreasureConfigs = Array[Object]([ExtResource("7_wt1qt")])
 ConnectionScene = ExtResource("7_qh65i")
 

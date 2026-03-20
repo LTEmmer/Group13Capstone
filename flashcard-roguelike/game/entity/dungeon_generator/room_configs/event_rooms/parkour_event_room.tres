@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomConfig" format=3 uid="uid://c2kbiufvcusr0"]
+
+[ext_resource type="PackedScene" uid="uid://cutbohat4yfdk" path="res://game/entity/dungeon_generator/rooms/event_rooms/parkour_event_room_one.tscn" id="1_6swqt"]
+[ext_resource type="Script" uid="uid://bgoqu1mfuaoyg" path="res://game/entity/dungeon_generator/room_configs/RoomConfig.cs" id="1_h4ysf"]
+
+[resource]
+script = ExtResource("1_h4ysf")
+RoomType = 2
+MaxConnections = 2
+Scene = ExtResource("1_6swqt")
+metadata/_custom_type_script = "uid://bgoqu1mfuaoyg"

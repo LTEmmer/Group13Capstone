@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://06fqplvjbu5"]
 
-[ext_resource type="Script" uid="uid://1j6uc4370ncl" path="res://ShootingEventRoom.cs" id="1_d6t06"]
+[ext_resource type="Script" uid="uid://1j6uc4370ncl" path="res://game/entity/dungeon_generator/rooms/event_rooms/ShootingEventRoom.cs" id="1_d6t06"]
 [ext_resource type="PackedScene" uid="uid://bschigwu6vf3i" path="res://game/entity/turret/turret.tscn" id="2_bh6dk"]
 [ext_resource type="AudioStream" uid="uid://bj0cir78vmoaj" path="res://assets/audio/flashcard_sfx/correct.mp3" id="2_dsngy"]
 [ext_resource type="AudioStream" uid="uid://bfy4ic88v3rho" path="res://assets/audio/flashcard_sfx/incorrect.mp3" id="3_8ftga"]
