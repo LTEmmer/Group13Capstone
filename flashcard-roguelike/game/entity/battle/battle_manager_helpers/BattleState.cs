@@ -7,14 +7,14 @@ public class BattleState
 {
     // Entity references
     public Player Player { get; set; }
-    public List<EnemyExample> AliveEnemies { get; private set; } = new List<EnemyExample>();
+    public List<EnemyFSM> AliveEnemies { get; private set; } = new List<EnemyFSM>();
     
     // Component dictionaries
     public AttackComponent PlayerAttack { get; set; }
     public HealthComponent PlayerHealth { get; set; }
-    public Dictionary<EnemyExample, AttackComponent> EnemyAttackComponents { get; private set; } = new Dictionary<EnemyExample, AttackComponent>();
-    public Dictionary<EnemyExample, HealthComponent> EnemyHealthComponents { get; private set; } = new Dictionary<EnemyExample, HealthComponent>();
-    public Dictionary<EnemyExample, EnemyStatusComponent> EnemyStatusComponents { get; private set; } = new Dictionary<EnemyExample, EnemyStatusComponent>();
+    public Dictionary<EnemyFSM, AttackComponent> EnemyAttackComponents { get; private set; } = new Dictionary<EnemyFSM, AttackComponent>();
+    public Dictionary<EnemyFSM, HealthComponent> EnemyHealthComponents { get; private set; } = new Dictionary<EnemyFSM, HealthComponent>();
+    public Dictionary<EnemyFSM, EnemyStatusComponent> EnemyStatusComponents { get; private set; } = new Dictionary<EnemyFSM, EnemyStatusComponent>();
     
     // Combat flow state
     public bool InCombat { get; set; } = false;
@@ -41,14 +41,14 @@ public class BattleState
     }
     
     // Initialize state with entities
-    public void Initialize(Player player, List<EnemyExample> enemies)
+    public void Initialize(Player player, List<EnemyFSM> enemies)
     {
         Player = player;
-        AliveEnemies = new List<EnemyExample>(enemies);
+        AliveEnemies = new List<EnemyFSM>(enemies);
     }
     
     // Remove a defeated enemy from all tracking
-    public void RemoveEnemy(EnemyExample enemy)
+    public void RemoveEnemy(EnemyFSM enemy)
     {
         // Remove enemy from alive list and component dictionaries
         AliveEnemies.Remove(enemy);

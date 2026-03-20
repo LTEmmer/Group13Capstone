@@ -92,7 +92,7 @@ public partial class BattleManager : Node
 		AddChild(_battleCooldownTimer);
 	}
 
-	public void StartBattle(Player player, List<EnemyExample> enemies, Node3D room)
+	public void StartBattle(Player player, List<EnemyFSM> enemies, Node3D room)
 	{
 		if (!_canEnterBattle)
 		{
@@ -157,7 +157,7 @@ public partial class BattleManager : Node
 
 		// Start transition to battle, focusing on the first enemy for now 
 		// (can be expanded to multiple enemies or a more dynamic focus later)
-		EnemyExample focusEnemy = enemies[0];
+		EnemyFSM focusEnemy = enemies[0];
 
 		// Play transition animation and initialize combat after transition completes and positions are set
 		Transitions.Cover(focusEnemy.GlobalPosition, player, () =>
@@ -195,7 +195,7 @@ public partial class BattleManager : Node
 		return true;
 	}
 
-	private bool ValidateAndCacheEnemyComponents(List<EnemyExample> enemies)
+	private bool ValidateAndCacheEnemyComponents(List<EnemyFSM> enemies)
 	{
 		foreach (var enemy in enemies)
 		{
@@ -291,7 +291,7 @@ public partial class BattleManager : Node
 		_combatResolver.HandleFlashcardAnswer(isCorrect, GetTree());
 	}
 
-	private void OnEnemyDeath(EnemyExample enemy)
+	private void OnEnemyDeath(EnemyFSM enemy)
 	{
 		_uiCoordinator.LogMessage($"{enemy.Name} was defeated!");
 		_uiCoordinator.UpdateHealthUI();

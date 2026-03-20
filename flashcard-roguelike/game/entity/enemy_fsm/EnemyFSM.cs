@@ -1,29 +1,29 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class EnemyExample : CharacterBody3D
+public partial class EnemyFSM : CharacterBody3D
 {
+	[Export]
+	public AttackComponent attackComponent;
+	[Export]
+	public HealthComponent healthComponent;
+	[Export] 
+	public EModel EnemyModel;
 	[Export] public Area3D DetectionArea;
-
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
+	
+	public override void _Ready(){
+		healthComponent.EnemyDied += OnEnemyDeath;
 		DetectionArea.BodyEntered += OnBodyEntered;
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		MoveAndSlide();
+		EnemyModel.Update(delta);
 	}
 
-	private void OnBodyEntered(Node3D body)
-	{
+	private void OnBodyEntered(Node3D body){
 		if (body is Player player)
 		{
 			GD.Print($"Player detected by {Name}! Starting battle...");
@@ -51,8 +51,11 @@ public partial class EnemyExample : CharacterBody3D
 			and then get all enemies from the Enemies node. I tested it this way and it worked
 			*/
 			var room = GetParent<Node3D>().GetParent<Node3D>();
-			//List<EnemyExample> enemiesInRoom = GetParent<Node3D>().GetChildren().OfType<EnemyExample>().ToList();
-			//BattleManager.Instance.StartBattle(player, enemiesInRoom, room);
+			List<EnemyFSM> enemiesInRoom = GetParent<Node3D>().GetChildren().OfType<EnemyFSM>().ToList();
+			BattleManager.Instance.StartBattle(player, enemiesInRoom, room);
 		}
+	}
+	private void OnEnemyDeath(){
+		EnemyModel.SwitchTo(StateNames.death);
 	}
 }

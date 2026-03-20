@@ -17,13 +17,16 @@ config/icon="res://assets/sprites/icon.svg"
 
 [autoload]
 
+
 AudioManager="*uid://4rhky336pfbs"
 CurrentRoomManager="*res://game/current_room_manager.tscn"
+
 FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
 BattleManager="*uid://b8g15b4a5ec36"
 EventManager="*uid://u328qtrmmpqj"
 DifficultyManager="*uid://cgpb16u2nxry2"
 GameDifficultyManager="*uid://cgpb16u2nxry2"
+CurrentRoomManager="*res://game/current_room_manager.tscn"
 
 [display]
 

@@ -107,7 +107,7 @@ public class CombatResolver
         // If attack is successful, deal damage to the first alive enemy; otherwise, log a missed attack
         if (success)
         {
-            var enemyToAttack = _state.AliveEnemies.First<EnemyExample>();
+            var enemyToAttack = _state.AliveEnemies.First<EnemyFSM>();
             _state.PlayerAttack.Attack(enemyToAttack);
             _uiCoordinator.LogMessage($"You attacked {enemyToAttack.Name} for {_state.PlayerAttack.BaseDamage} damage!");
         }

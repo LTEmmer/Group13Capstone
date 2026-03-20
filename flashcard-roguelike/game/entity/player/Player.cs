@@ -114,32 +114,14 @@ public override void _PhysicsProcess(double delta)
 	{
 		//Get input 
 		if (_acceptKeyboardInput){
+			
 			InputPackage input = inputGatherer.GatherInput();
 			playerModel.Update(input,delta);
 			input.QueueFree();
-			TickFootsteps((float)delta);
 		}else{
 			playerModel.SwitchTo(StateNames.idle);
+			TickFootsteps((float)delta);
 		}
-		//Old Code
-		//if (_acceptKeyboardInput)
-		//{
-			//Vector2 inputDir = Input.GetVector("left", "right", "forward", "backward");
-			//Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
-			//if (direction != Vector3.Zero)
-			//{
-				//Velocity = new Vector3(direction.X * _speed, Velocity.Y, direction.Z * _speed);
-				//if (Input.IsActionPressed("sprint")){
-					//Velocity = Velocity * _sprintSpeed;
-				//}
-			//}
-			//else
-			//{
-				//Velocity = new Vector3(Mathf.MoveToward(Velocity.X, 0, _speed), Velocity.Y, Mathf.MoveToward(Velocity.Z, 0, _speed));
-			//}
-		//}
-//
-		//MoveAndSlide();
 	}
 
 	public void PlayJumpSound()
