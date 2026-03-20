@@ -122,6 +122,7 @@ public partial class AudioManager : Node
 
     public void PlayButtonHover()
     {
+        if (_buttonSoundsPlayer.Stream == ClickSound && _buttonSoundsPlayer.Playing) return;
         if (HoverSound != null)
         {
             _buttonSoundsPlayer.Stream = HoverSound;
