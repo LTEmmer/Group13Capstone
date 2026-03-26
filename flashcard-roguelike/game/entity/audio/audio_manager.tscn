@@ -2,11 +2,15 @@
 
 [ext_resource type="Script" uid="uid://quntfit7ys0o" path="res://game/entity/audio/AudioManager.cs" id="1_s8cgb"]
 [ext_resource type="AudioStream" uid="uid://b6ek27y7amn6d" path="res://assets/audio/flashcard_sfx/correct.mp3" id="4_fd0pu"]
+[ext_resource type="AudioStream" uid="uid://dh6k00k3l0phe" path="res://assets/audio/item_pickup_sfx/pickup_1.mp3" id="4_hcsh6"]
 [ext_resource type="AudioStream" uid="uid://bj0cir78vmoaj" path="res://assets/audio/menu_sfx/hover.mp3" id="4_u5kqu"]
 [ext_resource type="AudioStream" uid="uid://bfy4ic88v3rho" path="res://assets/audio/menu_sfx/click.mp3" id="5_8kl0b"]
+[ext_resource type="AudioStream" uid="uid://c347hnrd3s0nq" path="res://assets/audio/item_pickup_sfx/pickup_2.mp3" id="5_fxxoh"]
 [ext_resource type="AudioStream" uid="uid://db5xi1sfwjtn1" path="res://assets/audio/music/menu_music/Cakeflaps - Cate.mp3" id="5_hw8ob"]
 [ext_resource type="AudioStream" uid="uid://bwrpmgdt36xbm" path="res://assets/audio/flashcard_sfx/incorrect.mp3" id="5_vsw76"]
 [ext_resource type="AudioStream" uid="uid://dtxupy17wk6sj" path="res://assets/audio/game_conditions_sfx/game_over.mp3" id="6_8kl0b"]
+[ext_resource type="AudioStream" uid="uid://dk1ppby1n3w6x" path="res://assets/audio/item_pickup_sfx/pickup_3.mp3" id="6_hs8ax"]
+[ext_resource type="AudioStream" uid="uid://cvu3lphurevcq" path="res://assets/audio/item_pickup_sfx/pickup_4.mp3" id="7_fxxoh"]
 [ext_resource type="AudioStream" uid="uid://c075uxfa12bk7" path="res://assets/audio/music/background_music/headscratcher.mp3" id="8_vsw76"]
 [ext_resource type="AudioStream" uid="uid://gf48wlb7ok07" path="res://assets/audio/music/battle_music/Memoraphile - So Many Spiders.mp3" id="9_3vlp5"]
 [ext_resource type="AudioStream" uid="uid://dga1s15g1s475" path="res://assets/audio/music/stinger/dragon-studio-scary-scream-401725.mp3" id="10_hcsh6"]
@@ -15,6 +19,7 @@
 script = ExtResource("1_s8cgb")
 HoverSound = ExtResource("4_u5kqu")
 ClickSound = ExtResource("5_8kl0b")
+ItemPickupSounds = Array[AudioStream]([ExtResource("4_hcsh6"), ExtResource("5_fxxoh"), ExtResource("6_hs8ax"), ExtResource("7_fxxoh")])
 CorrectSound = ExtResource("4_fd0pu")
 WrongSound = ExtResource("5_vsw76")
 GameOverSound = ExtResource("6_8kl0b")
@@ -28,6 +33,8 @@ BattleStinger = ExtResource("10_hcsh6")
 [node name="CorrectSounds" type="AudioStreamPlayer" parent="." unique_id=2028219655]
 
 [node name="GameConditions" type="AudioStreamPlayer" parent="." unique_id=1729431443]
+
+[node name="ItemPickupSounds" type="AudioStreamPlayer" parent="." unique_id=1024209258]
 
 [node name="Stinger" type="AudioStreamPlayer" parent="." unique_id=306049734]
 

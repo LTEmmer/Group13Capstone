@@ -9,6 +9,7 @@ public partial class AudioManager : Node
     // UI sounds
     [Export] public AudioStream HoverSound;
     [Export] public AudioStream ClickSound;
+    [Export] public AudioStream[] ItemPickupSounds;
 
     // Flashcard feedback
     [Export] public AudioStream CorrectSound;
@@ -30,6 +31,7 @@ public partial class AudioManager : Node
     private AudioStreamPlayer _buttonSoundsPlayer;
     private AudioStreamPlayer _correctSoundsPlayer;
     private AudioStreamPlayer _gameConditionsPlayer;
+    private AudioStreamPlayer _itemPickupSoundsPlayer;
     private AudioStreamPlayer _stingerPlayer;
 
     // Two music players for crossfading
@@ -47,6 +49,7 @@ public partial class AudioManager : Node
         _buttonSoundsPlayer = GetNode<AudioStreamPlayer>("ButtonSounds");
         _correctSoundsPlayer = GetNode<AudioStreamPlayer>("CorrectSounds");
         _gameConditionsPlayer = GetNode<AudioStreamPlayer>("GameConditions");
+        _itemPickupSoundsPlayer = GetNode<AudioStreamPlayer>("ItemPickupSounds");
         _stingerPlayer = GetNode<AudioStreamPlayer>("Stinger");
         _musicPlayerA = GetNode<AudioStreamPlayer>("MusicPlayerA");
         _musicPlayerB = GetNode<AudioStreamPlayer>("MusicPlayerB");
@@ -117,7 +120,7 @@ public partial class AudioManager : Node
         {
             return;
         }
-        
+
         if (_buttonSoundsPlayer.Stream == ClickSound && _buttonSoundsPlayer.Playing) return;
         if (HoverSound != null)
         {
@@ -132,6 +135,15 @@ public partial class AudioManager : Node
         {
             _buttonSoundsPlayer.Stream = ClickSound;
             _buttonSoundsPlayer.Play();
+        }
+    }
+
+    public void PlayItemPickupSound()
+    {
+        if (ItemPickupSounds.Length > 0)
+        {
+            _itemPickupSoundsPlayer.Stream = ItemPickupSounds[GD.Randi() % (uint)ItemPickupSounds.Length];
+            _itemPickupSoundsPlayer.Play();
         }
     }
 
