@@ -107,12 +107,17 @@ public partial class AudioManager : Node
     public void RegisterButton(Button button)
     {
         if (button == null) return;
-        button.MouseEntered += PlayButtonHover;
+        button.MouseEntered += () => PlayButtonHover(button);
         button.Pressed += PlayButtonClick;
     }
 
-    public void PlayButtonHover()
+    public void PlayButtonHover(Button button = null)
     {
+        if (button?.Disabled == true) 
+        {
+            return;
+        }
+        
         if (_buttonSoundsPlayer.Stream == ClickSound && _buttonSoundsPlayer.Playing) return;
         if (HoverSound != null)
         {

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dltt8htnkkipr" path="res://game/ui/main_menu/MainMenu.cs" id="1_gof3u"]
 [ext_resource type="Script" uid="uid://b1s7bonqrcj7q" path="res://game/ui/main_menu/UploadPanelContainer.cs" id="2_2ww3u"]
 [ext_resource type="PackedScene" uid="uid://d18ywib3x7tev" path="res://assets/animations/Animation Library[Standard]/Godot/AnimationLibrary_Godot_Standard.glb" id="3_model"]
-[ext_resource type="Theme" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="4_theme"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="4_theme"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mkp5f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -25,8 +25,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_gof3u")
 theme = ExtResource("4_theme")
+script = ExtResource("1_gof3u")
 
 [node name="BackgroundViewport" type="SubViewportContainer" parent="." unique_id=-1294967295]
 layout_mode = 1
@@ -53,31 +53,31 @@ spot_range = 8.0
 spot_angle = 35.0
 
 [node name="Cam1" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=-1294967292]
-transform = Transform3D(5.9604645e-08, 0.99443585, 0.10534425, -1, 5.9272995e-08, 6.2790066e-09, 0, -0.10534425, 0.99443585, 0.16560173, 2.2026777, 1.0222867)
+transform = Transform3D(5.9604645e-08, 0.99443585, 0.10534425, -1, 5.9272995e-08, 6.2790066e-09, 0, -0.10534425, 0.99443585, 0.16560173, 2.515336, 1.2154537)
 
 [node name="Cam2" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=413763845]
-transform = Transform3D(0.6712938, 0, -0.7411914, 0, 1, 0, 0.7411914, 0, 0.6712938, -0.90961313, 1.3935753, 0.103762984)
+transform = Transform3D(0.6712938, 0, -0.7411914, 0, 1, 0, 0.7411914, 0, 0.6712938, -0.97419536, 1.3282784, 0.00063955784)
 
 [node name="Cam3" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=1268678437]
 transform = Transform3D(-0.43067196, -0.65640146, -0.61940205, -0.37472066, 0.7544118, -0.53893167, 0.8210397, -3.6298268e-08, -0.5708712, -0.71754193, 0.05743313, -0.712826)
 
 [node name="Cam4" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=1130836983]
-transform = Transform3D(-0.93639076, 1.395331e-08, -0.35095936, -0.19631492, 0.8289204, 0.52378565, 0.2909174, 0.5593665, -0.77619344, -1.358258, 1.7016766, -0.71092653)
+transform = Transform3D(-0.6452377, 0.61984116, -0.44661546, 0.68647975, 0.72694725, 0.017127115, 0.33528194, -0.29554138, -0.8945621, -0.9934047, 1.6589684, -0.4990275)
 
 [node name="Cam5" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=753691370]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.2769651, 1.1944325, -0.9358233)
 
 [node name="Cam6" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=500933708]
-transform = Transform3D(0.9152904, 0.17362326, 0.36345354, 0, 0.9023297, -0.43104663, -0.40279463, 0.39453286, 0.8258937, 1.999595, 0, 1.1466677)
+transform = Transform3D(0.9152904, 0.17362328, 0.3634535, -0.069369875, 0.95679426, -0.28236952, -0.39677614, 0.23323737, 0.8877889, 2.266715, 0.16904795, 1.1204891)
 
 [node name="Cam7" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=740516408]
-transform = Transform3D(-0.58145577, 5.0832476e-08, 0.813578, -8.742278e-08, -1, -3.5527137e-15, 0.813578, -7.112525e-08, 0.58145577, 0.12454346, 1.6404184, 0.40727633)
+transform = Transform3D(-0.58145577, 5.0832476e-08, 0.813578, -8.742278e-08, -1, -3.5527137e-15, 0.813578, -7.112525e-08, 0.58145577, 0.1623154, 1.6404184, 0.7382063)
 
 [node name="Cam8" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=122529893]
-transform = Transform3D(0.83709866, 0.37523392, -0.39807716, 0, 0.72767705, 0.68591994, 0.547052, -0.5741827, 0.6091374, -1.048763, 1.9830616, 0.23001468)
+transform = Transform3D(0.7625791, 0.64401466, -0.060977746, -0.3455134, 0.4851786, 0.8032573, 0.5468945, -0.5914786, 0.5925028, -0.80004984, 2.5400407, 0.097405076)
 
 [node name="Cam9" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=882986777]
-transform = Transform3D(0.976616, 0, 0.21499102, 0, 1, 0, -0.21499102, 0, 0.976616, -1.0203094, 0.9237287, 2.0935173)
+transform = Transform3D(0.976616, 0, 0.21499102, 0, 1, 0, -0.21499102, 0, 0.976616, -1.2102095, 0.9237287, 2.0935173)
 
 [node name="AnimationLibrary_Godot_Standard" parent="BackgroundViewport/SubViewport" unique_id=1197229922 instance=ExtResource("3_model")]
 
@@ -89,11 +89,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="WhiteboardPanel" type="PanelContainer" parent="CenterContainer"]
-layout_mode = 2
+[node name="WhiteboardPanel" type="PanelContainer" parent="CenterContainer" unique_id=856586313]
 custom_minimum_size = Vector2(520, 420)
+layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/WhiteboardPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/WhiteboardPanel" unique_id=935320165]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/WhiteboardPanel/MarginContainer" unique_id=913965203]
@@ -103,9 +103,9 @@ alignment = 1
 
 [node name="Label" type="Label" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=651380197]
 layout_mode = 2
-horizontal_alignment = 1
 theme_override_font_sizes/font_size = 44
 text = "Flash Card Roguelike"
+horizontal_alignment = 1
 
 [node name="PlayButton" type="Button" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1296768342]
 custom_minimum_size = Vector2(320, 56)
@@ -153,6 +153,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Blur" type="Panel" parent="ViewFlashcardsPanelContainer/Panel" unique_id=2000000003]
+modulate = Color(1, 1, 1, 0.05)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,7 +161,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-modulate = Color(1, 1, 1, 0.05)
 
 [node name="MarginContainer" type="MarginContainer" parent="ViewFlashcardsPanelContainer/Panel" unique_id=2000000004]
 layout_mode = 1
@@ -202,11 +202,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_2ww3u")
 
-[node name="WhiteboardPanel" type="PanelContainer" parent="UploadPanelContainer"]
-layout_mode = 2
+[node name="WhiteboardPanel" type="PanelContainer" parent="UploadPanelContainer" unique_id=436326620]
 custom_minimum_size = Vector2(620, 360)
+layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="UploadPanelContainer/WhiteboardPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="UploadPanelContainer/WhiteboardPanel" unique_id=2020345890]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer" unique_id=526669163]
@@ -216,9 +216,9 @@ alignment = 1
 
 [node name="Label" type="Label" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1505921739]
 layout_mode = 2
-horizontal_alignment = 1
 theme_override_font_sizes/font_size = 38
 text = "Upload CSV File"
+horizontal_alignment = 1
 
 [node name="LineEdit" type="LineEdit" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1658352499]
 custom_minimum_size = Vector2(420, 50)
