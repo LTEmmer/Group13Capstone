@@ -111,6 +111,15 @@ public partial class Player : CharacterBody3D
 		_acceptKeyboardInput = accept;
 	}
 
+	public void ForceLookAt(Vector3 target)
+	{	
+		// Rotate the player to face the target horizontally
+		LookAt(new Vector3(target.X, GlobalPosition.Y, target.Z), Vector3.Up);
+
+		// Rotate the camera pivot to look at the target vertically, slightly lower
+		_cameraPivot.LookAt(new(target.X, target.Y - 1, target.Z), Vector3.Up);
+	}
+
 public override void _PhysicsProcess(double delta)
 	{
 		//Get input 

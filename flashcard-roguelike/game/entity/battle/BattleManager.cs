@@ -134,11 +134,6 @@ public partial class BattleManager : Node
 		// Initialize state with entities
 		_state.Initialize(player, enemies);
 
-		// Disable player input and stop movement
-		player.SetAcceptKeyboardInput(false);
-		player.Velocity = Vector3.Zero;
-		Input.MouseMode = Input.MouseModeEnum.Visible;
-
 		// Get and validate player components
 		if (!ValidateAndCachePlayerComponents(player))
 		{
@@ -229,6 +224,11 @@ public partial class BattleManager : Node
 	// Called once the cover transition finishes positions entities then starts the reveal
 	private void OnCoverTransitionComplete()
 	{
+		// Disable player input and stop movement after transition covers the player
+		_state.Player.SetAcceptKeyboardInput(false);
+		_state.Player.Velocity = Vector3.Zero;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+
 		_setup.SetupBattlePositions(_state.Player, _state.AliveEnemies);
 		Transitions.Reveal(InitializeCombat);
 	}

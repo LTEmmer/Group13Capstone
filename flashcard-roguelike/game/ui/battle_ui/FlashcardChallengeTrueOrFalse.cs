@@ -126,6 +126,8 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 		// The statement shown was either the correct answer or an incorrect one
 		bool isCorrect = DetermineIfCorrect(selectedTrue);
 
+		GD.Print($"Player selected {(selectedTrue ? "True" : "False")}. Statement was {(isCorrect ? "Correct" : "Incorrect")}. Answer: {_currentCard.Answer}, Incorrect Option: {_incorrectCard.Answer}, Question: {_currentCard.Question}");
+
 		// Play sound
 		if (isCorrect)
 		{

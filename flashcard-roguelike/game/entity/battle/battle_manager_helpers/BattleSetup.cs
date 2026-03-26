@@ -54,6 +54,12 @@ public class BattleSetup
                 continue;
             }
             enemies[i].GlobalPosition = enemySpot.GlobalPosition + new Vector3(0, EnemyYOffset, 0);
+
+            // Force player to look at the first enemy spot for centering cam
+            if (i == 0)
+            {
+                player.ForceLookAt(enemySpot.GlobalPosition + new Vector3(0, EnemyYOffset, 0));
+            }       
         }
     }
     
