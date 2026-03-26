@@ -103,7 +103,7 @@ public partial class ParkourEventRoom : Room, IEventRoom
 		_challenge = FlashcardTFScene.Instantiate<FlashcardChallengeTrueOrFalse>();
 		AddChild(_challenge);
 
-		var card = _challenge.LoadRandomCard();
+		var card = FlashcardManager.Instance.GetRandomCard();
 		if (card == null)
 		{
 			GD.PrintErr("No flashcards available for ParkourEventRoomOne challenge.");

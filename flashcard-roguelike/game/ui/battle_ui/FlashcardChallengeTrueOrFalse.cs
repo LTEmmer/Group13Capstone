@@ -20,6 +20,11 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 
 	private Action<bool> _onAnswerSubmitted;
 
+	// Shared Random instance avoids creating new Random() on every call
+	private static readonly Random _rng = new();
+
+	private const float FeedbackDisplayTime = 4.0f; // Seconds to show correct/incorrect feedback before hiding
+
     public bool Visibility => Visible;
 
 	public override void _Ready()
@@ -62,7 +67,7 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
         _questionLabel.Text = $"Question:\n{card.Question}";
 
 		// Randomly decide if the statement shown is True or False, 50/50
-		bool showTrue = new Random().Next(2) == 0;
+		bool showTrue = _rng.Next(2) == 0;
         _shownStatementIsCorrect = showTrue; // Track if the shown statement is correct for answer evaluation
 
 		if (showTrue)
@@ -146,7 +151,7 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 		}
 
 		// Wait a moment then hide and emit result
-		GetTree().CreateTimer(4.0f).Timeout += () =>
+		GetTree().CreateTimer(FeedbackDisplayTime).Timeout += () =>
 		{
 			_trueButton.Modulate = Colors.White;
 			_falseButton.Modulate = Colors.White;
@@ -159,57 +164,23 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
         return _shownStatementIsCorrect == selectedTrue;
 	}
 
-	public Flashcard LoadRandomCard()
+	private static Flashcard GetRandomDifferentCard(Flashcard excludeCard)
 	{
-		List<FlashcardSet> sets = FlashcardManager.Instance.ActiveFlashCardLists;
+		// Pick a random card and check if its the same
+		Flashcard card = FlashcardManager.Instance?.GetRandomCard();
 
-		if (sets == null || sets.Count == 0)
+		if (FlashcardManager.Instance.GetActiveCardCount() <= 1)
 		{
-			GD.PrintErr("FlashcardChallengeTrueOrFalse: No flashcard sets available.");
-			return null;
+			// If there's only one card, we can't get a different one, so return card
+			return card;
 		}
 
-        // Get a random card from all active sets
-		List<Flashcard> allCards = new List<Flashcard>();
-		foreach (var set in sets)
+		while (card == excludeCard)
 		{
-			if (set.Cards != null)
-				allCards.AddRange(set.Cards);
+			card = FlashcardManager.Instance?.GetRandomCard();
 		}
 
-		if (allCards.Count == 0)
-		{
-			GD.PrintErr("FlashcardChallengeTrueOrFalse: No flashcards available in sets.");
-			return null;
-		}
-
-		Random random = new Random();
-		return allCards[random.Next(allCards.Count)];
-	}
-
-	private Flashcard GetRandomDifferentCard(Flashcard excludeCard)
-	{
-		List<FlashcardSet> sets = FlashcardManager.Instance.ActiveFlashCardLists;
-
-		if (sets == null || sets.Count == 0) return excludeCard;
-
-        // Get a list of all other cards
-		List<Flashcard> otherCards = new List<Flashcard>();
-		foreach (var set in sets)
-		{
-			if (set.Cards != null)
-			
-            foreach (var card in set.Cards)
-            {
-                if (card == excludeCard) continue; // Skip the card we want to exclude
-                otherCards.Add(card);
-            } 
-		}
-
-		if (otherCards.Count == 0) return excludeCard;
-
-        // Return a random other card
-		Random random = new Random();
-		return otherCards[random.Next(otherCards.Count)];
+		// Fall back to the original card if the deck has only one card
+		return card;
 	}
 }

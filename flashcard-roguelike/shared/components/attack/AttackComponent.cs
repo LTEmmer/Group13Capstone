@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class AttackComponent : Node
 {
@@ -7,6 +6,9 @@ public partial class AttackComponent : Node
 
 	[Export] public AudioStream[] AttackSounds;
 	[Export] public AudioStream[] MissSounds;
+
+	private const float PlayerVolumeDb = -30f;
+	private const float EnemyVolumeDb = -10f;
 
 	private AudioStreamPlayer3D _audioPlayer;
 
@@ -18,11 +20,11 @@ public partial class AttackComponent : Node
 		// Check if parent is a player node
 		if (GetParent() is Player)
 		{
-			_audioPlayer.VolumeDb = -30f; // Reduce volume for player attacks
+			_audioPlayer.VolumeDb = PlayerVolumeDb;
 		}
 		else
 		{
-			_audioPlayer.VolumeDb = -10f; // Slightly louder for enemies
+			_audioPlayer.VolumeDb = EnemyVolumeDb;
 		}
 
 		GetParent().CallDeferred(Node.MethodName.AddChild, _audioPlayer);

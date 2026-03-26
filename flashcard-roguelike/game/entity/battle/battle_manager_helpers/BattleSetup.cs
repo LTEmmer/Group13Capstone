@@ -5,6 +5,8 @@ using System.Collections.Generic;
 // Manages the physical arrangement of combatants in the battle scene.
 public class BattleSetup
 {
+    private const float EnemyYOffset = 1.25f; // Vertical offset to place enemies above their marker spot
+
     private Transform3D _originalPlayerTransform;
     private Transform3D[] _originalEnemyTransforms;
     private Node3D _battleArea;
@@ -34,13 +36,24 @@ public class BattleSetup
         }
         
         // Move player to player spot
-        Marker3D playerSpot = _battleArea.GetNode<Marker3D>("PlayerSpot");
+        Marker3D playerSpot = _battleArea.GetNodeOrNull<Marker3D>("PlayerSpot");
+        if (playerSpot == null)
+        {
+            GD.PrintErr("BattleSetup: PlayerSpot marker not found in BattleArea.");
+            return;
+        }
         player.GlobalTransform = playerSpot.GlobalTransform;
-        
+
         // Move each enemy to their respective spots
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].GlobalPosition = _battleArea.GetNode<Marker3D>($"EnemySpot{i}").GlobalPosition +  new Vector3(0, 1.25F, 0);
+            Marker3D enemySpot = _battleArea.GetNodeOrNull<Marker3D>($"EnemySpot{i}");
+            if (enemySpot == null)
+            {
+                GD.PrintErr($"BattleSetup: EnemySpot{i} marker not found in BattleArea.");
+                continue;
+            }
+            enemies[i].GlobalPosition = enemySpot.GlobalPosition + new Vector3(0, EnemyYOffset, 0);
         }
     }
     

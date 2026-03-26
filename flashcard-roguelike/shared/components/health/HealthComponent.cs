@@ -15,7 +15,6 @@ public partial class HealthComponent : Node
 	[Export] public float MaxHealth = 100f;
 	[Export] public bool IsPlayer = false;
 
-	[Export] public bool IsEnemy = false;
 
 	[Export] public AudioStream[] HurtSounds;
 	[Export] public AudioStream[] BlockSounds;
@@ -23,6 +22,9 @@ public partial class HealthComponent : Node
 
 	
 	public float CurrentHealth { get; private set; }
+
+	private const float PlayerVolumeDb = -30f;
+	private const float EnemyVolumeDb = -10f;
 
 	private AudioStreamPlayer3D _audioPlayer;
 
@@ -34,11 +36,11 @@ public partial class HealthComponent : Node
 
 		if (IsPlayer)
 		{
-			_audioPlayer.VolumeDb = -30f; // Make player death sound louder
+			_audioPlayer.VolumeDb = PlayerVolumeDb;
 		}
 		else
 		{
-			_audioPlayer.VolumeDb = -10f; // Reduce volume for enemy sounds
+			_audioPlayer.VolumeDb = EnemyVolumeDb;
 		}
 
 		GetParent().CallDeferred(Node.MethodName.AddChild, _audioPlayer);
@@ -98,14 +100,10 @@ public partial class HealthComponent : Node
 			EmitSignal(SignalName.PlayerDied);
 			ShowGameOver();
 		}
-		else if (IsEnemy)
-		{
-			EmitSignal(SignalName.EnemyDied);
-		}
 		else
 		{
-			// Non-player entities get removed
-			GetParent().QueueFree();
+			// Emit enemy death signal for non-player deaths
+			EmitSignal(SignalName.EnemyDied);
 		}
 		
 		EmitSignal(SignalName._OnDeath);

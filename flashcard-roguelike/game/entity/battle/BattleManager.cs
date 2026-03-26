@@ -76,11 +76,6 @@ public partial class BattleManager : Node
 			ActiveUI.OnActionSelected += OnPlayerActionSelected;
 		}
 
-		if (_flashcardChallenge != null)
-		{
-			_flashcardChallenge.OnAnswerSubmitted += OnFlashcardAnswered;
-		}
-
 		// Connect combat resolver events
 		_combatResolver.OnBattleEnded += (victory) => EndBattle(victory, false);
 		_combatResolver.OnBattleEndedWithRun += (success) => EndBattle(false, success);
@@ -161,14 +156,7 @@ public partial class BattleManager : Node
 		EnemyFSM focusEnemy = enemies[0];
 
 		// Play transition animation and initialize combat after transition completes and positions are set
-		Transitions.Cover(focusEnemy.GlobalPosition, player, () =>
-		{
-			_setup.SetupBattlePositions(player, _state.AliveEnemies);
-			Transitions.Reveal(() =>
-			{
-				InitializeCombat();
-			});
-		});
+		Transitions.Cover(focusEnemy.GlobalPosition, _state.Player, OnCoverTransitionComplete);
 	}
 
 	private bool ValidateAndCachePlayerComponents(Player player)
@@ -238,6 +226,13 @@ public partial class BattleManager : Node
 		return true;
 	}
 
+	// Called once the cover transition finishes positions entities then starts the reveal
+	private void OnCoverTransitionComplete()
+	{
+		_setup.SetupBattlePositions(_state.Player, _state.AliveEnemies);
+		Transitions.Reveal(InitializeCombat);
+	}
+
 	private void InitializeCombat()
 	{
 		_state.InCombat = true;
@@ -299,7 +294,6 @@ public partial class BattleManager : Node
 		_state.RemoveEnemy(enemy);
 
 		// Check if all enemies are dead
-		// Redundant check since combat resolver also checks after each attack, just in case
 		if (_state.AliveEnemies.Count == 0)
 		{
 			EndBattle(true, false);
@@ -319,6 +313,12 @@ public partial class BattleManager : Node
 		_state.WaitingForFlashcard = false;
 		_flashcardChallengeManager.HideChallenge(); // Immediately clear any active flashcard (e.g. player died mid-challenge)
 		_battleCooldownTimer.Start();
+
+		// Disconnect player death signal to prevent duplication
+		if (_state.PlayerHealth != null)
+		{
+			_state.PlayerHealth._OnDeath -= OnPlayerDeath;
+		}
 
 		// Handle UI end sequence
 		_uiCoordinator.HandleBattleEndUI(victory, ran, () =>
@@ -375,17 +375,6 @@ public partial class BattleManager : Node
 			EventManager.Instance.raise("on_battle_lost","test");
 			return;
 		}
-		
-		// ADEMAR: Here you can put any other code that needs to be run immediately when battle ends, 
-		// for whatever your event manager needs to do.
-		// All that is done here is resetting state, playing UI, and resetting positions.
-		// You may also want to look at the OnDeath handlers for player and enemy to see how they trigger battle 
-		// end when one side dies, and make sure to add any necessary logic there as well, (like QueueFreeing enemies, etc.)
-		// since right now nothing actually queuefrees the enemy after death, it just slides out the UI and disables their status display. 
-		// For now all combat is independent of room, enemies act as combat initiators (the ExampleEnemy) 
-		// and connections spawn regardless of victory or defeat, though you could modify some stuff to disable 
-		// connections until victory where your event manager would trigger them to open, 
-		// or something like that through an event here. 
 	}
 
 	private void OnBattleCooldownTimeout()

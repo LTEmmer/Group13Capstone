@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public partial class FlashcardChallenge : Control, IFlashcardChallenge
 {
@@ -21,6 +19,8 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 	private Flashcard _currentCard;
 	private bool _isActive = false;
 	private Action<bool> _onAnswerSubmittedCallback;
+
+	private const float FeedbackDisplayTime = 4.0f; // Seconds to show correct/incorrect feedback before hiding
 
 	public override void _Ready()
 	{
@@ -139,7 +139,7 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 		}
 
 		// Wait a moment then hide and emit result
-        GetTree().CreateTimer(4.0f).Timeout += () =>
+        GetTree().CreateTimer(FeedbackDisplayTime).Timeout += () =>
 		{
 			_answerInput.Modulate = Colors.White;
 			HideChallenge(() => 
@@ -147,37 +147,5 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 				_onAnswerSubmittedCallback?.Invoke(isCorrect);
 			});
 		};
-	}
-
-	public Flashcard LoadRandomCard()
-	{
-		// Get a random flashcard from available sets
-		List<FlashcardSet> sets = FlashcardManager.Instance?.ActiveFlashCardLists;
-
-		if (sets == null || sets.Count == 0)
-		{
-			GD.PrintErr("FlashcardChallenge: No flashcard sets available.");
-			return null;
-		}
-
-		// Collect all cards from all active sets
-		List<Flashcard> allCards = new List<Flashcard>();
-
-        // Loop through each set and add its cards to the allCards list, checking for null to avoid errors
-		foreach (var set in sets)
-		{
-			if (set.Cards != null)
-				allCards.AddRange(set.Cards);
-		}
-
-		if (allCards.Count == 0)
-		{
-			GD.PrintErr("FlashcardChallenge: No flashcards available in sets.");
-			return null;
-		}
-
-		// Return a random card
-		Random random = new Random();
-		return allCards[random.Next(allCards.Count)];
 	}
 }

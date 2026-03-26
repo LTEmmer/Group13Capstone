@@ -122,13 +122,6 @@ public class CombatResolver
         // Update health UI after attack
         _uiCoordinator.UpdateHealthUI();
         
-        // Check if all enemies are dead
-        if (_state.AliveEnemies.Count == 0)
-        {
-            OnBattleEnded?.Invoke(true);
-            return;
-        }
-        
         // Start enemy turns
         _turnController.StartEnemyTurns();
     }

@@ -14,14 +14,14 @@ public partial class GameDifficultyManager : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Instance = this; 
+
 		EventManager.Instance.listen("on_battle_victory", new Callable(this, MethodName.on_battle_victory));
 		EventManager.Instance.listen("on_ran_from_battle", new Callable(this, MethodName.on_ran_from_battle));
 		EventManager.Instance.listen("on_battle_lost", new Callable(this, MethodName.on_battle_lost));
 		// Add one more event when player reaches new floor update _baselineDiffcultyScore, floors wont be implemented this sprint
 		// Most likely will just increase by flat 1.0 value every floor
 		_currentDifficultyScore = _baselineDifficultyScore;
-
-		Instance = this;
 	}
 	
 	public int getEnemyCount(){
