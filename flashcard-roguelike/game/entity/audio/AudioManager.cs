@@ -25,7 +25,7 @@ public partial class AudioManager : Node
     // Battle stinger — plays on top of music when entering battle
     [Export] public AudioStream BattleStinger;
 
-    [Export] public float SoundReduction = -12.5f;
+    [Export] public float SoundReduction = -12.5f; // Currently does nothing
 
     private AudioStreamPlayer _buttonSoundsPlayer;
     private AudioStreamPlayer _correctSoundsPlayer;
@@ -50,14 +50,6 @@ public partial class AudioManager : Node
         _stingerPlayer = GetNode<AudioStreamPlayer>("Stinger");
         _musicPlayerA = GetNode<AudioStreamPlayer>("MusicPlayerA");
         _musicPlayerB = GetNode<AudioStreamPlayer>("MusicPlayerB");
-
-        // Turn down volume of all
-        _buttonSoundsPlayer.VolumeDb = SoundReduction + 7.5f; // UI sounds slightly louder
-        _correctSoundsPlayer.VolumeDb = SoundReduction + 7.5f; // Feedback sounds slightly louder
-        _gameConditionsPlayer.VolumeDb = SoundReduction + 7.5f; // Game condition sounds slightly louder
-        _stingerPlayer.VolumeDb = SoundReduction;
-        _musicPlayerA.VolumeDb = SoundReduction;
-        _musicPlayerB.VolumeDb = SoundReduction;
     }
 
     // --- Music ---
@@ -76,11 +68,10 @@ public partial class AudioManager : Node
         var tween = CreateTween();
         tween.SetParallel(true);
         tween.TweenProperty(fadeOut, "volume_db", -80f, fadeDuration);
-        tween.TweenProperty(fadeIn,  "volume_db", SoundReduction, fadeDuration);
+        tween.TweenProperty(fadeIn,  "volume_db", 0, fadeDuration);
         tween.Chain().TweenCallback(Callable.From(() =>
         {
             fadeOut.Stop();
-            fadeOut.VolumeDb = SoundReduction;
         }));
 
         _usingPlayerA = !_usingPlayerA;

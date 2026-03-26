@@ -7,25 +7,12 @@ public partial class AttackComponent : Node
 	[Export] public AudioStream[] AttackSounds;
 	[Export] public AudioStream[] MissSounds;
 
-	private const float PlayerVolumeDb = -30f;
-	private const float EnemyVolumeDb = -10f;
-
 	private AudioStreamPlayer3D _audioPlayer;
 
 	public override void _Ready()
 	{
 		// Create an AudioStreamPlayer3D for playing attack/miss sounds
 		_audioPlayer = new AudioStreamPlayer3D();
-		
-		// Check if parent is a player node
-		if (GetParent() is Player)
-		{
-			_audioPlayer.VolumeDb = PlayerVolumeDb;
-		}
-		else
-		{
-			_audioPlayer.VolumeDb = EnemyVolumeDb;
-		}
 
 		GetParent().CallDeferred(Node.MethodName.AddChild, _audioPlayer);
 	}

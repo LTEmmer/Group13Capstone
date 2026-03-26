@@ -23,8 +23,6 @@ public partial class HealthComponent : Node
 	
 	public float CurrentHealth { get; private set; }
 
-	private const float PlayerVolumeDb = -30f;
-	private const float EnemyVolumeDb = -10f;
 
 	private AudioStreamPlayer3D _audioPlayer;
 
@@ -33,15 +31,6 @@ public partial class HealthComponent : Node
 		CurrentHealth = MaxHealth;
 		// Create an AudioStreamPlayer3D for playing hurt/death sounds
 		_audioPlayer = new AudioStreamPlayer3D();
-
-		if (IsPlayer)
-		{
-			_audioPlayer.VolumeDb = PlayerVolumeDb;
-		}
-		else
-		{
-			_audioPlayer.VolumeDb = EnemyVolumeDb;
-		}
 
 		GetParent().CallDeferred(Node.MethodName.AddChild, _audioPlayer);
 	}
