@@ -42,6 +42,7 @@ public partial class Player : CharacterBody3D
 
 	private Node3D _cameraPivot;
 	private float _pitch;
+	public bool SuppressNextLandSound { get; set; } = false;
 
 	private Vector3 _targetVelocity = Vector3.Zero;
 	private int _speed { get; set; } = 10;
@@ -145,6 +146,12 @@ public override void _PhysicsProcess(double delta)
 
 	public void PlayLandSound()
 	{
+		if (SuppressNextLandSound) // For after connections
+		{ 
+			SuppressNextLandSound = false; 
+			return; 
+		}
+
 		if (LandSounds == null || LandSounds.Length == 0) return;
 
 		_jumpSoundPlayer.Stream = LandSounds[GD.Randi() % (uint)LandSounds.Length];
