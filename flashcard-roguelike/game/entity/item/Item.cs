@@ -24,6 +24,8 @@ public partial class Item : Node3D
     {
         if (Resource == null || collector is not Player player) return;
 
+        AudioManager.Instance.PlayItemPickupSound();
+
         foreach (var effect in Resource.Effects)
             effect.Apply(player, new ItemInstance(Resource));
     }

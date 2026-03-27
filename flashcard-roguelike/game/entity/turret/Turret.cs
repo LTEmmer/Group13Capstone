@@ -55,6 +55,7 @@ public partial class Turret : Node3D
         if (ShootSounds != null && ShootSounds.Length > 0)
         {
             _audioPlayer.Stream = ShootSounds[GD.Randi() % ShootSounds.Length];
+            _audioPlayer.PitchScale = (float)GD.RandRange(.75, 1.25); // Slight random pitch variation
             _audioPlayer.Play();
         }
 

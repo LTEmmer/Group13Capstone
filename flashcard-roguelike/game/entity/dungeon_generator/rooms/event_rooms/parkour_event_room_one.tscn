@@ -1,13 +1,13 @@
 [gd_scene format=4 uid="uid://cutbohat4yfdk"]
 
-[ext_resource type="Script" uid="uid://c05gcj2hfflb8" path="res://game/entity/hazards/ScalingPlatform.cs" id="8_8jd16"]
-[ext_resource type="Script" uid="uid://ivih3u0lxvvf" path="res://game/entity/hazards/BlinkingPlatform.cs" id="9_c02ok"]
+[ext_resource type="Script" uid="uid://bvs732ljwgra3" path="res://game/entity/hazards/ScalingPlatform.cs" id="8_8jd16"]
+[ext_resource type="Script" uid="uid://dil04vdvtxvrn" path="res://game/entity/hazards/BlinkingPlatform.cs" id="9_c02ok"]
 [ext_resource type="PackedScene" uid="uid://cxokfn2emr2xn" path="res://game/ui/battle_ui/flashcard_challenge_true_false.tscn" id="Scene_flashcard"]
 [ext_resource type="PackedScene" uid="uid://cm05m68d10agu" path="res://game/entity/npcs/base_npc.tscn" id="Scene_npc"]
-[ext_resource type="Script" uid="uid://b86me767xlakg" path="res://game/entity/hazards/DamageZone.cs" id="Script_damage"]
-[ext_resource type="Script" uid="uid://deyrud2bcn3xv" path="res://game/entity/hazards/MovingPlatform.cs" id="Script_platform"]
-[ext_resource type="Script" uid="uid://don8t7u8sae1u" path="res://game/entity/dungeon_generator/rooms/event_rooms/ParkourEventRoom.cs" id="Script_room"]
-[ext_resource type="Shader" uid="uid://cqaeuemm56ld4" path="res://assets/shaders/water.gdshader" id="Shader_water"]
+[ext_resource type="Script" uid="uid://ba07nbm5r86bb" path="res://game/entity/hazards/DamageZone.cs" id="Script_damage"]
+[ext_resource type="Script" uid="uid://b5yw0do0mol40" path="res://game/entity/hazards/MovingPlatform.cs" id="Script_platform"]
+[ext_resource type="Script" uid="uid://ithhp2apuwn0" path="res://game/entity/dungeon_generator/rooms/event_rooms/ParkourEventRoom.cs" id="Script_room"]
+[ext_resource type="Shader" uid="uid://ctvfod2f28tjw" path="res://assets/shaders/water.gdshader" id="Shader_water"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_c02ok"]
 _surfaces = [{
@@ -24,13 +24,13 @@ _surfaces = [{
 data = PackedVector3Array(-38.75, -77.7196, -38.75, 38.75, -77.7196, -38.75, -38.75, 47.2804, -38.75, -38.75, -77.7196, -38.75, -38.75, 47.2804, 38.75, -38.75, -77.7196, 38.75, -38.75, -77.7196, -38.75, -38.75, -77.7196, 38.75, 38.75, -77.7196, 38.75, -38.75, -77.7196, -38.75, -38.75, 47.2804, -38.75, -38.75, 47.2804, 38.75, -38.75, 47.2804, -38.75, 38.75, 47.2804, -38.75, -38.75, 47.2804, 38.75, -38.75, -77.7196, 38.75, -38.75, 47.2804, 38.75, 38.75, 47.2804, 38.75, -38.75, -77.7196, -38.75, 38.75, -77.7196, 38.75, 38.75, -77.7196, -38.75, 38.75, -77.7196, -38.75, 38.75, -77.7196, 38.75, 38.75, 47.2804, -38.75, -38.75, -77.7196, 38.75, 38.75, 47.2804, 38.75, 38.75, -77.7196, 38.75, -38.75, 47.2804, -38.75, 38.75, -77.7196, -38.75, 38.75, 47.2804, -38.75, -38.75, 47.2804, 38.75, 38.75, 47.2804, -38.75, 38.75, 47.2804, 38.75, 38.75, -77.7196, 38.75, 38.75, 47.2804, 38.75, 38.75, 47.2804, -38.75, -37.5, -37.5, -37.5, 37.5, -37.5, 37.5, -37.5, -37.5, 37.5, -37.5, -37.5, -37.5, -37.5, 37.5, 37.5, -37.5, 37.5, -37.5, -37.5, -37.5, -37.5, -37.5, 37.5, -37.5, 37.5, -37.5, -37.5, -37.5, 37.5, -37.5, -37.5, 37.5, 37.5, 37.5, 37.5, -37.5, -37.5, -37.5, -37.5, -37.5, -37.5, 37.5, -37.5, 37.5, 37.5, -37.5, -37.5, 37.5, 37.5, 37.5, 37.5, -37.5, 37.5, 37.5, -37.5, -37.5, -37.5, 37.5, -37.5, -37.5, 37.5, -37.5, 37.5, -37.5, 37.5, -37.5, 37.5, 37.5, -37.5, 37.5, -37.5, -37.5, 37.5, -37.5, -37.5, 37.5, 37.5, -37.5, 37.5, -37.5, 37.5, -37.5, -37.5, 37.5, 37.5, -37.5, 37.5, 37.5, 37.5, 37.5, -37.5, 37.5, 37.5, 37.5, 37.5, 37.5, 37.5, 37.5, -37.5, 37.5, -37.5, 37.5, 37.5, 37.5, -37.5, 37.5, 37.5, 37.5)
 
 [sub_resource type="BoxMesh" id="Mesh_start"]
-size = Vector3(12, 1, 6)
+size = Vector3(20, 1, 10)
 
 [sub_resource type="StandardMaterial3D" id="Mat_ledge"]
 albedo_color = Color(0.55, 0.52, 0.48, 1)
 
-[sub_resource type="BoxShape3D" id="Col_start"]
-size = Vector3(12, 1, 6)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4to0x"]
+points = PackedVector3Array(-10, -0.5, -5, -10, 0.5, -5, 10, -0.5, -5, -10, -0.5, 5, -10, 0.5, 5, 10, 0.5, -5, 10, -0.5, 5, 10, 0.5, 5)
 
 [sub_resource type="BoxMesh" id="Mesh_exit"]
 size = Vector3(12, 1, 6)
@@ -95,10 +95,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.533313, 32.361946)
 mesh = SubResource("Mesh_start")
 surface_material_override/0 = SubResource("Mat_ledge")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="StartLedge" unique_id=1369101344]
+[node name="StaticBody3D" type="StaticBody3D" parent="StartLedge" unique_id=853765230]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StartLedge/StaticBody3D" unique_id=1473184420]
-shape = SubResource("Col_start")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StartLedge/StaticBody3D" unique_id=1241496117]
+shape = SubResource("ConvexPolygonShape3D_4to0x")
 
 [node name="ExitLedge" type="MeshInstance3D" parent="." unique_id=319223445]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.533313, -31.527563)
@@ -132,7 +132,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29999995, 0)
 shape = SubResource("ConvexPolygonShape3D_n7dii")
 
 [node name="NPC" parent="." unique_id=100000010 instance=ExtResource("Scene_npc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2556434, 6.0290866, 30.361946)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.81645, 6.0290866, 27.93879)
 
 [node name="Label3D" type="Label3D" parent="NPC" unique_id=1657950002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9278517, 0)
@@ -151,10 +151,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.6774416, -30.532434)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.533313, 31.361946)
 
 [node name="0" type="Marker3D" parent="Entrances" unique_id=934156117]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4642677, -1.8062999, 2.6708508)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.099, -1.806, 3.325)
 
 [node name="1" type="Marker3D" parent="Entrances" unique_id=411924845]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.464, -1.806, 2.671)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.098503, -1.8059998, 3.325386)
 
 [node name="Exits" type="Node3D" parent="." unique_id=1565686847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.533313, -29.807714)

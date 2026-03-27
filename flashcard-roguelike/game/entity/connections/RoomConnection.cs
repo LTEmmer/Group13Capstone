@@ -75,6 +75,13 @@ public partial class RoomConnection : Node3D
 		GetParent().GetParent().GetParent().RemoveChild(player);
 		targetRoom.AddChild(player);
 		player.GlobalPosition = dest;
+
+		// Disable landing sound for next connection
+		if (player is Player p)
+		{
+			p.SuppressNextLandSound = true;
+		}
+
 		if (CurrentRoomManager.Instance != null)
 			CurrentRoomManager.Instance.CurrentRoomId = TargetRoomId;
 	}

@@ -60,13 +60,8 @@ public partial class ShootingEventRoom : Room, IEventRoom
         RoomTurret.ActivateTurret(_playerCamera);
         _panelsNode.Visible = true; // Show panels when event starts
 
-        // Get all flashcards from active sets for panel pair assignment
-        List<FlashcardSet> sets = FlashcardManager.Instance.ActiveFlashCardLists;
-        List<Flashcard> flashcards = new();
-        foreach (FlashcardSet set in sets)
-        {
-            flashcards.AddRange(set.Cards);
-        }
+        // Get all active flashcards
+        List<Flashcard> flashcards = FlashcardManager.Instance.GetActiveCards();
 
         Random rng = new Random();
         for (int i = 0; i < _pairs; i++)

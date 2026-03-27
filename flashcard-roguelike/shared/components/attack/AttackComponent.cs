@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class AttackComponent : Node
 {
@@ -14,16 +13,6 @@ public partial class AttackComponent : Node
 	{
 		// Create an AudioStreamPlayer3D for playing attack/miss sounds
 		_audioPlayer = new AudioStreamPlayer3D();
-		
-		// Check if parent is a player node
-		if (GetParent() is Player)
-		{
-			_audioPlayer.VolumeDb = -30f; // Reduce volume for player attacks
-		}
-		else
-		{
-			_audioPlayer.VolumeDb = -10f; // Slightly louder for enemies
-		}
 
 		GetParent().CallDeferred(Node.MethodName.AddChild, _audioPlayer);
 	}

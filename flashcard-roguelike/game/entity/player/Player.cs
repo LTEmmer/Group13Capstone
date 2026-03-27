@@ -42,6 +42,7 @@ public partial class Player : CharacterBody3D
 
 	private Node3D _cameraPivot;
 	private float _pitch;
+	public bool SuppressNextLandSound { get; set; } = false;
 
 	private Vector3 _targetVelocity = Vector3.Zero;
 	private int _speed { get; set; } = 10;
@@ -111,6 +112,15 @@ public partial class Player : CharacterBody3D
 		_acceptKeyboardInput = accept;
 	}
 
+	public void ForceLookAt(Vector3 target)
+	{	
+		// Rotate the player to face the target horizontally
+		LookAt(new Vector3(target.X, GlobalPosition.Y, target.Z), Vector3.Up);
+
+		// Rotate the camera pivot to look at the target vertically, slightly lower
+		_cameraPivot.LookAt(new(target.X, target.Y - 1, target.Z), Vector3.Up);
+	}
+
 public override void _PhysicsProcess(double delta)
 	{
 		//Get input 
@@ -136,6 +146,12 @@ public override void _PhysicsProcess(double delta)
 
 	public void PlayLandSound()
 	{
+		if (SuppressNextLandSound) // For after connections
+		{ 
+			SuppressNextLandSound = false; 
+			return; 
+		}
+
 		if (LandSounds == null || LandSounds.Length == 0) return;
 
 		_jumpSoundPlayer.Stream = LandSounds[GD.Randi() % (uint)LandSounds.Length];

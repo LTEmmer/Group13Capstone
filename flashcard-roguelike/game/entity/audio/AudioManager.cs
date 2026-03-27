@@ -9,6 +9,7 @@ public partial class AudioManager : Node
     // UI sounds
     [Export] public AudioStream HoverSound;
     [Export] public AudioStream ClickSound;
+    [Export] public AudioStream[] ItemPickupSounds;
 
     // Flashcard feedback
     [Export] public AudioStream CorrectSound;
@@ -25,11 +26,12 @@ public partial class AudioManager : Node
     // Battle stinger — plays on top of music when entering battle
     [Export] public AudioStream BattleStinger;
 
-    [Export] public float SoundReduction = -12.5f;
+    [Export] public float SoundReduction = -12.5f; // Currently does nothing
 
     private AudioStreamPlayer _buttonSoundsPlayer;
     private AudioStreamPlayer _correctSoundsPlayer;
     private AudioStreamPlayer _gameConditionsPlayer;
+    private AudioStreamPlayer _itemPickupSoundsPlayer;
     private AudioStreamPlayer _stingerPlayer;
 
     // Two music players for crossfading
@@ -47,17 +49,10 @@ public partial class AudioManager : Node
         _buttonSoundsPlayer = GetNode<AudioStreamPlayer>("ButtonSounds");
         _correctSoundsPlayer = GetNode<AudioStreamPlayer>("CorrectSounds");
         _gameConditionsPlayer = GetNode<AudioStreamPlayer>("GameConditions");
+        _itemPickupSoundsPlayer = GetNode<AudioStreamPlayer>("ItemPickupSounds");
         _stingerPlayer = GetNode<AudioStreamPlayer>("Stinger");
         _musicPlayerA = GetNode<AudioStreamPlayer>("MusicPlayerA");
         _musicPlayerB = GetNode<AudioStreamPlayer>("MusicPlayerB");
-
-        // Turn down volume of all
-        _buttonSoundsPlayer.VolumeDb = SoundReduction + 7.5f; // UI sounds slightly louder
-        _correctSoundsPlayer.VolumeDb = SoundReduction + 7.5f; // Feedback sounds slightly louder
-        _gameConditionsPlayer.VolumeDb = SoundReduction + 7.5f; // Game condition sounds slightly louder
-        _stingerPlayer.VolumeDb = SoundReduction;
-        _musicPlayerA.VolumeDb = SoundReduction;
-        _musicPlayerB.VolumeDb = SoundReduction;
     }
 
     // --- Music ---
@@ -76,11 +71,10 @@ public partial class AudioManager : Node
         var tween = CreateTween();
         tween.SetParallel(true);
         tween.TweenProperty(fadeOut, "volume_db", -80f, fadeDuration);
-        tween.TweenProperty(fadeIn,  "volume_db", SoundReduction, fadeDuration);
+        tween.TweenProperty(fadeIn,  "volume_db", 0, fadeDuration);
         tween.Chain().TweenCallback(Callable.From(() =>
         {
             fadeOut.Stop();
-            fadeOut.VolumeDb = SoundReduction;
         }));
 
         _usingPlayerA = !_usingPlayerA;
@@ -116,12 +110,17 @@ public partial class AudioManager : Node
     public void RegisterButton(Button button)
     {
         if (button == null) return;
-        button.MouseEntered += PlayButtonHover;
+        button.MouseEntered += () => PlayButtonHover(button);
         button.Pressed += PlayButtonClick;
     }
 
-    public void PlayButtonHover()
+    public void PlayButtonHover(Button button = null)
     {
+        if (button?.Disabled == true) 
+        {
+            return;
+        }
+
         if (_buttonSoundsPlayer.Stream == ClickSound && _buttonSoundsPlayer.Playing) return;
         if (HoverSound != null)
         {
@@ -136,6 +135,15 @@ public partial class AudioManager : Node
         {
             _buttonSoundsPlayer.Stream = ClickSound;
             _buttonSoundsPlayer.Play();
+        }
+    }
+
+    public void PlayItemPickupSound()
+    {
+        if (ItemPickupSounds.Length > 0)
+        {
+            _itemPickupSoundsPlayer.Stream = ItemPickupSounds[GD.Randi() % (uint)ItemPickupSounds.Length];
+            _itemPickupSoundsPlayer.Play();
         }
     }
 

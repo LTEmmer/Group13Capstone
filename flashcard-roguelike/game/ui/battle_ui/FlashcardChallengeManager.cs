@@ -64,11 +64,10 @@ public class FlashcardChallengeManager
 		}
 	}
 
-	// Load a random flashcard (delegates to current challenge)
+	// Load a random flashcard, delegates to FlashcardManager which owns the card data
 	public Flashcard LoadRandomCard()
 	{
-		if (_currentChallenge == null) return _textChallenge.LoadRandomCard();
-		return _currentChallenge.LoadRandomCard();
+		return FlashcardManager.Instance?.GetRandomCard();
 	}
 
 	private IFlashcardChallenge SelectChallengeByDifficulty(float difficulty)

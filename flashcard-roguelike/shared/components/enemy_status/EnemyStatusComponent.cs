@@ -24,6 +24,11 @@ public partial class EnemyStatusComponent : Node3D
 	private AttackComponent _attack;
 	private bool _isVisible;
 
+	// Shared Random instance avoids creating new Random() on every slide animation
+	private static readonly Random _rng = new();
+
+	private const float LabelSlideOffset = 150f; // Off-screen distance labels slide from/to during animations
+
 	public override void _Ready()
 	{
 		// Get references to the labels
@@ -85,13 +90,12 @@ public partial class EnemyStatusComponent : Node3D
 		_isVisible = true;
 
 		// Calculate offset based on label size + small margin, not full screen width
-		float offset = 150f; // Reasonable off-screen distance for label width
-		Random rand = new Random();
+		float offset = LabelSlideOffset; // Reasonable off-screen distance for label width
 
 		// Each label starts off-screen to the left or right randomly
-		_nameLabel.Position = _nameLabel.Position with { X = rand.Next(0, 2) == 0 ? -offset : offset };
-		_statsLabel.Position = _statsLabel.Position with { X = rand.Next(0, 2) == 0 ? -offset : offset };
-		_healthLabel.Position = _healthLabel.Position with { X = rand.Next(0, 2) == 0 ? -offset : offset };
+		_nameLabel.Position = _nameLabel.Position with { X = _rng.Next(0, 2) == 0 ? -offset : offset };
+		_statsLabel.Position = _statsLabel.Position with { X = _rng.Next(0, 2) == 0 ? -offset : offset };
+		_healthLabel.Position = _healthLabel.Position with { X = _rng.Next(0, 2) == 0 ? -offset : offset };
 
 		Tween tween = CreateTween();
 		
@@ -113,20 +117,19 @@ public partial class EnemyStatusComponent : Node3D
 		_isVisible = false;
 
 		// Use same reasonable offset as SlideIn
-		float offset = 150f;
-		Random rand = new Random();
+		float offset = LabelSlideOffset;
 
 		// Each label exits to the left or right randomly
 		Tween tween = CreateTween();
 
 		// Animate each label sliding out to the left or right randomly with a slight delay between them for a staggered effect
 		tween.SetParallel(true);
-		tween.TweenProperty(_nameLabel, "position:x", rand.Next(0, 2) == 0 ? -offset : offset, SlideDuration)
+		tween.TweenProperty(_nameLabel, "position:x", _rng.Next(0, 2) == 0 ? -offset : offset, SlideDuration)
 			 .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
-		tween.TweenProperty(_statsLabel, "position:x", rand.Next(0, 2) == 0 ? -offset : offset, SlideDuration)
+		tween.TweenProperty(_statsLabel, "position:x", _rng.Next(0, 2) == 0 ? -offset : offset, SlideDuration)
 			 .SetDelay(0.05f)
 			 .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
-		tween.TweenProperty(_healthLabel, "position:x", rand.Next(0, 2) == 0 ? -offset : offset, SlideDuration)
+		tween.TweenProperty(_healthLabel, "position:x", _rng.Next(0, 2) == 0 ? -offset : offset, SlideDuration)
 			 .SetDelay(0.1f)
 			 .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
 

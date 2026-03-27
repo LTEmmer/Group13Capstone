@@ -13,9 +13,6 @@ public interface IFlashcardChallenge
     // Hide the challenge with optional completion callback
     void HideChallenge(Action onComplete = null);
     
-    // Load a random flashcard from available sets
-    Flashcard LoadRandomCard();
-    
     // Get the visibility state
     bool Visibility { get; }
 }
