@@ -48,15 +48,15 @@ public partial class MainMenu : Control
 		if (vp != null)
 		{
 			_cameras = new Camera3D[] {
-				vp.GetNodeOrNull<Camera3D>("Cam1"),
-				vp.GetNodeOrNull<Camera3D>("Cam2"),
-				vp.GetNodeOrNull<Camera3D>("Cam3"),
-				vp.GetNodeOrNull<Camera3D>("Cam4"),
-				vp.GetNodeOrNull<Camera3D>("Cam5"),
-				vp.GetNodeOrNull<Camera3D>("Cam6"),
-				vp.GetNodeOrNull<Camera3D>("Cam7"),
-				vp.GetNodeOrNull<Camera3D>("Cam8"),
-				vp.GetNodeOrNull<Camera3D>("Cam9"),
+				vp.GetNodeOrNull<Camera3D>("Cameras/Cam1"),
+				vp.GetNodeOrNull<Camera3D>("Cameras/Cam2"),
+				vp.GetNodeOrNull<Camera3D>("Cameras/Cam3"),
+				vp.GetNodeOrNull<Camera3D>("Cameras/Cam4"),
+				vp.GetNodeOrNull<Camera3D>("Cameras/Cam5"),
+				vp.GetNodeOrNull<Camera3D>("Cameras/Cam6"),
+				vp.GetNodeOrNull<Camera3D>("Cameras/Cam7"),
+				vp.GetNodeOrNull<Camera3D>("Cameras/Cam8"),
+				vp.GetNodeOrNull<Camera3D>("Cameras/Cam9"),
 			};
 			_light = vp.GetNodeOrNull<SpotLight3D>("SpotLight3D");
 		}

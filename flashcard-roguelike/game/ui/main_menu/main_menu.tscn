@@ -1,9 +1,15 @@
-[gd_scene format=3 uid="uid://h18wimcwtwvr"]
+[gd_scene format=4 uid="uid://h18wimcwtwvr"]
 
 [ext_resource type="Script" uid="uid://dltt8htnkkipr" path="res://game/ui/main_menu/MainMenu.cs" id="1_gof3u"]
 [ext_resource type="Script" uid="uid://b1s7bonqrcj7q" path="res://game/ui/main_menu/UploadPanelContainer.cs" id="2_2ww3u"]
+[ext_resource type="Texture2D" uid="uid://b0gi538rd7txo" path="res://assets/backgrounds/prettysleepy-stars-3750824.png" id="3_0p1rw"]
 [ext_resource type="PackedScene" uid="uid://d18ywib3x7tev" path="res://assets/animations/Animation Library[Standard]/Godot/AnimationLibrary_Godot_Standard.glb" id="3_model"]
-[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="4_theme"]
+[ext_resource type="Theme" uid="uid://cdutdkbhfle2e" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="4_theme"]
+[ext_resource type="Shader" uid="uid://dixadmc1j5rnp" path="res://game/ui/main_menu/BackgroundScroll.gdshader" id="5_scroll"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_scroll"]
+shader = ExtResource("5_scroll")
+shader_parameter/scroll_speed = 0.0050000002375
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mkp5f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -13,10 +19,20 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_mkp5f")
 
 [sub_resource type="Environment" id="Environment_0p1rw"]
-background_mode = 1
 sky = SubResource("Sky_1x88f")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_m1bca"]
+_surfaces = [{
+"aabb": AABB(-8.75, -1.5, -8.75, 17.5, 5, 17.5),
+"attribute_data": PackedByteArray("q6oqPwAAgD+rqio/AAAAP77iKz/jK34/q6oqPwAAgD++4is/4yt+PwAAgD8AAIA/AACAPwAAAD+rqio/AAAAPwAAgD8AAAAAq6oqPwAAAD++4is/HdQBP77iKz/jK34/AAAAAAAAgD+rqqo+AAAAP6uqqj4AAIA/q6oqPwAAAD/sx34/HdQBP77iKz8d1AE/AAAAAAAAgD8AAAAAAAAAP6uqqj4AAAA/q6oqPwAAgD+Xcik/4yt+P5dyKT8d1AE/q6oqPwAAgD/SGq0+4yt+P5dyKT/jK34/q6oqPwAAgD+Xcik/HdQBP6uqKj8AAAA/AAAAAAAAAD8AAAAAAAAAAKuqqj4AAAAAq6oqPwAAAD+Xcik/HdQBP6uqqj4AAAA/AACAPwAAgD++4is/4yt+P+zHfj/jK34/AACAPwAAgD/sx34/4yt+P+zHfj8d1AE/q6oqPwAAAD+rqqo+AAAAP6uqKj8AAAAAq6oqPwAAAD8AAIA/AAAAP+zHfj8d1AE/AAAAAAAAAD+rqqo+AAAAAKuqqj4AAAA/AACAPwAAgD/sx34/HdQBPwAAgD8AAAA/AACAPwAAAACrqio/AAAAP6uqKj8AAAAAq6oqPwAAgD+rqqo+AACAP9IarT7jK34/q6qqPgAAgD+rqqo+AAAAP9IarT7jK34/q6qqPgAAAD+Xcik/HdQBP9IarT4d1AE/q6qqPgAAAD+rqqo+AAAAAKuqKj8AAAAAq6qqPgAAAD/SGq0+HdQBP9IarT7jK34/AACAPwAAAACrqio/AAAAPwAAgD8AAAA/q6qqPgAAgD+rqqo+AAAAPwAAAAAAAIA/AAAAAAAAAD8AAAAAAACAP6uqqj4AAAA/AAAAAAAAAAAAAAAAAAAAP6uqqj4AAAAAq6oqPwAAAACrqqo+AAAAP6uqKj8AAAA/AAAAAAAAAD+rqqo+AAAAP6uqqj4AAAAAAACAPwAAAACrqio/AAAAAKuqKj8AAAA/q6qqPgAAAD+rqio/AAAAAKuqqj4AAAAA"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 96,
+"vertex_data": PackedByteArray("AAAMwQAAwL8AAAzBAAAMwQAAwL8AAAxBAAAIwQAAwL8AAAjBAAAMwQAAwL8AAAzBAAAIwQAAwL8AAAjBAAAMQQAAwL8AAAzBAAAMwQAAwL8AAAzBAAAMQQAAwL8AAAzBAAAMwQAAYEAAAAzBAAAMwQAAwL8AAAxBAAAIwQAAwL8AAAhBAAAIwQAAwL8AAAjBAAAMwQAAwL8AAAzBAAAMwQAAYEAAAAxBAAAMwQAAwL8AAAxBAAAMwQAAwL8AAAxBAAAIQQAAwL8AAAhBAAAIwQAAwL8AAAhBAAAMwQAAwL8AAAzBAAAMwQAAYEAAAAzBAAAMwQAAYEAAAAxBAAAMwQAAYEAAAAzBAAAIwQAAYEAAAAjBAAAIwQAAYEAAAAhBAAAMwQAAYEAAAAzBAAAIQQAAYEAAAAjBAAAIwQAAYEAAAAjBAAAMwQAAYEAAAAzBAAAIwQAAYEAAAAhBAAAMwQAAYEAAAAxBAAAMwQAAwL8AAAxBAAAMwQAAYEAAAAxBAAAMQQAAYEAAAAxBAAAMwQAAYEAAAAxBAAAIwQAAYEAAAAhBAAAMQQAAYEAAAAxBAAAMQQAAwL8AAAzBAAAIwQAAwL8AAAjBAAAIQQAAwL8AAAjBAAAMQQAAwL8AAAzBAAAIQQAAwL8AAAjBAAAIQQAAwL8AAAhBAAAMQQAAwL8AAAzBAAAMQQAAwL8AAAxBAAAMQQAAYEAAAAzBAAAMwQAAwL8AAAxBAAAMQQAAwL8AAAxBAAAIQQAAwL8AAAhBAAAMwQAAwL8AAAxBAAAMQQAAYEAAAAxBAAAMQQAAwL8AAAxBAAAMQQAAwL8AAAzBAAAIQQAAwL8AAAhBAAAMQQAAwL8AAAxBAAAMwQAAYEAAAAzBAAAMQQAAwL8AAAzBAAAMQQAAYEAAAAzBAAAMwQAAYEAAAAzBAAAMQQAAYEAAAAzBAAAIQQAAYEAAAAjBAAAMQQAAYEAAAAzBAAAMQQAAYEAAAAxBAAAIQQAAYEAAAAjBAAAMQQAAYEAAAAxBAAAIwQAAYEAAAAhBAAAIQQAAYEAAAAhBAAAMQQAAwL8AAAxBAAAMQQAAYEAAAAxBAAAMQQAAYEAAAAzBAAAMQQAAYEAAAAxBAAAIQQAAYEAAAAhBAAAIQQAAYEAAAAjBAAAIwQAAYEAAAAjBAAAIQQAAwL8AAAjBAAAIwQAAwL8AAAjBAAAIwQAAwL8AAAhBAAAIwQAAYEAAAAhBAAAIwQAAwL8AAAjBAAAIwQAAYEAAAAjBAAAIwQAAwL8AAAjBAAAIwQAAYEAAAAhBAAAIwQAAYEAAAAhBAAAIwQAAwL8AAAhBAAAIQQAAYEAAAAhBAAAIQQAAYEAAAAjBAAAIQQAAwL8AAAhBAAAIQQAAwL8AAAjBAAAIwQAAwL8AAAhBAAAIQQAAwL8AAAhBAAAIQQAAYEAAAAhBAAAIwQAAYEAAAAjBAAAIQQAAYEAAAAjBAAAIQQAAwL8AAAjBAAAIQQAAwL8AAAhBAAAIQQAAYEAAAAjBAAAIQQAAYEAAAAhB/38AAP7//7//fwAA////v/9/AAD+//+//38AAP7//7//fwAA/v//v/9/AAD///+//////wAA/7//////AAD/v/////8AAP+//38AAP///7//fwAA////v/9/AAD+//+/AAD/f/9//78AAP9//3//vwAA/3//f/+//38AAP///7//fwAA////v/9/AAD///+/AAD/f/9//78AAP9//3//vwAA/3//f/+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3//f////7//f/9/////v/9//3////+//3///wAA/7//f///AAD/v/9///8AAP+//38AAP///7//fwAA/v//v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+/////f/////////9//////////3///////38AAP///7//fwAA////v/9/AAD///+//3//f////7//f/9/////v/9//3////+//38AAP///7//fwAA////v/9/AAD///+//////wAA/7//////AAD/v/////8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+/////f/////////9//////////3///////3///wAA/7//f///AAD/v/9///8AAP+//3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//z////9//3//P////3//f/8/////f/9//z////9//3//P////3//f/8//////////z//////////P/////////8/AAD/f///AAAAAP9///8AAAAA/3///wAA/////////z//////////P/////////8//3//fwAA/z//f/9/AAD/P/9//38AAP8/AAD/f///AAAAAP9///8AAAAA/3///wAA")
+}]
 
 [node name="main menu" type="Control" unique_id=1885237886]
 layout_mode = 3
@@ -27,6 +43,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_theme")
 script = ExtResource("1_gof3u")
+
+[node name="BackgroundImage" type="TextureRect" parent="." unique_id=691189400]
+material = SubResource("ShaderMaterial_scroll")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0p1rw")
+stretch_mode = 2
 
 [node name="BackgroundViewport" type="SubViewportContainer" parent="." unique_id=-1294967295]
 layout_mode = 1
@@ -39,6 +66,7 @@ mouse_filter = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="BackgroundViewport" unique_id=-1294967294]
+transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
@@ -52,32 +80,64 @@ light_energy = 2.0
 spot_range = 8.0
 spot_angle = 35.0
 
-[node name="Cam1" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=-1294967292]
+[node name="Cameras" type="Node3D" parent="BackgroundViewport/SubViewport" unique_id=1199996169]
+
+[node name="Cam1" type="Camera3D" parent="BackgroundViewport/SubViewport/Cameras" unique_id=-1294967292]
 transform = Transform3D(5.9604645e-08, 0.99443585, 0.10534425, -1, 5.9272995e-08, 6.2790066e-09, 0, -0.10534425, 0.99443585, 0.16560173, 2.515336, 1.2154537)
 
-[node name="Cam2" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=413763845]
+[node name="Cam2" type="Camera3D" parent="BackgroundViewport/SubViewport/Cameras" unique_id=413763845]
 transform = Transform3D(0.6712938, 0, -0.7411914, 0, 1, 0, 0.7411914, 0, 0.6712938, -0.97419536, 1.3282784, 0.00063955784)
 
-[node name="Cam3" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=1268678437]
-transform = Transform3D(-0.43067196, -0.65640146, -0.61940205, -0.37472066, 0.7544118, -0.53893167, 0.8210397, -3.6298268e-08, -0.5708712, -0.71754193, 0.05743313, -0.712826)
+[node name="Cam3" type="Camera3D" parent="BackgroundViewport/SubViewport/Cameras" unique_id=1268678437]
+transform = Transform3D(-0.43067196, -0.65640146, -0.61940205, -0.37472066, 0.7544118, -0.53893167, 0.8210397, -3.629827e-08, -0.5708712, -0.71754193, 0.05743313, -0.712826)
 
-[node name="Cam4" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=1130836983]
-transform = Transform3D(0.051893923, -0.07247173, 0.99601954, 0.68647975, 0.72694725, 0.017127173, -0.7252949, 0.6828584, 0.08747452, 0.7616605, 1.6612457, -0.499)
+[node name="Cam4" type="Camera3D" parent="BackgroundViewport/SubViewport/Cameras" unique_id=1130836983]
+transform = Transform3D(0.051893923, -0.07247173, 0.99601954, 0.68647975, 0.72694725, 0.017127171, -0.7252949, 0.6828584, 0.08747452, 0.7616605, 1.6612457, -0.499)
 
-[node name="Cam5" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=753691370]
+[node name="Cam5" type="Camera3D" parent="BackgroundViewport/SubViewport/Cameras" unique_id=753691370]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.0872598, 1.1944325, -0.9358233)
 
-[node name="Cam6" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=500933708]
+[node name="Cam6" type="Camera3D" parent="BackgroundViewport/SubViewport/Cameras" unique_id=500933708]
 transform = Transform3D(0.9152904, 0.17362328, 0.3634535, -0.069369875, 0.95679426, -0.28236952, -0.39677614, 0.23323737, 0.8877889, 2.266715, 0.16904795, 1.1204891)
 
-[node name="Cam7" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=740516408]
+[node name="Cam7" type="Camera3D" parent="BackgroundViewport/SubViewport/Cameras" unique_id=740516408]
 transform = Transform3D(-0.58145577, 5.0832476e-08, 0.813578, -8.742278e-08, -1, -3.5527137e-15, 0.813578, -7.112525e-08, 0.58145577, 0.1623154, 1.6404184, 0.7382063)
 
-[node name="Cam8" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=122529893]
+[node name="Cam8" type="Camera3D" parent="BackgroundViewport/SubViewport/Cameras" unique_id=122529893]
 transform = Transform3D(0.7625791, 0.64401466, -0.060977746, -0.3455134, 0.4851786, 0.8032573, 0.5468945, -0.5914786, 0.5925028, -0.80004984, 2.5400407, 0.097405076)
 
-[node name="Cam9" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=882986777]
+[node name="Cam9" type="Camera3D" parent="BackgroundViewport/SubViewport/Cameras" unique_id=882986777]
 transform = Transform3D(0.976616, 0, 0.21499102, 0, 1, 0, -0.21499102, 0, 0.976616, -1.2102095, 0.9237287, 2.0935173)
+
+[node name="Decoration" type="Node3D" parent="BackgroundViewport/SubViewport" unique_id=1727092926]
+
+[node name="WallLighting1" type="SpotLight3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=313565923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1292343, -1.0642554)
+light_energy = 1.896
+spot_range = 14.5
+spot_angle = 82.44
+
+[node name="WallLighting2" type="SpotLight3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=344834675]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.129, 1.064)
+light_energy = 1.896
+spot_range = 14.5
+spot_angle = 82.44
+
+[node name="WallLighting3" type="SpotLight3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=2128290577]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.064, 1.129, 0)
+light_energy = 1.896
+spot_range = 14.5
+spot_angle = 82.44
+
+[node name="WallLighting4" type="SpotLight3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=2024420822]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.064, 1.129, 0)
+light_energy = 1.896
+spot_range = 14.5
+spot_angle = 82.44
+
+[node name="WallsTEMP" type="MeshInstance3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=1476987077]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("ArrayMesh_m1bca")
 
 [node name="AnimationLibrary_Godot_Standard" parent="BackgroundViewport/SubViewport" unique_id=1197229922 instance=ExtResource("3_model")]
 
