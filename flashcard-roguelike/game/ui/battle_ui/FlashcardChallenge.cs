@@ -20,7 +20,7 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 	private bool _isActive = false;
 	private Action<bool> _onAnswerSubmittedCallback;
 
-	private const float FeedbackDisplayTime = 4.0f; // Seconds to show correct/incorrect feedback before hiding
+	private const float FeedbackDisplayTime = 2.5f; // Seconds to show correct/incorrect feedback before hiding
 
 	public override void _Ready()
 	{

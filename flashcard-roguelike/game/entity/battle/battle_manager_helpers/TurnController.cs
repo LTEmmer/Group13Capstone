@@ -52,7 +52,7 @@ public class TurnController
         _uiCoordinator.LogMessage($"{enemy.Name} attacks!");
         
         // Trigger defense challenge for the player
-        _combatResolver.StartDefenseChallenge(_state.CurrentEnemyIndex);
+        _combatResolver.StartDefenseChallenge();
     }
     
     // Move to the next enemy turn after a delay

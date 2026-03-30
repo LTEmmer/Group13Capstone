@@ -22,6 +22,12 @@ public class BattleState
     public bool WaitingForFlashcard { get; set; } = false;
     public string PendingAction { get; set; } = "";
     public int CurrentEnemyIndex { get; set; } = 0;
+
+    // Boss battle state
+    public bool IsBossBattle { get; set; } = false;
+    public int ConsecutiveCorrect { get; set; } = 0;
+    public int BossStreakRequired { get; set; } = 3;
+    public float BossBlockReduction { get; set; } = 0.5f;
     
     // Reset all state for a new battle
     public void Reset()
@@ -31,6 +37,8 @@ public class BattleState
         WaitingForFlashcard = false;
         PendingAction = "";
         CurrentEnemyIndex = 0;
+        IsBossBattle = false;
+        ConsecutiveCorrect = 0;
         AliveEnemies.Clear();
         EnemyAttackComponents.Clear();
         EnemyHealthComponents.Clear();
