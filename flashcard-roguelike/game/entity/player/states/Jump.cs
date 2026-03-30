@@ -17,6 +17,7 @@ public partial class Jump : BaseState
 	public double JumpTiming = 0.2;
 	
 	private bool _jumped = false;
+	private const float PitchVariance = 0.08f;
 
 	public override Array CheckRelevance(InputPackage input, double delta)
 	{
@@ -68,6 +69,12 @@ public partial class Jump : BaseState
 	{
 		player.staminaComponent.CurrentStamina -= StaminaDrain; //Update player stamina
 		//player.Velocity = player.Velocity.Normalized() * Speed;
-		player.PlayJumpSound();
+
+		if (player.JumpSounds != null && player.JumpSounds.Length > 0)
+		{
+			player.JumpSoundPlayer.Stream = player.JumpSounds[GD.Randi() % (uint)player.JumpSounds.Length];
+			player.JumpSoundPlayer.PitchScale = 1.0f + (float)GD.RandRange(-PitchVariance, PitchVariance);
+			player.JumpSoundPlayer.Play();
+		}
 	}
 }

@@ -6,6 +6,10 @@ using System.Collections.Generic;
 public partial class Run : BaseState
 {
 	private int _speed { get; set; } = 10;
+	private float _footstepTimer = 0f;
+	private const float StepInterval = 0.5f;
+	private const float BasePitch = 0.9f;
+	
 	public override Godot.Collections.Array CheckRelevance(InputPackage input, double delta){
 		if(player.IsOnFloor() == false){
 			return [true, StateNames.midair];
@@ -16,8 +20,9 @@ public partial class Run : BaseState
 	public override void Update(InputPackage input, double delta){
 		VelocityCalculation(input, delta);
 		player.MoveAndSlide();
+		player.TickFootsteps(ref _footstepTimer, (float)delta, StepInterval, BasePitch);
 	}
-	
+
 	private void VelocityCalculation(InputPackage input, double delta){
 		Vector3 direction = (player.Transform.Basis * new Vector3(input.InputDirection.X, 0, input.InputDirection.Y)).Normalized();
 		if (direction != Vector3.Zero)
