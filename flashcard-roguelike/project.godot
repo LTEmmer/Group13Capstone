@@ -17,6 +17,8 @@ config/icon="res://shared/icon.svg"
 
 [autoload]
 
+Talo="*uid://bpmdn8oc34pg7"
+AudioManager="*uid://4rhky336pfbs"
 CurrentRoomManager="*res://game/current_room_manager.tscn"
 FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
 BattleManager="*uid://b8g15b4a5ec36"
@@ -31,6 +33,10 @@ window/size/mode=2
 [dotnet]
 
 project/assembly_name="FlashcardRoguelike"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/talo/plugin.cfg")
 
 [input]
 
