@@ -5,10 +5,9 @@ Use this to connect your local game to our shared Talo project.
 ## 1. Get access
 
 1. Go to `https://dashboard.trytalo.com`.
-2. Sign in with the team account:
-   - Email/username: `shahmohsin4882@gmail.com`
-   - Password: `12345678910`
-3. Open the correct team project.
+2. Create your own Talo account.
+3. Send me the email address you used so I can invite you to the team project.
+4. After I invite you, accept the invite and open the correct team project.
 
 ## 2. Enable plugin in Godot
 
