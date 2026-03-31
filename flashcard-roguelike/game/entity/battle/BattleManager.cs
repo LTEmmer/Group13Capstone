@@ -183,6 +183,14 @@ public partial class BattleManager : Node
 	{
 		foreach (var enemy in enemies)
 		{
+			// Detect boss battles via interface
+			if (enemy is IBossEnemy boss)
+			{
+				_state.IsBossBattle = true;
+				_state.BossStreakRequired = boss.StreakRequired;
+				_state.BossBlockReduction = boss.BlockReduction;
+			}
+
 			// Get attack component
 			var attackComp = enemy.GetNode<AttackComponent>("AttackComponent");
 			if (attackComp != null)

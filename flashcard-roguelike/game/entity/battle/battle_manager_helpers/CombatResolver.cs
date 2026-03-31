@@ -53,10 +53,18 @@ public class CombatResolver
     }
     
     // Start defense sequence with flashcard challenge
-    public void StartDefenseChallenge(int enemyIndex)
+    public async void StartDefenseChallenge()
     {
         _state.PendingAction = "defend";
-        
+
+        // Brief delay so the attack is visible before the card appears
+        await _state.Player.ToSignal(_state.Player.GetTree().CreateTimer(1.5f), SceneTreeTimer.SignalName.Timeout);
+
+        if (!_state.InCombat) // Make sure we're in combat due to the delay, just in case
+        {
+            return;
+        }
+
         if (_flashcardChallengeManager != null)
         {
             // Load a random flashcard for the defense challenge
@@ -108,24 +116,60 @@ public class CombatResolver
     // Execute player attack based on success
     public void ExecutePlayerAttack(bool success)
     {
-        // If attack is successful, deal damage to the first alive enemy; otherwise, log a missed attack
         if (success)
         {
+            if (_state.IsBossBattle)
+            {
+                _state.ConsecutiveCorrect++;
+                if (_state.ConsecutiveCorrect < _state.BossStreakRequired)
+                {
+                    // Need more correct answers, show the next flashcard immediately
+                    _uiCoordinator.LogMessage($"Hit! {_state.ConsecutiveCorrect}/{_state.BossStreakRequired} — keep going!");
+                    Flashcard card = _flashcardChallengeManager.LoadRandomCard();
+                    if (card != null)
+                    {
+                        float difficulty = GameDifficultyManager.Instance.getCurrentDifficultyScore();
+                        _state.WaitingForFlashcard = true;
+                        if (_state.ConsecutiveCorrect != _state.BossStreakRequired - 1)
+                        {
+                            _uiCoordinator.LogMessage($"Keep it up! {_state.BossStreakRequired - _state.ConsecutiveCorrect} more to go.");
+                            _flashcardChallengeManager.ShowChallenge(card, $"Keep it up! {_state.BossStreakRequired - _state.ConsecutiveCorrect} more correct answers to go!", difficulty);
+                            
+                        }
+                        else
+                        {
+                            _uiCoordinator.LogMessage($"Last hit needed! You best not miss you hear.");
+                            _flashcardChallengeManager.ShowChallenge(card, $"Last hit needed! You best not miss you hear.", difficulty);
+                        }
+                    }
+                    else
+                    {
+                        GD.PrintErr("CombatResolver: No flashcards available for boss attack continuation.");
+                        _state.ConsecutiveCorrect = 0;
+                        _turnController.StartEnemyTurns();
+                    }
+                    return;
+                }
+                // Streak met — deal damage and reset
+                _state.ConsecutiveCorrect = 0;
+            }
+
             var enemyToAttack = _state.AliveEnemies.First<EnemyFSM>();
             _state.PlayerAttack.Attack(enemyToAttack);
             _uiCoordinator.LogMessage($"You attacked {enemyToAttack.Name} for {_state.PlayerAttack.BaseDamage} damage!");
         }
         else
         {
-            // Play miss sound
-            _state.PlayerAttack.PlayMissSound();
+            if (_state.IsBossBattle)
+                _state.ConsecutiveCorrect = 0;
 
+            _state.PlayerAttack.PlayMissSound();
             _uiCoordinator.LogMessage("Attack missed!");
         }
-        
+
         // Update health UI after attack
         _uiCoordinator.UpdateHealthUI();
-        
+
         // Start enemy turns
         _turnController.StartEnemyTurns();
     }
@@ -138,7 +182,7 @@ public class CombatResolver
             _state.PlayerHealth.PlayBlockSound();
         }
 
-        // If successful defense, no damage; otherwise take full damage
+        // If successful defense, reduce damage; otherwise take full damage
         // Then advance to next enemy's turn regardless of defense outcome
         ExecuteEnemyAttack(!success);
 
@@ -152,17 +196,20 @@ public class CombatResolver
     private void ExecuteEnemyAttack(bool fullDamage)
     {
         var enemy = _state.AliveEnemies[_state.CurrentEnemyIndex];
-        // If fullDamage is true, enemy attacks player for full damage; 
-        // if false, player successfully defends and takes no damage
         if (fullDamage)
         {
             _state.EnemyAttackComponents[enemy].Attack(_state.Player);
-
             _uiCoordinator.LogMessage("Failed to defend! Taking full damage!");
+        }
+        else if (_state.IsBossBattle && _state.BossBlockReduction > 0f)
+        {
+            // Partial block, enemy still deals a fraction of damage on successful defense
+            _state.EnemyAttackComponents[enemy].Attack(_state.Player, _state.BossBlockReduction);
+            float reducedDamage = _state.EnemyAttackComponents[enemy].BaseDamage * _state.BossBlockReduction;
+            _uiCoordinator.LogMessage($"Partial block! Taking {reducedDamage} damage!");
         }
         else
         {
-            // Just play attack sound
             _state.EnemyAttackComponents[enemy].PlayAttackSound();
             _uiCoordinator.LogMessage("Defended successfully! Taking no damage!");
         }

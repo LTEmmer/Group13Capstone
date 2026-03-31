@@ -17,19 +17,21 @@ public partial class AttackComponent : Node
 		GetParent().CallDeferred(Node.MethodName.AddChild, _audioPlayer);
 	}
 
-	public bool Attack(Node target)
+	public bool Attack(Node target, float damageMultiplier = 1.0f)
 	{
 		// Try to get the health component from the target
 		HealthComponent healthComponent = target.GetNode<HealthComponent>("HealthComponent");
-		
+
 		if (healthComponent != null)
 		{
 			// Play attack sound
 			if (AttackSounds != null && AttackSounds.Length > 0)
 			PlayAttackSound();
 
-			GD.Print($"{GetParent().Name} attacked {target.Name} for {BaseDamage} damage!");
-			healthComponent.TakeDamage(BaseDamage);
+			// Calculate damage with multiplier and apply to target, for now only bosses will change the multiplier
+			float damage = BaseDamage * damageMultiplier;
+			GD.Print($"{GetParent().Name} attacked {target.Name} for {damage} damage!");
+			healthComponent.TakeDamage(damage);
 			return true;
 		}
 		else

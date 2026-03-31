@@ -24,7 +24,7 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 	// Shared Random instance avoids creating new Random() on every call
 	private static readonly Random _rng = new();
 
-	private const float FeedbackDisplayTime = 4.0f; // Seconds to show correct/incorrect feedback before hiding
+	private const float FeedbackDisplayTime = 2.5f; // Seconds to show correct/incorrect feedback before hiding
 
 	public bool Visibility => Visible;
 

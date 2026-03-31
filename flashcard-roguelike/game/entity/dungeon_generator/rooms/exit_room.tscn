@@ -1,5 +1,8 @@
 [gd_scene format=4 uid="uid://ho30grmj7jcn"]
 
+[ext_resource type="PackedScene" uid="uid://cbxdgr6q22qmu" path="res://game/entity/enemy_fsm/test_boss.tscn" id="1_oqh0e"]
+[ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="2_2ddii"]
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_0drqo"]
 _surfaces = [{
 "aabb": AABB(-26, -0.1726656, -26, 52, 10, 52),
@@ -75,3 +78,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3992662, -1.7729723, -7.297
 
 [node name="3" type="Marker3D" parent="Exits" unique_id=897839084]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.57488, -1.7729723, -7.2970276)
+
+[node name="BattleArea" parent="." unique_id=1408501426 instance=ExtResource("2_2ddii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.643182, 0, 1.173)
+
+[node name="Boss" type="Node3D" parent="." unique_id=1784541584]
+
+[node name="EnemyFSM" parent="Boss" unique_id=1279096522 instance=ExtResource("1_oqh0e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7037535, 1.2499995, -7.439432)
