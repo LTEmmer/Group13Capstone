@@ -36,3 +36,6 @@ Thumbs.db
 .DS_Store
 *.lnk
 
+# ===== Talo =====
+flashcard-roguelike/addons/talo/settings.cfg
+

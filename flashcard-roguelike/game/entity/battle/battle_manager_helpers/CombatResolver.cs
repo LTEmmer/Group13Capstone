@@ -89,6 +89,10 @@ public class CombatResolver
         if (!_state.WaitingForFlashcard) return; // Ignore if not currently waiting for a flashcard answer
         
         _state.WaitingForFlashcard = false;
+
+        string action = string.IsNullOrWhiteSpace(_state.PendingAction) ? "unknown" : _state.PendingAction;
+        float difficulty = GameDifficultyManager.Instance == null ? 0f : GameDifficultyManager.Instance.getCurrentDifficultyScore();
+        TaloTelemetry.TrackFlashcardAnswer(isCorrect, action, difficulty);
         
         // Determine which action to resolve based on the pending action state
         if (_state.PendingAction == "attack")

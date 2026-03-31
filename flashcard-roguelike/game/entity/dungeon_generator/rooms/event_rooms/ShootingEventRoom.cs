@@ -158,6 +158,7 @@ public partial class ShootingEventRoom : Room, IEventRoom
             panel1.ShowResult(true);
             panel2.ShowResult(true);
             panel2.SetAndPlaySound(CorrectSound); // Play correct sound on second panel hit for better feedback timing
+            TaloTelemetry.TrackFlashcardAnswer(true, "shooting_event_match", Difficulty);
         }
         else
         {
@@ -165,6 +166,7 @@ public partial class ShootingEventRoom : Room, IEventRoom
             panel1.ShowResult(false);
             panel2.ShowResult(false);
             panel2.SetAndPlaySound(WrongSound); // Play wrong sound on second panel hit for better feedback timing
+            TaloTelemetry.TrackFlashcardAnswer(false, "shooting_event_match", Difficulty);
         }
 
         // Reset current pair tracking for next selection
