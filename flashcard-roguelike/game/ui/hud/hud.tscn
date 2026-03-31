@@ -1,39 +1,45 @@
-[gd_scene format=3 uid="uid://bqxhud_flashcard_roguelike"]
+[gd_scene format=3 uid="uid://b3in5lpjk8qjr"]
 
-[ext_resource type="Script" path="res://game/ui/hud/HUD.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://dpg6u0hfi2o0f" path="res://game/ui/hud/HUD.cs" id="1_script"]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=1895084757]
 script = ExtResource("1_script")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 0.0
+[node name="Background" type="Panel" parent="." unique_id=1552136995]
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.0
 anchor_bottom = 1.0
-offset_left = 16.0
+offset_left = 19.0
 offset_top = -120.0
-offset_right = 280.0
-offset_bottom = -16.0
-grow_horizontal = 0
-grow_vertical = 1
+offset_right = 258.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=666212496]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -112.0
+offset_right = 284.0
+offset_bottom = -8.0
+grow_vertical = 0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=219611288]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="RoomNameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="RoomNameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=110892469]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Room 0 (Entrance)"
 autowrap_mode = 2
 
-[node name="HealthLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="HealthLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=342355670]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "HP: 100 / 100"

@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class FlashcardManager : Node
@@ -7,34 +8,10 @@ public partial class FlashcardManager : Node
 	public static FlashcardManager Instance { get; private set; }
 	private FlashcardPersistence _persistence = new();
 	private List<FlashcardSet> AvailableSets = new();
-	
-	public override void _Ready()
-	{
-		Instance = this;
-		AvailableSets = _persistence.LoadAllSets();
 
-		/* For demonstration, run this scene on its own and close it, there are no visuals.
-		It should import and save these three sets from CSV on startup.
-		In practice this would be triggered by user input. Only the two labeled as valid
-		should be saved successfully to available sets and to: user://flashcards/ 
-		The example CSV files are located in example_csv. 
-		REMOVE when actual implementation for adding from menu is ready. */
-		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/LabeledHeaders_Valid.csv"), "LabeledTest");
-		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/UnlabeledHeaders_Valid.csv"), "UnlabeledTest");
-		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/TooManyColumns_Invalid.csv"), "FailureTest");
-	}
-
-	// Singleton method to handle importing and saving flashcards from CSV files and add them to the available sets
-	public void ImportAndSave(string csvPath, string setName = null)
-	{
-		FlashcardSet set = new FlashcardCsvLoader().ImportCsv(csvPath, setName);
-
-		if (set != null)
-		{
-			_persistence.SaveSet(set);
-			AvailableSets.Add(set);
-		}
-	}    
+	// Cached flat list of all cards across sets rebuilt only when sets change
+	private List<Flashcard> _cardCache = null;
+	private readonly Random _random = new();
 
 	public List<FlashcardSet> ActiveFlashCardLists
 	{
@@ -51,6 +28,80 @@ public partial class FlashcardManager : Node
 		}
 	}
 
+	public override void _Ready()
+	{
+		Instance = this;
+		AvailableSets = _persistence.LoadAllSets();
+
+		/* For demonstration, run this scene on its own and close it, there are no visuals.
+		It should import and save these three sets from CSV on startup.
+		In practice this would be triggered by user input. Only the two labeled as valid
+		should be saved successfully to available sets and to: user://flashcards/
+		The example CSV files are located in example_csv.
+		REMOVE when actual implementation for adding from menu is ready. */
+		//ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/LabeledHeaders_Valid.csv"), "LabeledTest");
+		//ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/UnlabeledHeaders_Valid.csv"), "UnlabeledTest");
+		//ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/TooManyColumns_Invalid.csv"), "FailureTest");
+		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/SampleCards.csv"));
+	}
+
+	// Singleton method to handle importing and saving flashcards from CSV files and add them to the available sets
+	public void ImportAndSave(string csvPath, string setName = null)
+	{
+		FlashcardSet set = new FlashcardCsvLoader().ImportCsv(csvPath, setName);
+
+		if (set != null)
+		{
+			_persistence.SaveSet(set);
+			AvailableSets.Add(set);
+			_cardCache = null; // Invalidate cache so GetRandomCard() rebuilds on next call
+		}
+	}
+
+	private void BuildCardCache()
+	{
+		_cardCache = new();
+		foreach (var set in AvailableSets)
+		{
+			if (set.Cards != null)
+				_cardCache.AddRange(set.Cards);
+		}
+	}
+
+	// Returns a random flashcard drawn from all active sets.
+	// Uses a cached flat card list rebuilt only when sets are added or removed.
+	public Flashcard GetRandomCard()
+	{
+		// Build cache if missing or invalidated
+		if (_cardCache == null)
+		{
+			BuildCardCache();
+		}
+
+		if (_cardCache.Count == 0)
+		{
+			GD.PrintErr("FlashcardManager: No flashcards available in active sets.");
+			return null;
+		}
+
+		return _cardCache[_random.Next(_cardCache.Count)];
+	}
+
+	public List<Flashcard> GetActiveCards()
+	{
+		if (_cardCache == null)
+		{
+			BuildCardCache();
+		}
+		
+		return new(_cardCache);
+	}
+
+	public int GetActiveCardCount()
+	{
+		return _cardCache.Count;
+	}
+
 	// Delete a flashcard set from available sets and from the file system
 	public bool DeleteSet(string setDisplayName)
 	{
@@ -64,6 +115,7 @@ public partial class FlashcardManager : Node
 			{
 				// Remove from available sets list only if deletion was successful
 				AvailableSets.Remove(setToRemove);
+				_cardCache = null; // Invalidate cache so GetRandomCard() rebuilds on next call
 				return true;
 			}
 		}

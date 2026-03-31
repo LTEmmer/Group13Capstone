@@ -8,21 +8,45 @@ public partial class HealthComponent : Node
 	
 	[Signal]
 	public delegate void PlayerDiedEventHandler();
-
+	
+	[Signal]
+	public delegate void EnemyDiedEventHandler();
+	
 	[Export] public float MaxHealth = 100f;
 	[Export] public bool IsPlayer = false;
+
+
+	[Export] public AudioStream[] HurtSounds;
+	[Export] public AudioStream[] BlockSounds;
+	[Export] public AudioStream[] DeathSound;
+
 	
 	public float CurrentHealth { get; private set; }
+
+
+	private AudioStreamPlayer3D _audioPlayer;
 
 	public override void _Ready()
 	{
 		CurrentHealth = MaxHealth;
+		// Create an AudioStreamPlayer3D for playing hurt/death sounds
+		_audioPlayer = new AudioStreamPlayer3D();
+
+		GetParent().CallDeferred(Node.MethodName.AddChild, _audioPlayer);
 	}
 
 	public void TakeDamage(float damage)
 	{
 		CurrentHealth -= damage;
 		GD.Print($"{GetParent().Name}: Health: {CurrentHealth}/{MaxHealth}");
+
+		// Play hurt sound 
+		if (HurtSounds != null && HurtSounds.Length > 0)
+		{
+			var hurtSound = HurtSounds[GD.Randi() % HurtSounds.Length];
+			_audioPlayer.Stream = hurtSound;
+			_audioPlayer.Play();
+		}
 
 		if (CurrentHealth <= 0) Die();
 	}
@@ -33,9 +57,30 @@ public partial class HealthComponent : Node
 		GD.Print($"{GetParent().Name}: Health: {CurrentHealth}/{MaxHealth}");
 	}
 
-	private void Die()
+	private async void Die()
 	{
 		GD.Print($"{GetParent().Name} died!");
+
+		// Play death sound
+		if (DeathSound != null && DeathSound.Length > 0)
+		{
+			var deathSound = DeathSound[GD.Randi() % DeathSound.Length];
+			_audioPlayer.Stream = deathSound;
+
+			_audioPlayer.Play();
+
+			if (IsPlayer)
+			{
+				// Wait for death sound to finish before showing game over
+				await ToSignal(_audioPlayer, "finished");
+			}
+			else
+			{
+				// Reparent so sound plays even after entity is removed
+				_audioPlayer.Finished += _audioPlayer.QueueFree;
+				_audioPlayer.Reparent(GetTree().Root);
+			}
+		}
 		
 		if (IsPlayer)
 		{
@@ -46,8 +91,8 @@ public partial class HealthComponent : Node
 		}
 		else
 		{
-			// Non-player entities get removed
-			GetParent().QueueFree();
+			// Emit enemy death signal for non-player deaths
+			EmitSignal(SignalName.EnemyDied);
 		}
 		
 		EmitSignal(SignalName._OnDeath);
@@ -73,6 +118,19 @@ public partial class HealthComponent : Node
 		if (gameOverMenu != null && gameOverMenu.HasMethod("ShowGameOver"))
 		{
 			gameOverMenu.Call("ShowGameOver", "You have fallen in the dungeon...");
+		}
+	}
+
+	public void PlayBlockSound()
+	{
+		if (IsPlayer) // Only play block sound for player
+		{
+			if (BlockSounds != null && BlockSounds.Length > 0)
+			{
+				var blockSound = BlockSounds[GD.Randi() % BlockSounds.Length];
+				_audioPlayer.Stream = blockSound;
+				_audioPlayer.Play();
+			}
 		}
 	}
 }

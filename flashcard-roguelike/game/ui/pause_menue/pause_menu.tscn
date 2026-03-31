@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://qr0ptjsgc05a" path="res://game/ui/pause_menue/PauseMenu.cs" id="1_f48la"]
 [ext_resource type="PackedScene" uid="uid://h18wimcwtwvr" path="res://game/ui/main_menu/main_menu.tscn" id="2_1n6di"]
-[ext_resource type="Theme" uid="uid://b5r6t2u2mi7tl" path="res://game/ui/pause_menue/CardTheme.tres" id="2_h8w6g"]
 [ext_resource type="Shader" uid="uid://x7hlq5qbs4m5" path="res://game/ui/pause_menue/blur.gdshader" id="2_scxh3"]
+[ext_resource type="Theme" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="3_whiteboard"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1n6di"]
 shader = ExtResource("2_scxh3")
@@ -28,6 +28,7 @@ offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+theme = ExtResource("3_whiteboard")
 
 [node name="ButtonPanel" type="Panel" parent="ButtonPanelContainer" unique_id=1124337736]
 layout_mode = 1
@@ -36,7 +37,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_h8w6g")
 
 [node name="Blur" type="Panel" parent="ButtonPanelContainer/ButtonPanel" unique_id=2147014097]
 material = SubResource("ShaderMaterial_1n6di")
@@ -46,7 +46,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_h8w6g")
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0.05)
 
 [node name="MarginContainer" type="MarginContainer" parent="ButtonPanelContainer/ButtonPanel" unique_id=1628028525]
 layout_mode = 1
@@ -68,115 +69,39 @@ alignment = 1
 [node name="Resume" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=1895204069]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
+custom_minimum_size = Vector2(240, 56)
 text = "Resume"
-
-[node name="View Imported Flashcards" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=-1282018725]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
-text = "View Imported Flashcards"
-autowrap_mode = 2
 
 [node name="Options" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=218642742]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
+custom_minimum_size = Vector2(240, 56)
 text = "Options
 "
 
 [node name="Abandon Run" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=178363380]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
+custom_minimum_size = Vector2(240, 56)
 text = "Abandon Run
 "
 
 [node name="Main Menu" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=2111338140]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
+custom_minimum_size = Vector2(240, 56)
 text = "Main Menu
 "
 
 [node name="Quit" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=948793584]
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
+custom_minimum_size = Vector2(240, 56)
 text = "Quit
 "
 
-[node name="ViewFlashcardsPanelContainer" type="Control" parent="." unique_id=-282018724]
-visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -250.0
-offset_right = 200.0
-offset_bottom = 250.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-
-[node name="Panel" type="Panel" parent="ViewFlashcardsPanelContainer" unique_id=-282018723]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_h8w6g")
-
-[node name="Blur" type="Panel" parent="ViewFlashcardsPanelContainer/Panel" unique_id=-282018722]
-material = SubResource("ShaderMaterial_1n6di")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("2_h8w6g")
-
-[node name="MarginContainer" type="MarginContainer" parent="ViewFlashcardsPanelContainer/Panel" unique_id=-282018721]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer" unique_id=-282018720]
-layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=-282018719]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="FlashcardListContainer" type="VBoxContainer" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=-282018718]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Back" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=-282018717]
-layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_h8w6g")
-text = "Back"
-
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/View Imported Flashcards" to="." method="_on_view_flashcards_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Abandon Run" to="." method="_on_abandon_run_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Main Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/Back" to="." method="_on_flashcards_back_pressed"]

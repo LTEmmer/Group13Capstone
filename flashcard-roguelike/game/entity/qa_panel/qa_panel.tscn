@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cayaqtl6ocmoa"]
+
+[ext_resource type="Script" uid="uid://dercwou1yu8ty" path="res://game/entity/qa_panel/QAPanel.cs" id="1_auvah"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o2wsp"]
+size = Vector3(12, 2.5, 0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_auvah"]
+points = PackedVector3Array(6, 1.25, 0.25, 6, 1.25, -0.25, -6, 1.25, 0.25, 6, -1.25, 0.25, 6, -1.25, -0.25, -6, 1.25, -0.25, -6, -1.25, 0.25, -6, -1.25, -0.25)
+
+[node name="QAPanel" type="Area3D" unique_id=487236728]
+script = ExtResource("1_auvah")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1868814699]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -0.3161323)
+shaded = true
+double_sided = false
+text = "TEST"
+font_size = 112
+outline_size = 24
+autowrap_mode = 3
+width = 2250.0
+
+[node name="Panel" type="MeshInstance3D" parent="." unique_id=335669479]
+mesh = SubResource("BoxMesh_o2wsp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=886622993]
+shape = SubResource("ConvexPolygonShape3D_auvah")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=53834061]

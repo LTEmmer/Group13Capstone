@@ -5,7 +5,10 @@ using Vector3 = Godot.Vector3;
 
 public partial class RoomConnection : Node3D
 {
-	[Export] public PackedScene[] ConnectionVisuals;
+	[Export] 
+	public PackedScene[] ConnectionVisuals;
+	[Export]
+	public InteractableComponent Interactable;
 	
 	public bool PlayerInRoom = false;
 	public int TargetRoomId { get; set; }
@@ -29,46 +32,13 @@ public partial class RoomConnection : Node3D
 		rng.Randomize();
 		PackedScene scene = ConnectionVisuals[rng.RandiRange(0, ConnectionVisuals.Length - 1)];
 		AddChild(scene.Instantiate());
-	
-		_area = GetNode<Area3D>("Area3D");
-		_area.BodyEntered += OnBodyEntered;
-		_area.BodyExited += OnBodyExited;
-		EventManager.Instance.listen("on_battle_victory", new Callable(this, MethodName.on_battle_victory));
+		
+		Interactable.Interact += OnInteract;
+		EventManager.Instance.listen("on_room_clear", new Callable(this, MethodName.on_room_clear));
 	}
 
-	public override void _Input(InputEvent @event)
-	{
-		if (!_playerInRange || !connection_enabled)// If either player not in range or connection are not enabled return
-			return;
-
-		if (@event.IsActionPressed("interact"))
-		{
-			TeleportPlayer(_player);
-		}
-	}
-
-	public override void _ExitTree()    
-	{
-		_area.BodyEntered -= OnBodyEntered;
-		_area.BodyExited -= OnBodyExited;
-	}
-
-	private void OnBodyEntered(Node body)
-	{
-		if(body is Node3D node && body.Name == "Player")
-		{
-			_playerInRange = true;
-			_player = node;
-		}
-	}
-
-	private void OnBodyExited(Node body)
-	{
-		if (body == _player)
-		{
-			_playerInRange = false;
-			_player = null;
-		}
+	private void OnInteract(Node3D player){
+		TeleportPlayer(player);
 	}
 
 	public void TeleportPlayer(Node3D player)
@@ -105,6 +75,13 @@ public partial class RoomConnection : Node3D
 		GetParent().GetParent().GetParent().RemoveChild(player);
 		targetRoom.AddChild(player);
 		player.GlobalPosition = dest;
+
+		// Disable landing sound for next connection
+		if (player is Player p)
+		{
+			p.SuppressNextLandSound = true;
+		}
+
 		if (CurrentRoomManager.Instance != null)
 			CurrentRoomManager.Instance.CurrentRoomId = TargetRoomId;
 	}
@@ -118,7 +95,7 @@ public partial class RoomConnection : Node3D
 		}
 	}
 	
-	private void on_battle_victory(string test){
+	private void on_room_clear(string test){
 		if(PlayerInRoom == true){
 			this.Visible = true;
 			this.connection_enabled = true;

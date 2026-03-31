@@ -58,7 +58,6 @@ public partial class ParkourEventRoom : Room, IEventRoom
 			? 0f
 			: GameDifficultyManager.Instance.getCurrentDifficultyScore();
 		TaloTelemetry.TrackFlashcardAnswer(isCorrect, "parkour_event", difficulty);
-
 		// Lock mouse
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 

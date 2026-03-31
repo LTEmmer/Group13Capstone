@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public partial class BattleManager : Node
 {
 	public static BattleManager Instance { get; private set; }
+	public bool IsInCombat => _state?.InCombat ?? false;
 
 	// Specialized managers
 	private BattleState _state;
@@ -16,8 +17,8 @@ public partial class BattleManager : Node
 	private BattleUICoordinator _uiCoordinator;
 	
 	// UI Components
-	private BattleTransition _transition;
-	private BattleUI _battleUI;
+	public BattleTransition Transitions;
+	public BattleUI ActiveUI;
 	private FlashcardChallenge _flashcardChallenge;
 	private FlashcardChallengeTrueOrFalse _flashcardChallengeTrueOrFalse;
 	private FlashcardChallengeMultipleChoice _flashcardChallengeMultipleChoice;
@@ -39,11 +40,11 @@ public partial class BattleManager : Node
 		_uiCoordinator = new BattleUICoordinator();
 
 		// Load UI scenes
-		_transition = GD.Load<PackedScene>("res://game/ui/battle_ui/battle_transition.tscn").Instantiate<BattleTransition>();
-		AddChild(_transition);
+		Transitions = GD.Load<PackedScene>("res://game/ui/battle_ui/battle_transition.tscn").Instantiate<BattleTransition>();
+		AddChild(Transitions);
 
-		_battleUI = GD.Load<PackedScene>("res://game/ui/battle_ui/battle_ui.tscn").Instantiate<BattleUI>();
-		AddChild(_battleUI);
+		ActiveUI = GD.Load<PackedScene>("res://game/ui/battle_ui/battle_ui.tscn").Instantiate<BattleUI>();
+		AddChild(ActiveUI);
 
 		_flashcardChallenge = GD.Load<PackedScene>("res://game/ui/battle_ui/flashcard_challenge.tscn").Instantiate<FlashcardChallenge>();
 		AddChild(_flashcardChallenge);
@@ -54,7 +55,7 @@ public partial class BattleManager : Node
 		_flashcardChallengeMultipleChoice = GD.Load<PackedScene>("res://game/ui/battle_ui/flashcard_challenge_multiple_choice.tscn").Instantiate<FlashcardChallengeMultipleChoice>();
 		AddChild(_flashcardChallengeMultipleChoice);
 
-		if (_transition == null || _battleUI == null || _flashcardChallenge == null || _flashcardChallengeTrueOrFalse == null || _flashcardChallengeMultipleChoice == null)
+		if (Transitions == null || ActiveUI == null || _flashcardChallenge == null || _flashcardChallengeTrueOrFalse == null || _flashcardChallengeMultipleChoice == null)
 		{
 			GD.PrintErr("BattleManager: Failed to load one or more UI scenes.");
 		}
@@ -65,19 +66,14 @@ public partial class BattleManager : Node
 		_flashcardChallengeManager.SetAnswerSubmittedCallback(OnFlashcardAnswered);
 
 		// Initialize manager dependencies
-		_uiCoordinator.Initialize(_battleUI, _state);
+		_uiCoordinator.Initialize(ActiveUI, _state);
 		_turnController.Initialize(_state, _uiCoordinator, _combatResolver);
 		_combatResolver.Initialize(_state, _uiCoordinator, _flashcardChallengeManager, _turnController);
 
 		// Connect UI signals
-		if (_battleUI != null)
+		if (ActiveUI != null)
 		{
-			_battleUI.OnActionSelected += OnPlayerActionSelected;
-		}
-
-		if (_flashcardChallenge != null)
-		{
-			_flashcardChallenge.OnAnswerSubmitted += OnFlashcardAnswered;
+			ActiveUI.OnActionSelected += OnPlayerActionSelected;
 		}
 
 		// Connect combat resolver events
@@ -92,7 +88,7 @@ public partial class BattleManager : Node
 		AddChild(_battleCooldownTimer);
 	}
 
-	public void StartBattle(Player player, List<EnemyExample> enemies, Node3D room)
+	public void StartBattle(Player player, List<EnemyFSM> enemies, Node3D room)
 	{
 		if (!_canEnterBattle)
 		{
@@ -100,7 +96,7 @@ public partial class BattleManager : Node
 			return;
 		}
 
-		if (_transition == null)
+		if (Transitions == null)
 		{
 			GD.PrintErr("BattleManager: Transition is not assigned.");
 			return;
@@ -127,13 +123,16 @@ public partial class BattleManager : Node
 			return;
 		}
 
+		// Make visible
+		Transitions.Visible = true;
+		ActiveUI.Visible = true;
+
+		// Play stinger and music
+		AudioManager.Instance?.PlayBattleStinger();
+		AudioManager.Instance?.PlayBattleMusic();
+
 		// Initialize state with entities
 		_state.Initialize(player, enemies);
-
-		// Disable player input and stop movement
-		player.SetAcceptKeyboardInput(false);
-		player.Velocity = Vector3.Zero;
-		Input.MouseMode = Input.MouseModeEnum.Visible;
 
 		// Get and validate player components
 		if (!ValidateAndCachePlayerComponents(player))
@@ -149,17 +148,10 @@ public partial class BattleManager : Node
 
 		// Start transition to battle, focusing on the first enemy for now 
 		// (can be expanded to multiple enemies or a more dynamic focus later)
-		EnemyExample focusEnemy = enemies[0];
+		EnemyFSM focusEnemy = enemies[0];
 
 		// Play transition animation and initialize combat after transition completes and positions are set
-		_transition.Cover(focusEnemy.GlobalPosition, player, () =>
-		{
-			_setup.SetupBattlePositions(player, _state.AliveEnemies);
-			_transition.Reveal(() =>
-			{
-				InitializeCombat();
-			});
-		});
+		Transitions.Cover(focusEnemy.GlobalPosition, _state.Player, OnCoverTransitionComplete);
 	}
 
 	private bool ValidateAndCachePlayerComponents(Player player)
@@ -187,7 +179,7 @@ public partial class BattleManager : Node
 		return true;
 	}
 
-	private bool ValidateAndCacheEnemyComponents(List<EnemyExample> enemies)
+	private bool ValidateAndCacheEnemyComponents(List<EnemyFSM> enemies)
 	{
 		foreach (var enemy in enemies)
 		{
@@ -227,6 +219,18 @@ public partial class BattleManager : Node
 		}
 
 		return true;
+	}
+
+	// Called once the cover transition finishes positions entities then starts the reveal
+	private void OnCoverTransitionComplete()
+	{
+		// Disable player input and stop movement after transition covers the player
+		_state.Player.SetAcceptKeyboardInput(false);
+		_state.Player.Velocity = Vector3.Zero;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+
+		_setup.SetupBattlePositions(_state.Player, _state.AliveEnemies);
+		Transitions.Reveal(InitializeCombat);
 	}
 
 	private void InitializeCombat()
@@ -283,14 +287,13 @@ public partial class BattleManager : Node
 		_combatResolver.HandleFlashcardAnswer(isCorrect, GetTree());
 	}
 
-	private void OnEnemyDeath(EnemyExample enemy)
+	private void OnEnemyDeath(EnemyFSM enemy)
 	{
 		_uiCoordinator.LogMessage($"{enemy.Name} was defeated!");
 		_uiCoordinator.UpdateHealthUI();
 		_state.RemoveEnemy(enemy);
 
 		// Check if all enemies are dead
-		// Redundant check since combat resolver also checks after each attack, just in case
 		if (_state.AliveEnemies.Count == 0)
 		{
 			EndBattle(true, false);
@@ -308,7 +311,14 @@ public partial class BattleManager : Node
 		_state.InCombat = false;
 		_state.WaitingForAction = false;
 		_state.WaitingForFlashcard = false;
+		_flashcardChallengeManager.HideChallenge(); // Immediately clear any active flashcard (e.g. player died mid-challenge)
 		_battleCooldownTimer.Start();
+
+		// Disconnect player death signal to prevent duplication
+		if (_state.PlayerHealth != null)
+		{
+			_state.PlayerHealth._OnDeath -= OnPlayerDeath;
+		}
 
 		// Handle UI end sequence
 		_uiCoordinator.HandleBattleEndUI(victory, ran, () =>
@@ -318,8 +328,11 @@ public partial class BattleManager : Node
 			{
 				_uiCoordinator.SlideOutBattleUI(() =>
 				{
-					// Reset mouse mode
-					Input.MouseMode = Input.MouseModeEnum.Captured;
+					// Reset mouse mode only if we're still alive
+					if (!(victory == false && ran == false))
+					{
+						Input.MouseMode = Input.MouseModeEnum.Captured;
+					}
 
 					// Reset positions
 					if (ran)
@@ -332,7 +345,10 @@ public partial class BattleManager : Node
 					}
 
 					// Play transition out
-					_transition.SliceOut();
+					Transitions.SliceOut();
+
+					// Transition music
+					AudioManager.Instance?.PlayDungeonMusic(1.5f);
 
 					// Re-enable player input after transition (BEFORE state reset to avoid null reference)
 					GetTree().CreateTimer(0.5).Timeout += () =>
@@ -346,7 +362,8 @@ public partial class BattleManager : Node
 		
 		// When battle over if player wins activate room exit
 		if(victory == true){ //victory increases difficulty
-			EventManager.Instance.raise("on_battle_victory","test"); //No arg needed just added placeholder for now
+			EventManager.Instance.raise("on_battle_victory","test"); // Update difficulty 
+			EventManager.Instance.raise("on_room_clear","test"); // Tell connections to open
 			return;
 		}
 		if(ran == true){ //running lowers difficulty
@@ -358,17 +375,6 @@ public partial class BattleManager : Node
 			EventManager.Instance.raise("on_battle_lost","test");
 			return;
 		}
-		
-		// ADEMAR: Here you can put any other code that needs to be run immediately when battle ends, 
-		// for whatever your event manager needs to do.
-		// All that is done here is resetting state, playing UI, and resetting positions.
-		// You may also want to look at the OnDeath handlers for player and enemy to see how they trigger battle 
-		// end when one side dies, and make sure to add any necessary logic there as well, (like QueueFreeing enemies, etc.)
-		// since right now nothing actually queuefrees the enemy after death, it just slides out the UI and disables their status display. 
-		// For now all combat is independent of room, enemies act as combat initiators (the ExampleEnemy) 
-		// and connections spawn regardless of victory or defeat, though you could modify some stuff to disable 
-		// connections until victory where your event manager would trigger them to open, 
-		// or something like that through an event here. 
 	}
 
 	private void OnBattleCooldownTimeout()

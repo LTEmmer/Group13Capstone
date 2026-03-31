@@ -65,7 +65,8 @@ public class CombatResolver
             {
                 // Set state to wait for flashcard answer and show challenge with default difficulty (0 = text)
                 _state.WaitingForFlashcard = true;
-                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to defend!", 0);
+                // Use the current game difficulty so defense challenges scale like attacks
+                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to defend!", GameDifficultyManager.Instance.getCurrentDifficultyScore());
             }
             else
             {
@@ -110,24 +111,20 @@ public class CombatResolver
         // If attack is successful, deal damage to the first alive enemy; otherwise, log a missed attack
         if (success)
         {
-            var enemyToAttack = _state.AliveEnemies.First<EnemyExample>();
+            var enemyToAttack = _state.AliveEnemies.First<EnemyFSM>();
             _state.PlayerAttack.Attack(enemyToAttack);
             _uiCoordinator.LogMessage($"You attacked {enemyToAttack.Name} for {_state.PlayerAttack.BaseDamage} damage!");
         }
         else
         {
+            // Play miss sound
+            _state.PlayerAttack.PlayMissSound();
+
             _uiCoordinator.LogMessage("Attack missed!");
         }
         
         // Update health UI after attack
         _uiCoordinator.UpdateHealthUI();
-        
-        // Check if all enemies are dead
-        if (_state.AliveEnemies.Count == 0)
-        {
-            OnBattleEnded?.Invoke(true);
-            return;
-        }
         
         // Start enemy turns
         _turnController.StartEnemyTurns();
@@ -136,25 +133,37 @@ public class CombatResolver
     // Execute player defense
     private void ExecutePlayerDefense(bool success, SceneTree tree)
     {
+        if (success) // Play block sound if defense successful
+        {
+            _state.PlayerHealth.PlayBlockSound();
+        }
+
         // If successful defense, no damage; otherwise take full damage
         // Then advance to next enemy's turn regardless of defense outcome
         ExecuteEnemyAttack(!success);
+
+        // Player may have died during the attack — don't advance if battle already ended
+        if (!_state.InCombat) return;
+
         _turnController.AdvanceToNextEnemy(tree);
     }
     
     // Execute enemy attack
     private void ExecuteEnemyAttack(bool fullDamage)
     {
+        var enemy = _state.AliveEnemies[_state.CurrentEnemyIndex];
         // If fullDamage is true, enemy attacks player for full damage; 
         // if false, player successfully defends and takes no damage
         if (fullDamage)
         {
-            var enemy = _state.AliveEnemies[_state.CurrentEnemyIndex];
             _state.EnemyAttackComponents[enemy].Attack(_state.Player);
+
             _uiCoordinator.LogMessage("Failed to defend! Taking full damage!");
         }
         else
         {
+            // Just play attack sound
+            _state.EnemyAttackComponents[enemy].PlayAttackSound();
             _uiCoordinator.LogMessage("Defended successfully! Taking no damage!");
         }
         

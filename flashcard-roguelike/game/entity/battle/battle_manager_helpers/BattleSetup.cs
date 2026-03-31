@@ -5,6 +5,8 @@ using System.Collections.Generic;
 // Manages the physical arrangement of combatants in the battle scene.
 public class BattleSetup
 {
+    private const float EnemyYOffset = 1.25f; // Vertical offset to place enemies above their marker spot
+
     private Transform3D _originalPlayerTransform;
     private Transform3D[] _originalEnemyTransforms;
     private Node3D _battleArea;
@@ -16,7 +18,7 @@ public class BattleSetup
     }
     
     // Move player and enemies to their battle positions and store original transforms
-    public void SetupBattlePositions(Player player, List<EnemyExample> enemies)
+    public void SetupBattlePositions(Player player, List<EnemyFSM> enemies)
     {
         if (_battleArea == null)
         {
@@ -34,21 +36,38 @@ public class BattleSetup
         }
         
         // Move player to player spot
-        Marker3D playerSpot = _battleArea.GetNode<Marker3D>("PlayerSpot");
+        Marker3D playerSpot = _battleArea.GetNodeOrNull<Marker3D>("PlayerSpot");
+        if (playerSpot == null)
+        {
+            GD.PrintErr("BattleSetup: PlayerSpot marker not found in BattleArea.");
+            return;
+        }
         player.GlobalTransform = playerSpot.GlobalTransform;
-        
+
         // Move each enemy to their respective spots
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].GlobalTransform = _battleArea.GetNode<Marker3D>($"EnemySpot{i}").GlobalTransform;
+            Marker3D enemySpot = _battleArea.GetNodeOrNull<Marker3D>($"EnemySpot{i}");
+            if (enemySpot == null)
+            {
+                GD.PrintErr($"BattleSetup: EnemySpot{i} marker not found in BattleArea.");
+                continue;
+            }
+            enemies[i].GlobalPosition = enemySpot.GlobalPosition + new Vector3(0, EnemyYOffset, 0);
+
+            // Force player to look at the first enemy spot for centering cam
+            if (i == 0)
+            {
+                player.ForceLookAt(enemySpot.GlobalPosition + new Vector3(0, EnemyYOffset, 0));
+            }       
         }
     }
     
     // Initialize enemy status UI components
-    public void InitializeEnemyStatusUI(List<EnemyExample> enemies, 
-        Dictionary<EnemyExample, HealthComponent> healthComponents,
-        Dictionary<EnemyExample, AttackComponent> attackComponents,
-        Dictionary<EnemyExample, EnemyStatusComponent> statusComponents)
+    public void InitializeEnemyStatusUI(List<EnemyFSM> enemies, 
+        Dictionary<EnemyFSM, HealthComponent> healthComponents,
+        Dictionary<EnemyFSM, AttackComponent> attackComponents,
+        Dictionary<EnemyFSM, EnemyStatusComponent> statusComponents)
     {
         foreach (var enemy in enemies)
         {
@@ -62,7 +81,7 @@ public class BattleSetup
     }
     
     // Reset player and enemy positions to their original locations
-    public void ResetPositions(Player player, List<EnemyExample> enemies, bool enemiesAlive)
+    public void ResetPositions(Player player, List<EnemyFSM> enemies, bool enemiesAlive)
     {
         // Reset player position
         player.GlobalTransform = _originalPlayerTransform;

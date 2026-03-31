@@ -16,6 +16,7 @@ public partial class EventManager : Node
 		GD.Print(listeners);
 		if(listeners.ContainsKey(Event) != true){
 			listeners.Add(Event, new List<Callable>());
+			listeners[Event].Add(Callback);
 		}else{
 			listeners[Event].Add(Callback);
 		}

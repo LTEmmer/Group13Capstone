@@ -1,7 +1,10 @@
 [gd_scene format=4 uid="uid://bw5gdsxslid3h"]
 
 [ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="1_fij0k"]
-[ext_resource type="PackedScene" path="res://game/entity/item/PickupCube.tscn" id="2_pickup"]
+[ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="2_0aegq"]
+[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/health.tres" id="3_vxwn0"]
+[ext_resource type="Resource" uid="uid://cqh570ewgdsiw" path="res://game/entity/item/item_resources/sword.tres" id="4_ac0fh"]
+[ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/shield.tres" id="5_y4ohd"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fij0k"]
 _surfaces = [{
@@ -82,10 +85,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3992662, -1.7729723, -7.297
 [node name="Player" parent="." unique_id=249236073 instance=ExtResource("1_fij0k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.187, 5.766)
 
-[node name="HealthPack" parent="." unique_id=936069260 instance=ExtResource("2_pickup")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.9860811, 8)
-DamageBonus = 0.0
+[node name="Item" parent="." unique_id=1116861116 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.7213154, 0.8003898, -3.663927)
+Resource = ExtResource("3_vxwn0")
 
-[node name="DamageBuff" parent="." unique_id=877266839 instance=ExtResource("2_pickup")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.2392316, 0)
-HealAmount = 0.0
+[node name="Item2" parent="." unique_id=1248684543 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.9795914, 0.8003898, -4.2110906)
+Resource = ExtResource("4_ac0fh")
+
+[node name="Item3" parent="." unique_id=529039477 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.43233633, 0.8003898, -8.143987)
+Resource = ExtResource("5_y4ohd")

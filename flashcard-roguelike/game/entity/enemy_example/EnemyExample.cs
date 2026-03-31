@@ -51,8 +51,8 @@ public partial class EnemyExample : CharacterBody3D
 			and then get all enemies from the Enemies node. I tested it this way and it worked
 			*/
 			var room = GetParent<Node3D>().GetParent<Node3D>();
-			List<EnemyExample> enemiesInRoom = GetParent<Node3D>().GetChildren().OfType<EnemyExample>().ToList();
-			BattleManager.Instance.StartBattle(player, enemiesInRoom, room);
+			//List<EnemyExample> enemiesInRoom = GetParent<Node3D>().GetChildren().OfType<EnemyExample>().ToList();
+			//BattleManager.Instance.StartBattle(player, enemiesInRoom, room);
 		}
 	}
 }

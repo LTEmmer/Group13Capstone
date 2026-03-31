@@ -1,6 +1,22 @@
 [gd_scene format=3 uid="uid://h18wimcwtwvr"]
 
 [ext_resource type="Script" uid="uid://dltt8htnkkipr" path="res://game/ui/main_menu/MainMenu.cs" id="1_gof3u"]
+[ext_resource type="Script" uid="uid://b1s7bonqrcj7q" path="res://game/ui/main_menu/UploadPanelContainer.cs" id="2_2ww3u"]
+[ext_resource type="PackedScene" uid="uid://d18ywib3x7tev" path="res://assets/animations/Animation Library[Standard]/Godot/AnimationLibrary_Godot_Standard.glb" id="3_model"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="4_theme"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mkp5f"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_1x88f"]
+sky_material = SubResource("ProceduralSkyMaterial_mkp5f")
+
+[sub_resource type="Environment" id="Environment_0p1rw"]
+background_mode = 1
+sky = SubResource("Sky_1x88f")
+tonemap_mode = 2
+glow_enabled = true
 
 [node name="main menu" type="Control" unique_id=1885237886]
 layout_mode = 3
@@ -9,7 +25,61 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_theme")
 script = ExtResource("1_gof3u")
+
+[node name="BackgroundViewport" type="SubViewportContainer" parent="." unique_id=-1294967295]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="BackgroundViewport" unique_id=-1294967294]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BackgroundViewport/SubViewport" unique_id=851746136]
+environment = SubResource("Environment_0p1rw")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="BackgroundViewport/SubViewport" unique_id=-1294967293]
+transform = Transform3D(1, 0, 0, 0, 0.013368875, 0.9999106, 0, -0.9999106, 0.013368875, 0, 3, 1)
+light_energy = 2.0
+spot_range = 8.0
+spot_angle = 35.0
+
+[node name="Cam1" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=-1294967292]
+transform = Transform3D(5.9604645e-08, 0.99443585, 0.10534425, -1, 5.9272995e-08, 6.2790066e-09, 0, -0.10534425, 0.99443585, 0.16560173, 2.515336, 1.2154537)
+
+[node name="Cam2" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=413763845]
+transform = Transform3D(0.6712938, 0, -0.7411914, 0, 1, 0, 0.7411914, 0, 0.6712938, -0.97419536, 1.3282784, 0.00063955784)
+
+[node name="Cam3" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=1268678437]
+transform = Transform3D(-0.43067196, -0.65640146, -0.61940205, -0.37472066, 0.7544118, -0.53893167, 0.8210397, -3.6298268e-08, -0.5708712, -0.71754193, 0.05743313, -0.712826)
+
+[node name="Cam4" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=1130836983]
+transform = Transform3D(0.051893923, -0.07247173, 0.99601954, 0.68647975, 0.72694725, 0.017127173, -0.7252949, 0.6828584, 0.08747452, 0.7616605, 1.6612457, -0.499)
+
+[node name="Cam5" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=753691370]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.0872598, 1.1944325, -0.9358233)
+
+[node name="Cam6" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=500933708]
+transform = Transform3D(0.9152904, 0.17362328, 0.3634535, -0.069369875, 0.95679426, -0.28236952, -0.39677614, 0.23323737, 0.8877889, 2.266715, 0.16904795, 1.1204891)
+
+[node name="Cam7" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=740516408]
+transform = Transform3D(-0.58145577, 5.0832476e-08, 0.813578, -8.742278e-08, -1, -3.5527137e-15, 0.813578, -7.112525e-08, 0.58145577, 0.1623154, 1.6404184, 0.7382063)
+
+[node name="Cam8" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=122529893]
+transform = Transform3D(0.7625791, 0.64401466, -0.060977746, -0.3455134, 0.4851786, 0.8032573, 0.5468945, -0.5914786, 0.5925028, -0.80004984, 2.5400407, 0.097405076)
+
+[node name="Cam9" type="Camera3D" parent="BackgroundViewport/SubViewport" unique_id=882986777]
+transform = Transform3D(0.976616, 0, 0.21499102, 0, 1, 0, -0.21499102, 0, 0.976616, -1.2102095, 0.9237287, 2.0935173)
+
+[node name="AnimationLibrary_Godot_Standard" parent="BackgroundViewport/SubViewport" unique_id=1197229922 instance=ExtResource("3_model")]
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=617760870]
 layout_mode = 1
@@ -19,31 +89,155 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=913965203]
+[node name="WhiteboardPanel" type="PanelContainer" parent="CenterContainer" unique_id=856586313]
+custom_minimum_size = Vector2(520, 420)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/WhiteboardPanel" unique_id=935320165]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/WhiteboardPanel/MarginContainer" unique_id=913965203]
 layout_mode = 2
 theme_override_constants/separation = 16
+alignment = 1
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=651380197]
+[node name="Label" type="Label" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=651380197]
 layout_mode = 2
+theme_override_font_sizes/font_size = 44
 text = "Flash Card Roguelike"
+horizontal_alignment = 1
 
-[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1296768342]
+[node name="PlayButton" type="Button" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1296768342]
+custom_minimum_size = Vector2(320, 56)
 layout_mode = 2
 text = "Start Game"
 
-[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer" unique_id=628858375]
-layout_mode = 2
-text = "Enter Path
-"
-
-[node name="SetNameInput" type="LineEdit" parent="CenterContainer/VBoxContainer" unique_id=544894052]
-layout_mode = 2
-
-[node name="CardUpload" type="Button" parent="CenterContainer/VBoxContainer" unique_id=455458912]
+[node name="CardUpload" type="Button" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=455458912]
+custom_minimum_size = Vector2(320, 56)
 layout_mode = 2
 text = "Card Upload
 "
 
-[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1567657475]
+[node name="ViewImportedFlashcards" type="Button" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=2000000000]
+custom_minimum_size = Vector2(320, 56)
+layout_mode = 2
+text = "View Imported Flashcards"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1567657475]
+custom_minimum_size = Vector2(320, 56)
 layout_mode = 2
 text = "Exit"
+
+[node name="ViewFlashcardsPanelContainer" type="Control" parent="." unique_id=2000000001]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="ViewFlashcardsPanelContainer" unique_id=2000000002]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Blur" type="Panel" parent="ViewFlashcardsPanelContainer/Panel" unique_id=2000000003]
+modulate = Color(1, 1, 1, 0.05)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ViewFlashcardsPanelContainer/Panel" unique_id=2000000004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer" unique_id=2000000005]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=2000000006]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FlashcardListContainer" type="VBoxContainer" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=2000000007]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=2000000008]
+custom_minimum_size = Vector2(80, 24)
+layout_mode = 2
+text = "Back"
+
+[node name="UploadPanelContainer" type="CenterContainer" parent="." unique_id=1670258514]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_2ww3u")
+
+[node name="WhiteboardPanel" type="PanelContainer" parent="UploadPanelContainer" unique_id=436326620]
+custom_minimum_size = Vector2(620, 360)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UploadPanelContainer/WhiteboardPanel" unique_id=2020345890]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer" unique_id=526669163]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1505921739]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "Upload CSV File"
+horizontal_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1658352499]
+custom_minimum_size = Vector2(420, 50)
+layout_mode = 2
+
+[node name="BrowseButton" type="Button" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=926566108]
+custom_minimum_size = Vector2(240, 54)
+layout_mode = 2
+text = "Browse 
+"
+
+[node name="ImportButton" type="Button" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=636903067]
+custom_minimum_size = Vector2(240, 54)
+layout_mode = 2
+text = "Import"
+
+[node name="BackButton" type="Button" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1442279632]
+custom_minimum_size = Vector2(240, 54)
+layout_mode = 2
+text = "Back"
+
+[node name="CsvFileDialog" type="FileDialog" parent="UploadPanelContainer" unique_id=1313515291]

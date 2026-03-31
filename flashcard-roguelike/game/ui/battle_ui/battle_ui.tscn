@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://brak2x5m7n8p3"]
 
-[ext_resource type="Script" uid="uid://c8y7x4k6m3p2h" path="res://game/ui/battle_ui/BattleUI.cs" id="1_battle_ui"]
+[ext_resource type="Script" uid="uid://f2j83gxk5lw2" path="res://game/ui/battle_ui/BattleUI.cs" id="1_battle_ui"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x52vn"]
 font_size = 13
@@ -61,6 +61,7 @@ layout_mode = 2
 text = "Run"
 
 [node name="StatusPanel" type="Panel" parent="." unique_id=1854288722]
+visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

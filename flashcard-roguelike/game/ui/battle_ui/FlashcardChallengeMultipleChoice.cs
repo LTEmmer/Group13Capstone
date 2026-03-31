@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChallenge
 {
@@ -22,6 +21,11 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 
 	private Action<bool> _onAnswerSubmitted;
 
+	// Shared Random instance avoids creating new Random() on every call
+	private static readonly Random _rng = new();
+
+	private const float FeedbackDisplayTime = 4.0f; // Seconds to show correct/incorrect feedback before hiding
+
 	public bool Visibility => Visible;
 
 	public override void _Ready()
@@ -35,13 +39,18 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 		_optionCButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionCButton");
 		_optionDButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionDButton");
 
-		_optionButtons = new Button[] { _optionAButton, _optionBButton, _optionCButton, _optionDButton };
+		_optionButtons = [_optionAButton, _optionBButton, _optionCButton, _optionDButton];
 
 		// Connect signals
 		_optionAButton.Pressed += () => OnOptionSelected(_optionAButton.Text);
 		_optionBButton.Pressed += () => OnOptionSelected(_optionBButton.Text);
 		_optionCButton.Pressed += () => OnOptionSelected(_optionCButton.Text);
 		_optionDButton.Pressed += () => OnOptionSelected(_optionDButton.Text);
+
+		AudioManager.Instance?.RegisterButton(_optionAButton);
+		AudioManager.Instance?.RegisterButton(_optionBButton);
+		AudioManager.Instance?.RegisterButton(_optionCButton);
+		AudioManager.Instance?.RegisterButton(_optionDButton);
 
 		// Start hidden
 		Visible = false;
@@ -63,8 +72,8 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 		// Get three incorrect answers from other cards
 		List<string> allOptions = GetWrongAnswers(card, 3);
 
-		// Create a list of all options (1 correct + 3 wrong)  
-        allOptions.Add(_correctAnswer);
+		// Create a list of all options (1 correct + 3 wrong)
+		allOptions.Add(_correctAnswer);
 
 		// Shuffle the options
 		ShuffleList(allOptions);
@@ -132,9 +141,19 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 		// Check if the answer is correct
 		bool isCorrect = selectedAnswer.Equals(_correctAnswer, StringComparison.OrdinalIgnoreCase);
 
+		// Play sound
+		if (isCorrect)
+		{
+			AudioManager.Instance?.PlayCorrectSound();
+		}
+		else
+		{
+			AudioManager.Instance?.PlayWrongSound();
+		}
+
 		// Visual feedback - highlight all buttons
-		Color correctColor = new Color(0.5f, 1.0f, 0.5f); // Green for correct
-		Color wrongColor = new Color(1.0f, 0.5f, 0.5f);   // Red for wrong
+		Color correctColor = new(0.5f, 1.0f, 0.5f); // Green for correct
+		Color wrongColor = new(1.0f, 0.5f, 0.5f);   // Red for wrong
 		Color neutralColor = Colors.White;
 
 		foreach (var button in _optionButtons)
@@ -147,7 +166,7 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 			{
 				button.Modulate = wrongColor; // Highlight the selected wrong answer
 			}
-			else 
+			else
 			{
 				button.Modulate = neutralColor; // Keep unselected wrong answers neutral
 			}
@@ -159,7 +178,7 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 		}
 
 		// Wait a moment then hide and emit result
-		GetTree().CreateTimer(4.0f).Timeout += () =>
+		GetTree().CreateTimer(FeedbackDisplayTime).Timeout += () =>
 		{
 			foreach (var button in _optionButtons)
 			{
@@ -169,58 +188,24 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 		};
 	}
 
-	public Flashcard LoadRandomCard()
-	{
-		List<FlashcardSet> sets = FlashcardManager.Instance?.ActiveFlashCardLists;
-
-		if (sets == null || sets.Count == 0)
-		{
-			GD.PrintErr("FlashcardChallengeMultipleChoice: No flashcard sets available.");
-			return null;
-		}
-
-        // Get a random card
-		List<Flashcard> allCards = new List<Flashcard>();
-		foreach (var set in sets)
-		{
-			if (set.Cards != null)
-				allCards.AddRange(set.Cards);
-		}
-
-		if (allCards.Count == 0)
-		{
-			GD.PrintErr("FlashcardChallengeMultipleChoice: No flashcards available in sets.");
-			return null;
-		}
-
-		Random random = new Random();
-		return allCards[random.Next(allCards.Count)];
-	}
-
-	private List<string> GetWrongAnswers(Flashcard excludeCard, int count)
+	private static List<string> GetWrongAnswers(Flashcard excludeCard, int count)
 	{
 		List<FlashcardSet> sets = FlashcardManager.Instance.ActiveFlashCardLists;
-		List<string> wrongAnswers = new List<string>();
+		List<string> wrongAnswers = [];
 
-		if (sets == null || sets.Count == 0) return wrongAnswers;
-
-        // Get all cards excluding the current one
-		List<Flashcard> otherCards = new List<Flashcard>();
-		foreach (var set in sets)
+		if (sets == null || FlashcardManager.Instance.GetActiveCardCount() <= count) 
 		{
-            foreach (var card in set.Cards)
-            {
-                if (card == excludeCard) continue; // Skip the card we want to exclude
-                otherCards.Add(card);
-            }
+			return wrongAnswers; // Not enough cards to get wrong answers, return empty list
 		}
 
-		Random random = new Random();
+		// Get all cards excluding the current one
+		List<Flashcard> otherCards = FlashcardManager.Instance.GetActiveCards();
+		otherCards.Remove(excludeCard);
 
 		// Get up to 'count' wrong answers
 		for (int i = 0; i < count && otherCards.Count > 0; i++)
 		{
-			int randomIndex = random.Next(otherCards.Count);
+			int randomIndex = _rng.Next(otherCards.Count);
 			wrongAnswers.Add(otherCards[randomIndex].Answer);
 			otherCards.RemoveAt(randomIndex);
 		}
@@ -234,13 +219,12 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 		return wrongAnswers;
 	}
 
-	private void ShuffleList(List<string> list)
+	private static void ShuffleList(List<string> list)
 	{
-        // Basic shuffling
-		Random random = new Random();
+		// Basic shuffling
 		for (int i = list.Count - 1; i > 0; i--)
 		{
-			int randomIndex = random.Next(i + 1);
+			int randomIndex = _rng.Next(i + 1);
 			(list[i], list[randomIndex]) = (list[randomIndex], list[i]);
 		}
 	}
