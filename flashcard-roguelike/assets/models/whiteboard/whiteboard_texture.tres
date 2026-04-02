@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://mgn42cq7dm5h"]
+
+[ext_resource type="Texture2D" uid="uid://ckr2376hn58eu" path="res://assets/models/whiteboard/whiteboard_Material_BaseColor.png" id="1_a30y2"]
+[ext_resource type="Texture2D" uid="uid://byihtjurdtr6c" path="res://assets/models/whiteboard/whiteboard_Material_Metallic.png" id="2_j87oq"]
+[ext_resource type="Texture2D" uid="uid://dvkw4xlecnq1a" path="res://assets/models/whiteboard/whiteboard_Material_Roughness.png" id="3_0cy6i"]
+
+[resource]
+albedo_texture = ExtResource("1_a30y2")
+metallic = 1.0
+metallic_texture = ExtResource("2_j87oq")
+roughness_texture = ExtResource("3_0cy6i")
