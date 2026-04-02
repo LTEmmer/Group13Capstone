@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 
 /// <summary>
 /// Victory screen displayed when the player completes the dungeon.
@@ -40,6 +41,8 @@ public partial class VictoryMenu : CanvasLayer
 	/// </summary>
 	public void ShowVictory(string message = "Congratulations! You conquered the dungeon!")
 	{
+		AudioManager.Instance.PlayGameVictorySound();
+
 		if (_messageLabel != null)
 		{
 			_messageLabel.Text = message;
@@ -55,6 +58,8 @@ public partial class VictoryMenu : CanvasLayer
 		GD.Print("Starting new run...");
 		GetTree().Paused = false;
 		GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
+
+		Visible = false;
 	}
 	
 	public void _on_main_menu_pressed()
@@ -70,6 +75,8 @@ public partial class VictoryMenu : CanvasLayer
 		{
 			GetTree().ChangeSceneToFile("res://game/ui/main_menu/main_menu.tscn");
 		}
+
+		Visible = false;
 	}
 	
 	public void _on_quit_pressed()

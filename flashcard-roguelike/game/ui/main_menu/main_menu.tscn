@@ -227,7 +227,7 @@ shaded = true
 texture = ExtResource("17_fkgrk")
 
 [node name="Sprite3D2" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls" unique_id=1770875365]
-transform = Transform3D(-0.16572978, 0.00486375, -1.4488554e-08, 0.00486375, 0.16572978, 4.2520115e-10, 1.44947965e-08, 9.255494e-16, -0.16580112, -5.635089, 1.1349208, 8.494368)
+transform = Transform3D(-0.0659716, 0.0019360995, -9.9657225e-09, 0.0019360995, 0.0659716, 1.6925958e-10, 9.966399e-09, -1.2315615e-10, -0.066, 7.980157, 0.8837851, -8.494384)
 shaded = true
 texture = ExtResource("19_705nu")
 

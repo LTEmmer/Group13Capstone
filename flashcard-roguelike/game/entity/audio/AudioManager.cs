@@ -17,6 +17,7 @@ public partial class AudioManager : Node
 
     // Game condition sounds
     [Export] public AudioStream GameOverSound;
+    [Export] public AudioStream GameVictorySound;
 
     // Music tracks
     [Export] public AudioStream MainMenuMusic;
@@ -174,6 +175,15 @@ public partial class AudioManager : Node
         if (GameOverSound != null)
         {
             _gameConditionsPlayer.Stream = GameOverSound;
+            _gameConditionsPlayer.Play();
+        }
+    }
+
+    public void PlayGameVictorySound()
+    {
+        if (GameVictorySound != null)
+        {
+            _gameConditionsPlayer.Stream = GameVictorySound;
             _gameConditionsPlayer.Play();
         }
     }
