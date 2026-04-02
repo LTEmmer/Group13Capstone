@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://b1s7bonqrcj7q" path="res://game/ui/main_menu/UploadPanelContainer.cs" id="2_2ww3u"]
 [ext_resource type="Texture2D" uid="uid://b0gi538rd7txo" path="res://assets/backgrounds/prettysleepy-stars-3750824.png" id="3_0p1rw"]
 [ext_resource type="PackedScene" uid="uid://d18ywib3x7tev" path="res://assets/animations/Animation Library[Standard]/Godot/AnimationLibrary_Godot_Standard.glb" id="3_model"]
-[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="4_theme"]
+[ext_resource type="Theme" uid="uid://cdutdkbhfle2e" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="4_theme"]
 [ext_resource type="PackedScene" uid="uid://dqvmfieyp6dn8" path="res://assets/models/desk/desk.glb" id="5_0ipjw"]
 [ext_resource type="PackedScene" uid="uid://dgjvxrwbjwilc" path="res://assets/models/mainmenu_walls/mainmenu_walls2.glb" id="5_cwbgs"]
 [ext_resource type="Shader" uid="uid://dixadmc1j5rnp" path="res://game/ui/main_menu/BackgroundScroll.gdshader" id="5_scroll"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://d0yf6bjted3ip" path="res://assets/sprites/grafitti_etc/graffiti_1.png" id="18_njswq"]
 [ext_resource type="Texture2D" uid="uid://bidcpo3q0ri48" path="res://assets/sprites/grafitti_etc/graffiti_4.png" id="19_06kjt"]
 [ext_resource type="Texture2D" uid="uid://b2r6br2fdw5a5" path="res://assets/sprites/grafitti_etc/graffiti_3.png" id="19_705nu"]
+[ext_resource type="PackedScene" uid="uid://cn4tm82kgsw57" path="res://assets/models/ufo/ufo.glb" id="23_hutre"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_scroll"]
 shader = ExtResource("5_scroll")
@@ -240,6 +241,18 @@ texture = ExtResource("19_06kjt")
 transform = Transform3D(-4.3442594e-08, 6.7879047e-10, 0.6123755, 0.27107677, 0.5491093, 1.9414752e-08, -0.5491093, 0.27107677, -3.889065e-08, -8.46581, 3.1050653, 3.9055643)
 shaded = true
 texture = ExtResource("18_njswq")
+
+[node name="UFO" type="Node3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=650332032]
+
+[node name="DirectionalLight3D" type="SpotLight3D" parent="BackgroundViewport/SubViewport/Decoration/UFO" unique_id=398684236]
+transform = Transform3D(1, 0, 0, 0, 0.64039123, 0.7680489, 0, -0.7680489, 0.64039123, -0.3803134, 25.47427, -21.558504)
+light_energy = 10.0
+spot_range = 8.154
+spot_angle = 31.57475
+
+[node name="ufo" parent="BackgroundViewport/SubViewport/Decoration/UFO" unique_id=575728332 instance=ExtResource("23_hutre")]
+transform = Transform3D(0.8547079, -0.06625698, 0.5148637, 0.41474316, 0.68363553, -0.6005251, -0.31219018, 0.7268096, 0.61178833, -0.3803134, 22.343311, -24.596483)
+script = ExtResource("6_k3ypk")
 
 [node name="AnimationLibrary_Godot_Standard" parent="BackgroundViewport/SubViewport" unique_id=1197229922 instance=ExtResource("3_model")]
 

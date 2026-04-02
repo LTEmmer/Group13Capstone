@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://drq58oyucx00r"]
+
+[ext_resource type="Texture2D" uid="uid://dy1a65rxohwup" path="res://assets/models/ufo/ufo_Material.001_BaseColor.png" id="1_nc7pv"]
+[ext_resource type="Texture2D" uid="uid://cu5hlkisqlq3c" path="res://assets/models/ufo/ufo_Material.001_Metallic.png" id="2_68gs0"]
+[ext_resource type="Texture2D" uid="uid://du1o2xsxrb5cq" path="res://assets/models/ufo/ufo_Material.001_Roughness.png" id="3_y2k7r"]
+
+[resource]
+albedo_texture = ExtResource("1_nc7pv")
+metallic = 1.0
+metallic_texture = ExtResource("2_68gs0")
+roughness_texture = ExtResource("3_y2k7r")
