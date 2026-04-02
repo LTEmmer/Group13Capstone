@@ -4,6 +4,9 @@ using System;
 
 public partial class MainMenu : Control
 {
+	private const int FlashcardSetTitleFontSize = 28;
+	private const int FlashcardQaFontSize = 18;
+
 	private Control _mainMenuContainer;
 	private Control _uploadPanelContainer;
 	private Control _viewFlashcardsPanelContainer;
@@ -117,6 +120,9 @@ public partial class MainMenu : Control
 		{
 			var emptyLabel = new Label();
 			emptyLabel.Text = "No imported flashcards";
+			emptyLabel.AddThemeFontSizeOverride("font_size", FlashcardQaFontSize);
+			if (ThemeDB.FallbackFont != null)
+				emptyLabel.AddThemeFontOverride("font", ThemeDB.FallbackFont);
 			_flashcardListContainer.AddChild(emptyLabel);
 			return;
 		}
@@ -128,7 +134,7 @@ public partial class MainMenu : Control
 
 			var setNameLabel = new Label();
 			setNameLabel.Text = set.DisplayName ?? "(Unnamed set)";
-			setNameLabel.AddThemeFontSizeOverride("font_size", 18);
+			setNameLabel.AddThemeFontSizeOverride("font_size", FlashcardSetTitleFontSize);
 			if (ThemeDB.FallbackFont != null)
 				setNameLabel.AddThemeFontOverride("font", ThemeDB.FallbackFont);
 			setNameLabel.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
@@ -157,9 +163,10 @@ public partial class MainMenu : Control
 					(string.IsNullOrEmpty(card.Answer) ? "(no answer)" : card.Answer);
 				if (ThemeDB.FallbackFont != null)
 					cardLabel.AddThemeFontOverride("font", ThemeDB.FallbackFont);
+				cardLabel.AddThemeFontSizeOverride("font_size", FlashcardQaFontSize);
 
 				cardLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
-				cardLabel.CustomMinimumSize = new Vector2(340, 0);
+				cardLabel.CustomMinimumSize = new Vector2(620, 0);
 				_flashcardListContainer.AddChild(cardLabel);
 			}
 
@@ -169,6 +176,7 @@ public partial class MainMenu : Control
 		}
 
 		ApplyDefaultFontToFlashcardsPanel();
+		GetNodeOrNull<Control>("ViewFlashcardsPanelContainer/Panel")?.UpdateMinimumSize();
 	}
 
 	private void OnDeleteSetPressed(string setDisplayName)
