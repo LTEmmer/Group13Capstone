@@ -41,7 +41,8 @@ public partial class VictoryMenu : CanvasLayer
 	/// </summary>
 	public void ShowVictory(string message = "Congratulations! You conquered the dungeon!")
 	{
-		AudioManager.Instance.PlayGameVictorySound();
+		AudioManager.Instance?.FadeOutMusic();
+		AudioManager.Instance?.PlayGameVictorySound();
 
 		if (_messageLabel != null)
 		{

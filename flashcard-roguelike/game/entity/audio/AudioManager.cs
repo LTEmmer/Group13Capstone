@@ -97,6 +97,15 @@ public partial class AudioManager : Node
         TransitionToMusic(BattleMusic, fadeDuration);
     }
 
+    /// Fades the current music out to silence without starting a new track.
+    public void FadeOutMusic(float fadeDuration = 1.5f)
+    {
+        var active = _usingPlayerA ? _musicPlayerA : _musicPlayerB;
+        var tween = CreateTween();
+        tween.TweenProperty(active, "volume_db", -80f, fadeDuration);
+        tween.TweenCallback(Callable.From(active.Stop));
+    }
+
     /// Plays the one-shot stinger sound on top of whatever music is currently playing.
     /// Call this when entering battle, alongside PlayBattleMusic.
     public void PlayBattleStinger()
