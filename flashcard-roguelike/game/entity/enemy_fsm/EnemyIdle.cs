@@ -5,7 +5,7 @@ using Array = Godot.Collections.Array;
 public partial class EnemyIdle : EnemyBaseState
 {
 	[Export]
-	private float _idleTimer = 2.0F;
+	private float _idleTimer = 3.0F;
 	[Export]
 	private bool _staticEnemy = true;
 	[Export]
@@ -43,6 +43,7 @@ public partial class EnemyIdle : EnemyBaseState
 	
 	public override void OnEnterState()
 	{
+		_currentTimer = _idleTimer;
 		enemy.Velocity = Vector3.Zero;
 	}
 	

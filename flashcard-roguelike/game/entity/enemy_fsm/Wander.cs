@@ -30,7 +30,7 @@ public partial class Wander : EnemyBaseState
 			return [true, StateNames.pursue];
 		}
 
-		if (navAgent.IsTargetReached())
+		if (navAgent.IsNavigationFinished())
 		{
 			return [true, StateNames.idle];
 		}
@@ -87,7 +87,7 @@ public partial class Wander : EnemyBaseState
 		float offsetX = GD.RandRange(-10, 10);
 		float offsetZ  = GD.RandRange(-10, 10);
 		_targetPosition = enemyCurrentPosition +  new Vector3(offsetX, 0, offsetZ);
-		_targetPosition.Y = 0.0F;
+		_targetPosition.Y = enemy.GlobalPosition.Y;
 		navAgent.SetTargetPosition(_targetPosition);
 	}
 }
