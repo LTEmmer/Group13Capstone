@@ -10,10 +10,10 @@ public partial class EModel : Node3D
 	public AnimationPlayer animator;
 	[Export]
 	public Node StateContainer;
-	
+	public CharacterBody3D Player;
 	public Dictionary<string,EnemyBaseState> States = new Dictionary<string,EnemyBaseState>();
 	public EnemyBaseState CurrentState;
-	
+	public bool BattleMode = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -23,7 +23,7 @@ public partial class EModel : Node3D
 	}
 	
 	public void Update(double delta){
-		Godot.Collections.Array verdict = CurrentState.CheckRelevance(delta);
+		Godot.Collections.Array verdict = CurrentState.DefaultCheckRelevance(delta);
 		if((bool)verdict[0]){
 			SwitchTo((String)verdict[1]);
 		}

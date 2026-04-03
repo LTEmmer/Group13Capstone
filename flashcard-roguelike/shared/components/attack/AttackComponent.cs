@@ -21,7 +21,7 @@ public partial class AttackComponent : Node
 	{
 		// Try to get the health component from the target
 		HealthComponent healthComponent = target.GetNode<HealthComponent>("HealthComponent");
-
+		
 		if (healthComponent != null)
 		{
 			// Play attack sound

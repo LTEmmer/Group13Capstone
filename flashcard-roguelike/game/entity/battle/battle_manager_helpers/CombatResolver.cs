@@ -6,61 +6,61 @@ using System.Linq;
 // Integrates flashcard challenges with combat outcomes.
 public class CombatResolver
 {
-    private BattleState _state;
-    private BattleUICoordinator _uiCoordinator;
-    private FlashcardChallengeManager _flashcardChallengeManager;
-    private TurnController _turnController;
-    
-    public event Action<bool> OnBattleEnded; // bool: victory
-    public event Action<bool> OnBattleEndedWithRun; // bool: successfully ran
-    
-    public void Initialize(BattleState state, BattleUICoordinator uiCoordinator, 
-        FlashcardChallengeManager flashcardChallengeManager, TurnController turnController)
-    {
-        _state = state;
-        _uiCoordinator = uiCoordinator;
-        _flashcardChallengeManager = flashcardChallengeManager;
-        _turnController = turnController;
-    }
-    
-    // Start attack sequence with flashcard challenge
-    public void StartAttackSequence()
-    {
-        float difficulty = GameDifficultyManager.Instance.getCurrentDifficultyScore();
-        if (_flashcardChallengeManager != null)
-        {
-            // Load a random flashcard for the attack challenge
-            Flashcard card = _flashcardChallengeManager.LoadRandomCard();
-            if (card != null)
-            {
-                // Set state to wait for flashcard answer and show challenge with difficulty
-                _state.WaitingForFlashcard = true;
-                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to attack!", difficulty);
-            }
-            else
-            {
-                // If no flashcards are available, log an error and execute attack as if it succeeded, shouldnt happen
-                GD.PrintErr("CombatResolver: No flashcards available for attack challenge.");
-                ExecutePlayerAttack(true);
-            }
-        }
-        else
-        {
-            // If flashcard challenge manager is not assigned, log an error and execute attack as if it succeeded, shouldnt happen
-            GD.PrintErr("CombatResolver: FlashcardChallengeManager is not assigned. Skipping attack challenge.");
-            ExecutePlayerAttack(true);
-        }
-    }
-    
-    // Start defense sequence with flashcard challenge
-    public async void StartDefenseChallenge()
-    {
-        _state.PendingAction = "defend";
+	private BattleState _state;
+	private BattleUICoordinator _uiCoordinator;
+	private FlashcardChallengeManager _flashcardChallengeManager;
+	private TurnController _turnController;
+	
+	public event Action<bool> OnBattleEnded; // bool: victory
+	public event Action<bool> OnBattleEndedWithRun; // bool: successfully ran
+	
+	public void Initialize(BattleState state, BattleUICoordinator uiCoordinator, 
+		FlashcardChallengeManager flashcardChallengeManager, TurnController turnController)
+	{
+		_state = state;
+		_uiCoordinator = uiCoordinator;
+		_flashcardChallengeManager = flashcardChallengeManager;
+		_turnController = turnController;
+	}
+	
+	// Start attack sequence with flashcard challenge
+	public void StartAttackSequence()
+	{
+		float difficulty = GameDifficultyManager.Instance.getCurrentDifficultyScore();
+		if (_flashcardChallengeManager != null)
+		{
+			// Load a random flashcard for the attack challenge
+			Flashcard card = _flashcardChallengeManager.LoadRandomCard();
+			if (card != null)
+			{
+				// Set state to wait for flashcard answer and show challenge with difficulty
+				_state.WaitingForFlashcard = true;
+				_flashcardChallengeManager.ShowChallenge(card, "Answer correctly to attack!", difficulty);
+			}
+			else
+			{
+				// If no flashcards are available, log an error and execute attack as if it succeeded, shouldnt happen
+				GD.PrintErr("CombatResolver: No flashcards available for attack challenge.");
+				ExecutePlayerAttack(true);
+			}
+		}
+		else
+		{
+			// If flashcard challenge manager is not assigned, log an error and execute attack as if it succeeded, shouldnt happen
+			GD.PrintErr("CombatResolver: FlashcardChallengeManager is not assigned. Skipping attack challenge.");
+			ExecutePlayerAttack(true);
+		}
+	}
+	
+	// Start defense sequence with flashcard challenge
+	public async void StartDefenseChallenge()
+	{
+		_state.PendingAction = "defend";
 
-        // Brief delay so the attack is visible before the card appears
-        await _state.Player.ToSignal(_state.Player.GetTree().CreateTimer(1.5f), SceneTreeTimer.SignalName.Timeout);
+		// Brief delay so the attack is visible before the card appears
+		await _state.Player.ToSignal(_state.Player.GetTree().CreateTimer(1.5f), SceneTreeTimer.SignalName.Timeout);
 
-        if (!_state.InCombat) // Make sure we're in combat due to the delay, just in case
+		if (!_state.InCombat) // Make sure we're in combat due to the delay, just in case
         {
             return;
         }
@@ -183,10 +183,10 @@ public class CombatResolver
         }
 
         // If successful defense, reduce damage; otherwise take full damage
-        // Then advance to next enemy's turn regardless of defense outcome
-        ExecuteEnemyAttack(!success);
+		// Then advance to next enemy's turn regardless of defense outcome
+		ExecuteEnemyAttack(!success);
 
-        // Player may have died during the attack — don't advance if battle already ended
+		// Player may have died during the attack — don't advance if battle already ended
         if (!_state.InCombat) return;
 
         _turnController.AdvanceToNextEnemy(tree);
@@ -196,6 +196,9 @@ public class CombatResolver
     private void ExecuteEnemyAttack(bool fullDamage)
     {
         var enemy = _state.AliveEnemies[_state.CurrentEnemyIndex];
+        enemy.EnemyModel.Player = _state.Player; 
+        // switch to attack state for enemy 
+        enemy.EnemyModel.SwitchTo(StateNames.movein); //ill find a better way to do this in the future
         if (fullDamage)
         {
             _state.EnemyAttackComponents[enemy].Attack(_state.Player);

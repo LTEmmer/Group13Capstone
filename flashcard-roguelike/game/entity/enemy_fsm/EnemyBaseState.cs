@@ -11,8 +11,8 @@ public partial class EnemyBaseState : Node
 	public String StateAnimation;
 	[Export]
 	public AnimationPlayer animator;
-	
 	public EnemyFSM enemy;
+	public CharacterBody3D PlayerBody;
 	protected double _enterStateTime; 
 	static protected Dictionary<string,int> StatesPriority  = new Dictionary<string,int>{
 		{StateNames.idle , 1},
@@ -46,6 +46,10 @@ public partial class EnemyBaseState : Node
 			property["hint"] = (int)PropertyHint.Enum;
 			property["hint_string"] = animations;
 		}
+	}
+	
+	public virtual Godot.Collections.Array DefaultCheckRelevance(double delta){
+		return CheckRelevance(delta);
 	}
 	
 	public virtual Godot.Collections.Array CheckRelevance(double delta){

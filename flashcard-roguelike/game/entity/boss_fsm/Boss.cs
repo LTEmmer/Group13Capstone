@@ -1,8 +1,9 @@
 using Godot;
+using System;
 
-// Temporary boss for testing boss combat mechanics.
-public partial class TestBoss : EnemyFSM, IBossEnemy
+public partial class Boss : EnemyFSM, IBossEnemy
 {
 	[Export] public int StreakRequired { get; set; } = 3;
 	[Export] public float BlockReduction { get; set; } = 0.5f;
+	
 }

@@ -230,6 +230,9 @@ public partial class BattleManager : Node
 			{
 				GD.PrintErr($"BattleManager: Enemy {enemy.Name} missing EnemyStatusComponent.");
 			}
+			//Set enemyFSM model to battleMode can move elsewhere if needed
+			enemy.EnemyModel.BattleMode = true;
+
 		}
 
 		return true;
@@ -327,7 +330,8 @@ public partial class BattleManager : Node
 		_state.WaitingForFlashcard = false;
 		_flashcardChallengeManager.HideChallenge(); // Immediately clear any active flashcard (e.g. player died mid-challenge)
 		_battleCooldownTimer.Start();
-
+		
+		
 		// Disconnect player death signal to prevent duplication
 		if (_state.PlayerHealth != null)
 		{
@@ -377,6 +381,9 @@ public partial class BattleManager : Node
 						_state.Player.SetAcceptKeyboardInput(true);
 						_state.Reset();
 					};
+					foreach (var enemy in _state.AliveEnemies){ //a timer of some sort needs to be implemented to give the player a headstart
+						enemy.EnemyModel.BattleMode = false;
+					}
 				});
 			};
 		});
@@ -396,6 +403,7 @@ public partial class BattleManager : Node
 			EventManager.Instance.raise("on_battle_lost","test");
 			return;
 		}
+
 	}
 
 	private void OnBattleCooldownTimeout()
