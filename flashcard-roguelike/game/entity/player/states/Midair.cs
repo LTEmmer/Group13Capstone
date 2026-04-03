@@ -13,8 +13,6 @@ public partial class Midair : BaseState
 	public RayCast3D DownCastRay;
 	[Export]
 	public ModifierBoneTarget3D HipsAttachment;
-	[Export]
-	public double DoubleJumpTiming = 0.2;
 	public Vector3 JumpDirection;
 	
 	private const float GRAVITY_GOING_DOWN = 30.0F;
@@ -22,7 +20,7 @@ public partial class Midair : BaseState
 	public override Array CheckRelevance(InputPackage input, double delta)
 	{
 		Vector3 floorPoint = DownCastRay.GetCollisionPoint();
-		if (input.actions.Contains(StateNames.jump) && WorksLongerThan(DoubleJumpTiming) && InputCanBePaid(StateNames.jump))  
+		if (input.actions.Contains(StateNames.jump) && InputCanBePaid(StateNames.jump))  
 		{
 			return [true, StateNames.jump];
 		}
