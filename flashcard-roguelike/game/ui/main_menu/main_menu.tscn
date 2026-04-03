@@ -1,15 +1,17 @@
 [gd_scene format=3 uid="uid://h18wimcwtwvr"]
 
 [ext_resource type="Script" uid="uid://dltt8htnkkipr" path="res://game/ui/main_menu/MainMenu.cs" id="1_gof3u"]
-[ext_resource type="Script" uid="uid://diiy6r5dxkn1" path="res://game/ui/main_menu/UploadPanelContainer.cs" id="2_2ww3u"]
+[ext_resource type="Script" uid="uid://b1s7bonqrcj7q" path="res://game/ui/main_menu/UploadPanelContainer.cs" id="2_2ww3u"]
 [ext_resource type="Texture2D" uid="uid://b0gi538rd7txo" path="res://assets/backgrounds/prettysleepy-stars-3750824.png" id="3_0p1rw"]
 [ext_resource type="PackedScene" uid="uid://d18ywib3x7tev" path="res://assets/animations/Animation Library[Standard]/Godot/AnimationLibrary_Godot_Standard.glb" id="3_model"]
-[ext_resource type="Theme" uid="uid://cdutdkbhfle2e" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="4_theme"]
-[ext_resource type="PackedScene" uid="uid://dqvmfieyp6dn8" path="res://assets/models/desk/desk.glb" id="5_0ipjw"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="4_theme"]
+[ext_resource type="PackedScene" uid="uid://cm0r6jfidsyc8" path="res://assets/models/desk/desk.glb" id="5_0ipjw"]
 [ext_resource type="PackedScene" uid="uid://dgjvxrwbjwilc" path="res://assets/models/mainmenu_walls/mainmenu_walls2.glb" id="5_cwbgs"]
 [ext_resource type="Shader" uid="uid://dixadmc1j5rnp" path="res://game/ui/main_menu/BackgroundScroll.gdshader" id="5_scroll"]
-[ext_resource type="Script" uid="uid://rvw7n50h5edw" path="res://shared/components/hover/HoverComponent.cs" id="6_k3ypk"]
-[ext_resource type="PackedScene" uid="uid://cmkeya22nxijs" path="res://assets/models/big_pencil/pencil.glb" id="10_gscod"]
+[ext_resource type="Script" uid="uid://d21whjtbn8o5c" path="res://shared/components/hover/HoverComponent.cs" id="6_k3ypk"]
+[ext_resource type="Texture2D" uid="uid://b48xe6gkb0idd" path="res://assets/ui/main_menu_torn_paper.png" id="6_paper_tex"]
+[ext_resource type="Script" uid="uid://lq4wspjrvojx" path="res://game/ui/main_menu/TornPaperMenuPanel.cs" id="7_tpaper"]
+[ext_resource type="PackedScene" uid="uid://2qvmv1ijxwoo" path="res://assets/models/big_pencil/pencil.glb" id="10_gscod"]
 [ext_resource type="Texture2D" uid="uid://b7fijt5wuxgr2" path="res://assets/sprites/grafitti_etc/whiteboard_1.png" id="10_jxl6k"]
 [ext_resource type="Texture2D" uid="uid://cct4abgrtfb3" path="res://assets/sprites/grafitti_etc/whiteboard_2.png" id="11_06kjt"]
 [ext_resource type="Script" uid="uid://sjh56ix28es4" path="res://shared/components/rotate/RotateComponent.cs" id="11_egypv"]
@@ -23,10 +25,6 @@
 [ext_resource type="Texture2D" uid="uid://bidcpo3q0ri48" path="res://assets/sprites/grafitti_etc/graffiti_4.png" id="19_06kjt"]
 [ext_resource type="Texture2D" uid="uid://b2r6br2fdw5a5" path="res://assets/sprites/grafitti_etc/graffiti_3.png" id="19_705nu"]
 [ext_resource type="PackedScene" uid="uid://cn4tm82kgsw57" path="res://assets/models/ufo/ufo.glb" id="23_hutre"]
-[ext_resource type="Theme" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="4_theme"]
-[ext_resource type="Shader" uid="uid://c4p4ndwf1u7fc" path="res://game/ui/main_menu/BackgroundScroll.gdshader" id="5_scroll"]
-[ext_resource type="Texture2D" uid="uid://cp2m8nx4torn7" path="res://assets/ui/main_menu_torn_paper.png" id="6_paper_tex"]
-[ext_resource type="Script" path="res://game/ui/main_menu/TornPaperMenuPanel.cs" id="7_tpaper"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_scroll"]
 shader = ExtResource("5_scroll")
@@ -281,7 +279,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("6_paper_tex")
-ignore_texture_size = true
+expand_mode = 1
 stretch_mode = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/WhiteboardPanel" unique_id=935320165]
@@ -357,20 +355,16 @@ script = ExtResource("7_tpaper")
 
 [node name="Paper" type="TextureRect" parent="ViewFlashcardsPanelContainer/Panel" unique_id=2000000010]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_left = -0.065
 anchor_top = -0.065
 anchor_right = 1.065
 anchor_bottom = 1.065
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("6_paper_tex")
-ignore_texture_size = true
+expand_mode = 1
 stretch_mode = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="ViewFlashcardsPanelContainer/Panel" unique_id=2000000004]
@@ -427,7 +421,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("6_paper_tex")
-ignore_texture_size = true
+expand_mode = 1
 stretch_mode = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="UploadPanelContainer/WhiteboardPanel" unique_id=2020345890]
