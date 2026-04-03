@@ -3,7 +3,7 @@ using Godot;
 public partial class MainMenu : Control
 {
 	private Camera3D[] _cameras;
-	private SpotLight3D _light;
+	private DirectionalLight3D _mainLight;
 	private int _activeCameraIndex = 0;
 
 	private static readonly Color[] LightColors =
@@ -58,7 +58,8 @@ public partial class MainMenu : Control
 				vp.GetNodeOrNull<Camera3D>("Cameras/Cam8"),
 				vp.GetNodeOrNull<Camera3D>("Cameras/Cam9"),
 			};
-			_light = vp.GetNodeOrNull<SpotLight3D>("SpotLight3D");
+
+			_mainLight = vp.GetNodeOrNull<DirectionalLight3D>("Lights/MainLight");
 		}
 
 		SwitchCamera();
@@ -87,13 +88,14 @@ public partial class MainMenu : Control
 			_cameras[_activeCameraIndex].Current = true;
 		}
 
-		if (_light != null)
+		if (_mainLight != null)
 		{
-			_light.LightColor = LightColors[GD.RandRange(0, LightColors.Length - 1)];
+			Color lightColor = LightColors[GD.RandRange(0, LightColors.Length - 1)];
+			_mainLight.LightColor = lightColor;
 
 			var (pos, target) = LightAngles[GD.RandRange(0, LightAngles.Length - 1)];
-			_light.Position = pos;
-			_light.LookAt(target);
+			_mainLight.Position = pos;
+			_mainLight.LookAt(target);
 		}
 	}
 }

@@ -17,6 +17,7 @@ public partial class AudioManager : Node
 
     // Game condition sounds
     [Export] public AudioStream GameOverSound;
+    [Export] public AudioStream GameVictorySound;
 
     // Music tracks
     [Export] public AudioStream MainMenuMusic;
@@ -94,6 +95,15 @@ public partial class AudioManager : Node
     public void PlayBattleMusic(float fadeDuration = 0.5f)
     {
         TransitionToMusic(BattleMusic, fadeDuration);
+    }
+
+    /// Fades the current music out to silence without starting a new track.
+    public void FadeOutMusic(float fadeDuration = 1.5f)
+    {
+        var active = _usingPlayerA ? _musicPlayerA : _musicPlayerB;
+        var tween = CreateTween();
+        tween.TweenProperty(active, "volume_db", -80f, fadeDuration);
+        tween.TweenCallback(Callable.From(active.Stop));
     }
 
     /// Plays the one-shot stinger sound on top of whatever music is currently playing.
@@ -174,6 +184,15 @@ public partial class AudioManager : Node
         if (GameOverSound != null)
         {
             _gameConditionsPlayer.Stream = GameOverSound;
+            _gameConditionsPlayer.Play();
+        }
+    }
+
+    public void PlayGameVictorySound()
+    {
+        if (GameVictorySound != null)
+        {
+            _gameConditionsPlayer.Stream = GameVictorySound;
             _gameConditionsPlayer.Play();
         }
     }

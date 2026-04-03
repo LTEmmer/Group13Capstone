@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://c075uxfa12bk7" path="res://assets/audio/music/background_music/headscratcher.mp3" id="8_vsw76"]
 [ext_resource type="AudioStream" uid="uid://gf48wlb7ok07" path="res://assets/audio/music/battle_music/Memoraphile - So Many Spiders.mp3" id="9_3vlp5"]
 [ext_resource type="AudioStream" uid="uid://dga1s15g1s475" path="res://assets/audio/music/stinger/dragon-studio-scary-scream-401725.mp3" id="10_hcsh6"]
+[ext_resource type="AudioStream" uid="uid://cmvx8ytmcicbf" path="res://assets/audio/game_conditions_sfx/game_win.mp3" id="11_hs8ax"]
 
 [node name="AudioManager" type="Node" unique_id=81914917]
 script = ExtResource("1_s8cgb")
@@ -23,6 +24,7 @@ ItemPickupSounds = Array[AudioStream]([ExtResource("4_hcsh6"), ExtResource("5_fx
 CorrectSound = ExtResource("4_fd0pu")
 WrongSound = ExtResource("5_vsw76")
 GameOverSound = ExtResource("6_8kl0b")
+GameVictorySound = ExtResource("11_hs8ax")
 MainMenuMusic = ExtResource("5_hw8ob")
 AmbientMusic = Array[AudioStream]([ExtResource("8_vsw76")])
 BattleMusic = ExtResource("9_3vlp5")
