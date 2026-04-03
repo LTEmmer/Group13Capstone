@@ -39,7 +39,7 @@ public partial class Pursue : EnemyBaseState
 	private void PursuePlayer()
 	{
 		Vector3 TargetPosition = _player.GlobalPosition;
-		enemy.LookAt(-TargetPosition);
+		enemy.LookAt(TargetPosition,Vector3.Up);
 		enemy.Velocity = enemy.GlobalPosition.DirectionTo(TargetPosition) * PursuitSpeed;
 		enemy.MoveAndSlide();
 	}

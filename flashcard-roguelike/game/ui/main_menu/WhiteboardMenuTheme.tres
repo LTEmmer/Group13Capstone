@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://byifovnma6qe7"]
 
-[ext_resource type="Texture2D" uid="uid://druh3ka7exhpo" path="res://assets/ui/markergreen.png" id="1_scribble"]
+[ext_resource type="Texture2D" uid="uid://dmonr5ajfikxm" path="res://assets/ui/markergreen.png" id="1_scribble"]
 [ext_resource type="FontFile" uid="uid://c0qr83crw4avc" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_marker_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]

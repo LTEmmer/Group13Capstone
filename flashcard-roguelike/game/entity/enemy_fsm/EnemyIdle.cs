@@ -12,6 +12,7 @@ public partial class EnemyIdle : EnemyBaseState
 	public Area3D PursuitDetector;
 	private float _currentTimer;
 	private bool _playerDetected = false;
+	
 	public override void _Ready()
 	{
 		PursuitDetector.BodyEntered += OnBodyEntered;
