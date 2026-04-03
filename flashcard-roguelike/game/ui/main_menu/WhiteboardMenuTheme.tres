@@ -1,120 +1,136 @@
 [gd_resource type="Theme" format=3 uid="uid://byifovnma6qe7"]
 
-[ext_resource type="Texture2D" uid="uid://dmonr5ajfikxm" path="res://assets/ui/markergreen.png" id="1_scribble"]
-[ext_resource type="FontFile" uid="uid://c0qr83crw4avc" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_marker_font"]
+
+[ext_resource type="Texture2D" uid="uid://dt2cje5lk82j2" path="res://assets/ui/highlighter.png" id="1_highlighter"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_marker_font"]
+
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
 content_margin_left = 18.0
 content_margin_top = 10.0
 content_margin_right = 18.0
 content_margin_bottom = 10.0
-bg_color = Color(0.9, 0.9, 0.9, 0.8)
-border_width_left = 3
+
+
+bg_color = Color(0.94, 0.94, 0.93, 0.75)
+border_width_left = 2
 border_width_top = 2
-border_width_right = 4
-border_width_bottom = 3
-border_color = Color(0.3, 0.3, 0.3, 0.8)
-corner_radius_top_left = 10
-corner_radius_top_right = 12
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 11
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.55, 0.52, 0.55)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
+
 content_margin_left = 18.0
 content_margin_top = 10.0
 content_margin_right = 18.0
 content_margin_bottom = 10.0
-bg_color = Color(0.975, 0.975, 0.975, 0.98)
-border_width_left = 4
-border_width_top = 3
-border_width_right = 4
-border_width_bottom = 3
-border_color = Color(0.08, 0.08, 0.08, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 12
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 11
-shadow_color = Color(0, 0, 0, 0.15)
+
+bg_color = Color(0.99, 0.99, 0.98, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.12, 0.12, 0.11, 0.95)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.08)
 shadow_size = 2
-shadow_offset = Vector2(1, 2)
+shadow_offset = Vector2(0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_button_hover"]
-texture = ExtResource("1_scribble")
-region_rect = Rect2(0, 0, 1024, 320)
-modulate_color = Color(1, 1, 1, 0.35)
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_highlighter")
+region_rect = Rect2(0, 0, 750, 500)
+axis_stretch_horizontal = 0
+axis_stretch_vertical = 0
+modulate_color = Color(1, 1, 1, 0.92)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
 content_margin_left = 18.0
 content_margin_top = 10.0
 content_margin_right = 18.0
 content_margin_bottom = 10.0
-bg_color = Color(0.985, 0.985, 0.985, 0.96)
-border_width_left = 3
+
+bg_color = Color(0.995, 0.994, 0.99, 1)
+border_width_left = 2
 border_width_top = 2
-border_width_right = 4
-border_width_bottom = 3
-border_color = Color(0.05, 0.05, 0.05, 0.98)
-corner_radius_top_left = 10
-corner_radius_top_right = 12
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 11
-shadow_color = Color(0, 0, 0, 0.15)
-shadow_size = 2
-shadow_offset = Vector2(1, 2)
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.2, 0.18, 0.35)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.06)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
 content_margin_left = 18.0
 content_margin_top = 10.0
 content_margin_right = 18.0
 content_margin_bottom = 10.0
-bg_color = Color(0.92, 0.92, 0.92, 0.98)
-border_width_left = 3
+bg_color = Color(0.96, 0.96, 0.94, 1)
+border_width_left = 2
 border_width_top = 2
-border_width_right = 4
-border_width_bottom = 3
-border_color = Color(0.05, 0.05, 0.05, 0.98)
-corner_radius_top_left = 10
-corner_radius_top_right = 12
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 11
-shadow_color = Color(0, 0, 0, 0.12)
-shadow_size = 1
-shadow_offset = Vector2(0, 1)
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.2, 0.18, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.04)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_line_edit"]
 content_margin_left = 12.0
 content_margin_top = 8.0
 content_margin_right = 12.0
 content_margin_bottom = 8.0
-bg_color = Color(0.98, 0.98, 0.98, 0.97)
-border_width_left = 3
+bg_color = Color(0.995, 0.994, 0.99, 1)
+border_width_left = 2
 border_width_top = 2
-border_width_right = 3
+border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.08, 0.08, 0.08, 0.95)
-corner_radius_top_left = 8
-corner_radius_top_right = 9
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 9
+border_color = Color(0.22, 0.22, 0.2, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 content_margin_left = 20.0
 content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
-bg_color = Color(1, 1, 1, 0.93)
-border_width_left = 5
-border_width_top = 4
-border_width_right = 5
-border_width_bottom = 4
-border_color = Color(0.06, 0.06, 0.06, 0.95)
-corner_radius_top_left = 18
-corner_radius_top_right = 16
-corner_radius_bottom_right = 19
-corner_radius_bottom_left = 17
-shadow_color = Color(0, 0, 0, 0.18)
-shadow_size = 4
-shadow_offset = Vector2(2, 3)
+
+bg_color = Color(0.998, 0.997, 0.992, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.22, 0.2, 0.4)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.12)
+shadow_size = 3
+shadow_offset = Vector2(1, 2)
+
 
 [resource]
 default_base_scale = 1.0
