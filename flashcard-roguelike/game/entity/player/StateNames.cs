@@ -14,5 +14,10 @@ public static class StateNames
 	public static String midair{ get; set;}  = "midair";
 	public static String landing{ get; set;}  = "landing";
 	public static String death{ get; set;}  = "death";
-	
+	public static String attack{ get; set;}  = "attack";
+	public static String idlebattle{ get; set;}  = "idlebattle";
+	public static String movein{ get; set;} = "movein";
+	public static String moveback{ get; set;} = "moveback";
+	public static String wander{ get; set;} = "wander";
+	public static String pursue{ get; set;} = "pursue";
 }

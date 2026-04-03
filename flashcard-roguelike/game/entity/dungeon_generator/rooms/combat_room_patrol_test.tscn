@@ -1,7 +1,9 @@
-[gd_scene format=4 uid="uid://b2px6jxwb8r7o"]
+[gd_scene format=4 uid="uid://dwfk1atbupmih"]
 
-[ext_resource type="Script" uid="uid://c8fl78a1ygu1q" path="res://game/entity/dungeon_generator/rooms/Room.cs" id="1_os7nw"]
-[ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="2_p3pul"]
+[ext_resource type="Script" uid="uid://c8fl78a1ygu1q" path="res://game/entity/dungeon_generator/rooms/Room.cs" id="1_pygj5"]
+[ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="2_1xdlv"]
+[ext_resource type="PackedScene" uid="uid://hame71oukhea" path="res://game/entity/enemy_fsm/enemy_patroller.tscn" id="3_1xdlv"]
+[ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="4_fx6n5"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_p3pul"]
 vertices = PackedVector3Array(-24.5, 0.75, -24.5, -24.5, 0.75, 24.5, 24.5, 0.75, 24.5, 24.5, 0.75, -24.5)
@@ -34,8 +36,14 @@ albedo_color = Color(0.43134022, 0.43134025, 0.43134025, 0.78431374)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_p3pul"]
 data = PackedVector3Array(-26, -0.1727, -26, -26, -0.1727, 26, -25, -0.1727, -25, -26, -0.1727, -26, -25, -0.1727, -25, 25, -0.1727, -25, -26, -0.1727, -26, 26, -0.1727, -26, -26, 9.8273, -26, -26, -0.1727, 26, -25, -0.1727, 25, -25, -0.1727, -25, -26, -0.1727, -26, -26, 9.8273, 26, -26, -0.1727, 26, -26, -0.1727, 26, 26, -0.1727, 26, -25, -0.1727, 25, -26, -0.1727, -26, -26, 9.8273, -26, -26, 9.8273, 26, -26, 9.8273, -26, -25, 9.8273, -25, -25, 9.8273, 25, -26, 9.8273, -26, 26, 9.8273, -26, -25, 9.8273, -25, -26, 9.8273, -26, -25, 9.8273, 25, -26, 9.8273, 26, -26, -0.1727, 26, -26, 9.8273, 26, 26, 9.8273, 26, -26, 9.8273, 26, -25, 9.8273, 25, 25, 9.8273, 25, -26, -0.1727, -26, 25, -0.1727, -25, 26, -0.1727, -26, 26, -0.1727, -26, 25, -0.1727, -25, 25, -0.1727, 25, 26, -0.1727, -26, 26, -0.1727, 26, 26, 9.8273, -26, 26, -0.1727, 26, 25, -0.1727, 25, -25, -0.1727, 25, -26, -0.1727, 26, 26, 9.8273, 26, 26, -0.1727, 26, 26, -0.1727, -26, 25, -0.1727, 25, 26, -0.1727, 26, -26, 9.8273, -26, 26, -0.1727, -26, 26, 9.8273, -26, 26, 9.8273, -26, 25, 9.8273, -25, -25, 9.8273, -25, 26, 9.8273, -26, 26, 9.8273, 26, 25, 9.8273, -25, -26, 9.8273, 26, 25, 9.8273, 25, 26, 9.8273, 26, 26, -0.1727, 26, 26, 9.8273, 26, 26, 9.8273, -26, 26, 9.8273, 26, 25, 9.8273, 25, 25, 9.8273, -25, -25, 9.8273, -25, -25, -0.1727, -25, -25, -0.1727, 25, -25, -0.1727, 25, 25, -0.1727, 25, -25, 9.8273, 25, 25, 9.8273, -25, -25, -0.1727, -25, -25, 9.8273, -25, -25, -0.1727, 25, -25, 9.8273, 25, -25, 9.8273, -25, -25, -0.1727, -25, 25, 9.8273, -25, 25, -0.1727, -25, 25, -0.1727, 25, 25, -0.1727, -25, 25, 9.8273, 25, 25, 9.8273, -25, 25, 9.8273, 25, 25, -0.1727, -25, -25, 9.8273, 25, 25, -0.1727, 25, 25, 9.8273, 25)
 
+[sub_resource type="Sky" id="Sky_fx6n5"]
+
+[sub_resource type="Environment" id="Environment_b2jjk"]
+background_mode = 2
+sky = SubResource("Sky_fx6n5")
+
 [node name="CombatRoom" type="Node3D" unique_id=1298955981]
-script = ExtResource("1_os7nw")
+script = ExtResource("1_pygj5")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1723493764]
 navigation_mesh = SubResource("NavigationMesh_p3pul")
@@ -63,7 +71,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59409785, 16.44909)
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=1595695969]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44763565, -17.54694)
 
-[node name="BattleArea" parent="." unique_id=1408501426 instance=ExtResource("2_p3pul")]
+[node name="BattleArea" parent="." unique_id=1408501426 instance=ExtResource("2_1xdlv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.02218, 0, 0)
 
 [node name="Entrances" type="Node3D" parent="." unique_id=733062030]
@@ -108,3 +116,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 
 [node name="3" type="Marker3D" parent="EnemySpawnArea" unique_id=1252675369]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Player" parent="." unique_id=249236073 instance=ExtResource("4_fx6n5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2945517, 0)
+
+[node name="EnemyFSM" parent="." unique_id=1279096522 instance=ExtResource("3_1xdlv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3400278, -13.035138)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2005378575]
+environment = SubResource("Environment_b2jjk")

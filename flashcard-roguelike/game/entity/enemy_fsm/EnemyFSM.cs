@@ -12,7 +12,6 @@ public partial class EnemyFSM : CharacterBody3D
 	[Export] 
 	public EModel EnemyModel;
 	[Export] public Area3D DetectionArea;
-	
 	public override void _Ready(){
 		healthComponent.EnemyDied += OnEnemyDeath;
 		DetectionArea.BodyEntered += OnBodyEntered;

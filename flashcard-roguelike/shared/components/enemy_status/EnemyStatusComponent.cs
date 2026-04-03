@@ -5,9 +5,9 @@ public partial class EnemyStatusComponent : Node3D
 {
 	[Export] public float SlideDuration = 1.5f;
 	
-    // These positions are relative to the EnemyStatusComponent's position, 
-    // which should be set to the enemy's head or desired label anchor point in the scene
-    // You can adjust these offsets in the editor to position the labels correctly above the enemy
+	// These positions are relative to the EnemyStatusComponent's position, 
+	// which should be set to the enemy's head or desired label anchor point in the scene
+	// You can adjust these offsets in the editor to position the labels correctly above the enemy
 
 	private Label3D _nameLabel;
 	private Label3D _statsLabel;
@@ -99,17 +99,17 @@ public partial class EnemyStatusComponent : Node3D
 
 		Tween tween = CreateTween();
 		
-        // Animate each label sliding in to its on-screen position with a slight delay between them for a staggered effect
-        tween.SetParallel(true);
-        tween.TweenProperty(_nameLabel, "position", _nameOnScreenPos, SlideDuration)
-             .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
-        tween.TweenProperty(_statsLabel, "position", _statsOnScreenPos, SlideDuration)
-             .SetDelay(0.05f)
-             .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
-        tween.TweenProperty(_healthLabel, "position", _healthOnScreenPos, SlideDuration)
-             .SetDelay(0.1f)
-             .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
-    }
+		// Animate each label sliding in to its on-screen position with a slight delay between them for a staggered effect
+		tween.SetParallel(true);
+		tween.TweenProperty(_nameLabel, "position", _nameOnScreenPos, SlideDuration)
+			 .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+		tween.TweenProperty(_statsLabel, "position", _statsOnScreenPos, SlideDuration)
+			 .SetDelay(0.05f)
+			 .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+		tween.TweenProperty(_healthLabel, "position", _healthOnScreenPos, SlideDuration)
+			 .SetDelay(0.1f)
+			 .SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+	}
 
 	public void SlideOut(Action onComplete = null)
 	{

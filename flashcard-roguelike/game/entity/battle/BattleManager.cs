@@ -224,6 +224,9 @@ public partial class BattleManager : Node
 			{
 				GD.PrintErr($"BattleManager: Enemy {enemy.Name} missing EnemyStatusComponent.");
 			}
+			//Set enemyFSM model to battleMode can move elsewhere if needed
+			enemy.EnemyModel.BattleMode = true;
+
 		}
 
 		return true;

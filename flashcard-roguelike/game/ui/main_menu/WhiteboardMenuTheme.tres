@@ -1,144 +1,140 @@
-[gd_resource type="Theme" format=4]
+[gd_resource type="Theme" format=3 uid="uid://byifovnma6qe7"]
 
-[ext_resource type="Texture2D" path="res://assets/ui/markergreen.png" id="1_scribble"]
-[ext_resource type="FontFile" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_marker_font"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
-bg_color = Color(0.985, 0.985, 0.985, 0.96)
-corner_radius_top_left = 10
-corner_radius_top_right = 12
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 11
-border_width_left = 3
-border_width_top = 2
-border_width_right = 4
-border_width_bottom = 3
-border_color = Color(0.05, 0.05, 0.05, 0.98)
-shadow_color = Color(0, 0, 0, 0.15)
-shadow_size = 2
-shadow_offset = Vector2(1, 2)
-content_margin_left = 18.0
-content_margin_top = 10.0
-content_margin_right = 18.0
-content_margin_bottom = 10.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_button_hover"]
-texture = ExtResource("1_scribble")
-modulate_color = Color(1, 1, 1, 0.35)
-region_rect = Rect2(0, 0, 1024, 320)
-margin_left = 18.0
-margin_top = 10.0
-margin_right = 18.0
-margin_bottom = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
-bg_color = Color(0.92, 0.92, 0.92, 0.98)
-corner_radius_top_left = 10
-corner_radius_top_right = 12
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 11
-border_width_left = 3
-border_width_top = 2
-border_width_right = 4
-border_width_bottom = 3
-border_color = Color(0.05, 0.05, 0.05, 0.98)
-shadow_color = Color(0, 0, 0, 0.12)
-shadow_size = 1
-shadow_offset = Vector2(0, 1)
-content_margin_left = 18.0
-content_margin_top = 10.0
-content_margin_right = 18.0
-content_margin_bottom = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
-bg_color = Color(0.975, 0.975, 0.975, 0.98)
-corner_radius_top_left = 10
-corner_radius_top_right = 12
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 11
-border_width_left = 4
-border_width_top = 3
-border_width_right = 4
-border_width_bottom = 3
-border_color = Color(0.08, 0.08, 0.08, 1)
-shadow_color = Color(0, 0, 0, 0.15)
-shadow_size = 2
-shadow_offset = Vector2(1, 2)
-content_margin_left = 18.0
-content_margin_top = 10.0
-content_margin_right = 18.0
-content_margin_bottom = 10.0
+[ext_resource type="Texture2D" uid="uid://druh3ka7exhpo" path="res://assets/ui/markergreen.png" id="1_scribble"]
+[ext_resource type="FontFile" uid="uid://c0qr83crw4avc" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_marker_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
 bg_color = Color(0.9, 0.9, 0.9, 0.8)
-corner_radius_top_left = 10
-corner_radius_top_right = 12
-corner_radius_bottom_right = 9
-corner_radius_bottom_left = 11
 border_width_left = 3
 border_width_top = 2
 border_width_right = 4
 border_width_bottom = 3
 border_color = Color(0.3, 0.3, 0.3, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 12
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 11
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
 content_margin_left = 18.0
 content_margin_top = 10.0
 content_margin_right = 18.0
 content_margin_bottom = 10.0
+bg_color = Color(0.975, 0.975, 0.975, 0.98)
+border_width_left = 4
+border_width_top = 3
+border_width_right = 4
+border_width_bottom = 3
+border_color = Color(0.08, 0.08, 0.08, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 12
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 11
+shadow_color = Color(0, 0, 0, 0.15)
+shadow_size = 2
+shadow_offset = Vector2(1, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-bg_color = Color(1, 1, 1, 0.93)
-corner_radius_top_left = 18
-corner_radius_top_right = 16
-corner_radius_bottom_right = 19
-corner_radius_bottom_left = 17
-border_width_left = 5
-border_width_top = 4
-border_width_right = 5
-border_width_bottom = 4
-border_color = Color(0.06, 0.06, 0.06, 0.95)
-shadow_color = Color(0, 0, 0, 0.18)
-shadow_size = 4
-shadow_offset = Vector2(2, 3)
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_button_hover"]
+texture = ExtResource("1_scribble")
+region_rect = Rect2(0, 0, 1024, 320)
+modulate_color = Color(1, 1, 1, 0.35)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.985, 0.985, 0.985, 0.96)
+border_width_left = 3
+border_width_top = 2
+border_width_right = 4
+border_width_bottom = 3
+border_color = Color(0.05, 0.05, 0.05, 0.98)
+corner_radius_top_left = 10
+corner_radius_top_right = 12
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 11
+shadow_color = Color(0, 0, 0, 0.15)
+shadow_size = 2
+shadow_offset = Vector2(1, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.92, 0.92, 0.92, 0.98)
+border_width_left = 3
+border_width_top = 2
+border_width_right = 4
+border_width_bottom = 3
+border_color = Color(0.05, 0.05, 0.05, 0.98)
+corner_radius_top_left = 10
+corner_radius_top_right = 12
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 11
+shadow_color = Color(0, 0, 0, 0.12)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_line_edit"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
 bg_color = Color(0.98, 0.98, 0.98, 0.97)
-corner_radius_top_left = 8
-corner_radius_top_right = 9
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 9
 border_width_left = 3
 border_width_top = 2
 border_width_right = 3
 border_width_bottom = 2
 border_color = Color(0.08, 0.08, 0.08, 0.95)
-content_margin_left = 12.0
-content_margin_top = 8.0
-content_margin_right = 12.0
-content_margin_bottom = 8.0
+corner_radius_top_left = 8
+corner_radius_top_right = 9
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 1, 0.93)
+border_width_left = 5
+border_width_top = 4
+border_width_right = 5
+border_width_bottom = 4
+border_color = Color(0.06, 0.06, 0.06, 0.95)
+corner_radius_top_left = 18
+corner_radius_top_right = 16
+corner_radius_bottom_right = 19
+corner_radius_bottom_left = 17
+shadow_color = Color(0, 0, 0, 0.18)
+shadow_size = 4
+shadow_offset = Vector2(2, 3)
 
 [resource]
 default_base_scale = 1.0
 Button/colors/font_color = Color(0.06, 0.06, 0.06, 1)
+Button/colors/font_disabled_color = Color(0.3, 0.3, 0.3, 0.9)
+Button/colors/font_focus_color = Color(0.03, 0.03, 0.03, 1)
 Button/colors/font_hover_color = Color(0.03, 0.03, 0.03, 1)
 Button/colors/font_pressed_color = Color(0.03, 0.03, 0.03, 1)
-Button/colors/font_focus_color = Color(0.03, 0.03, 0.03, 1)
-Button/colors/font_disabled_color = Color(0.3, 0.3, 0.3, 0.9)
 Button/constants/h_separation = 8
 Button/constants/icon_max_width = 0
-Button/fonts/font = ExtResource("2_marker_font")
 Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("2_marker_font")
 Button/styles/disabled = SubResource("StyleBoxFlat_button_disabled")
 Button/styles/focus = SubResource("StyleBoxFlat_button_focus")
 Button/styles/hover = SubResource("StyleBoxTexture_button_hover")
 Button/styles/normal = SubResource("StyleBoxFlat_button_normal")
 Button/styles/pressed = SubResource("StyleBoxFlat_button_pressed")
 Label/colors/font_color = Color(0.05, 0.05, 0.05, 1)
-Label/fonts/font = ExtResource("2_marker_font")
 Label/font_sizes/font_size = 28
+Label/fonts/font = ExtResource("2_marker_font")
 LineEdit/colors/font_color = Color(0.05, 0.05, 0.05, 1)
 LineEdit/font_sizes/font_size = 20
 LineEdit/styles/focus = SubResource("StyleBoxFlat_line_edit")
