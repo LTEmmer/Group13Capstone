@@ -24,6 +24,9 @@ public partial class BattleManager : Node
 	private FlashcardChallengeMultipleChoice _flashcardChallengeMultipleChoice;
 	private FlashcardChallengeManager _flashcardChallengeManager;
 	
+	// Victory menu
+	private VictoryMenu _victoryMenu;
+
 	// Cooldown management
 	private Timer _battleCooldownTimer;
 	private bool _canEnterBattle = true;
@@ -54,6 +57,9 @@ public partial class BattleManager : Node
 
 		_flashcardChallengeMultipleChoice = GD.Load<PackedScene>("res://game/ui/battle_ui/flashcard_challenge_multiple_choice.tscn").Instantiate<FlashcardChallengeMultipleChoice>();
 		AddChild(_flashcardChallengeMultipleChoice);
+
+		_victoryMenu = GD.Load<PackedScene>("res://game/ui/victory/victory_menu.tscn").Instantiate<VictoryMenu>();
+		AddChild(_victoryMenu);
 
 		if (Transitions == null || ActiveUI == null || _flashcardChallenge == null || _flashcardChallengeTrueOrFalse == null || _flashcardChallengeMultipleChoice == null)
 		{
@@ -340,6 +346,13 @@ public partial class BattleManager : Node
 			{
 				_uiCoordinator.SlideOutBattleUI(() =>
 				{
+					// Boss victory: show victory screen instead of returning to dungeon
+					if (victory && _state.IsBossBattle)
+					{
+						_victoryMenu.ShowVictory("You defeated the boss!\nCongratulations!");
+						return;
+					}
+
 					// Reset mouse mode only if we're still alive
 					if (!(victory == false && ran == false))
 					{

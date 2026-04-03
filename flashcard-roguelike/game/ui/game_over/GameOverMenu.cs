@@ -53,7 +53,8 @@ public partial class GameOverMenu : CanvasLayer
 		BattleManager.Instance?.Transitions.Hide();
 		BattleManager.Instance?.ActiveUI.Hide();
 
-		// Play game over sound
+		// Fade out music and play game over sound
+		AudioManager.Instance?.FadeOutMusic();
 		AudioManager.Instance?.PlayGameOverSound();
 
 		Visible = true;
