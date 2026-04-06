@@ -15,6 +15,7 @@ public partial class Wander : EnemyBaseState
 	private float _currentTimer;
 	private bool _wanderTimerFinished = false;
 	private Vector3 _targetPosition = Vector3.Zero;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -52,9 +53,11 @@ public partial class Wander : EnemyBaseState
 		//}
 		
 		Vector3 destination = navAgent.GetNextPathPosition();
+		Vector3 lookAtPosition = new Vector3(destination.X, 0.0F, destination.Z);
 		Vector3 localDestination = destination - enemy.GlobalPosition;
+		
 		Vector3 direction = localDestination.Normalized();
-		//enemy.LookAt(_targetPosition);
+		//enemy.LookAt(lookAtPosition);
 		enemy.Velocity = direction * WanderSpeed;
 		Vector3 enemyCurrentPosition = enemy.GlobalPosition;
 		enemy.MoveAndSlide();
@@ -65,6 +68,7 @@ public partial class Wander : EnemyBaseState
 		//_currentTimer = _wanderTimer;
 		//_wanderTimerFinished = false;
 		SetRandomNavPosition();
+		enemy.LookAt(_targetPosition);
 	}
 
 	private void OnBodyEntered(Node3D body){
