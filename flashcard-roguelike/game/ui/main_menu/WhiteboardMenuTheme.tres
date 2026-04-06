@@ -1,17 +1,13 @@
 [gd_resource type="Theme" format=3 uid="uid://byifovnma6qe7"]
 
-
-[ext_resource type="Texture2D" uid="uid://dt2cje5lk82j2" path="res://assets/ui/highlighter.png" id="1_highlighter"]
-[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_marker_font"]
-
+[ext_resource type="Texture2D" uid="uid://rp8dqm6rqlim" path="res://assets/ui/highlighter.png" id="1_highlighter"]
+[ext_resource type="FontFile" uid="uid://c0qr83crw4avc" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_marker_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
 content_margin_left = 18.0
 content_margin_top = 10.0
 content_margin_right = 18.0
 content_margin_bottom = 10.0
-
-
 bg_color = Color(0.94, 0.94, 0.93, 0.75)
 border_width_left = 2
 border_width_top = 2
@@ -24,12 +20,10 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
-
 content_margin_left = 18.0
 content_margin_top = 10.0
 content_margin_right = 18.0
 content_margin_bottom = 10.0
-
 bg_color = Color(0.99, 0.99, 0.98, 1)
 border_width_left = 2
 border_width_top = 2
@@ -51,8 +45,6 @@ content_margin_right = 18.0
 content_margin_bottom = 10.0
 texture = ExtResource("1_highlighter")
 region_rect = Rect2(0, 0, 750, 500)
-axis_stretch_horizontal = 0
-axis_stretch_vertical = 0
 modulate_color = Color(1, 1, 1, 0.92)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
@@ -60,7 +52,6 @@ content_margin_left = 18.0
 content_margin_top = 10.0
 content_margin_right = 18.0
 content_margin_bottom = 10.0
-
 bg_color = Color(0.995, 0.994, 0.99, 1)
 border_width_left = 2
 border_width_top = 2
@@ -91,8 +82,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 shadow_color = Color(0, 0, 0, 0.04)
-shadow_size = 0
-shadow_offset = Vector2(0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_line_edit"]
 content_margin_left = 12.0
@@ -110,13 +99,11 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 content_margin_left = 20.0
 content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
-
 bg_color = Color(0.998, 0.997, 0.992, 0.98)
 border_width_left = 2
 border_width_top = 2
@@ -130,7 +117,6 @@ corner_radius_bottom_left = 6
 shadow_color = Color(0, 0, 0, 0.12)
 shadow_size = 3
 shadow_offset = Vector2(1, 2)
-
 
 [resource]
 default_base_scale = 1.0

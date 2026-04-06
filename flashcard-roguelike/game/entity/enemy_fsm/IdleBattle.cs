@@ -15,9 +15,7 @@ public partial class IdleBattle : EnemyBaseState
 
 	public override void Update(double delta)
 	{
-		Vector3 playerDirection = new Vector3(-enemy.EnemyModel.Player.GlobalPosition.X,
-			enemy.EnemyModel.Player.GlobalPosition.Y, -enemy.EnemyModel.Player.GlobalPosition.Z);
-		enemy.LookAt(playerDirection,Vector3.Up);
+		enemy.LookAt(enemy.EnemyModel.Player.GlobalPosition,Vector3.Up);
 	}
 
 	public override void OnEnterState()
