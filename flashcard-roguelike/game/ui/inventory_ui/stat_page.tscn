@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://qy5qpb6mote0"]
+
+[ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="1_puldr"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_oa6w4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa6w4"]
+
+[node name="StatPage" type="Control" unique_id=758058895]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -656.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1787377405]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1963459934]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1330005620]
+layout_mode = 2
+texture = ExtResource("1_puldr")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=1477368649]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "asdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfa"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1269351363]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1357072600]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_oa6w4")
+
+[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=683009023]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_oa6w4")
+
+[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1144058249]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_oa6w4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oa6w4")

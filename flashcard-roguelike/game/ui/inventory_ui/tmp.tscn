@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dllsm531lxbow"]
+
+[ext_resource type="PackedScene" uid="uid://inventoryui" path="res://game/ui/inventory_ui/inventory_ui.tscn" id="1_3s6qg"]
+[ext_resource type="Script" uid="uid://55ydh2dvab3s" path="res://game/ui/inventory_ui/Tmp.cs" id="1_voi16"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3s6qg"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_voi16"]
+sky_material = SubResource("ProceduralSkyMaterial_3s6qg")
+
+[sub_resource type="Environment" id="Environment_bo74h"]
+background_mode = 2
+sky = SubResource("Sky_voi16")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_jlyq3"]
+
+[node name="Node3D" type="Node3D" unique_id=2037171380 node_paths=PackedStringArray("inv")]
+script = ExtResource("1_voi16")
+inv = NodePath("Camera3D/InventoryUI")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1237984227]
+environment = SubResource("Environment_bo74h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=318324280]
+transform = Transform3D(-0.8660254, -0.43301278, 0.24999999, 0.29336292, -0.03515145, 0.9553547, -0.40489292, 0.9007021, 0.15747193, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=303799432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2.2430568)
+
+[node name="InventoryUI" parent="Camera3D" unique_id=2131535673 instance=ExtResource("1_3s6qg")]
+transform = Transform3D(1, 0, 0, 0, 0.22309704, -0.97479624, 0, 0.97479624, 0.22309704, 0, 0, -2.199852)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1497058057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8911967, 0.37002134, -4.6467905)
+mesh = SubResource("BoxMesh_jlyq3")
