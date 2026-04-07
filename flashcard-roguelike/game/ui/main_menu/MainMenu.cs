@@ -63,8 +63,21 @@ public partial class MainMenu : Control
 			_createSetPanelContainer.Visible = false;
 	}
 
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		// Ensure mouse is visible
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+	}
+
 	private void OnPlayPressed()
 	{
+		if (FlashcardManager.Instance == null || !FlashcardManager.Instance.HasActiveSet())
+		{
+			ShowInfoDialog("No Active Flashcard Sets", "Please activate at least one flashcard set before playing.");
+			return;
+		}
+
 		SceneTransition.FadeOut(this, () =>
 			GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn")
 		);
@@ -108,11 +121,50 @@ public partial class MainMenu : Control
 
 	private void OnFlashcardsBackPressed()
 	{
+		if (FlashcardManager.Instance != null && !FlashcardManager.Instance.HasActiveSet())
+		{
+			var dialog = new ConfirmationDialog();
+			dialog.Title = "No Active Sets";
+			dialog.DialogText = "No flashcard sets are active. You won't be able to play without one.\nGo back anyway?";
+			dialog.OkButtonText = "Go Back";
+			ApplyWhiteBackground(dialog);
+			AddChild(dialog);
+			dialog.PopupCentered();
+			dialog.Confirmed += () => { dialog.QueueFree(); NavigateBackFromFlashcards(); };
+			dialog.Canceled += () => dialog.QueueFree();
+			return;
+		}
+
+		NavigateBackFromFlashcards();
+	}
+
+	private void NavigateBackFromFlashcards()
+	{
 		if (_viewFlashcardsPanelContainer != null)
 			_viewFlashcardsPanelContainer.Visible = false;
 
 		if (_mainMenuContainer != null)
 			_mainMenuContainer.Visible = true;
+	}
+
+	private void ShowInfoDialog(string title, string message)
+	{
+		var dialog = new AcceptDialog();
+		dialog.Title = title;
+		dialog.DialogText = message;
+		ApplyWhiteBackground(dialog);
+		AddChild(dialog);
+		dialog.PopupCentered();
+		dialog.Confirmed += () => dialog.QueueFree();
+		dialog.Canceled += () => dialog.QueueFree();
+	}
+
+	private static void ApplyWhiteBackground(Window dialog)
+	{
+		var style = new StyleBoxFlat();
+		style.BgColor = Colors.White;
+		style.SetContentMarginAll(16f);
+		dialog.AddThemeStyleboxOverride("panel", style);
 	}
 
 	private void OnCreateNewSetPressed()

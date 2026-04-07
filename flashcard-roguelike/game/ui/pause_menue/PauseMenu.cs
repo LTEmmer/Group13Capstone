@@ -56,6 +56,9 @@ public partial class PauseMenu : CanvasLayer
 		_buttonPanelContainer = GetNode<Control>("ButtonPanelContainer");
 		_settingsPanel = GetNode<SettingsPanel>("SettingsPanelContainer");
 
+		_buttonPanelContainer.ProcessMode = ProcessModeEnum.Always;
+		_settingsPanel.ProcessMode = ProcessModeEnum.Always;
+
 		const string btnPath = "ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/";
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Resume"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Settings"));

@@ -70,6 +70,7 @@ font_size = 32
 font_color = Color(1, 0, 0, 1)
 
 [node name="main menu" type="Control" unique_id=1885237886]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

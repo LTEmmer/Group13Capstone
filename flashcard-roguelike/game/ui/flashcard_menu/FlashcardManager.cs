@@ -135,6 +135,11 @@ public partial class FlashcardManager : Node
 		return _cardCache.Count;
 	}
 
+	public bool HasActiveSet()
+	{
+		return AvailableSets.Exists(s => s.IsActive && s.Cards != null && s.Cards.Count > 0);
+	}
+
 	// Delete a flashcard set from available sets and from the file system
 	public bool DeleteSet(string setDisplayName)
 	{
