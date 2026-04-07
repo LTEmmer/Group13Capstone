@@ -9,6 +9,7 @@ public partial class PauseMenu : CanvasLayer
 
 	[Export] PackedScene MainMenu;
 	private Control _buttonPanelContainer;
+	private SettingsPanel _settingsPanel;
 	private Stack<Control> _panelStack = new Stack<Control>();
 
 	/*
@@ -53,10 +54,11 @@ public partial class PauseMenu : CanvasLayer
 	{
 		ProcessMode = ProcessModeEnum.Always;
 		_buttonPanelContainer = GetNode<Control>("ButtonPanelContainer");
+		_settingsPanel = GetNode<SettingsPanel>("SettingsPanelContainer");
 
 		const string btnPath = "ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/";
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Resume"));
-		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Options"));
+		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Settings"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Abandon Run"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Main Menu"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Quit"));
@@ -101,9 +103,15 @@ public partial class PauseMenu : CanvasLayer
 	{
 	}
 
-	public void _on_options_pressed()
+	public void _on_settings_pressed()
 	{
-		GD.Print("Options Pressed");
+		_settingsPanel.SyncFromAudioManager();
+		PushPanel(_settingsPanel);
+	}
+
+	public void _on_settings_back_pressed()
+	{
+		PopPanel();
 	}
 
 	public void _on_abandon_run_pressed()

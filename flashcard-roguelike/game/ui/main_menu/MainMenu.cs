@@ -11,6 +11,7 @@ public partial class MainMenu : Control
 	private Control _uploadPanelContainer;
 	private Control _viewFlashcardsPanelContainer;
 	private VBoxContainer _flashcardListContainer;
+	private SettingsPanel _settingsPanel;
 
 	public override void _Ready()
 	{
@@ -20,6 +21,7 @@ public partial class MainMenu : Control
 		_mainMenuContainer = GetNodeOrNull<Control>("CenterContainer");
 		_uploadPanelContainer = GetNodeOrNull<Control>("UploadPanelContainer");
 		_viewFlashcardsPanelContainer = GetNodeOrNull<Control>("ViewFlashcardsPanelContainer");
+		_settingsPanel = GetNodeOrNull<SettingsPanel>("SettingsPanelContainer");
 		ApplyDefaultFontToFlashcardsPanel();
 
 		_flashcardListContainer = GetNodeOrNull<VBoxContainer>(
@@ -30,22 +32,22 @@ public partial class MainMenu : Control
 		var quitButton = GetNodeOrNull<Button>("CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer/QuitButton");
 		var uploadButton = GetNodeOrNull<Button>("CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer/CardUpload");
 		var viewFlashcardsButton = GetNodeOrNull<Button>("CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer/ViewImportedFlashcards");
-
-		var flashcardsBackButton = GetNodeOrNull<Button>(
-			"ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/Back"
-		);
+		var flashcardsBackButton = GetNodeOrNull<Button>("ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/Back");
+		var settingsButton = GetNodeOrNull<Button>("CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer/SettingsButton");
 
 		if (playButton != null) playButton.Pressed += OnPlayPressed;
 		if (quitButton != null) quitButton.Pressed += OnQuitPressed;
 		if (uploadButton != null) uploadButton.Pressed += OnOpenUploadScreenPressed;
 		if (viewFlashcardsButton != null) viewFlashcardsButton.Pressed += OnViewFlashcardsPressed;
 		if (flashcardsBackButton != null) flashcardsBackButton.Pressed += OnFlashcardsBackPressed;
+		if (settingsButton != null) settingsButton.Pressed += OnSettingsPressed;
 
 		AudioManager.Instance?.RegisterButton(playButton);
 		AudioManager.Instance?.RegisterButton(quitButton);
 		AudioManager.Instance?.RegisterButton(uploadButton);
 		AudioManager.Instance?.RegisterButton(viewFlashcardsButton);
 		AudioManager.Instance?.RegisterButton(flashcardsBackButton);
+		AudioManager.Instance?.RegisterButton(settingsButton);
 
 		if (_uploadPanelContainer != null)
 			_uploadPanelContainer.Visible = false;
@@ -104,6 +106,42 @@ public partial class MainMenu : Control
 
 		if (_mainMenuContainer != null)
 			_mainMenuContainer.Visible = true;
+	}
+
+	private void OnSettingsPressed()
+	{
+		if (_settingsPanel == null)
+		{
+			GD.PushError("Settings panel not configured on main menu.");
+			return;
+		}
+
+		_settingsPanel.SyncFromAudioManager();
+
+		if (_mainMenuContainer != null)
+		{
+			_mainMenuContainer.Visible = false;
+		}
+
+		if (_uploadPanelContainer != null)
+		{
+			_uploadPanelContainer.Visible = false;
+		}
+
+		_settingsPanel.Visible = true;
+	}
+
+	private void OnSettingsBackPressed()
+	{
+		if (_settingsPanel != null)
+		{
+			_settingsPanel.Visible = false;
+		}
+
+		if (_mainMenuContainer != null)
+		{
+			_mainMenuContainer.Visible = true;
+		}
 	}
 
 	private void PopulateFlashcardList()

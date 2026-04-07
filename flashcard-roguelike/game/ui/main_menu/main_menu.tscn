@@ -30,6 +30,7 @@
 [ext_resource type="Material" uid="uid://bvy7yqq2bokb6" path="res://assets/models/mainmenu_walls/mainmenu_walls2_texture.tres" id="20_73pe5"]
 [ext_resource type="PackedScene" uid="uid://cn4tm82kgsw57" path="res://assets/models/ufo/ufo.glb" id="23_hutre"]
 [ext_resource type="Material" uid="uid://drq58oyucx00r" path="res://assets/models/ufo/ufo_texture.tres" id="26_wwtvc"]
+[ext_resource type="Script" uid="uid://cxgn2j6exrb1q" path="res://game/ui/pause_menue/SettingsPanel.cs" id="31_nekgt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_scroll"]
 shader = ExtResource("5_scroll")
@@ -46,6 +47,14 @@ sky_material = SubResource("ProceduralSkyMaterial_mkp5f")
 sky = SubResource("Sky_1x88f")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_73pe5"]
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wwtvc"]
+font_size = 36
+font_color = Color(0, 0, 0, 1)
 
 [node name="main menu" type="Control" unique_id=1885237886]
 layout_mode = 3
@@ -461,6 +470,7 @@ RandomizeFrequency = true
 material_override = ExtResource("7_w4r1y")
 
 [node name="Walls" type="Node3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=645588578]
+transform = Transform3D(0.98686135, 0.16156937, 0, -0.16156937, 0.98686135, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("6_k3ypk")
 Amplitude = 0.075
 Frequency = 0.125
@@ -603,8 +613,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -16.0
+offset_right = -64.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.25, 1.25)
 mouse_filter = 2
 texture = ExtResource("6_paper_tex")
 expand_mode = 1
@@ -648,6 +663,11 @@ text = "Card Upload
 custom_minimum_size = Vector2(320, 56)
 layout_mode = 2
 text = "View Imported Flashcards"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=2015885132]
+custom_minimum_size = Vector2(320, 56)
+layout_mode = 2
+text = "Settings"
 
 [node name="QuitButton" type="Button" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1567657475]
 custom_minimum_size = Vector2(320, 56)
@@ -728,6 +748,7 @@ layout_mode = 2
 text = "Back"
 
 [node name="UploadPanelContainer" type="CenterContainer" parent="." unique_id=1670258514]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -796,6 +817,139 @@ layout_mode = 2
 text = "Back"
 
 [node name="CsvFileDialog" type="FileDialog" parent="UploadPanelContainer" unique_id=1313515291]
+
+[node name="SettingsPanelContainer" type="Control" parent="." unique_id=402845879]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -272.0
+offset_right = 200.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("31_nekgt")
+
+[node name="Paper" type="TextureRect" parent="SettingsPanelContainer" unique_id=1657009992]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.065
+anchor_top = -0.065
+anchor_right = 1.065
+anchor_bottom = 1.065
+mouse_filter = 2
+texture = ExtResource("6_paper_tex")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SettingsPanel" type="Panel" parent="SettingsPanelContainer" unique_id=1238534162]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -17.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsPanelContainer/SettingsPanel" unique_id=1015426582]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="SliderContainer" type="VBoxContainer" parent="SettingsPanelContainer/SettingsPanel/MarginContainer" unique_id=996620446]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SettingsLabel" type="Label" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer" unique_id=1289610506]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_73pe5")
+horizontal_alignment = 1
+
+[node name="Spacer1" type="Control" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer" unique_id=2044096819]
+layout_mode = 2
+
+[node name="VolumeLabel" type="Label" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer" unique_id=1733496401]
+layout_mode = 2
+text = "Volume"
+label_settings = SubResource("LabelSettings_wwtvc")
+horizontal_alignment = 1
+
+[node name="MasterRow" type="HBoxContainer" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer" unique_id=735409643]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer/MasterRow" unique_id=160438985]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+text = "Master"
+
+[node name="MasterSlider" type="HSlider" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer/MasterRow" unique_id=2115436130]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicRow" type="HBoxContainer" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer" unique_id=798742673]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer/MusicRow" unique_id=337270104]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer/MusicRow" unique_id=565304076]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXRow" type="HBoxContainer" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer" unique_id=2119220597]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer/SFXRow" unique_id=1959052118]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+text = "SFX"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer/SFXRow" unique_id=1454139403]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Spacer2" type="Control" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer" unique_id=1502953255]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer" unique_id=863920562]
+custom_minimum_size = Vector2(160, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[connection signal="pressed" from="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer/Back" to="." method="OnSettingsBackPressed"]
 
 [editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk"]
 [editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk2"]

@@ -6,6 +6,9 @@ public partial class AudioManager : Node
 {
     public static AudioManager Instance { get; private set; }
 
+    private const string MusicBusName = "Music";
+    private const string SFXBusName   = "SFX";
+
     // UI sounds
     [Export] public AudioStream HoverSound;
     [Export] public AudioStream ClickSound;
@@ -54,9 +57,54 @@ public partial class AudioManager : Node
         _stingerPlayer = GetNode<AudioStreamPlayer>("Stinger");
         _musicPlayerA = GetNode<AudioStreamPlayer>("MusicPlayerA");
         _musicPlayerB = GetNode<AudioStreamPlayer>("MusicPlayerB");
+
+        _musicPlayerA.Bus = MusicBusName;
+        _musicPlayerB.Bus = MusicBusName;
+        _stingerPlayer.Bus = MusicBusName;
+        _gameConditionsPlayer.Bus = MusicBusName;
+        _buttonSoundsPlayer.Bus = SFXBusName;
+        _correctSoundsPlayer.Bus = SFXBusName;
+        _itemPickupSoundsPlayer.Bus = SFXBusName;
+
+        GetTree().NodeAdded += OnNodeAddedToTree;
+    }
+
+    // Automatically routes any AudioStreamPlayer added to the scene tree to the SFX bus
+    // Anything new that isn't explicitly set to the Music bus will be assumed to be a sound effect
+    private void OnNodeAddedToTree(Node node)
+    {
+        if (node is AudioStreamPlayer p && p.Bus == "Master")
+        {
+            p.Bus = SFXBusName;
+        }
+        else if (node is AudioStreamPlayer3D p3d && p3d.Bus == "Master")
+        {
+            p3d.Bus = SFXBusName;
+        }
+    }
+
+    // --- Volume control ---
+
+    public void SetBusVolume(string busName, float linear)
+    {
+        int idx = AudioServer.GetBusIndex(busName);
+        if (idx < 0) // If the bus doesn't exist, just ignore it.
+        {
+            return;
+        }
+
+        // Clamp the value to ensure valid input for LinearToDb, and set the bus volume.
+        AudioServer.SetBusVolumeDb(idx, Mathf.LinearToDb(Mathf.Clamp(linear, 0, 1)));
+    }
+
+    public float GetBusVolume(string busName)
+    {
+        int idx = AudioServer.GetBusIndex(busName);
+        return idx < 0 ? 1f : Mathf.DbToLinear(AudioServer.GetBusVolumeDb(idx));
     }
 
     // --- Music ---
+    
     /// Crossfades from the currently playing music track to a new one.
     public void TransitionToMusic(AudioStream newTrack, float fadeDuration = 1.0f)
     {
