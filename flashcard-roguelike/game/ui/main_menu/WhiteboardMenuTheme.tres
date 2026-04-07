@@ -1,7 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://byifovnma6qe7"]
 
-[ext_resource type="Texture2D" uid="uid://rp8dqm6rqlim" path="res://assets/ui/highlighter.png" id="1_highlighter"]
-[ext_resource type="FontFile" uid="uid://c0qr83crw4avc" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_marker_font"]
+[ext_resource type="Texture2D" uid="uid://dt2cje5lk82j2" path="res://assets/ui/highlighter.png" id="1_highlighter"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_marker_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
 content_margin_left = 18.0
