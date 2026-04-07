@@ -5,7 +5,7 @@ using System.Collections.Generic;
 // Manages the physical arrangement of combatants in the battle scene.
 public class BattleSetup
 {
-    private const float EnemyYOffset = 1.25f; // Vertical offset to place enemies above their marker spot
+    private const float ActorYOffset = 1.25f; // Vertical offset to place actors above their marker spot
 
     private Transform3D _originalPlayerTransform;
     private Transform3D[] _originalEnemyTransforms;
@@ -42,7 +42,8 @@ public class BattleSetup
             GD.PrintErr("BattleSetup: PlayerSpot marker not found in BattleArea.");
             return;
         }
-        player.GlobalTransform = playerSpot.GlobalTransform;
+        // Apply vertical offset to player position as well to ensure they are above the ground
+        player.GlobalTransform = new Transform3D(player.GlobalTransform.Basis, playerSpot.GlobalPosition + new Vector3(0, ActorYOffset, 0));
 
         // Move each enemy to their respective spots
         for (int i = 0; i < enemies.Count; i++)
@@ -53,12 +54,12 @@ public class BattleSetup
                 GD.PrintErr($"BattleSetup: EnemySpot{i} marker not found in BattleArea.");
                 continue;
             }
-            enemies[i].GlobalPosition = enemySpot.GlobalPosition + new Vector3(0, EnemyYOffset, 0);
+            enemies[i].GlobalPosition = enemySpot.GlobalPosition + new Vector3(0, ActorYOffset, 0);
 
             // Force player to look at the first enemy spot for centering cam
             if (i == 0)
             {
-                player.ForceLookAt(enemySpot.GlobalPosition + new Vector3(0, EnemyYOffset, 0));
+                player.ForceLookAt(enemySpot.GlobalPosition + new Vector3(0, 2, 0));
             }       
         }
     }
