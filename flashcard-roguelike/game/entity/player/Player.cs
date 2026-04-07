@@ -7,7 +7,7 @@ public partial class Player : CharacterBody3D
 	public CanvasLayer PauseMenu;
 
 	[Export]
-	public InventoryUI InventoryUI;
+	public Inventory InventoryCanvas;
 
 	[Export]
 	public Node3D CameraMount;
@@ -58,9 +58,6 @@ public partial class Player : CharacterBody3D
 	{
 		_cameraPivot = GetNode<Node3D>("CameraPivot");
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		// Ensure we have a reference to InventoryUI
-		if (InventoryUI == null)
-			InventoryUI = GetNodeOrNull<InventoryUI>("CameraPivot/Camera3D/InventoryUI");
 
 		FootstepSoundPlayer = GetNode<AudioStreamPlayer3D>("FootstepSoundPlayer");
 		JumpSoundPlayer = GetNode<AudioStreamPlayer3D>("JumpSoundPlayer");
@@ -68,12 +65,15 @@ public partial class Player : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
-		if (InventoryUI != null)
+		if (@event.IsActionPressed("inventory_toggle"))
 		{
-			if (@event.IsActionPressed("inventory_toggle"))
-				InventoryUI.SetVisible(true);
-			else if (@event.IsActionReleased("inventory_toggle"))
-				InventoryUI.SetVisible(false);
+			InventoryCanvas.SetVisible(true);
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		else if (@event.IsActionReleased("inventory_toggle"))
+		{
+			InventoryCanvas.SetVisible(false);
+			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 
 		if (Input.MouseMode == Input.MouseModeEnum.Captured)
