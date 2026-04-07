@@ -13,6 +13,10 @@ public partial class FlashcardManager : Node
 	private List<Flashcard> _cardCache = null;
 	private readonly Random _random = new();
 
+	// Shuffled deck for cycle-through drawing, every card is dealt once before reshuffling
+	private List<Flashcard> _shuffledDeck = null;
+	private int _deckIndex = 0;
+
 	public List<FlashcardSet> ActiveFlashCardLists
 	{
 		get {
@@ -99,25 +103,37 @@ public partial class FlashcardManager : Node
 			if (set.IsActive && set.Cards != null)
 				_cardCache.AddRange(set.Cards);
 		}
+
+		_shuffledDeck = new List<Flashcard>(_cardCache);
+		ShuffleDeck();
 	}
 
-	// Returns a random flashcard drawn from all active sets.
-	// Uses a cached flat card list rebuilt only when sets are added or removed.
+	private void ShuffleDeck()
+	{
+		for (int i = _shuffledDeck.Count - 1; i > 0; i--)
+		{
+			int j = _random.Next(i + 1);
+			(_shuffledDeck[i], _shuffledDeck[j]) = (_shuffledDeck[j], _shuffledDeck[i]);
+		}
+		_deckIndex = 0;
+	}
+
+	// Returns a flashcard drawn from a shuffled deck. Every card is dealt once before reshuffling.
 	public Flashcard GetRandomCard()
 	{
-		// Build cache if missing or invalidated
 		if (_cardCache == null)
-		{
 			BuildCardCache();
-		}
 
-		if (_cardCache.Count == 0)
+		if (_shuffledDeck.Count == 0)
 		{
 			GD.PrintErr("FlashcardManager: No flashcards available in active sets.");
 			return null;
 		}
 
-		return _cardCache[_random.Next(_cardCache.Count)];
+		if (_deckIndex >= _shuffledDeck.Count)
+			ShuffleDeck();
+
+		return _shuffledDeck[_deckIndex++];
 	}
 
 	public List<Flashcard> GetActiveCards()
