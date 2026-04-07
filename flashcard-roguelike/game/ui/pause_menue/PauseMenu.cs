@@ -51,6 +51,7 @@ public partial class PauseMenu : CanvasLayer
 
 	public override void _Ready()
 	{
+		ProcessMode = ProcessModeEnum.Always;
 		_buttonPanelContainer = GetNode<Control>("ButtonPanelContainer");
 
 		const string btnPath = "ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/";
@@ -70,6 +71,7 @@ public partial class PauseMenu : CanvasLayer
 				EmitSignal(SignalName.ToggleMouseLock);
 				Visible = true;
 				PushPanel(_buttonPanelContainer);
+				GetTree().Paused = true;
 			}
 			else
 			{
@@ -81,6 +83,7 @@ public partial class PauseMenu : CanvasLayer
 					// All panels closed, hide the pause menu
 					Visible = false;
 					EmitSignal(SignalName.ToggleMouseLock);
+					GetTree().Paused = false;
 				}
 			}
 		}
@@ -91,6 +94,7 @@ public partial class PauseMenu : CanvasLayer
 		GD.Print("Resume Pressed");
 		CloseAll();
 		EmitSignal(SignalName.ToggleMouseLock);
+		GetTree().Paused = false;
 	}
 
 	public void _on_view_flashcards_pressed()
@@ -110,6 +114,7 @@ public partial class PauseMenu : CanvasLayer
 	public void _on_main_menu_pressed()
 	{
 		GD.Print("Main Menue Pressed");
+		GetTree().Paused = false;
 		SceneTransition.FadeOut(this, () => GetTree().ChangeSceneToPacked(MainMenu));
 	}
 

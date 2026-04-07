@@ -129,6 +129,10 @@ transform = Transform3D(0.976616, 0, 0.21499102, 0, 1, 0, -0.21499102, 0, 0.9766
 [node name="desk" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1700550473 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(0.7443931, 0.5794952, 0.33175915, 0, 0.49683762, -0.8678435, -0.6677416, 0.6460167, 0.3698425, 4.835836, 0, -2.9311981)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk" index="0" unique_id=765216664]
 material_override = ExtResource("7_w4r1y")
@@ -136,6 +140,10 @@ material_override = ExtResource("7_w4r1y")
 [node name="desk2" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=783625125 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(0.33452773, -0.2133467, -0.91791844, -0.41673842, 0.84013104, -0.34714377, 0.8452338, 0.4986612, 0.19213739, 3.0306146, 1.9914603, -4.2189374)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk2" index="0" unique_id=765216664]
 material_override = ExtResource("7_w4r1y")
@@ -143,6 +151,10 @@ material_override = ExtResource("7_w4r1y")
 [node name="desk3" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=806559575 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(0.54487324, 0, 0.83851844, 0.6250563, 0.6665845, -0.40616456, -0.5589434, 0.74542946, 0.36320406, 2.9755843, 3.7370214, -3.4263089)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk3" index="0" unique_id=765216664]
 material_override = ExtResource("7_w4r1y")
@@ -150,6 +162,10 @@ material_override = ExtResource("7_w4r1y")
 [node name="desk4" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1084033554 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(0.53311384, -0.5406476, 0.6507609, -0.7120505, -0.70212823, 0, 0.45691758, -0.4633746, -0.7592827, 4.983942, 1.804326, -4.418326)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk4" index="0" unique_id=765216664]
 material_override = ExtResource("7_w4r1y")
@@ -157,6 +173,10 @@ material_override = ExtResource("7_w4r1y")
 [node name="desk5" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1392554236 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(-0.47787955, 0.7944309, 0.37484744, -0.87842536, -0.43218502, -0.20392391, 0, -0.42672658, 0.9043807, 4.544798, -4.2910423, -3.1351624)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk5" index="0" unique_id=765216664]
 material_override = ExtResource("7_w4r1y")
@@ -164,6 +184,10 @@ material_override = ExtResource("7_w4r1y")
 [node name="desk6" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1168865738 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(0.7816496, -0.52795255, -0.3320996, -0.048821915, 0.47902796, -0.8764408, 0.6218042, 0.70128345, 0.3486564, 3.9556098, -1.6774871, -3.4263089)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk6" index="0" unique_id=765216664]
 material_override = ExtResource("7_w4r1y")
@@ -171,6 +195,10 @@ material_override = ExtResource("7_w4r1y")
 [node name="desk11" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1108283978 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(0.89227873, -0.45148498, 0, 0.26362005, 0.5209975, 0.8118288, -0.3665285, -0.7243776, 0.5838955, 2.9380646, -3.0652425, -4.247768)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk11" index="0" unique_id=765216664]
 material_override = ExtResource("7_w4r1y")
@@ -178,6 +206,10 @@ material_override = ExtResource("7_w4r1y")
 [node name="desk7" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1261816940 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(0.35484585, 0.14978299, 0.9228485, 0.93492484, -0.05684935, -0.35026234, 0, 0.98708314, -0.16020858, 3.4402823, 0.70341015, -3.9357393)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk7" index="0" unique_id=765216664]
 material_override = ExtResource("7_w4r1y")
@@ -185,13 +217,22 @@ material_override = ExtResource("7_w4r1y")
 [node name="desk8" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1486004327 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(0.48548457, 0.6320104, -0.60404295, -0.7930346, 0.60917675, 0, 0.36796886, 0.47902685, 0.79695183, 4.122778, 2.5865815, -3.4263089)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk8" index="0" unique_id=765216664]
+transform = Transform3D(2.162309, -5.9604645e-08, 5.9604645e-08, -5.9604645e-08, 2.1623085, 5.9604645e-08, 0, 0, 2.1623085, 0.036898017, 0.048035383, 0.6489229)
 material_override = ExtResource("7_w4r1y")
 
 [node name="desk9" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=2144835990 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(0.5346032, 0.8451032, 0, 0.20902549, -0.13222727, -0.96892947, -0.8188454, 0.5179928, -0.24733724, 4.1286507, 4.5866504, -4.1893783)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk9" index="0" unique_id=765216664]
 material_override = ExtResource("7_w4r1y")
@@ -199,112 +240,334 @@ material_override = ExtResource("7_w4r1y")
 [node name="desk10" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=815125889 instance=ExtResource("5_0ipjw")]
 transform = Transform3D(0.75847566, 0.53562397, 0.3712433, -0.6517013, 0.6233802, 0.4320675, 0, -0.5696525, 0.8218855, 3.732469, 5.98245, -4.583824)
 script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
 [node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk10" index="0" unique_id=765216664]
 material_override = ExtResource("7_w4r1y")
 
-[node name="pencil" parent="BackgroundViewport/SubViewport/Decoration" unique_id=1527815892 instance=ExtResource("10_gscod")]
-transform = Transform3D(-0.47961867, -0.28752896, -0.8290314, 0.10345391, 0.9196714, -0.3788163, 0.8713571, -0.2674539, -0.4113456, -6.5871725, 4.2051272, -6.3431344)
-script = ExtResource("11_egypv")
+[node name="desk12" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1094252860 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(-0.28861406, 0.8309129, 0.47569495, 0, 0.49683768, -0.8678436, -0.9574455, -0.25047183, -0.14339435, 5.0842953, -10.89579, -4.3032317)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
-[node name="Cylinder" parent="BackgroundViewport/SubViewport/Decoration/pencil" index="0" unique_id=107585494]
-material_override = ExtResource("9_hpwr3")
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk12" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
 
-[node name="Whiteboards" type="Node3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=1851616834]
+[node name="desk13" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1815388308 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.9073063, 0.36094332, -0.21567354, -0.41673845, 0.84013104, -0.34714377, 0.05589485, 0.4048453, 0.9126752, 3.1520429, -8.904329, -3.2153444)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
-[node name="whiteboard" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=1447787193 instance=ExtResource("13_o0d2s")]
-transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -4.6333456, 2.8091087, -8.435543)
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk13" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
 
-[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard" index="0" unique_id=892213354]
-material_override = ExtResource("12_nekgt")
+[node name="desk14" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=348047696 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(-0.27479732, 0.6749383, 0.6847954, 0.6250563, 0.66658455, -0.4061645, -0.7306101, 0.31642282, -0.6050502, 3.8463573, -7.1587687, -2.82906)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
-[node name="whiteboard2" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=162135145 instance=ExtResource("13_o0d2s")]
-transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -0.13645434, 2.8091087, -8.435543)
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk14" index="0" unique_id=765216664]
+transform = Transform3D(2.1623092, 0, 5.9604645e-08, 8.940697e-08, 2.1623092, -8.940697e-08, 0, 1.1920929e-07, 2.162309, 2.470316, -1.0698786, 2.045776)
+material_override = ExtResource("7_w4r1y")
 
-[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard2" index="0" unique_id=892213354]
-material_override = ExtResource("12_nekgt")
+[node name="desk15" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=37026182 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.64000773, -0.6490521, -0.41124403, -0.71205044, -0.7021282, 0, -0.28874606, 0.29282653, -0.91152525, 3.8006654, -9.091464, -5.068594)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
-[node name="whiteboard3" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=1526325837 instance=ExtResource("13_o0d2s")]
-transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, 4.3640184, 2.8091087, -8.435541)
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk15" index="0" unique_id=765216664]
+transform = Transform3D(2.162309, 5.9604645e-08, 5.9604645e-08, -8.940697e-08, 2.162309, 0, 0, -1.1920929e-07, 2.1623092, 0.99881554, 0.9848974, 0)
+material_override = ExtResource("7_w4r1y")
 
-[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard3" index="0" unique_id=892213354]
-material_override = ExtResource("12_nekgt")
+[node name="desk16" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1550950788 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(-0.20285213, -0.049150288, 0.9779751, -0.87842536, -0.43218505, -0.20392394, 0.4326892, -0.9004446, 0.044494808, 4.7760777, -16.239096, -4.126295)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
-[node name="whiteboard4" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=1951920117 instance=ExtResource("13_o0d2s")]
-transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 8.41983, 2.8091087, -4.5779433)
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk16" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
 
-[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard4" index="0" unique_id=892213354]
-material_override = ExtResource("12_nekgt")
+[node name="desk17" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=2065788329 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.89480114, 0.41085958, 0.17471494, -0.048821926, 0.47902787, -0.8764407, -0.44378746, 0.77571046, 0.44869375, 4.2623625, -13.390118, -3.7164102)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
-[node name="whiteboard5" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=141814065 instance=ExtResource("13_o0d2s")]
-transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 8.41983, 2.8091087, -0.0810523)
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk17" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
 
-[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard5" index="0" unique_id=892213354]
-material_override = ExtResource("12_nekgt")
+[node name="desk18" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=566637307 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.04688999, -0.8475253, 0.5286797, 0.26362002, 0.52099746, 0.8118287, -0.9634863, 0.101303935, 0.24785426, 3.0866528, -13.961033, -3.1437845)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
-[node name="whiteboard6" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=1933857991 instance=ExtResource("13_o0d2s")]
-transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 8.419828, 2.8091087, 4.4194202)
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk18" index="0" unique_id=765216664]
+transform = Transform3D(2.162309, -1.4901161e-08, -5.9604645e-08, 2.9802322e-08, 2.162309, 1.8626451e-08, 1.1920929e-07, 6.7055225e-08, 2.1623092, -0.19737172, -0.390069, -0.6078129)
+material_override = ExtResource("7_w4r1y")
 
-[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard6" index="0" unique_id=892213354]
-surface_material_override/0 = ExtResource("12_nekgt")
+[node name="desk19" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1817940235 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.15062638, 0.9573206, 0.24667573, 0.93492484, -0.056849346, -0.3502623, -0.32129002, 0.28338203, -0.9035858, 3.582358, -10.19238, -3.4660592)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
-[node name="Sprite3D" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=1854868155]
-transform = Transform3D(0.11300383, 0.02133391, 0, -0.02133391, 0.11300383, 0, 0, 0, 0.115, -5.252414, 2.8463893, -8.388285)
-shaded = true
-texture = ExtResource("10_jxl6k")
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk19" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
 
-[node name="Sprite3D4" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=922794364]
-transform = Transform3D(-4.9395545e-09, -9.325349e-10, -0.11500002, -0.021333912, 0.11300384, 0, 0.11300383, 0.02133391, -5.0268096e-09, 8.371674, 2.6802886, -3.881005)
-shaded = true
-texture = ExtResource("11_06kjt")
+[node name="desk20" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=743081992 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.5392524, 0.7020061, 0.46518198, -0.7930345, 0.6091767, 0, -0.28337806, -0.36890543, 0.88521504, 4.3333225, -8.309209, -3.86777)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
-[node name="Sprite3D5" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=155878348]
-transform = Transform3D(-4.9395537e-09, -9.325348e-10, -0.115, 0.028984088, 0.11128757, -2.1473738e-09, 0.111287564, -0.028984098, -4.545062e-09, 8.371674, 2.7891285, -0.42524958)
-shaded = true
-texture = ExtResource("12_hutre")
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk20" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
 
-[node name="Sprite3D6" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=842792109]
-transform = Transform3D(-4.939553e-09, -9.325354e-10, -0.115, 0.009402925, 0.11461496, -1.3332927e-09, 0.11461494, -0.009402931, -4.8467648e-09, 8.371674, 2.7891285, 4.4929852)
-shaded = true
-texture = ExtResource("13_i1dr8")
+[node name="desk21" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1124483603 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(-0.5144813, 0.82774174, -0.22394791, 0.20902547, -0.13222729, -0.9689294, -0.83163536, -0.5453068, -0.104990646, 3.6449053, -6.3091397, -4.196998)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
 
-[node name="Sprite3D3" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=2083902652]
-transform = Transform3D(0.11300383, 0.02133391, 0, -0.02133391, 0.11300383, 0, 0, 0, 0.115, 4.546994, 2.7335796, -8.388285)
-shaded = true
-texture = ExtResource("14_hyaa6")
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk21" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
 
-[node name="Sprite3D2" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Whiteboards" unique_id=1048001118]
-transform = Transform3D(0.188216, -0.020822871, 0, 0.034652777, 0.11309912, 0, 0, 0, 0.11500002, 0.7412192, 2.8463893, -8.388285)
-shaded = true
-texture = ExtResource("15_hpwr3")
+[node name="desk22" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=375411730 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.32196066, -0.28841984, 0.90175104, -0.6517013, 0.6233802, 0.4320675, -0.68675077, -0.72678125, 0.012740284, 3.1195874, -4.91334, -4.0057173)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
+
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk22" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
+
+[node name="desk23" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1086563260 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.98374116, 0.1558578, 0.089228064, -1.467845e-09, 0.4968377, -0.8678436, -0.17959207, 0.8537334, 0.48875967, 4.233511, 11.40237, -2.5617876)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
+
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk23" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
+
+[node name="desk24" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=767200425 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(-0.15713611, -0.44271496, -0.8827863, -0.4167385, 0.84013104, -0.34714377, 0.89534193, 0.31334224, -0.31651124, 3.3688228, 13.393831, -4.6037016)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
+
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk24" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
+
+[node name="desk26" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=908974787 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.21526735, -0.21830942, 0.9518408, -0.71205044, -0.7021282, 0, 0.6683144, -0.67775875, -0.30659264, 5.1377907, 13.2066965, -3.751646)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
+
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk26" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
+
+[node name="desk27" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1446564125 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(-0.40725437, 0.9002855, -0.1537207, -0.8784252, -0.43218493, -0.20392393, -0.2500255, 0.051983275, 0.9668426, 4.0921984, 7.111328, -2.8878787)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
+
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk27" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
+
+[node name="desk28" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=590444211 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.34080407, -0.81683713, -0.46543527, -0.048821926, 0.47902784, -0.8764407, 0.9388659, 0.3214181, 0.12337514, 3.742413, 9.724883, -3.444259)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
+
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk28" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
+
+[node name="desk29" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=838798985 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.9521769, -0.005767852, -0.30549288, 0.26362002, 0.52099746, 0.8118287, 0.15447852, -0.8535387, 0.4976023, 3.3050349, 8.337128, -4.676693)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
+
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk29" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
+
+[node name="desk30" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=1218526376 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.30240363, -0.38879296, 0.8702827, 0.93492496, -0.056849353, -0.35026234, 0.18565457, 0.9195695, 0.34630072, 3.5697777, 12.105781, -4.1480193)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
+
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk30" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
+
+[node name="desk31" parent="BackgroundViewport/SubViewport/Decoration/Desks" unique_id=380199679 instance=ExtResource("5_0ipjw")]
+transform = Transform3D(0.22121492, 0.28798056, -0.9317356, -0.79303443, 0.60917664, -2.7054234e-08, 0.56759167, 0.73889846, 0.36313736, 3.8848753, 13.988952, -3.3567972)
+script = ExtResource("6_k3ypk")
+RandomizeAmplitude = true
+RandomizeAmplitudeMin = 0.1
+RandomizeAmplitudeMax = 0.5
+RandomizeFrequency = true
+
+[node name="Seat" parent="BackgroundViewport/SubViewport/Decoration/Desks/desk31" index="0" unique_id=765216664]
+material_override = ExtResource("7_w4r1y")
 
 [node name="Walls" type="Node3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=645588578]
+script = ExtResource("6_k3ypk")
+Amplitude = 0.075
+Frequency = 0.125
 
 [node name="mainmenu_walls2" parent="BackgroundViewport/SubViewport/Decoration/Walls" unique_id=1458237966 instance=ExtResource("5_cwbgs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6096478, 0)
+script = ExtResource("11_egypv")
+DegreesPerSecond = 1.0
 
 [node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2" index="0" unique_id=1035635711]
 material_override = ExtResource("20_73pe5")
 
-[node name="Sprite3D" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls" unique_id=451335664]
-transform = Transform3D(-0.1409902, 0.010049425, -1.2325753e-08, 0.010049425, 0.1409902, 8.785481e-10, 1.2357028e-08, 1.0876087e-15, -0.1413479, 4.8715286, 3.5630977, 8.494368)
+[node name="Graffiti1" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2" unique_id=451335664]
+transform = Transform3D(-0.1409902, 0.010049425, -1.2325753e-08, 0.010049425, 0.1409902, 8.785481e-10, 1.2357028e-08, 1.0876087e-15, -0.1413479, 4.8715286, 0.95344996, 8.494368)
 shaded = true
 texture = ExtResource("17_fkgrk")
 
-[node name="Sprite3D2" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls" unique_id=1770875365]
-transform = Transform3D(-0.0659716, 0.0019360995, -9.9657225e-09, 0.0019360995, 0.0659716, 1.6925958e-10, 9.966399e-09, -1.2315615e-10, -0.066, 7.980157, 0.8837851, -8.494384)
+[node name="Graffiti2" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2" unique_id=1770875365]
+transform = Transform3D(-0.0659716, 0.0019360995, -9.9657225e-09, 0.0019360995, 0.0659716, 1.6925958e-10, 9.966399e-09, -1.2315615e-10, -0.066, 7.980157, -1.7258626, -8.494384)
 shaded = true
 texture = ExtResource("19_705nu")
 
-[node name="Sprite3D3" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls" unique_id=760855997]
-transform = Transform3D(-1.9638867e-08, 3.068573e-10, 0.2768334, 0.008120862, 0.27671418, 6.6384376e-10, -0.27671418, 0.008120862, -1.9638867e-08, -8.46581, 2.8966084, -5.4391174)
+[node name="Graffiti3" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2" unique_id=760855997]
+transform = Transform3D(-1.9638867e-08, 3.068573e-10, 0.2768334, 0.008120862, 0.27671418, 6.6384376e-10, -0.27671418, 0.008120862, -1.9638867e-08, -8.46581, 0.2869606, -5.4391174)
 shaded = true
 texture = ExtResource("19_06kjt")
 
-[node name="Sprite3D4" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls" unique_id=761443592]
-transform = Transform3D(-4.3442594e-08, 6.7879047e-10, 0.6123755, 0.27107677, 0.5491093, 1.9414752e-08, -0.5491093, 0.27107677, -3.889065e-08, -8.46581, 3.1050653, 3.9055643)
+[node name="Graffiti4" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2" unique_id=761443592]
+transform = Transform3D(-4.3442594e-08, 6.7879047e-10, 0.6123755, 0.27107677, 0.5491093, 1.9414752e-08, -0.5491093, 0.27107677, -3.889065e-08, -8.46581, 0.4954176, 3.9055643)
 shaded = true
 texture = ExtResource("18_njswq")
+
+[node name="Whiteboards" type="Node3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2" unique_id=1851616834]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.6096478, 0)
+
+[node name="whiteboard" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=1447787193 instance=ExtResource("13_o0d2s")]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -4.6333456, 2.8091087, -8.435543)
+
+[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard" index="0" unique_id=892213354]
+material_override = ExtResource("12_nekgt")
+
+[node name="whiteboard2" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=162135145 instance=ExtResource("13_o0d2s")]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -0.13645434, 2.8091087, -8.435543)
+
+[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard2" index="0" unique_id=892213354]
+material_override = ExtResource("12_nekgt")
+
+[node name="whiteboard3" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=1526325837 instance=ExtResource("13_o0d2s")]
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, 4.3640184, 2.8091087, -8.435541)
+
+[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard3" index="0" unique_id=892213354]
+material_override = ExtResource("12_nekgt")
+
+[node name="whiteboard4" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=1951920117 instance=ExtResource("13_o0d2s")]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 8.41983, 2.8091087, -4.5779433)
+
+[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard4" index="0" unique_id=892213354]
+material_override = ExtResource("12_nekgt")
+
+[node name="whiteboard5" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=141814065 instance=ExtResource("13_o0d2s")]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 8.41983, 2.8091087, -0.0810523)
+
+[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard5" index="0" unique_id=892213354]
+material_override = ExtResource("12_nekgt")
+
+[node name="whiteboard6" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=1933857991 instance=ExtResource("13_o0d2s")]
+transform = Transform3D(-1.5, 0, 1.3113416e-07, 0, 1.5, 0, -1.3113416e-07, 0, -1.5, 8.419828, 2.8091087, 4.4194202)
+
+[node name="Cube" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard6" index="0" unique_id=892213354]
+surface_material_override/0 = ExtResource("12_nekgt")
+
+[node name="Sprite3D" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=1854868155]
+transform = Transform3D(0.11300383, 0.02133391, 0, -0.02133391, 0.11300383, 0, 0, 0, 0.115, -5.252414, 2.8463893, -8.388285)
+shaded = true
+texture = ExtResource("10_jxl6k")
+
+[node name="Sprite3D4" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=922794364]
+transform = Transform3D(-4.9395545e-09, -9.325349e-10, -0.11500002, -0.021333912, 0.11300384, 0, 0.11300383, 0.02133391, -5.0268096e-09, 8.371674, 2.6802886, -3.881005)
+shaded = true
+texture = ExtResource("11_06kjt")
+
+[node name="Sprite3D5" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=155878348]
+transform = Transform3D(-4.9395537e-09, -9.325348e-10, -0.115, 0.028984088, 0.11128757, -2.1473738e-09, 0.111287564, -0.028984098, -4.545062e-09, 8.371674, 2.7891285, -0.42524958)
+shaded = true
+texture = ExtResource("12_hutre")
+
+[node name="Sprite3D6" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=842792109]
+transform = Transform3D(-4.939553e-09, -9.325354e-10, -0.115, 0.009402925, 0.11461496, -1.3332927e-09, 0.11461494, -0.009402931, -4.8467648e-09, 8.371674, 2.7891285, 4.4929852)
+shaded = true
+texture = ExtResource("13_i1dr8")
+
+[node name="Sprite3D3" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=2083902652]
+transform = Transform3D(0.11300383, 0.02133391, 0, -0.02133391, 0.11300383, 0, 0, 0, 0.115, 4.546994, 2.7335796, -8.388285)
+shaded = true
+texture = ExtResource("14_hyaa6")
+
+[node name="Sprite3D2" type="Sprite3D" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards" unique_id=1048001118]
+transform = Transform3D(0.188216, -0.020822871, 0, 0.034652777, 0.11309912, 0, 0, 0, 0.11500002, 0.7412192, 2.8463893, -8.388285)
+shaded = true
+texture = ExtResource("15_hpwr3")
+
+[node name="pencil" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2" unique_id=1527815892 instance=ExtResource("10_gscod")]
+transform = Transform3D(-0.47961867, -0.28752896, -0.8290314, 0.10345391, 0.9196714, -0.3788163, 0.8713571, -0.2674539, -0.4113456, -6.5871725, 1.5954795, -6.3431344)
+script = ExtResource("11_egypv")
+
+[node name="Cylinder" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/pencil" index="0" unique_id=107585494]
+material_override = ExtResource("9_hpwr3")
 
 [node name="UFO" type="Node3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=650332032]
 
@@ -545,12 +808,31 @@ text = "Back"
 [editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk8"]
 [editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk9"]
 [editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk10"]
-[editable path="BackgroundViewport/SubViewport/Decoration/pencil"]
-[editable path="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard"]
-[editable path="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard2"]
-[editable path="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard3"]
-[editable path="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard4"]
-[editable path="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard5"]
-[editable path="BackgroundViewport/SubViewport/Decoration/Whiteboards/whiteboard6"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk12"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk13"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk14"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk15"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk16"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk17"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk18"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk19"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk20"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk21"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk22"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk23"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk24"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk26"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk27"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk28"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk29"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk30"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Desks/desk31"]
 [editable path="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard2"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard3"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard4"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard5"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/Whiteboards/whiteboard6"]
+[editable path="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/pencil"]
 [editable path="BackgroundViewport/SubViewport/Decoration/UFO/ufo"]
