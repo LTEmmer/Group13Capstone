@@ -17635,7 +17635,6 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -
 
 [node name="GeneralSkeleton" type="Skeleton3D" parent="EnemyVisuals/Rig" unique_id=25343865]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 motion_scale = 0.9167
 bones/0/name = "Root"
 bones/0/parent = -1

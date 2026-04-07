@@ -3,20 +3,6 @@
 [ext_resource type="Script" uid="uid://c8fl78a1ygu1q" path="res://game/entity/dungeon_generator/rooms/Room.cs" id="1_os7nw"]
 [ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="2_p3pul"]
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_p3pul"]
-vertices = PackedVector3Array(-24.5, 0.75, -24.5, -24.5, 0.75, 24.5, 24.5, 0.75, 24.5, 24.5, 0.75, -24.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0drqo"]
-albedo_color = Color(1, 0.11764706, 0.08627451, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_smkli"]
-material = SubResource("StandardMaterial3D_0drqo")
-size = Vector3(50, 0.5, 50)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j4xo5"]
-points = PackedVector3Array(-25, -0.25, -25, -25, 0.25, -25, 25, -0.25, -25, -25, -0.25, 25, -25, 0.25, 25, 25, 0.25, -25, 25, -0.25, 25, 25, 0.25, 25)
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_j4xo5"]
 _surfaces = [{
 "aabb": AABB(-26, -0.1726656, -26, 52, 10, 52),
@@ -34,19 +20,26 @@ albedo_color = Color(0.43134022, 0.43134025, 0.43134025, 0.78431374)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_p3pul"]
 data = PackedVector3Array(-26, -0.1727, -26, -26, -0.1727, 26, -25, -0.1727, -25, -26, -0.1727, -26, -25, -0.1727, -25, 25, -0.1727, -25, -26, -0.1727, -26, 26, -0.1727, -26, -26, 9.8273, -26, -26, -0.1727, 26, -25, -0.1727, 25, -25, -0.1727, -25, -26, -0.1727, -26, -26, 9.8273, 26, -26, -0.1727, 26, -26, -0.1727, 26, 26, -0.1727, 26, -25, -0.1727, 25, -26, -0.1727, -26, -26, 9.8273, -26, -26, 9.8273, 26, -26, 9.8273, -26, -25, 9.8273, -25, -25, 9.8273, 25, -26, 9.8273, -26, 26, 9.8273, -26, -25, 9.8273, -25, -26, 9.8273, -26, -25, 9.8273, 25, -26, 9.8273, 26, -26, -0.1727, 26, -26, 9.8273, 26, 26, 9.8273, 26, -26, 9.8273, 26, -25, 9.8273, 25, 25, 9.8273, 25, -26, -0.1727, -26, 25, -0.1727, -25, 26, -0.1727, -26, 26, -0.1727, -26, 25, -0.1727, -25, 25, -0.1727, 25, 26, -0.1727, -26, 26, -0.1727, 26, 26, 9.8273, -26, 26, -0.1727, 26, 25, -0.1727, 25, -25, -0.1727, 25, -26, -0.1727, 26, 26, 9.8273, 26, 26, -0.1727, 26, 26, -0.1727, -26, 25, -0.1727, 25, 26, -0.1727, 26, -26, 9.8273, -26, 26, -0.1727, -26, 26, 9.8273, -26, 26, 9.8273, -26, 25, 9.8273, -25, -25, 9.8273, -25, 26, 9.8273, -26, 26, 9.8273, 26, 25, 9.8273, -25, -26, 9.8273, 26, 25, 9.8273, 25, 26, 9.8273, 26, 26, -0.1727, 26, 26, 9.8273, 26, 26, 9.8273, -26, 26, 9.8273, 26, 25, 9.8273, 25, 25, 9.8273, -25, -25, 9.8273, -25, -25, -0.1727, -25, -25, -0.1727, 25, -25, -0.1727, 25, 25, -0.1727, 25, -25, 9.8273, 25, 25, 9.8273, -25, -25, -0.1727, -25, -25, 9.8273, -25, -25, -0.1727, 25, -25, 9.8273, 25, -25, 9.8273, -25, -25, -0.1727, -25, 25, 9.8273, -25, 25, -0.1727, -25, 25, -0.1727, 25, 25, -0.1727, -25, 25, 9.8273, 25, 25, 9.8273, -25, 25, 9.8273, 25, 25, -0.1727, -25, -25, 9.8273, 25, 25, -0.1727, 25, 25, 9.8273, 25)
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_p3pul"]
+vertices = PackedVector3Array(-17, 0.575, -17, -17, 0.575, 17, 17, 0.575, 17, 17, 0.575, -17)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0drqo"]
+albedo_color = Color(1, 0.11764706, 0.08627451, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p3pul"]
+material = SubResource("StandardMaterial3D_0drqo")
+size = Vector3(50, 0.5, 50)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j4xo5"]
+points = PackedVector3Array(-25, -0.25, -25, -25, 0.25, -25, 25, -0.25, -25, -25, -0.25, 25, -25, 0.25, 25, 25, 0.25, -25, 25, -0.25, 25, 25, 0.25, 25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_smkli"]
+material = SubResource("StandardMaterial3D_0drqo")
+size = Vector3(50, 0.5, 50)
+
 [node name="CombatRoom" type="Node3D" unique_id=1298955981]
 script = ExtResource("1_os7nw")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1723493764]
-navigation_mesh = SubResource("NavigationMesh_p3pul")
-
-[node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1530236064]
-mesh = SubResource("BoxMesh_smkli")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor" unique_id=1847215606]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor/StaticBody3D" unique_id=1770789246]
-shape = SubResource("ConvexPolygonShape3D_j4xo5")
 
 [node name="Walls" type="MeshInstance3D" parent="." unique_id=1338685124]
 mesh = SubResource("ArrayMesh_j4xo5")
@@ -108,3 +101,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 
 [node name="3" type="Marker3D" parent="EnemySpawnArea" unique_id=1252675369]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1723493764]
+navigation_mesh = SubResource("NavigationMesh_p3pul")
+
+[node name="Floor" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1530236064]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_p3pul")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor" unique_id=1847215606]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor/StaticBody3D" unique_id=1770789246]
+shape = SubResource("ConvexPolygonShape3D_j4xo5")
+
+[node name="Floor2" type="MeshInstance3D" parent="." unique_id=1147961110]
+mesh = SubResource("BoxMesh_smkli")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor2" unique_id=2055799593]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D" unique_id=1554398928]
+shape = SubResource("ConvexPolygonShape3D_j4xo5")
