@@ -50,7 +50,7 @@ public partial class FlashcardManager : Node
 	{
 		FlashcardSet set = new FlashcardCsvLoader().ImportCsv(csvPath, setName);
 
-		if (set != null)
+		if (set != null && !AvailableSets.Exists(s => s.DisplayName == set.DisplayName))
 		{
 			_persistence.SaveSet(set);
 			AvailableSets.Add(set);
@@ -58,12 +58,45 @@ public partial class FlashcardManager : Node
 		}
 	}
 
+	public void CreateAndSaveSet(string displayName, List<Flashcard> cards)
+	{
+		if (string.IsNullOrWhiteSpace(displayName) || cards == null || cards.Count == 0)
+		{
+			GD.PushError("CreateAndSaveSet: displayName is empty or cards list is null/empty.");
+			return;
+		}
+		
+		string trimmed = displayName.Trim();
+		if (AvailableSets.Exists(s => s.DisplayName == trimmed))
+		{
+			GD.PushError($"CreateAndSaveSet: a set named '{trimmed}' already exists.");
+			return;
+		}
+		var set = new FlashcardSet { DisplayName = trimmed, Cards = cards };
+		_persistence.SaveSet(set);
+		AvailableSets.Add(set);
+		_cardCache = null;
+	}
+
+	public void SetActive(string displayName, bool active)
+	{
+		FlashcardSet set = AvailableSets.Find(s => s.DisplayName == displayName);
+		if (set == null) 
+		{
+			return;
+		}
+
+		set.IsActive = active;
+		_persistence.SaveSet(set);
+		_cardCache = null;
+	}
+
 	private void BuildCardCache()
 	{
 		_cardCache = new();
 		foreach (var set in AvailableSets)
 		{
-			if (set.Cards != null)
+			if (set.IsActive && set.Cards != null)
 				_cardCache.AddRange(set.Cards);
 		}
 	}

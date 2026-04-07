@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://cn4tm82kgsw57" path="res://assets/models/ufo/ufo.glb" id="23_hutre"]
 [ext_resource type="Material" uid="uid://drq58oyucx00r" path="res://assets/models/ufo/ufo_texture.tres" id="26_wwtvc"]
 [ext_resource type="Script" uid="uid://cxgn2j6exrb1q" path="res://game/ui/pause_menue/SettingsPanel.cs" id="31_nekgt"]
+[ext_resource type="Script" uid="uid://0i60ivtawcij" path="res://game/ui/main_menu/CreateSetPanel.cs" id="32_73pe5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_scroll"]
 shader = ExtResource("5_scroll")
@@ -55,6 +56,18 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_wwtvc"]
 font_size = 36
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_alg0g"]
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vt321"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2f5e2"]
+font_size = 32
+font_color = Color(1, 0, 0, 1)
 
 [node name="main menu" type="Control" unique_id=1885237886]
 layout_mode = 3
@@ -581,18 +594,18 @@ material_override = ExtResource("9_hpwr3")
 
 [node name="UFO" type="Node3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=650332032]
 
-[node name="DirectionalLight3D" type="SpotLight3D" parent="BackgroundViewport/SubViewport/Decoration/UFO" unique_id=398684236]
-transform = Transform3D(1, 0, 0, 0, 0.64039123, 0.7680489, 0, -0.7680489, 0.64039123, -0.3803134, 25.47427, -21.558504)
-light_energy = 10.0
-spot_range = 8.154
-spot_angle = 31.57475
-
 [node name="ufo" parent="BackgroundViewport/SubViewport/Decoration/UFO" unique_id=575728332 instance=ExtResource("23_hutre")]
 transform = Transform3D(0.8547079, -0.06625698, 0.5148637, 0.41474316, 0.68363553, -0.6005251, -0.31219018, 0.7268096, 0.61178833, -0.3803134, 22.343311, -24.596483)
 script = ExtResource("6_k3ypk")
 
 [node name="Sphere" parent="BackgroundViewport/SubViewport/Decoration/UFO/ufo" index="0" unique_id=1575183401]
 material_override = ExtResource("26_wwtvc")
+
+[node name="DirectionalLight3D" type="SpotLight3D" parent="BackgroundViewport/SubViewport/Decoration/UFO" unique_id=398684236]
+transform = Transform3D(1, 0, 0, 0, 0.64039123, 0.7680489, 0, -0.7680489, 0.64039123, -0.3803134, 25.47427, -21.558504)
+light_energy = 10.0
+spot_range = 8.154
+spot_angle = 31.57475
 
 [node name="AnimationLibrary_Godot_Standard" parent="BackgroundViewport/SubViewport" unique_id=1197229922 instance=ExtResource("3_model")]
 
@@ -741,6 +754,10 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="CreateNewSet" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=701770794]
+layout_mode = 2
+text = "Create New Set"
 
 [node name="Back" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=2000000008]
 custom_minimum_size = Vector2(80, 24)
@@ -944,10 +961,128 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Back" type="Button" parent="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer" unique_id=863920562]
-custom_minimum_size = Vector2(160, 48)
 layout_mode = 2
-size_flags_horizontal = 4
 text = "Back"
+
+[node name="CreateSetPanelContainer" type="Control" parent="." unique_id=586242937]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("32_73pe5")
+
+[node name="Paper" type="TextureRect" parent="CreateSetPanelContainer" unique_id=917783858]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -425.0
+offset_top = -300.0
+offset_right = 425.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_paper_tex")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Panel" type="Panel" parent="CreateSetPanelContainer" unique_id=43107021]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CreateSetPanelContainer/Panel" unique_id=1718918008]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -250.5
+offset_right = 320.0
+offset_bottom = 250.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateSetPanelContainer/Panel/MarginContainer" unique_id=1244435456]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1153534891]
+layout_mode = 2
+text = "Create a Flashcard Set"
+label_settings = SubResource("LabelSettings_alg0g")
+horizontal_alignment = 1
+
+[node name="Spacer1" type="Control" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1074243918]
+layout_mode = 2
+
+[node name="SetNameHBox" type="HBoxContainer" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=521362308]
+layout_mode = 2
+
+[node name="SetNameLabel" type="Label" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer/SetNameHBox" unique_id=1136609334]
+custom_minimum_size = Vector2(125, 25)
+layout_mode = 2
+text = "Set Name:"
+label_settings = SubResource("LabelSettings_vt321")
+
+[node name="SetNameEdit" type="LineEdit" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer/SetNameHBox" unique_id=1055675713]
+custom_minimum_size = Vector2(460, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Set name..."
+
+[node name="ErrorLabel" type="Label" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1924348781]
+visible = false
+layout_mode = 2
+text = "TEST"
+label_settings = SubResource("LabelSettings_2f5e2")
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1626820004]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1888096643]
+custom_minimum_size = Vector2(640, 340)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/scrollbar_h_separation = 8
+
+[node name="CardRowsContainer" type="VBoxContainer" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1811333994]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="ButtonRow" type="HBoxContainer" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1002035937]
+layout_mode = 2
+
+[node name="AddCardButton" type="Button" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer/ButtonRow" unique_id=1421931157]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Add Card"
+
+[node name="SaveButton" type="Button" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer/ButtonRow" unique_id=110171938]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="CancelButton" type="Button" parent="CreateSetPanelContainer/Panel/MarginContainer/VBoxContainer/ButtonRow" unique_id=1780907762]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
 
 [connection signal="pressed" from="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer/Back" to="." method="OnSettingsBackPressed"]
 
