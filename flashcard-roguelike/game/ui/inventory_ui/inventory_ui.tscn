@@ -1,15 +1,75 @@
 [gd_scene format=4 uid="uid://inventoryui"]
 
 [ext_resource type="Script" uid="uid://cimbfn6l2mraq" path="res://game/ui/inventory_ui/InventoryUI.cs" id="1"]
-[ext_resource type="Texture2D" uid="uid://bsfwg1c0g1w5x" path="res://assets/sprites/shield-plus.svg" id="2_f70lu"]
-[ext_resource type="Texture2D" uid="uid://cmyjgorgq77fl" path="res://assets/sprites/heart-plus.svg" id="2_mb3cs"]
-[ext_resource type="Material" uid="uid://b3hfqrm7r7dtl" path="res://game/ui/inventory_ui/PaperMaterial.tres" id="3_be8hc"]
-[ext_resource type="Texture2D" uid="uid://bktwg2fwo3flq" path="res://assets/sprites/heart-plus-yellow.svg" id="3_caxbp"]
+[ext_resource type="Material" uid="uid://b3hfqrm7r7dtl" path="res://game/ui/inventory_ui/CoverMaterial.tres" id="3_be8hc"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="3_e77rp"]
 [ext_resource type="PackedScene" uid="uid://qy5qpb6mote0" path="res://game/ui/inventory_ui/pages/stat_page.tscn" id="3_g3pns"]
-[ext_resource type="Material" uid="uid://q5c4854goi7h" path="res://game/ui/inventory_ui/CoverMaterial.tres" id="4_f70lu"]
-[ext_resource type="PackedScene" uid="uid://dj5diogm5gipf" path="res://game/ui/inventory_ui/pages/consumeable_page.tscn" id="4_fhk5c"]
-[ext_resource type="PackedScene" uid="uid://mffc2ay0sxt8" path="res://game/ui/inventory_ui/pages/equipment_page.tscn" id="5_pmruj"]
+[ext_resource type="ButtonGroup" uid="uid://bh2a2mgbhh88r" path="res://game/ui/inventory_ui/TabButtons.tres" id="3_q2ccd"]
+[ext_resource type="Material" uid="uid://q5c4854goi7h" path="res://game/ui/inventory_ui/PaperMaterial.tres" id="4_f70lu"]
+[ext_resource type="PackedScene" uid="uid://dj5diogm5gipf" path="res://game/ui/inventory_ui/pages/use_page.tscn" id="4_fhk5c"]
+[ext_resource type="PackedScene" uid="uid://mffc2ay0sxt8" path="res://game/ui/inventory_ui/pages/tool_page.tscn" id="5_pmruj"]
 [ext_resource type="Script" uid="uid://m3drfwmlmtxs" path="res://game/ui/inventory_ui/InputController.cs" id="10_fhk5c"]
+[ext_resource type="Material" uid="uid://cxyqlevo2mro1" path="res://game/ui/inventory_ui/PostItMaterial.tres" id="11_pmruj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmt0n"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.995, 0.994, 0.99, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.2, 0.18, 0.35)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.06)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dblsh"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.995, 0.994, 0.99, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.2, 0.18, 0.35)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.06)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjqwk"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.995, 0.994, 0.99, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.2, 0.18, 0.35)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.06)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f70lu"]
 
@@ -98,7 +158,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_si2r2")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ngtlq"]
-viewport_path = NodePath("LeftPage")
+viewport_path = NodePath("Node/LeftPageView")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f70lu"]
 size = Vector3(4.92, 7.17, 0.175)
@@ -138,22 +198,127 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_6qh5d")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_caxbp"]
-viewport_path = NodePath("RightPage")
+viewport_path = NodePath("Node/RightPageView")
 
-[node name="InventoryUI" type="Node3D" unique_id=2131535673 node_paths=PackedStringArray("_itemList", "_equipmentPage", "_statPage", "_consumablePage")]
+[sub_resource type="QuadMesh" id="QuadMesh_fhk5c"]
+size = Vector2(0.245, 0.23)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_e77rp"]
+viewport_path = NodePath("Node/Tabs/StatsView")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e77rp"]
+size = Vector3(0.955, 0.54, 0.175)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_mmt0n"]
+viewport_path = NodePath("Node/Tabs/UseView")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q2ccd"]
+viewport_path = NodePath("Node/Tabs/ToolsView")
+
+[node name="InventoryUI" type="Node3D" unique_id=2131535673 node_paths=PackedStringArray("_statPage", "_statItems", "_toolPage", "_toolItems", "_usePage", "_useItems", "_statList", "_useList", "_toolList")]
 transform = Transform3D(1, 0, 0, 0, 0.22309704, -0.97479624, 0, 0.97479624, 0.22309704, 0, 0, 0)
 script = ExtResource("1")
-_itemList = NodePath("LeftPage/Control/ItemList")
-testImg = ExtResource("2_mb3cs")
-_equipmentPage = NodePath("RightPage/EquipmentPage")
-_statPage = NodePath("RightPage/StatPage")
-_consumablePage = NodePath("RightPage/ConsumeablePage")
+_statPage = NodePath("Node/RightPageView/StatPage")
+_statItems = NodePath("Node/LeftPageView/StatsItems")
+_toolPage = NodePath("Node/RightPageView/ToolPage")
+_toolItems = NodePath("Node/LeftPageView/ToolItems")
+_usePage = NodePath("Node/RightPageView/UsePage")
+_useItems = NodePath("Node/LeftPageView/UseItems")
+_statList = NodePath("Node/LeftPageView/StatsItems/StatList")
+_useList = NodePath("Node/LeftPageView/UseItems/UseList")
+_toolList = NodePath("Node/LeftPageView/ToolItems/ToolList")
 
-[node name="LeftPage" type="SubViewport" parent="." unique_id=1274983126]
+[node name="Node" type="Node" parent="." unique_id=1869142780]
+
+[node name="Tabs" type="Node" parent="Node" unique_id=1323784058]
+
+[node name="StatsView" type="SubViewport" parent="Node/Tabs" unique_id=185591379]
+transparent_bg = true
+size = Vector2i(100, 57)
+
+[node name="Label" type="Label" parent="Node/Tabs/StatsView" unique_id=387338223]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Stats"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Node/Tabs/StatsView/Label" unique_id=2110215863]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_e77rp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mmt0n")
+toggle_mode = true
+button_group = ExtResource("3_q2ccd")
+
+[node name="UseView" type="SubViewport" parent="Node/Tabs" unique_id=680430388]
+transparent_bg = true
+size = Vector2i(100, 57)
+
+[node name="Label" type="Label" parent="Node/Tabs/UseView" unique_id=1102250670]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Items"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Node/Tabs/UseView/Label" unique_id=1016381922]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_e77rp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_dblsh")
+toggle_mode = true
+button_group = ExtResource("3_q2ccd")
+
+[node name="ToolsView" type="SubViewport" parent="Node/Tabs" unique_id=1430711242]
+transparent_bg = true
+size = Vector2i(100, 57)
+
+[node name="Label" type="Label" parent="Node/Tabs/ToolsView" unique_id=610567685]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Tools"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Node/Tabs/ToolsView/Label" unique_id=1500950659]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_e77rp")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jjqwk")
+toggle_mode = true
+button_group = ExtResource("3_q2ccd")
+
+[node name="LeftPageView" type="SubViewport" parent="Node" unique_id=1274983126]
 transparent_bg = true
 size = Vector2i(496, 717)
 
-[node name="Control" type="Control" parent="LeftPage" unique_id=1827112348]
+[node name="StatsItems" type="Control" parent="Node/LeftPageView" unique_id=1827112348]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,7 +328,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ItemList" type="ItemList" parent="LeftPage/Control" unique_id=149639012]
+[node name="StatList" type="ItemList" parent="Node/LeftPageView/StatsItems" unique_id=149639012]
 z_index = 10
 layout_mode = 1
 anchors_preset = 15
@@ -174,41 +339,76 @@ grow_vertical = 2
 theme_override_colors/guide_color = Color(0.7, 0.7, 0.7, 0)
 theme_override_styles/panel = SubResource("StyleBoxEmpty_f70lu")
 theme_override_styles/selected = SubResource("StyleBoxFlat_fhk5c")
-item_count = 15
 max_columns = 10
 same_column_width = true
 fixed_icon_size = Vector2i(64, 64)
-item_0/icon = ExtResource("2_f70lu")
-item_1/icon = ExtResource("2_f70lu")
-item_2/icon = ExtResource("2_f70lu")
-item_3/icon = ExtResource("2_f70lu")
-item_4/icon = ExtResource("2_f70lu")
-item_5/icon = ExtResource("3_caxbp")
-item_6/icon = ExtResource("3_caxbp")
-item_7/icon = ExtResource("3_caxbp")
-item_8/icon = ExtResource("3_caxbp")
-item_9/icon = ExtResource("3_caxbp")
-item_10/icon = ExtResource("2_mb3cs")
-item_11/icon = ExtResource("2_mb3cs")
-item_12/icon = ExtResource("2_mb3cs")
-item_13/icon = ExtResource("2_mb3cs")
-item_14/icon = ExtResource("2_mb3cs")
 
-[node name="RightPage" type="SubViewport" parent="." unique_id=732024750]
+[node name="UseItems" type="Control" parent="Node/LeftPageView" unique_id=1662417582]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UseList" type="ItemList" parent="Node/LeftPageView/UseItems" unique_id=1295976374]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/guide_color = Color(0.7, 0.7, 0.7, 0)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_f70lu")
+theme_override_styles/selected = SubResource("StyleBoxFlat_fhk5c")
+max_columns = 10
+same_column_width = true
+fixed_icon_size = Vector2i(64, 64)
+
+[node name="ToolItems" type="Control" parent="Node/LeftPageView" unique_id=1318317427]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ToolList" type="ItemList" parent="Node/LeftPageView/ToolItems" unique_id=1405453968]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/guide_color = Color(0.7, 0.7, 0.7, 0)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_f70lu")
+theme_override_styles/selected = SubResource("StyleBoxFlat_fhk5c")
+max_columns = 10
+same_column_width = true
+fixed_icon_size = Vector2i(64, 64)
+
+[node name="RightPageView" type="SubViewport" parent="Node" unique_id=732024750]
 transparent_bg = true
 size = Vector2i(496, 717)
 
-[node name="StatPage" parent="RightPage" unique_id=758058895 instance=ExtResource("3_g3pns")]
+[node name="StatPage" parent="Node/RightPageView" unique_id=758058895 instance=ExtResource("3_g3pns")]
 visible = false
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="ConsumeablePage" parent="RightPage" unique_id=1164067624 instance=ExtResource("4_fhk5c")]
+[node name="UsePage" parent="Node/RightPageView" unique_id=1164067624 instance=ExtResource("4_fhk5c")]
 visible = false
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="EquipmentPage" parent="RightPage" unique_id=1242328435 instance=ExtResource("5_pmruj")]
+[node name="ToolPage" parent="Node/RightPageView" unique_id=1242328435 instance=ExtResource("5_pmruj")]
 offset_right = 0.0
 offset_bottom = 0.0
 
@@ -232,12 +432,12 @@ texture = SubResource("ViewportTexture_ngtlq")
 [node name="InputController" type="Node" parent="Book/Cover/Left Page/Sprite3D" unique_id=1357571976 node_paths=PackedStringArray("head", "_collider", "_viewport")]
 script = ExtResource("10_fhk5c")
 head = NodePath("../../../../..")
-_collider = NodePath("../StaticBody3D")
-_viewport = NodePath("../../../../../LeftPage")
+_collider = NodePath("../LeftColider")
+_viewport = NodePath("../../../../../Node/LeftPageView")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Book/Cover/Left Page/Sprite3D" unique_id=1247631218]
+[node name="LeftColider" type="StaticBody3D" parent="Book/Cover/Left Page/Sprite3D" unique_id=1247631218]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Book/Cover/Left Page/Sprite3D/StaticBody3D" unique_id=1837920853]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Book/Cover/Left Page/Sprite3D/LeftColider" unique_id=1837920853]
 shape = SubResource("BoxShape3D_f70lu")
 
 [node name="Right Page" type="MeshInstance3D" parent="Book/Cover" unique_id=1794931431]
@@ -252,10 +452,77 @@ texture = SubResource("ViewportTexture_caxbp")
 [node name="InputController" type="Node" parent="Book/Cover/Right Page/Sprite3D" unique_id=899854664 node_paths=PackedStringArray("head", "_collider", "_viewport")]
 script = ExtResource("10_fhk5c")
 head = NodePath("../../../../..")
-_collider = NodePath("../StaticBody3D")
-_viewport = NodePath("../../../../../RightPage")
+_collider = NodePath("../RightColider")
+_viewport = NodePath("../../../../../Node/RightPageView")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Book/Cover/Right Page/Sprite3D" unique_id=984072838]
+[node name="RightColider" type="StaticBody3D" parent="Book/Cover/Right Page/Sprite3D" unique_id=984072838]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Book/Cover/Right Page/Sprite3D/StaticBody3D" unique_id=1463441118]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Book/Cover/Right Page/Sprite3D/RightColider" unique_id=1463441118]
 shape = SubResource("BoxShape3D_f70lu")
+
+[node name="Tabs" type="Node3D" parent="Book/Cover" unique_id=1389243993]
+transform = Transform3D(0.9973856, 0, -0.072263405, 0.07218548, 0.046426486, 0.99631006, 0.003354936, -0.9989217, 0.046305113, -0.7698242, 0.11618585, -1.0243798)
+
+[node name="Stats" type="MeshInstance3D" parent="Book/Cover/Tabs" unique_id=1435310031]
+transform = Transform3D(0.99999976, 9.313226e-10, 0, 0, 0.9999998, -1.4901161e-08, 7.450581e-09, 0, 0.9999998, -0.4, 0, 0)
+material_override = ExtResource("11_pmruj")
+mesh = SubResource("QuadMesh_fhk5c")
+
+[node name="Sprite3D" type="Sprite3D" parent="Book/Cover/Tabs/Stats" unique_id=2006133494]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1.4551915e-11, 0.044598345, 0.0027183522)
+texture = SubResource("ViewportTexture_e77rp")
+
+[node name="StatsColilder" type="StaticBody3D" parent="Book/Cover/Tabs/Stats/Sprite3D" unique_id=1933762322]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Book/Cover/Tabs/Stats/Sprite3D/StatsColilder" unique_id=1428395886]
+shape = SubResource("BoxShape3D_e77rp")
+
+[node name="InputController" type="Node" parent="Book/Cover/Tabs/Stats/Sprite3D" unique_id=1189386053 node_paths=PackedStringArray("head", "_collider", "_viewport")]
+script = ExtResource("10_fhk5c")
+head = NodePath("../../../../../..")
+_collider = NodePath("../StatsColilder")
+_viewport = NodePath("../../../../../../Node/Tabs/StatsView")
+
+[node name="Items" type="MeshInstance3D" parent="Book/Cover/Tabs" unique_id=1701272399]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.99999976, -1.4901161e-08, 0, 1.4901161e-08, 0.99999976, 0, 0, 0)
+material_override = ExtResource("11_pmruj")
+mesh = SubResource("QuadMesh_fhk5c")
+
+[node name="Sprite3D" type="Sprite3D" parent="Book/Cover/Tabs/Items" unique_id=488903532]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1.4551915e-11, 0.044598345, 0.0027183522)
+texture = SubResource("ViewportTexture_mmt0n")
+
+[node name="ItemsColider" type="StaticBody3D" parent="Book/Cover/Tabs/Items/Sprite3D" unique_id=377939434]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Book/Cover/Tabs/Items/Sprite3D/ItemsColider" unique_id=764565841]
+shape = SubResource("BoxShape3D_e77rp")
+
+[node name="InputController" type="Node" parent="Book/Cover/Tabs/Items/Sprite3D" unique_id=405911131 node_paths=PackedStringArray("head", "_collider", "_viewport")]
+script = ExtResource("10_fhk5c")
+head = NodePath("../../../../../..")
+_collider = NodePath("../ItemsColider")
+_viewport = NodePath("../../../../../../Node/Tabs/UseView")
+
+[node name="Tools" type="MeshInstance3D" parent="Book/Cover/Tabs" unique_id=1314637530]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.99999976, -1.4901161e-08, 0, 1.4901161e-08, 0.99999976, 0.4, 0, 0)
+material_override = ExtResource("11_pmruj")
+mesh = SubResource("QuadMesh_fhk5c")
+
+[node name="Sprite3D" type="Sprite3D" parent="Book/Cover/Tabs/Tools" unique_id=2089139832]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 1.4551915e-11, 0.044598345, 0.0027183522)
+texture = SubResource("ViewportTexture_q2ccd")
+
+[node name="ToolsColider" type="StaticBody3D" parent="Book/Cover/Tabs/Tools/Sprite3D" unique_id=793821125]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Book/Cover/Tabs/Tools/Sprite3D/ToolsColider" unique_id=1033753252]
+shape = SubResource("BoxShape3D_e77rp")
+
+[node name="InputController" type="Node" parent="Book/Cover/Tabs/Tools/Sprite3D" unique_id=137439681 node_paths=PackedStringArray("head", "_collider", "_viewport")]
+script = ExtResource("10_fhk5c")
+head = NodePath("../../../../../..")
+_collider = NodePath("../ToolsColider")
+_viewport = NodePath("../../../../../../Node/Tabs/ToolsView")
+
+[connection signal="pressed" from="Node/Tabs/StatsView/Label/Button" to="." method="setRight" binds= [0]]
+[connection signal="pressed" from="Node/Tabs/UseView/Label/Button" to="." method="setRight" binds= [1]]
+[connection signal="pressed" from="Node/Tabs/ToolsView/Label/Button" to="." method="setRight" binds= [2]]

@@ -1,11 +1,12 @@
 using Godot;
 
-public partial class EquipmentPage : Control
+public partial class ToolPage : InventoryPage<ItemResource>
 {
-    [Export] private Button _equipButton;  // VBoxContainer/HBoxContainer2/Button
-    [Export] private Button _dropButton;   // VBoxContainer/HBoxContainer2/Button2
+    [Export] private Button _equipButton;
+    [Export] private Button _dropButton;
+	[Export] private RichTextLabel description;
 
-    private ItemInstance _item;
+    private new ItemInstance _item;
 
     public override void _Ready()
     {
@@ -13,10 +14,12 @@ public partial class EquipmentPage : Control
         _dropButton.Pressed  += OnDropPressed;
     }
 
-    public void SetItem(ItemInstance item)
+    public override void SetItem(ItemInstance item)
     {
         _item = item;
-        // update any labels/icons here when ready
+		description.Text = item.Resource.Description;
+		OnItemSet(_item);
+
     }
 
     private void OnEquipPressed()

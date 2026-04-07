@@ -1,19 +1,23 @@
 using Godot;
 
-public partial class StatPage : Control
+public partial class StatPage : InventoryPage<ItemResource> 
 {
-    [Export] private Button _dropButton; // VBoxContainer/HBoxContainer2/Button
+    [Export] private Button _dropButton;
+	[Export] private RichTextLabel description;
 
-    private ItemInstance _item;
+    private new ItemInstance _item;
 
     public override void _Ready()
     {
         _dropButton.Pressed += OnDropPressed;
     }
 
-    public void SetItem(ItemInstance item)
+    public override void SetItem(ItemInstance item)
     {
         _item = item;
+		description.Text = item.Resource.Description;
+		OnItemSet(_item);
+
     }
 
     private void OnDropPressed()
