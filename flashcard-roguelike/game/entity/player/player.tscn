@@ -46,7 +46,7 @@
 [ext_resource type="AudioStream" uid="uid://c3el472ijdwlc" path="res://assets/audio/player_sfx/block_sfx/block_5.mp3" id="36_icsuc"]
 [ext_resource type="AudioStream" uid="uid://chl7k76fobosi" path="res://assets/audio/player_sfx/death_sfx/death_3.mp3" id="39_yna46"]
 [ext_resource type="AudioStream" uid="uid://b4ya4iobl34pn" path="res://assets/audio/player_sfx/death_sfx/death_4.mp3" id="40_6qpfs"]
-[ext_resource type="Resource" path="res://game/entity/player/player_inventory.tres" id="42_6rqdb"]
+[ext_resource type="Script" uid="uid://b6d0xrnp1u3wd" path="res://game/entity/player/Inventory.cs" id="45_6rqdb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43spn"]
 resource_name = "M_Main"
@@ -17581,12 +17581,20 @@ _data = {
 &"Walk_Formal": SubResource("Animation_xxhq3")
 }
 
+[sub_resource type="Environment" id="Environment_ria7k"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.71
+
+[sub_resource type="World3D" id="World3D_6rqdb"]
+environment = SubResource("Environment_ria7k")
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0b5cm"]
 
-[node name="Player" type="CharacterBody3D" unique_id=249236073 node_paths=PackedStringArray("PauseMenu", "InventoryUI", "CameraMount", "inputGatherer", "playerModel", "attackComponent", "healthComponent", "inventoryComponent", "staminaComponent")]
+[node name="Player" type="CharacterBody3D" unique_id=249236073 node_paths=PackedStringArray("PauseMenu", "InventoryCanvas", "CameraMount", "inputGatherer", "playerModel", "attackComponent", "healthComponent", "inventoryComponent", "staminaComponent")]
 script = ExtResource("1_script")
 PauseMenu = NodePath("CameraPivot/Camera3D/PauseMenu")
-InventoryUI = NodePath("CameraPivot/Camera3D/InventoryUI")
+InventoryCanvas = NodePath("CameraPivot/Camera3D/Inventory")
 CameraMount = NodePath("CameraPivot")
 inputGatherer = NodePath("InputGatherer")
 playerModel = NodePath("Model")
@@ -17653,7 +17661,6 @@ StaminaDrain = 100.0
 script = ExtResource("9_ka5uw")
 DownCastRay = NodePath("../../../DownCast")
 HipsAttachment = NodePath("../../../PlayerVisuals/Rig/GeneralSkeleton/Hips")
-DoubleJumpTiming = 0.3
 StateAnimation = "Jump"
 StateName = "midair"
 animator = NodePath("../../../PlayerVisuals/AnimationPlayer")
@@ -18072,7 +18079,6 @@ BlockSounds = Array[AudioStream]([ExtResource("18_je5mu"), ExtResource("19_k8egu
 DeathSound = Array[AudioStream]([ExtResource("15_kmnjn"), ExtResource("16_4j27x"), ExtResource("39_yna46"), ExtResource("40_6qpfs")])
 
 [node name="InventoryComponent" parent="." unique_id=288412274 instance=ExtResource("5_inventory")]
-InventoryResource = ExtResource("42_6rqdb")
 
 [node name="StaminaComponent" parent="." unique_id=671763882 node_paths=PackedStringArray("player") instance=ExtResource("15_vqr5b")]
 player = NodePath("..")
@@ -18088,8 +18094,40 @@ visible = false
 
 [node name="HUD" parent="CameraPivot/Camera3D" unique_id=816940577 instance=ExtResource("4_hud")]
 
-[node name="InventoryUI" parent="CameraPivot/Camera3D" unique_id=1987012151 node_paths=PackedStringArray("_inventoryComponent") instance=ExtResource("6_inventory_ui")]
-_inventoryComponent = NodePath("../../../InventoryComponent")
+[node name="Inventory" type="CanvasLayer" parent="CameraPivot/Camera3D" unique_id=34492209]
+follow_viewport_enabled = true
+script = ExtResource("45_6rqdb")
+
+[node name="Control" type="Control" parent="CameraPivot/Camera3D/Inventory" unique_id=1114331362]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="CameraPivot/Camera3D/Inventory/Control" unique_id=1550153634]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer2" unique_id=165957460]
+own_world_3d = true
+world_3d = SubResource("World3D_6rqdb")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer2/SubViewport" unique_id=117706074]
+
+[node name="InventoryUI" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer2/SubViewport/Camera3D" unique_id=1987012151 instance=ExtResource("6_inventory_ui")]
+transform = Transform3D(1, 0, 0, 0, 0.22309704, -0.97479624, 0, 0.97479624, 0.22309704, 0, 0.20301676, -2.2575336)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")

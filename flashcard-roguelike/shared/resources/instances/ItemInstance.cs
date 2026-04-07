@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class ItemInstance : GodotObject
 {
     public event Action Changed;

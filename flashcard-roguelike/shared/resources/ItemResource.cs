@@ -10,7 +10,7 @@ public partial class ItemResource : Resource
     [Export(PropertyHint.MultilineText)] public string Description = "";
 
     // ===== Behavior =====
-    public enum ItemBehavior { Collectable, StatUpgrade }
+    public enum ItemBehavior { Stat, Consumeable, Equipable }
     [Export] public ItemBehavior Behavior;
 
     // ===== Rarity (1 = Common, 5 = Legendary) =====
