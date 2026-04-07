@@ -33,8 +33,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 2.2430568)
 
 [node name="InventoryUI" parent="Camera3D" unique_id=2131535673 instance=ExtResource("1_3s6qg")]
-transform = Transform3D(1, 0, 0, 0, 0.22309704, -0.97479624, 0, 0.97479624, 0.22309704, 0, 0, -2.199852)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 0.22309704, -0.97479624, 0, 0.97479624, 0.22309704, 0, 0, -1.6700726)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1497058057]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8911967, 0.37002134, -4.6467905)

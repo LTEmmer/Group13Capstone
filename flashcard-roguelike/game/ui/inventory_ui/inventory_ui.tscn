@@ -5,12 +5,25 @@
 [ext_resource type="Texture2D" uid="uid://cmyjgorgq77fl" path="res://assets/sprites/heart-plus.svg" id="2_mb3cs"]
 [ext_resource type="Material" uid="uid://b3hfqrm7r7dtl" path="res://game/ui/inventory_ui/PaperMaterial.tres" id="3_be8hc"]
 [ext_resource type="Texture2D" uid="uid://bktwg2fwo3flq" path="res://assets/sprites/heart-plus-yellow.svg" id="3_caxbp"]
-[ext_resource type="PackedScene" uid="uid://qy5qpb6mote0" path="res://game/ui/inventory_ui/stat_page.tscn" id="3_g3pns"]
+[ext_resource type="PackedScene" uid="uid://qy5qpb6mote0" path="res://game/ui/inventory_ui/pages/stat_page.tscn" id="3_g3pns"]
 [ext_resource type="Material" uid="uid://q5c4854goi7h" path="res://game/ui/inventory_ui/CoverMaterial.tres" id="4_f70lu"]
-[ext_resource type="PackedScene" uid="uid://dj5diogm5gipf" path="res://game/ui/inventory_ui/consumeable_page.tscn" id="4_fhk5c"]
-[ext_resource type="PackedScene" uid="uid://mffc2ay0sxt8" path="res://game/ui/inventory_ui/equipment_page.tscn" id="5_pmruj"]
+[ext_resource type="PackedScene" uid="uid://dj5diogm5gipf" path="res://game/ui/inventory_ui/pages/consumeable_page.tscn" id="4_fhk5c"]
+[ext_resource type="PackedScene" uid="uid://mffc2ay0sxt8" path="res://game/ui/inventory_ui/pages/equipment_page.tscn" id="5_pmruj"]
+[ext_resource type="Script" uid="uid://m3drfwmlmtxs" path="res://game/ui/inventory_ui/InputController.cs" id="10_fhk5c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f70lu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhk5c"]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.14500001, 0.5, 0.21008337, 0.4745098)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wx4nh"]
 resource_name = "Material"
@@ -127,29 +140,14 @@ shadow_mesh = SubResource("ArrayMesh_6qh5d")
 [sub_resource type="ViewportTexture" id="ViewportTexture_caxbp"]
 viewport_path = NodePath("RightPage")
 
-[node name="InventoryUI" type="Node3D" unique_id=2131535673 node_paths=PackedStringArray("_itemList", "_leftPageViewport", "_leftPageCollider", "_rightPageViewport", "_rightPageCollider")]
+[node name="InventoryUI" type="Node3D" unique_id=2131535673 node_paths=PackedStringArray("_itemList", "_equipmentPage", "_statPage", "_consumablePage")]
 transform = Transform3D(1, 0, 0, 0, 0.22309704, -0.97479624, 0, 0.97479624, 0.22309704, 0, 0, 0)
 script = ExtResource("1")
 _itemList = NodePath("LeftPage/Control/ItemList")
-_leftPageViewport = NodePath("LeftPage")
-_leftPageCollider = NodePath("Book/Cover/Left Page/Sprite3D/StaticBody3D")
-_rightPageViewport = NodePath("RightPage")
-_rightPageCollider = NodePath("Book/Cover/Right Page/Sprite3D/StaticBody3D")
 testImg = ExtResource("2_mb3cs")
-
-[node name="RightPage" type="SubViewport" parent="." unique_id=732024750]
-transparent_bg = true
-size = Vector2i(496, 717)
-
-[node name="StatPage" parent="RightPage" unique_id=758058895 instance=ExtResource("3_g3pns")]
-offset_right = 0.0
-offset_bottom = 0.0
-
-[node name="ConsumeablePage" parent="RightPage" unique_id=1164067624 instance=ExtResource("4_fhk5c")]
-visible = false
-
-[node name="EquipmentPage" parent="RightPage" unique_id=1242328435 instance=ExtResource("5_pmruj")]
-visible = false
+_equipmentPage = NodePath("RightPage/EquipmentPage")
+_statPage = NodePath("RightPage/StatPage")
+_consumablePage = NodePath("RightPage/ConsumeablePage")
 
 [node name="LeftPage" type="SubViewport" parent="." unique_id=1274983126]
 transparent_bg = true
@@ -166,6 +164,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ItemList" type="ItemList" parent="LeftPage/Control" unique_id=149639012]
+z_index = 10
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,6 +173,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/guide_color = Color(0.7, 0.7, 0.7, 0)
 theme_override_styles/panel = SubResource("StyleBoxEmpty_f70lu")
+theme_override_styles/selected = SubResource("StyleBoxFlat_fhk5c")
 item_count = 15
 max_columns = 10
 same_column_width = true
@@ -194,6 +194,24 @@ item_12/icon = ExtResource("2_mb3cs")
 item_13/icon = ExtResource("2_mb3cs")
 item_14/icon = ExtResource("2_mb3cs")
 
+[node name="RightPage" type="SubViewport" parent="." unique_id=732024750]
+transparent_bg = true
+size = Vector2i(496, 717)
+
+[node name="StatPage" parent="RightPage" unique_id=758058895 instance=ExtResource("3_g3pns")]
+visible = false
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="ConsumeablePage" parent="RightPage" unique_id=1164067624 instance=ExtResource("4_fhk5c")]
+visible = false
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="EquipmentPage" parent="RightPage" unique_id=1242328435 instance=ExtResource("5_pmruj")]
+offset_right = 0.0
+offset_bottom = 0.0
+
 [node name="Book" type="Node3D" parent="." unique_id=1674903542]
 transform = Transform3D(1, 0, 0, 0, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
 
@@ -211,6 +229,12 @@ mesh = SubResource("ArrayMesh_jedyx")
 transform = Transform3D(0.24931996, 4.350511e-10, -0.018426932, 0.018426932, -1.1788776e-08, 0.24931996, -4.350511e-10, -0.24999999, -1.1788776e-08, -0.7308364, 0.15580198, 3.4721214e-08)
 texture = SubResource("ViewportTexture_ngtlq")
 
+[node name="InputController" type="Node" parent="Book/Cover/Left Page/Sprite3D" unique_id=1357571976 node_paths=PackedStringArray("head", "_collider", "_viewport")]
+script = ExtResource("10_fhk5c")
+head = NodePath("../../../../..")
+_collider = NodePath("../StaticBody3D")
+_viewport = NodePath("../../../../../LeftPage")
+
 [node name="StaticBody3D" type="StaticBody3D" parent="Book/Cover/Left Page/Sprite3D" unique_id=1247631218]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Book/Cover/Left Page/Sprite3D/StaticBody3D" unique_id=1837920853]
@@ -224,6 +248,12 @@ mesh = SubResource("ArrayMesh_g3pns")
 [node name="Sprite3D" type="Sprite3D" parent="Book/Cover/Right Page" unique_id=271879658]
 transform = Transform3D(-0.2493286, 2.1826345e-08, 0.018309556, -0.018309556, 8.0033613e-10, -0.2493286, -2.1826345e-08, -0.24999999, 8.0033613e-10, -0.7308364, 0.15580198, 3.4721214e-08)
 texture = SubResource("ViewportTexture_caxbp")
+
+[node name="InputController" type="Node" parent="Book/Cover/Right Page/Sprite3D" unique_id=899854664 node_paths=PackedStringArray("head", "_collider", "_viewport")]
+script = ExtResource("10_fhk5c")
+head = NodePath("../../../../..")
+_collider = NodePath("../StaticBody3D")
+_viewport = NodePath("../../../../../RightPage")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Book/Cover/Right Page/Sprite3D" unique_id=984072838]
 
