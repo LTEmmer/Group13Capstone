@@ -17608,13 +17608,7 @@ _data = {
 &"Walk_Formal": SubResource("Animation_xxhq3")
 }
 
-[sub_resource type="Environment" id="Environment_ria7k"]
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.71
-
 [sub_resource type="World3D" id="World3D_6rqdb"]
-environment = SubResource("Environment_ria7k")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0b5cm"]
 
@@ -18134,7 +18128,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="CameraPivot/Camera3D/Inventory/Control" unique_id=1550153634]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CameraPivot/Camera3D/Inventory/Control" unique_id=1550153634]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -18143,7 +18137,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer2" unique_id=165957460]
+[node name="SubViewport" type="SubViewport" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer" unique_id=165957460]
 own_world_3d = true
 world_3d = SubResource("World3D_6rqdb")
 transparent_bg = true
@@ -18152,10 +18146,15 @@ size = Vector2i(1152, 648)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer2/SubViewport" unique_id=117706074]
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer/SubViewport" unique_id=117706074]
 
-[node name="InventoryUI" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer2/SubViewport/Camera3D" unique_id=1987012151 instance=ExtResource("6_inventory_ui")]
-transform = Transform3D(1, 0, 0, 0, 0.22309704, -0.97479624, 0, 0.97479624, 0.22309704, 0, 0.20301676, -2.2575336)
+[node name="InventoryUI" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer/SubViewport/Camera3D" unique_id=1987012151 node_paths=PackedStringArray("_inventory") instance=ExtResource("6_inventory_ui")]
+transform = Transform3D(1, 0, 0, 0, 0.08336482, -0.99651915, 0, 0.99651915, 0.08336482, 0, 0.11130309, -2.0568848)
+_inventory = NodePath("../../../../../../../../InventoryComponent")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer/SubViewport" unique_id=2145213328]
+transform = Transform3D(0.87219733, -3.8990258e-08, 0.48915413, -0.19785658, 0.9145436, 0.3527928, -0.44735277, -0.40448728, 0.79766256, 0.912992, 1.6815484, 1.9366792)
+sky_mode = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")

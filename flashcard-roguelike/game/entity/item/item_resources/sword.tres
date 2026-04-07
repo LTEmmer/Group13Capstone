@@ -28,6 +28,7 @@ Name = "Sword"
 Icon = ExtResource("4_p16xb")
 Mesh = SubResource("BoxMesh_siyda")
 Description = "A sword to attack 1 enemy for 60"
+Behavior = 2
 Rarity = 5
 MaxUses = 1
 Effects = Array[ExtResource("1_o4csq")]([SubResource("Resource_4bnm5"), SubResource("Resource_fqsy6")])

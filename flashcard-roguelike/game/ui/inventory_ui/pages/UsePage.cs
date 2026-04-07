@@ -1,11 +1,12 @@
 using Godot;
 
-public partial class ConsumablePage : Control
+public partial class UsePage : InventoryPage<ItemResource>
 {
-    [Export] private Button _useButton;  // VBoxContainer/HBoxContainer2/Button
-    [Export] private Button _dropButton; // VBoxContainer/HBoxContainer2/Button2
+    [Export] private Button _useButton;
+    [Export] private Button _dropButton;
+	[Export] private RichTextLabel description;
 
-    private ItemInstance _item;
+    private new ItemInstance _item;
 
     public override void _Ready()
     {
@@ -13,9 +14,12 @@ public partial class ConsumablePage : Control
         _dropButton.Pressed += OnDropPressed;
     }
 
-    public void SetItem(ItemInstance item)
+    public override void SetItem(ItemInstance item)
     {
         _item = item;
+		description.Text = item.Resource.Description;
+		OnItemSet(_item);
+
     }
 
     private void OnUsePressed()

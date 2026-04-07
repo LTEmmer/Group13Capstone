@@ -1,33 +1,37 @@
 using Godot;
-using System.Collections.Generic;
+using Godot.Collections;
 
 public partial class InventoryComponent : Node
 {
 	[Signal] public delegate void ItemAddedEventHandler(ItemInstance item);
 	[Signal] public delegate void ItemRemovedEventHandler(ItemInstance item);
 
-	private readonly List<ItemInstance> _items = new();
-	public IReadOnlyList<ItemInstance> Items => _items;
+	[Export] public Array<ItemInstance> inv = new Array<ItemInstance>();
+
+	public void AddItem(ItemInstance item)
+	{
+		AddItem(item.Resource, item.Count);
+	}
 
 	public void AddItem(ItemResource resource, int count = 1)
 	{
-		foreach (var item in _items)
+		foreach (var item in inv)
 		{
 			if (item.Resource.Name == resource.Name)
 			{
-				item.Count += count; // triggers ItemInstance.Changed
+				item.Count += count;
 				return;
 			}
 		}
 
 		var newItem = new ItemInstance(resource, count);
-		_items.Add(newItem);
+		inv.Add(newItem);
 		EmitSignal(SignalName.ItemAdded, newItem);
 	}
 
 	public void RemoveItem(ItemInstance item)
 	{
-		if (!_items.Remove(item)) return;
+		if (!inv.Remove(item)) return;
 		EmitSignal(SignalName.ItemRemoved, item);
 	}
 }
