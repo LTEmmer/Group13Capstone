@@ -82,6 +82,11 @@ script = ExtResource("Script_room")
 Npc = NodePath("NPC")
 FlashcardTFScene = ExtResource("Scene_flashcard")
 
+[node name="Light" type="OmniLight3D" parent="." unique_id=1739106375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.01756, 0)
+light_energy = 6.0
+omni_range = 99.869
+
 [node name="Bounds" type="MeshInstance3D" parent="." unique_id=1518302578]
 mesh = SubResource("ArrayMesh_c02ok")
 
