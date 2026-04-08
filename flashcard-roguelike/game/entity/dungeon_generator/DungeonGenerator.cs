@@ -17,7 +17,9 @@ public partial class DungeonGenerator : Node3D
 	[Export] public RoomConfig[] EventConfigs;
 	[Export] public RoomConfig[] TreasureConfigs;
 	[Export] public PackedScene ConnectionScene;
+	[Export] public PackedScene PlayerScene;
 
+	private Player _player;
 	private readonly RandomNumberGenerator _rng = new RandomNumberGenerator();
 	
 	public override void _Ready()
@@ -37,6 +39,7 @@ public partial class DungeonGenerator : Node3D
 		graph.PrintGraph();
 		Dictionary<int, Vector3> positions = GenerateLayout(graph); // Generate world positions for rooms
 		SpawnRooms(graph, positions); // Instantiate room scenes and connections based on the graph and layout
+		SpawnPlayer(); // Place the player at the entrance room's EnterPoint
 
 		if (CurrentRoomManager.Instance != null)
 			CurrentRoomManager.Instance.CurrentRoomId = 0;
@@ -289,6 +292,33 @@ public partial class DungeonGenerator : Node3D
 		return instance;
 	}
 	
+	private void SpawnPlayer()
+	{
+		if (PlayerScene == null)
+		{
+			GD.PushError("DungeonGenerator: PlayerScene is not assigned.");
+			return;
+		}
+
+		Node3D entranceRoom = GetRoomNode(0);
+		if (entranceRoom == null)
+		{
+			GD.PushError("DungeonGenerator: Could not find entrance room (Room_0).");
+			return;
+		}
+
+		Marker3D enterPoint = entranceRoom.GetNodeOrNull<Marker3D>("EnterPoint");
+		if (enterPoint == null)
+		{
+			GD.PushError("DungeonGenerator: Entrance room has no 'EnterPoint' Marker3D.");
+			return;
+		}
+
+		_player = PlayerScene.Instantiate<Player>();
+		_player.Transform = enterPoint.Transform;
+		entranceRoom.AddChild(_player);
+	}
+
 	private Node3D GetOrCreateRoot(string name)
 	{
 		// Get or create the root node with the given name

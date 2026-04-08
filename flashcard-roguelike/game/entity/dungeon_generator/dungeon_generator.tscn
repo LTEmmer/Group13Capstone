@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://c2kbiufvcusr0" path="res://game/entity/dungeon_generator/room_configs/event_rooms/parkour_event_room.tres" id="6_qj5ly"]
 [ext_resource type="PackedScene" uid="uid://273l427ermxg" path="res://game/entity/connections/room_connection.tscn" id="7_qh65i"]
 [ext_resource type="Resource" uid="uid://vinykelr35nl" path="res://game/entity/dungeon_generator/room_configs/examples/treasure_config.tres" id="7_wt1qt"]
+[ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="9_a7trn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qj5ly"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,7 +18,6 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_qj5ly")
 
 [sub_resource type="Environment" id="Environment_wm4nc"]
-background_mode = 2
 sky = SubResource("Sky_a7trn")
 tonemap_mode = 2
 glow_enabled = true
@@ -30,10 +30,7 @@ CombatConfigs = Array[Object]([ExtResource("4_wm4nc")])
 EventConfigs = Array[Object]([ExtResource("6_6rcja"), ExtResource("6_qj5ly")])
 TreasureConfigs = Array[Object]([ExtResource("7_wt1qt")])
 ConnectionScene = ExtResource("7_qh65i")
+PlayerScene = ExtResource("9_a7trn")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=476425350]
 environment = SubResource("Environment_wm4nc")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=257349963]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
