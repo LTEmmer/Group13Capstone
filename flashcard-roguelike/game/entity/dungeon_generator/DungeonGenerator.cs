@@ -23,6 +23,7 @@ public partial class DungeonGenerator : Node3D
 	public override void _Ready()
 	{
 		AudioManager.Instance?.PlayDungeonMusic();
+		GameDifficultyManager.Instance?.ResetDifficulty();
 		// Initialize random number generator with seed
 		if (UseRandomSeed)
 		{
