@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bq0trffva3vxw"]
+
+[ext_resource type="Texture2D" uid="uid://ct04x4e5jxroi" path="res://assets/models/entrance_room/tunnel/entrance_tunnel_Material_BaseColor.png" id="1_3b6aw"]
+[ext_resource type="Texture2D" uid="uid://wwv7njinhi8t" path="res://assets/models/entrance_room/tunnel/entrance_tunnel_Material_Height.png" id="2_fm01k"]
+[ext_resource type="Texture2D" uid="uid://8hot7lhc80ji" path="res://assets/models/entrance_room/tunnel/entrance_tunnel_Material_Metallic.png" id="3_qor6y"]
+[ext_resource type="Texture2D" uid="uid://cdqy0xcspt4o7" path="res://assets/models/entrance_room/tunnel/entrance_tunnel_Material_Normal.png" id="4_fx6uj"]
+[ext_resource type="Texture2D" uid="uid://ctubpfkgkpobo" path="res://assets/models/entrance_room/tunnel/entrance_tunnel_Material_Roughness.png" id="5_nc540"]
+
+[resource]
+albedo_texture = ExtResource("1_3b6aw")
+metallic = 1.0
+metallic_texture = ExtResource("3_qor6y")
+roughness_texture = ExtResource("5_nc540")
+normal_enabled = true
+normal_texture = ExtResource("4_fx6uj")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("2_fm01k")
