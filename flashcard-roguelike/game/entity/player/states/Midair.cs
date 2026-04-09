@@ -42,21 +42,21 @@ public partial class Midair : BaseState
 
 	public override void Update(InputPackage input, double delta)
 	{
-		//RotationalVelocityCalculation(input, delta);
+		RotationalVelocityCalculation(input, delta);
 		Vector3 velocity = player.Velocity;
 		velocity.Y -= GRAVITY_GOING_DOWN * (float)delta;
 		player.Velocity = velocity;
 		player.MoveAndSlide();
 	}
 
-	//public void RotationalVelocityCalculation(InputPackage input, double delta) //Gives more aircontrol but going to refine later
-	//{
-		//Vector3 direction = (player.Transform.Basis * new Vector3(input.InputDirection.X, 0, input.InputDirection.Y)).Normalized();
-		//Vector3 InputDeltaVector = direction * DeltaVectorLength;
-		//JumpDirection = (JumpDirection + InputDeltaVector).LimitLength(player.Velocity.Length());
-		//Vector3 NewVelocity = (player.Velocity + InputDeltaVector).LimitLength(player.Velocity.Length());
-		//player.Velocity = NewVelocity;
-	//}
+	public void RotationalVelocityCalculation(InputPackage input, double delta) //Gives more aircontrol but going to refine later
+	{
+		Vector3 direction = (player.Transform.Basis * new Vector3(input.InputDirection.X, 0, input.InputDirection.Y)).Normalized();
+		Vector3 InputDeltaVector = direction * DeltaVectorLength;
+		JumpDirection = (JumpDirection + InputDeltaVector).LimitLength(player.Velocity.Length());
+		Vector3 NewVelocity = (player.Velocity + InputDeltaVector).LimitLength(player.Velocity.Length());
+		player.Velocity = NewVelocity;
+	}
 
 	public override void OnEnterState()
 	{

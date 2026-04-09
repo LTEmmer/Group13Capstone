@@ -1,19 +1,8 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://c025ebyq1swtw"]
 
 [ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="1_3x2pi"]
-[ext_resource type="Script" uid="uid://30hurkkwi1jh" path="res://game/entity/item/effects/mod_battle/Stun.cs" id="2_3x2pi"]
-[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="3_d05sp"]
 [ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="4_2pu0s"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="5_a5088"]
-
-[sub_resource type="Resource" id="Resource_3x2pi"]
-script = ExtResource("2_3x2pi")
-metadata/_custom_type_script = "uid://30hurkkwi1jh"
-
-[sub_resource type="Resource" id="Resource_d05sp"]
-script = ExtResource("3_d05sp")
-_hp = -1
-metadata/_custom_type_script = "uid://cslf8mk74f83c"
 
 [resource]
 script = ExtResource("5_a5088")
@@ -22,6 +11,6 @@ Icon = ExtResource("4_2pu0s")
 Description = "Stun the enemy for 1 turn."
 Behavior = 1
 Rarity = 2
-MaxUses = 1
-UseEffects = Array[ExtResource("1_3x2pi")]([SubResource("Resource_3x2pi"), SubResource("Resource_d05sp")])
+UseEffects = Array[ExtResource("1_3x2pi")]([])
+PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"

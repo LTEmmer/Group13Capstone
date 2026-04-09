@@ -15,6 +15,10 @@ run/main_scene="uid://h18wimcwtwvr"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://assets/sprites/icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://g1o07fqb5tpx"
+
 [autoload]
 
 Talo="*uid://whkpcuqqg2ly"
