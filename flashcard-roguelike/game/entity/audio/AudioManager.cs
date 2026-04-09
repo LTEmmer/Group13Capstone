@@ -4,196 +4,244 @@ using GodotPlugins.Game;
 
 public partial class AudioManager : Node
 {
-	public static AudioManager Instance { get; private set; }
+    public static AudioManager Instance { get; private set; }
 
-	// UI sounds
-	[Export] public AudioStream HoverSound;
-	[Export] public AudioStream ClickSound;
-	[Export] public AudioStream[] ItemPickupSounds;
+    private const string MusicBusName = "Music";
+    private const string SFXBusName   = "SFX";
 
-	// Flashcard feedback
-	[Export] public AudioStream CorrectSound;
-	[Export] public AudioStream WrongSound;
+    // UI sounds
+    [Export] public AudioStream HoverSound;
+    [Export] public AudioStream ClickSound;
+    [Export] public AudioStream[] ItemPickupSounds;
 
-	// Game condition sounds
-	[Export] public AudioStream GameOverSound;
-	[Export] public AudioStream GameVictorySound;
+    // Flashcard feedback
+    [Export] public AudioStream CorrectSound;
+    [Export] public AudioStream WrongSound;
 
-	// Music tracks
-	[Export] public AudioStream MainMenuMusic;
-	[Export] public AudioStream[] AmbientMusic;
-	[Export] public AudioStream BattleMusic;
+    // Game condition sounds
+    [Export] public AudioStream GameOverSound;
+    [Export] public AudioStream GameVictorySound;
 
-	// Battle stinger — plays on top of music when entering battle
-	[Export] public AudioStream BattleStinger;
+    // Music tracks
+    [Export] public AudioStream MainMenuMusic;
+    [Export] public AudioStream[] AmbientMusic;
+    [Export] public AudioStream BattleMusic;
 
-	[Export] public float SoundReduction = -12.5f; // Currently does nothing
+    // Battle stinger — plays on top of music when entering battle
+    [Export] public AudioStream BattleStinger;
 
-	private AudioStreamPlayer _buttonSoundsPlayer;
-	private AudioStreamPlayer _correctSoundsPlayer;
-	private AudioStreamPlayer _gameConditionsPlayer;
-	private AudioStreamPlayer _itemPickupSoundsPlayer;
-	private AudioStreamPlayer _stingerPlayer;
+    [Export] public float SoundReduction = -12.5f; // Currently does nothing
 
-	// Two music players for crossfading
-	private AudioStreamPlayer _musicPlayerA;
-	private AudioStreamPlayer _musicPlayerB;
-	private bool _usingPlayerA = true;
+    private AudioStreamPlayer _buttonSoundsPlayer;
+    private AudioStreamPlayer _correctSoundsPlayer;
+    private AudioStreamPlayer _gameConditionsPlayer;
+    private AudioStreamPlayer _itemPickupSoundsPlayer;
+    private AudioStreamPlayer _stingerPlayer;
+
+    // Two music players for crossfading
+    private AudioStreamPlayer _musicPlayerA;
+    private AudioStreamPlayer _musicPlayerB;
+    private bool _usingPlayerA = true;
 
 
 
-	public override void _Ready()
-	{
-		Instance = this;
-		ProcessMode = ProcessModeEnum.Always;
+    public override void _Ready()
+    {
+        Instance = this;
+        ProcessMode = ProcessModeEnum.Always;
 
-		_buttonSoundsPlayer = GetNode<AudioStreamPlayer>("ButtonSounds");
-		_correctSoundsPlayer = GetNode<AudioStreamPlayer>("CorrectSounds");
-		_gameConditionsPlayer = GetNode<AudioStreamPlayer>("GameConditions");
-		_itemPickupSoundsPlayer = GetNode<AudioStreamPlayer>("ItemPickupSounds");
-		_stingerPlayer = GetNode<AudioStreamPlayer>("Stinger");
-		_musicPlayerA = GetNode<AudioStreamPlayer>("MusicPlayerA");
-		_musicPlayerB = GetNode<AudioStreamPlayer>("MusicPlayerB");
-	}
+        _buttonSoundsPlayer = GetNode<AudioStreamPlayer>("ButtonSounds");
+        _correctSoundsPlayer = GetNode<AudioStreamPlayer>("CorrectSounds");
+        _gameConditionsPlayer = GetNode<AudioStreamPlayer>("GameConditions");
+        _itemPickupSoundsPlayer = GetNode<AudioStreamPlayer>("ItemPickupSounds");
+        _stingerPlayer = GetNode<AudioStreamPlayer>("Stinger");
+        _musicPlayerA = GetNode<AudioStreamPlayer>("MusicPlayerA");
+        _musicPlayerB = GetNode<AudioStreamPlayer>("MusicPlayerB");
 
-	// --- Music ---
-	/// Crossfades from the currently playing music track to a new one.
-	public void TransitionToMusic(AudioStream newTrack, float fadeDuration = 1.0f)
-	{
-		if (newTrack == null) return;
+        _musicPlayerA.Bus = MusicBusName;
+        _musicPlayerB.Bus = MusicBusName;
+        _stingerPlayer.Bus = MusicBusName;
+        _gameConditionsPlayer.Bus = MusicBusName;
+        _buttonSoundsPlayer.Bus = SFXBusName;
+        _correctSoundsPlayer.Bus = SFXBusName;
+        _itemPickupSoundsPlayer.Bus = SFXBusName;
 
-		var fadeOut = _usingPlayerA ? _musicPlayerA : _musicPlayerB;
-		var fadeIn  = _usingPlayerA ? _musicPlayerB : _musicPlayerA;
+        GetTree().NodeAdded += OnNodeAddedToTree;
+    }
 
-		fadeIn.Stream = newTrack;
-		fadeIn.VolumeDb = -80f;
-		fadeIn.Play();
+    // Automatically routes any AudioStreamPlayer added to the scene tree to the SFX bus
+    // Anything new that isn't explicitly set to the Music bus will be assumed to be a sound effect
+    private void OnNodeAddedToTree(Node node)
+    {
+        if (node is AudioStreamPlayer p && p.Bus == "Master")
+        {
+            p.Bus = SFXBusName;
+        }
+        else if (node is AudioStreamPlayer3D p3d && p3d.Bus == "Master")
+        {
+            p3d.Bus = SFXBusName;
+        }
+    }
 
-		var tween = CreateTween();
-		tween.SetParallel(true);
-		tween.TweenProperty(fadeOut, "volume_db", -80f, fadeDuration);
-		tween.TweenProperty(fadeIn,  "volume_db", 0, fadeDuration);
-		tween.Chain().TweenCallback(Callable.From(() =>
-		{
-			fadeOut.Stop();
-		}));
+    // --- Volume control ---
 
-		_usingPlayerA = !_usingPlayerA;
-	}
+    public void SetBusVolume(string busName, float linear)
+    {
+        int idx = AudioServer.GetBusIndex(busName);
+        if (idx < 0) // If the bus doesn't exist, just ignore it.
+        {
+            return;
+        }
 
-	public void PlayMainMenuMusic(float fadeDuration = 1.0f)
-	{
-		TransitionToMusic(MainMenuMusic, fadeDuration);
-	}
+        // Clamp the value to ensure valid input for LinearToDb, and set the bus volume.
+        AudioServer.SetBusVolumeDb(idx, Mathf.LinearToDb(Mathf.Clamp(linear, 0, 1)));
+    }
 
-	public void PlayDungeonMusic(float fadeDuration = 1.0f)
-	{
-		if (AmbientMusic == null || AmbientMusic.Length == 0) return;
-		TransitionToMusic(AmbientMusic[GD.Randi() % (uint)AmbientMusic.Length], fadeDuration);
-	}
+    public float GetBusVolume(string busName)
+    {
+        int idx = AudioServer.GetBusIndex(busName);
+        return idx < 0 ? 1f : Mathf.DbToLinear(AudioServer.GetBusVolumeDb(idx));
+    }
 
-	public void PlayBattleMusic(float fadeDuration = 0.5f)
-	{
-		TransitionToMusic(BattleMusic, fadeDuration);
-	}
+    // --- Music ---
+    
+    /// Crossfades from the currently playing music track to a new one.
+    public void TransitionToMusic(AudioStream newTrack, float fadeDuration = 1.0f)
+    {
+        if (newTrack == null) return;
 
-	/// Fades the current music out to silence without starting a new track.
-	public void FadeOutMusic(float fadeDuration = 1.5f)
-	{
-		var active = _usingPlayerA ? _musicPlayerA : _musicPlayerB;
-		var tween = CreateTween();
-		tween.TweenProperty(active, "volume_db", -80f, fadeDuration);
-		tween.TweenCallback(Callable.From(active.Stop));
-	}
+        var fadeOut = _usingPlayerA ? _musicPlayerA : _musicPlayerB;
+        var fadeIn  = _usingPlayerA ? _musicPlayerB : _musicPlayerA;
 
-	/// Plays the one-shot stinger sound on top of whatever music is currently playing.
-	/// Call this when entering battle, alongside PlayBattleMusic.
-	public void PlayBattleStinger()
-	{
-		if (BattleStinger == null) return;
-		_stingerPlayer.Stream = BattleStinger;
-		_stingerPlayer.Play();
-	}
+        fadeIn.Stream = newTrack;
+        fadeIn.VolumeDb = -80f;
+        fadeIn.Play();
 
-	// --- UI sounds ---
+        var tween = CreateTween();
+        tween.SetParallel(true);
+        tween.TweenProperty(fadeOut, "volume_db", -80f, fadeDuration);
+        tween.TweenProperty(fadeIn,  "volume_db", 0, fadeDuration);
+        tween.Chain().TweenCallback(Callable.From(() =>
+        {
+            fadeOut.Stop();
+        }));
 
-	public void RegisterButton(Button button)
-	{
-		if (button == null) return;
-		button.MouseEntered += () => PlayButtonHover(button);
-		button.Pressed += PlayButtonClick;
-	}
+        _usingPlayerA = !_usingPlayerA;
+    }
 
-	public void PlayButtonHover(Button button = null)
-	{
-		if (button?.Disabled == true) 
-		{
-			return;
-		}
+    public void PlayMainMenuMusic(float fadeDuration = 1.0f)
+    {
+        TransitionToMusic(MainMenuMusic, fadeDuration);
+    }
 
-		if (_buttonSoundsPlayer.Stream == ClickSound && _buttonSoundsPlayer.Playing) return;
-		if (HoverSound != null)
-		{
-			_buttonSoundsPlayer.Stream = HoverSound;
-			_buttonSoundsPlayer.Play();
-		}
-	}
+    public void PlayDungeonMusic(float fadeDuration = 1.0f)
+    {
+        if (AmbientMusic == null || AmbientMusic.Length == 0) return;
+        TransitionToMusic(AmbientMusic[GD.Randi() % (uint)AmbientMusic.Length], fadeDuration);
+    }
 
-	public void PlayButtonClick()
-	{
-		if (ClickSound != null)
-		{
-			_buttonSoundsPlayer.Stream = ClickSound;
-			_buttonSoundsPlayer.Play();
-		}
-	}
+    public void PlayBattleMusic(float fadeDuration = 0.5f)
+    {
+        TransitionToMusic(BattleMusic, fadeDuration);
+    }
 
-	public void PlayItemPickupSound()
-	{
-		if (ItemPickupSounds.Length > 0)
-		{
-			_itemPickupSoundsPlayer.Stream = ItemPickupSounds[GD.Randi() % (uint)ItemPickupSounds.Length];
-			_itemPickupSoundsPlayer.Play();
-		}
-	}
+    /// Fades the current music out to silence without starting a new track.
+    public void FadeOutMusic(float fadeDuration = 1.5f)
+    {
+        var active = _usingPlayerA ? _musicPlayerA : _musicPlayerB;
+        var tween = CreateTween();
+        tween.TweenProperty(active, "volume_db", -80f, fadeDuration);
+        tween.TweenCallback(Callable.From(active.Stop));
+    }
 
-	// --- Flashcard feedback ---
+    /// Plays the one-shot stinger sound on top of whatever music is currently playing.
+    /// Call this when entering battle, alongside PlayBattleMusic.
+    public void PlayBattleStinger()
+    {
+        if (BattleStinger == null) return;
+        _stingerPlayer.Stream = BattleStinger;
+        _stingerPlayer.Play();
+    }
 
-	public void PlayCorrectSound()
-	{
-		if (CorrectSound != null)
-		{
-			_correctSoundsPlayer.Stream = CorrectSound;
-			_correctSoundsPlayer.Play();
-		}
-	}
+    // --- UI sounds ---
 
-	public void PlayWrongSound()
-	{
-		if (WrongSound != null)
-		{
-			_correctSoundsPlayer.Stream = WrongSound;
-			_correctSoundsPlayer.Play();
-		}
-	}
+    public void RegisterButton(Button button)
+    {
+        if (button == null) return;
+        button.MouseEntered += () => PlayButtonHover(button);
+        button.Pressed += PlayButtonClick;
+    }
 
-	// --- Game conditions ---
+    public void PlayButtonHover(Button button = null)
+    {
+        if (button?.Disabled == true) 
+        {
+            return;
+        }
 
-	public void PlayGameOverSound()
-	{
-		if (GameOverSound != null)
-		{
-			_gameConditionsPlayer.Stream = GameOverSound;
-			_gameConditionsPlayer.Play();
-		}
-	}
+        if (_buttonSoundsPlayer.Stream == ClickSound && _buttonSoundsPlayer.Playing) return;
+        if (HoverSound != null)
+        {
+            _buttonSoundsPlayer.Stream = HoverSound;
+            _buttonSoundsPlayer.Play();
+        }
+    }
 
-	public void PlayGameVictorySound()
-	{
-		if (GameVictorySound != null)
-		{
-			_gameConditionsPlayer.Stream = GameVictorySound;
-			_gameConditionsPlayer.Play();
-		}
-	}
+    public void PlayButtonClick()
+    {
+        if (ClickSound != null)
+        {
+            _buttonSoundsPlayer.Stream = ClickSound;
+            _buttonSoundsPlayer.Play();
+        }
+    }
+
+    public void PlayItemPickupSound()
+    {
+        if (ItemPickupSounds.Length > 0)
+        {
+            _itemPickupSoundsPlayer.Stream = ItemPickupSounds[GD.Randi() % (uint)ItemPickupSounds.Length];
+            _itemPickupSoundsPlayer.Play();
+        }
+    }
+
+    // --- Flashcard feedback ---
+
+    public void PlayCorrectSound()
+    {
+        if (CorrectSound != null)
+        {
+            _correctSoundsPlayer.Stream = CorrectSound;
+            _correctSoundsPlayer.Play();
+        }
+    }
+
+    public void PlayWrongSound()
+    {
+        if (WrongSound != null)
+        {
+            _correctSoundsPlayer.Stream = WrongSound;
+            _correctSoundsPlayer.Play();
+        }
+    }
+
+    // --- Game conditions ---
+
+    public void PlayGameOverSound()
+    {
+        if (GameOverSound != null)
+        {
+            _gameConditionsPlayer.Stream = GameOverSound;
+            _gameConditionsPlayer.Play();
+        }
+    }
+
+    public void PlayGameVictorySound()
+    {
+        if (GameVictorySound != null)
+        {
+            _gameConditionsPlayer.Stream = GameVictorySound;
+            _gameConditionsPlayer.Play();
+        }
+    }
 }

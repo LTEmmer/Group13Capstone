@@ -196,29 +196,53 @@ public class CombatResolver
     private void ExecuteEnemyAttack(bool fullDamage)
     {
         var enemy = _state.AliveEnemies[_state.CurrentEnemyIndex];
-        enemy.EnemyModel.Player = _state.Player; 
-        // switch to attack state for enemy 
-        enemy.EnemyModel.SwitchTo(StateNames.movein); //ill find a better way to do this in the future
-        if (fullDamage)
-        {
-            _state.EnemyAttackComponents[enemy].Attack(_state.Player);
-            _uiCoordinator.LogMessage("Failed to defend! Taking full damage!");
-        }
-        else if (_state.IsBossBattle && _state.BossBlockReduction > 0f)
-        {
-            // Partial block, enemy still deals a fraction of damage on successful defense
-            _state.EnemyAttackComponents[enemy].Attack(_state.Player, _state.BossBlockReduction);
-            float reducedDamage = _state.EnemyAttackComponents[enemy].BaseDamage * _state.BossBlockReduction;
-            _uiCoordinator.LogMessage($"Partial block! Taking {reducedDamage} damage!");
-        }
-        else
+        enemy.EnemyModel.Player = _state.Player;
+        enemy.EnemyModel.SwitchTo(StateNames.movein);
+
+        // No damage case handle immediately, nothing to defer
+        if (!fullDamage && !(_state.IsBossBattle && _state.BossBlockReduction > 0f))
         {
             _state.EnemyAttackComponents[enemy].PlayAttackSound();
             _uiCoordinator.LogMessage("Defended successfully! Taking no damage!");
+            _uiCoordinator.UpdateHealthUI();
+            return;
         }
-        
-        // Update health UI after enemy attack
-        _uiCoordinator.UpdateHealthUI();
+
+        // Defer damage until the attack animation ends so feedback is visually aligned
+        string attackAnimName = enemy.EnemyModel.States[StateNames.attack].StateAnimation;
+        AnimationPlayer animator = enemy.EnemyModel.animator;
+
+        // Local function to handle the end of the attack animation
+        void OnAttackAnimEnded(StringName animName)
+        {
+            if (animName != attackAnimName) 
+            {
+                return;
+            }
+
+            animator.AnimationFinished -= OnAttackAnimEnded;
+
+            if (!_state.InCombat)
+            {
+                return;
+            }
+
+            if (fullDamage)
+            {
+                _state.EnemyAttackComponents[enemy].Attack(_state.Player);
+                _uiCoordinator.LogMessage("Failed to defend! Taking full damage!");
+            }
+            else
+            {
+                _state.EnemyAttackComponents[enemy].Attack(_state.Player, _state.BossBlockReduction);
+                float reducedDamage = _state.EnemyAttackComponents[enemy].BaseDamage * _state.BossBlockReduction;
+                _uiCoordinator.LogMessage($"Partial block! Taking {reducedDamage} damage!");
+            }
+
+            _uiCoordinator.UpdateHealthUI();
+        }
+
+        animator.AnimationFinished += OnAttackAnimEnded;
     }
     
     // Attempt to run from battle
