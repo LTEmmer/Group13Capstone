@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://u05v56fskb4q"]
+
+[ext_resource type="Texture2D" uid="uid://dvblk3s72w6oi" path="res://assets/models/exit_room/cafeteria/walls/exit_cafeteria_walls_Material_BaseColor.png" id="1_um73l"]
+[ext_resource type="Texture2D" uid="uid://cf7iph6mi6eyb" path="res://assets/models/exit_room/cafeteria/walls/exit_cafeteria_walls_Material_Metallic.png" id="2_2fga8"]
+[ext_resource type="Texture2D" uid="uid://qgveuji5y64f" path="res://assets/models/exit_room/cafeteria/walls/exit_cafeteria_walls_Material_Normal.png" id="3_ofgsg"]
+[ext_resource type="Texture2D" uid="uid://dtt5o72goxksq" path="res://assets/models/exit_room/cafeteria/walls/exit_cafeteria_walls_Material_Roughness.png" id="4_5uuif"]
+
+[resource]
+albedo_texture = ExtResource("1_um73l")
+metallic = 1.0
+metallic_texture = ExtResource("2_2fga8")
+roughness_texture = ExtResource("4_5uuif")
+normal_enabled = true
+normal_texture = ExtResource("3_ofgsg")
