@@ -18,4 +18,5 @@ Behavior = 1
 Rarity = 3
 MaxUses = 1
 UseEffects = Array[ExtResource("1_4vu6c")]([SubResource("Resource_4vu6c")])
+PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"

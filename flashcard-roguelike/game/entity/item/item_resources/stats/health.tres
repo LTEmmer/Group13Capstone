@@ -23,5 +23,6 @@ Icon = ExtResource("3_8sxb7")
 Mesh = SubResource("CylinderMesh_b80tv")
 Description = "Heals the player"
 AddToInventory = false
+UseEffects = null
 PickupEffects = Array[ExtResource("1_3bnc8")]([SubResource("Resource_mwtb2")])
 metadata/_custom_type_script = "uid://573w4ti026as"
