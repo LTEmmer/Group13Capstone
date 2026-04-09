@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChallenge
 {
-	private Panel _challengePanel;
+	private Control _challengePanel;
 	private Label _questionLabel;
     private Label _answerLabel;
 	private Button _trueButton;
@@ -30,12 +30,12 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 	public override void _Ready()
 	{
 		// Get UI elements
-		_challengePanel = GetNode<Panel>("ChallengePanel");
-		_questionLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/QuestionLabel");
-        _answerLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/AnswerLabel");
-		_contextLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
-		_trueButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer/TrueButton");
-		_falseButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer/FalseButton");
+		_challengePanel = GetNode<Control>("CenterContainer/ChallengePanel");
+		_questionLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/QuestionLabel");
+        _answerLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/AnswerLabel");
+		_contextLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
+		_trueButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer/TrueButton");
+		_falseButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer/FalseButton");
 
 		// Connect signals
 		_trueButton.Pressed += () => OnAnswerSelected(true);
@@ -138,16 +138,15 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 			AudioManager.Instance?.PlayWrongSound();
 		}
 
-		// Visual feedback
+		// Visual feedback: only the option the player clicked is highlighted
+		var chosen = selectedTrue ? _trueButton : _falseButton;
 		if (isCorrect)
 		{
-			_trueButton.Modulate = new Color(0.5f, 1.0f, 0.5f);
-			_falseButton.Modulate = new Color(0.5f, 1.0f, 0.5f);
+			chosen.Modulate = new Color(0.5f, 1.0f, 0.5f);
 		}
 		else
 		{
-			_trueButton.Modulate = new Color(1.0f, 0.5f, 0.5f);
-			_falseButton.Modulate = new Color(1.0f, 0.5f, 0.5f);
+			chosen.Modulate = new Color(1.0f, 0.5f, 0.5f);
 			_contextLabel.Text = "Incorrect! The correct answer for:";
             _answerLabel.Text = $"Answer:\n{_currentCard.Answer}";
 		}
