@@ -54,10 +54,10 @@ public partial class Player : CharacterBody3D
 	private bool _acceptKeyboardInput = true;
 	private const float PitchVariance = 0.1f; // Random pitch variance for footstep sounds
 
-
 	public AudioStreamPlayer3D FootstepSoundPlayer;
 	public AudioStreamPlayer3D JumpSoundPlayer;
 
+	private Interactable oldInteractable = null;
 	public override void _Ready()
 	{
 		_cameraPivot = GetNode<Node3D>("CameraPivot");
@@ -66,7 +66,7 @@ public partial class Player : CharacterBody3D
 		FootstepSoundPlayer = GetNode<AudioStreamPlayer3D>("FootstepSoundPlayer");
 		JumpSoundPlayer = GetNode<AudioStreamPlayer3D>("JumpSoundPlayer");
 	}
-
+	
 	public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed("inventory_toggle"))
@@ -161,6 +161,25 @@ public partial class Player : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		Interactable newInteractable = null;
+
+    	if (sightline.IsColliding())
+    	{
+        	var collider = sightline.GetCollider() as Node;
+        	if (collider is Interactable interactable)
+            	newInteractable = interactable;
+    	}
+
+    	if (newInteractable != oldInteractable)
+    	{
+        	if (IsInstanceValid(oldInteractable))
+            	oldInteractable?.HoverEnd(this);
+        	if (IsInstanceValid(newInteractable))
+            	newInteractable?.HoverStart(this);
+
+        	oldInteractable = newInteractable;
+    	}
+
 		//Get input
 		if (_acceptKeyboardInput){
 

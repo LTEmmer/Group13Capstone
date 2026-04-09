@@ -134,32 +134,32 @@ transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 14.159891, 0.24199575, 
 LootPool = Array[ExtResource("9_4bnm5")]([ExtResource("6_jumof"), ExtResource("8_p0w5i"), ExtResource("7_l3qxk"), ExtResource("11_jcauo"), ExtResource("12_fqsy6"), ExtResource("13_4ixbf"), ExtResource("14_ltkbo")])
 
 [node name="Items" type="Node3D" parent="." unique_id=583334911]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.749798, -1.1307017, -3.859191)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.701834, 0.5006633, -0.49810982)
 
-[node name="Item" parent="Items" unique_id=1116861116 instance=ExtResource("5_503t6")]
-transform = Transform3D(0.29999164, 0.0022409821, 0, -0.0022409821, 0.29999164, 0, 0, 0, 0.3, -3.0898771, 1.6643176, 4.3950443)
+[node name="Health" parent="Items" unique_id=1116861116 instance=ExtResource("5_503t6")]
+transform = Transform3D(0.29999164, 0.0022409821, 0, -0.0022409821, 0.29999164, 0, 0, 0, 0.3, 0, 0, 0)
 _resource = ExtResource("6_jumof")
 
-[node name="Item2" parent="Items" unique_id=1846056995 instance=ExtResource("5_503t6")]
-transform = Transform3D(0.29999164, 0.0022409821, 0, -0.0022409821, 0.29999164, 0, 0, 0, 0.3, -2.2606, 1.6581094, -1.4446917)
+[node name="Bandage" parent="Items" unique_id=1846056995 instance=ExtResource("5_503t6")]
+transform = Transform3D(0.2999916, 0.002240982, 0, -0.002240982, 0.2999916, 0, 0, 0, 0.29999998, 0.5999832, -0.0044819713, 0)
 _resource = ExtResource("7_l3qxk")
 
-[node name="Item3" parent="Items" unique_id=2118227672 instance=ExtResource("5_503t6")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.42806625, 1.6512508, 1.103672)
+[node name="Shield" parent="Items" unique_id=2118227672 instance=ExtResource("5_503t6")]
+transform = Transform3D(0.3, -2.3283064e-10, 0, 2.3283064e-10, 0.3, 0, 0, 0, 0.29999998, 1.1999664, -0.0089639425, 0)
 _resource = ExtResource("8_p0w5i")
 
-[node name="Item4" parent="Items" unique_id=1775426547 instance=ExtResource("5_503t6")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 5.688484, 1.6512806, 0.21392155)
-_resource = ExtResource("14_ltkbo")
-
-[node name="Item7" parent="Items" unique_id=22810434 instance=ExtResource("5_503t6")]
-transform = Transform3D(0.29999164, 0.0022409821, 0, -0.0022409821, 0.29999164, 0, 0, 0, 0.3, 1.32306, 1.6313653, -9.3175335)
+[node name="BonkStick" parent="Items" unique_id=22810434 instance=ExtResource("5_503t6")]
+transform = Transform3D(0.29999164, 0.0022409824, 0, -0.0022409824, 0.29999164, 0, 0, 0, 0.3, 1.7999663, -0.0089639425, 0)
 _resource = ExtResource("11_jcauo")
 
-[node name="Item8" parent="Items" unique_id=2124541634 instance=ExtResource("5_503t6")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.7752724, 1.6512642, -7.876482)
+[node name="SmokeScreen" parent="Items" unique_id=1775426547 instance=ExtResource("5_503t6")]
+transform = Transform3D(0.3, -2.3283064e-10, 0, 2.3283064e-10, 0.3, 0, 0, 0, 0.29999998, 2.3999496, -0.013445914, 0)
+_resource = ExtResource("14_ltkbo")
+
+[node name="ShieldCapsule" parent="Items" unique_id=2124541634 instance=ExtResource("5_503t6")]
+transform = Transform3D(0.29999998, -2.3283063e-10, 0, 2.3283063e-10, 0.29999998, 0, 0, 0, 0.29999995, 2.9999495, -0.013445914, 0)
 _resource = ExtResource("13_4ixbf")
 
-[node name="Item9" parent="Items" unique_id=588639888 instance=ExtResource("5_503t6")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.4265833, 1.6512642, -4.9509287)
+[node name="CheatSheet" parent="Items" unique_id=588639888 instance=ExtResource("5_503t6")]
+transform = Transform3D(0.29999998, 0, 0, 0, 0.29999998, 0, 0, 0, 0.29999998, 3.5999494, -0.013445914, 0)
 _resource = ExtResource("12_fqsy6")

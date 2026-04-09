@@ -5,14 +5,19 @@ public partial class Item : Interactable
 {
 	[Export] private MeshInstance3D _meshInstance;
 	[Export] public ItemResource _resource;
+	[Export] private Label3D label;
 
 	public override void _Ready()
 	{
-		if (_resource == null) return;
+    	if (_resource == null) return;
+    	if (_meshInstance != null && _resource.Mesh != null)
+        	_meshInstance.Mesh = _resource.Mesh;
 
-		if (_meshInstance != null && _resource.Mesh != null)
-			_meshInstance.Mesh = _resource.Mesh;
+    	label.Text = _resource?.Name;
+    	label.Visible = false;
+		label.Billboard = BaseMaterial3D.BillboardModeEnum.Enabled;
 	}
+
 	public override void Interact(Node caller)
 	{
 		GD.Print("ALKSJDLAKSJDLKa");
@@ -41,6 +46,15 @@ public partial class Item : Interactable
 		
 
 		QueueFree();
+	}
+
+    public override void HoverStart(Node caller)
+	{
+		label.Visible = true;
+	}
+    public override void HoverEnd(Node caller)
+	{
+		label.Visible = false;
 	}
 
 }

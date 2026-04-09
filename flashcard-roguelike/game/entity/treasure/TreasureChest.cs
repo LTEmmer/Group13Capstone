@@ -35,6 +35,7 @@ public partial class TreasureChest : Interactable
 
 		_rng.Randomize();
 		UpdateLabel();
+		_label.Visible = false;
 	}
 
     public override void Interact(Node caller)
@@ -119,4 +120,16 @@ public partial class TreasureChest : Interactable
 		_label.Text = IsOpen         ? "Treasure Chest (Empty)"
 					: "Treasure Chest";
 	}
+
+    public override void HoverStart(Node caller)
+	{
+		_label.Visible = true;		
+	}
+
+    public override void HoverEnd(Node caller)
+    {
+		_label.Visible = false;		
+    }
+
+
 }

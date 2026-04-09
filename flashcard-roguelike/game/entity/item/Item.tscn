@@ -7,12 +7,13 @@ radius = 1.6565362
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0ak7e"]
 
-[node name="Item" type="StaticBody3D" unique_id=696073096 node_paths=PackedStringArray("_meshInstance") groups=["Interactable"]]
+[node name="Item" type="StaticBody3D" unique_id=696073096 node_paths=PackedStringArray("_meshInstance", "label") groups=["Interactable"]]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_7x45u")
 _meshInstance = NodePath("MeshInstance3D")
+label = NodePath("Label3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2085220173]
 shape = SubResource("SphereShape3D_nwg37")
@@ -20,3 +21,8 @@ shape = SubResource("SphereShape3D_nwg37")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1647908511]
 transform = Transform3D(0.83045584, -0.24577151, 0.4999395, 0.28378105, 0.9588891, 0, -0.47938654, 0.14187336, 0.8660603, 0, 0, 0)
 mesh = SubResource("CylinderMesh_0ak7e")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1603687644]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 2.840121, 0)
+text = "asdfasdfsdf"
+font_size = 128
