@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://11fr68fb3aa2"]
+
+[ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="1_bcrrh"]
+[ext_resource type="Script" uid="uid://4is7514q5jla" path="res://game/entity/item/effects/mod_battle/RunAway.cs" id="3_kehts"]
+[ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="4_f2g41"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="5_em4id"]
+
+[sub_resource type="Resource" id="Resource_bcrrh"]
+script = ExtResource("3_kehts")
+metadata/_custom_type_script = "uid://4is7514q5jla"
+
+[resource]
+script = ExtResource("5_em4id")
+Name = "Smoke Screen"
+Icon = ExtResource("4_f2g41")
+Description = "Gives you a chance to run away"
+Behavior = 1
+Rarity = 3
+MaxUses = 1
+UseEffects = Array[ExtResource("1_bcrrh")]([SubResource("Resource_bcrrh")])
+metadata/_custom_type_script = "uid://573w4ti026as"

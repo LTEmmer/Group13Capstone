@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bk7p3xjo8ru00" path="res://game/entity/treasure/TreasureChest.cs" id="1_chest"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_1gdil"]
-[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/health.tres" id="5_8ikyb"]
+[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/stats/health.tres" id="5_8ikyb"]
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="5_kpa80"]
-[ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/shield.tres" id="6_dfobw"]
-[ext_resource type="Resource" uid="uid://cqh570ewgdsiw" path="res://game/entity/item/item_resources/sword.tres" id="7_kccro"]
+[ext_resource type="Resource" uid="uid://biapbeaft61wq" path="res://game/entity/item/item_resources/use/bandage.tres" id="5_lia74"]
+[ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/stats/shield.tres" id="6_dfobw"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_chest"]
-radius = 8.991286
+[sub_resource type="BoxShape3D" id="BoxShape3D_hbtxb"]
+size = Vector3(1.4978027, 1.104126, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_body"]
 size = Vector3(1.5, 0.8, 1)
@@ -30,33 +30,36 @@ albedo_color = Color(0.85, 0.7, 0.1, 1)
 metallic = 0.8
 roughness = 0.3
 
-[node name="TreasureChest" type="Node3D" unique_id=368681909]
+[node name="TreasureChest" type="StaticBody3D" unique_id=1552683655 node_paths=PackedStringArray("_lidMesh", "_label") groups=["Interactable"]]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("1_chest")
-LootPool = Array[ExtResource("4_1gdil")]([ExtResource("5_8ikyb"), ExtResource("6_dfobw"), ExtResource("7_kccro")])
+LootPool = Array[ExtResource("4_1gdil")]([ExtResource("5_8ikyb"), ExtResource("6_dfobw"), ExtResource("5_lia74")])
 ItemScene = ExtResource("5_kpa80")
+_lidMesh = NodePath("mesh/Lid")
+_label = NodePath("mesh/Label3D")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=1384779987]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1931309563]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0013427734, 0.14874268, 0)
+shape = SubResource("BoxShape3D_hbtxb")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1496993993]
-shape = SubResource("SphereShape3D_chest")
+[node name="mesh" type="Node3D" parent="." unique_id=49063272]
 
-[node name="Body" type="MeshInstance3D" parent="." unique_id=1349989793]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+[node name="Body" type="MeshInstance3D" parent="mesh" unique_id=1349989793]
 mesh = SubResource("BoxMesh_body")
 surface_material_override/0 = SubResource("StandardMaterial3D_body")
 
-[node name="Lid" type="MeshInstance3D" parent="." unique_id=229894499]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -0.4)
+[node name="Lid" type="MeshInstance3D" parent="mesh" unique_id=229894499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, -0.4)
 mesh = SubResource("BoxMesh_lid")
 surface_material_override/0 = SubResource("StandardMaterial3D_lid")
 
-[node name="Lock" type="MeshInstance3D" parent="." unique_id=1934885545]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.55)
+[node name="Lock" type="MeshInstance3D" parent="mesh" unique_id=1934885545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.55)
 mesh = SubResource("BoxMesh_lock")
 surface_material_override/0 = SubResource("StandardMaterial3D_lock")
 
-[node name="Label3D" type="Label3D" parent="." unique_id=1708631566]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+[node name="Label3D" type="Label3D" parent="mesh" unique_id=1708631566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 billboard = 1
 text = "Treasure Chest"
 font_size = 64
