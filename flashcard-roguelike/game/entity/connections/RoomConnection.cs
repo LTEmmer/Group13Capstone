@@ -3,12 +3,10 @@ using System;
 using System.Numerics;
 using Vector3 = Godot.Vector3;
 
-public partial class RoomConnection : Node3D
+public partial class RoomConnection : Interactable
 {
 	[Export] 
 	public PackedScene[] ConnectionVisuals;
-	[Export]
-	public InteractableComponent Interactable;
 	
 	public bool PlayerInRoom = false;
 	public int TargetRoomId { get; set; }
@@ -21,6 +19,7 @@ public partial class RoomConnection : Node3D
 	
 	public override void _Ready()
 	{
+		base._Ready();
 		// Spawn random visual
 		if (ConnectionVisuals == null || ConnectionVisuals.Length == 0)
 		{
@@ -33,9 +32,14 @@ public partial class RoomConnection : Node3D
 		PackedScene scene = ConnectionVisuals[rng.RandiRange(0, ConnectionVisuals.Length - 1)];
 		AddChild(scene.Instantiate());
 		
-		Interactable.Interact += OnInteract;
 		EventManager.Instance.listen("on_room_clear", new Callable(this, MethodName.on_room_clear));
 	}
+
+    public override void Interact(Node caller)
+	{
+		OnInteract(caller as Node3D);
+	}
+
 
 	private void OnInteract(Node3D player){
 		TeleportPlayer(player);

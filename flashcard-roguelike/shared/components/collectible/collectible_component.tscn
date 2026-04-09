@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://liceqttxegox"]
-
-[ext_resource type="Script" uid="uid://bmxlpwcg00ejn" path="res://shared/components/collectible/CollectibleComponent.cs" id="1_iiyh8"]
-
-[node name="CollectibleComponent" type="Node" unique_id=120460810]
-script = ExtResource("1_iiyh8")

@@ -1,19 +1,16 @@
 [gd_scene format=3 uid="uid://cm05m68d10agu"]
 
-[ext_resource type="Script" uid="uid://bmr8hh6yx1bj4" path="res://game/entity/npcs/BaseNPC.cs" id="1_4jotm"]
+[ext_resource type="Script" uid="uid://bpyixt7jhh8jd" path="res://game/entity/npcs/BaseNPC.cs" id="1_4jotm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4jotm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4jotm"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_4jotm"]
-radius = 4.0
-
-[node name="BaseNPC" type="Node3D" unique_id=1000981014]
+[node name="BaseNPC" type="StaticBody3D" unique_id=2015437748 groups=["Interactable"]]
 script = ExtResource("1_4jotm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=507006833]
+shape = SubResource("CapsuleShape3D_4jotm")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=652919116]
 mesh = SubResource("CapsuleMesh_4jotm")
-
-[node name="Area3D" type="Area3D" parent="." unique_id=1513059777]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=507006833]
-shape = SubResource("SphereShape3D_4jotm")
