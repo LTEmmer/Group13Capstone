@@ -17,7 +17,7 @@ config/icon="res://assets/sprites/icon.svg"
 
 [autoload]
 
-Talo="*res://addons/talo/talo_manager.gd"
+Talo="*uid://whkpcuqqg2ly"
 AudioManager="*res://game/entity/audio/audio_manager.tscn"
 CurrentRoomManager="*res://game/current_room_manager.tscn"
 FlashcardManager="*res://game/ui/flashcard_menu/flashcard_manager.tscn"
@@ -25,6 +25,7 @@ BattleManager="*uid://b8g15b4a5ec36"
 EventManager="*uid://u328qtrmmpqj"
 DifficultyManager="*uid://cgpb16u2nxry2"
 GameDifficultyManager="*uid://cgpb16u2nxry2"
+
 [display]
 
 window/size/mode=2
@@ -83,6 +84,7 @@ jump={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 
