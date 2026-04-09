@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://crfbfrmnv3seh"]
+
+[ext_resource type="Texture2D" uid="uid://bjxxu7nswf58u" path="res://assets/models/entrance_room/ceiling_floor/entrance_room_floors_ceiling_Material_BaseColor.png" id="1_td2yp"]
+[ext_resource type="Texture2D" uid="uid://ckxkrbdtxfx30" path="res://assets/models/entrance_room/ceiling_floor/entrance_room_floors_ceiling_Material_Height.png" id="2_be08n"]
+[ext_resource type="Texture2D" uid="uid://bx7wwfcr5dbjk" path="res://assets/models/entrance_room/ceiling_floor/entrance_room_floors_ceiling_Material_Metallic.png" id="3_xpo72"]
+[ext_resource type="Texture2D" uid="uid://bt4i6cpcxonch" path="res://assets/models/entrance_room/ceiling_floor/entrance_room_floors_ceiling_Material_Normal.png" id="4_hl58d"]
+[ext_resource type="Texture2D" uid="uid://b88rafwcuevci" path="res://assets/models/entrance_room/ceiling_floor/entrance_room_floors_ceiling_Material_Roughness.png" id="5_1mff0"]
+
+[resource]
+albedo_texture = ExtResource("1_td2yp")
+metallic = 1.0
+metallic_texture = ExtResource("3_xpo72")
+roughness_texture = ExtResource("5_1mff0")
+normal_enabled = true
+normal_texture = ExtResource("4_hl58d")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("2_be08n")

@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://dwfk1atbupmih"]
 
-[ext_resource type="Script" uid="uid://c8fl78a1ygu1q" path="res://game/entity/dungeon_generator/rooms/Room.cs" id="1_pygj5"]
+[ext_resource type="Script" uid="uid://bvi274x44ayaj" path="res://game/entity/dungeon_generator/rooms/Room.cs" id="1_pygj5"]
 [ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="2_1xdlv"]
-[ext_resource type="PackedScene" uid="uid://hame71oukhea" path="res://game/entity/enemy_fsm/enemy_patroller.tscn" id="3_1xdlv"]
+[ext_resource type="PackedScene" uid="uid://cbj21ypi4ovx8" path="res://game/entity/enemy_fsm/enemy_patroller.tscn" id="3_1xdlv"]
 [ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="4_fx6n5"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_p3pul"]
@@ -35,12 +35,6 @@ albedo_color = Color(0.43134022, 0.43134025, 0.43134025, 0.78431374)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_p3pul"]
 data = PackedVector3Array(-26, -0.1727, -26, -26, -0.1727, 26, -25, -0.1727, -25, -26, -0.1727, -26, -25, -0.1727, -25, 25, -0.1727, -25, -26, -0.1727, -26, 26, -0.1727, -26, -26, 9.8273, -26, -26, -0.1727, 26, -25, -0.1727, 25, -25, -0.1727, -25, -26, -0.1727, -26, -26, 9.8273, 26, -26, -0.1727, 26, -26, -0.1727, 26, 26, -0.1727, 26, -25, -0.1727, 25, -26, -0.1727, -26, -26, 9.8273, -26, -26, 9.8273, 26, -26, 9.8273, -26, -25, 9.8273, -25, -25, 9.8273, 25, -26, 9.8273, -26, 26, 9.8273, -26, -25, 9.8273, -25, -26, 9.8273, -26, -25, 9.8273, 25, -26, 9.8273, 26, -26, -0.1727, 26, -26, 9.8273, 26, 26, 9.8273, 26, -26, 9.8273, 26, -25, 9.8273, 25, 25, 9.8273, 25, -26, -0.1727, -26, 25, -0.1727, -25, 26, -0.1727, -26, 26, -0.1727, -26, 25, -0.1727, -25, 25, -0.1727, 25, 26, -0.1727, -26, 26, -0.1727, 26, 26, 9.8273, -26, 26, -0.1727, 26, 25, -0.1727, 25, -25, -0.1727, 25, -26, -0.1727, 26, 26, 9.8273, 26, 26, -0.1727, 26, 26, -0.1727, -26, 25, -0.1727, 25, 26, -0.1727, 26, -26, 9.8273, -26, 26, -0.1727, -26, 26, 9.8273, -26, 26, 9.8273, -26, 25, 9.8273, -25, -25, 9.8273, -25, 26, 9.8273, -26, 26, 9.8273, 26, 25, 9.8273, -25, -26, 9.8273, 26, 25, 9.8273, 25, 26, 9.8273, 26, 26, -0.1727, 26, 26, 9.8273, 26, 26, 9.8273, -26, 26, 9.8273, 26, 25, 9.8273, 25, 25, 9.8273, -25, -25, 9.8273, -25, -25, -0.1727, -25, -25, -0.1727, 25, -25, -0.1727, 25, 25, -0.1727, 25, -25, 9.8273, 25, 25, 9.8273, -25, -25, -0.1727, -25, -25, 9.8273, -25, -25, -0.1727, 25, -25, 9.8273, 25, -25, 9.8273, -25, -25, -0.1727, -25, 25, 9.8273, -25, 25, -0.1727, -25, 25, -0.1727, 25, 25, -0.1727, -25, 25, 9.8273, 25, 25, 9.8273, -25, 25, 9.8273, 25, 25, -0.1727, -25, -25, 9.8273, 25, 25, -0.1727, 25, 25, 9.8273, 25)
-
-[sub_resource type="Sky" id="Sky_fx6n5"]
-
-[sub_resource type="Environment" id="Environment_b2jjk"]
-background_mode = 2
-sky = SubResource("Sky_fx6n5")
 
 [node name="CombatRoom" type="Node3D" unique_id=1298955981]
 script = ExtResource("1_pygj5")
@@ -123,5 +117,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2945517, 0)
 [node name="EnemyFSM" parent="." unique_id=1279096522 instance=ExtResource("3_1xdlv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3400278, -13.035138)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2005378575]
-environment = SubResource("Environment_b2jjk")
+[node name="Light" type="OmniLight3D" parent="." unique_id=1371973516]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.518296, 0)
+light_energy = 6.0
+omni_range = 67.148

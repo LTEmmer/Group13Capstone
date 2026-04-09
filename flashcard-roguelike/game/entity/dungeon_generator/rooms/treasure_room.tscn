@@ -31,6 +31,11 @@ points = PackedVector3Array(-25, -0.25, -25, -25, 0.25, -25, 25, -0.25, -25, -25
 
 [node name="TreasureRoom" type="Node3D" unique_id=1298955981]
 
+[node name="Light" type="OmniLight3D" parent="." unique_id=791824277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.9574766, 0)
+light_energy = 6.0
+omni_range = 62.681
+
 [node name="Walls" type="MeshInstance3D" parent="." unique_id=1244738179]
 mesh = SubResource("ArrayMesh_5xbyn")
 surface_material_override/0 = SubResource("StandardMaterial3D_uwmo1")

@@ -56,6 +56,16 @@ RoomTurret = NodePath("Turret")
 CorrectSound = ExtResource("2_dsngy")
 WrongSound = ExtResource("3_8ftga")
 
+[node name="Light" type="OmniLight3D" parent="." unique_id=1602930548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.717031, 0)
+light_energy = 6.0
+omni_range = 36.729
+
+[node name="Light2" type="OmniLight3D" parent="." unique_id=1047004225]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.786638, -52.20974)
+light_energy = 6.0
+omni_range = 181.767
+
 [node name="Turret" parent="." unique_id=2031055064 instance=ExtResource("2_bh6dk")]
 transform = Transform3D(2.425, 0, 0, 0, 2.425, 0, 0, 0, 2.425, 0, 0.14188349, -41.302742)
 
