@@ -11,6 +11,10 @@ public partial class Player : CharacterBody3D
 
 	[Export]
 	public Node3D CameraMount;
+
+	[Export] 
+	public RayCast3D sightline;
+
 	[Export]
 	// _speed of camera
 	public float MouseSensitivity { get; set; } = 0.002f;
@@ -87,6 +91,18 @@ public partial class Player : CharacterBody3D
 				_pitch -= motion.Relative.Y * MouseSensitivity;
 				_pitch = Mathf.Clamp(_pitch, -Mathf.DegToRad(MaxPitchDegrees), Mathf.DegToRad(MaxPitchDegrees));
 				_cameraPivot.Rotation = new Vector3(_pitch, 0, 0);
+			}
+		}
+
+		if (@event.IsActionPressed("interact") && sightline.IsColliding())
+		{
+
+			var colider = sightline.GetCollider() as Node;
+			if (colider.IsInGroup("Interactable"))
+			{
+        		if (colider is Interactable interactable){
+            		interactable.Interact(this);
+        		}
 			}
 		}
 	}

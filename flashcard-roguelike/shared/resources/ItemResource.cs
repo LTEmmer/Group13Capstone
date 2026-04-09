@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 [GlobalClass]
 public partial class ItemResource : Resource
@@ -16,9 +17,11 @@ public partial class ItemResource : Resource
     // ===== Rarity (1 = Common, 5 = Legendary) =====
     [Export(PropertyHint.Range, "1,5")] public int Rarity = 1;
 
+    [Export] public bool AddToInventory = true;
     // ===== Uses =====
     [Export] public int MaxUses = -1; // -1 = infinite
 
     // ===== Effects =====
-    [Export] public Godot.Collections.Array<ItemEffect> Effects = new();
+    [Export] public Array<ItemEffect> UseEffects;
+    [Export] public Array<ItemEffect> PickupEffects;
 }

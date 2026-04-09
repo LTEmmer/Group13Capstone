@@ -2,9 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="1_fij0k"]
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="2_0aegq"]
-[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/health.tres" id="3_vxwn0"]
-[ext_resource type="Resource" uid="uid://cqh570ewgdsiw" path="res://game/entity/item/item_resources/sword.tres" id="4_ac0fh"]
-[ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/shield.tres" id="5_y4ohd"]
+[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/stats/health.tres" id="3_vxwn0"]
+[ext_resource type="Resource" uid="uid://biapbeaft61wq" path="res://game/entity/item/item_resources/use/bandage.tres" id="5_sac2s"]
+[ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/stats/shield.tres" id="5_y4ohd"]
+[ext_resource type="Resource" uid="uid://c025ebyq1swtw" path="res://game/entity/item/item_resources/use/bonk_stick.tres" id="6_38i74"]
+[ext_resource type="Resource" uid="uid://dujio0bwmrbul" path="res://game/entity/item/item_resources/use/cheat_sheet.tres" id="7_vleqm"]
+[ext_resource type="Resource" uid="uid://v332y1tyceyu" path="res://game/entity/item/item_resources/use/shield_capsule.tres" id="8_ofujs"]
+[ext_resource type="Resource" uid="uid://11fr68fb3aa2" path="res://game/entity/item/item_resources/use/smoke_screen.tres" id="9_8cp7p"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_fij0k"]
 _surfaces = [{
@@ -85,14 +89,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3992662, -1.7729723, -7.297
 [node name="Player" parent="." unique_id=249236073 instance=ExtResource("1_fij0k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.187, 5.766)
 
-[node name="Item" parent="." unique_id=1116861116 instance=ExtResource("2_0aegq")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 6.7213154, 0.8003898, -3.663927)
-Resource = ExtResource("3_vxwn0")
+[node name="Items" type="Node3D" parent="." unique_id=2107026514]
 
-[node name="Item2" parent="." unique_id=1248684543 instance=ExtResource("2_0aegq")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -4.9795914, 0.8003898, -4.2110906)
-Resource = ExtResource("4_ac0fh")
+[node name="Item" parent="Items" unique_id=1116861116 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.7213154, 0.7469609, -3.663927)
+_resource = ExtResource("3_vxwn0")
 
-[node name="Item3" parent="." unique_id=529039477 instance=ExtResource("2_0aegq")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.43233633, 0.8003898, -8.143987)
-Resource = ExtResource("5_y4ohd")
+[node name="Item2" parent="Items" unique_id=1248684543 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.9795914, 0.7469609, -4.2110906)
+_resource = ExtResource("5_y4ohd")
+
+[node name="Item3" parent="Items" unique_id=529039477 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.43233633, 0.7469609, -8.143987)
+_resource = ExtResource("5_sac2s")
+
+[node name="Item4" parent="Items" unique_id=696073096 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.7184224, 0.7469609, -0.31379938)
+_resource = ExtResource("6_38i74")
+
+[node name="Item5" parent="Items" unique_id=673775765 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.9824843, 0.7469609, -0.86096287)
+_resource = ExtResource("7_vleqm")
+
+[node name="Item6" parent="Items" unique_id=9816767 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.42944336, 0.7469609, -4.793859)
+_resource = ExtResource("8_ofujs")
+
+[node name="Item7" parent="Items" unique_id=1403745903 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.58791244, 0.7469609, -0.14371705)
+_resource = ExtResource("9_8cp7p")
