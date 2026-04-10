@@ -8,6 +8,7 @@ public partial class BattleManager : Node
 {
 	public static BattleManager Instance { get; private set; }
 	public bool IsInCombat => _state?.InCombat ?? false;
+	public bool CanStartBattle => _canEnterBattle;
 
 	// Specialized managers
 	private BattleState _state;

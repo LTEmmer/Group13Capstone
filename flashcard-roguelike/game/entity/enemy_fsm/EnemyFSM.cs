@@ -23,7 +23,7 @@ public partial class EnemyFSM : CharacterBody3D
 	}
 
 	private void OnBodyEntered(Node3D body){
-		if (body is Player player)
+		if (body is Player player && BattleManager.Instance.CanStartBattle)
 		{
 			GD.Print($"Player detected by {Name}! Starting battle...");
 
