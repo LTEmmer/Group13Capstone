@@ -11,6 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://dph0ggbxbkuqc" path="res://assets/models/exit_room/cafeteria/baine.glb" id="9_5fd8k"]
 [ext_resource type="PackedScene" uid="uid://tka8xdh5srkl" path="res://game/entity/rollable_sprite/rollable_sprite.tscn" id="10_ud1vd"]
 [ext_resource type="Texture2D" uid="uid://c1q1snm86d1hw" path="res://assets/sprites/grafitti_etc/hamburger.png" id="11_gpd1t"]
+[ext_resource type="Texture2D" uid="uid://c1x1ox5kg66o" path="res://assets/sprites/grafitti_etc/poster_1.jpg" id="12_2lfoa"]
+[ext_resource type="Texture2D" uid="uid://bmnnr4c7mwxuj" path="res://assets/sprites/grafitti_etc/poster_4.jpg" id="13_4ojgm"]
+[ext_resource type="Texture2D" uid="uid://b6um0vhtjtdcf" path="res://assets/sprites/grafitti_etc/poster_3.jpg" id="14_inxja"]
+[ext_resource type="Texture2D" uid="uid://b1acufahoh4w7" path="res://assets/sprites/grafitti_etc/poster_2.jpg" id="15_syhdu"]
+[ext_resource type="Texture2D" uid="uid://ddac130uxn386" path="res://assets/sprites/grafitti_etc/splat_1.png" id="16_pdxer"]
+[ext_resource type="Texture2D" uid="uid://ctiynvkv1oqj4" path="res://assets/sprites/grafitti_etc/splat_2.png" id="17_54idd"]
+[ext_resource type="Texture2D" uid="uid://cr5ha7s07x27i" path="res://assets/sprites/grafitti_etc/splat_3.png" id="18_vupce"]
+[ext_resource type="Texture2D" uid="uid://c3bsqyxi0ap3e" path="res://assets/sprites/grafitti_etc/splat_4.png" id="19_vdkyj"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5fd8k"]
 data = PackedVector3Array(9.9998, -1.3278999, 15.999499, -10.0001, 2.5, 15.999499, -10.0001, -1.3278999, 15.999499, 9.9998, -1.3278999, 15.999499, 9.9998, 2.5, 15.999499, -10.0001, 2.5, 15.999499, -10.0001, -1.3278999, 15.999499, -10.0001, 2.5, -25.0007, -10.0001, -1.3278999, -25.0007, -10.0001, -1.3278999, 15.999499, -10.0001, 2.5, 15.999499, -10.0001, 2.5, -25.0007, 9.9998, -1.3278999, -25.0007, 9.9998, 2.5, 15.999499, 9.9998, -1.3278999, 15.999499, 9.9998, -1.3278999, -25.0007, 9.9998, 2.5, -25.0007, 9.9998, 2.5, 15.999499, 1.9997, -1.3278999, -33.000298, 9.9998, 2.5, -25.0007, 9.9998, -1.3278999, -25.0007, 1.9997, -1.3278999, -33.000298, 1.9997, 2.5, -33.000298, 9.9998, 2.5, -25.0007, 10.5, -2.5, 16.5, -10.5, 2.5, 16.5, 10.5, 2.5, 16.5, 10.5, -2.5, 16.5, -10.5, -2.5, 16.5, -10.5, 2.5, 16.5, -10.5, -2.5, 16.5, -10.5, 2.5, -25.5005, -10.5, 2.5, 16.5, -10.5, -2.5, 16.5, -10.5, -2.5, -25.5005, -10.5, 2.5, -25.5005, 10.5, -2.5, -25.5005, 10.5, 2.5, 16.5, 10.5, 2.5, -25.5005, 10.5, -2.5, -25.5005, 10.5, -2.5, 16.5, 10.5, 2.5, 16.5, 1.9997, -2.5, -33.5, 10.5, 2.5, -25.5005, 1.9997, 2.5, -33.5, 1.9997, -2.5, -33.5, 10.5, -2.5, -25.5005, 10.5, 2.5, -25.5005, -10.0001, -2.5, -25.0007, -10.5, -2.5, 16.5, -10.0001, -2.5, 15.999499, -10.0001, -2.5, 15.999499, -10.5, -2.5, 16.5, 10.5, -2.5, 16.5, -10.0001, -2.5, 15.999499, 10.5, -2.5, 16.5, 9.9998, -2.5, 15.999499, -10.0001, -2.5, -25.0007, -10.5, -2.5, -25.5005, -10.5, -2.5, 16.5, -2, -2.5, -33.000298, -10.5, -2.5, -25.5005, -10.0001, -2.5, -25.0007, -2, -2.5, -33.000298, -2, -2.5, -33.5, -10.5, -2.5, -25.5005, 1.9997, -2.5, -33.000298, -2, -2.5, -33.5, -2, -2.5, -33.000298, 1.9997, -2.5, -33.000298, 1.9997, -2.5, -33.5, -2, -2.5, -33.5, 9.9998, -2.5, -25.0007, 1.9997, -2.5, -33.5, 1.9997, -2.5, -33.000298, 9.9998, -2.5, -25.0007, 10.5, -2.5, -25.5005, 1.9997, -2.5, -33.5, 9.9998, -2.5, 15.999499, 10.5, -2.5, -25.5005, 9.9998, -2.5, -25.0007, 9.9998, -2.5, 15.999499, 10.5, -2.5, 16.5, 10.5, -2.5, -25.5005, 9.9998, 2.5, 15.999499, -10.5, 2.5, 16.5, -10.0001, 2.5, 15.999499, 9.9998, 2.5, 15.999499, 10.5, 2.5, 16.5, -10.5, 2.5, 16.5, -10.0001, 2.5, 15.999499, -10.5, 2.5, 16.5, -10.5, 2.5, -25.5005, -10.0001, 2.5, 15.999499, -10.5, 2.5, -25.5005, -10.0001, 2.5, -25.0007, -10.0001, 2.5, -25.0007, -10.5, 2.5, -25.5005, -2, 2.5, -33.5, -10.0001, 2.5, -25.0007, -2, 2.5, -33.5, -2, 2.5, -33.000298, -2, 2.5, -33.000298, -2, 2.5, -33.5, 1.9997, 2.5, -33.5, -2, 2.5, -33.000298, 1.9997, 2.5, -33.5, 1.9997, 2.5, -33.000298, 1.9997, 2.5, -33.000298, 1.9997, 2.5, -33.5, 10.5, 2.5, -25.5005, 1.9997, 2.5, -33.000298, 10.5, 2.5, -25.5005, 9.9998, 2.5, -25.0007, 9.9998, 2.5, -25.0007, 10.5, 2.5, -25.5005, 10.5, 2.5, 16.5, 9.9998, 2.5, -25.0007, 10.5, 2.5, 16.5, 9.9998, 2.5, 15.999499, 1.9997, -2.5, -33.000298, 9.9998, -1.3278999, -25.0007, 9.9998, -2.5, -25.0007, 1.9997, -2.5, -33.000298, 1.9997, -1.3278999, -33.000298, 9.9998, -1.3278999, -25.0007, 9.9998, -2.5, -25.0007, 9.9998, -1.3278999, 15.999499, 9.9998, -2.5, 15.999499, 9.9998, -2.5, -25.0007, 9.9998, -1.3278999, -25.0007, 9.9998, -1.3278999, 15.999499, -10.0001, -2.5, 15.999499, -10.0001, -1.3278999, -25.0007, -10.0001, -2.5, -25.0007, -10.0001, -2.5, 15.999499, -10.0001, -1.3278999, 15.999499, -10.0001, -1.3278999, -25.0007, 9.9998, -2.5, 15.999499, -10.0001, -1.3278999, 15.999499, -10.0001, -2.5, 15.999499, 9.9998, -2.5, 15.999499, 9.9998, -1.3278999, 15.999499, -10.0001, -1.3278999, 15.999499, -10.0001, -2.5, -25.0007, -2, -1.3278999, -33.000298, -2, -2.5, -33.000298, -10.0001, -2.5, -25.0007, -10.0001, -1.3278999, -25.0007, -2, -1.3278999, -33.000298, -10.5, -2.5, -25.5005, -2, 2.5, -33.5, -10.5, 2.5, -25.5005, -10.5, -2.5, -25.5005, -2, -2.5, -33.5, -2, 2.5, -33.5, -10.0001, -1.3278999, -25.0007, -2, 2.5, -33.000298, -2, -1.3278999, -33.000298, -10.0001, -1.3278999, -25.0007, -10.0001, 2.5, -25.0007, -2, 2.5, -33.000298, -2, -2.5, -33.000298, 1.9997, -1.3278999, -33.000298, 1.9997, -2.5, -33.000298, -2, -2.5, -33.000298, -2, -1.3278999, -33.000298, 1.9997, -1.3278999, -33.000298, -2, -2.5, -33.5, 1.9997, 2.5, -33.5, -2, 2.5, -33.5, -2, -2.5, -33.5, 1.9997, -2.5, -33.5, 1.9997, 2.5, -33.5, -2, -1.3278999, -33.000298, 1.9997, 2.5, -33.000298, 1.9997, -1.3278999, -33.000298, -2, -1.3278999, -33.000298, -2, 2.5, -33.000298, 1.9997, 2.5, -33.000298)
@@ -79,6 +87,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 material_override = ExtResource("4_81sre")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="exit_cafeteria_walls/Cube" index="0" unique_id=547063338]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="exit_cafeteria_walls/Cube/StaticBody3D" unique_id=840578643]
 shape = SubResource("ConcavePolygonShape3D_5fd8k")
@@ -89,6 +98,7 @@ shape = SubResource("ConcavePolygonShape3D_5fd8k")
 material_override = ExtResource("6_5fd8k")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="exit_cafeteria_walls/exit_cafeteria_ceiling_floor/Cube_001" index="0" unique_id=601332062]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="exit_cafeteria_walls/exit_cafeteria_ceiling_floor/Cube_001/StaticBody3D" unique_id=440896572]
 shape = SubResource("ConcavePolygonShape3D_cvta4")
@@ -324,7 +334,6 @@ omni_range = 80.558
 
 [node name="Hamburger" parent="Decor/Food" unique_id=1883001707 instance=ExtResource("10_ud1vd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.66023, 1.0396428, -25.873182)
-SpriteTexture = ExtResource("11_gpd1t")
 
 [node name="Hamburger2" parent="Decor/Food" unique_id=810590628 instance=ExtResource("10_ud1vd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8499184, 1.2761621, 0.49012798)
@@ -347,6 +356,60 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8754053, 1.3039832, -27.21
 SpriteTexture = ExtResource("11_gpd1t")
 
 [node name="Junk" type="Node3D" parent="Decor" unique_id=417872092]
+
+[node name="Poster" type="Sprite3D" parent="Decor/Junk" unique_id=658816561]
+transform = Transform3D(-4.371139e-08, 0, 1, -0.12521203, 0.99213, -5.4731917e-09, -0.99213, -0.12521203, -4.336738e-08, -9.997926, 2.7948296, 0)
+shaded = true
+double_sided = false
+texture = ExtResource("12_2lfoa")
+
+[node name="Poster2" type="Sprite3D" parent="Decor/Junk" unique_id=795901880]
+transform = Transform3D(0.68438864, 0.177798, 0.70710677, -0.25144437, 0.96787184, 0, -0.6843886, -0.17779799, 0.7071067, -4.801405, 2.4831495, -30.189354)
+shaded = true
+double_sided = false
+texture = ExtResource("13_4ojgm")
+
+[node name="Poster3" type="Sprite3D" parent="Decor/Junk" unique_id=1802165587]
+transform = Transform3D(-4.371139e-08, 0, -1, 0.1541241, 0.98805153, -6.736978e-09, 0.98805153, -0.1541241, -4.31891e-08, 9.990423, 2.6123984, -0.8266512)
+shaded = true
+double_sided = false
+texture = ExtResource("14_inxja")
+
+[node name="Poster4" type="Sprite3D" parent="Decor/Junk" unique_id=2019984412]
+transform = Transform3D(-4.371139e-08, 0, 1, -0.6137204, 0.7895234, -2.6826571e-08, -0.7895234, -0.6137204, -3.4511164e-08, -9.999862, 1.9003358, -15.233376)
+shaded = true
+double_sided = false
+texture = ExtResource("15_syhdu")
+
+[node name="Poster5" type="Sprite3D" parent="Decor/Junk" unique_id=470294282]
+transform = Transform3D(0.94922787, 0.31458896, 1.3751118e-08, 0, -4.3711392e-08, 0.99999994, 0.3145889, -0.9492281, -4.149207e-08, -4.638972, 0.0025320947, -6.7561803)
+shaded = true
+double_sided = false
+texture = ExtResource("13_4ojgm")
+
+[node name="Splat" type="Sprite3D" parent="Decor/Junk" unique_id=814044997]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 4.0592756, 0.985752, 0.5574311)
+shaded = true
+double_sided = false
+texture = ExtResource("16_pdxer")
+
+[node name="Splat2" type="Sprite3D" parent="Decor/Junk" unique_id=371561054]
+transform = Transform3D(1.96, 0, 0, 0, -8.567432e-08, 1.96, 0, -1.96, -8.567432e-08, 5.5820675, 0.010807872, -16.04957)
+shaded = true
+double_sided = false
+texture = ExtResource("17_54idd")
+
+[node name="Splat3" type="Sprite3D" parent="Decor/Junk" unique_id=665264579]
+transform = Transform3D(0.81095785, 1.5827067, -1.7783736, -2.238285, 1.1468676, 0, 0.81095785, 1.5827067, 1.7783736, 3.956751, 2.8918848, -31.02747)
+shaded = true
+double_sided = false
+texture = ExtResource("18_vupce")
+
+[node name="Splat4" type="Sprite3D" parent="Decor/Junk" unique_id=669015861]
+transform = Transform3D(1.4803116, -1.0803342e-07, 0.6486513, -1.2607973, -0.036260005, 0.7605852, 0.045746446, -0.99934244, -0.027597036, -7.141309, 2.346712, -6.5569806)
+shaded = true
+double_sided = false
+texture = ExtResource("19_vdkyj")
 
 [editable path="exit_cafeteria_walls"]
 [editable path="exit_cafeteria_walls/exit_cafeteria_ceiling_floor"]
