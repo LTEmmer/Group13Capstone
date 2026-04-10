@@ -5,15 +5,20 @@
 [ext_resource type="PackedScene" uid="uid://cqgcdegamf600" path="res://game/entity/connections/connection_types/donut.tscn" id="3_jjg55"]
 [ext_resource type="PackedScene" uid="uid://mcpr3xoc22ml" path="res://game/entity/connections/connection_types/cube.tscn" id="4_6qhxk"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_q6jgi"]
-radius = 0.7063775
+[sub_resource type="SphereShape3D" id="SphereShape3D_dfhhp"]
+radius = 0.7269047
 
 [node name="RoomConnection" type="StaticBody3D" unique_id=98081723 groups=["Interactable"]]
 script = ExtResource("1_ndbvl")
 ConnectionVisuals = Array[PackedScene]([ExtResource("2_dfhhp"), ExtResource("3_jjg55"), ExtResource("4_6qhxk")])
+EntranceVisuals = Array[PackedScene]([])
+CombatVisuals = Array[PackedScene]([])
+EventVisuals = Array[PackedScene]([])
+TreasureVisuals = Array[PackedScene]([])
+ExitVisuals = Array[PackedScene]([])
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=532319659]
-shape = SubResource("SphereShape3D_q6jgi")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1057585435]
+shape = SubResource("SphereShape3D_dfhhp")
 
 [node name="Label" type="Label3D" parent="." unique_id=1356015597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1864083, 0)

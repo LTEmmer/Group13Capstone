@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://2qvmv1ijxwoo" path="res://assets/models/big_pencil/pencil.glb" id="16_nh78s"]
 [ext_resource type="Resource" uid="uid://c025ebyq1swtw" path="res://game/entity/item/item_resources/use/bonk_stick.tres" id="16_qf1e3"]
 [ext_resource type="PackedScene" uid="uid://cm0r6jfidsyc8" path="res://assets/models/desk/desk.glb" id="17_5npjy"]
+[ext_resource type="Material" path="res://assets/models/big_pencil/pencil_texture.tres" id="17_emyof"]
 [ext_resource type="Material" path="res://assets/models/desk/desk_texture.tres" id="18_emyof"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sac2s"]
@@ -293,8 +294,11 @@ gravity_scale = 0.0
 transform = Transform3D(0.43500003, 0, 0, 0, 0.43500003, 0, 0, 0, 0.435, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_nh78s")
 
-[node name="pencil" parent="Decor/Pencil" unique_id=746156109 instance=ExtResource("16_nh78s")]
+[node name="pencil" parent="Decor/Pencil" unique_id=320721088 instance=ExtResource("16_nh78s")]
 transform = Transform3D(0.43500003, 0, 0, 0, 0.43500003, 0, 0, 0, 0.435, 0, 0, 0)
+
+[node name="Cylinder" parent="Decor/Pencil/pencil" index="0" unique_id=1257910671]
+material_override = ExtResource("17_emyof")
 
 [node name="Desks" type="Node3D" parent="Decor" unique_id=13545952]
 

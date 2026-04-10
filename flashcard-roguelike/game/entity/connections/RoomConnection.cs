@@ -5,31 +5,52 @@ using Vector3 = Godot.Vector3;
 
 public partial class RoomConnection : Interactable
 {
-	[Export] 
-	public PackedScene[] ConnectionVisuals;
-	
+	[Export]
+	public PackedScene[] ConnectionVisuals; // Fallback visuals (used when no type-specific array is assigned)
+	[Export]
+	public PackedScene[] EntranceVisuals;
+	[Export]
+	public PackedScene[] CombatVisuals;
+	[Export]
+	public PackedScene[] EventVisuals;
+	[Export]
+	public PackedScene[] TreasureVisuals;
+	[Export]
+	public PackedScene[] ExitVisuals;
+
 	public bool PlayerInRoom = false;
 	public int TargetRoomId { get; set; }
+	public RoomTypes TargetRoomType { get; set; }
 	public bool IsEntrance { get; set; }
 	public bool connection_enabled = true; // New attribute to toggle connection availability
 	private bool _playerInRange = false;
 	private Node3D _player;
 	private Area3D _area;
-	
-	
+
+
 	public override void _Ready()
 	{
 		base._Ready();
-		// Spawn random visual
-		if (ConnectionVisuals == null || ConnectionVisuals.Length == 0)
+		// Pick the visual array for the target room type, falling back to ConnectionVisuals
+		PackedScene[] visuals = TargetRoomType switch
+		{
+			RoomTypes.Entrance => EntranceVisuals?.Length > 0 ? EntranceVisuals : ConnectionVisuals,
+			RoomTypes.Combat   => CombatVisuals?.Length   > 0 ? CombatVisuals   : ConnectionVisuals,
+			RoomTypes.Event    => EventVisuals?.Length    > 0 ? EventVisuals    : ConnectionVisuals,
+			RoomTypes.Treasure => TreasureVisuals?.Length > 0 ? TreasureVisuals : ConnectionVisuals,
+			RoomTypes.Exit     => ExitVisuals?.Length     > 0 ? ExitVisuals     : ConnectionVisuals,
+			_                  => ConnectionVisuals,
+		};
+
+		if (visuals == null || visuals.Length == 0)
 		{
 			GD.PushWarning("RoomConnection has no ConnectionVisuals assigned. No visual representation will be created.");
 			return;
 		}
-		
+
 		RandomNumberGenerator rng = new RandomNumberGenerator();
 		rng.Randomize();
-		PackedScene scene = ConnectionVisuals[rng.RandiRange(0, ConnectionVisuals.Length - 1)];
+		PackedScene scene = visuals[rng.RandiRange(0, visuals.Length - 1)];
 		AddChild(scene.Instantiate());
 		
 		EventManager.Instance.listen("on_room_clear", new Callable(this, MethodName.on_room_clear));

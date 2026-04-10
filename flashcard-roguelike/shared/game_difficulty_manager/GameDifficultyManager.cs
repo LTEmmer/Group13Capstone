@@ -8,7 +8,7 @@ public partial class GameDifficultyManager : Node
 
 	private float _currentDifficultyScore = 0.0F;
 	private float _baselineDifficultyScore = 1.0F;
-	private float _difficultyScoreIncrease = 0.50F;  // 0.50 for testing purposes we can adjust values later on
+	private float _difficultyScoreIncrease = 0.15F;  // 0.25 per victory — slower difficulty ramp
 	private float _difficultyScoreDecrease = 0.50F; 
 
 	// Called when the node enters the scene tree for the first time.
@@ -26,15 +26,19 @@ public partial class GameDifficultyManager : Node
 	
 	public int getEnemyCount(){
 		int enemyCount = (int)_currentDifficultyScore;
-		float enemyChance = _currentDifficultyScore - _baselineDifficultyScore;
-		float chanceResult = (float)GD.RandRange(0.0F,1.0F);
-		if(chanceResult < enemyChance){ // chance of an additional enemy increases the higher your difficulty score increases
+		float enemyChance = _currentDifficultyScore - MathF.Floor(_currentDifficultyScore); // fractional part [0,1)
+		float chanceResult = (float)GD.RandRange(0.0F, 1.0F);
+		if(chanceResult < enemyChance){
 			enemyCount += 1;
 		}
 
-		enemyCount = Math.Min(enemyCount, 3); // Cap enemy count at 3 for now
-		
+		enemyCount = Math.Min(enemyCount, 3); // Cap enemy count at 3
+
 		return enemyCount;
+	}
+
+	public void ResetDifficulty(){
+		_currentDifficultyScore = _baselineDifficultyScore;
 	}
 	
 	public float getCurrentDifficultyScore(){
