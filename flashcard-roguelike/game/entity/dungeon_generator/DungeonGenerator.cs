@@ -25,6 +25,7 @@ public partial class DungeonGenerator : Node3D
 	public override void _Ready()
 	{
 		AudioManager.Instance?.PlayDungeonMusic();
+		GameDifficultyManager.Instance?.ResetDifficulty();
 		// Initialize random number generator with seed
 		if (UseRandomSeed)
 		{
@@ -214,6 +215,7 @@ public partial class DungeonGenerator : Node3D
 				PackedScene conn = ConnectionScene;
 				RoomConnection connInstance = conn.Instantiate() as RoomConnection;
 				connInstance.TargetRoomId = incoming;
+				connInstance.TargetRoomType = graph.GetRoom(incoming).RoomType;
 				connInstance.IsEntrance = true;
 				// Set the label to show the source room ID and type for debugging purposes
 				connInstance.SetLabel(true, incoming, graph.GetRoom(incoming).RoomType.ToString());
@@ -228,6 +230,7 @@ public partial class DungeonGenerator : Node3D
 				PackedScene conn = ConnectionScene;
 				RoomConnection connInstance = conn.Instantiate() as RoomConnection;
 				connInstance.TargetRoomId = outgoing;
+				connInstance.TargetRoomType = graph.GetRoom(outgoing).RoomType;
 				connInstance.IsEntrance = false;
 				// Set the label to show the target room ID and type for debugging purposes
 				connInstance.SetLabel(false, outgoing, graph.GetRoom(outgoing).RoomType.ToString());

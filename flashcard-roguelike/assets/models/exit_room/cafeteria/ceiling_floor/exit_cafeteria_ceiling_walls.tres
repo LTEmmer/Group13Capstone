@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ceurahi3yvdal"]
+
+[ext_resource type="Texture2D" uid="uid://ctk4j2t41jrdm" path="res://assets/models/exit_room/cafeteria/ceiling_floor/exit_cafeteria_ceiling_floor_Material_BaseColor.png" id="1_jc5j0"]
+[ext_resource type="Texture2D" uid="uid://chp2rsi7p4slx" path="res://assets/models/exit_room/cafeteria/ceiling_floor/exit_cafeteria_ceiling_floor_Material_Height.png" id="2_1reyd"]
+[ext_resource type="Texture2D" uid="uid://biosvskdy6j7r" path="res://assets/models/exit_room/cafeteria/ceiling_floor/exit_cafeteria_ceiling_floor_Material_Metallic.png" id="3_jrhor"]
+[ext_resource type="Texture2D" uid="uid://brxt7uu4abic0" path="res://assets/models/exit_room/cafeteria/ceiling_floor/exit_cafeteria_ceiling_floor_Material_Normal.png" id="4_r8dwb"]
+[ext_resource type="Texture2D" uid="uid://d0ci67ycxqbyx" path="res://assets/models/exit_room/cafeteria/ceiling_floor/exit_cafeteria_ceiling_floor_Material_Roughness.png" id="5_gcn35"]
+
+[resource]
+albedo_texture = ExtResource("1_jc5j0")
+metallic = 1.0
+metallic_texture = ExtResource("3_jrhor")
+roughness_texture = ExtResource("5_gcn35")
+normal_texture = ExtResource("4_r8dwb")
+heightmap_enabled = true
+heightmap_scale = 1.0
+heightmap_texture = ExtResource("2_1reyd")
