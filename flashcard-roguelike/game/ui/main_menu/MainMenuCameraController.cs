@@ -22,16 +22,18 @@ public partial class MainMenu : Control
 		new Color(0.1f, 0.4f, 1.0f),  // deep electric blue
 	};
 
-	// (position, look-at target) pairs for spotlight placement
-	private static readonly (Vector3 pos, Vector3 target)[] LightAngles = {
-		(new Vector3( 0.0f, 3.5f,  1.5f), new Vector3( 0,   1,    0)),  // front-top
-		(new Vector3( 2.0f, 3.0f,  1.0f), new Vector3( 0,   1,    0)),  // right-top
-		(new Vector3(-2.0f, 3.0f,  1.0f), new Vector3( 0,   1,    0)),  // left-top
-		(new Vector3( 0.0f, 3.5f, -1.5f), new Vector3( 0,   1,    0)),  // back-top
-		(new Vector3( 2.5f, 2.0f,  0.0f), new Vector3( 0,   1,    0)),  // far right
-		(new Vector3(-2.5f, 2.0f,  0.0f), new Vector3( 0,   1,    0)),  // far left
-		(new Vector3( 1.5f, 4.0f,  1.5f), new Vector3( 0, 0.5f,   0)),  // high front-right
-		(new Vector3(-1.5f, 4.0f,  1.5f), new Vector3( 0, 0.5f,   0)),  // high front-left
+	// Target directions for LookAt — spread across axes for distinct light angles
+	private static readonly Vector3[] LightAngles = {
+		new Vector3( 0,    0,    1),  // straight forward
+		new Vector3( 0,    0,   -1),  // straight back
+		new Vector3( 1,    0,    0),  // hard right
+		new Vector3(-1,    0,    0),  // hard left
+		new Vector3( 0,   -1,    1),  // steep down-forward
+		new Vector3( 1,   -1,    0),  // down-right diagonal
+		new Vector3(-1,   -1,    0),  // down-left diagonal
+		new Vector3( 0,   -1,    1),  // down-forward diagonal
+		new Vector3( 1,    0,   -1),  // side-back diagonal
+		new Vector3(-1,    0,    1),  // side-forward diagonal
 	};
 
 	private void InitializeBackgroundViewport()
@@ -60,6 +62,13 @@ public partial class MainMenu : Control
 			};
 
 			_mainLight = vp.GetNodeOrNull<DirectionalLight3D>("Lights/MainLight");
+
+			foreach (var cam in _cameras)
+				if (cam != null)
+					cam.PhysicsInterpolationMode = PhysicsInterpolationModeEnum.Off;
+
+			if (_mainLight != null)
+				_mainLight.PhysicsInterpolationMode = PhysicsInterpolationModeEnum.Off;
 		}
 
 		SwitchCamera();
@@ -93,9 +102,9 @@ public partial class MainMenu : Control
 			Color lightColor = LightColors[GD.RandRange(0, LightColors.Length - 1)];
 			_mainLight.LightColor = lightColor;
 
-			var (pos, target) = LightAngles[GD.RandRange(0, LightAngles.Length - 1)];
-			_mainLight.Position = pos;
+			var target = LightAngles[GD.RandRange(0, LightAngles.Length - 1)];
 			_mainLight.LookAt(target);
+			GD.Print($"Switched to camera {_activeCameraIndex}, light color {lightColor}, looking at {target}");
 		}
 	}
 }

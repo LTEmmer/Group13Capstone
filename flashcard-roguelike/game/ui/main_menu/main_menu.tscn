@@ -30,8 +30,8 @@
 [ext_resource type="Material" uid="uid://bvy7yqq2bokb6" path="res://assets/models/mainmenu_walls/mainmenu_walls2_texture.tres" id="20_73pe5"]
 [ext_resource type="PackedScene" uid="uid://cn4tm82kgsw57" path="res://assets/models/ufo/ufo.glb" id="23_hutre"]
 [ext_resource type="Material" uid="uid://drq58oyucx00r" path="res://assets/models/ufo/ufo_texture.tres" id="26_wwtvc"]
-[ext_resource type="Script" uid="uid://cxgn2j6exrb1q" path="res://game/ui/pause_menue/SettingsPanel.cs" id="31_nekgt"]
-[ext_resource type="Script" uid="uid://0i60ivtawcij" path="res://game/ui/main_menu/CreateSetPanel.cs" id="32_73pe5"]
+[ext_resource type="Script" uid="uid://bnbhifky1dd3h" path="res://game/ui/pause_menue/SettingsPanel.cs" id="31_nekgt"]
+[ext_resource type="Script" uid="uid://c6mb8jerb70d6" path="res://game/ui/main_menu/CreateSetPanel.cs" id="32_73pe5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_scroll"]
 shader = ExtResource("5_scroll")
@@ -46,7 +46,6 @@ sky_material = SubResource("ProceduralSkyMaterial_mkp5f")
 
 [sub_resource type="Environment" id="Environment_0p1rw"]
 sky = SubResource("Sky_1x88f")
-tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_73pe5"]
@@ -590,7 +589,7 @@ texture = ExtResource("15_hpwr3")
 transform = Transform3D(-0.47961867, -0.28752896, -0.8290314, 0.10345391, 0.9196714, -0.3788163, 0.8713571, -0.2674539, -0.4113456, -6.5871725, 1.5954795, -6.3431344)
 script = ExtResource("11_egypv")
 
-[node name="Cylinder" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/pencil" index="0" unique_id=107585494]
+[node name="Cylinder" parent="BackgroundViewport/SubViewport/Decoration/Walls/mainmenu_walls2/pencil" index="0" unique_id=782881547]
 material_override = ExtResource("9_hpwr3")
 
 [node name="UFO" type="Node3D" parent="BackgroundViewport/SubViewport/Decoration" unique_id=650332032]
