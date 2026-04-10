@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/health.tres" id="3_vxwn0"]
 [ext_resource type="Resource" uid="uid://cqh570ewgdsiw" path="res://game/entity/item/item_resources/sword.tres" id="4_ac0fh"]
 [ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/shield.tres" id="5_y4ohd"]
-[ext_resource type="PackedScene" uid="uid://b1byk1c8v1yxv" path="res://assets/models/entrance_room/tunnel/entrance_tunnel.glb" id="6_ac0fh"]
+[ext_resource type="PackedScene" uid="uid://b7gfxjllsdmh3" path="res://assets/models/entrance_room/tunnel/entrance_tunnel.glb" id="6_ac0fh"]
 [ext_resource type="Material" uid="uid://bq0trffva3vxw" path="res://assets/models/entrance_room/tunnel/tunnel_texture.tres" id="7_y4ohd"]
 [ext_resource type="PackedScene" uid="uid://paxfl5rn8u8f" path="res://assets/models/entrance_room/walls/entrance_room_walls.glb" id="8_sac2s"]
 [ext_resource type="Material" uid="uid://cot6row2i1kv4" path="res://assets/models/entrance_room/walls/entrance_walls_texture.tres" id="9_38i74"]
@@ -17,6 +17,7 @@
 [ext_resource type="Material" uid="uid://btxixoo8wjobe" path="res://assets/models/standing_whiteboard/standing_whiteboard_texture.tres" id="15_nh78s"]
 [ext_resource type="PackedScene" uid="uid://2qvmv1ijxwoo" path="res://assets/models/big_pencil/pencil.glb" id="16_nh78s"]
 [ext_resource type="PackedScene" uid="uid://cm0r6jfidsyc8" path="res://assets/models/desk/desk.glb" id="17_5npjy"]
+[ext_resource type="Material" uid="uid://c6pv2i4awlv7m" path="res://assets/models/big_pencil/pencil_texture.tres" id="17_emyof"]
 [ext_resource type="Material" uid="uid://cicbhcj8wuo0d" path="res://assets/models/desk/desk_texture.tres" id="18_emyof"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sac2s"]
@@ -82,7 +83,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -38.
 [node name="entrance_tunnel" parent="." unique_id=1815549371 instance=ExtResource("6_ac0fh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.102, 1.5216737, 0)
 
-[node name="Cube" parent="entrance_tunnel" index="0" unique_id=1553172336]
+[node name="Cube" parent="entrance_tunnel" index="0" unique_id=312856401]
 material_override = ExtResource("7_y4ohd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="entrance_tunnel/Cube" index="0" unique_id=1181884609]
@@ -109,7 +110,7 @@ spot_angle = 15.20904
 [node name="entrance_room_walls" parent="." unique_id=412804620 instance=ExtResource("8_sac2s")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2.037, 0)
 
-[node name="Cube" parent="entrance_room_walls" index="0" unique_id=1703948515]
+[node name="Cube" parent="entrance_room_walls" index="0" unique_id=1495710538]
 material_override = ExtResource("9_38i74")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="entrance_room_walls/Cube" index="0" unique_id=638059734]
@@ -121,7 +122,7 @@ shape = SubResource("ConcavePolygonShape3D_vleqm")
 [node name="entrance_room_floors_ceiling" parent="entrance_room_walls" unique_id=1392994238 instance=ExtResource("10_vleqm")]
 transform = Transform3D(1.01, 0, 0, 0, 1, 0, 0, 0, 1.01, 0, 0, 0)
 
-[node name="Cube_001" parent="entrance_room_walls/entrance_room_floors_ceiling" index="0" unique_id=183702100]
+[node name="Cube_001" parent="entrance_room_walls/entrance_room_floors_ceiling" index="0" unique_id=2011222458]
 material_override = ExtResource("11_ofujs")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="entrance_room_walls/entrance_room_floors_ceiling/Cube_001" index="0" unique_id=1411537327]
@@ -183,7 +184,7 @@ omni_range = 24.867853
 [node name="standing_whiteboard" parent="Whiteboards" unique_id=1538548847 instance=ExtResource("14_qryxv")]
 transform = Transform3D(-0.9388984, 0.13422462, -0.31694454, 0.14323653, 0.98967487, -0.005192645, 0.31297505, -0.050273385, -0.94842994, -34.54722, 1.011837, -2.1899662)
 
-[node name="Cube" parent="Whiteboards/standing_whiteboard" index="0" unique_id=1457462879]
+[node name="Cube" parent="Whiteboards/standing_whiteboard" index="0" unique_id=1398859540]
 material_override = ExtResource("15_nh78s")
 
 [node name="Label3D" type="Label3D" parent="Whiteboards/standing_whiteboard" unique_id=1812571850]
@@ -202,7 +203,7 @@ width = 500.84
 [node name="standing_whiteboard2" parent="Whiteboards" unique_id=1497239939 instance=ExtResource("14_qryxv")]
 transform = Transform3D(-1, 0, -8.742278e-08, -6.5533197e-09, -0.9971864, 0.07496124, -8.717681e-08, 0.07496124, 0.9971864, 19.04534, 3.223959, -3.9571068)
 
-[node name="Cube" parent="Whiteboards/standing_whiteboard2" index="0" unique_id=1457462879]
+[node name="Cube" parent="Whiteboards/standing_whiteboard2" index="0" unique_id=1398859540]
 material_override = ExtResource("15_nh78s")
 
 [node name="Label3D" type="Label3D" parent="Whiteboards/standing_whiteboard2" unique_id=2021250033]
@@ -223,7 +224,7 @@ font = ExtResource("12_nh78s")
 [node name="standing_whiteboard3" parent="Whiteboards" unique_id=233276191 instance=ExtResource("14_qryxv")]
 transform = Transform3D(-0.8901405, 0.10413888, 0.4436273, 0.14901315, 0.9865346, 0.06741256, -0.4306333, 0.12611297, -0.89367247, -15.421209, 0.79342175, 2.9032955)
 
-[node name="Cube" parent="Whiteboards/standing_whiteboard3" index="0" unique_id=1457462879]
+[node name="Cube" parent="Whiteboards/standing_whiteboard3" index="0" unique_id=1398859540]
 material_override = ExtResource("15_nh78s")
 
 [node name="Label3D" type="Label3D" parent="Whiteboards/standing_whiteboard3" unique_id=75240084]
@@ -235,6 +236,9 @@ font = ExtResource("12_nh78s")
 
 [node name="standing_whiteboard4" parent="Whiteboards" unique_id=1704156745 instance=ExtResource("14_qryxv")]
 transform = Transform3D(-0.82665706, 0.050279245, -0.56045514, 0.09778119, 0.9936826, -0.055080056, 0.5541452, -0.100334294, -0.82635117, -1.4953375, 0.8291075, -4.818736)
+
+[node name="Cube" parent="Whiteboards/standing_whiteboard4" index="0" unique_id=1398859540]
+material_override = ExtResource("15_nh78s")
 
 [node name="ItemPivot" type="Node3D" parent="Whiteboards/standing_whiteboard4" unique_id=1087441278]
 transform = Transform3D(-0.8999007, 0.09778115, 0.42499113, 0.064647004, 0.99368286, -0.0917373, -0.4312769, -0.055080082, -0.9005364, -0.06067288, -0.6165749, 0.034176826)
@@ -256,9 +260,6 @@ Resource = ExtResource("5_y4ohd")
 transform = Transform3D(0.43929413, 0.048890635, -0.23373148, -0.030097123, 0.49684173, 0.04735931, 0.23688571, -0.027540063, 0.43946186, -3.966, 0.55, -0.019000001)
 Resource = ExtResource("3_vxwn0")
 
-[node name="Cube" parent="Whiteboards/standing_whiteboard4" index="1" unique_id=1457462879]
-material_override = ExtResource("15_nh78s")
-
 [node name="Label3D" type="Label3D" parent="Whiteboards/standing_whiteboard4" unique_id=2124146285]
 transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.039243698, 0, 3.4308414e-09)
 shaded = true
@@ -269,7 +270,7 @@ font = ExtResource("12_nh78s")
 [node name="standing_whiteboard5" parent="Whiteboards" unique_id=1723247862 instance=ExtResource("14_qryxv")]
 transform = Transform3D(-0.90639305, 0.15744114, 0.3919999, 0.1338926, 0.98717874, -0.08689606, -0.40065497, -0.026276112, -0.9158521, 8.281675, 0.9542723, 5.3223925)
 
-[node name="Cube" parent="Whiteboards/standing_whiteboard5" index="0" unique_id=1457462879]
+[node name="Cube" parent="Whiteboards/standing_whiteboard5" index="0" unique_id=1398859540]
 material_override = ExtResource("15_nh78s")
 
 [node name="Label3D" type="Label3D" parent="Whiteboards/standing_whiteboard5" unique_id=2074013609]
@@ -292,8 +293,11 @@ gravity_scale = 0.0
 transform = Transform3D(0.43500003, 0, 0, 0, 0.43500003, 0, 0, 0, 0.435, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_nh78s")
 
-[node name="pencil" parent="Decor/Pencil" unique_id=746156109 instance=ExtResource("16_nh78s")]
+[node name="pencil" parent="Decor/Pencil" unique_id=320721088 instance=ExtResource("16_nh78s")]
 transform = Transform3D(0.43500003, 0, 0, 0, 0.43500003, 0, 0, 0, 0.435, 0, 0, 0)
+
+[node name="Cylinder" parent="Decor/Pencil/pencil" index="0" unique_id=1402167979]
+material_override = ExtResource("17_emyof")
 
 [node name="Desks" type="Node3D" parent="Decor" unique_id=13545952]
 
