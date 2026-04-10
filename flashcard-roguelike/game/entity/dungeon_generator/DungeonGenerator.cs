@@ -24,6 +24,7 @@ public partial class DungeonGenerator : Node3D
 	
 	public override void _Ready()
 	{
+		TaloTelemetry.ResetSessionStats();
 		AudioManager.Instance?.PlayDungeonMusic();
 		// Initialize random number generator with seed
 		if (UseRandomSeed)

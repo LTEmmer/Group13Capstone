@@ -8,6 +8,7 @@ public partial class PauseMenu : CanvasLayer
 	public delegate void ToggleMouseLockEventHandler();
 
 	[Export] PackedScene MainMenu;
+	[Export] PackedScene EndRunStatsScene;
 	private Control _buttonPanelContainer;
 	private SettingsPanel _settingsPanel;
 	private Stack<Control> _panelStack = new Stack<Control>();
@@ -125,8 +126,49 @@ public partial class PauseMenu : CanvasLayer
 	public void _on_main_menu_pressed()
 	{
 		GD.Print("Main Menue Pressed");
-		GetTree().Paused = false;
-		SceneTransition.FadeOut(this, () => GetTree().ChangeSceneToPacked(MainMenu));
+		ShowEndRunStats("Returning to the main menu...");
+	}
+
+	private void ShowEndRunStats(string message)
+	{
+		CloseAll();
+		_buttonPanelContainer.Hide();
+		Visible = false;
+
+		GameOverMenu statsMenu = FindOrCreateEndRunStatsMenu();
+		if (statsMenu != null)
+		{
+			statsMenu.ShowSessionStats(message, false);
+		}
+		else
+		{
+			GetTree().Paused = false;
+			SceneTransition.FadeOut(this, () => GetTree().ChangeSceneToPacked(MainMenu));
+		}
+	}
+
+	private GameOverMenu FindOrCreateEndRunStatsMenu()
+	{
+		GameOverMenu statsMenu = GetTree().Root.GetNodeOrNull<GameOverMenu>("GameOverMenu");
+		if (statsMenu != null)
+		{
+			return statsMenu;
+		}
+
+		PackedScene statsScene = EndRunStatsScene;
+		if (statsScene == null)
+		{
+			statsScene = GD.Load<PackedScene>("res://game/ui/game_over/game_over_menu.tscn");
+		}
+
+		if (statsScene == null)
+		{
+			return null;
+		}
+
+		statsMenu = statsScene.Instantiate<GameOverMenu>();
+		GetTree().Root.AddChild(statsMenu);
+		return statsMenu;
 	}
 
 	public void _on_quit_pressed()

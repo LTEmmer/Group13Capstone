@@ -1,80 +1,94 @@
-[gd_scene format=3 uid="uid://cipiibpksub5v"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://b8bystywoxvc" path="res://game/ui/game_over/GameOverMenu.cs" id="1_script"]
+[ext_resource type="Script" path="res://game/ui/game_over/GameOverMenu.cs" id="1_script"]
+[ext_resource type="FontFile" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_font"]
 
-[node name="GameOverMenu" type="CanvasLayer" unique_id=780090609]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main"]
+bg_color = Color(0.98, 0.95, 0.88, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.38, 0.26, 0.15, 0.9)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_left = 24
+corner_radius_bottom_right = 24
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.18)
+
+[node name="GameOverMenu" type="CanvasLayer"]
 process_mode = 3
-layer = 2
+layer = 10
 script = ExtResource("1_script")
 
-[node name="Panel" type="Panel" parent="." unique_id=1018363225]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="Panel" unique_id=521833262]
+[node name="Backdrop" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.7)
+color = Color(0.05, 0.04, 0.03, 0.82)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1001274452]
+[node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -150.0
-offset_right = 200.0
-offset_bottom = 150.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer" unique_id=527354939]
+[node name="MainPanel" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(860, 520)
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
+theme_override_styles/panel = SubResource("StyleBoxFlat_main")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MainPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="MainVBox" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 54
+theme_override_colors/font_color = Color(0.78, 0.18, 0.16, 1)
 text = "GAME OVER"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="MessageLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1165868571]
+[node name="MessageLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "You have fallen in the dungeon..."
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.2, 0.16, 0.13, 1)
+text = "Press anywhere to return to the main menu."
 horizontal_alignment = 1
-vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Spacer" type="Control" parent="Panel/VBoxContainer" unique_id=383371828]
-custom_minimum_size = Vector2(0, 20)
+[node name="StatsHeaderLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.22, 0.15, 0.09, 1)
+text = "Session Stats"
 
-[node name="RestartButton" type="Button" parent="Panel/VBoxContainer" unique_id=1546863700]
-custom_minimum_size = Vector2(200, 50)
+[node name="StatsListContainer" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer/MainVBox"]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Try Again"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
 
-[node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer" unique_id=1891151644]
-custom_minimum_size = Vector2(200, 50)
+[node name="FooterLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox"]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "Main Menu"
-
-[node name="QuitButton" type="Button" parent="Panel/VBoxContainer" unique_id=1113316304]
-custom_minimum_size = Vector2(200, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Quit Game"
-
-[connection signal="pressed" from="Panel/VBoxContainer/RestartButton" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.32, 0.24, 0.18, 1)
+text = "Click, tap, or press any key to continue."
+horizontal_alignment = 1
