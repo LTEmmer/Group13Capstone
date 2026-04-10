@@ -151,7 +151,11 @@ public partial class BattleManager : Node
 		{
 			return;
 		}
-
+		//Set enemies player field
+		foreach (var enemy in enemies)
+		{
+			enemy.EnemyModel.Player = player;
+		}
 		// Start transition to battle, focusing on the first enemy for now 
 		// (can be expanded to multiple enemies or a more dynamic focus later)
 		EnemyFSM focusEnemy = enemies[0];

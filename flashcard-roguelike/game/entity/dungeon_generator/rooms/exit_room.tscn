@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ho30grmj7jcn"]
 
-[ext_resource type="PackedScene" uid="uid://cbxdgr6q22qmu" path="res://game/entity/enemy_fsm/test_boss.tscn" id="1_oqh0e"]
+[ext_resource type="PackedScene" uid="uid://ds5f3mbj7qseo" path="res://game/entity/boss_fsm/boss.tscn" id="2_1on2c"]
 [ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="2_2ddii"]
 [ext_resource type="PackedScene" uid="uid://dnratetacucfc" path="res://assets/models/exit_room/cafeteria/walls/exit_cafeteria_walls.glb" id="3_m2y4s"]
 [ext_resource type="Material" uid="uid://u05v56fskb4q" path="res://assets/models/exit_room/cafeteria/walls/exit_cafeteria_walls_texture.tres" id="4_81sre"]
@@ -10,12 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://vq5jarq3aore" path="res://assets/models/exit_room/cafeteria/trashcan.glb" id="8_5fd8k"]
 [ext_resource type="PackedScene" uid="uid://dph0ggbxbkuqc" path="res://assets/models/exit_room/cafeteria/baine.glb" id="9_5fd8k"]
 [ext_resource type="PackedScene" uid="uid://tka8xdh5srkl" path="res://game/entity/rollable_sprite/rollable_sprite.tscn" id="10_ud1vd"]
-[ext_resource type="Texture2D" uid="uid://c1q1snm86d1hw" path="res://assets/sprites/grafitti_etc/hamburger.png" id="11_gpd1t"]
-[ext_resource type="Texture2D" uid="uid://c1x1ox5kg66o" path="res://assets/sprites/grafitti_etc/poster_1.jpg" id="12_2lfoa"]
-[ext_resource type="Texture2D" uid="uid://bmnnr4c7mwxuj" path="res://assets/sprites/grafitti_etc/poster_4.jpg" id="13_4ojgm"]
-[ext_resource type="Texture2D" uid="uid://b6um0vhtjtdcf" path="res://assets/sprites/grafitti_etc/poster_3.jpg" id="14_inxja"]
-[ext_resource type="Texture2D" uid="uid://b1acufahoh4w7" path="res://assets/sprites/grafitti_etc/poster_2.jpg" id="15_syhdu"]
-[ext_resource type="Texture2D" uid="uid://ddac130uxn386" path="res://assets/sprites/grafitti_etc/splat_1.png" id="16_pdxer"]
+[ext_resource type="Texture2D" uid="uid://crdvrj75os4e4" path="res://assets/sprites/grafitti_etc/hamburger.png" id="11_gpd1t"]
+[ext_resource type="Texture2D" uid="uid://cs363sxbff2yk" path="res://assets/sprites/grafitti_etc/poster_1.jpg" id="12_2lfoa"]
+[ext_resource type="Texture2D" uid="uid://cqmgr1cegw7o4" path="res://assets/sprites/grafitti_etc/poster_4.jpg" id="13_4ojgm"]
+[ext_resource type="Texture2D" uid="uid://c7lfj7ei1vs2y" path="res://assets/sprites/grafitti_etc/poster_3.jpg" id="14_inxja"]
+[ext_resource type="Texture2D" uid="uid://bs7hevmeaiyo" path="res://assets/sprites/grafitti_etc/poster_2.jpg" id="15_syhdu"]
+[ext_resource type="Texture2D" uid="uid://drm2cg7immu64" path="res://assets/sprites/grafitti_etc/splat_1.png" id="16_pdxer"]
 [ext_resource type="Texture2D" uid="uid://ctiynvkv1oqj4" path="res://assets/sprites/grafitti_etc/splat_2.png" id="17_54idd"]
 [ext_resource type="Texture2D" uid="uid://cr5ha7s07x27i" path="res://assets/sprites/grafitti_etc/splat_3.png" id="18_vupce"]
 [ext_resource type="Texture2D" uid="uid://c3bsqyxi0ap3e" path="res://assets/sprites/grafitti_etc/splat_4.png" id="19_vdkyj"]
@@ -78,12 +78,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21.604242)
 [node name="Boss" type="Node3D" parent="." unique_id=1784541584]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.078375)
 
-[node name="EnemyFSM" parent="Boss" unique_id=1279096522 instance=ExtResource("1_oqh0e")]
+[node name="Boss" parent="Boss" unique_id=1938171652 instance=ExtResource("2_1on2c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.000926, 0)
 
 [node name="exit_cafeteria_walls" parent="." unique_id=1525600554 instance=ExtResource("3_m2y4s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
-[node name="Cube" parent="exit_cafeteria_walls" index="0" unique_id=499881284]
+[node name="Cube" parent="exit_cafeteria_walls" index="0" unique_id=1607814061]
 material_override = ExtResource("4_81sre")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="exit_cafeteria_walls/Cube" index="0" unique_id=547063338]
@@ -94,7 +95,7 @@ shape = SubResource("ConcavePolygonShape3D_5fd8k")
 
 [node name="exit_cafeteria_ceiling_floor" parent="exit_cafeteria_walls" unique_id=1438716541 instance=ExtResource("5_63vvc")]
 
-[node name="Cube_001" parent="exit_cafeteria_walls/exit_cafeteria_ceiling_floor" index="0" unique_id=99522574]
+[node name="Cube_001" parent="exit_cafeteria_walls/exit_cafeteria_ceiling_floor" index="0" unique_id=704754325]
 material_override = ExtResource("6_5fd8k")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="exit_cafeteria_walls/exit_cafeteria_ceiling_floor/Cube_001" index="0" unique_id=601332062]
@@ -110,7 +111,7 @@ shape = SubResource("ConcavePolygonShape3D_cvta4")
 [node name="cafeteria_table" parent="Decor/Tables" unique_id=1171273467 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.99431944, 0, 0.10643761, 0, 1, 0, -0.10643761, 0, 0.99431944, -5.600757, 0.93716216, 6.100458)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table/Cube_002" parent_id_path=PackedInt32Array(1171273467, 1417517715) index="0" unique_id=175613207]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table/Cube_002" parent_id_path=PackedInt32Array(1171273467, 1750717533) index="0" unique_id=175613207]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table/Cube_002/StaticBody3D" unique_id=1951753733]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -118,7 +119,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table2" parent="Decor/Tables" unique_id=1570883236 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.997844, 0, -0.06562955, 0, 1, 0, 0.06562955, 0, 0.997844, 5.6578546, 0.93716216, 6.100458)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table2/Cube_002" parent_id_path=PackedInt32Array(1570883236, 1417517715) index="0" unique_id=1018209529]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table2/Cube_002" parent_id_path=PackedInt32Array(1570883236, 1750717533) index="0" unique_id=1018209529]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table2/Cube_002/StaticBody3D" unique_id=919265430]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -126,7 +127,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table3" parent="Decor/Tables" unique_id=1932463580 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.9974719, 0, -0.07106223, 0, 1, 0, 0.07106223, 0, 0.9974719, -5.600757, 0.93716216, 0.6405878)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table3/Cube_002" parent_id_path=PackedInt32Array(1932463580, 1417517715) index="0" unique_id=1071086329]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table3/Cube_002" parent_id_path=PackedInt32Array(1932463580, 1750717533) index="0" unique_id=1071086329]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table3/Cube_002/StaticBody3D" unique_id=558769338]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -134,7 +135,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table4" parent="Decor/Tables" unique_id=335631844 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.9999768, 0, 0.0068241507, 0, 1, 0, -0.0068241507, 0, 0.9999768, 5.6578546, 0.93716216, 0.6405878)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table4/Cube_002" parent_id_path=PackedInt32Array(335631844, 1417517715) index="0" unique_id=1811116843]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table4/Cube_002" parent_id_path=PackedInt32Array(335631844, 1750717533) index="0" unique_id=1811116843]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table4/Cube_002/StaticBody3D" unique_id=426332303]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -142,7 +143,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table5" parent="Decor/Tables" unique_id=146438068 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.998173, 0, 0.06042137, 0, 1, 0, -0.06042137, 0, 0.998173, -5.600757, 0.93716216, -3.748004)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table5/Cube_002" parent_id_path=PackedInt32Array(146438068, 1417517715) index="0" unique_id=392297947]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table5/Cube_002" parent_id_path=PackedInt32Array(146438068, 1750717533) index="0" unique_id=392297947]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table5/Cube_002/StaticBody3D" unique_id=1921374881]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -150,7 +151,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table12" parent="Decor/Tables" unique_id=1927601620 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.76059425, 0.6487665, 0.024465151, -0.64908606, 0.7606751, 0.0077864975, -0.013558393, -0.021802355, 0.9996703, -7.3839374, 2.4872062, -6.641906)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table12/Cube_002" parent_id_path=PackedInt32Array(1927601620, 1417517715) index="0" unique_id=1480037175]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table12/Cube_002" parent_id_path=PackedInt32Array(1927601620, 1750717533) index="0" unique_id=1480037175]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table12/Cube_002/StaticBody3D" unique_id=1186891921]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -158,7 +159,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table14" parent="Decor/Tables" unique_id=148616067 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.17410561, -0.6021427, 0.7355364, 0.71065503, 0.27968276, 0, -0.16479324, 0.5699359, 0.7771013, 4.6811724, 2.2589936, -28.331514)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table14/Cube_002" parent_id_path=PackedInt32Array(148616067, 1417517715) index="0" unique_id=99579051]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table14/Cube_002" parent_id_path=PackedInt32Array(148616067, 1750717533) index="0" unique_id=99579051]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table14/Cube_002/StaticBody3D" unique_id=2129567779]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -166,7 +167,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table15" parent="Decor/Tables" unique_id=180107298 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.5027617, -0.6067153, -0.28278005, -1.3933514e-08, 0.31163216, -0.9998386, 0.55653465, 0.548094, 0.25545755, 7.135132, 1.5322545, -25.308355)
 
-[node name="Cube_002" parent="Decor/Tables/cafeteria_table15" index="0" unique_id=1417517715]
+[node name="Cube_002" parent="Decor/Tables/cafeteria_table15" index="0" unique_id=1750717533]
 transform = Transform3D(1, -2.9802322e-08, 2.9802322e-08, 2.9802322e-08, 0.8713597, 7.4505806e-08, -3.7252903e-08, -1.4901161e-08, 0.729933, -0.11227226, -0.6897125, -0.2149725)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table15/Cube_002" index="0" unique_id=1850508657]
@@ -177,7 +178,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table6" parent="Decor/Tables" unique_id=501681696 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.93093485, 0, -0.36518553, 0, 1, 0, 0.36518553, 0, 0.93093485, 5.6578546, 0.93716216, -5.0553484)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table6/Cube_002" parent_id_path=PackedInt32Array(501681696, 1417517715) index="0" unique_id=710218493]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table6/Cube_002" parent_id_path=PackedInt32Array(501681696, 1750717533) index="0" unique_id=710218493]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table6/Cube_002/StaticBody3D" unique_id=838225905]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -185,7 +186,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table11" parent="Decor/Tables" unique_id=475926174 instance=ExtResource("7_63vvc")]
 transform = Transform3D(-0.5553672, 0, 0.8316053, 0, 1, 0, -0.8316053, 0, -0.5553672, 5.6578546, 1.9091749, -7.1000314)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table11/Cube_002" parent_id_path=PackedInt32Array(475926174, 1417517715) index="0" unique_id=1134618937]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table11/Cube_002" parent_id_path=PackedInt32Array(475926174, 1750717533) index="0" unique_id=1134618937]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table11/Cube_002/StaticBody3D" unique_id=1076527302]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -193,7 +194,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table13" parent="Decor/Tables" unique_id=1134943872 instance=ExtResource("7_63vvc")]
 transform = Transform3D(-0.5907889, 8.734108e-08, 0.80682623, 0.030761171, -0.99927294, 0.022524608, 0.8062396, 0.038126204, 0.5903594, 6.8196177, 1.9555225, -9.358707)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table13/Cube_002" parent_id_path=PackedInt32Array(1134943872, 1417517715) index="0" unique_id=2136521659]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table13/Cube_002" parent_id_path=PackedInt32Array(1134943872, 1750717533) index="0" unique_id=2136521659]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table13/Cube_002/StaticBody3D" unique_id=522712066]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -201,7 +202,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table7" parent="Decor/Tables" unique_id=1708609993 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.8161476, 0, 0.57784337, 0, 1, 0, -0.57784337, 0, 0.8161476, -5.600757, 0.93716216, -10.155647)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table7/Cube_002" parent_id_path=PackedInt32Array(1708609993, 1417517715) index="0" unique_id=968888073]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table7/Cube_002" parent_id_path=PackedInt32Array(1708609993, 1750717533) index="0" unique_id=968888073]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table7/Cube_002/StaticBody3D" unique_id=1470336150]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -209,7 +210,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table8" parent="Decor/Tables" unique_id=902124772 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.9988817, 0, 0.047280774, 0, 1, 0, -0.047280774, 0, 0.9988817, 5.6578546, 0.93716216, -10.155647)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table8/Cube_002" parent_id_path=PackedInt32Array(902124772, 1417517715) index="0" unique_id=1355464619]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table8/Cube_002" parent_id_path=PackedInt32Array(902124772, 1750717533) index="0" unique_id=1355464619]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Tables/cafeteria_table8/Cube_002/StaticBody3D" unique_id=1555478107]
 shape = SubResource("ConvexPolygonShape3D_cvta4")
@@ -217,7 +218,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table9" parent="Decor/Tables" unique_id=2048914351 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.9841183, 5.6898846e-09, 0.17751424, -0.10146745, 0.8205312, 0.5625237, -0.14565597, -0.5716017, 0.80749977, 5.6578546, 0.93716216, -12.48581)
 
-[node name="Cube_002" parent="Decor/Tables/cafeteria_table9" index="0" unique_id=1417517715]
+[node name="Cube_002" parent="Decor/Tables/cafeteria_table9" index="0" unique_id=1750717533]
 transform = Transform3D(0.99526733, -0.029372595, -0.06652446, 0.034474857, 0.870821, 0.0049938858, 0.09085067, -0.008671224, 0.7268777, -0.13928938, 0.07147694, 0.7422395)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table9/Cube_002" index="0" unique_id=1439794564]
@@ -228,7 +229,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="cafeteria_table10" parent="Decor/Tables" unique_id=1912922923 instance=ExtResource("7_63vvc")]
 transform = Transform3D(0.5375333, -0.17084612, -0.8257539, 0.30290222, 0.95302165, -1.3240277e-08, 0.7869614, -0.2501227, 0.5640305, -6.048419, 1.7259881, -11.396539)
 
-[node name="Cube_002" parent="Decor/Tables/cafeteria_table10" index="0" unique_id=1417517715]
+[node name="Cube_002" parent="Decor/Tables/cafeteria_table10" index="0" unique_id=1750717533]
 transform = Transform3D(1, 0, 0, 0, 0.87135977, 0, 0, 0, 0.729933, 0, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Decor/Tables/cafeteria_table10" unique_id=1643183011]
@@ -241,7 +242,7 @@ shape = SubResource("ConvexPolygonShape3D_cvta4")
 [node name="trashcan2" parent="Decor/Trashcans" unique_id=1975382905 instance=ExtResource("8_5fd8k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.56197, 0.33736947, 3.497315)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Trashcans/trashcan2/Cylinder_002" parent_id_path=PackedInt32Array(1975382905, 1198344782) index="0" unique_id=28635220]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Trashcans/trashcan2/Cylinder_002" parent_id_path=PackedInt32Array(1975382905, 429749877) index="0" unique_id=28635220]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Trashcans/trashcan2/Cylinder_002/StaticBody3D" unique_id=1764386862]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009033173, 0)
@@ -250,7 +251,7 @@ shape = SubResource("CylinderShape3D_gpd1t")
 [node name="trashcan6" parent="Decor/Trashcans" unique_id=948748866 instance=ExtResource("8_5fd8k")]
 transform = Transform3D(0.47221228, 7.7061856e-08, 0.88148487, 0, -1, 8.742278e-08, 0.88148487, -4.128211e-08, -0.47221228, -4.684462, 0.33736947, -8.089804)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Trashcans/trashcan6/Cylinder_002" parent_id_path=PackedInt32Array(948748866, 1198344782) index="0" unique_id=1197128758]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Trashcans/trashcan6/Cylinder_002" parent_id_path=PackedInt32Array(948748866, 429749877) index="0" unique_id=1197128758]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Trashcans/trashcan6/Cylinder_002/StaticBody3D" unique_id=1674709003]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009033173, 0)
@@ -259,7 +260,7 @@ shape = SubResource("CylinderShape3D_gpd1t")
 [node name="trashcan5" parent="Decor/Trashcans" unique_id=959547627 instance=ExtResource("8_5fd8k")]
 transform = Transform3D(0.17143047, -0.9751236, -0.14051956, -0.080761604, 0.12824166, -0.988449, 0.98188037, 0.18079889, -0.056768022, 3.6834893, 0.2823437, -8.168985)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Trashcans/trashcan5/Cylinder_002" parent_id_path=PackedInt32Array(959547627, 1198344782) index="0" unique_id=1341439539]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Trashcans/trashcan5/Cylinder_002" parent_id_path=PackedInt32Array(959547627, 429749877) index="0" unique_id=1341439539]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Trashcans/trashcan5/Cylinder_002/StaticBody3D" unique_id=434897899]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009033173, 0)
@@ -268,7 +269,7 @@ shape = SubResource("CylinderShape3D_gpd1t")
 [node name="trashcan4" parent="Decor/Trashcans" unique_id=1637922123 instance=ExtResource("8_5fd8k")]
 transform = Transform3D(0.52744526, 0, 0.84958905, 0, 1, 0, -0.84958905, 0, 0.52744526, -7.748817, 1.3153902, -9.081999)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Trashcans/trashcan4/Cylinder_002" parent_id_path=PackedInt32Array(1637922123, 1198344782) index="0" unique_id=781023578]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Trashcans/trashcan4/Cylinder_002" parent_id_path=PackedInt32Array(1637922123, 429749877) index="0" unique_id=781023578]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Trashcans/trashcan4/Cylinder_002/StaticBody3D" unique_id=455602159]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009033173, 0)
@@ -277,7 +278,7 @@ shape = SubResource("CylinderShape3D_gpd1t")
 [node name="trashcan3" parent="Decor/Trashcans" unique_id=721612792 instance=ExtResource("8_5fd8k")]
 transform = Transform3D(1, 0, 0, 0, 0.090632536, -0.9958844, 0, 0.9958844, 0.090632536, 8.5014305, 0.25684002, 2.578651)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Trashcans/trashcan3/Cylinder_002" parent_id_path=PackedInt32Array(721612792, 1198344782) index="0" unique_id=1495173314]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Trashcans/trashcan3/Cylinder_002" parent_id_path=PackedInt32Array(721612792, 429749877) index="0" unique_id=1495173314]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Trashcans/trashcan3/Cylinder_002/StaticBody3D" unique_id=903132956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009033173, 0)
@@ -288,7 +289,7 @@ shape = SubResource("CylinderShape3D_gpd1t")
 [node name="baine" parent="Decor/Baines" unique_id=92869 instance=ExtResource("9_5fd8k")]
 transform = Transform3D(0.72644275, 0, 0.687227, 0, 1, 0, -0.687227, 0, 0.72644275, -6.5593653, 0.4867965, -26.982216)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Baines/baine/Cube_002" parent_id_path=PackedInt32Array(92869, 1369399693) index="0" unique_id=1749423179]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Baines/baine/Cube_002" parent_id_path=PackedInt32Array(92869, 2048098205) index="0" unique_id=1749423179]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Baines/baine/Cube_002/StaticBody3D" unique_id=1967275041]
 shape = SubResource("ConcavePolygonShape3D_ud1vd")
@@ -296,7 +297,7 @@ shape = SubResource("ConcavePolygonShape3D_ud1vd")
 [node name="baine5" parent="Decor/Baines" unique_id=1352229478 instance=ExtResource("9_5fd8k")]
 transform = Transform3D(0.38402134, 0, -0.9233242, 0, 1, 0, 0.9233242, 0, 0.38402134, -7.803053, 0.4867965, -21.319866)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Baines/baine5/Cube_002" parent_id_path=PackedInt32Array(1352229478, 1369399693) index="0" unique_id=1954528702]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Baines/baine5/Cube_002" parent_id_path=PackedInt32Array(1352229478, 2048098205) index="0" unique_id=1954528702]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Baines/baine5/Cube_002/StaticBody3D" unique_id=822940681]
 shape = SubResource("ConvexPolygonShape3D_5fd8k")
@@ -304,7 +305,7 @@ shape = SubResource("ConvexPolygonShape3D_5fd8k")
 [node name="baine2" parent="Decor/Baines" unique_id=1596102852 instance=ExtResource("9_5fd8k")]
 transform = Transform3D(0.98477745, 0, 0.17382005, 0, 1, 0, -0.17382005, 0, 0.98477745, 0.018131256, 0.4867965, -17.029636)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Baines/baine2/Cube_002" parent_id_path=PackedInt32Array(1596102852, 1369399693) index="0" unique_id=1426315319]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Baines/baine2/Cube_002" parent_id_path=PackedInt32Array(1596102852, 2048098205) index="0" unique_id=1426315319]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Baines/baine2/Cube_002/StaticBody3D" unique_id=811127205]
 shape = SubResource("ConvexPolygonShape3D_5fd8k")
@@ -312,7 +313,7 @@ shape = SubResource("ConvexPolygonShape3D_5fd8k")
 [node name="baine3" parent="Decor/Baines" unique_id=2098607265 instance=ExtResource("9_5fd8k")]
 transform = Transform3D(0.99106485, 0, -0.1333808, 0, 1, 0, 0.1333808, 0, 0.99106485, -6.736304, 0.4867965, -17.412766)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Baines/baine3/Cube_002" parent_id_path=PackedInt32Array(2098607265, 1369399693) index="0" unique_id=2116868119]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Baines/baine3/Cube_002" parent_id_path=PackedInt32Array(2098607265, 2048098205) index="0" unique_id=2116868119]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Baines/baine3/Cube_002/StaticBody3D" unique_id=1366646952]
 shape = SubResource("ConvexPolygonShape3D_5fd8k")
@@ -320,7 +321,7 @@ shape = SubResource("ConvexPolygonShape3D_5fd8k")
 [node name="baine4" parent="Decor/Baines" unique_id=2108957650 instance=ExtResource("9_5fd8k")]
 transform = Transform3D(-0.3499622, 0, 0.9367638, 0, 1, 0, -0.9367638, 0, -0.3499622, 7.8178787, 0.4867965, -19.86907)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Baines/baine4/Cube_002" parent_id_path=PackedInt32Array(2108957650, 1369399693) index="0" unique_id=563825448]
+[node name="StaticBody3D" type="StaticBody3D" parent="Decor/Baines/baine4/Cube_002" parent_id_path=PackedInt32Array(2108957650, 2048098205) index="0" unique_id=563825448]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/Baines/baine4/Cube_002/StaticBody3D" unique_id=98543051]
 shape = SubResource("ConvexPolygonShape3D_5fd8k")
