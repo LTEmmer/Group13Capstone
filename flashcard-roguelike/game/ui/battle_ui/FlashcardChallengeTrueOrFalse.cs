@@ -168,21 +168,20 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 
 	private static Flashcard GetRandomDifferentCard(Flashcard excludeCard)
 	{
-		// Pick a random card and check if its the same
-		Flashcard card = FlashcardManager.Instance?.GetRandomCard();
+		List<Flashcard> others = FlashcardManager.Instance?.GetActiveCards();
 
-		if (FlashcardManager.Instance.GetActiveCardCount() <= 1)
+		if (others == null || others.Count == 0)
 		{
-			// If there's only one card, we can't get a different one, so return card
-			return card;
+			return excludeCard;
 		}
 
-		while (card == excludeCard)
-		{
-			card = FlashcardManager.Instance?.GetRandomCard();
-		}
+		others.Remove(excludeCard);
 
-		// Fall back to the original card if the deck has only one card
-		return card;
+		if (others.Count == 0)
+		{
+			return excludeCard;
+		}
+		
+		return others[GD.RandRange(0, others.Count - 1)];
 	}
 }

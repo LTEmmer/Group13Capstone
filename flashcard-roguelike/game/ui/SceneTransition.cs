@@ -15,6 +15,7 @@ public static class SceneTransition
         layer.AddChild(overlay);
 
         var tween = context.CreateTween();
+        tween.SetPauseMode(Tween.TweenPauseMode.Process);
         tween.TweenProperty(overlay, "color:a", 1.0f, duration);
         if (onComplete != null)
             tween.TweenCallback(Callable.From(onComplete));
@@ -30,6 +31,7 @@ public static class SceneTransition
         layer.AddChild(overlay);
 
         var tween = context.CreateTween();
+        tween.SetPauseMode(Tween.TweenPauseMode.Process);
         tween.TweenProperty(overlay, "color:a", 0.0f, duration);
         tween.TweenCallback(Callable.From(layer.QueueFree));
     }

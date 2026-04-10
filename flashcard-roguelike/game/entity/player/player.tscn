@@ -18063,11 +18063,12 @@ BaseDamage = 100.0
 AttackSounds = Array[AudioStream]([ExtResource("12_4j27x"), ExtResource("13_0jrw7"), ExtResource("22_6rqdb"), ExtResource("23_l0vtf"), ExtResource("24_8vwb3")])
 MissSounds = Array[AudioStream]([])
 
-[node name="HealthComponent" parent="." unique_id=58685042 instance=ExtResource("3_health")]
+[node name="HealthComponent" parent="." unique_id=58685042 node_paths=PackedStringArray("PlayerCamera") instance=ExtResource("3_health")]
 IsPlayer = true
 HurtSounds = Array[AudioStream]([ExtResource("13_cawmy"), ExtResource("14_chnj6"), ExtResource("28_5jc0j"), ExtResource("29_h2rmy"), ExtResource("30_l4byk"), ExtResource("31_h2xdj")])
 BlockSounds = Array[AudioStream]([ExtResource("18_je5mu"), ExtResource("19_k8egu"), ExtResource("34_6wk8s"), ExtResource("35_0vqd7"), ExtResource("36_icsuc")])
 DeathSound = Array[AudioStream]([ExtResource("15_kmnjn"), ExtResource("16_4j27x"), ExtResource("39_yna46"), ExtResource("40_6qpfs")])
+PlayerCamera = NodePath("../CameraPivot/Camera3D")
 
 [node name="InventoryComponent" parent="." unique_id=288412274 instance=ExtResource("5_inventory")]
 

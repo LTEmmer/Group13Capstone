@@ -5,4 +5,5 @@ public sealed class FlashcardSet
 {
 	public string DisplayName { get; set; }
 	public List<Flashcard> Cards { get; set; }
+	public bool IsActive { get; set; } = true;
 }

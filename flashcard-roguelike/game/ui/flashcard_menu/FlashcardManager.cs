@@ -13,6 +13,10 @@ public partial class FlashcardManager : Node
 	private List<Flashcard> _cardCache = null;
 	private readonly Random _random = new();
 
+	// Shuffled deck for cycle-through drawing, every card is dealt once before reshuffling
+	private List<Flashcard> _shuffledDeck = null;
+	private int _deckIndex = 0;
+
 	public List<FlashcardSet> ActiveFlashCardLists
 	{
 		get {
@@ -50,7 +54,7 @@ public partial class FlashcardManager : Node
 	{
 		FlashcardSet set = new FlashcardCsvLoader().ImportCsv(csvPath, setName);
 
-		if (set != null)
+		if (set != null && !AvailableSets.Exists(s => s.DisplayName == set.DisplayName))
 		{
 			_persistence.SaveSet(set);
 			AvailableSets.Add(set);
@@ -58,33 +62,78 @@ public partial class FlashcardManager : Node
 		}
 	}
 
+	public void CreateAndSaveSet(string displayName, List<Flashcard> cards)
+	{
+		if (string.IsNullOrWhiteSpace(displayName) || cards == null || cards.Count == 0)
+		{
+			GD.PushError("CreateAndSaveSet: displayName is empty or cards list is null/empty.");
+			return;
+		}
+		
+		string trimmed = displayName.Trim();
+		if (AvailableSets.Exists(s => s.DisplayName == trimmed))
+		{
+			GD.PushError($"CreateAndSaveSet: a set named '{trimmed}' already exists.");
+			return;
+		}
+		var set = new FlashcardSet { DisplayName = trimmed, Cards = cards };
+		_persistence.SaveSet(set);
+		AvailableSets.Add(set);
+		_cardCache = null;
+	}
+
+	public void SetActive(string displayName, bool active)
+	{
+		FlashcardSet set = AvailableSets.Find(s => s.DisplayName == displayName);
+		if (set == null) 
+		{
+			return;
+		}
+
+		set.IsActive = active;
+		_persistence.SaveSet(set);
+		_cardCache = null;
+	}
+
 	private void BuildCardCache()
 	{
 		_cardCache = new();
 		foreach (var set in AvailableSets)
 		{
-			if (set.Cards != null)
+			if (set.IsActive && set.Cards != null)
 				_cardCache.AddRange(set.Cards);
 		}
+
+		_shuffledDeck = new List<Flashcard>(_cardCache);
+		ShuffleDeck();
 	}
 
-	// Returns a random flashcard drawn from all active sets.
-	// Uses a cached flat card list rebuilt only when sets are added or removed.
+	private void ShuffleDeck()
+	{
+		for (int i = _shuffledDeck.Count - 1; i > 0; i--)
+		{
+			int j = _random.Next(i + 1);
+			(_shuffledDeck[i], _shuffledDeck[j]) = (_shuffledDeck[j], _shuffledDeck[i]);
+		}
+		_deckIndex = 0;
+	}
+
+	// Returns a flashcard drawn from a shuffled deck. Every card is dealt once before reshuffling.
 	public Flashcard GetRandomCard()
 	{
-		// Build cache if missing or invalidated
 		if (_cardCache == null)
-		{
 			BuildCardCache();
-		}
 
-		if (_cardCache.Count == 0)
+		if (_shuffledDeck.Count == 0)
 		{
 			GD.PrintErr("FlashcardManager: No flashcards available in active sets.");
 			return null;
 		}
 
-		return _cardCache[_random.Next(_cardCache.Count)];
+		if (_deckIndex >= _shuffledDeck.Count)
+			ShuffleDeck();
+
+		return _shuffledDeck[_deckIndex++];
 	}
 
 	public List<Flashcard> GetActiveCards()
@@ -100,6 +149,11 @@ public partial class FlashcardManager : Node
 	public int GetActiveCardCount()
 	{
 		return _cardCache.Count;
+	}
+
+	public bool HasActiveSet()
+	{
+		return AvailableSets.Exists(s => s.IsActive && s.Cards != null && s.Cards.Count > 0);
 	}
 
 	// Delete a flashcard set from available sets and from the file system
