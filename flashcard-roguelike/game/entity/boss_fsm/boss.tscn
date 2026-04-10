@@ -1,13 +1,22 @@
 [gd_scene format=4 uid="uid://ds5f3mbj7qseo"]
 
-[ext_resource type="Script" uid="uid://spx4ccxppifn" path="res://game/entity/boss_fsm/Boss.cs" id="1_fp8j3"]
+[ext_resource type="Script" uid="uid://bgwolxo5ukgjk" path="res://game/entity/boss_fsm/Boss.cs" id="1_fp8j3"]
 [ext_resource type="Script" uid="uid://jeb4wjju0mrt" path="res://game/entity/enemy_fsm/EModel.cs" id="2_7vggu"]
 [ext_resource type="Script" uid="uid://ddtmfu4q1u2ll" path="res://game/entity/enemy_fsm/EnemyBaseState.cs" id="3_pjdtl"]
 [ext_resource type="Script" uid="uid://d3k53cusqoiuv" path="res://game/entity/enemy_fsm/EnemyIdle.cs" id="4_mmvcq"]
 [ext_resource type="Script" uid="uid://f41526eebk7j" path="res://game/entity/enemy_fsm/Death.cs" id="5_7q84l"]
+[ext_resource type="Script" uid="uid://vtk5k5eh25lc" path="res://game/entity/enemy_fsm/IdleBattle.cs" id="6_3h4h3"]
 [ext_resource type="PackedScene" uid="uid://ci0hdg6g3o0ny" path="res://shared/components/attack/attack_component.tscn.tscn" id="6_8r88a"]
 [ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="7_3h4h3"]
+[ext_resource type="Script" uid="uid://dbi84gy5bv2m1" path="res://game/entity/enemy_fsm/Attack.cs" id="7_i3ob8"]
 [ext_resource type="PackedScene" uid="uid://c6v5m2qas1t4q" path="res://shared/components/enemy_status/enemy_status_component.tscn" id="8_i3ob8"]
+[ext_resource type="Script" uid="uid://cseiqj66a5vmt" path="res://game/entity/enemy_fsm/MoveIn.cs" id="8_socvb"]
+[ext_resource type="Script" uid="uid://sxa7g5h3u2b1" path="res://game/entity/enemy_fsm/MoveBack.cs" id="9_nbw7f"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efiqk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xfgue"]
+radius = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43spn"]
 resource_name = "M_Main"
@@ -21,7 +30,7 @@ cull_mode = 2
 albedo_color = Color(0.93147814, 0.28525272, 0, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_socvb"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_8r88a"]
 resource_name = "AnimationLibrary_Godot_Standard_Mannequin"
 _surfaces = [{
 "aabb": AABB(-0.9722271, 0.000461441, -0.16415405, 1.9444542, 1.8287165, 0.3695984),
@@ -56,7 +65,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="Skin" id="Skin_nbw7f"]
+[sub_resource type="Skin" id="Skin_3h4h3"]
 resource_name = "Skin"
 bind_count = 53
 bind/0/name = &"Root"
@@ -17487,7 +17496,7 @@ tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/keys = PackedFloat32Array(0, 1, 0.015115627, -0.9508219, -0.3093302, 0.0049175126, 0.033333335, 1, 0.013090193, -0.96043867, -0.2781585, 0.0037910868, 0.06666667, 1, -0.008891741, 0.9792213, 0.20259184, -0.0018396229, 0.1, 1, -0.0046144673, 0.99384594, 0.11067316, -0.0005137976, 0.13333334, 1, 0.0013405154, -0.9994619, -0.03277853, 4.3960346e-05, 0.16666667, 1, 3.260824e-08, -1, -8.940697e-08, -4.80223e-08, 1, 1, -4.4076177e-08, -1, -5.9604645e-08, -1.967916e-08, 1.0333333, 1, 0.00036042184, -0.999961, -0.008828014, 3.1615054e-06, 1.0666667, 1, 0.001340579, -0.9994617, -0.03277868, 4.394329e-05, 1.1, 1, -0.0027990793, 0.99767995, 0.06802145, -0.00019081426, 1.1333333, 1, -0.004614467, 0.99384594, 0.11067316, -0.00051383185, 1.2, 1, -0.008891799, 0.97922134, 0.2025919, -0.0018395903, 1.2333333, 1, 0.0111005055, -0.9696499, -0.24422976, 0.0027958862, 1.2666667, 1, 0.013090209, -0.96043855, -0.2781586, 0.003791093, 1.3, 1, 0.014551079, -0.95351106, -0.30097157, 0.00459294, 1.3333334, 1, 0.015115629, -0.950822, -0.30933022, 0.0049175126)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bg6qk"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i3ob8"]
 _data = {
 &"A_TPose": SubResource("Animation_58ljg"),
 &"Crouch_Fwd": SubResource("Animation_1w0j2"),
@@ -17537,11 +17546,6 @@ _data = {
 &"Walk_Formal": SubResource("Animation_xxhq3")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_efiqk"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_xfgue"]
-radius = 3.0
-
 [node name="Boss" type="CharacterBody3D" unique_id=1938171652 node_paths=PackedStringArray("attackComponent", "healthComponent", "EnemyModel", "DetectionArea")]
 script = ExtResource("1_fp8j3")
 attackComponent = NodePath("AttackComponent")
@@ -17557,32 +17561,71 @@ StateContainer = NodePath("States")
 
 [node name="States" type="Node" parent="EModel" unique_id=1114994785]
 
-[node name="EnemyBaseState" type="Node" parent="EModel/States" unique_id=1743530150 node_paths=PackedStringArray("animator")]
+[node name="EnemyBaseState" type="Node" parent="EModel/States" unique_id=1451304676]
 script = ExtResource("3_pjdtl")
 StateName = "base_state"
-animator = NodePath("")
 
-[node name="Idle" type="Node" parent="EModel/States" unique_id=1322801767 node_paths=PackedStringArray("animator")]
+[node name="Idle" type="Node" parent="EModel/States" unique_id=1105964345 node_paths=PackedStringArray("PursuitDetector", "animator")]
 script = ExtResource("4_mmvcq")
-_staticEnemy = true
+PursuitDetector = NodePath("../../../Area3D")
 StateName = "idle"
 StateAnimation = "Idle"
 animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="Death" type="Node" parent="EModel/States" unique_id=1585268439 node_paths=PackedStringArray("animator")]
+[node name="Death" type="Node" parent="EModel/States" unique_id=1814176630 node_paths=PackedStringArray("animator")]
 script = ExtResource("5_7q84l")
 StateName = "death"
 StateAnimation = "Death01"
 animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="EnemyVisuals" type="Node3D" parent="." unique_id=425883158]
+[node name="IdleBattle" type="Node" parent="EModel/States" unique_id=1372894632 node_paths=PackedStringArray("Rig", "animator")]
+script = ExtResource("6_3h4h3")
+Rig = NodePath("../../../EnemyVisuals/Rig")
+StateName = "idlebattle"
+StateAnimation = "Sword_Idle"
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="Rig" type="Node3D" parent="EnemyVisuals" unique_id=1003664794]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, -1, 0)
+[node name="Attack" type="Node" parent="EModel/States" unique_id=499708582 node_paths=PackedStringArray("animator")]
+script = ExtResource("7_i3ob8")
+StateName = "attack"
+StateAnimation = "Sword_Attack"
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="GeneralSkeleton" type="Skeleton3D" parent="EnemyVisuals/Rig" unique_id=2078623334]
+[node name="MoveIn" type="Node" parent="EModel/States" unique_id=782273112 node_paths=PackedStringArray("animator")]
+script = ExtResource("8_socvb")
+StateName = "movein"
+StateAnimation = "Sword_Idle"
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
+
+[node name="MoveBack" type="Node" parent="EModel/States" unique_id=1366890591 node_paths=PackedStringArray("moveIn", "animator")]
+script = ExtResource("9_nbw7f")
+moveIn = NodePath("../MoveIn")
+StateName = "moveback"
+StateAnimation = "Sword_Idle"
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
+
+[node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("6_8r88a")]
+
+[node name="HealthComponent" parent="." unique_id=495182273 instance=ExtResource("7_3h4h3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1700821662]
+shape = SubResource("CapsuleShape3D_efiqk")
+
+[node name="EnemyStatusComponent" parent="." unique_id=153576658 instance=ExtResource("8_i3ob8")]
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1692945024]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=956372600]
+shape = SubResource("SphereShape3D_xfgue")
+debug_color = Color(0.9939484, 0.07460917, 1.92523e-07, 0.41960785)
+
+[node name="EnemyVisuals" type="Node3D" parent="." unique_id=1323213528]
+
+[node name="Rig" type="Node3D" parent="EnemyVisuals" unique_id=1110631558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="GeneralSkeleton" type="Skeleton3D" parent="EnemyVisuals/Rig" unique_id=712749398]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 motion_scale = 0.9167
 bones/0/name = "Root"
 bones/0/parent = -1
@@ -17956,26 +17999,11 @@ bones/52/position = Vector3(3.5171341e-09, 0.14900002, -0.08849997)
 bones/52/rotation = Quaternion(4.409676e-08, 1, 5.9604645e-08, 1.9452786e-08)
 bones/52/scale = Vector3(1, 1, 1)
 
-[node name="Mannequin" type="MeshInstance3D" parent="EnemyVisuals/Rig/GeneralSkeleton" unique_id=1099630697]
-mesh = SubResource("ArrayMesh_socvb")
-skin = SubResource("Skin_nbw7f")
+[node name="Mannequin" type="MeshInstance3D" parent="EnemyVisuals/Rig/GeneralSkeleton" unique_id=236799088]
+mesh = SubResource("ArrayMesh_8r88a")
+skin = SubResource("Skin_3h4h3")
 skeleton = NodePath("..")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemyVisuals" unique_id=1532759125]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemyVisuals" unique_id=1498429779]
 root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_bg6qk")
-
-[node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("6_8r88a")]
-
-[node name="HealthComponent" parent="." unique_id=495182273 instance=ExtResource("7_3h4h3")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1700821662]
-shape = SubResource("CapsuleShape3D_efiqk")
-
-[node name="EnemyStatusComponent" parent="." unique_id=153576658 instance=ExtResource("8_i3ob8")]
-
-[node name="Area3D" type="Area3D" parent="." unique_id=1692945024]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=956372600]
-shape = SubResource("SphereShape3D_xfgue")
-debug_color = Color(0.9939484, 0.07460917, 1.92523e-07, 0.41960785)
+libraries/ = SubResource("AnimationLibrary_i3ob8")

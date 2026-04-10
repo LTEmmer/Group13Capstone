@@ -196,7 +196,6 @@ public class CombatResolver
     private void ExecuteEnemyAttack(bool fullDamage)
     {
         var enemy = _state.AliveEnemies[_state.CurrentEnemyIndex];
-        enemy.EnemyModel.Player = _state.Player;
         enemy.EnemyModel.SwitchTo(StateNames.movein);
 
         // No damage case handle immediately, nothing to defer
