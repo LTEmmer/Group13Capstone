@@ -7,10 +7,14 @@ public partial class Player : CharacterBody3D
 	public CanvasLayer PauseMenu;
 
 	[Export]
-	public InventoryUI InventoryUI;
+	public Inventory InventoryCanvas;
 
 	[Export]
 	public Node3D CameraMount;
+
+	[Export] 
+	public RayCast3D sightline;
+
 	[Export]
 	// _speed of camera
 	public float MouseSensitivity { get; set; } = 0.002f;
@@ -50,30 +54,30 @@ public partial class Player : CharacterBody3D
 	private bool _acceptKeyboardInput = true;
 	private const float PitchVariance = 0.1f; // Random pitch variance for footstep sounds
 
-
 	public AudioStreamPlayer3D FootstepSoundPlayer;
 	public AudioStreamPlayer3D JumpSoundPlayer;
 
+	private Interactable oldInteractable = null;
 	public override void _Ready()
 	{
 		_cameraPivot = GetNode<Node3D>("CameraPivot");
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		// Ensure we have a reference to InventoryUI
-		if (InventoryUI == null)
-			InventoryUI = GetNodeOrNull<InventoryUI>("CameraPivot/Camera3D/InventoryUI");
 
 		FootstepSoundPlayer = GetNode<AudioStreamPlayer3D>("FootstepSoundPlayer");
 		JumpSoundPlayer = GetNode<AudioStreamPlayer3D>("JumpSoundPlayer");
 	}
-
+	
 	public override void _Input(InputEvent @event)
 	{
-		if (InventoryUI != null)
+		if (@event.IsActionPressed("inventory_toggle"))
 		{
-			if (@event.IsActionPressed("inventory_toggle"))
-				InventoryUI.SetVisible(true);
-			else if (@event.IsActionReleased("inventory_toggle"))
-				InventoryUI.SetVisible(false);
+			InventoryCanvas.SetVisible(true);
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
+		else if (@event.IsActionReleased("inventory_toggle"))
+		{
+			InventoryCanvas.SetVisible(false);
+			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 
 		if (Input.MouseMode == Input.MouseModeEnum.Captured)
@@ -87,6 +91,18 @@ public partial class Player : CharacterBody3D
 				_pitch -= motion.Relative.Y * MouseSensitivity;
 				_pitch = Mathf.Clamp(_pitch, -Mathf.DegToRad(MaxPitchDegrees), Mathf.DegToRad(MaxPitchDegrees));
 				_cameraPivot.Rotation = new Vector3(_pitch, 0, 0);
+			}
+		}
+
+		if (@event.IsActionPressed("interact") && sightline.IsColliding())
+		{
+
+			var colider = sightline.GetCollider() as Node;
+			if (colider.IsInGroup("Interactable"))
+			{
+        		if (colider is Interactable interactable){
+            		interactable.Interact(this);
+        		}
 			}
 		}
 	}
@@ -145,6 +161,25 @@ public partial class Player : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		Interactable newInteractable = null;
+
+    	if (sightline.IsColliding())
+    	{
+        	var collider = sightline.GetCollider() as Node;
+        	if (collider is Interactable interactable)
+            	newInteractable = interactable;
+    	}
+
+    	if (newInteractable != oldInteractable)
+    	{
+        	if (IsInstanceValid(oldInteractable))
+            	oldInteractable?.HoverEnd(this);
+        	if (IsInstanceValid(newInteractable))
+            	newInteractable?.HoverStart(this);
+
+        	oldInteractable = newInteractable;
+    	}
+
 		//Get input
 		if (_acceptKeyboardInput){
 

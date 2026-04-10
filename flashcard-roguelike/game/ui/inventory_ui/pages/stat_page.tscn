@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://qy5qpb6mote0"]
+
+[ext_resource type="Script" uid="uid://rxbaww6ktbg1" path="res://game/ui/inventory_ui/pages/StatPage.cs" id="1_rmbdi"]
+[ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="2_gvg4i"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="3_b15ck"]
+
+[node name="StatPage" type="Control" unique_id=758058895 node_paths=PackedStringArray("_dropButton", "description")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -656.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rmbdi")
+_dropButton = NodePath("VBoxContainer/HBoxContainer2/Button")
+description = NodePath("VBoxContainer/HBoxContainer/RichTextLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1787377405]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1963459934]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1330005620]
+layout_mode = 2
+texture = ExtResource("2_gvg4i")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=1477368649]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 32
+text = "asdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfa"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1269351363]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1357072600]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_b15ck")
+text = "Drop"

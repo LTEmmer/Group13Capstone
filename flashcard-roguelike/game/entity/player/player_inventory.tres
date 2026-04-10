@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryResource" format=3]
+
+[ext_resource type="Script" uid="uid://dynjrh86o12xj" path="res://shared/resources/ItemInstance.cs" id="1_jm1vd"]
+[ext_resource type="Script" uid="uid://cx8gnqpenfm8f" path="res://shared/resources/InventoryResource.cs" id="2_228gr"]
+
+[resource]
+script = ExtResource("2_228gr")
+Items = Array[ExtResource("1_jm1vd")]([Object(Object,"script":ExtResource("1_jm1vd"))
+, Object(Object,"script":ExtResource("1_jm1vd"))
+])
+metadata/_custom_type_script = "uid://cx8gnqpenfm8f"

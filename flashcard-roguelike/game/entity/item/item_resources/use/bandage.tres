@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://biapbeaft61wq"]
+
+[ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="1_1dv1i"]
+[ext_resource type="Texture2D" uid="uid://bktwg2fwo3flq" path="res://assets/sprites/heart-plus-yellow.svg" id="4_up4ha"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="5_det7y"]
+
+[resource]
+script = ExtResource("5_det7y")
+Name = "Bandage"
+Icon = ExtResource("4_up4ha")
+Description = "Can heal the player for 5 hp in combat."
+Behavior = 1
+MaxUses = 1
+UseEffects = Array[ExtResource("1_1dv1i")]([])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"

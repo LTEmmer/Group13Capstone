@@ -1,51 +1,52 @@
 [gd_scene format=4 uid="uid://ceim8jmtkr6d5"]
 
-[ext_resource type="Script" uid="uid://uc2jvp48gwdm" path="res://game/entity/player/Player.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://bd1l7xc6cbgd5" path="res://game/entity/player/Player.cs" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="2_0b5cm"]
 [ext_resource type="Script" uid="uid://btg7o2uoiswpk" path="res://game/entity/player/InputGatherer.cs" id="2_7qfun"]
-[ext_resource type="AudioStream" uid="uid://b7ulp5fykhnwx" path="res://assets/audio/player_sfx/footsteps_sfx/footstep_1.mp3" id="2_8um7f"]
+[ext_resource type="AudioStream" uid="uid://b0mxhdoifrhp" path="res://assets/audio/player_sfx/footsteps_sfx/footstep_1.mp3" id="2_8um7f"]
 [ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="3_health"]
 [ext_resource type="Script" uid="uid://bldnf8cvthjgs" path="res://game/entity/player/Model.cs" id="3_hs80g"]
-[ext_resource type="AudioStream" uid="uid://21vdnpelx5q5" path="res://assets/audio/player_sfx/footsteps_sfx/footstep_2.mp3" id="3_kycdh"]
+[ext_resource type="AudioStream" uid="uid://cnmxgwueere2f" path="res://assets/audio/player_sfx/footsteps_sfx/footstep_2.mp3" id="3_kycdh"]
 [ext_resource type="PackedScene" uid="uid://ci0hdg6g3o0ny" path="res://shared/components/attack/attack_component.tscn.tscn" id="4_dmj0o"]
 [ext_resource type="PackedScene" uid="uid://b3in5lpjk8qjr" path="res://game/ui/hud/hud.tscn" id="4_hud"]
 [ext_resource type="Script" uid="uid://dbe6lgfx2qgwm" path="res://game/entity/player/states/BaseState.cs" id="4_lw321"]
-[ext_resource type="AudioStream" uid="uid://6ict1n8ycugt" path="res://assets/audio/player_sfx/footsteps_sfx/footstep_3.mp3" id="4_otk8c"]
+[ext_resource type="AudioStream" uid="uid://dwlyic2d13j06" path="res://assets/audio/player_sfx/footsteps_sfx/footstep_3.mp3" id="4_otk8c"]
 [ext_resource type="PackedScene" uid="uid://bdvt8t1u8oocj" path="res://shared/components/inventory/inventory_component.tscn" id="5_inventory"]
-[ext_resource type="AudioStream" uid="uid://ddj5stonp81nr" path="res://assets/audio/player_sfx/jumping_sfx/jump_1.mp3" id="5_mb70y"]
+[ext_resource type="AudioStream" uid="uid://cgjg46qn2toi4" path="res://assets/audio/player_sfx/jumping_sfx/jump_1.mp3" id="5_mb70y"]
 [ext_resource type="Script" uid="uid://dda0tplggcagx" path="res://game/entity/player/states/Idle.cs" id="5_q523c"]
-[ext_resource type="AudioStream" uid="uid://dgfydlejy72vw" path="res://assets/audio/player_sfx/jumping_sfx/jump_2.mp3" id="6_b6ajd"]
+[ext_resource type="AudioStream" uid="uid://dqkadqmmupux" path="res://assets/audio/player_sfx/jumping_sfx/jump_2.mp3" id="6_b6ajd"]
 [ext_resource type="Script" uid="uid://dm77pk370xucl" path="res://game/entity/player/states/Run.cs" id="6_idvai"]
 [ext_resource type="PackedScene" uid="uid://inventoryui" path="res://game/ui/inventory_ui/inventory_ui.tscn" id="6_inventory_ui"]
-[ext_resource type="AudioStream" uid="uid://d1id1c8wiwedn" path="res://assets/audio/player_sfx/landing_sfx/landing_1.mp3" id="7_02rvq"]
+[ext_resource type="AudioStream" uid="uid://ys4tjbtjgmvv" path="res://assets/audio/player_sfx/landing_sfx/landing_1.mp3" id="7_02rvq"]
 [ext_resource type="Script" uid="uid://dbyltosnfiqpd" path="res://game/entity/player/states/Sprint.cs" id="7_ewdpy"]
 [ext_resource type="AudioStream" uid="uid://da47s5ntl7a0w" path="res://assets/audio/player_sfx/jumping_sfx/jump_3.mp3" id="7_ria7k"]
-[ext_resource type="AudioStream" uid="uid://2rtmv85w4kx" path="res://assets/audio/player_sfx/landing_sfx/landing_2.mp3" id="8_20bnd"]
+[ext_resource type="AudioStream" uid="uid://bcbobax6jptvr" path="res://assets/audio/player_sfx/landing_sfx/landing_2.mp3" id="8_20bnd"]
 [ext_resource type="Script" uid="uid://df41wfekyp1yg" path="res://game/entity/player/states/Jump.cs" id="8_vp686"]
 [ext_resource type="Script" uid="uid://dntnvhh4bccxr" path="res://game/entity/player/states/Midair.cs" id="9_ka5uw"]
 [ext_resource type="Script" uid="uid://sjpebhc72dj6" path="res://game/entity/player/states/Landing.cs" id="10_vqr5b"]
-[ext_resource type="AudioStream" uid="uid://p4r723gwqgv7" path="res://assets/audio/player_sfx/attack_sfx/attack_1.mp3" id="12_4j27x"]
-[ext_resource type="AudioStream" uid="uid://bt7hjmfkgqxy3" path="res://assets/audio/player_sfx/attack_sfx/attack_2.mp3" id="13_0jrw7"]
-[ext_resource type="AudioStream" uid="uid://xncbq50buvpt" path="res://assets/audio/player_sfx/hurt_sfx/hurt_1.mp3" id="13_cawmy"]
-[ext_resource type="AudioStream" uid="uid://bucnvmexgmeq4" path="res://assets/audio/player_sfx/hurt_sfx/hurt_2.mp3" id="14_chnj6"]
-[ext_resource type="AudioStream" uid="uid://b1e5raryts66n" path="res://assets/audio/player_sfx/death_sfx/death_1.mp3" id="15_kmnjn"]
+[ext_resource type="AudioStream" uid="uid://b08qg74r2ar44" path="res://assets/audio/player_sfx/attack_sfx/attack_1.mp3" id="12_4j27x"]
+[ext_resource type="AudioStream" uid="uid://dmfepttsspixn" path="res://assets/audio/player_sfx/attack_sfx/attack_2.mp3" id="13_0jrw7"]
+[ext_resource type="AudioStream" uid="uid://d2coynpsu6sb8" path="res://assets/audio/player_sfx/hurt_sfx/hurt_1.mp3" id="13_cawmy"]
+[ext_resource type="AudioStream" uid="uid://i8krsufunhyo" path="res://assets/audio/player_sfx/hurt_sfx/hurt_2.mp3" id="14_chnj6"]
+[ext_resource type="AudioStream" uid="uid://cm3fhaq8d5563" path="res://assets/audio/player_sfx/death_sfx/death_1.mp3" id="15_kmnjn"]
 [ext_resource type="PackedScene" uid="uid://c7ytlo0422m6u" path="res://shared/components/stamina/stamina_component.tscn" id="15_vqr5b"]
-[ext_resource type="AudioStream" uid="uid://tmud7aammhp0" path="res://assets/audio/player_sfx/death_sfx/death_2.mp3" id="16_4j27x"]
+[ext_resource type="AudioStream" uid="uid://burg4bbfb6ifw" path="res://assets/audio/player_sfx/death_sfx/death_2.mp3" id="16_4j27x"]
 [ext_resource type="Script" uid="uid://biabnuibn3bqn" path="res://game/entity/player/DownCast.cs" id="17_vp686"]
-[ext_resource type="AudioStream" uid="uid://fbhde411ex8k" path="res://assets/audio/player_sfx/block_sfx/block_1.mp3" id="18_je5mu"]
-[ext_resource type="AudioStream" uid="uid://bdb8ackwhyxg3" path="res://assets/audio/player_sfx/block_sfx/block_2.mp3" id="19_k8egu"]
-[ext_resource type="AudioStream" uid="uid://dxgxw887g5dj8" path="res://assets/audio/player_sfx/attack_sfx/attack_3.mp3" id="22_6rqdb"]
-[ext_resource type="AudioStream" uid="uid://dj27x1qfpftn7" path="res://assets/audio/player_sfx/attack_sfx/attack_4.mp3" id="23_l0vtf"]
-[ext_resource type="AudioStream" uid="uid://u5x5gsvoude8" path="res://assets/audio/player_sfx/attack_sfx/attack_5.mp3" id="24_8vwb3"]
-[ext_resource type="AudioStream" uid="uid://ckv60kpoqvpbb" path="res://assets/audio/player_sfx/hurt_sfx/hurt_3.mp3" id="28_5jc0j"]
-[ext_resource type="AudioStream" uid="uid://cb3wkj1ad7kce" path="res://assets/audio/player_sfx/hurt_sfx/hurt_4.mp3" id="29_h2rmy"]
-[ext_resource type="AudioStream" uid="uid://cartk6r5fofqq" path="res://assets/audio/player_sfx/hurt_sfx/hurt_5.mp3" id="30_l4byk"]
-[ext_resource type="AudioStream" uid="uid://dc22fq8gop43" path="res://assets/audio/player_sfx/hurt_sfx/hurt_6.mp3" id="31_h2xdj"]
-[ext_resource type="AudioStream" uid="uid://d0vmxqybxbi1i" path="res://assets/audio/player_sfx/block_sfx/block_3.mp3" id="34_6wk8s"]
-[ext_resource type="AudioStream" uid="uid://bwefqq0yrwlyu" path="res://assets/audio/player_sfx/block_sfx/block_4.mp3" id="35_0vqd7"]
-[ext_resource type="AudioStream" uid="uid://dg07axa061o8a" path="res://assets/audio/player_sfx/block_sfx/block_5.mp3" id="36_icsuc"]
+[ext_resource type="AudioStream" uid="uid://ngqq6fvv50gx" path="res://assets/audio/player_sfx/block_sfx/block_1.mp3" id="18_je5mu"]
+[ext_resource type="AudioStream" uid="uid://ddj6jvcje4wqe" path="res://assets/audio/player_sfx/block_sfx/block_2.mp3" id="19_k8egu"]
+[ext_resource type="AudioStream" uid="uid://wtec1vh7ijrc" path="res://assets/audio/player_sfx/attack_sfx/attack_3.mp3" id="22_6rqdb"]
+[ext_resource type="AudioStream" uid="uid://c0olk6eig4smo" path="res://assets/audio/player_sfx/attack_sfx/attack_4.mp3" id="23_l0vtf"]
+[ext_resource type="AudioStream" uid="uid://bcfsuoonimr6g" path="res://assets/audio/player_sfx/attack_sfx/attack_5.mp3" id="24_8vwb3"]
+[ext_resource type="AudioStream" uid="uid://cymu0fywratln" path="res://assets/audio/player_sfx/hurt_sfx/hurt_3.mp3" id="28_5jc0j"]
+[ext_resource type="AudioStream" uid="uid://m4d102i6t0b3" path="res://assets/audio/player_sfx/hurt_sfx/hurt_4.mp3" id="29_h2rmy"]
+[ext_resource type="AudioStream" uid="uid://bdkdlrmea4lpj" path="res://assets/audio/player_sfx/hurt_sfx/hurt_5.mp3" id="30_l4byk"]
+[ext_resource type="AudioStream" uid="uid://boh0s62l7ge0g" path="res://assets/audio/player_sfx/hurt_sfx/hurt_6.mp3" id="31_h2xdj"]
+[ext_resource type="AudioStream" uid="uid://dh0jso3w5ohw8" path="res://assets/audio/player_sfx/block_sfx/block_3.mp3" id="34_6wk8s"]
+[ext_resource type="AudioStream" uid="uid://bpxh615tbss6q" path="res://assets/audio/player_sfx/block_sfx/block_4.mp3" id="35_0vqd7"]
+[ext_resource type="AudioStream" uid="uid://c3el472ijdwlc" path="res://assets/audio/player_sfx/block_sfx/block_5.mp3" id="36_icsuc"]
 [ext_resource type="AudioStream" uid="uid://chl7k76fobosi" path="res://assets/audio/player_sfx/death_sfx/death_3.mp3" id="39_yna46"]
 [ext_resource type="AudioStream" uid="uid://b4ya4iobl34pn" path="res://assets/audio/player_sfx/death_sfx/death_4.mp3" id="40_6qpfs"]
+[ext_resource type="Script" uid="uid://b6d0xrnp1u3wd" path="res://game/entity/player/Inventory.cs" id="45_6rqdb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43spn"]
 resource_name = "M_Main"
@@ -17580,13 +17581,16 @@ _data = {
 &"Walk_Formal": SubResource("Animation_xxhq3")
 }
 
+[sub_resource type="World3D" id="World3D_6rqdb"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0b5cm"]
 
-[node name="Player" type="CharacterBody3D" unique_id=249236073 node_paths=PackedStringArray("PauseMenu", "InventoryUI", "CameraMount", "inputGatherer", "playerModel", "attackComponent", "healthComponent", "inventoryComponent", "staminaComponent")]
+[node name="Player" type="CharacterBody3D" unique_id=249236073 node_paths=PackedStringArray("PauseMenu", "InventoryCanvas", "CameraMount", "sightline", "inputGatherer", "playerModel", "attackComponent", "healthComponent", "inventoryComponent", "staminaComponent")]
 script = ExtResource("1_script")
 PauseMenu = NodePath("CameraPivot/Camera3D/PauseMenu")
-InventoryUI = NodePath("CameraPivot/Camera3D/InventoryUI")
+InventoryCanvas = NodePath("CameraPivot/Camera3D/Inventory")
 CameraMount = NodePath("CameraPivot")
+sightline = NodePath("CameraPivot/Camera3D/SightLine")
 inputGatherer = NodePath("InputGatherer")
 playerModel = NodePath("Model")
 attackComponent = NodePath("AttackComponent")
@@ -18063,12 +18067,11 @@ BaseDamage = 100.0
 AttackSounds = Array[AudioStream]([ExtResource("12_4j27x"), ExtResource("13_0jrw7"), ExtResource("22_6rqdb"), ExtResource("23_l0vtf"), ExtResource("24_8vwb3")])
 MissSounds = Array[AudioStream]([])
 
-[node name="HealthComponent" parent="." unique_id=58685042 node_paths=PackedStringArray("PlayerCamera") instance=ExtResource("3_health")]
+[node name="HealthComponent" parent="." unique_id=58685042 instance=ExtResource("3_health")]
 IsPlayer = true
 HurtSounds = Array[AudioStream]([ExtResource("13_cawmy"), ExtResource("14_chnj6"), ExtResource("28_5jc0j"), ExtResource("29_h2rmy"), ExtResource("30_l4byk"), ExtResource("31_h2xdj")])
 BlockSounds = Array[AudioStream]([ExtResource("18_je5mu"), ExtResource("19_k8egu"), ExtResource("34_6wk8s"), ExtResource("35_0vqd7"), ExtResource("36_icsuc")])
 DeathSound = Array[AudioStream]([ExtResource("15_kmnjn"), ExtResource("16_4j27x"), ExtResource("39_yna46"), ExtResource("40_6qpfs")])
-PlayerCamera = NodePath("../CameraPivot/Camera3D")
 
 [node name="InventoryComponent" parent="." unique_id=288412274 instance=ExtResource("5_inventory")]
 
@@ -18086,9 +18089,49 @@ visible = false
 
 [node name="HUD" parent="CameraPivot/Camera3D" unique_id=816940577 instance=ExtResource("4_hud")]
 
-[node name="InventoryUI" parent="CameraPivot/Camera3D" unique_id=1987012151 node_paths=PackedStringArray("_player", "_inventory") instance=ExtResource("6_inventory_ui")]
-_player = NodePath("../../..")
-_inventory = NodePath("../../../InventoryComponent")
+[node name="Inventory" type="CanvasLayer" parent="CameraPivot/Camera3D" unique_id=34492209]
+follow_viewport_enabled = true
+script = ExtResource("45_6rqdb")
+
+[node name="Control" type="Control" parent="CameraPivot/Camera3D/Inventory" unique_id=1114331362]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CameraPivot/Camera3D/Inventory/Control" unique_id=1550153634]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer" unique_id=165957460]
+own_world_3d = true
+world_3d = SubResource("World3D_6rqdb")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer/SubViewport" unique_id=117706074]
+
+[node name="InventoryUI" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer/SubViewport/Camera3D" unique_id=1987012151 node_paths=PackedStringArray("_inventory") instance=ExtResource("6_inventory_ui")]
+transform = Transform3D(1, 0, 0, 0, 0.08336482, -0.99651915, 0, 0.99651915, 0.08336482, 0.004, 0.115, -2.386)
+_inventory = NodePath("../../../../../../../../InventoryComponent")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer/SubViewport" unique_id=2145213328]
+transform = Transform3D(0.87219733, -3.8990258e-08, 0.48915413, -0.19785658, 0.9145436, 0.3527928, -0.44735277, -0.40448728, 0.79766256, 0.912992, 1.6815484, 1.9366792)
+sky_mode = 1
+
+[node name="SightLine" type="RayCast3D" parent="CameraPivot/Camera3D" unique_id=1093677146 groups=["Interactable"]]
+transform = Transform3D(1, 0, 0, 0, -1.3113416e-07, -1, 0, 3, -4.371139e-08, 0, 0, 0)
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")

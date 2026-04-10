@@ -42,6 +42,10 @@ project/assembly_name="FlashcardRoguelike"
 
 enabled=PackedStringArray("res://addons/talo/plugin.cfg")
 
+[global_group]
+
+Interactable="All Interactable objectrs"
+
 [input]
 
 forward={
@@ -94,4 +98,3 @@ common/physics_interpolation=true
 
 rendering_device/driver.windows="d3d12"
 anti_aliasing/quality/msaa_3d=3
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)

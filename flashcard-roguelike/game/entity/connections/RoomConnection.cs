@@ -3,7 +3,7 @@ using System;
 using System.Numerics;
 using Vector3 = Godot.Vector3;
 
-public partial class RoomConnection : Node3D
+public partial class RoomConnection : Interactable
 {
 	[Export]
 	public PackedScene[] ConnectionVisuals; // Fallback visuals (used when no type-specific array is assigned)
@@ -17,8 +17,6 @@ public partial class RoomConnection : Node3D
 	public PackedScene[] TreasureVisuals;
 	[Export]
 	public PackedScene[] ExitVisuals;
-	[Export]
-	public InteractableComponent Interactable;
 
 	public bool PlayerInRoom = false;
 	public int TargetRoomId { get; set; }
@@ -32,6 +30,7 @@ public partial class RoomConnection : Node3D
 
 	public override void _Ready()
 	{
+		base._Ready();
 		// Pick the visual array for the target room type, falling back to ConnectionVisuals
 		PackedScene[] visuals = TargetRoomType switch
 		{
@@ -54,9 +53,14 @@ public partial class RoomConnection : Node3D
 		PackedScene scene = visuals[rng.RandiRange(0, visuals.Length - 1)];
 		AddChild(scene.Instantiate());
 		
-		Interactable.Interact += OnInteract;
 		EventManager.Instance.listen("on_room_clear", new Callable(this, MethodName.on_room_clear));
 	}
+
+    public override void Interact(Node caller)
+	{
+		OnInteract(caller as Node3D);
+	}
+
 
 	private void OnInteract(Node3D player){
 		TeleportPlayer(player);
