@@ -56,11 +56,15 @@ public class BattleSetup
             }
             enemies[i].GlobalPosition = enemySpot.GlobalPosition + new Vector3(0, ActorYOffset, 0);
 
+            // Make enemy face the player after being repositioned
+            Vector3 lookTarget = new Vector3(player.GlobalPosition.X, enemies[i].GlobalPosition.Y, player.GlobalPosition.Z);
+            enemies[i].LookAt(lookTarget, Vector3.Up);
+
             // Force player to look at the first enemy spot for centering cam
             if (i == 0)
             {
                 player.ForceLookAt(enemySpot.GlobalPosition + new Vector3(0, 2, 0));
-            }       
+            }
         }
     }
     
