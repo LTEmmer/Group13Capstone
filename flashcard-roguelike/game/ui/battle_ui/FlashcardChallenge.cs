@@ -9,7 +9,7 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 	[Export] public float ShowDuration = 0.3f;
 	[Export] public float HideDuration = 0.3f;
 
-	private Panel _challengePanel;
+	private Control _challengePanel;
 	private Label _questionLabel;
 	private LineEdit _answerInput;
 	private Button _submitButton;
@@ -25,12 +25,12 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 	public override void _Ready()
 	{
 		// Get UI elements
-		_challengePanel = GetNode<Panel>("ChallengePanel");
-		_questionLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/QuestionLabel");
-		_answerInput = GetNode<LineEdit>("ChallengePanel/MarginContainer/VBoxContainer/AnswerInput");
-		_contextLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
-		_submitButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/SubmitButton");
-        _answerLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/AnswerLabel");
+		_challengePanel = GetNode<Control>("CenterContainer/ChallengePanel");
+		_questionLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/QuestionLabel");
+		_answerInput = GetNode<LineEdit>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/AnswerInput");
+		_contextLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
+		_submitButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/SubmitButton");
+        _answerLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/AnswerLabel");
 
 		// Connect signals
 		_submitButton.Pressed += OnSubmitPressed;

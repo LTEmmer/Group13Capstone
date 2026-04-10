@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChallenge
 {
-	private Panel _challengePanel;
+	private Control _challengePanel;
 	private Label _questionLabel;
 	private Button _optionAButton;
 	private Button _optionBButton;
@@ -31,15 +31,21 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 	public override void _Ready()
 	{
 		// Get UI elements
-		_challengePanel = GetNode<Panel>("ChallengePanel");
-		_questionLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/QuestionLabel");
-		_contextLabel = GetNode<Label>("ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
-		_optionAButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionAButton");
-		_optionBButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionBButton");
-		_optionCButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionCButton");
-		_optionDButton = GetNode<Button>("ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionDButton");
+		_challengePanel = GetNode<Control>("CenterContainer/ChallengePanel");
+		_questionLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/QuestionLabel");
+		_contextLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
+		_optionAButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionAButton");
+		_optionBButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionBButton");
+		_optionCButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionCButton");
+		_optionDButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionDButton");
 
 		_optionButtons = [_optionAButton, _optionBButton, _optionCButton, _optionDButton];
+
+		// Mouse-only choices: avoid focus on first open so the first click is not consumed by focus/UI.
+		foreach (var b in _optionButtons)
+		{
+			b.FocusMode = FocusModeEnum.None;
+		}
 
 		// Connect signals
 		_optionAButton.Pressed += () => OnOptionSelected(_optionAButton.Text);
@@ -94,14 +100,6 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 		tween.TweenProperty(_challengePanel, "modulate:a", 1.0f, _showDuration)
 			 .SetTrans(Tween.TransitionType.Quad)
 			 .SetEase(Tween.EaseType.Out);
-
-		// Focus the first button
-		CallDeferred("FocusFirstButton");
-	}
-
-	private void FocusFirstButton()
-	{
-		_optionAButton.GrabFocus();
 	}
 
 	public void HideChallenge(Action onComplete = null)

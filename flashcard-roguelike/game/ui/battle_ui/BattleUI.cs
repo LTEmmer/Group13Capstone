@@ -9,7 +9,7 @@ public partial class BattleUI : Control
 	[Export] public float SlideInDuration = 0.5f;
 	[Export] public float SlideOutDuration = 0.3f;
 
-	private Panel _actionPanel;
+	private Control _actionPanel;
 	private Button _attackButton;
 	private Button _runButton;
 	private Button _itemsButton;
@@ -23,12 +23,12 @@ public partial class BattleUI : Control
 	public override void _Ready()
 	{
 		// Get UI elements
-		_actionPanel = GetNode<Panel>("ActionPanel");
-		_attackButton = GetNode<Button>("ActionPanel/ActionsContainer/AttackButton");
-		_runButton = GetNode<Button>("ActionPanel/ActionsContainer/RunButton");
-		_itemsButton = GetNode<Button>("ActionPanel/ActionsContainer/ItemsButton");
+		_actionPanel = GetNode<Control>("ActionPanel");
+		_attackButton = GetNode<Button>("ActionPanel/MarginContainer/ActionsContainer/AttackButton");
+		_runButton = GetNode<Button>("ActionPanel/MarginContainer/ActionsContainer/RunButton");
+		_itemsButton = GetNode<Button>("ActionPanel/MarginContainer/ActionsContainer/ItemsButton");
 		_playerHealthLabel = GetNode<Label>("StatusPanel/MarginContainer/VBoxContainer/PlayerStatus/HealthLabel");
-		_combatLogLabel = GetNode<Label>("CombatLogPanel/MarginContainer/VBoxContainer/ScrollContainer/LogLabel");
+		_combatLogLabel = GetNode<Label>("CombatLogPanel/MarginContainer/VBoxContainer/ScrollContainer/LogMargin/LogLabel");
 
 		// Connect button signals
 		_attackButton.Pressed += () => OnActionButtonPressed("attack");
