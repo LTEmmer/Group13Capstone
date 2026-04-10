@@ -21,6 +21,7 @@ public partial class Room : Node3D
 			// Save player reference for use in event rooms, etc.
 			_player = body as Player;
 			GD.Print("Player entered room: " + Name + " with player reference: " + _player.Name);
+			TaloTelemetry.TrackRoomsEntered();
 
 			Node3D Exits = GetNode<Node3D>("Exits");
 			var children = Exits.GetChildren();

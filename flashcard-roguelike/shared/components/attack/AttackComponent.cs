@@ -32,6 +32,10 @@ public partial class AttackComponent : Node
 			float damage = BaseDamage * damageMultiplier;
 			GD.Print($"{GetParent().Name} attacked {target.Name} for {damage} damage!");
 			healthComponent.TakeDamage(damage);
+			if (GetParent() is Player)
+			{
+				TaloTelemetry.TrackDamageDealt(damage);
+			}
 			return true;
 		}
 		else

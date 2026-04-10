@@ -44,6 +44,11 @@ public partial class HealthComponent : Node
 
 		if (IsPlayer)
 		{
+			TaloTelemetry.TrackDamageTaken(damage);
+		}
+
+		if (IsPlayer)
+		{
 			ShakeCamera();
 			FlashDamageOverlay();
 		}

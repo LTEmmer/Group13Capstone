@@ -43,6 +43,8 @@ public partial class Item : Interactable
 			foreach (var effect in _resource.PickupEffects)
 				effect.Apply(player, new ItemInstance(_resource));
 		}
+
+		TaloTelemetry.TrackItemsPickedUp();
 		
 
 		QueueFree();

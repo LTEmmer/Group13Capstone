@@ -1,7 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://xis5gf6wut10"]
 
-[ext_resource type="Script" path="res://game/ui/game_over/GameOverMenu.cs" id="1_script"]
-[ext_resource type="FontFile" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_font"]
+[ext_resource type="Script" uid="uid://b8bystywoxvc" path="res://game/ui/game_over/GameOverMenu.cs" id="1_script"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main"]
 bg_color = Color(0.98, 0.95, 0.88, 0.98)
@@ -12,18 +12,17 @@ border_width_bottom = 2
 border_color = Color(0.38, 0.26, 0.15, 0.9)
 corner_radius_top_left = 24
 corner_radius_top_right = 24
-corner_radius_bottom_left = 24
 corner_radius_bottom_right = 24
-shadow_size = 10
+corner_radius_bottom_left = 24
 shadow_color = Color(0, 0, 0, 0.18)
+shadow_size = 10
 
-[node name="GameOverMenu" type="CanvasLayer"]
+[node name="GameOverMenu" type="CanvasLayer" unique_id=395216041]
 process_mode = 3
 layer = 10
 script = ExtResource("1_script")
 
-[node name="Backdrop" type="ColorRect" parent="."]
-layout_mode = 1
+[node name="Backdrop" type="ColorRect" parent="." unique_id=2015551207]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,64 +30,65 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.05, 0.04, 0.03, 0.82)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2024712742]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MainPanel" type="PanelContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(860, 520)
+[node name="MainPanel" type="PanelContainer" parent="CenterContainer" unique_id=361003437]
+custom_minimum_size = Vector2(1040, 720)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_main")
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MainPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MainPanel" unique_id=1479757156]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="MainVBox" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer"]
+[node name="MainVBox" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer" unique_id=766003528]
 layout_mode = 2
-theme_override_constants/separation = 18
+theme_override_constants/separation = 14
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=182607670]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 54
 theme_override_colors/font_color = Color(0.78, 0.18, 0.16, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 48
 text = "GAME OVER"
 horizontal_alignment = 1
 
-[node name="MessageLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox"]
+[node name="MessageLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=180056133]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 20
 theme_override_colors/font_color = Color(0.2, 0.16, 0.13, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 18
 text = "Press anywhere to return to the main menu."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="StatsHeaderLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox"]
+[node name="StatsHeaderLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=1637770715]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 24
 theme_override_colors/font_color = Color(0.22, 0.15, 0.09, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 22
 text = "Session Stats"
 
-[node name="StatsListContainer" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer/MainVBox"]
+[node name="StatsListContainer" type="GridContainer" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=792468478]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 10
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 10
+columns = 2
 
-[node name="FooterLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox"]
+[node name="FooterLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=1117936091]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_font")
-theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.32, 0.24, 0.18, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 13
 text = "Click, tap, or press any key to continue."
 horizontal_alignment = 1
