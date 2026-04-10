@@ -1,7 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using Godot.Collections;
+using System.Globalization;
+using GodotDictionary = Godot.Collections.Dictionary;
 
 // Lightweight bridge between C# gameplay code and the Talo Godot plugin autoload.
 // This stays no-op when the plugin is not installed or configured.
@@ -16,9 +17,24 @@ public static class TaloTelemetry
     private static bool _identifyAttempted;
     private static bool _identifySignalConnected;
     private static readonly List<PendingAnswer> _pendingAnswers = new();
+    private static readonly Dictionary<string, float> _sessionStatValues = new();
+    private static int _sessionTotalAnswers;
+    private static int _sessionCorrectAnswers;
+    private static int _sessionIncorrectAnswers;
+
+    public static void ResetSessionStats()
+    {
+        _pendingAnswers.Clear();
+        _sessionStatValues.Clear();
+        _sessionTotalAnswers = 0;
+        _sessionCorrectAnswers = 0;
+        _sessionIncorrectAnswers = 0;
+    }
 
     public static void TrackFlashcardAnswer(bool isCorrect, string action, float difficulty)
     {
+        RecordSessionAnswer(isCorrect);
+
         if (!TryGetTalo(out Node talo))
         {
             return;
@@ -40,6 +56,39 @@ public static class TaloTelemetry
         FlushPendingAnswers(talo);
     }
 
+    public static IReadOnlyList<SessionStatEntry> GetSessionStats()
+    {
+        SessionStatsSnapshot snapshot = GetSessionSnapshot();
+
+        return new List<SessionStatEntry>
+        {
+            new("flashcard_answers_total", "Total questions answered", snapshot.TotalAnswers.ToString(CultureInfo.InvariantCulture)),
+            new("flashcard_answers_correct", "Questions answered correctly", snapshot.CorrectAnswers.ToString(CultureInfo.InvariantCulture)),
+            new("flashcard_answers_incorrect", "Questions answered incorrectly", snapshot.IncorrectAnswers.ToString(CultureInfo.InvariantCulture))
+        };
+    }
+
+    public static SessionStatsSnapshot GetSessionSnapshot()
+    {
+        return new SessionStatsSnapshot(_sessionTotalAnswers, _sessionCorrectAnswers, _sessionIncorrectAnswers);
+    }
+
+    private static void RecordSessionAnswer(bool isCorrect)
+    {
+        _sessionTotalAnswers++;
+        IncrementSessionValue(FlashcardAnswersTotalStat, 1f);
+
+        IncrementSessionValue(isCorrect ? FlashcardAnswersCorrectStat : FlashcardAnswersIncorrectStat, 1f);
+        if (isCorrect)
+        {
+            _sessionCorrectAnswers++;
+        }
+        else
+        {
+            _sessionIncorrectAnswers++;
+        }
+    }
+
     private static void FlushPendingAnswers(Node talo)
     {
         if (_pendingAnswers.Count == 0)
@@ -56,11 +105,11 @@ public static class TaloTelemetry
             {
                 if (eventsApi != null)
                 {
-                    var props = new Dictionary
+                    GodotDictionary props = new GodotDictionary
                     {
                         { "correct", answer.IsCorrect ? "true" : "false" },
                         { "action", answer.Action },
-                        { "difficulty", answer.Difficulty.ToString("0.00") }
+                        { "difficulty", answer.Difficulty.ToString("0.00", CultureInfo.InvariantCulture) }
                     };
 
                     eventsApi.Call("track", FlashcardAnsweredEventName, props);
@@ -80,6 +129,27 @@ public static class TaloTelemetry
         {
             GD.PrintErr($"TaloTelemetry: Failed to track flashcard answer: {ex.Message}");
         }
+    }
+
+    private static void IncrementSessionValue(string statName, float delta)
+    {
+        if (_sessionStatValues.ContainsKey(statName))
+        {
+            _sessionStatValues[statName] += delta;
+            return;
+        }
+
+        _sessionStatValues[statName] = delta;
+    }
+
+    private static float GetSessionValue(string statName)
+    {
+        return _sessionStatValues.TryGetValue(statName, out float value) ? value : 0f;
+    }
+
+    private static string FormatCount(float value)
+    {
+        return Mathf.RoundToInt(value).ToString(CultureInfo.InvariantCulture);
     }
 
     private static bool TryGetTalo(out Node talo)
@@ -176,6 +246,34 @@ public static class TaloTelemetry
         {
             return false;
         }
+    }
+
+    public sealed class SessionStatEntry
+    {
+        public SessionStatEntry(string key, string label, string value)
+        {
+            Key = key;
+            Label = label;
+            Value = value;
+        }
+
+        public string Key { get; }
+        public string Label { get; }
+        public string Value { get; }
+    }
+
+    public readonly struct SessionStatsSnapshot
+    {
+        public SessionStatsSnapshot(int totalAnswers, int correctAnswers, int incorrectAnswers)
+        {
+            TotalAnswers = totalAnswers;
+            CorrectAnswers = correctAnswers;
+            IncorrectAnswers = incorrectAnswers;
+        }
+
+        public int TotalAnswers { get; }
+        public int CorrectAnswers { get; }
+        public int IncorrectAnswers { get; }
     }
 
     private sealed class PendingAnswer

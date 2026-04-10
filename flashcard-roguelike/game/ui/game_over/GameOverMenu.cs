@@ -1,95 +1,269 @@
 using Godot;
-using System;
-using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Game over screen displayed when the player dies.
-/// Allows the player to restart or return to the main menu.
+/// Shows only the tracked Talo session stats and returns to the main menu on input.
 /// </summary>
 public partial class GameOverMenu : CanvasLayer
 {
 	[Export]
 	public PackedScene MainMenuScene { get; set; }
-	
-	[Export]
-	public PackedScene GameScene { get; set; }
-	
-	private Control _panel;
-	private Label _titleLabel;
+
+	public bool PendingShow { get; set; }
+	public string PendingMessage { get; set; } = "Run summary";
+	public bool PendingPlayAudio { get; set; }
+
+	private const string MarkerFontPath = "res://assets/fonts/DryWhiteboardMarker-Regular.ttf";
+
+	private FontFile _markerFont;
 	private Label _messageLabel;
-	
+	private Label _statsHeaderLabel;
+	private VBoxContainer _statsListContainer;
+	private bool _advanceRequested;
+
 	public override void _Ready()
 	{
-		_panel = GetNodeOrNull<Control>("Panel");
-		_titleLabel = GetNodeOrNull<Label>("Panel/VBoxContainer/TitleLabel");
-		_messageLabel = GetNodeOrNull<Label>("Panel/VBoxContainer/MessageLabel");
+		_markerFont = GD.Load<FontFile>(MarkerFontPath);
+		_messageLabel = GetNodeOrNull<Label>("CenterContainer/MainPanel/MarginContainer/MainVBox/MessageLabel");
+		_statsHeaderLabel = GetNodeOrNull<Label>("CenterContainer/MainPanel/MarginContainer/MainVBox/StatsHeaderLabel");
+		_statsListContainer = GetNodeOrNull<VBoxContainer>("CenterContainer/MainPanel/MarginContainer/MainVBox/StatsListContainer");
 
-		Button _restartButton = GetNodeOrNull<Button>("Panel/VBoxContainer/RestartButton");
-		Button _mainMenuButton = GetNodeOrNull<Button>("Panel/VBoxContainer/MainMenuButton");
-		Button _quitButton = GetNodeOrNull<Button>("Panel/VBoxContainer/QuitButton");
+		ApplyMarkerFontRecursive(this);
 
-		AudioManager.Instance?.RegisterButton(_restartButton);
-		AudioManager.Instance?.RegisterButton(_mainMenuButton);
-		AudioManager.Instance?.RegisterButton(_quitButton);
-		
-		// Start hidden
 		Visible = false;
-		
-		// Ensure mouse is visible when game over shows
 		ProcessMode = ProcessModeEnum.Always;
+
+		if (GetTree().CurrentScene == this)
+		{
+			ShowGameOver();
+			return;
+		}
+
+		if (PendingShow)
+		{
+			PendingShow = false;
+			ShowStatsScreen(PendingMessage, PendingPlayAudio);
+		}
 	}
-	
+
+	public override void _Input(InputEvent @event)
+	{
+		if (!_advanceRequested)
+		{
+			return;
+		}
+
+		if (@event is InputEventMouseButton mouseButton && mouseButton.Pressed)
+		{
+			GoToMainMenu();
+		}
+		else if (@event is InputEventKey key && key.Pressed && !key.Echo)
+		{
+			GoToMainMenu();
+		}
+		else if (@event is InputEventScreenTouch touch && touch.Pressed)
+		{
+			GoToMainMenu();
+		}
+	}
+
 	/// <summary>
 	/// Shows the game over screen with an optional custom message.
 	/// </summary>
 	public void ShowGameOver(string message = "You have fallen in the dungeon...")
+	{
+		if (!IsNodeReady())
+		{
+			CallDeferred("ShowGameOver", message);
+			return;
+		}
+
+		ShowStatsScreen(message, true);
+	}
+
+	/// <summary>
+	/// Shows the same end-of-run stats screen from non-death flows such as the pause menu.
+	/// </summary>
+	public void ShowSessionStats(string message = "Run summary", bool playAudio = false)
+	{
+		if (!IsNodeReady())
+		{
+			PendingShow = true;
+			PendingMessage = message;
+			PendingPlayAudio = playAudio;
+			return;
+		}
+
+		ShowStatsScreen(message, playAudio);
+	}
+
+	private void ShowStatsScreen(string message, bool playAudio)
 	{
 		if (_messageLabel != null)
 		{
 			_messageLabel.Text = message;
 		}
 
-		// Hide battle transition so it doesn't bleed through during fade-out
-		BattleManager.Instance?.Transitions.Hide();
-		BattleManager.Instance?.ActiveUI.Hide();
+		RefreshStats();
 
-		// Fade out music and play game over sound
+		BattleManager.Instance?.Transitions?.Hide();
+		BattleManager.Instance?.ActiveUI?.Hide();
+
 		AudioManager.Instance?.FadeOutMusic();
-		AudioManager.Instance?.PlayGameOverSound();
+		if (playAudio)
+		{
+			AudioManager.Instance?.PlayGameOverSound();
+		}
 
+		_advanceRequested = true;
 		Visible = true;
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		GetTree().Paused = true;
 	}
-	
-	public void _on_restart_pressed()
+
+	private void RefreshStats()
 	{
-		GD.Print("Restarting game...");
-		SceneTransition.FadeOut(this, () =>
-		{
-			GetTree().Paused = false;
-			GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
-			QueueFree();
-		});
+		ClearContainer(_statsListContainer);
+
+		TaloTelemetry.SessionStatsSnapshot sessionStats = TaloTelemetry.GetSessionSnapshot();
+		AddStatCard(_statsListContainer, "Total questions answered", sessionStats.TotalAnswers.ToString());
+		AddStatCard(_statsListContainer, "Questions answered correctly", sessionStats.CorrectAnswers.ToString());
+		AddStatCard(_statsListContainer, "Questions answered incorrectly", sessionStats.IncorrectAnswers.ToString());
 	}
 
-	public void _on_main_menu_pressed()
+	private void GoToMainMenu()
 	{
-		GD.Print("Returning to main menu...");
+		if (!_advanceRequested)
+		{
+			return;
+		}
+
+		_advanceRequested = false;
 		SceneTransition.FadeOut(this, () =>
 		{
 			GetTree().Paused = false;
 			if (MainMenuScene != null)
+			{
 				GetTree().ChangeSceneToPacked(MainMenuScene);
+			}
 			else
+			{
 				GetTree().ChangeSceneToFile("res://game/ui/main_menu/main_menu.tscn");
+			}
+
 			QueueFree();
 		});
 	}
-	
-	public void _on_quit_pressed()
+
+	private void AddStatCard(VBoxContainer parent, string label, string value)
 	{
-		GD.Print("Quitting game...");
-		GetTree().Quit();
+		if (parent == null)
+		{
+			return;
+		}
+
+		var card = new PanelContainer();
+		card.CustomMinimumSize = new Vector2(0, 88);
+		card.AddThemeStyleboxOverride("panel", CreateCardStyle());
+		parent.AddChild(card);
+
+		var margin = new MarginContainer();
+		margin.AddThemeConstantOverride("margin_left", 16);
+		margin.AddThemeConstantOverride("margin_top", 14);
+		margin.AddThemeConstantOverride("margin_right", 16);
+		margin.AddThemeConstantOverride("margin_bottom", 14);
+		card.AddChild(margin);
+
+		var row = new HBoxContainer();
+		row.AddThemeConstantOverride("separation", 16);
+		margin.AddChild(row);
+
+		var textColumn = new VBoxContainer();
+		textColumn.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+		textColumn.AddThemeConstantOverride("separation", 2);
+		row.AddChild(textColumn);
+
+		var labelNode = new Label
+		{
+			Text = label,
+			AutowrapMode = TextServer.AutowrapMode.WordSmart
+		};
+		labelNode.AddThemeFontSizeOverride("font_size", 17);
+		labelNode.AddThemeColorOverride("font_color", new Color(0.24f, 0.18f, 0.13f));
+		if (_markerFont != null)
+		{
+			labelNode.AddThemeFontOverride("font", _markerFont);
+		}
+		textColumn.AddChild(labelNode);
+
+		var valueNode = new Label
+		{
+			Text = value,
+			HorizontalAlignment = HorizontalAlignment.Right,
+			AutowrapMode = TextServer.AutowrapMode.WordSmart
+		};
+		valueNode.AddThemeFontSizeOverride("font_size", 30);
+		valueNode.AddThemeColorOverride("font_color", new Color(0.63f, 0.29f, 0.12f));
+		if (_markerFont != null)
+		{
+			valueNode.AddThemeFontOverride("font", _markerFont);
+		}
+		textColumn.AddChild(valueNode);
+	}
+
+	private static void ClearContainer(Container container)
+	{
+		if (container == null)
+		{
+			return;
+		}
+
+		foreach (Node child in container.GetChildren())
+		{
+			container.RemoveChild(child);
+			child.QueueFree();
+		}
+	}
+
+	private void ApplyMarkerFontRecursive(Node node)
+	{
+		if (_markerFont == null || node == null)
+		{
+			return;
+		}
+
+		if (node is Label label)
+		{
+			label.AddThemeFontOverride("font", _markerFont);
+		}
+
+		foreach (Node child in node.GetChildren())
+		{
+			ApplyMarkerFontRecursive(child);
+		}
+	}
+
+	private static StyleBoxFlat CreateCardStyle()
+	{
+		return new StyleBoxFlat
+		{
+			BgColor = new Color(0.97f, 0.94f, 0.86f, 0.98f),
+			BorderWidthLeft = 2,
+			BorderWidthTop = 2,
+			BorderWidthRight = 2,
+			BorderWidthBottom = 2,
+			BorderColor = new Color(0.46f, 0.32f, 0.18f, 0.9f),
+			CornerRadiusTopLeft = 20,
+			CornerRadiusTopRight = 20,
+			CornerRadiusBottomLeft = 20,
+			CornerRadiusBottomRight = 20,
+			ShadowSize = 5,
+			ShadowColor = new Color(0, 0, 0, 0.14f),
+			ContentMarginLeft = 2,
+			ContentMarginTop = 2,
+			ContentMarginRight = 2,
+			ContentMarginBottom = 2
+		};
 	}
 }
