@@ -207,24 +207,16 @@ public class CombatResolver
             return;
         }
 
-        // Defer damage until the attack animation ends so feedback is visually aligned
+        // Defer damage until after movein + attack animations have played.
+        float moveInDuration = ((MoveIn)enemy.EnemyModel.States[StateNames.movein]).TweenDuration;
         string attackAnimName = enemy.EnemyModel.States[StateNames.attack].StateAnimation;
-        AnimationPlayer animator = enemy.EnemyModel.animator;
+        float attackAnimLength = enemy.EnemyModel.animator.GetAnimation(attackAnimName).Length;
+        float damageDelay = moveInDuration + attackAnimLength;
 
-        // Local function to handle the end of the attack animation
-        void OnAttackAnimEnded(StringName animName)
+        var timer = enemy.GetTree().CreateTimer(damageDelay);
+        timer.Timeout += () =>
         {
-            if (animName != attackAnimName) 
-            {
-                return;
-            }
-
-            animator.AnimationFinished -= OnAttackAnimEnded;
-
-            if (!_state.InCombat)
-            {
-                return;
-            }
+            if (!_state.InCombat) return;
 
             if (fullDamage)
             {
@@ -239,9 +231,7 @@ public class CombatResolver
             }
 
             _uiCoordinator.UpdateHealthUI();
-        }
-
-        animator.AnimationFinished += OnAttackAnimEnded;
+        };
     }
     
     // Attempt to run from battle
