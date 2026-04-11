@@ -34,14 +34,14 @@ public partial class Item : Interactable
 			var inventory = player.GetNodeOrNull<InventoryComponent>("InventoryComponent");
 			if (inventory == null) 
 				throw new ArgumentNullException("Player has no inventory!");
-			inventory.AddItem(_resource, 1);
+			inventory.AddItem(_resource);
 			GD.Print($"Added {1} '{_resource.Name}' to {player.Name}'s inventory.");
 		}
 
 		if (_resource.PickupEffects != null)
 		{
 			foreach (var effect in _resource.PickupEffects)
-				effect.Apply(player, new ItemInstance(_resource));
+				effect.Apply(player, _resource);
 		}
 		
 

@@ -8,7 +8,7 @@ public partial class ModAttack: ItemEffect
 	[Export] public float _crit_chance = 0;
 	[Export] public float _attack_mult = 1;
 
-    public override void Apply(Node target, ItemInstance item)
+    public override void Apply(Node target, ItemResource item)
     {
 		var attack = target.GetNodeOrNull<AttackComponent>("AttackComponent");
 		if (attack== null)

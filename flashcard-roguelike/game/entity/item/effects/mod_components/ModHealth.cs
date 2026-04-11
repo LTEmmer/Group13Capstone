@@ -5,7 +5,7 @@ public partial class ModHealth: ItemEffect
 {
     [Export] public int _hp = 1;
 
-    public override void Apply(Node target, ItemInstance item)
+    public override void Apply(Node target, ItemResource item)
     {
         GD.Print($"Healing {_hp} to {target.Name}");
 		var health = target.GetNodeOrNull<HealthComponent>("HealthComponent");

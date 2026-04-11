@@ -6,7 +6,7 @@ public partial class UsePage : InventoryPage<ItemResource>
     [Export] private Button _dropButton;
 	[Export] private RichTextLabel description;
 
-    private new ItemInstance _item;
+    private new ItemResource _item;
 
     public override void _Ready()
     {
@@ -14,10 +14,10 @@ public partial class UsePage : InventoryPage<ItemResource>
         _dropButton.Pressed += OnDropPressed;
     }
 
-    public override void SetItem(ItemInstance item)
+    public override void SetItem(ItemResource item)
     {
         _item = item;
-		description.Text = item.Resource.Description;
+		description.Text = item.Description;
 		OnItemSet(_item);
 
     }

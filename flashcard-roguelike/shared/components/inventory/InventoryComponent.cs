@@ -3,33 +3,18 @@ using Godot.Collections;
 
 public partial class InventoryComponent : Node
 {
-	[Signal] public delegate void ItemAddedEventHandler(ItemInstance item);
-	[Signal] public delegate void ItemRemovedEventHandler(ItemInstance item);
+	[Signal] public delegate void ItemAddedEventHandler(ItemResource item);
+	[Signal] public delegate void ItemRemovedEventHandler(ItemResource item);
 
-	[Export] public Array<ItemInstance> inv = new Array<ItemInstance>();
+	[Export] public Array<ItemResource> inv = new Array<ItemResource>();
 
-	public void AddItem(ItemInstance item)
+	public void AddItem(ItemResource resource)
 	{
-		AddItem(item.Resource, item.Count);
+		inv.Add(resource);
+		EmitSignal(SignalName.ItemAdded, resource);
 	}
 
-	public void AddItem(ItemResource resource, int count = 1)
-	{
-		foreach (var item in inv)
-		{
-			if (item.Resource.Name == resource.Name)
-			{
-				item.Count += count;
-				return;
-			}
-		}
-
-		var newItem = new ItemInstance(resource, count);
-		inv.Add(newItem);
-		EmitSignal(SignalName.ItemAdded, newItem);
-	}
-
-	public void RemoveItem(ItemInstance item)
+	public void RemoveItem(ItemResource item)
 	{
 		if (!inv.Remove(item)) return;
 		EmitSignal(SignalName.ItemRemoved, item);
