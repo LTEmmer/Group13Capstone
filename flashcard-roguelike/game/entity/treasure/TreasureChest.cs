@@ -47,6 +47,7 @@ public partial class TreasureChest : Interactable
 	{
 		if (IsOpen) return;
 		IsOpen = true;
+		TaloTelemetry.TrackChestsOpened();
 
 		if (_lidMesh != null)
 		{

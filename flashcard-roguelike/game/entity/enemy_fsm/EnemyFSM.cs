@@ -51,6 +51,7 @@ public partial class EnemyFSM : CharacterBody3D
 			*/
 			var room = GetParent<Node3D>().GetParent<Node3D>();
 			List<EnemyFSM> enemiesInRoom = GetParent<Node3D>().GetChildren().OfType<EnemyFSM>().ToList();
+			TaloTelemetry.TrackEnemiesFaced(enemiesInRoom.Count);
 			BattleManager.Instance.StartBattle(player, enemiesInRoom, room);
 		}
 	}

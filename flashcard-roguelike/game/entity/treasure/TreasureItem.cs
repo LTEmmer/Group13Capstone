@@ -92,6 +92,7 @@ public partial class TreasureItem : Node3D
 	public void Collect()
 	{
 		GD.Print($"Collected {ItemName} (Value: {Value}, Rarity: {Rarity})");
+		TaloTelemetry.TrackItemsPickedUp();
 		EmitSignal(SignalName.ItemCollected, this);
 		QueueFree();
 	}

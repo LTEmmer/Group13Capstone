@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 /// <summary>
 /// Game over screen displayed when the player dies.
-/// Shows only the tracked Talo session stats and returns to the main menu on input.
+/// Shows the tracked session stats and returns to the main menu on input.
 /// </summary>
 public partial class GameOverMenu : CanvasLayer
 {
@@ -19,7 +19,7 @@ public partial class GameOverMenu : CanvasLayer
 	private FontFile _markerFont;
 	private Label _messageLabel;
 	private Label _statsHeaderLabel;
-	private VBoxContainer _statsListContainer;
+	private GridContainer _statsListContainer;
 	private bool _advanceRequested;
 
 	public override void _Ready()
@@ -27,7 +27,7 @@ public partial class GameOverMenu : CanvasLayer
 		_markerFont = GD.Load<FontFile>(MarkerFontPath);
 		_messageLabel = GetNodeOrNull<Label>("CenterContainer/MainPanel/MarginContainer/MainVBox/MessageLabel");
 		_statsHeaderLabel = GetNodeOrNull<Label>("CenterContainer/MainPanel/MarginContainer/MainVBox/StatsHeaderLabel");
-		_statsListContainer = GetNodeOrNull<VBoxContainer>("CenterContainer/MainPanel/MarginContainer/MainVBox/StatsListContainer");
+		_statsListContainer = GetNodeOrNull<GridContainer>("CenterContainer/MainPanel/MarginContainer/MainVBox/StatsListContainer");
 
 		ApplyMarkerFontRecursive(this);
 
@@ -126,10 +126,10 @@ public partial class GameOverMenu : CanvasLayer
 	{
 		ClearContainer(_statsListContainer);
 
-		TaloTelemetry.SessionStatsSnapshot sessionStats = TaloTelemetry.GetSessionSnapshot();
-		AddStatCard(_statsListContainer, "Total questions answered", sessionStats.TotalAnswers.ToString());
-		AddStatCard(_statsListContainer, "Questions answered correctly", sessionStats.CorrectAnswers.ToString());
-		AddStatCard(_statsListContainer, "Questions answered incorrectly", sessionStats.IncorrectAnswers.ToString());
+		foreach (TaloTelemetry.SessionStatEntry stat in TaloTelemetry.GetSessionStats())
+		{
+			AddStatCard(_statsListContainer, stat.Label, stat.Value);
+		}
 	}
 
 	private void GoToMainMenu()
@@ -156,7 +156,7 @@ public partial class GameOverMenu : CanvasLayer
 		});
 	}
 
-	private void AddStatCard(VBoxContainer parent, string label, string value)
+	private void AddStatCard(Container parent, string label, string value)
 	{
 		if (parent == null)
 		{
@@ -164,7 +164,8 @@ public partial class GameOverMenu : CanvasLayer
 		}
 
 		var card = new PanelContainer();
-		card.CustomMinimumSize = new Vector2(0, 88);
+		card.CustomMinimumSize = new Vector2(0, 72);
+		card.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
 		card.AddThemeStyleboxOverride("panel", CreateCardStyle());
 		parent.AddChild(card);
 
@@ -189,7 +190,7 @@ public partial class GameOverMenu : CanvasLayer
 			Text = label,
 			AutowrapMode = TextServer.AutowrapMode.WordSmart
 		};
-		labelNode.AddThemeFontSizeOverride("font_size", 17);
+		labelNode.AddThemeFontSizeOverride("font_size", 15);
 		labelNode.AddThemeColorOverride("font_color", new Color(0.24f, 0.18f, 0.13f));
 		if (_markerFont != null)
 		{
@@ -203,7 +204,7 @@ public partial class GameOverMenu : CanvasLayer
 			HorizontalAlignment = HorizontalAlignment.Right,
 			AutowrapMode = TextServer.AutowrapMode.WordSmart
 		};
-		valueNode.AddThemeFontSizeOverride("font_size", 30);
+		valueNode.AddThemeFontSizeOverride("font_size", 24);
 		valueNode.AddThemeColorOverride("font_color", new Color(0.63f, 0.29f, 0.12f));
 		if (_markerFont != null)
 		{

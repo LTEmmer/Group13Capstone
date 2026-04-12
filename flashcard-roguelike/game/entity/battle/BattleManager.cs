@@ -152,6 +152,7 @@ public partial class BattleManager : Node
 		{
 			return;
 		}
+
 		//Set enemies player field
 		foreach (var enemy in enemies)
 		{
@@ -311,6 +312,7 @@ public partial class BattleManager : Node
 
 	private void OnEnemyDeath(EnemyFSM enemy)
 	{
+		TaloTelemetry.TrackEnemiesDefeated();
 		_uiCoordinator.LogMessage($"{enemy.Name} was defeated!");
 		_uiCoordinator.UpdateHealthUI();
 		_state.RemoveEnemy(enemy);
