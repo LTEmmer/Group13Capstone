@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 [GlobalClass]
 [Tool]
@@ -7,14 +6,12 @@ public partial class ItemInstance : Resource
 {
     [Signal] public delegate void ChangedEventHandler();
 
-    // Export as generic Resource
-    [Export] 
+    [Export]
     public Resource ResourceBase { get; set; }
 
-    // Safe typed accessor
     public ItemResource Resource
     {
-        get => ResourceBase as ItemResource; // will be null if wrong type
+        get => ResourceBase as ItemResource;
         set => ResourceBase = value;
     }
 
@@ -35,13 +32,16 @@ public partial class ItemInstance : Resource
         }
     }
 
-    // Parameterless constructor for Godot
+    // The slot array and index this item occupies, null if not equipped
+    public ItemInstance[] EquippedSlot { get; set; }
+    public int EquippedIndex { get; set; }
+    public bool IsEquipped => EquippedSlot != null;
+
     public ItemInstance() { }
     public ItemInstance(ItemResource resource, int count = 1)
     {
         Resource = resource;
         CurrentUses = resource.MaxUses;
         Count = count;
-        
     }
 }

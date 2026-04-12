@@ -14,6 +14,19 @@ public partial class ItemResource : Resource
     public enum ItemBehavior { Stat, Use , Tool}
     [Export] public ItemBehavior Behavior;
 
+    // ===== Equipment =====
+    public enum EquipSlot
+    {
+        None,
+        Helmet,
+        Chestplate,
+        Leggings,
+        Handheld,
+        Charm,
+    }
+
+    [Export] public EquipSlot Slot = EquipSlot.None;
+
     // ===== Rarity (1 = Common, 5 = Legendary) =====
     [Export(PropertyHint.Range, "1,5")] public int Rarity = 1;
 

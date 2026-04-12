@@ -20,7 +20,6 @@ public partial class Item : Interactable
 
 	public override void Interact(Node caller)
 	{
-		GD.Print("ALKSJDLAKSJDLKa");
 		if (_resource == null || caller is not Player player) return;
 
 		AudioManager.Instance.PlayItemPickupSound();
@@ -31,11 +30,13 @@ public partial class Item : Interactable
 		}
 
 		if (_resource.AddToInventory){
-			var inventory = player.GetNodeOrNull<InventoryComponent>("InventoryComponent");
+			var inventoryNode = player.FindChild("InventoryComponent");
+			GD.Print("Found node: " + inventoryNode?.Name ?? "null");
+			var inventory = inventoryNode as InventoryComponent;
 			if (inventory == null) 
 				throw new ArgumentNullException("Player has no inventory!");
-			inventory.AddItem(_resource, 1);
-			GD.Print($"Added {1} '{_resource.Name}' to {player.Name}'s inventory.");
+			inventory.AddItem(new ItemInstance(_resource));
+			GD.Print($"Added '{_resource.Name}' to {player.Name}'s inventory.");
 		}
 
 		if (_resource.PickupEffects != null)
@@ -58,5 +59,4 @@ public partial class Item : Interactable
 	{
 		label.Visible = false;
 	}
-
 }
