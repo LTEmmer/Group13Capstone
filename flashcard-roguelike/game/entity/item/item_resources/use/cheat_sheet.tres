@@ -11,6 +11,7 @@ Icon = ExtResource("4_f5tv0")
 Description = "Dont get caught..."
 Behavior = 1
 Rarity = 3
+OnlyCombat = true
 UseEffects = Array[ExtResource("1_4vu6c")]([])
 PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"

@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cnycncg0uqrvt"]
+
+[ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="1_jb5a7"]
+[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/stats/health.tres" id="2_gtvra"]
+[ext_resource type="Resource" uid="uid://dhlcwfdiu3op" path="res://game/entity/item/item_resources/stats/damage_up.tres" id="2_ov34g"]
+[ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/stats/shield.tres" id="3_4ym54"]
+[ext_resource type="Resource" uid="uid://btfjb1kjvo6oi" path="res://game/entity/item/item_resources/stats/danger_damage.tres" id="3_77r7h"]
+[ext_resource type="Resource" uid="uid://biapbeaft61wq" path="res://game/entity/item/item_resources/use/bandage.tres" id="4_xbhdi"]
+[ext_resource type="Resource" uid="uid://brjqa1vhygh5i" path="res://game/entity/item/item_resources/tool/head_armor.tres" id="10_grrod"]
+[ext_resource type="Resource" uid="uid://c025ebyq1swtw" path="res://game/entity/item/item_resources/use/bonk_stick.tres" id="10_ov34g"]
+[ext_resource type="Resource" uid="uid://dmdi1gagqqbm7" path="res://game/entity/item/item_resources/tool/chest_armor.tres" id="11_2yv0f"]
+[ext_resource type="Resource" uid="uid://dujio0bwmrbul" path="res://game/entity/item/item_resources/use/cheat_sheet.tres" id="11_77r7h"]
+[ext_resource type="Resource" uid="uid://7hyntiag1ycs" path="res://game/entity/item/item_resources/tool/leg_armor.tres" id="12_gtvra"]
+[ext_resource type="Resource" uid="uid://v332y1tyceyu" path="res://game/entity/item/item_resources/use/shield_capsule.tres" id="12_od83i"]
+[ext_resource type="Resource" uid="uid://b4sdo5bqn5smb" path="res://game/entity/item/item_resources/tool/sword.tres" id="13_4ym54"]
+[ext_resource type="Resource" uid="uid://11fr68fb3aa2" path="res://game/entity/item/item_resources/use/smoke_screen.tres" id="13_5w8ke"]
+[ext_resource type="Resource" uid="uid://bo32p1f8tu7wp" path="res://game/entity/item/item_resources/tool/charm.tres" id="14_4ym54"]
+
+[node name="AllItems" type="Node3D" unique_id=818415985]
+
+[node name="Damage" parent="." unique_id=696073096 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.29999164, 0.0022409821, 0, -0.0022409821, 0.29999164, 0, 0, 0, 0.3, 0, 0, 0)
+_resource = ExtResource("2_ov34g")
+
+[node name="DangerDam" parent="." unique_id=2073960566 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.29996654, 0.004481839, 0, -0.004481839, 0.29996654, 0, 0, 0, 0.3, 0.5999833, -0.0044819643, 0)
+_resource = ExtResource("3_77r7h")
+
+[node name="Health" parent="." unique_id=603235657 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.29999164, 0.0022409821, 0, -0.0022409821, 0.29999164, 0, 0, 0, 0.3, 1.2, 0, 0)
+_resource = ExtResource("2_gtvra")
+
+[node name="Shield" parent="." unique_id=191471317 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.2999916, 0.002240982, 0, -0.002240982, 0.2999916, 0, 0, 0, 0.29999998, 1.7999833, -0.0044819713, 0)
+_resource = ExtResource("3_4ym54")
+
+[node name="Charm" parent="." unique_id=1907055634 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.3, -2.3283064e-10, 0, 2.3283064e-10, 0.3, 0, 0, 0, 0.29999998, 2.3999665, -0.0089639425, 0)
+_resource = ExtResource("14_4ym54")
+
+[node name="Chest" parent="." unique_id=1111274732 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.29999164, 0.0022409824, 0, -0.0022409824, 0.29999164, 0, 0, 0, 0.3, 2.9999664, -0.0089639425, 0)
+_resource = ExtResource("11_2yv0f")
+
+[node name="Head" parent="." unique_id=19646496 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.3, -2.3283064e-10, 0, 2.3283064e-10, 0.3, 0, 0, 0, 0.29999998, 3.5999496, -0.013445914, 0)
+_resource = ExtResource("10_grrod")
+
+[node name="Leg" parent="." unique_id=337069059 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.3, -2.3283064e-10, 0, 2.3283064e-10, 0.3, 0, 0, 0, 0.29999998, 4.1999493, -0.013445914, 0)
+_resource = ExtResource("12_gtvra")
+
+[node name="Sword" parent="." unique_id=1848623386 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.3, -2.3283064e-10, 0, 2.3283064e-10, 0.3, 0, 0, 0, 0.29999998, 4.7999496, -0.013445913, 0)
+_resource = ExtResource("13_4ym54")
+
+[node name="Bandage" parent="." unique_id=867548936 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.3, -2.3283064e-10, 0, 2.3283064e-10, 0.3, 0, 0, 0, 0.29999998, 5.399949, -0.013445914, 0)
+_resource = ExtResource("4_xbhdi")
+
+[node name="Bonk" parent="." unique_id=1794126287 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.3, -2.3283064e-10, 0, 2.3283064e-10, 0.3, 0, 0, 0, 0.29999998, 5.999949, -0.013445914, 0)
+_resource = ExtResource("10_ov34g")
+
+[node name="Cheat" parent="." unique_id=735255692 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.3, -2.3283064e-10, 0, 2.3283064e-10, 0.3, 0, 0, 0, 0.29999998, 6.599949, -0.013445914, 0)
+_resource = ExtResource("11_77r7h")
+
+[node name="ShieldCap" parent="." unique_id=1011036108 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.3, -2.3283064e-10, 0, 2.3283064e-10, 0.3, 0, 0, 0, 0.29999998, 7.199949, -0.013445914, 0)
+_resource = ExtResource("12_od83i")
+
+[node name="Smoke" parent="." unique_id=1485395600 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.3, -4.656613e-10, 0, 4.656613e-10, 0.3, 0, 0, 0, 0.3, 7.7999487, -0.013445914, 0)
+_resource = ExtResource("13_5w8ke")

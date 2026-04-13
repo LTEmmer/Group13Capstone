@@ -11,6 +11,7 @@ Icon = ExtResource("4_f2g41")
 Description = "Gives you a chance to run away"
 Behavior = 1
 Rarity = 3
+OnlyCombat = true
 MaxUses = 1
 UseEffects = Array[ExtResource("1_bcrrh")]([])
 PickupEffects = null

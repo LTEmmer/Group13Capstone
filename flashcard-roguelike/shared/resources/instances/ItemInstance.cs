@@ -32,10 +32,9 @@ public partial class ItemInstance : Resource
         }
     }
 
-    // The slot array and index this item occupies, null if not equipped
-    public ItemInstance[] EquippedSlot { get; set; }
-    public int EquippedIndex { get; set; }
-    public bool IsEquipped => EquippedSlot != null;
+    // Set by EquipmentComponent when equipped; null when in the bag.
+    public ItemResource.EquipType? ActiveSlot { get; set; }
+    public bool IsEquipped => ActiveSlot.HasValue;
 
     public ItemInstance() { }
     public ItemInstance(ItemResource resource, int count = 1)
@@ -44,4 +43,12 @@ public partial class ItemInstance : Resource
         CurrentUses = resource.MaxUses;
         Count = count;
     }
+
+    public ItemInstance Clone() => new ItemInstance
+    {
+        Resource     = Resource,
+        CurrentUses  = CurrentUses,
+        Count        = Count,
+        ActiveSlot   = ActiveSlot,
+    };
 }

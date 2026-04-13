@@ -17,6 +17,6 @@ public partial class ModHealth: ItemEffect
 		
 		if(_hp == 0)return;
 		if(_hp >= 0) health.Heal(_hp);
-		else health.TakeDamage(_hp);
+		else health.TakeDamage(-_hp);
     }
 }

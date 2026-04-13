@@ -11,6 +11,7 @@ Icon = ExtResource("4_2pu0s")
 Description = "Stun the enemy for 1 turn."
 Behavior = 1
 Rarity = 2
+OnlyCombat = true
 UseEffects = Array[ExtResource("1_3x2pi")]([])
 PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"
