@@ -17,7 +17,7 @@ public partial class Item : Interactable
         Setup(instance);
     }
 
-    /// <summary>Spawns from a resource alone creates a fresh instance with Count 1.</summary>
+    /// <summary>Spawns from a resource alone creates a instance with Count 1.</summary>
     public void Init(ItemResource resource)
     {
         if (resource == null) throw new ArgumentNullException(nameof(resource));

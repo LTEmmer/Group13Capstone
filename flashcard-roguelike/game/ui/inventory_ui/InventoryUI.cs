@@ -193,7 +193,7 @@ public partial class InventoryUI : Node3D
         newItem.GlobalPosition = _player.GlobalPosition - new Vector3(0, 0.5f, 0);
     }
 
-    // ───────────────────────── EQUIP HIGHLIGHT ─────────────────────────  NEW
+    // ───────────────────────── EQUIP HIGHLIGHT ─────────────────────────
 
     private void RefreshEquipHighlights()
     {

@@ -35,6 +35,8 @@ public partial class ToolPage : InventoryPage<ItemResource>
 
         _equipButton.Text   = _equipment.IsEquipped(item) ? "Unequip" : "Equip";
         _dropButton.Visible = !_equipment.IsEquipped(item);
+        _dropButton.Disabled = false;
+        _equipButton.Disabled  = false;
 
         Refresh();
     }
@@ -44,9 +46,15 @@ public partial class ToolPage : InventoryPage<ItemResource>
         if (_item == null) return;
 
         if (_equipment.IsEquipped(_item))
+        {
+            _dropButton.Disabled = false;
             _equipment.Unequip(_item);
+        }
         else
+        {
+            _dropButton.Disabled = true;
             _equipment.Equip(_item);
+        }
 
         SetItem(_item);
     }
@@ -54,6 +62,8 @@ public partial class ToolPage : InventoryPage<ItemResource>
     private void OnDropPressed()
     {
         if (_item == null) return;
+        _dropButton.Disabled = true;
+        _equipButton.Disabled  = true;
         Drop(_item);
     }
 

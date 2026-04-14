@@ -20,6 +20,7 @@ public partial class UsePage : InventoryPage<ItemResource>
         _item = item;
         _useButton.Visible = !item.Resource.OnlyCombat;
         _dropButton.Disabled = false;
+        _useButton.Disabled = false;
         RefreshUses();
     }
 
