@@ -44,15 +44,36 @@ size = Vector3(12, 3, 4)
 [sub_resource type="BoxMesh" id="BoxMesh_y432j"]
 size = Vector3(75, 75, 75)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8jd16"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c02ok"]
+noise = SubResource("FastNoiseLite_8jd16")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y432j"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n7dii"]
+noise = SubResource("FastNoiseLite_y432j")
+
 [sub_resource type="ShaderMaterial" id="Mat_water"]
 render_priority = 0
 shader = ExtResource("Shader_water")
-shader_parameter/shallow_color = Color(0.1, 0.5, 0.8, 0.85)
-shader_parameter/deep_color = Color(0.02, 0.15, 0.4, 0.95)
-shader_parameter/wave_speed = 0.6
-shader_parameter/wave_scale = 3.0
-shader_parameter/fresnel_power = 3.0
-shader_parameter/emission_strength = 0.2
+shader_parameter/surfaceNoise = SubResource("NoiseTexture2D_n7dii")
+shader_parameter/distortNoise = SubResource("NoiseTexture2D_c02ok")
+shader_parameter/beer_factor = 0.8
+shader_parameter/foam_distance = 0.01
+shader_parameter/foam_max_distance = 0.4
+shader_parameter/foam_min_distance = 0.04
+shader_parameter/foam_color = Color(1, 1, 1, 1)
+shader_parameter/surface_noise_tiling = Vector2(2.62, 2.22)
+shader_parameter/surface_noise_scroll = Vector3(0.03, 0.03, 0)
+shader_parameter/surface_noise_cutoff = 0.777
+shader_parameter/surface_distortion_amount = 0.27
+shader_parameter/_DepthGradientShallow = Color(0.325, 0.807, 0.971, 0.725)
+shader_parameter/_DepthGradientDeep = Color(0.086, 0.407, 1, 0.749)
+shader_parameter/_DepthMaxDistance = 1.0
+shader_parameter/_DepthFactor = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n7dii"]
 points = PackedVector3Array(-37.5, 0, -37.5, -37.5, 0, 37.5, 37.5, 0, -37.5, 37.5, 0, 37.5)
