@@ -178,7 +178,7 @@ public partial class DungeonGenerator : Node3D
 		// Place each at a fixed distance apart on the x-axis.
 		for (int i = 0; i < roomCount; i++)
 		{
-			positions[i] = new Vector3(i * 100f, 0, 0);
+			positions[i] = new Vector3(i * 300f, 0, 0);
 		}
 
 		return positions;
