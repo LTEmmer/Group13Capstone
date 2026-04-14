@@ -18069,7 +18069,6 @@ AttackSounds = Array[AudioStream]([ExtResource("12_4j27x"), ExtResource("13_0jrw
 MissSounds = Array[AudioStream]([])
 
 [node name="HealthComponent" parent="." unique_id=58685042 node_paths=PackedStringArray("PlayerCamera") instance=ExtResource("3_health")]
-MaxHealth = 30.0
 IsPlayer = true
 HurtSounds = Array[AudioStream]([ExtResource("13_cawmy"), ExtResource("14_chnj6"), ExtResource("28_5jc0j"), ExtResource("29_h2rmy"), ExtResource("30_l4byk"), ExtResource("31_h2xdj")])
 BlockSounds = Array[AudioStream]([ExtResource("18_je5mu"), ExtResource("19_k8egu"), ExtResource("34_6wk8s"), ExtResource("35_0vqd7"), ExtResource("36_icsuc")])
