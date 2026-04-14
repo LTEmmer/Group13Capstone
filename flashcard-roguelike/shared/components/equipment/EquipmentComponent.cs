@@ -8,14 +8,16 @@ public partial class EquipmentComponent : Node
     [Signal] public delegate void ItemEquippedEventHandler(ItemInstance item);
     [Signal] public delegate void ItemUnequippedEventHandler(ItemInstance item);
 
+    [Export] public Player EffectTarget;
+
     // Maps each SlotGroup to the physical slots that accept it.
     private static readonly Dictionary<SG, ET[]> GroupSlots = new()
     {
-        { SG.Helmet,        new[] { ET.Helmet } },
-        { SG.Chestplate,    new[] { ET.Chestplate } },
-        { SG.Leggings,      new[] { ET.Leggings } },
-        { SG.Handheld,      new[] { ET.LeftHand, ET.RightHand } },
-        { SG.Charm,         new[] { ET.Charm1, ET.Charm2, ET.Charm3, ET.Charm4 } },
+        { SG.Helmet,     new[] { ET.Helmet } },
+        { SG.Chestplate, new[] { ET.Chestplate } },
+        { SG.Leggings,   new[] { ET.Leggings } },
+        { SG.Handheld,   new[] { ET.LeftHand, ET.RightHand } },
+        { SG.Charm,      new[] { ET.Charm1, ET.Charm2, ET.Charm3, ET.Charm4 } },
     };
 
     private readonly Dictionary<ET, ItemInstance> _slots = new();
@@ -35,7 +37,6 @@ public partial class EquipmentComponent : Node
         if (!GroupSlots.TryGetValue(group, out var candidates))
             return false;
 
-        // Find the first free physical slot in this group
         foreach (var slot in candidates)
         {
             if (_slots.ContainsKey(slot)) continue;
@@ -43,6 +44,16 @@ public partial class EquipmentComponent : Node
             _slots[slot] = item;
             item.ActiveSlot = slot;
             GD.Print($"[Equipment] Equipped: {item.Resource.Name} → {slot}");
+
+            // Tool items: apply UseEffects while equipped
+            if (EffectTarget != null
+                && item.Resource.Behavior == ItemResource.ItemBehavior.Tool
+                && item.Resource.UseEffects != null)
+            {
+                foreach (var effect in item.Resource.UseEffects)
+                    effect.Apply(EffectTarget, item);
+            }
+
             EmitSignal(SignalName.ItemEquipped, item);
             return true;
         }
@@ -63,6 +74,16 @@ public partial class EquipmentComponent : Node
         _slots.Remove(slot);
         item.ActiveSlot = null;
         GD.Print($"[Equipment] Unequipped: {item.Resource.Name}");
+
+        // Tool items: remove UseEffects when unequipped
+        if (EffectTarget != null
+            && item.Resource.Behavior == ItemResource.ItemBehavior.Tool
+            && item.Resource.UseEffects != null)
+        {
+            foreach (var effect in item.Resource.UseEffects)
+                effect.Remove(EffectTarget);
+        }
+
         EmitSignal(SignalName.ItemUnequipped, item);
         return true;
     }

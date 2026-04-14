@@ -28,10 +28,6 @@ public partial class InventoryUI : Node3D
     [Export] private Button _useTab;
     [Export] private Button _toolTab;
 
-    private Array<ItemInstance> _statArr = new();
-    private Array<ItemInstance> _useArr = new();
-    private Array<ItemInstance> _toolArr = new();
-
     public override void _Ready()
     {
         ProcessMode = ProcessModeEnum.Always;
@@ -53,18 +49,33 @@ public partial class InventoryUI : Node3D
         _useTab.Pressed  += () => ShowPage(_usePage,  _useItems);
         _toolTab.Pressed += () => ShowPage(_toolPage, _toolItems);
 
-        // NEW — refresh highlights whenever equipment changes
         if (_equipment != null)
         {
             _equipment.ItemEquipped   += _ => RefreshEquipHighlights();
             _equipment.ItemUnequipped += _ => RefreshEquipHighlights();
+            _equipment.EffectTarget = _player;
         }
 
-        foreach (ItemInstance item in _inventory.inv)
-            OnItemAdded(item);
+        RefreshUILists();
 
         ShowPage(_toolPage, _toolItems);
         Visible = true;
+    }
+
+    // ───────────────────────── UI SYNCHRONIZATION ─────────────────────────
+
+    private void RefreshUILists()
+    {
+        _statList.Clear();
+        _useList.Clear();
+        _toolList.Clear();
+
+        foreach (var item in _inventory.StatItems)
+            _statList.AddItem("", item.Resource.Icon);
+        foreach (var item in _inventory.UseItems)
+            _useList.AddItem("", item.Resource.Icon);
+        foreach (var item in _inventory.ToolItems)
+            _toolList.AddItem("", item.Resource.Icon);
     }
 
     // ───────────────────────── ITEM MANAGEMENT ─────────────────────────
@@ -79,54 +90,31 @@ public partial class InventoryUI : Node3D
 
         var res = item.Resource;
 
-        switch (res.Behavior)
+        // PickupEffects are applied in Item.Interact, not here
+
+        if (res.Behavior == ItemResource.ItemBehavior.Stat
+            && res.UseEffects != null)
         {
-            case ItemResource.ItemBehavior.Stat:
-                _statList.AddItem("", res.Icon);
-                _statArr.Add(item);
-                break;
-
-            case ItemResource.ItemBehavior.Use:
-                _useList.AddItem("", res.Icon);
-                _useArr.Add(item);
-                break;
-
-            case ItemResource.ItemBehavior.Tool:
-                _toolList.AddItem("", res.Icon);
-                _toolArr.Add(item);
-                break;
+            foreach (var effect in res.UseEffects)
+                effect.Apply(_player, item);
         }
 
-        RefreshEquipHighlights(); // NEW — newly added item might already be equipped
+        RefreshUILists();
+        RefreshEquipHighlights();
     }
 
     private void OnItemRemoved(ItemInstance item)
     {
-        int idx;
-
-        switch (item.Resource.Behavior)
+        // Stat items: remove passive UseEffects when leaving inventory
+        if ( item.Resource.Behavior == ItemResource.ItemBehavior.Stat
+            && item.Resource.UseEffects != null)
         {
-            case ItemResource.ItemBehavior.Stat:
-                idx = _statArr.IndexOf(item);
-                if (idx < 0) return;
-                _statList.RemoveItem(idx);
-                _statArr.RemoveAt(idx);
-                break;
-
-            case ItemResource.ItemBehavior.Use:
-                idx = _useArr.IndexOf(item);
-                if (idx < 0) return;
-                _useList.RemoveItem(idx);
-                _useArr.RemoveAt(idx);
-                break;
-
-            case ItemResource.ItemBehavior.Tool:
-                idx = _toolArr.IndexOf(item);
-                if (idx < 0) return;
-                _toolList.RemoveItem(idx);
-                _toolArr.RemoveAt(idx);
-                break;
+            foreach (var effect in item.Resource.UseEffects)
+                effect.Remove(_player);
         }
+
+        RefreshUILists();
+        RefreshEquipHighlights();
     }
 
     // ───────────────────────── SELECTION ─────────────────────────
@@ -198,6 +186,7 @@ public partial class InventoryUI : Node3D
         var newItem = _itemScene.Instantiate<Item>();
 
         _player.GetParent().AddChild(newItem);
+        item.PickupEffectsApplied = true;
 
         newItem.Init(item);
 
@@ -210,9 +199,9 @@ public partial class InventoryUI : Node3D
     {
         if (_equipment == null) return;
 
-        ApplyHighlights(_statList, _statArr);
-        ApplyHighlights(_useList,  _useArr);
-        ApplyHighlights(_toolList, _toolArr);
+        ApplyHighlights(_statList, _inventory.StatItems);
+        ApplyHighlights(_useList,  _inventory.UseItems);
+        ApplyHighlights(_toolList, _inventory.ToolItems);
     }
 
     private void ApplyHighlights(ItemList list, Array<ItemInstance> arr)
@@ -228,9 +217,9 @@ public partial class InventoryUI : Node3D
 
     private (Array<ItemInstance> arr, InventoryPage<ItemResource> page) GetOpenPage()
     {
-        if (_statPage.Visible) return (_statArr, _statPage);
-        if (_usePage.Visible) return (_useArr, _usePage);
-        return (_toolArr, _toolPage);
+        if (_statPage.Visible) return (_inventory.StatItems, _statPage);
+        if (_usePage.Visible) return (_inventory.UseItems, _usePage);
+        return (_inventory.ToolItems, _toolPage);
     }
 
     private void ShowPage(Control page, Control items)

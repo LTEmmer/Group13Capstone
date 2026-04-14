@@ -17,7 +17,7 @@ public partial class Item : Interactable
         Setup(instance);
     }
 
-    /// <summary>Spawns from a resource alone — creates a fresh instance with Count 1.</summary>
+    /// <summary>Spawns from a resource alone creates a fresh instance with Count 1.</summary>
     public void Init(ItemResource resource)
     {
         if (resource == null) throw new ArgumentNullException(nameof(resource));
@@ -57,6 +57,13 @@ public partial class Item : Interactable
         if (_resource.UseEffects == null && _resource.PickupEffects == null)
             GD.Print(_resource.Name + ": has no effects");
 
+        if (!_itemInstance.PickupEffectsApplied && _resource.PickupEffects != null)
+        {
+            foreach (var effect in _resource.PickupEffects)
+                effect.Apply(player, _itemInstance);
+            _itemInstance.PickupEffectsApplied = true;
+        }
+
         if (_resource.AddToInventory)
         {
             var inventoryNode = player.FindChild("InventoryComponent");
@@ -67,12 +74,6 @@ public partial class Item : Interactable
 
             inventory.AddItem(_itemInstance);
             GD.Print($"Added '{_resource.Name}' to {player.Name}'s inventory.");
-        }
-
-        if (_resource.PickupEffects != null)
-        {
-            foreach (var effect in _resource.PickupEffects)
-                effect.Apply(player, _itemInstance);
         }
 
         TaloTelemetry.TrackItemsPickedUp();

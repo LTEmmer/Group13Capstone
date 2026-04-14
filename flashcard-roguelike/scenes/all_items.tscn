@@ -15,6 +15,73 @@
 [ext_resource type="Resource" uid="uid://b4sdo5bqn5smb" path="res://game/entity/item/item_resources/tool/sword.tres" id="13_4ym54"]
 [ext_resource type="Resource" uid="uid://11fr68fb3aa2" path="res://game/entity/item/item_resources/use/smoke_screen.tres" id="13_5w8ke"]
 [ext_resource type="Resource" uid="uid://bo32p1f8tu7wp" path="res://game/entity/item/item_resources/tool/charm.tres" id="14_4ym54"]
+[ext_resource type="Texture2D" uid="uid://cmyjgorgq77fl" path="res://assets/sprites/heart-plus.svg" id="16_5w8ke"]
+[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="17_c47jj"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="18_a67qy"]
+[ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="19_c47jj"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_m10cq"]
+
+[sub_resource type="Resource" id="Resource_1fg21"]
+script = ExtResource("17_c47jj")
+_hp = 10
+_maxHp = true
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[sub_resource type="Resource" id="Resource_6a435"]
+script = ExtResource("18_a67qy")
+Name = "MaxHP"
+Icon = ExtResource("16_5w8ke")
+Mesh = SubResource("PrismMesh_m10cq")
+Behavior = 2
+Slot = 5
+UseEffects = Array[Object]([SubResource("Resource_1fg21")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfbec"]
+albedo_color = Color(0.013984438, 0.65015376, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b80tv"]
+material = SubResource("StandardMaterial3D_yfbec")
+
+[sub_resource type="Resource" id="Resource_mwtb2"]
+script = ExtResource("17_c47jj")
+_hp = 5
+_maxHp = true
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[sub_resource type="Resource" id="Resource_a67qy"]
+script = ExtResource("18_a67qy")
+Name = "Health"
+Icon = ExtResource("16_5w8ke")
+Mesh = SubResource("CylinderMesh_b80tv")
+Description = "Heals the player"
+AddToInventory = false
+UseEffects = null
+PickupEffects = Array[ExtResource("19_c47jj")]([SubResource("Resource_mwtb2")])
+metadata/_custom_type_script = "uid://573w4ti026as"
+
+[sub_resource type="Resource" id="Resource_cm8q1"]
+script = ExtResource("17_c47jj")
+_hp = -5
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[sub_resource type="Resource" id="Resource_c47jj"]
+script = ExtResource("17_c47jj")
+_hp = 10
+_maxHp = true
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[sub_resource type="Resource" id="Resource_m10cq"]
+script = ExtResource("18_a67qy")
+Name = "Health"
+Icon = ExtResource("16_5w8ke")
+Mesh = SubResource("CylinderMesh_b80tv")
+Description = "Heals the player"
+UseEffects = Array[Object]([SubResource("Resource_c47jj")])
+PickupEffects = Array[Object]([SubResource("Resource_cm8q1")])
+metadata/_custom_type_script = "uid://573w4ti026as"
 
 [node name="AllItems" type="Node3D" unique_id=818415985]
 
@@ -73,3 +140,15 @@ _resource = ExtResource("12_od83i")
 [node name="Smoke" parent="." unique_id=1485395600 instance=ExtResource("1_jb5a7")]
 transform = Transform3D(0.3, -4.656613e-10, 0, 4.656613e-10, 0.3, 0, 0, 0, 0.3, 7.7999487, -0.013445914, 0)
 _resource = ExtResource("13_5w8ke")
+
+[node name="MaxHPCharm" parent="." unique_id=749319352 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.3, -4.656613e-10, 0, 4.656613e-10, 0.3, 0, 0, 0, 0.3, 8.799949, -0.013445914, 0)
+_resource = SubResource("Resource_6a435")
+
+[node name="MaxHPStat" parent="." unique_id=1094720715 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.29999164, 0.0022409821, 0, -0.0022409821, 0.29999164, 0, 0, 0, 0.3, 9.5, 0, 0)
+_resource = SubResource("Resource_a67qy")
+
+[node name="MaxHPStat2" parent="." unique_id=1154706287 instance=ExtResource("1_jb5a7")]
+transform = Transform3D(0.29999164, 0.0022409821, 0, -0.0022409821, 0.29999164, 0, 0, 0, 0.3, 10.3, 0, 0)
+_resource = SubResource("Resource_m10cq")

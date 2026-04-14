@@ -4,10 +4,24 @@ using Godot;
 public partial class ModHealth: ItemEffect
 {
     [Export] public int _hp = 1;
+	[Export] private bool _maxHp;
 
     public override void Apply(Node target, ItemInstance item)
+	{
+		DoModHealth(target, true);
+	}
+
+    public override void Remove(Node target)
     {
-        GD.Print($"Healing {_hp} to {target.Name}");
+        base.Remove(target);
+		DoModHealth(target, false);
+
+    }
+
+	private void DoModHealth(Node target, bool apply)
+	{
+		int hp = apply? _hp: -_hp;
+        GD.Print($"Healing {hp} to {target.Name}");
 		var health = target.GetNodeOrNull<HealthComponent>("HealthComponent");
 		if (health == null)
 		{
@@ -15,8 +29,14 @@ public partial class ModHealth: ItemEffect
 			return;
 		}
 		
-		if(_hp == 0)return;
-		if(_hp >= 0) health.Heal(_hp);
-		else health.TakeDamage(-_hp);
-    }
+		if(hp == 0)return;
+		else if (_maxHp)
+		{
+			health.MaxHealth += hp;
+		}
+		else if(hp >= 0) health.Heal(hp);
+		else health.TakeDamage(-hp);
+
+	}
+
 }

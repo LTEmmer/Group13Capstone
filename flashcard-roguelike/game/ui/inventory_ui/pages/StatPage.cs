@@ -8,13 +8,23 @@ public partial class StatPage : InventoryPage<ItemResource>
 
     public override void _Ready()
     {
+
         _dropButton.Pressed += OnDropPressed;
+    }
+
+    public override void SetItem(ItemInstance item)
+    {
+        base.SetItem(item);
+        _item = item;
+        _dropButton.Disabled = false;
     }
 
     private void OnDropPressed()
     {
+        GD.Print("test");
         if (_item == null) return;
         GD.Print("dropping");
         Drop(_item);
+        _dropButton.Disabled = true;
     }
 }
