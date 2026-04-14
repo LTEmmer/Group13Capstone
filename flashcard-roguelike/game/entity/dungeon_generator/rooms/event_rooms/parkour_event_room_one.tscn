@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bvs732ljwgra3" path="res://game/entity/hazards/ScalingPlatform.cs" id="8_8jd16"]
 [ext_resource type="Script" uid="uid://dil04vdvtxvrn" path="res://game/entity/hazards/BlinkingPlatform.cs" id="9_c02ok"]
-[ext_resource type="PackedScene" uid="uid://cxokfn2emr2xn" path="res://game/ui/battle_ui/flashcard_challenge_true_false.tscn" id="Scene_flashcard"]
+[ext_resource type="PackedScene" uid="uid://cnitj3uodab4s" path="res://game/ui/battle_ui/flashcard_challenge_true_false.tscn" id="Scene_flashcard"]
 [ext_resource type="PackedScene" uid="uid://cm05m68d10agu" path="res://game/entity/npcs/base_npc.tscn" id="Scene_npc"]
 [ext_resource type="Script" uid="uid://ba07nbm5r86bb" path="res://game/entity/hazards/DamageZone.cs" id="Script_damage"]
 [ext_resource type="Script" uid="uid://b5yw0do0mol40" path="res://game/entity/hazards/MovingPlatform.cs" id="Script_platform"]
@@ -79,7 +79,7 @@ points = PackedVector3Array(4.7683716e-07, -0.5, -7.5, -0.7356105, -0.5, -7.4647
 
 [node name="ParkourEventRoomOne" type="Node3D" unique_id=47384417 node_paths=PackedStringArray("Npc")]
 script = ExtResource("Script_room")
-Npc = NodePath("NPC")
+Npc = NodePath("NPC/BaseNPC")
 FlashcardTFScene = ExtResource("Scene_flashcard")
 
 [node name="Light" type="OmniLight3D" parent="." unique_id=1739106375]
@@ -216,3 +216,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3440895)
 shape = SubResource("ConvexPolygonShape3D_y432j")
 
 [node name="StaticPlatforms" type="Node3D" parent="." unique_id=1293067487]
+
+[editable path="NPC"]
+[editable path="NPC/BaseNPC/denizen"]

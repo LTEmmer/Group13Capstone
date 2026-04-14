@@ -247,12 +247,14 @@ public partial class DungeonGenerator : Node3D
 			}
 
 			// Add a label in the middle of the room to show its ID and type for debugging purposes
+			/*
 			Label3D label = new Label3D();
 			label.Text = $"Room {room.Id} ({room.RoomType})";
 			label.Position = new Vector3(0, 3, 0);
 			label.Billboard = BaseMaterial3D.BillboardModeEnum.Enabled;
 			label.FontSize = 94;
 			roomNode.AddChild(label);
+			*/
 			
 			// Add the room to the Rooms node in the scene tree
 			roomsRoot.AddChild(roomNode);	

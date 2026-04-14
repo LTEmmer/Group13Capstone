@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://6rsymws4j3rj"]
+
+[ext_resource type="Texture2D" uid="uid://tfjwqpbwfly8" path="res://assets/models/turret/turret_barrel_texture/paint_turret_Material.004_BaseColor.png" id="1_fgxlt"]
+[ext_resource type="Texture2D" uid="uid://iqkyax3m6tm2" path="res://assets/models/turret/turret_barrel_texture/paint_turret_Material.004_Metallic.png" id="2_sbdhq"]
+[ext_resource type="Texture2D" uid="uid://dcs5qr4qbvof1" path="res://assets/models/turret/turret_barrel_texture/paint_turret_Material.004_Roughness.png" id="3_sinbp"]
+
+[resource]
+albedo_texture = ExtResource("1_fgxlt")
+metallic = 1.0
+metallic_texture = ExtResource("2_sbdhq")
+roughness_texture = ExtResource("3_sinbp")

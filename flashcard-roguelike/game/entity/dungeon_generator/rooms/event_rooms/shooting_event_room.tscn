@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bwrpmgdt36xbm" path="res://assets/audio/flashcard_sfx/incorrect.mp3" id="3_8ftga"]
 [ext_resource type="PackedScene" uid="uid://cayaqtl6ocmoa" path="res://game/entity/qa_panel/qa_panel.tscn" id="3_401qd"]
 [ext_resource type="PackedScene" uid="uid://cm05m68d10agu" path="res://game/entity/npcs/base_npc.tscn" id="4_pp6jg"]
+[ext_resource type="Script" uid="uid://sjh56ix28es4" path="res://shared/components/rotate/RotateComponent.cs" id="6_afmoe"]
 [ext_resource type="PackedScene" uid="uid://cftxvwpjm2e6r" path="res://assets/models/shooting_room/walls/shooting_room_walls1.glb" id="7_dxxao"]
 [ext_resource type="Material" uid="uid://bm1uqh4lys2wm" path="res://assets/models/shooting_room/walls/shooting_room_gallery_walls_texture.tres" id="8_066kt"]
 [ext_resource type="PackedScene" uid="uid://c58vn5h3b0le6" path="res://assets/models/shooting_room/floors/shooting_room_floors.glb" id="9_cauoo"]
@@ -57,7 +58,7 @@ rings = 16
 
 [node name="ShootingEventRoom" type="Node3D" unique_id=464632565 node_paths=PackedStringArray("TriggerNPC", "RoomTurret")]
 script = ExtResource("1_d6t06")
-TriggerNPC = NodePath("BaseNPC")
+TriggerNPC = NodePath("BaseNPC/BaseNPC")
 RoomTurret = NodePath("Turret")
 CorrectSound = ExtResource("2_dsngy")
 WrongSound = ExtResource("3_8ftga")
@@ -78,61 +79,81 @@ light_energy = 6.0
 omni_range = 181.767
 
 [node name="Turret" parent="." unique_id=2031055064 instance=ExtResource("2_bh6dk")]
-transform = Transform3D(2.425, 0, 0, 0, 2.425, 0, 0, 0, 2.425, 0, 0.14188349, 0.29257488)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 2, 0)
 
 [node name="BaseNPC" parent="." unique_id=1000981014 instance=ExtResource("4_pp6jg")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.00027179718, 0.053922653, 59.81685)
 
+[node name="BaseNPC" parent="BaseNPC" index="0" unique_id=2015437748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25591367, 0.32939088, 0)
+
 [node name="Panels" type="Node3D" parent="." unique_id=917031636]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 54.21998)
 
-[node name="QAPanel" parent="Panels" unique_id=32849381 instance=ExtResource("3_401qd")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 5.4332795, -73.2998)
+[node name="SlowPivot" type="Node3D" parent="Panels" unique_id=1423815925]
+transform = Transform3D(0.62196815, 0, -0.78304255, 0, 1, 0, 0.78304255, 0, 0.62196815, 0, 0, -54.243443)
+visible = false
+script = ExtResource("6_afmoe")
+DegreesPerSecond = 2.5
 
-[node name="QAPanel2" parent="Panels" unique_id=1399223484 instance=ExtResource("3_401qd")]
-transform = Transform3D(-1, -1.8626451e-08, -8.940697e-08, -5.3335008e-08, 0.9422797, 0.33482668, 7.2142655e-08, 0.33482665, -0.9422797, 0, 13.624254, -72.86138)
+[node name="QAPanel" parent="Panels/SlowPivot" unique_id=32849381 instance=ExtResource("3_401qd")]
+transform = Transform3D(-1, 0, 8.940697e-08, 0, 1, 0, -8.940697e-08, 0, -1, -9.741634e-07, 2.6958537, -19.056356)
 
-[node name="QAPanel3" parent="Panels" unique_id=487236728 instance=ExtResource("3_401qd")]
-transform = Transform3D(-0.30033955, -0.58560973, 0.7528993, 0, 0.78934133, 0.6139546, -0.9538323, 0.18439485, -0.23707043, 23.588844, 15.9833355, -55.477596)
+[node name="QAPanel3" parent="Panels/SlowPivot" unique_id=487236728 instance=ExtResource("3_401qd")]
+transform = Transform3D(-0.01197508, -0.4939757, 0.86939335, -0.035288345, 0.86912274, 0.49333602, -0.9993055, -0.02477166, -0.027839482, 23.588846, 15.9833355, -1.2341548)
 
-[node name="QAPanel4" parent="Panels" unique_id=851234901 instance=ExtResource("3_401qd")]
-transform = Transform3D(-0.79228765, 0.22256818, -0.5681054, 0.044822436, 0.94980997, 0.3095996, 0.60849917, 0.21982813, -0.76249874, -19.644154, 15.704597, -68.89804)
+[node name="QAPanel4" parent="Panels/SlowPivot" unique_id=851234901 instance=ExtResource("3_401qd")]
+transform = Transform3D(-0.62406397, 0.2510246, -0.7399537, 0.01486966, 0.9506347, 0.30995563, 0.7812318, 0.18242946, -0.5969897, -19.644157, 15.704597, -14.654596)
 
-[node name="QAPanel5" parent="Panels" unique_id=2099372656 instance=ExtResource("3_401qd")]
-transform = Transform3D(-0.12751743, 0.30385798, -0.944145, -0.0071327854, 0.9516106, 0.307224, 0.9918108, 0.045910805, -0.11917959, -19.251877, 11.078019, -45.115623)
+[node name="QAPanel8" parent="Panels/SlowPivot" unique_id=355684451 instance=ExtResource("3_401qd")]
+transform = Transform3D(0.9889331, 0, -0.14836165, 0, 1, 0, 0.14836165, 0, 0.9889331, -4.3546133, 8.34069, 24.337584)
 
-[node name="QAPanel6" parent="Panels" unique_id=1088759526 instance=ExtResource("3_401qd")]
-transform = Transform3D(0.41466144, 0, 0.9099757, 0, 1, 0, -0.9099757, 0, 0.41466144, 21.616415, 5.1558466, -36.13412)
+[node name="MediumPivot" type="Node3D" parent="Panels" unique_id=1051498564]
+transform = Transform3D(-0.986943, 0, 0.16106984, 0, 1, 0, -0.16106984, 0, -0.986943, 0, 0, -54.243443)
+visible = false
+script = ExtResource("6_afmoe")
+DegreesPerSecond = 7.5
 
-[node name="QAPanel7" parent="Panels" unique_id=2128908007 instance=ExtResource("3_401qd")]
-transform = Transform3D(-1, -4.274667e-15, 8.9406974e-08, 5.8267833e-08, 0.7584644, 0.6517147, -6.7811996e-08, 0.6517147, -0.7584644, 0, 18.109716, -61.4388)
+[node name="QAPanel10" parent="Panels/MediumPivot" unique_id=715034792 instance=ExtResource("3_401qd")]
+transform = Transform3D(-0.91168314, 0, 0.41089392, 0, 1, 0, -0.41089392, 0, -0.91168314, 10.544242, 2.6835093, -24.125017)
 
-[node name="QAPanel8" parent="Panels" unique_id=355684451 instance=ExtResource("3_401qd")]
-transform = Transform3D(-0.7754737, 0, 0.63137984, 0, 1, 0, -0.63137984, 0, -0.7754737, 19.592669, 4.6719646, -69.32349)
+[node name="QAPanel5" parent="Panels/MediumPivot" unique_id=2099372656 instance=ExtResource("3_401qd")]
+transform = Transform3D(0.48453254, 0.27204508, -0.83139634, -0.007132789, 0.9516106, 0.30722398, 0.8747442, -0.14292982, 0.46302658, -19.251877, 11.078019, 9.127819)
 
-[node name="QAPanel9" parent="Panels" unique_id=2055360049 instance=ExtResource("3_401qd")]
-transform = Transform3D(1, 0, 0, 0, 0.94378936, 0.3305474, 0, -0.3305474, 0.94378936, 0, 14.783106, -25.921467)
+[node name="QAPanel6" parent="Panels/MediumPivot" unique_id=1088759526 instance=ExtResource("3_401qd")]
+transform = Transform3D(0.6563883, 0, 0.75442326, 0, 1, 0, -0.75442326, 0, 0.6563883, 21.616417, 5.1558466, 18.109324)
 
-[node name="QAPanel10" parent="Panels" unique_id=715034792 instance=ExtResource("3_401qd")]
-transform = Transform3D(0.8335967, 0, -0.5523735, 0, 1, 0, 0.5523735, 0, 0.8335967, -14.292379, 2.6835093, -32.131783)
+[node name="QAPanel9" parent="Panels/MediumPivot" unique_id=2055360049 instance=ExtResource("3_401qd")]
+transform = Transform3D(-0.986943, 0.053241216, -0.152016, 0, 0.94378936, 0.3305474, 0.16106984, 0.32623145, -0.93146634, -4.561816, 20.690222, -27.952175)
+
+[node name="FastPivot" type="Node3D" parent="Panels" unique_id=2075837547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -54.243443)
+visible = false
+script = ExtResource("6_afmoe")
+
+[node name="QAPanel2" parent="Panels/FastPivot" unique_id=1399223484 instance=ExtResource("3_401qd")]
+transform = Transform3D(-0.62196827, -0.26218352, 0.73784506, -5.3335008e-08, 0.9422797, 0.33482668, -0.7830425, 0.2082515, -0.58606803, 14.578638, 13.624254, -11.579764)
+
+[node name="QAPanel7" parent="Panels/FastPivot" unique_id=2128908007 instance=ExtResource("3_401qd")]
+transform = Transform3D(0.9969485, 0.008397549, -0.077608675, 0.029955203, 0.87692904, 0.47968674, 0.07208544, -0.48054785, 0.8740013, -1.1589547, 11.156778, 18.19645)
 
 [node name="Entrances" type="Node3D" parent="." unique_id=821191918]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.408337, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.996246, -2.5467045, 51.761242)
 
 [node name="0" type="Marker3D" parent="Entrances" unique_id=274275866]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4516354, 0.35016823, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4516373, -0.47772336, 0)
 
 [node name="Exits" type="Node3D" parent="." unique_id=1926671770]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.239616, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.322784, -3.7744603, 51.895782)
 
 [node name="0" type="Marker3D" parent="Exits" unique_id=467082419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5115643, 0.47745728, -0.2607808)
 
 [node name="EnterPoint" type="Marker3D" parent="." unique_id=2008530178]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.876305, -1.822938, 52.20393)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.4851, -2.7108965, 52.20393)
 
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=1219844045]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.490044, -1.0867186, 51.74106)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.700348, -2.7470727, 51.74106)
 
 [node name="shooting_room_walls1" parent="." unique_id=862968955 instance=ExtResource("7_dxxao")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
@@ -199,5 +220,7 @@ shape = SubResource("ConvexPolygonShape3D_p063s")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -45.2319, 12.893448)
 mesh = SubResource("SphereMesh_afmoe")
 
+[editable path="BaseNPC"]
+[editable path="BaseNPC/BaseNPC/denizen"]
 [editable path="shooting_room_walls1"]
 [editable path="shooting_room_walls1/shooting_room_floors"]
