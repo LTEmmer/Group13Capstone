@@ -57,13 +57,6 @@ public partial class Item : Interactable
         if (_resource.UseEffects == null && _resource.PickupEffects == null)
             GD.Print(_resource.Name + ": has no effects");
 
-        if (!_itemInstance.PickupEffectsApplied && _resource.PickupEffects != null)
-        {
-            foreach (var effect in _resource.PickupEffects)
-                effect.Apply(player, _itemInstance);
-            _itemInstance.PickupEffectsApplied = true;
-        }
-
         if (_resource.AddToInventory)
         {
             var inventoryNode = player.FindChild("InventoryComponent");

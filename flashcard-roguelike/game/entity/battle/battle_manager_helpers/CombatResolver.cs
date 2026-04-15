@@ -163,7 +163,7 @@ public class CombatResolver
             if (_state.IsBossBattle)
                 _state.ConsecutiveCorrect = 0;
 
-            _state.PlayerAttack.PlayMissSound();
+            _state.PlayerAttack.Miss();
             _uiCoordinator.LogMessage("Attack missed!");
         }
 

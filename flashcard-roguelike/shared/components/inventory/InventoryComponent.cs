@@ -53,7 +53,12 @@ public partial class InventoryComponent : Node
 
         GD.Print(item.PickupEffectsApplied);
         inv.Add(item);
-        item.PickupEffectsApplied = true;
+        if (!item.PickupEffectsApplied && item.Resource.PickupEffects != null && EffectTarget != null)
+        {
+            foreach (var effect in item.Resource.PickupEffects)
+                effect.Apply(EffectTarget, item);
+            item.PickupEffectsApplied = true;
+        }
         EmitSignal(SignalName.ItemAdded, item);
     }
 
@@ -61,8 +66,12 @@ public partial class InventoryComponent : Node
     public void RemoveItem(ItemInstance item)
     {
         if (!inv.Remove(item)) return;
-
-
+        if (item.PickupEffectsApplied && item.Resource.PickupEffects != null && EffectTarget != null)
+        {
+            foreach (var effect in item.Resource.PickupEffects)
+                effect.Remove(EffectTarget);
+            item.PickupEffectsApplied = false;
+        }
         EmitSignal(SignalName.ItemRemoved, item);
     }
 }

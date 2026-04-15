@@ -132,7 +132,7 @@ public partial class BattleManager : Node
 
 		// Make visible
 		Transitions.Visible = true;
-		ActiveUI.Visible = true;
+		// ActiveUI.Visible = true;  // Moved to InitializeCombat
 
 		// Play stinger and music
 		AudioManager.Instance?.PlayBattleStinger();
@@ -259,6 +259,9 @@ public partial class BattleManager : Node
 	private void InitializeCombat()
 	{
 		_state.InCombat = true;
+
+		// Make UI visible after transition
+		ActiveUI.Visible = true;
 
 		// Initialize UI
 		_uiCoordinator.InitializeBattleUI();

@@ -17,13 +17,20 @@ public partial class ModAttack: ItemEffect
 			return;
 		}
 
-		// TODO: either these methods need implementation, 
-		// the attack dammage in the component needs to be able to be changed,
-		// the attack ammout has some sort of additive value,
-		// or some other way you can think of. :D
-		// maby add a crit chance value in the attack component that can be changed
-		// attack.setAttack();
-		// attack.addAttack();
-		// attack.multAttack();
+		attack.BaseDamage += _attack;
+		attack.BaseDamage *= _attack_mult;
+		// Crit chance not implemented yet
+    }
+
+    public override void Remove(Node target)
+    {
+        var attack = target.GetNodeOrNull<AttackComponent>("AttackComponent");
+		if (attack== null)
+		{
+			return;
+		}
+
+		attack.BaseDamage /= _attack_mult;
+		attack.BaseDamage -= _attack;
     }
 }

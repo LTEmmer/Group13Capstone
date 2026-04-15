@@ -7,6 +7,9 @@ public partial class AttackComponent : Node
 	[Export] public AudioStream[] AttackSounds;
 	[Export] public AudioStream[] MissSounds;
 
+	[Signal] public delegate void OnAttackSuccessfulEventHandler(Node target, float damage);
+	[Signal] public delegate void OnAttackMissedEventHandler();
+
 	private AudioStreamPlayer3D _audioPlayer;
 
 	public override void _Ready()
@@ -36,6 +39,7 @@ public partial class AttackComponent : Node
 			{
 				TaloTelemetry.TrackDamageDealt(damage);
 			}
+			EmitSignal(SignalName.OnAttackSuccessful, target, damage);
 			return true;
 		}
 		else
@@ -43,6 +47,12 @@ public partial class AttackComponent : Node
 			GD.PrintErr($"Target {target.Name} does not have a HealthComponent!");
 			return false;
 		}
+	}
+
+	public void Miss()
+	{
+		EmitSignal(SignalName.OnAttackMissed);
+		PlayMissSound();
 	}
 
 	public void PlayMissSound()
