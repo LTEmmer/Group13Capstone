@@ -1,7 +1,6 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://v332y1tyceyu"]
 
 [ext_resource type="Texture2D" uid="uid://bsfwg1c0g1w5x" path="res://assets/sprites/shield-plus.svg" id="1_2w0p7"]
-[ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="2_wtrnc"]
 [ext_resource type="Script" uid="uid://disq4r3ec5xdh" path="res://game/entity/item/effects/mod_components/ModBlock.cs" id="3_mvxo8"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_nrbad"]
 
@@ -11,19 +10,20 @@ albedo_color = Color(2.695322e-06, 0.5793161, 0.80100197, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_imnv4"]
 material = SubResource("StandardMaterial3D_qgcsr")
 
-[sub_resource type="Resource" id="Resource_qgcsr"]
+[sub_resource type="Resource" id="Resource_dof1w"]
 script = ExtResource("3_mvxo8")
-block = 10
+block = 3
 metadata/_custom_type_script = "uid://disq4r3ec5xdh"
 
 [resource]
 script = ExtResource("4_nrbad")
-Name = "Shield"
+Name = "Shield Capsule"
 Icon = ExtResource("1_2w0p7")
 Mesh = SubResource("CapsuleMesh_imnv4")
-Description = "10 Shields to block damage"
+Description = "3 Shields to block damage"
+Behavior = 1
 Rarity = 3
 MaxUses = 1
-UseEffects = Array[ExtResource("2_wtrnc")]([])
-PickupEffects = Array[ExtResource("2_wtrnc")]([SubResource("Resource_qgcsr")])
+UseEffects = Array[Object]([SubResource("Resource_dof1w")])
+PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"

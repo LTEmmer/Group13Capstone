@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://bo32p1f8tu7wp"]
+
+[ext_resource type="Texture2D" uid="uid://ctiynvkv1oqj4" path="res://assets/sprites/grafitti_etc/splat_2.png" id="1_yo3fj"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_7a44y"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_bp3vm"]
+
+[sub_resource type="Resource" id="Resource_ov34g"]
+script = ExtResource("2_7a44y")
+_attack_mult = 2.0
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[resource]
+script = ExtResource("3_bp3vm")
+Name = "Charm"
+Icon = ExtResource("1_yo3fj")
+Description = "Doubles Attack Damage"
+Behavior = 2
+Slot = 5
+Rarity = 5
+UseEffects = Array[Object]([SubResource("Resource_ov34g")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"

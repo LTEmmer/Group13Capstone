@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://dhlcwfdiu3op"]
+
+[ext_resource type="Texture2D" uid="uid://ctiynvkv1oqj4" path="res://assets/sprites/grafitti_etc/splat_2.png" id="1_7sr11"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_3bhdw"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_hhcxp"]
+
+[sub_resource type="Resource" id="Resource_4obue"]
+script = ExtResource("2_3bhdw")
+_attack_mult = 2.0
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[resource]
+script = ExtResource("3_hhcxp")
+Name = "DammageUP"
+Icon = ExtResource("1_7sr11")
+Description = "Doubles Attack Damage"
+Rarity = 5
+UseEffects = null
+PickupEffects = Array[Object]([SubResource("Resource_4obue")])
+metadata/_custom_type_script = "uid://573w4ti026as"

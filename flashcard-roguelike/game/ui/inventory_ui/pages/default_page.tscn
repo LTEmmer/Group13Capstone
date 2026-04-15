@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://djcf6ekxqiig7"]
+
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="1_a3cia"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_deuaa"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 0.99, 0.28627452)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.22, 0.2, 0.4)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+shadow_color = Color(0, 0, 0, 0.12)
+shadow_size = 3
+shadow_offset = Vector2(1, 2)
+
+[node name="DefaultPage" type="Control" unique_id=1918252655]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 496.0
+offset_bottom = 717.0
+theme = ExtResource("1_a3cia")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=976895724]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1457697931]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_deuaa")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel" unique_id=1279334988]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer" unique_id=476390333]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_deuaa")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer" unique_id=1833890035]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/MarginContainer" unique_id=747740701]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_deuaa")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/MarginContainer/Panel" unique_id=583866773]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/MarginContainer/Panel/MarginContainer" unique_id=899737277]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_deuaa")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/MarginContainer/Panel/MarginContainer/Panel" unique_id=1621801418]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/MarginContainer/Panel/MarginContainer/Panel/MarginContainer" unique_id=1847368891]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_deuaa")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel/MarginContainer/MarginContainer/Panel/MarginContainer/Panel/MarginContainer" unique_id=388394600]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="MarginContainer/Panel/MarginContainer/MarginContainer/Panel/MarginContainer/Panel/MarginContainer/MarginContainer" unique_id=123433906]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_deuaa")

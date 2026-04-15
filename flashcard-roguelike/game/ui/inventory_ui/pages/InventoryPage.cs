@@ -1,24 +1,63 @@
+using System;
 using Godot;
 
-// Generic base class for all inventory pages
+/// <summary>
+/// Generic base class for all inventory pages.
+/// Pages fire events; InventoryUI owns the actual logic.
+/// </summary>
 public abstract partial class InventoryPage<T> : Control where T : ItemResource
 {
     protected ItemInstance _item;
+    [Export] private RichTextLabel _description;
+    [Export] private Label _name;
 
-    /// <summary>
-    /// Default method to set the item for this page
-    /// </summary>
+    // ── Events ──────────────────────────────────────────────────────────────
+    public event Action<ItemInstance> DropRequested;
+    public event Action<ItemInstance> UseRequested;
+    public event Action<ItemInstance> EquipRequested;
+
+    // ── Public API ──────────────────────────────────────────────────────────
     public virtual void SetItem(ItemInstance item)
     {
-        _item = item;
         OnItemSet(item);
     }
 
-    /// <summary>
-    /// Optional override for derived pages to react when an item is set
-    /// </summary>
+    // ── Protected helpers ───────────────────────────────────────────────────
     protected virtual void OnItemSet(ItemInstance item)
     {
-        GD.Print("OnItemSet: " + item.Resource.Name + " set.");
+        _item = item;
+        _description.Text = item.Resource.Description;
+        _name.Text = item.Resource.Name;
+    }
+
+    protected void Drop(ItemInstance item)
+    {
+        if (item == null)
+        {
+            GD.PrintErr("RequestDrop called with null item");
+            return;
+        }
+
+        DropRequested?.Invoke(item);
+    }
+    protected void Use(ItemInstance item)
+    {
+        if (item == null)
+        {
+            GD.PrintErr("RequestDrop called with null item");
+            return;
+        }
+
+        UseRequested?.Invoke(item);
+    }
+    protected void Equip(ItemInstance item)
+    {
+        if (item == null)
+        {
+            GD.PrintErr("RequestDrop called with null item");
+            return;
+        }
+
+        EquipRequested?.Invoke(item);
     }
 }
