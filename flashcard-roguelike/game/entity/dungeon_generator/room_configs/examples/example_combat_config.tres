@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="RoomConfig" format=3 uid="uid://f2mdjwt1wmg0"]
 
-[ext_resource type="Script" uid="uid://c82grg7jausf5" path="res://game/entity/dungeon_generator/room_configs/RoomConfig.cs" id="1_2w7vs"]
+[ext_resource type="Script" uid="uid://bgoqu1mfuaoyg" path="res://game/entity/dungeon_generator/room_configs/RoomConfig.cs" id="1_2w7vs"]
 [ext_resource type="PackedScene" uid="uid://b2px6jxwb8r7o" path="res://game/entity/dungeon_generator/rooms/combat_room.tscn" id="1_rp25q"]
 
 [resource]
 script = ExtResource("1_2w7vs")
 RoomType = 1
+MaxConnections = 3
 Scene = ExtResource("1_rp25q")
-metadata/_custom_type_script = "uid://c82grg7jausf5"

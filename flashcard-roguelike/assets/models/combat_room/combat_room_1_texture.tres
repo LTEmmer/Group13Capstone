@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dpii0oqakj1rr"]
+
+[ext_resource type="Texture2D" uid="uid://brvb2dr4pr2vp" path="res://assets/models/combat_room/combat_room_1_Material_BaseColor.png" id="1_6qm7d"]
+[ext_resource type="Texture2D" uid="uid://5bt6ebp1j6sg" path="res://assets/models/combat_room/combat_room_1_Material_Roughness.png" id="2_yuvbj"]
+
+[resource]
+albedo_texture = ExtResource("1_6qm7d")
+roughness_texture = ExtResource("2_yuvbj")
