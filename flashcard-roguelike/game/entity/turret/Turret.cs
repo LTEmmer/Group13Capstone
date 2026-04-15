@@ -11,6 +11,7 @@ public partial class Turret : Node3D
     [Export] public float PitchLimitDegrees = 80f;
     [Export] public float ZoomFov = 30f;
     [Export] public AudioStream[] ShootSounds;
+    [Export] public MeshInstance3D PaintMesh;
 
     private Node3D _turretBase;
     private Node3D _turretHead;
@@ -59,11 +60,10 @@ public partial class Turret : Node3D
             _audioPlayer.Play();
         }
 
-        // Create and initialize projectile
         Projectile projectile = ProjectileScene.Instantiate<Projectile>();
+        projectile.Initialize(direction);
         GetParent().AddChild(projectile);
         projectile.GlobalPosition = _barrelTip.GlobalPosition;
-        projectile.Initialize(direction);
 
         _ammo--;
 

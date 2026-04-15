@@ -6,6 +6,7 @@ public partial class Projectile : Area3D
     [Export] public float Speed = 30f;
     [Export] public float MaxLifetime = 5f;
     [Export] public AudioStream[] ImpactSounds;
+    [Export] public MeshInstance3D Visual;
 
     private static readonly Color[] PrimaryColors =
     {
@@ -38,9 +39,8 @@ public partial class Projectile : Area3D
         var mat = new StandardMaterial3D();
         mat.AlbedoColor = _color;
         mat.EmissionEnabled = true;
-        mat.Emission = _color;
-        mat.EmissionEnergyMultiplier = 0.5f;
-        GetNode<MeshInstance3D>("Visual").SetSurfaceOverrideMaterial(0, mat);
+        mat.Emission = _color * 2f; // Make it glow
+        Visual.SetSurfaceOverrideMaterial(0, mat);
     }
 
     public override void _PhysicsProcess(double delta)

@@ -1,8 +1,8 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://bm1uqh4lys2wm"]
 
-[ext_resource type="Texture2D" uid="uid://bvt20u85axscs" path="res://assets/models/shooting_room/walls/shooting_room_walls1_Material.001_BaseColor.png" id="1_34ond"]
+[ext_resource type="Texture2D" uid="uid://j4b0ny27dhwy" path="res://assets/models/shooting_room/walls/shooting_room_walls1_Material.001_BaseColor.png" id="1_34ond"]
 [ext_resource type="Texture2D" uid="uid://tjfgtsdqli4i" path="res://assets/models/shooting_room/walls/shooting_room_walls1_Material.001_Metallic.png" id="2_s1jia"]
-[ext_resource type="Texture2D" uid="uid://d2x1h24f2t70e" path="res://assets/models/shooting_room/walls/shooting_room_walls1_Material.001_Roughness.png" id="3_ufoxx"]
+[ext_resource type="Texture2D" uid="uid://dixg73r23dv1h" path="res://assets/models/shooting_room/walls/shooting_room_walls1_Material.001_Roughness.png" id="3_ufoxx"]
 
 [resource]
 albedo_texture = ExtResource("1_34ond")

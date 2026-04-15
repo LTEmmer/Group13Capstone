@@ -1,0 +1,95 @@
+[gd_scene format=4 uid="uid://dfax2nknpy5t2"]
+
+[ext_resource type="Script" uid="uid://cwn6hpqp8r8go" path="res://game/entity/painting/Painting.cs" id="1_bushm"]
+[ext_resource type="Texture2D" uid="uid://bhkry1jjhfrqa" path="res://game/entity/painting/pictures/monaLisa.jpg" id="2_8xchc"]
+[ext_resource type="Texture2D" uid="uid://dj7on2xqkhvbs" path="res://game/entity/painting/pictures/grantWood.jpg" id="2_lmd0y"]
+[ext_resource type="Texture2D" uid="uid://bml0tx6qpn8bn" path="res://game/entity/painting/pictures/saturnDevouringHisSon.jpg" id="4_47i2j"]
+[ext_resource type="Texture2D" uid="uid://d24moysa4trit" path="res://game/entity/painting/pictures/sunflowers.jpg" id="5_ybukr"]
+[ext_resource type="Texture2D" uid="uid://djx413vxxdcnj" path="res://game/entity/painting/pictures/theGirlWithAPearlEarring.jpg" id="6_7vvam"]
+[ext_resource type="Texture2D" uid="uid://dbtqokhghxbjw" path="res://game/entity/painting/pictures/theKiss.jpg" id="7_h7d4f"]
+[ext_resource type="Texture2D" uid="uid://cdq0lnkxxgnwm" path="res://game/entity/painting/pictures/theScream.jpg" id="8_ofit8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_own5e"]
+resource_name = "Material"
+cull_mode = 2
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2f8a"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5565g"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.58630025, -0.025, 1, 1.1726005, 0.05),
+"format": 34896613377,
+"index_count": 54,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAwAEAAAABQADAAIABQACAAEAAwAGAAQAAwAFAAYABAAHAAAAAAAHAAEABAAGAAcACAAFAAEACQAFAAgACQAGAAUACAABAAoACgABAAcACwAGAAkACgAHAAsACwAHAAYA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("/////wAAAAAAAP////8AAAAA//8AAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD//wAA//8AAP//AAD///////8AAOcN5w0OggAAF/LnDQ6CAADnDRfyDoIAABfyF/IOggAA")
+}, {
+"aabb": AABB(-0.4456792, -0.52260363, 0.00040228813, 0.8913584, 1.0452073, 1e-05),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("//8AAAAAAAAAAP//AAAAAP////8AAAAAAAAAAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_off8e"]
+resource_name = "frame_Cube"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.58630025, -0.025, 1, 1.1726005, 0.05),
+"attribute_data": PackedByteArray("/5//f//f/z//3/9//5//P/9f////n/+//5////9f/7//H/9//1//P/9f/3//H/8//1//f/+f/z//n/9//1//P/9f/7//n/9//5//v/9f/395Y3kD/58AAIWceQP/XwAAhZyFPP9f/z95Y4U8/5//P4WceQP/n/8/hZyFPP+fAAB5Y4U8/18AAHljeQP/X/8/"),
+"format": 34896613399,
+"index_count": 54,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEA"),
+"material": SubResource("StandardMaterial3D_own5e"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("/////wAA//8AAP///////wAA//8AAP////////////8AAAAA//9U1QAA//8AAFTVAAD/////VNUAAAAAAABU1QAAAAAAAP+///8AAP///7///wAAAAD/vwAAAAD///+///8AAAAAVNX///////9U1f////8AAFTV//8AAP//VNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD//+cN5w0Ogs/BAAD/////z8HnDRfyDoLPwQAAAAD//8/BF/IX8g6Cz8H//wAA///PwRfy5w0Ogs/B////////z8HnDRfyDoJdwf///////13BF/IX8g6CXcEAAP////9dwRfy5w0Ogl3BAAAAAP//XcHnDecNDoJdwf//AAD//13B/3//v/9//7//f/+//3//v1TVVNVU1VTVVNVU1VTVVNUAAP9/AAD/fwAA/38AAP9/qiqqKqoqqiqqKqoqqiqqKv+//7//v/+//7//v/+//79ME0wTTBNME0wTTBNME0wTsuyy7LLssuyy7LLssuyy7GARnu5gEZ7uYBGe7mARnu6e7mARnu5gEZ7uYBGe7mAR")
+}, {
+"aabb": AABB(-0.4456792, -0.52260363, 0.00040228813, 0.8913584, 1.0452073, 1e-05),
+"attribute_data": PackedByteArray("eWOFPIWceQOFnIU8eWN5Aw=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAADAAEA"),
+"material": SubResource("StandardMaterial3D_u2f8a"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("//8AAAAA/78AAP//AAD/v/////8AAP+/AAAAAAAA/7//////////////////////")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_5565g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iimso"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbitx"]
+
+[node name="Painting" type="Node3D" unique_id=1835183499]
+script = ExtResource("1_bushm")
+Paintings = Array[Texture2D]([ExtResource("2_lmd0y"), ExtResource("2_8xchc"), ExtResource("4_47i2j"), ExtResource("5_ybukr"), ExtResource("6_7vvam"), ExtResource("7_h7d4f"), ExtResource("8_ofit8")])
+
+[node name="Cube" type="MeshInstance3D" parent="." unique_id=851458456]
+mesh = SubResource("ArrayMesh_off8e")
+surface_material_override/0 = SubResource("StandardMaterial3D_iimso")
+surface_material_override/1 = SubResource("StandardMaterial3D_cbitx")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=796021562]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00069373846)
+shaded = true

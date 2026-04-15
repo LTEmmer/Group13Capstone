@@ -6,16 +6,17 @@
 [ext_resource type="AudioStream" uid="uid://cfvaj7tsnkv10" path="res://assets/audio/turret_sfx/splat_3.mp3" id="4_71wb1"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_iooqv"]
-radius = 0.25
-height = 0.5
+radius = 0.15
+height = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1g4rt"]
-radius = 0.25
+radius = 0.2
 
-[node name="Projectile" type="Area3D" unique_id=1367369620]
+[node name="Projectile" type="Area3D" unique_id=1367369620 node_paths=PackedStringArray("Visual")]
 script = ExtResource("1_iooqv")
 Speed = 50.0
 ImpactSounds = Array[AudioStream]([ExtResource("2_0bw6l"), ExtResource("3_71wb1"), ExtResource("4_71wb1")])
+Visual = NodePath("Visual")
 
 [node name="Visual" type="MeshInstance3D" parent="." unique_id=1331831976]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
