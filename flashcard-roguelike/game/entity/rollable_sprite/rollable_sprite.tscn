@@ -11,7 +11,9 @@ mass = 0.1
 script = ExtResource("1_hn6vf")
 
 [node name="Sprite" type="Sprite3D" parent="." unique_id=267344469]
+cast_shadow = 0
 billboard = 1
+render_priority = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1292216117]
 shape = SubResource("SphereShape3D_oome4")

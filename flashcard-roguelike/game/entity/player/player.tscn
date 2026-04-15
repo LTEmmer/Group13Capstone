@@ -47,14 +47,7 @@
 [ext_resource type="AudioStream" uid="uid://b83vu2wuvslqd" path="res://assets/audio/player_sfx/death_sfx/death_3.mp3" id="39_yna46"]
 [ext_resource type="AudioStream" uid="uid://bhpqxppsu3byr" path="res://assets/audio/player_sfx/death_sfx/death_4.mp3" id="40_6qpfs"]
 [ext_resource type="Script" uid="uid://bs2vym380rd2d" path="res://game/entity/player/Inventory.cs" id="45_6rqdb"]
-[ext_resource type="Shader" uid="uid://ds4o4kb7qd7ox" path="res://game/entity/player/ps1Shader.gdshader" id="48_l0vtf"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l0vtf"]
-shader = ExtResource("48_l0vtf")
-shader_parameter/enabled = true
-shader_parameter/dithering = true
-shader_parameter/colors = 12
-shader_parameter/dither_size = 2
+[ext_resource type="Shader" uid="uid://q5mlok32oygd" path="res://game/entity/player/camera.gdshader" id="47_l0vtf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43spn"]
 resource_name = "M_Main"
@@ -17591,6 +17584,26 @@ _data = {
 
 [sub_resource type="World3D" id="World3D_6rqdb"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l0vtf"]
+render_priority = 0
+shader = ExtResource("47_l0vtf")
+shader_parameter/outlineColor = Color(0, 0, 0, 1)
+shader_parameter/depth_threshold = 0.025
+shader_parameter/normal_threshold = 0.400000019
+shader_parameter/normal_smoothing = 0.25
+shader_parameter/max_thickness = 1.5000000712500001
+shader_parameter/min_thickness = 0.5
+shader_parameter/max_distance = 200.0
+shader_parameter/min_distance = 1.0
+shader_parameter/grazing_fresnel_power = 5.0
+shader_parameter/grazing_angle_mask_power = 1.0
+shader_parameter/grazing_angle_modulation_factor = 50.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_5jc0j"]
+material = SubResource("ShaderMaterial_l0vtf")
+flip_faces = true
+size = Vector2(2, 2)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0b5cm"]
 
 [node name="Player" type="CharacterBody3D" unique_id=249236073 node_paths=PackedStringArray("PauseMenu", "InventoryCanvas", "CameraMount", "sightline", "inputGatherer", "playerModel", "attackComponent", "healthComponent", "inventoryComponent", "staminaComponent")]
@@ -17608,18 +17621,6 @@ staminaComponent = NodePath("StaminaComponent")
 FootstepSounds = Array[AudioStream]([ExtResource("2_8um7f"), ExtResource("3_kycdh"), ExtResource("4_otk8c")])
 JumpSounds = Array[AudioStream]([ExtResource("5_mb70y"), ExtResource("6_b6ajd"), ExtResource("7_ria7k")])
 LandSounds = Array[AudioStream]([ExtResource("7_02rvq"), ExtResource("8_20bnd")])
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=696810176]
-layer = 128
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1402360259]
-material = SubResource("ShaderMaterial_l0vtf")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [node name="FootstepSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=894622732]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.868604, 0)
@@ -18154,6 +18155,10 @@ sky_mode = 1
 [node name="SightLine" type="RayCast3D" parent="CameraPivot/Camera3D" unique_id=1093677146 groups=["Interactable"]]
 transform = Transform3D(1, 0, 0, 0, -1.3113416e-07, -1, 0, 3, -4.371139e-08, 0, 0, 0)
 collision_mask = 3
+
+[node name="OutlineShaderQuad" type="MeshInstance3D" parent="CameraPivot/Camera3D" unique_id=89036070]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_5jc0j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=838992871]
 shape = SubResource("CapsuleShape3D_0b5cm")

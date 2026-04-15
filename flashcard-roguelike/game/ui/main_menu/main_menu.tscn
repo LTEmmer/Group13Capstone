@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cm0r6jfidsyc8" path="res://assets/models/desk/desk.glb" id="5_0ipjw"]
 [ext_resource type="PackedScene" uid="uid://dgjvxrwbjwilc" path="res://assets/models/mainmenu_walls/mainmenu_walls2.glb" id="5_cwbgs"]
 [ext_resource type="Shader" uid="uid://dixadmc1j5rnp" path="res://game/ui/main_menu/BackgroundScroll.gdshader" id="5_scroll"]
-[ext_resource type="Shader" uid="uid://ds4o4kb7qd7ox" path="res://game/entity/player/ps1Shader.gdshader" id="5_wwtvc"]
 [ext_resource type="Script" uid="uid://d21whjtbn8o5c" path="res://shared/components/hover/HoverComponent.cs" id="6_k3ypk"]
 [ext_resource type="Texture2D" uid="uid://b48xe6gkb0idd" path="res://assets/ui/main_menu_torn_paper.png" id="6_paper_tex"]
 [ext_resource type="Script" uid="uid://lq4wspjrvojx" path="res://game/ui/main_menu/TornPaperMenuPanel.cs" id="7_tpaper"]
@@ -33,19 +32,13 @@
 [ext_resource type="Material" uid="uid://drq58oyucx00r" path="res://assets/models/ufo/ufo_texture.tres" id="26_wwtvc"]
 [ext_resource type="Script" uid="uid://bnbhifky1dd3h" path="res://game/ui/pause_menue/SettingsPanel.cs" id="31_nekgt"]
 [ext_resource type="Script" uid="uid://c6mb8jerb70d6" path="res://game/ui/main_menu/CreateSetPanel.cs" id="32_73pe5"]
+[ext_resource type="Shader" uid="uid://q5mlok32oygd" path="res://game/entity/player/camera.gdshader" id="33_wwtvc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_alg0g"]
 shader = ExtResource("5_scroll")
 shader_parameter/scroll_speed = 0.005
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wwtvc"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vt321"]
-shader = ExtResource("5_wwtvc")
-shader_parameter/enabled = true
-shader_parameter/dithering = true
-shader_parameter/colors = 12
-shader_parameter/dither_size = 2
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mkp5f"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -77,6 +70,26 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_2f5e2"]
 font_size = 32
 font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8vwb3"]
+render_priority = 0
+shader = ExtResource("33_wwtvc")
+shader_parameter/outlineColor = Color(0, 0, 0, 1)
+shader_parameter/depth_threshold = 0.025
+shader_parameter/normal_threshold = 0.5
+shader_parameter/normal_smoothing = 0.25
+shader_parameter/max_thickness = 1.5000000712500001
+shader_parameter/min_thickness = 0.0
+shader_parameter/max_distance = 100.0
+shader_parameter/min_distance = 2.0
+shader_parameter/grazing_fresnel_power = 5.0
+shader_parameter/grazing_angle_mask_power = 1.0
+shader_parameter/grazing_angle_modulation_factor = 50.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_alg0g"]
+material = SubResource("ShaderMaterial_8vwb3")
+flip_faces = true
+size = Vector2(2, 2)
 
 [node name="main menu" type="Control" unique_id=1885237886]
 process_mode = 3
@@ -114,18 +127,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 stretch = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="BackgroundViewport" unique_id=1089060717]
-layer = 0
-
-[node name="ColorRect" type="ColorRect" parent="BackgroundViewport/CanvasLayer" unique_id=1111123662]
-material = SubResource("ShaderMaterial_vt321")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
 
 [node name="SubViewport" type="SubViewport" parent="BackgroundViewport" unique_id=-1294967294]
 transparent_bg = true
@@ -1111,6 +1112,10 @@ text = "Save"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancel"
+
+[node name="OutlineShaderQuad" type="MeshInstance3D" parent="." unique_id=933688228]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_alg0g")
 
 [connection signal="pressed" from="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer/Back" to="." method="OnSettingsBackPressed"]
 
