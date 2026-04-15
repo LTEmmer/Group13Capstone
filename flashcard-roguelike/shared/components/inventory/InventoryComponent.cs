@@ -52,7 +52,7 @@ public partial class InventoryComponent : Node
     {
 
         GD.Print(item.PickupEffectsApplied);
-        inv.Add(item);
+        if (item.Resource.AddToInventory) inv.Add(item);
         if (!item.PickupEffectsApplied && item.Resource.PickupEffects != null && EffectTarget != null)
         {
             foreach (var effect in item.Resource.PickupEffects)

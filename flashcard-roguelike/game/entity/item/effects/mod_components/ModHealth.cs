@@ -3,8 +3,9 @@ using Godot;
 [GlobalClass]
 public partial class ModHealth: ItemEffect
 {
-    [Export] public int _hp = 1;
-	[Export] private bool _maxHp;
+    [Export] public int _hp = 0;
+	[Export] private int _maxHp = 0;
+	[Export] private float _trueDefence;
 
     public override void Apply(Node target, ItemInstance item)
 	{
@@ -20,8 +21,10 @@ public partial class ModHealth: ItemEffect
 
 	private void DoModHealth(Node target, bool apply)
 	{
-		int hp = apply? _hp: -_hp;
-        GD.Print($"Healing {hp} to {target.Name}");
+		int hp = apply? _hp : -_hp;
+		float trueDefence = apply? _trueDefence: -_trueDefence;
+
+		GD.Print("ModHP: ", hp);
 		var health = target.GetNodeOrNull<HealthComponent>("HealthComponent");
 		if (health == null)
 		{
@@ -30,13 +33,13 @@ public partial class ModHealth: ItemEffect
 		}
 		
 		if(hp == 0)return;
-		else if (_maxHp)
-		{
-			health.MaxHealth += hp;
-		}
-		else if(hp >= 0) health.Heal(hp);
-		else health.TakeDamage(-hp);
+		health.MaxHealth += _maxHp;
+		if(hp >= 0) health.Heal(hp);
+		else health.TakeDamage(-hp, true);
 
+		health.TrueDefence += trueDefence;
+    	health.TrueDefence = Mathf.Max(health.TrueDefence, 2f);
+    	health.MaxHealth = Mathf.Max(health.MaxHealth, 1);
 	}
 
 }

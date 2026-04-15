@@ -12,18 +12,19 @@ material = SubResource("StandardMaterial3D_qgcsr")
 
 [sub_resource type="Resource" id="Resource_dof1w"]
 script = ExtResource("3_mvxo8")
-block = 3
+_block = 5
 metadata/_custom_type_script = "uid://disq4r3ec5xdh"
 
 [resource]
 script = ExtResource("4_nrbad")
-Name = "Shield Capsule"
+Name = "Large Textbook"
 Icon = ExtResource("1_2w0p7")
 Mesh = SubResource("CapsuleMesh_imnv4")
-Description = "3 Shields to block damage"
+Description = "These are the same books your grandma used.
++5 Block"
 Behavior = 1
 Rarity = 3
-MaxUses = 1
+MaxUses = 5
 UseEffects = Array[Object]([SubResource("Resource_dof1w")])
 PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"

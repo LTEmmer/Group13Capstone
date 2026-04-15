@@ -7,14 +7,15 @@
 
 [sub_resource type="Resource" id="Resource_1dv1i"]
 script = ExtResource("3_45k22")
-_hp = 5
+_hp = 10
 metadata/_custom_type_script = "uid://cslf8mk74f83c"
 
 [resource]
 script = ExtResource("5_det7y")
 Name = "Bandage"
 Icon = ExtResource("4_up4ha")
-Description = "sssCan heal the player for 5 hp on use."
+Description = "Always check the medical cabnet.
++10 HP"
 Behavior = 1
 MaxUses = 5
 UseEffects = Array[ExtResource("1_1dv1i")]([SubResource("Resource_1dv1i")])

@@ -3,6 +3,9 @@ using Godot;
 public partial class AttackComponent : Node
 {
 	[Export] public float BaseDamage = 20f;
+	[Export] public float BaseMult = 1f;
+	[Export] public float CritChance = 0.1f;
+	[Export] public float CritMult = 1.5f;
 
 	[Export] public AudioStream[] AttackSounds;
 	[Export] public AudioStream[] MissSounds;
@@ -11,6 +14,7 @@ public partial class AttackComponent : Node
 	[Signal] public delegate void OnAttackMissedEventHandler();
 
 	private AudioStreamPlayer3D _audioPlayer;
+    private RandomNumberGenerator rng = new RandomNumberGenerator();
 
 	public override void _Ready()
 	{
@@ -33,6 +37,7 @@ public partial class AttackComponent : Node
 
 			// Calculate damage with multiplier and apply to target, for now only bosses will change the multiplier
 			float damage = BaseDamage * damageMultiplier;
+			damage = TryCrit(damage);
 			GD.Print($"{GetParent().Name} attacked {target.Name} for {damage} damage!");
 			healthComponent.TakeDamage(damage);
 			if (GetParent() is Player)
@@ -48,6 +53,13 @@ public partial class AttackComponent : Node
 			return false;
 		}
 	}
+
+	private float TryCrit(float damage)
+    {
+        if (rng.Randf() >= CritChance) return damage;
+        GD.Print("CritChance: Critical Hit!");
+		return damage * CritMult;
+    }
 
 	public void Miss()
 	{

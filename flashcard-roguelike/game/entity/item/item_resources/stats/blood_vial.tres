@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://dhlcwfdiu3op"]
+
+[ext_resource type="Texture2D" uid="uid://ctiynvkv1oqj4" path="res://assets/sprites/grafitti_etc/splat_2.png" id="1_lc6bh"]
+[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="2_4r2bu"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="3_dn0k7"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_wem3c"]
+
+[sub_resource type="Resource" id="Resource_4obue"]
+script = ExtResource("2_4r2bu")
+_hp = -5
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[sub_resource type="Resource" id="Resource_kk7b4"]
+script = ExtResource("3_dn0k7")
+_attack = 3
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[resource]
+script = ExtResource("4_wem3c")
+Name = "BloodVial"
+Icon = ExtResource("1_lc6bh")
+Description = "Pain feeds power! 
++3 Attack
+-5 HP"
+UseEffects = Array[Object]([SubResource("Resource_kk7b4")])
+PickupEffects = Array[Object]([SubResource("Resource_4obue")])
+metadata/_custom_type_script = "uid://573w4ti026as"

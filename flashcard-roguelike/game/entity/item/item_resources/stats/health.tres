@@ -13,7 +13,7 @@ material = SubResource("StandardMaterial3D_yfbec")
 
 [sub_resource type="Resource" id="Resource_mwtb2"]
 script = ExtResource("3_3bnc8")
-_hp = 5
+_hp = 20
 metadata/_custom_type_script = "uid://cslf8mk74f83c"
 
 [resource]
@@ -21,7 +21,8 @@ script = ExtResource("4_fm70t")
 Name = "Health"
 Icon = ExtResource("3_8sxb7")
 Mesh = SubResource("CylinderMesh_b80tv")
-Description = "Heals the player"
+Description = "Heals the player 
++20 HP"
 AddToInventory = false
 UseEffects = null
 PickupEffects = Array[ExtResource("1_3bnc8")]([SubResource("Resource_mwtb2")])

@@ -57,17 +57,14 @@ public partial class Item : Interactable
         if (_resource.UseEffects == null && _resource.PickupEffects == null)
             GD.Print(_resource.Name + ": has no effects");
 
-        if (_resource.AddToInventory)
-        {
-            var inventoryNode = player.FindChild("InventoryComponent");
-            GD.Print("Found node: " + inventoryNode?.Name ?? "null");
-            var inventory = inventoryNode as InventoryComponent;
-            if (inventory == null)
-                throw new ArgumentNullException("Player has no inventory!");
+        var inventoryNode = player.FindChild("InventoryComponent");
+        GD.Print("Found node: " + inventoryNode?.Name ?? "null");
+        var inventory = inventoryNode as InventoryComponent;
+        if (inventory == null)
+            throw new ArgumentNullException("Player has no inventory!");
 
-            inventory.AddItem(_itemInstance);
-            GD.Print($"Added '{_resource.Name}' to {player.Name}'s inventory.");
-        }
+        inventory.AddItem(_itemInstance);
+        GD.Print($"Added '{_resource.Name}' to {player.Name}'s inventory.");
 
         TaloTelemetry.TrackItemsPickedUp();
         QueueFree();

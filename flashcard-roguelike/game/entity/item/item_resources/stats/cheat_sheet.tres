@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://wkqtbebu1dkd"]
+
+[ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="1_grn07"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_xwh7s"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_va37y"]
+
+[sub_resource type="Resource" id="Resource_6mrti"]
+script = ExtResource("2_xwh7s")
+_crit_chance = 0.25
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[resource]
+script = ExtResource("3_va37y")
+Name = "Cheat Sheet"
+Icon = ExtResource("1_grn07")
+Description = "Sometimes shortcuts work. 
++0.25 CC"
+Rarity = 3
+UseEffects = Array[Object]([SubResource("Resource_6mrti")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"
