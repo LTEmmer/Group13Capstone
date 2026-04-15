@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="1_1xtqs"]
 [ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_q2jqi"]
+[ext_resource type="PackedScene" uid="uid://c6qde63df8vxj" path="res://assets/models/item_models/precision.glb" id="2_wedgj"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_wedgj"]
 
 [sub_resource type="Resource" id="Resource_uwrwh"]
@@ -14,6 +15,8 @@ metadata/_custom_type_script = "uid://crv315mdj71bb"
 script = ExtResource("3_wedgj")
 Name = "Charm of Precision"
 Icon = ExtResource("1_1xtqs")
+ScenePrefab = ExtResource("2_wedgj")
+SceneScale = 2.0
 Description = "Everything is on point.
 25% CC
 50% CM"

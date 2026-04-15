@@ -8,6 +8,13 @@ public partial class Item : Interactable
     [Export] public ItemInstance _itemInstance;
     [Export] private Label3D label;
 
+	[Export] public float DegreesPerSecond = 15.0f;
+	[Export] public Vector3 Axis = Vector3.Up;
+
+	public override void _Process(double delta)
+	{
+		RotateObjectLocal(Axis.Normalized(), Mathf.DegToRad(DegreesPerSecond) * (float)delta);
+	}
     // ───────────────────────── INIT ─────────────────────────
 
     /// <summary>Spawns with a specific instance (e.g. dropped from inventory).</summary>
@@ -29,8 +36,18 @@ public partial class Item : Interactable
         _itemInstance = instance;
         _resource     = instance.Resource;
 
-        if (_meshInstance != null && _resource.Mesh != null)
+        if (_resource.ScenePrefab != null)
+        {
+            var sceneInstance = _resource.ScenePrefab.Instantiate<Node3D>();
+            sceneInstance.Scale = Vector3.One * _resource.SceneScale;
+            sceneInstance.RotationDegrees = new Vector3(0, GD.Randf() * 180f, 0);
+            AddChild(sceneInstance);
+            if(_meshInstance != null) _meshInstance.Visible = false;
+        }
+        else if (_meshInstance != null && _resource.Mesh != null)
+        {
             _meshInstance.Mesh = _resource.Mesh;
+        }
 
         if (label != null)
         {

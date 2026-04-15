@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://2qvmv1ijxwoo" path="res://assets/models/big_pencil/pencil.glb" id="16_nh78s"]
 [ext_resource type="Resource" uid="uid://7hyntiag1ycs" path="res://game/entity/item/item_resources/tool/gym_shorts.tres" id="16_qf1e3"]
 [ext_resource type="PackedScene" uid="uid://cm0r6jfidsyc8" path="res://assets/models/desk/desk.glb" id="17_5npjy"]
+[ext_resource type="Resource" uid="uid://dhlcwfdiu3op" path="res://game/entity/item/item_resources/stats/blood_vial.tres" id="17_6vshp"]
 [ext_resource type="Material" path="res://assets/models/big_pencil/pencil_texture.tres" id="17_emyof"]
 [ext_resource type="Material" path="res://assets/models/desk/desk_texture.tres" id="18_emyof"]
 
@@ -260,6 +261,10 @@ _resource = ExtResource("5_y4ohd")
 [node name="Item4" parent="Whiteboards/standing_whiteboard4/ItemPivot" unique_id=1621111281 instance=ExtResource("2_0aegq")]
 transform = Transform3D(0.43929413, 0.048890635, -0.23373148, -0.030097123, 0.49684173, 0.04735931, 0.23688571, -0.027540063, 0.43946186, -3.966, 0.55, -0.019000001)
 _resource = ExtResource("16_qf1e3")
+
+[node name="Item5" parent="Whiteboards/standing_whiteboard4/ItemPivot" unique_id=696073096 instance=ExtResource("2_0aegq")]
+transform = Transform3D(0.43929413, 0.04889063, -0.23373148, -0.030097123, 0.49684173, 0.04735931, 0.23688571, -0.027540065, 0.43946183, -2.7489932, 0.5500001, 3.4230752)
+_resource = ExtResource("17_6vshp")
 
 [node name="Label3D" type="Label3D" parent="Whiteboards/standing_whiteboard4" unique_id=2124146285]
 transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.039243698, 0, 3.4308414e-09)

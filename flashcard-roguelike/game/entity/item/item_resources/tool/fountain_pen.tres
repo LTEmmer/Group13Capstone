@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://ccqgj8gs5ctpl"]
 
 [ext_resource type="Texture2D" uid="uid://2du3e6kvj42w" path="res://assets/sprites/sword.svg" id="1_qa0x2"]
+[ext_resource type="PackedScene" uid="uid://l1ldc5s8u7qs" path="res://assets/models/item_models/Pen.glb" id="2_eac5n"]
 [ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_hv5t5"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_eac5n"]
 
@@ -14,6 +15,8 @@ metadata/_custom_type_script = "uid://crv315mdj71bb"
 script = ExtResource("3_eac5n")
 Name = "Fountain Pen"
 Icon = ExtResource("1_qa0x2")
+ScenePrefab = ExtResource("2_eac5n")
+SceneScale = 0.4
 Description = "Always marking in RED.
 +4 Attack
 +20% CC"

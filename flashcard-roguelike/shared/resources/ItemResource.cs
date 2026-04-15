@@ -8,6 +8,8 @@ public partial class ItemResource : Resource
     [Export] public string Name = "";
     [Export] public Texture2D Icon;
     [Export] public Mesh Mesh;
+    [Export] public PackedScene ScenePrefab; // drag your .glb here
+    [Export] public float SceneScale = 1f;
     [Export(PropertyHint.MultilineText)] public string Description = "";
 
     // ===== Behavior =====
