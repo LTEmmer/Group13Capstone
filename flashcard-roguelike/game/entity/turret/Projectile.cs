@@ -39,7 +39,7 @@ public partial class Projectile : Area3D
         var mat = new StandardMaterial3D();
         mat.AlbedoColor = _color;
         mat.EmissionEnabled = true;
-        mat.Emission = _color * 2f; // Make it glow
+        mat.Emission = _color; // Make it glow
         Visual.SetSurfaceOverrideMaterial(0, mat);
     }
 

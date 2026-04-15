@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c22qf27w2ujjv"]
+
+[ext_resource type="Texture2D" uid="uid://bw5ob3gqwpxjr" path="res://assets/models/parkour_room/cave_Material_BaseColor.png" id="1_3uyi4"]
+[ext_resource type="Texture2D" uid="uid://1xum4y6tbdua" path="res://assets/models/parkour_room/cave_Material_Normal.png" id="2_m0e2x"]
+[ext_resource type="Texture2D" uid="uid://byll4d63t8qdv" path="res://assets/models/parkour_room/cave_Material_Roughness.png" id="3_nr6lu"]
+
+[resource]
+albedo_texture = ExtResource("1_3uyi4")
+roughness_texture = ExtResource("3_nr6lu")
+normal_enabled = true
+normal_texture = ExtResource("2_m0e2x")
