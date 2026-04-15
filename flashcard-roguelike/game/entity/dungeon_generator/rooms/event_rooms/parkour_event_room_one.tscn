@@ -242,7 +242,7 @@ size = Vector3(0.18878174, 0.009796143, 0.21020508)
 size = Vector3(0.25727844, 0.009796143, 0.2774048)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0famd"]
-size = Vector3(0.04862213, 0.009796143, 0.10510254)
+size = Vector3(0.013437271, 0.24484634, 0.013824463)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gj8yi"]
 points = PackedVector3Array(0.5233508, 4.766327, -0.43451053, -0.594227, -4.3323236, -0.11518697, -0.27490345, -5.1304684, -0.11518697, 0.3636343, 4.766327, 0.5233508, -0.594227, 4.606298, -0.27490345, 0.5233508, -4.174295, -0.43451053, -0.43451053, -4.174295, 0.5233508, 0.5233508, -4.174295, 0.3636343, -0.27490345, -4.174295, -0.594227, -0.43451053, 4.766327, 0.5233508, -0.11518697, 4.766327, -0.594227, 0.5233508, 3.9671817, 0.5233508, 0.2040272, -4.174295, -0.594227, -0.594227, 4.766327, 0.2040272, 0.3636343, -4.174295, 0.5233508, 0.2040272, -5.2914977, 0.2040272, -0.594227, -4.174295, 0.2040272, -0.594227, -4.174295, -0.27490345, 0.2040272, 4.766327, -0.594227, -0.27490345, 4.606298, -0.594227, 0.2040272, -5.1304684, -0.27490345, -0.27490345, -5.1304684, 0.2040272, 0.5233508, 4.766327, 0.3636343, -0.27490345, -4.97244, -0.27490345, 0.2040272, -5.2914977, -0.11518697, -0.11518697, -5.2914977, 0.2040272, -0.11518697, -4.3323236, -0.594227, -0.43451053, 4.766327, -0.43451053, -0.27490345, -4.812411, 0.3636343, 0.3636343, -4.812411, -0.27490345, -0.11518697, -5.1304684, -0.27490345, -0.43451053, -4.3323236, -0.43451053)
@@ -377,7 +377,7 @@ visible = false
 shape = SubResource("ConvexPolygonShape3D_omeqm")
 
 [node name="ExitLedge" type="MeshInstance3D" parent="." unique_id=319223445]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32.852245, 18.121094, 22.661053)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -26.750528, 18.121094, 5.15785)
 mesh = SubResource("Mesh_exit")
 surface_material_override/0 = SubResource("Mat_ledge")
 
@@ -398,7 +398,7 @@ shape = SubResource("ConvexPolygonShape3D_0famd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.212858, 5.647655, 29.327156)
 
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=1106618029]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32.50433, 19.265223, 26.967312)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -31.05679, 19.265223, 4.809934)
 
 [node name="Entrances" type="Node3D" parent="." unique_id=39189759]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.313736, 7.533313, 29.410686)
@@ -410,7 +410,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.099, -1.806, 3.325)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.098503, -1.8059998, 3.325386)
 
 [node name="Exits" type="Node3D" parent="." unique_id=1565686847]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 32.87275, 21.121094, 30.12183)
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -34.211308, 21.121094, 5.178354)
 
 [node name="0" type="Marker3D" parent="Exits" unique_id=18164182]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5186563, -1.8337665, -3.282116)
@@ -497,7 +497,7 @@ shape = SubResource("BoxShape3D_gj8yi")
 [node name="Desk1" type="AnimatableBody3D" parent="MovingPlatforms" unique_id=1407880396]
 transform = Transform3D(-17.604126, 0, 10.630804, 0, 20.565, 0, -10.630804, 0, -17.604126, 34.154675, 16.436104, 5.8917446)
 script = ExtResource("Script_platform")
-TravelTime = 10.0
+TravelTime = 5.0
 StartPos = Vector3(31.512138, 6.9840536, -32.947487)
 EndPos = Vector3(34.154675, 16.436104, 5.8917446)
 
@@ -519,6 +519,49 @@ shape = SubResource("BoxShape3D_omeqm")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="MovingPlatforms/Desk1" unique_id=1026623660]
 transform = Transform3D(1, 0, 5.9604645e-08, 0, 0.9999999, 0, -5.9604645e-08, 0, 1, 0.09902954, 0.15751672, 0.056731224)
+shape = SubResource("BoxShape3D_0famd")
+
+[node name="Desk2" type="AnimatableBody3D" parent="MovingPlatforms" unique_id=1929135128]
+transform = Transform3D(7.407353, -1.6771744e-06, -19.184637, 0, -20.564999, 1.7978494e-06, -19.184637, -6.475714e-07, -7.407353, 26.5213, 19.44553, 4.3392544)
+script = ExtResource("Script_platform")
+TravelTime = 5.0
+StartPos = Vector3(-9.016916, 19.44553, 4.3392544)
+EndPos = Vector3(26.5213, 19.44553, 4.3392544)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MovingPlatforms/Desk2" unique_id=1698038326]
+material_override = ExtResource("10_gj8yi")
+mesh = SubResource("ArrayMesh_j0msk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/Desk2" unique_id=967442795]
+transform = Transform3D(1, 0, 5.9604645e-08, 0, 0.9999999, 0, -5.9604645e-08, 0, 1, 0.029204726, 0.15751672, -0.09948826)
+shape = SubResource("BoxShape3D_6skwy")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="MovingPlatforms/Desk2" unique_id=1423658121]
+transform = Transform3D(1, 3.5527137e-15, 2.9802322e-08, 1.7763568e-15, 0.99999994, 2.6645353e-15, -2.9802322e-08, -1.4210855e-14, 1, -0.05779648, 0.006471455, 0.009328008)
+shape = SubResource("BoxShape3D_omeqm")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="MovingPlatforms/Desk2" unique_id=765644923]
+transform = Transform3D(0.99993724, 0.0060163736, 0.009511001, 0.010161429, -0.119388066, -0.99279547, -0.004837364, 0.99283004, -0.11944164, -0.05734694, 0.13595381, 0.1522851)
+shape = SubResource("BoxShape3D_omeqm")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="MovingPlatforms/Desk2" unique_id=892478521]
+transform = Transform3D(1, 0, 5.9604645e-08, 0, 0.9999999, 0, -5.9604645e-08, 0, 1, 0.09902954, 0.15751672, 0.056731224)
+shape = SubResource("BoxShape3D_0famd")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="MovingPlatforms/Desk2" unique_id=1654949614]
+transform = Transform3D(0.9913374, -0.13125297, -0.0047802925, 0.13118528, 0.99127966, -0.012451857, 0.006372869, 0.011716891, 0.9999113, 0.07544541, -0.11759722, 0.12143755)
+shape = SubResource("BoxShape3D_0famd")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="MovingPlatforms/Desk2" unique_id=127382620]
+transform = Transform3D(0.9913374, -0.13125297, -0.0047802925, 0.13118528, 0.99127966, -0.012451857, 0.006372869, 0.011716891, 0.9999113, 0.07718068, -0.11759722, -0.11744404)
+shape = SubResource("BoxShape3D_0famd")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="MovingPlatforms/Desk2" unique_id=1688871038]
+transform = Transform3D(0.990631, 0.13510923, -0.019916266, -0.13451417, 0.9904963, 0.028682454, 0.023602098, -0.025734667, 0.9993906, -0.19316283, -0.11759722, 0.1198231)
+shape = SubResource("BoxShape3D_0famd")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="MovingPlatforms/Desk2" unique_id=72124898]
+transform = Transform3D(0.990631, 0.13510925, -0.019916385, -0.13451417, 0.9904963, 0.028682454, 0.023602128, -0.02573469, 0.9993911, -0.19546822, -0.11759722, -0.11705947)
 shape = SubResource("BoxShape3D_0famd")
 
 [node name="ScalingPlatforms" type="Node3D" parent="." unique_id=611208890]
@@ -590,7 +633,7 @@ mesh = SubResource("ArrayMesh_abvra")
 [node name="Node3D" type="Node3D" parent="StaticPlatforms" unique_id=453546926]
 transform = Transform3D(-2.7883846e-08, 0.63790804, -0.7701126, -1, -4.371139e-08, 0, -3.366269e-08, 0.7701126, 0.63790804, -18.66667, 4.6294827, 20.301414)
 script = ExtResource("13_xtihj")
-DegreesPerSecond = 1.0
+DegreesPerSecond = 3.0
 
 [node name="Pencil1" type="MeshInstance3D" parent="StaticPlatforms/Node3D" unique_id=782881547]
 transform = Transform3D(2.3600001, 0, 0, 0, 2.3600001, 0, 0, 0, 2.36, 0, 0, 0)
