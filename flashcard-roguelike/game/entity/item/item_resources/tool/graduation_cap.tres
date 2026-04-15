@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://c7ray2ai11y52"]
 
-[ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="1_mtihw"]
+[ext_resource type="Texture2D" uid="uid://owmwew5j4yx8" path="res://assets/sprites/item_sprites/grad_cap.png" id="1_fxe8q"]
 [ext_resource type="PackedScene" uid="uid://dbx0epw2gdeme" path="res://assets/models/item_models/graduation_cap.glb" id="2_fxe8q"]
 [ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_ptp3c"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_fxe8q"]
@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://cslf8mk74f83c"
 [resource]
 script = ExtResource("3_fxe8q")
 Name = "Graduation Cap"
-Icon = ExtResource("1_mtihw")
+Icon = ExtResource("1_fxe8q")
 ScenePrefab = ExtResource("2_fxe8q")
 SceneScale = 1.2
 Description = "Top of the class.

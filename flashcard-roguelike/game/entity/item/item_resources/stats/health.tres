@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://d1k3ywv6qs5j8"]
 
 [ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="1_3bnc8"]
+[ext_resource type="Texture2D" uid="uid://dwlpm4aog00tj" path="res://assets/sprites/item_sprites/heart.png" id="1_mwtb2"]
 [ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="3_3bnc8"]
-[ext_resource type="Texture2D" uid="uid://cmyjgorgq77fl" path="res://assets/sprites/heart-plus.svg" id="3_8sxb7"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_fm70t"]
 [ext_resource type="PackedScene" uid="uid://e04y6dm1dcqp" path="res://assets/models/item_models/Heart.glb" id="4_mwtb2"]
 
@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://cslf8mk74f83c"
 [resource]
 script = ExtResource("4_fm70t")
 Name = "Health"
-Icon = ExtResource("3_8sxb7")
+Icon = ExtResource("1_mwtb2")
 Mesh = SubResource("CylinderMesh_b80tv")
 ScenePrefab = ExtResource("4_mwtb2")
 SceneScale = 0.02

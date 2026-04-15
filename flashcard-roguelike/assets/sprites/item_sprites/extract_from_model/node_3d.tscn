@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://d4jv7pimaq3wm"]
+
+[ext_resource type="Script" uid="uid://bm0qih7avtvnr" path="res://assets/sprites/item_sprites/extract_from_model/SubViewport2.cs" id="1_ig8e5"]
+[ext_resource type="PackedScene" uid="uid://b75c8c64ruq6n" path="res://assets/models/item_models/ruler.glb" id="2_ig8e5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ig8e5"]
+viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1o1de"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_k7n5m"]
+sky_material = SubResource("ProceduralSkyMaterial_1o1de")
+
+[sub_resource type="Environment" id="Environment_2toni"]
+background_mode = 2
+sky = SubResource("Sky_k7n5m")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="TextureRect" unique_id=243001630]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_ig8e5")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="SubViewport2" type="SubViewport" parent="." unique_id=733515798]
+transparent_bg = true
+script = ExtResource("1_ig8e5")
+
+[node name="Node3D2" type="Node3D" parent="SubViewport2" unique_id=453049745]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport2/Node3D2" unique_id=245283405]
+environment = SubResource("Environment_2toni")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport2/Node3D2" unique_id=679526476]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Node3D2" type="Node3D" parent="SubViewport2/Node3D2" unique_id=2142322232]
+
+[node name="ruler" parent="SubViewport2/Node3D2/Node3D2" unique_id=64262536 instance=ExtResource("2_ig8e5")]
+transform = Transform3D(-0.022356583, 0.042233407, 0.15269747, 0.13695346, 0.08267901, -0.0028160592, -0.07964881, 0.13030931, -0.047702696, 0, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="SubViewport2/Node3D2" unique_id=1571357994]
+transform = Transform3D(0.6167748, -0.12584884, 0.777014, -7.334976e-09, 0.9871361, 0.15988117, -0.7871395, -0.09861074, 0.60884094, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport2/Node3D2/Node3D" unique_id=2125932599]
+transform = Transform3D(0.99994916, 0.0060551194, 0.008091617, -0.008638775, 0.92762935, 0.37340215, -0.005245028, -0.3734529, 0.9276344, -1.4901161e-08, 0.8049461, 1.7205577)
+current = true
+fov = 75.00145

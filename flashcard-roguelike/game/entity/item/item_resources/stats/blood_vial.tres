@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://dhlcwfdiu3op"]
 
-[ext_resource type="Texture2D" uid="uid://ctiynvkv1oqj4" path="res://assets/sprites/grafitti_etc/splat_2.png" id="1_lc6bh"]
+[ext_resource type="Texture2D" uid="uid://dkxdnd3h2p1nl" path="res://assets/sprites/item_sprites/blood_vial.png" id="1_4r2bu"]
 [ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="2_4r2bu"]
 [ext_resource type="PackedScene" uid="uid://bxt23w0064a0j" path="res://assets/models/item_models/blood_vial.glb" id="3_4r2bu"]
 [ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="3_dn0k7"]
@@ -19,7 +19,7 @@ metadata/_custom_type_script = "uid://crv315mdj71bb"
 [resource]
 script = ExtResource("4_wem3c")
 Name = "BloodVial"
-Icon = ExtResource("1_lc6bh")
+Icon = ExtResource("1_4r2bu")
 ScenePrefab = ExtResource("3_4r2bu")
 SceneScale = 3.0
 Description = "Pain feeds power! 

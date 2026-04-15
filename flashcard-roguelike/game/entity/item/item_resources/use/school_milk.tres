@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://c0i2msij417db"]
 
-[ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="1_rdu5b"]
+[ext_resource type="Texture2D" uid="uid://dm55o3ban8cmt" path="res://assets/sprites/item_sprites/milk.png" id="1_fycdj"]
 [ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_fycdj"]
 [ext_resource type="PackedScene" uid="uid://bw0cm1q445nqn" path="res://assets/models/item_models/milk_carton.glb" id="2_yp1gu"]
 [ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="3_yp1gu"]
@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://cslf8mk74f83c"
 [resource]
 script = ExtResource("4_cpx4c")
 Name = "School Milk"
-Icon = ExtResource("1_rdu5b")
+Icon = ExtResource("1_fycdj")
 ScenePrefab = ExtResource("2_yp1gu")
 SceneScale = 4.0
 Description = "Its a bit...           chunky.
