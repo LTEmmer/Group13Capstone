@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c175n268mh5vw"]
+
+[ext_resource type="Script" uid="uid://sjh56ix28es4" path="res://shared/components/rotate/RotateComponent.cs" id="1_lrstj"]
+[ext_resource type="Script" uid="uid://d21whjtbn8o5c" path="res://shared/components/hover/HoverComponent.cs" id="2_8dgsj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofujs"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0.5529412, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8cp7p"]
+material = SubResource("StandardMaterial3D_ofujs")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="LightRotate" type="Node3D" unique_id=1455328766]
+script = ExtResource("1_lrstj")
+DegreesPerSecond = 10.0
+
+[node name="Light" type="MeshInstance3D" parent="." unique_id=2064956913]
+transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071067, -0.4999999, -0.4999999, 0.70710677, 0.49999985, 0, 0.9878304, 0)
+mesh = SubResource("BoxMesh_8cp7p")
+script = ExtResource("2_8dgsj")
+Amplitude = 0.1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Light" unique_id=308789193]
+transform = Transform3D(1, 4.371138e-08, 1.9106853e-15, 0, -4.371139e-08, 1, 4.371138e-08, -1, -4.371139e-08, 0, 0, 0)
+light_energy = 10.0
+omni_range = 24.867853

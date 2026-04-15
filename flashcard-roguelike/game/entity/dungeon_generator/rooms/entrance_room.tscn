@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/stats/health.tres" id="3_vxwn0"]
 [ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/stats/shield.tres" id="5_y4ohd"]
 [ext_resource type="PackedScene" uid="uid://b7gfxjllsdmh3" path="res://assets/models/entrance_room/tunnel/entrance_tunnel.glb" id="6_ac0fh"]
+[ext_resource type="PackedScene" uid="uid://c175n268mh5vw" path="res://game/entity/light/floating_light.tscn" id="7_6vshp"]
 [ext_resource type="Material" uid="uid://bq0trffva3vxw" path="res://assets/models/entrance_room/tunnel/tunnel_texture.tres" id="7_y4ohd"]
 [ext_resource type="PackedScene" uid="uid://paxfl5rn8u8f" path="res://assets/models/entrance_room/walls/entrance_room_walls.glb" id="8_sac2s"]
 [ext_resource type="Material" uid="uid://cot6row2i1kv4" path="res://assets/models/entrance_room/walls/entrance_walls_texture.tres" id="9_38i74"]
@@ -147,21 +148,8 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="entrance_room_walls/entrance_room_floors_ceiling/Cube_001/StaticBody3D" unique_id=2067066575]
 shape = SubResource("ConcavePolygonShape3D_8cp7p")
 
-[node name="LightRotate" type="Node3D" parent="entrance_room_walls/entrance_room_floors_ceiling" unique_id=1987687905]
+[node name="LightRotate" parent="entrance_room_walls/entrance_room_floors_ceiling" unique_id=1455328766 instance=ExtResource("7_6vshp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27817535, 0)
-script = ExtResource("12_8cp7p")
-DegreesPerSecond = 10.0
-
-[node name="Light" type="MeshInstance3D" parent="entrance_room_walls/entrance_room_floors_ceiling/LightRotate" unique_id=1744487465]
-transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071067, -0.4999999, -0.4999999, 0.70710677, 0.49999985, 0, 0.9878304, 0)
-mesh = SubResource("BoxMesh_8cp7p")
-script = ExtResource("12_ofujs")
-Amplitude = 0.1
-
-[node name="OmniLight3D" type="OmniLight3D" parent="entrance_room_walls/entrance_room_floors_ceiling/LightRotate/Light" unique_id=1061460453]
-transform = Transform3D(1, 4.371138e-08, 1.9106853e-15, 0, -4.371139e-08, 1, 4.371138e-08, -1, -4.371139e-08, 0, 0, 0)
-light_energy = 10.0
-omni_range = 24.867853
 
 [node name="LightRotate2" type="Node3D" parent="entrance_room_walls/entrance_room_floors_ceiling" unique_id=1747477280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6781034, -0.102063894, -17.579172)

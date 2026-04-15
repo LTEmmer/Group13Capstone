@@ -26,11 +26,9 @@ public partial class MovingPlatform : AnimatableBody3D
 			_returning = !_returning;
 		}
 
-		// Smooth movement between StartPos and EndPos
-		Vector3 target = _returning ? EndPos.Lerp(StartPos, _t) : StartPos.Lerp(EndPos, _t);
-
-		// Use MoveAndCollide to move the platform and handle collisions properly
-		MoveAndCollide(target - Position);
+		// SyncToPhysics (true by default on AnimatableBody3D) diffs the position
+		// each frame and imparts that velocity to bodies standing on the platform.
+		Position = _returning ? EndPos.Lerp(StartPos, _t) : StartPos.Lerp(EndPos, _t);
 	}
 
 	public void ApplyBoon(float percent, bool isBoon)
