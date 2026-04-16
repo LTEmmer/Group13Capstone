@@ -84,7 +84,8 @@ public partial class Turret : Node3D
     public void DeactivateTurret(Camera3D playerCam)
     {
         _isActive = false;
-        _turretCamera.Current = false; // Disable turret camera
+        _turretCamera.Current = false; // Disable turret camera and remove it
+        _turretCamera.QueueFree();
         playerCam.Current = true; // Reactivate player camera
         _turretCamera.Fov = _defaultFov; // Reset FOV
     }

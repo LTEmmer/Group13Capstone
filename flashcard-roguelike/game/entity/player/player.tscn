@@ -47,8 +47,8 @@
 [ext_resource type="AudioStream" uid="uid://b83vu2wuvslqd" path="res://assets/audio/player_sfx/death_sfx/death_3.mp3" id="39_yna46"]
 [ext_resource type="AudioStream" uid="uid://bhpqxppsu3byr" path="res://assets/audio/player_sfx/death_sfx/death_4.mp3" id="40_6qpfs"]
 [ext_resource type="Script" uid="uid://bs2vym380rd2d" path="res://game/entity/player/Inventory.cs" id="45_6rqdb"]
-[ext_resource type="Shader" uid="uid://q5mlok32oygd" path="res://game/entity/player/camera.gdshader" id="47_l0vtf"]
-[ext_resource type="Shader" uid="uid://b4oe5g5w505u5" path="res://game/entity/player/ps1Shader.gdshader" id="48_l0vtf"]
+[ext_resource type="Shader" path="res://game/entity/player/camera.gdshader" id="47_l0vtf"]
+[ext_resource type="Shader" path="res://game/entity/player/ps1Shader.gdshader" id="48_l0vtf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8vwb3"]
 shader = ExtResource("48_l0vtf")
@@ -17599,7 +17599,7 @@ shader_parameter/outlineColor = Color(0, 0, 0, 1)
 shader_parameter/depth_threshold = 0.025
 shader_parameter/normal_threshold = 0.450000021375
 shader_parameter/normal_smoothing = 0.25
-shader_parameter/max_thickness = 1.5000000712500001
+shader_parameter/max_thickness = 1.50000007125
 shader_parameter/min_thickness = 1.0
 shader_parameter/max_distance = 200.0
 shader_parameter/min_distance = 20.0

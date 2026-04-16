@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 public partial class TreasureChest : Interactable
@@ -25,15 +26,14 @@ public partial class TreasureChest : Interactable
 
 	// Rarity light assign the room's spotlight in the Inspector
 	[Export] public Light3D ChestLight;
+	[Export] public Color[] RarityColors;
 
 	// Particles
 	[Export] private GpuParticles3D _particles;
 
 	// Camera stuff
 	[Export] public Camera3D RevealCamera;
-	[Export] public Vector3 CameraBaseOffset = new Vector3(0, 2, 4);
-	[Export] public float ZoomStep = 0.6f;
-	[Export] public float TiltStep = 5f;
+	[Export] public Marker3D[] CameraAngles;
 
 	// Tuning
 	[Export] public float LidImpulseUp    = 6f;
@@ -42,6 +42,7 @@ public partial class TreasureChest : Interactable
 	[Export] public float ShakeMagnitude  = 3f;
 	[Export] public float IdleShakePause  = 1.0f;
 	[Export] public float LightCycleDuration = 2f;
+	[Export] public float InitialStepDuration = 1.75f;
 
 	private RandomNumberGenerator _rng = new();
 	private Tween _hoverTween;
@@ -49,6 +50,7 @@ public partial class TreasureChest : Interactable
 	private Tween _lightCycleTween;
 	private List<ItemResource> _rolledItems = new();
 	private int _targetRarityIndex = 0;
+	private Player _playerRef;
 
 	private static readonly Dictionary<int, float> RarityWeights = new()
 	{
@@ -59,34 +61,25 @@ public partial class TreasureChest : Interactable
 		{ 5, 0.02f }
 	};
 
-	private static readonly Color[] RarityColors =
-	{
-		new Color(1f,    1f,    1f   ),  // 1 Common — white
-		new Color(0.2f,  0.9f,  0.2f ),  // 2 Uncommon — green
-		new Color(0.3f,  0.5f,  1f   ),  // 3 Rare — blue
-		new Color(0.7f,  0.2f,  1f   ),  // 4 Epic — purple
-		new Color(1f,    0.8f,  0.1f ),  // 5 Legendary — gold
-	};
-
 	public override void _Ready()
 	{
 		base._Ready();
 
+		if (RarityColors.Count() != RarityWeights.Count())
+		{
+			GD.PushError($"The amount of rarities and colors need to match in the treasure room scene: {Name}");
+			return;
+		}
+
+		if (CameraAngles.Count() != RarityWeights.Count())
+		{
+			GD.PushError($"The amount of rarities and camera angles need to match in the treasure room scene: {Name}");
+			return;
+		}
+
 		_rng.Randomize();
 		UpdateLabel();
 		_label.Visible = false;
-
-		// Tint burst particles to match rarity
-		if (_particles != null && LootPool.Count > 0)
-		{
-			int maxRarity = LootPool.Max(e => e?.Rarity ?? 1);
-			var mat = (_particles.ProcessMaterial as ParticleProcessMaterial)?.Duplicate() as ParticleProcessMaterial;
-			if (mat != null)
-			{
-				mat.Color = RarityColors[Mathf.Clamp(maxRarity - 1, 0, 4)];
-				_particles.ProcessMaterial = mat;
-			}
-		}
 
 		if (_openSoundPlayer != null && OpenSound != null)
 		{
@@ -96,13 +89,13 @@ public partial class TreasureChest : Interactable
 		StartIdleShake();
 		StartLightCycle();
 
-		// Prevent the frozen lid from blocking the player's interaction raycast
-		if (_lidBody != null)
-		{
-			_lidBody.CollisionLayer = 0;
-		}
-
 		RollLoot();
+		
+		StandardMaterial3D particleMat = new();
+		particleMat.AlbedoColor = RarityColors[_targetRarityIndex];
+		particleMat.EmissionEnabled = true;
+		particleMat.Emission = RarityColors[_targetRarityIndex];
+		_particles.DrawPass1.SurfaceSetMaterial(0, particleMat);
 	}
 
 	private void StartLightCycle()
@@ -145,6 +138,17 @@ public partial class TreasureChest : Interactable
 		{
 			return;
 		}
+
+		if (_playerRef == null)
+		{
+			_playerRef = GetTree().GetFirstNodeInGroup("player") as Player;
+			if (_playerRef == null)
+			{
+				GD.PushError("Could not find player.");
+				return;
+			}
+		}
+
 		IsOpen = true;
 		TaloTelemetry.TrackChestsOpened();
 
@@ -181,26 +185,34 @@ public partial class TreasureChest : Interactable
 
 	private void StartRarityReveal(int targetIndex)
 	{
+		// Switch to reveal carry
+		RevealCamera.Current = true;
+
+		// Set up tweens to cycle through rarity colors and cameras, pitch up sound each step
 		var tween = CreateTween();
-		float stepDuration = 2f;
+		float stepDuration = InitialStepDuration;
 
 		for (int i = 0; i <= targetIndex; i++)
 		{
-			int idx = i;
+			int idx = i; // Needed to sync up steps
 
 			tween.TweenCallback(Callable.From(() =>
 			{
+				RevealCamera.Transform = CameraAngles[idx].Transform;
+				RevealCamera.ResetPhysicsInterpolation();
+
 				if (ChestLight != null)
 					ChestLight.LightColor = RarityColors[idx];
 
 				if (_openSoundPlayer != null)
 				{
-					_openSoundPlayer.PitchScale *= 1f + (idx * .05f);
+					_openSoundPlayer.PitchScale = 1f + (idx * .05f);
 					_openSoundPlayer.Play();
 				}
 			}));
 
-			tween.TweenInterval(stepDuration / 2f);
+			stepDuration /= 1.25f;
+			tween.TweenInterval(stepDuration);
 		}
 
 		// Spawn items and fade light after full reveal
@@ -216,23 +228,23 @@ public partial class TreasureChest : Interactable
 
 	private void DoAnticipationShake(System.Action onComplete)
 	{
-		if (ShakeDuration <= 0f) { onComplete?.Invoke(); return; }
+		if (ShakeDuration <= 0f) 
+		{ 
+			onComplete?.Invoke(); 
+			return; 
+		}
 
 		float half = ShakeDuration * 0.25f;
 		var tween = CreateTween();
-		tween.TweenProperty(this, "rotation_degrees:z",  ShakeMagnitude, half);
+		tween.TweenProperty(this, "rotation_degrees:z", ShakeMagnitude, half);
 		tween.TweenProperty(this, "rotation_degrees:z", -ShakeMagnitude, half * 2f);
-		tween.TweenProperty(this, "rotation_degrees:z",  0f,             half);
+		tween.TweenProperty(this, "rotation_degrees:z", 0f, half);
 		tween.TweenCallback(Callable.From(() => onComplete?.Invoke()));
 	}
 
 	private void LaunchLid()
 	{
 		if (_lidBody == null) return;
-
-		_lidBody.CollisionLayer = 1; // re-enable before unfreezing
-		_lidBody.TopLevel = true; // must be set before unfreezing
-		_lidBody.Freeze = false;
 
 		float angle = _rng.Randf() * Mathf.Tau;
 		_lidBody.ApplyCentralImpulse(new Vector3(
@@ -250,6 +262,9 @@ public partial class TreasureChest : Interactable
 
 	private void SpawnItems()
 	{
+		// Play sfx (placeholder)
+		AudioManager.Instance.PlayGameVictorySound();
+
 		if (ItemScene == null || LootPool.Count == 0)
 		{
 			GD.PushWarning($"TreasureChest: ItemScene={ItemScene != null}, LootPool.Count={LootPool.Count}");
@@ -277,6 +292,18 @@ public partial class TreasureChest : Interactable
 				-Mathf.Cos(angle) * SpawnRadius
 			);
 		}
+
+		Timer delay = new();
+		delay.OneShot = true;
+		delay.WaitTime = 2f;
+		delay.Autostart = true;
+
+		delay.Timeout += () =>
+		{
+			_playerRef.PlayerCamera.Current = true;
+		};
+
+		AddChild(delay);
 	}
 
 	private ItemResource RollEntry()

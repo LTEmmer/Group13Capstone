@@ -3,12 +3,12 @@
 [ext_resource type="Material" uid="uid://ctwqc6y8tb51e" path="res://assets/models/treasure_room/shelf_room/treasure_room_walls_texture.tres" id="2_8egqf"]
 [ext_resource type="Material" uid="uid://vcidmjraea5p" path="res://assets/models/treasure_room/shelf_room/treasure_room_floor_texture.tres" id="3_ym5nv"]
 [ext_resource type="Material" uid="uid://rr05vmx1qo2j" path="res://assets/models/treasure_room/shelf_room/treasure_room_ceiling_texture.tres" id="4_5woem"]
-[ext_resource type="Texture2D" uid="uid://c15i4xv1gb22b" path="res://assets/models/treasure_room/shelf_room/Shelves_Base_Color.png" id="5_kwurh"]
+[ext_resource type="Texture2D" uid="uid://dexvas5w2y7xh" path="res://assets/models/treasure_room/shelf_room/Shelves_Base_Color.png" id="5_kwurh"]
 [ext_resource type="PackedScene" uid="uid://c175n268mh5vw" path="res://game/entity/light/floating_light.tscn" id="6_04r8m"]
 [ext_resource type="PackedScene" uid="uid://cm0r6jfidsyc8" path="res://assets/models/desk/desk.glb" id="6_e5evu"]
 [ext_resource type="Material" uid="uid://cicbhcj8wuo0d" path="res://assets/models/desk/desk_texture.tres" id="7_0ufai"]
 [ext_resource type="Material" uid="uid://c6pv2i4awlv7m" path="res://assets/models/big_pencil/pencil_texture.tres" id="8_jlue3"]
-[ext_resource type="Shader" uid="uid://dq2h2yqhsu8fl" path="res://game/entity/dungeon_generator/rooms/event_rooms/shooting_event_room.gdshader" id="9_ltfas"]
+[ext_resource type="Shader" path="res://game/entity/dungeon_generator/rooms/event_rooms/shooting_event_room.gdshader" id="9_ltfas"]
 [ext_resource type="Texture2D" uid="uid://b0gi538rd7txo" path="res://assets/backgrounds/prettysleepy-stars-3750824.png" id="10_y1f5v"]
 [ext_resource type="PackedScene" uid="uid://dxdxbn1isdu44" path="res://game/entity/treasure/box_root.tscn" id="12_0ufai"]
 
@@ -404,7 +404,7 @@ environment = SubResource("Environment_jlue3")
 
 [node name="Light" type="SpotLight3D" parent="." unique_id=676288966]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.038681746, 20.164894, 0.12280822)
-light_color = Color(0.9707342, 0, 0.42041865, 1)
+light_color = Color(0.85397196, 0, 0.13966635, 1)
 light_energy = 30.0
 light_volumetric_fog_energy = 16.0
 shadow_enabled = true
@@ -418,11 +418,11 @@ size = Vector3(3.8, 18.61453, 3.8)
 shape = 1
 material = SubResource("FogMaterial_ltfas")
 
-[node name="EnterPoint" type="Marker3D" parent="." unique_id=2063903394]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65767527, -10.32686)
-
-[node name="ExitPoint" type="Marker3D" parent="." unique_id=1595695969]
+[node name="EnterPoint" type="Marker3D" parent="." unique_id=1595695969]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44763565, 10.506846)
+
+[node name="ExitPoint" type="Marker3D" parent="." unique_id=2063903394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65767527, -10.32686)
 
 [node name="Entrances" type="Node3D" parent="." unique_id=1488867071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.582191, 13.568403)
@@ -435,310 +435,334 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -13.484043)
 [node name="0" type="Marker3D" parent="Exits" unique_id=603689357]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.3658826, -0.36742306)
 
-[node name="treasure_room" type="Node3D" parent="." unique_id=1602274846]
+[node name="RoomMesh" type="Node3D" parent="." unique_id=1602274846]
 transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 3.503441, 0)
 
-[node name="Walls" type="MeshInstance3D" parent="treasure_room" unique_id=616928067]
+[node name="Walls" type="MeshInstance3D" parent="RoomMesh" unique_id=616928067]
 material_override = ExtResource("2_8egqf")
 mesh = SubResource("ArrayMesh_knh0o")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="treasure_room/Walls" unique_id=1930450021]
+[node name="StaticBody3D" type="StaticBody3D" parent="RoomMesh/Walls" unique_id=1930450021]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Walls/StaticBody3D" unique_id=1223632796]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Walls/StaticBody3D" unique_id=1223632796]
 shape = SubResource("ConcavePolygonShape3D_y1f5v")
 
-[node name="Floor" type="MeshInstance3D" parent="treasure_room" unique_id=1896419569]
+[node name="Floor" type="MeshInstance3D" parent="RoomMesh" unique_id=1896419569]
 material_override = ExtResource("3_ym5nv")
 mesh = SubResource("ArrayMesh_7yckf")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="treasure_room/Floor" unique_id=1767814976]
+[node name="StaticBody3D" type="StaticBody3D" parent="RoomMesh/Floor" unique_id=1767814976]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Floor/StaticBody3D" unique_id=504416525]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Floor/StaticBody3D" unique_id=504416525]
 shape = SubResource("ConvexPolygonShape3D_2xlch")
 
-[node name="Ceiling" type="MeshInstance3D" parent="treasure_room" unique_id=832581571]
+[node name="Ceiling" type="MeshInstance3D" parent="RoomMesh" unique_id=832581571]
 material_override = ExtResource("4_5woem")
 mesh = SubResource("ArrayMesh_b2wi2")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="treasure_room/Ceiling" unique_id=1347996497]
+[node name="StaticBody3D" type="StaticBody3D" parent="RoomMesh/Ceiling" unique_id=1347996497]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Ceiling/StaticBody3D" unique_id=1129735727]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Ceiling/StaticBody3D" unique_id=1129735727]
 shape = SubResource("ConcavePolygonShape3D_ejb4y")
 
-[node name="GapColor" type="MeshInstance3D" parent="treasure_room" unique_id=1924398300]
+[node name="GapColor" type="MeshInstance3D" parent="RoomMesh" unique_id=1924398300]
 transform = Transform3D(7.814642, 0, 0, 0, 1, 0, 0, 0, 9.183025, 0, -2.0340295, 0)
+visible = false
 mesh = SubResource("PlaneMesh_tym5y")
 
-[node name="Decor" type="Node3D" parent="treasure_room" unique_id=1172592613]
+[node name="Decor" type="Node3D" parent="RoomMesh" unique_id=1172592613]
 
-[node name="Shelves" type="Node3D" parent="treasure_room/Decor" unique_id=1108142591]
+[node name="Shelves" type="Node3D" parent="RoomMesh/Decor" unique_id=1108142591]
 
-[node name="NarrowShelf" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=1191426044]
+[node name="NarrowShelf" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=1191426044]
 transform = Transform3D(-6.3381513e-06, -145, -6.3381513e-06, 0, -6.3381513e-06, 145, -145, 6.3381513e-06, 2.7704938e-13, -4.635811, -1.9734994, -3.0398207)
 material_override = SubResource("StandardMaterial3D_rpvl5")
 mesh = SubResource("ArrayMesh_yqowh")
 
-[node name="DoubleShelf" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=207709293]
+[node name="DoubleShelf" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=207709293]
 transform = Transform3D(-1.8347278, -144.98839, -6.3376438e-06, 0, -6.3381513e-06, 145, -144.98839, 1.8347278, 8.01985e-08, -4.6137276, -1.9950839, 2.152347)
 material_override = SubResource("StandardMaterial3D_m58he")
 mesh = SubResource("ArrayMesh_syg2j")
 
-[node name="DoubleShelf2" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=670542792]
+[node name="DoubleShelf2" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=670542792]
 transform = Transform3D(-1.4222565, -144.99303, -6.337846e-06, 0, -6.3381513e-06, 145, -144.99303, 1.4222565, 6.21688e-08, -4.6137276, -1.995084, -0.99454796)
 material_override = SubResource("StandardMaterial3D_m58he")
 mesh = SubResource("ArrayMesh_syg2j")
 
-[node name="NarrowShelf2" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=1353235076]
+[node name="NarrowShelf2" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=1353235076]
 transform = Transform3D(-10.856757, 144.59302, 6.32036e-06, 0, -6.3381513e-06, 145.00005, 144.59302, 10.856757, 4.745638e-07, 4.552162, -1.9735003, 0.16793063)
 material_override = SubResource("StandardMaterial3D_rpvl5")
 mesh = SubResource("ArrayMesh_yqowh")
 
-[node name="NarrowShelf3" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=741525672]
+[node name="NarrowShelf3" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=741525672]
 transform = Transform3D(-144.59306, -10.856764, -4.7456467e-07, 3.669268e-14, -6.3381513e-06, 145.00005, -10.856764, 144.59306, 6.320361e-06, 2.972961, -1.973501, 4.5631404)
 material_override = SubResource("StandardMaterial3D_rpvl5")
 mesh = SubResource("ArrayMesh_yqowh")
 
-[node name="NarrowShelf4" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=1387997466]
+[node name="NarrowShelf4" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=1387997466]
 transform = Transform3D(144.93584, 4.3167825, 1.8869312e-07, -4.408113e-14, -6.338151e-06, 145.00005, 4.3167825, -144.93584, -6.3353427e-06, 1.8959498, -1.9735013, 4.5631404)
 material_override = SubResource("StandardMaterial3D_rpvl5")
 mesh = SubResource("ArrayMesh_yqowh")
 
-[node name="DoubleShelf3" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=444950647]
+[node name="DoubleShelf3" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=444950647]
 transform = Transform3D(1.834741, 144.9884, 6.3376447e-06, 0, -6.3381535e-06, 145.00005, 144.9884, -1.834741, -8.019906e-08, 4.5300784, -1.9950845, -1.8793066)
 material_override = SubResource("StandardMaterial3D_m58he")
 mesh = SubResource("ArrayMesh_syg2j")
 
-[node name="DoubleShelf4" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=165830645]
+[node name="DoubleShelf4" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=165830645]
 transform = Transform3D(1.4222693, 144.99303, 6.337845e-06, 1.1754357e-15, -6.3381517e-06, 145.00005, 144.99303, -1.4222693, -6.2169356e-08, 4.530079, -1.9950848, 2.21659)
 material_override = SubResource("StandardMaterial3D_m58he")
 mesh = SubResource("ArrayMesh_syg2j")
 
-[node name="SingleShelf" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=427671280]
+[node name="SingleShelf" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=427671280]
 transform = Transform3D(144.65819, -9.950587, -4.3495393e-07, 0, -6.3381517e-06, 145.00003, -9.950587, -144.65819, -6.3232096e-06, 2.412796, -2.050471, -4.575798)
 material_override = SubResource("StandardMaterial3D_d0f52")
 mesh = SubResource("ArrayMesh_kw45y")
 
-[node name="SingleShelf2" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=306033603]
+[node name="SingleShelf2" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=306033603]
 transform = Transform3D(-144.99706, 0.9287589, 4.059728e-08, -4.8678433e-15, -6.3381544e-06, 145.00005, 0.9287589, 144.99706, 6.3380235e-06, -2.3150702, -2.050471, -4.602611)
 material_override = SubResource("StandardMaterial3D_d0f52")
 mesh = SubResource("ArrayMesh_kw45y")
 
-[node name="SingleShelf3" type="MeshInstance3D" parent="treasure_room/Decor/Shelves" unique_id=265190667]
+[node name="SingleShelf3" type="MeshInstance3D" parent="RoomMesh/Decor/Shelves" unique_id=265190667]
 transform = Transform3D(144.99706, -0.9287461, -4.0596728e-08, 3.5025469e-15, -6.338154e-06, 145.00005, -0.9287461, -144.99706, -6.338022e-06, -2.529014, -2.050471, 4.653205)
 material_override = SubResource("StandardMaterial3D_d0f52")
 mesh = SubResource("ArrayMesh_kw45y")
 
-[node name="Desks" type="Node3D" parent="treasure_room/Decor" unique_id=1041335945]
+[node name="Desks" type="Node3D" parent="RoomMesh/Decor" unique_id=1041335945]
 
-[node name="Desk" type="RigidBody3D" parent="treasure_room/Decor/Desks" unique_id=738436739]
+[node name="Desk" type="RigidBody3D" parent="RoomMesh/Decor/Desks" unique_id=738436739]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5079017, -1.6401124, -3.7555377)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Desks/Desk" unique_id=1464203954]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Desks/Desk" unique_id=1464203954]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_qf1e3")
 
-[node name="desk" parent="treasure_room/Decor/Desks/Desk" unique_id=1094252860 instance=ExtResource("6_e5evu")]
+[node name="desk" parent="RoomMesh/Decor/Desks/Desk" unique_id=1094252860 instance=ExtResource("6_e5evu")]
 
-[node name="Seat" parent="treasure_room/Decor/Desks/Desk/desk" index="0" unique_id=765216664]
+[node name="Seat" parent="RoomMesh/Decor/Desks/Desk/desk" index="0" unique_id=765216664]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 material_override = ExtResource("7_0ufai")
 
-[node name="Desk5" type="RigidBody3D" parent="treasure_room/Decor/Desks" unique_id=2057059026]
+[node name="Desk5" type="RigidBody3D" parent="RoomMesh/Decor/Desks" unique_id=2057059026]
 transform = Transform3D(0.6503766, 0, -0.75961196, 0, 1, 0, 0.75961196, 0, 0.6503766, 4.079135, -1.6587843, -4.3117023)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Desks/Desk5" unique_id=1280845858]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Desks/Desk5" unique_id=1280845858]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_qf1e3")
 
-[node name="desk" parent="treasure_room/Decor/Desks/Desk5" unique_id=1249798060 instance=ExtResource("6_e5evu")]
+[node name="desk" parent="RoomMesh/Decor/Desks/Desk5" unique_id=1249798060 instance=ExtResource("6_e5evu")]
 
-[node name="Seat" parent="treasure_room/Decor/Desks/Desk5/desk" index="0" unique_id=765216664]
+[node name="Seat" parent="RoomMesh/Decor/Desks/Desk5/desk" index="0" unique_id=765216664]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 material_override = ExtResource("7_0ufai")
 
-[node name="Desk2" type="RigidBody3D" parent="treasure_room/Decor/Desks" unique_id=875600223]
+[node name="Desk2" type="RigidBody3D" parent="RoomMesh/Decor/Desks" unique_id=875600223]
 transform = Transform3D(0.032124903, -0.7030103, 0.7104543, -0.99897975, -4.222197e-08, 0.04517122, -0.031755798, -0.71118003, -0.70229274, 4.2879066, -1.0247219, -4.151019)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Desks/Desk2" unique_id=1222493086]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Desks/Desk2" unique_id=1222493086]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_qf1e3")
 
-[node name="desk" parent="treasure_room/Decor/Desks/Desk2" unique_id=1106458833 instance=ExtResource("6_e5evu")]
+[node name="desk" parent="RoomMesh/Decor/Desks/Desk2" unique_id=1106458833 instance=ExtResource("6_e5evu")]
 
-[node name="Seat" parent="treasure_room/Decor/Desks/Desk2/desk" index="0" unique_id=765216664]
+[node name="Seat" parent="RoomMesh/Decor/Desks/Desk2/desk" index="0" unique_id=765216664]
 transform = Transform3D(1.285, 0, 8.940697e-08, 0, 1.285, 0, -8.940697e-08, 0, 1.285, 0, 0, 0)
 material_override = ExtResource("7_0ufai")
 
-[node name="Desk3" type="RigidBody3D" parent="treasure_room/Decor/Desks" unique_id=540400828]
+[node name="Desk3" type="RigidBody3D" parent="RoomMesh/Decor/Desks" unique_id=540400828]
 transform = Transform3D(-0.91764385, 0, 0.39740434, 0, 1, 0, -0.39740434, 0, -0.91764385, 3.118003, -1.6805906, -4.023998)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Desks/Desk3" unique_id=1746517151]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Desks/Desk3" unique_id=1746517151]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_qf1e3")
 
-[node name="desk" parent="treasure_room/Decor/Desks/Desk3" unique_id=995380306 instance=ExtResource("6_e5evu")]
+[node name="desk" parent="RoomMesh/Decor/Desks/Desk3" unique_id=995380306 instance=ExtResource("6_e5evu")]
 
-[node name="Seat" parent="treasure_room/Decor/Desks/Desk3/desk" index="0" unique_id=765216664]
+[node name="Seat" parent="RoomMesh/Decor/Desks/Desk3/desk" index="0" unique_id=765216664]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 material_override = ExtResource("7_0ufai")
 
-[node name="Desk6" type="RigidBody3D" parent="treasure_room/Decor/Desks" unique_id=2012922271]
+[node name="Desk6" type="RigidBody3D" parent="RoomMesh/Decor/Desks" unique_id=2012922271]
 transform = Transform3D(-0.85705066, 0, -0.5152325, 0, 1, 0, 0.5152325, 0, -0.85705066, 3.4571364, -1.688701, -4.542223)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Desks/Desk6" unique_id=332621103]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Desks/Desk6" unique_id=332621103]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_qf1e3")
 
-[node name="desk" parent="treasure_room/Decor/Desks/Desk6" unique_id=493335010 instance=ExtResource("6_e5evu")]
+[node name="desk" parent="RoomMesh/Decor/Desks/Desk6" unique_id=493335010 instance=ExtResource("6_e5evu")]
 
-[node name="Seat" parent="treasure_room/Decor/Desks/Desk6/desk" index="0" unique_id=765216664]
+[node name="Seat" parent="RoomMesh/Decor/Desks/Desk6/desk" index="0" unique_id=765216664]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 material_override = ExtResource("7_0ufai")
 
-[node name="Desk7" type="RigidBody3D" parent="treasure_room/Decor/Desks" unique_id=321561817]
+[node name="Desk7" type="RigidBody3D" parent="RoomMesh/Decor/Desks" unique_id=321561817]
 transform = Transform3D(-4.3711392e-08, -1, 0, 6.81196e-08, 4.0602444e-15, -1.0000004, 1.0000004, -4.3711413e-08, 6.81196e-08, 3.8223338, -1.7429341, -3.7283995)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Desks/Desk7" unique_id=175039020]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Desks/Desk7" unique_id=175039020]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_qf1e3")
 
-[node name="desk" parent="treasure_room/Decor/Desks/Desk7" unique_id=1181630032 instance=ExtResource("6_e5evu")]
+[node name="desk" parent="RoomMesh/Decor/Desks/Desk7" unique_id=1181630032 instance=ExtResource("6_e5evu")]
 
-[node name="Seat" parent="treasure_room/Decor/Desks/Desk7/desk" index="0" unique_id=765216664]
+[node name="Seat" parent="RoomMesh/Decor/Desks/Desk7/desk" index="0" unique_id=765216664]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 material_override = ExtResource("7_0ufai")
 
-[node name="Desk4" type="RigidBody3D" parent="treasure_room/Decor/Desks" unique_id=2093949249]
+[node name="Desk4" type="RigidBody3D" parent="RoomMesh/Decor/Desks" unique_id=2093949249]
 transform = Transform3D(-2.80457e-08, 0.64161056, 0.7670314, -1.0000005, -4.371139e-08, 2.237686e-15, 3.3528003e-08, -0.767031, 0.64161056, -3.5720496, -1.6586833, 4.1873846)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Desks/Desk4" unique_id=43083650]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Desks/Desk4" unique_id=43083650]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_qf1e3")
 
-[node name="desk" parent="treasure_room/Decor/Desks/Desk4" unique_id=2133460444 instance=ExtResource("6_e5evu")]
+[node name="desk" parent="RoomMesh/Decor/Desks/Desk4" unique_id=2133460444 instance=ExtResource("6_e5evu")]
 
-[node name="Seat" parent="treasure_room/Decor/Desks/Desk4/desk" index="0" unique_id=765216664]
+[node name="Seat" parent="RoomMesh/Decor/Desks/Desk4/desk" index="0" unique_id=765216664]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 material_override = ExtResource("7_0ufai")
 
-[node name="Desk8" type="RigidBody3D" parent="treasure_room/Decor/Desks" unique_id=1722786470]
+[node name="Desk8" type="RigidBody3D" parent="RoomMesh/Decor/Desks" unique_id=1722786470]
 transform = Transform3D(0.8303531, 0, -0.557238, 0, 1, 0, 0.557238, 0, 0.8303531, -4.111196, -1.6586833, 4.1175933)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Desks/Desk8" unique_id=395795032]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Desks/Desk8" unique_id=395795032]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_qf1e3")
 
-[node name="desk" parent="treasure_room/Decor/Desks/Desk8" unique_id=1694269302 instance=ExtResource("6_e5evu")]
+[node name="desk" parent="RoomMesh/Decor/Desks/Desk8" unique_id=1694269302 instance=ExtResource("6_e5evu")]
 
-[node name="Seat" parent="treasure_room/Decor/Desks/Desk8/desk" index="0" unique_id=765216664]
+[node name="Seat" parent="RoomMesh/Decor/Desks/Desk8/desk" index="0" unique_id=765216664]
 transform = Transform3D(1.285, 0, 0, 0, 1.285, 0, 0, 0, 1.285, 0, 0, 0)
 material_override = ExtResource("7_0ufai")
 
-[node name="Trashcan" type="MeshInstance3D" parent="treasure_room/Decor" unique_id=1860254592]
+[node name="Trashcan" type="MeshInstance3D" parent="RoomMesh/Decor" unique_id=1860254592]
 transform = Transform3D(0.53928113, 0, -0.26301333, 0, 0.60000014, 0, 0.26301333, 0, 0.53928113, -3.55762, -1.6779666, -4.490176)
 mesh = SubResource("ArrayMesh_2xlch")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="treasure_room/Decor/Trashcan" unique_id=1600810033]
+[node name="StaticBody3D" type="StaticBody3D" parent="RoomMesh/Decor/Trashcan" unique_id=1600810033]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Trashcan/StaticBody3D" unique_id=859652265]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Trashcan/StaticBody3D" unique_id=859652265]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009033173, 0)
 shape = SubResource("CylinderShape3D_ejb4y")
 
-[node name="Trashcan2" type="MeshInstance3D" parent="treasure_room/Decor" unique_id=110941721]
+[node name="Trashcan2" type="MeshInstance3D" parent="RoomMesh/Decor" unique_id=110941721]
 transform = Transform3D(0.45658737, 0.3887672, 0.019704066, 0.00092689664, 0.029285202, -0.5992842, -0.38926497, 0.45607296, 0.021684835, -3.7479663, -1.7470183, -4.049295)
 mesh = SubResource("ArrayMesh_2xlch")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="treasure_room/Decor/Trashcan2" unique_id=1092282302]
+[node name="StaticBody3D" type="StaticBody3D" parent="RoomMesh/Decor/Trashcan2" unique_id=1092282302]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Trashcan2/StaticBody3D" unique_id=1392185929]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Trashcan2/StaticBody3D" unique_id=1392185929]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009033173, 0)
 shape = SubResource("CylinderShape3D_ejb4y")
 
-[node name="Trashcan3" type="MeshInstance3D" parent="treasure_room/Decor" unique_id=44426950]
+[node name="Trashcan3" type="MeshInstance3D" parent="RoomMesh/Decor" unique_id=44426950]
 transform = Transform3D(0.60000014, 0, 0, 0, -0.60000014, 5.108971e-08, 0, -5.108971e-08, -0.60000014, -4.262762, -1.6921899, -3.8250976)
 mesh = SubResource("ArrayMesh_2xlch")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="treasure_room/Decor/Trashcan3" unique_id=1823692397]
+[node name="StaticBody3D" type="StaticBody3D" parent="RoomMesh/Decor/Trashcan3" unique_id=1823692397]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Trashcan3/StaticBody3D" unique_id=1710089875]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Trashcan3/StaticBody3D" unique_id=1710089875]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.009033173, 0)
 shape = SubResource("CylinderShape3D_ejb4y")
 
-[node name="Pencil" type="MeshInstance3D" parent="treasure_room/Decor" unique_id=782881547]
+[node name="Pencil" type="MeshInstance3D" parent="RoomMesh/Decor" unique_id=782881547]
 transform = Transform3D(-0.22348578, -0.058360238, 0.19143732, -2.5087e-08, -0.2869618, -0.08748118, 0.20013541, -0.06516932, 0.21377285, 4.116895, -0.6356782, 4.0203032)
 material_override = ExtResource("8_jlue3")
 mesh = SubResource("ArrayMesh_abvra")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="treasure_room/Decor/Pencil" unique_id=161313725]
+[node name="StaticBody3D" type="StaticBody3D" parent="RoomMesh/Decor/Pencil" unique_id=161313725]
 visible = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="treasure_room/Decor/Pencil/StaticBody3D" unique_id=1778262573]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomMesh/Decor/Pencil/StaticBody3D" unique_id=1778262573]
 shape = SubResource("ConvexPolygonShape3D_uc2kx")
 
-[node name="SkySphere" type="MeshInstance3D" parent="treasure_room/Decor" unique_id=1780106497]
+[node name="SkySphere" type="MeshInstance3D" parent="RoomMesh/Decor" unique_id=1780106497]
 transform = Transform3D(0.14789662, -0.5519576, 0, 0.5519576, 0.14789662, 0, 0, 0, 0.5714286, 0, -2.0019665, 0)
 mesh = SubResource("SphereMesh_tym5y")
 
-[node name="LightRotate5" parent="treasure_room/Decor" unique_id=1455328766 instance=ExtResource("6_04r8m")]
+[node name="LightRotate5" parent="RoomMesh/Decor" unique_id=1455328766 instance=ExtResource("6_04r8m")]
 transform = Transform3D(0.5714286, 0, 0, 0, 0.5714286, 0, 0, 0, 0.5714286, 3.7419152, -1.6139766, -3.9635475)
 
-[node name="Light" parent="treasure_room/Decor/LightRotate5" index="0" unique_id=2064956913]
+[node name="Light" parent="RoomMesh/Decor/LightRotate5" index="0" unique_id=2064956913]
 transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071067, -0.4999999, -0.4999999, 0.70710677, 0.49999985, 0, 3.1346364, 0)
 
-[node name="OmniLight3D" parent="treasure_room/Decor/LightRotate5/Light" index="0" unique_id=308789193]
+[node name="OmniLight3D" parent="RoomMesh/Decor/LightRotate5/Light" index="0" unique_id=308789193]
 light_energy = 0.322
 omni_range = 23.096
 
-[node name="LightRotate6" parent="treasure_room/Decor" unique_id=2039746749 instance=ExtResource("6_04r8m")]
+[node name="LightRotate6" parent="RoomMesh/Decor" unique_id=2039746749 instance=ExtResource("6_04r8m")]
 transform = Transform3D(0.5714286, 0, 0, 0, 0.5714286, 0, 0, 0, 0.5714286, -3.6142182, -1.6139766, 3.8905785)
 
-[node name="Light" parent="treasure_room/Decor/LightRotate6" index="0" unique_id=2064956913]
+[node name="Light" parent="RoomMesh/Decor/LightRotate6" index="0" unique_id=2064956913]
 transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071067, -0.4999999, -0.4999999, 0.70710677, 0.49999985, 0, 3.1346364, 0)
 
-[node name="OmniLight3D" parent="treasure_room/Decor/LightRotate6/Light" index="0" unique_id=308789193]
+[node name="OmniLight3D" parent="RoomMesh/Decor/LightRotate6/Light" index="0" unique_id=308789193]
 light_energy = 0.322
 omni_range = 23.096
 
-[node name="LightRotate7" parent="treasure_room/Decor" unique_id=585999356 instance=ExtResource("6_04r8m")]
+[node name="LightRotate7" parent="RoomMesh/Decor" unique_id=585999356 instance=ExtResource("6_04r8m")]
 transform = Transform3D(0.5714286, 0, 0, 0, 0.5714286, 0, 0, 0, 0.5714286, -3.6142182, -1.6139766, -3.7355032)
 
-[node name="Light" parent="treasure_room/Decor/LightRotate7" index="0" unique_id=2064956913]
+[node name="Light" parent="RoomMesh/Decor/LightRotate7" index="0" unique_id=2064956913]
 transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071067, -0.4999999, -0.4999999, 0.70710677, 0.49999985, 0, 3.1346364, 0)
 
-[node name="OmniLight3D" parent="treasure_room/Decor/LightRotate7/Light" index="0" unique_id=308789193]
+[node name="OmniLight3D" parent="RoomMesh/Decor/LightRotate7/Light" index="0" unique_id=308789193]
 light_energy = 0.322
 omni_range = 23.096
 
-[node name="LightRotate4" parent="treasure_room/Decor" unique_id=2062035407 instance=ExtResource("6_04r8m")]
+[node name="LightRotate4" parent="RoomMesh/Decor" unique_id=2062035407 instance=ExtResource("6_04r8m")]
 transform = Transform3D(0.5714286, 0, 0, 0, 0.5714286, 0, 0, 0, 0.5714286, 3.7419152, -1.6139766, 3.9973948)
 
-[node name="Light" parent="treasure_room/Decor/LightRotate4" index="0" unique_id=2064956913]
+[node name="Light" parent="RoomMesh/Decor/LightRotate4" index="0" unique_id=2064956913]
 transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071067, -0.4999999, -0.4999999, 0.70710677, 0.49999985, 0, 3.1346364, 0.58185863)
 
-[node name="OmniLight3D" parent="treasure_room/Decor/LightRotate4/Light" index="0" unique_id=308789193]
+[node name="OmniLight3D" parent="RoomMesh/Decor/LightRotate4/Light" index="0" unique_id=308789193]
 light_energy = 0.322
 omni_range = 23.096
 
-[node name="Treasure" parent="." unique_id=1286188714 node_paths=PackedStringArray("ChestLight") instance=ExtResource("12_0ufai")]
+[node name="Treasure" parent="." unique_id=1286188714 node_paths=PackedStringArray("ChestLight", "RevealCamera", "CameraAngles") instance=ExtResource("12_0ufai")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.43282324, 0)
 ChestLight = NodePath("../Light")
+RevealCamera = NodePath("../RevealCamera")
+CameraAngles = [NodePath("../RevealCameraAngles/Marker"), NodePath("../RevealCameraAngles/Marker2"), NodePath("../RevealCameraAngles/Marker3"), NodePath("../RevealCameraAngles/Marker4"), NodePath("../RevealCameraAngles/Marker5")]
 LidImpulseUp = 25.0
 
-[editable path="treasure_room/Decor/Desks/Desk/desk"]
-[editable path="treasure_room/Decor/Desks/Desk5/desk"]
-[editable path="treasure_room/Decor/Desks/Desk2/desk"]
-[editable path="treasure_room/Decor/Desks/Desk3/desk"]
-[editable path="treasure_room/Decor/Desks/Desk6/desk"]
-[editable path="treasure_room/Decor/Desks/Desk7/desk"]
-[editable path="treasure_room/Decor/Desks/Desk4/desk"]
-[editable path="treasure_room/Decor/Desks/Desk8/desk"]
-[editable path="treasure_room/Decor/LightRotate5"]
-[editable path="treasure_room/Decor/LightRotate6"]
-[editable path="treasure_room/Decor/LightRotate7"]
-[editable path="treasure_room/Decor/LightRotate4"]
+[node name="RevealCameraAngles" type="Node3D" parent="." unique_id=1944572144]
+
+[node name="Marker" type="Marker3D" parent="RevealCameraAngles" unique_id=981740992]
+transform = Transform3D(0.8562671, -0.25513744, -0.44912308, 0, 0.8694949, -0.49394187, 0.5165333, 0.42294618, 0.7445199, -1.433, 0.202, 2.238)
+gizmo_extents = 0.17
+
+[node name="Marker2" type="Marker3D" parent="RevealCameraAngles" unique_id=1564144361]
+transform = Transform3D(0.6372761, 0.38064918, 0.6700637, 2.6345193e-09, 0.8694949, -0.49394187, -0.77063555, 0.31477734, 0.5541083, 1.6700815, 0.202, 2.4441242)
+
+[node name="Marker3" type="Marker3D" parent="RevealCameraAngles" unique_id=906613426]
+transform = Transform3D(-0.8446924, 0.23406796, -0.4813595, -1.9115172e-08, 0.8993136, 0.43730417, 0.5352521, 0.3693875, -0.7596434, -1.9939985, 2.7060857, -3.8022652)
+
+[node name="Marker4" type="Marker3D" parent="RevealCameraAngles" unique_id=1699045465]
+transform = Transform3D(-0.844328, -0.23405008, 0.48200712, 0, 0.89955777, 0.4368018, -0.53582674, 0.36880398, -0.7595218, 2.9685602, 2.706, -3.802)
+
+[node name="Marker5" type="Marker3D" parent="RevealCameraAngles" unique_id=1770652319]
+transform = Transform3D(-1, 2.1613864e-08, -1.394363e-07, -3.3546858e-08, 0.9234448, 0.3837313, 1.3705564e-07, 0.3837313, -0.9234448, 0, 4.947082, -8.144059)
+
+[node name="RevealCamera" type="Camera3D" parent="." unique_id=1500331647]
+transform = Transform3D(-1, 0, -8.7422784e-08, -3.3546858e-08, 0.9234448, 0.3837313, 8.073011e-08, 0.3837313, -0.9234448, 0, 4.947082, -8.144059)
+
+[editable path="RoomMesh/Decor/Desks/Desk/desk"]
+[editable path="RoomMesh/Decor/Desks/Desk5/desk"]
+[editable path="RoomMesh/Decor/Desks/Desk2/desk"]
+[editable path="RoomMesh/Decor/Desks/Desk3/desk"]
+[editable path="RoomMesh/Decor/Desks/Desk6/desk"]
+[editable path="RoomMesh/Decor/Desks/Desk7/desk"]
+[editable path="RoomMesh/Decor/Desks/Desk4/desk"]
+[editable path="RoomMesh/Decor/Desks/Desk8/desk"]
+[editable path="RoomMesh/Decor/LightRotate5"]
+[editable path="RoomMesh/Decor/LightRotate6"]
+[editable path="RoomMesh/Decor/LightRotate7"]
+[editable path="RoomMesh/Decor/LightRotate4"]

@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://bk7p3xjo8ru00" path="res://game/entity/treasure/TreasureChest.cs" id="5_chest"]
 [ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/stats/health.tres" id="5_qjcd4"]
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="6_item"]
-[ext_resource type="AudioStream" uid="uid://vyot2pb7j6qd" path="res://assets/audio/etc/orchestra_hit.mp3" id="7_xelpo"]
+[ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="7_xelpo"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_chest"]
 size = Vector3(1.5, 0.85, 1)
@@ -148,15 +148,17 @@ initial_velocity_max = 9.25
 scale_min = 0.05
 scale_max = 0.12
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xelpo"]
+emission_enabled = true
+
 [sub_resource type="SphereMesh" id="SphereMesh_particle"]
+material = SubResource("StandardMaterial3D_xelpo")
 radius = 0.2
 height = 0.4
 radial_segments = 9
 rings = 2
 
-[node name="BoxRoot" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "_particles") groups=["Interactable"]]
-collision_layer = 2
-collision_mask = 2
+[node name="BoxRoot" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "_particles", "CameraAngles") groups=["Interactable"]]
 script = ExtResource("5_chest")
 LootPool = Array[ExtResource("2_yqjpm")]([ExtResource("3_xelpo"), ExtResource("4_5oboa"), ExtResource("5_qjcd4")])
 ItemScene = ExtResource("6_item")
@@ -164,7 +166,9 @@ _label = NodePath("Label3D")
 _lidBody = NodePath("LidBody")
 OpenSound = ExtResource("7_xelpo")
 _openSoundPlayer = NodePath("OpenSoundPlayer")
+RarityColors = PackedColorArray(0.5639733, 0.57363933, 0.549362, 1, 0.08478225, 0.6843731, 0, 1, 0, 0.39215687, 0.9843137, 1, 0.7480167, 0.0002950415, 0.7129954, 1, 0.85397196, 0, 0.13966635, 1)
 _particles = NodePath("BurstParticles")
+CameraAngles = []
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1832437720]
 shape = SubResource("BoxShape3D_chest")
@@ -176,7 +180,6 @@ mesh = SubResource("ArrayMesh_3vyn0")
 [node name="LidBody" type="RigidBody3D" parent="." unique_id=511200093]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.384, 0)
 mass = 2.0
-freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LidBody" unique_id=1908530398]
 shape = SubResource("BoxShape3D_lid")

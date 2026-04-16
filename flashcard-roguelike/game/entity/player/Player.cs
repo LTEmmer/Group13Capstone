@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Text.RegularExpressions;
 
 public partial class Player : CharacterBody3D
 {
@@ -44,6 +45,8 @@ public partial class Player : CharacterBody3D
 	[Export] public AudioStream[] JumpSounds;
 	[Export] public AudioStream[] LandSounds;
 
+	public Camera3D PlayerCamera;
+
 	private Node3D _cameraPivot;
 	private float _pitch;
 	public bool SuppressNextLandSound { get; set; } = false;
@@ -58,9 +61,17 @@ public partial class Player : CharacterBody3D
 	public AudioStreamPlayer3D JumpSoundPlayer;
 
 	private Interactable oldInteractable = null;
+
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+		AddToGroup("player");
+    }
+
 	public override void _Ready()
 	{
 		_cameraPivot = GetNode<Node3D>("CameraPivot");
+		PlayerCamera = _cameraPivot.GetNode<Camera3D>("Camera3D");
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 
 		FootstepSoundPlayer = GetNode<AudioStreamPlayer3D>("FootstepSoundPlayer");
