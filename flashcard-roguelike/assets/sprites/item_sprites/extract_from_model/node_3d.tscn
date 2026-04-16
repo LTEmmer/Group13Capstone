@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d4jv7pimaq3wm"]
 
 [ext_resource type="Script" uid="uid://bm0qih7avtvnr" path="res://assets/sprites/item_sprites/extract_from_model/SubViewport2.cs" id="1_ig8e5"]
-[ext_resource type="PackedScene" uid="uid://b75c8c64ruq6n" path="res://assets/models/item_models/ruler.glb" id="2_ig8e5"]
+[ext_resource type="PackedScene" uid="uid://cw55iyunpjmih" path="res://assets/models/item_models/ice_cubes.glb" id="2_ig8e5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ig8e5"]
 viewport_path = NodePath("SubViewport2")
@@ -39,18 +39,17 @@ script = ExtResource("1_ig8e5")
 environment = SubResource("Environment_2toni")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport2/Node3D2" unique_id=679526476]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.84965014, 0.07153264, 0.5224727, 0.4442206, -0.43683544, 0.7822038, 0.28418767, 0.89669275, 0.33938113, 0, 0, 0)
 shadow_enabled = true
 
 [node name="Node3D2" type="Node3D" parent="SubViewport2/Node3D2" unique_id=2142322232]
 
-[node name="ruler" parent="SubViewport2/Node3D2/Node3D2" unique_id=64262536 instance=ExtResource("2_ig8e5")]
-transform = Transform3D(-0.022356583, 0.042233407, 0.15269747, 0.13695346, 0.08267901, -0.0028160592, -0.07964881, 0.13030931, -0.047702696, 0, 0, 0)
+[node name="ice_cubes" parent="SubViewport2/Node3D2/Node3D2" unique_id=770132062 instance=ExtResource("2_ig8e5")]
 
 [node name="Node3D" type="Node3D" parent="SubViewport2/Node3D2" unique_id=1571357994]
-transform = Transform3D(0.6167748, -0.12584884, 0.777014, -7.334976e-09, 0.9871361, 0.15988117, -0.7871395, -0.09861074, 0.60884094, 0, 0, 0)
+transform = Transform3D(0.88609016, 0, 0.46351257, 0, 0.9999998, 0, -0.46351248, 0, 0.88609034, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport2/Node3D2/Node3D" unique_id=2125932599]
-transform = Transform3D(0.99994916, 0.0060551194, 0.008091617, -0.008638775, 0.92762935, 0.37340215, -0.005245028, -0.3734529, 0.9276344, -1.4901161e-08, 0.8049461, 1.7205577)
+transform = Transform3D(1.0000001, 0, 0, 0, 0.8785673, 0.47761884, 0, -0.4776189, 0.87856716, 0, 0.7395758, 1.470894)
 current = true
-fov = 75.00145
+fov = 30.40965

@@ -1,24 +1,20 @@
 [gd_scene format=4 uid="uid://bw5gdsxslid3h"]
 
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="2_0aegq"]
-[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/stats/health.tres" id="3_vxwn0"]
-[ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/stats/hamster_ball.tres" id="5_y4ohd"]
 [ext_resource type="PackedScene" uid="uid://dwh7rs8vsfh4c" path="res://assets/models/entrance_room/tunnel/entrance_tunnel.glb" id="6_ac0fh"]
 [ext_resource type="Material" uid="uid://bq0trffva3vxw" path="res://assets/models/entrance_room/tunnel/tunnel_texture.tres" id="7_y4ohd"]
 [ext_resource type="PackedScene" uid="uid://b1alp087wbyss" path="res://assets/models/entrance_room/walls/entrance_room_walls.glb" id="8_sac2s"]
 [ext_resource type="Material" uid="uid://cot6row2i1kv4" path="res://assets/models/entrance_room/walls/entrance_walls_texture.tres" id="9_38i74"]
 [ext_resource type="PackedScene" uid="uid://dyw0cy12lus0x" path="res://assets/models/entrance_room/ceiling_floor/entrance_room_floors_ceiling.glb" id="10_vleqm"]
 [ext_resource type="Material" uid="uid://crfbfrmnv3seh" path="res://assets/models/entrance_room/ceiling_floor/entrance_ceiling_floor_texture.tres" id="11_ofujs"]
+[ext_resource type="Script" uid="uid://851dvlb77bfg" path="res://game/entity/dungeon_generator/rooms/StartItems.cs" id="12_4m86l"]
 [ext_resource type="Script" uid="uid://sjh56ix28es4" path="res://shared/components/rotate/RotateComponent.cs" id="12_8cp7p"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="12_nh78s"]
 [ext_resource type="Script" uid="uid://d21whjtbn8o5c" path="res://shared/components/hover/HoverComponent.cs" id="12_ofujs"]
-[ext_resource type="Resource" uid="uid://biapbeaft61wq" path="res://game/entity/item/item_resources/use/bandage.tres" id="14_emyof"]
 [ext_resource type="PackedScene" uid="uid://b7wa1ycthqp6g" path="res://assets/models/standing_whiteboard/standing_whiteboard.glb" id="14_qryxv"]
 [ext_resource type="Material" uid="uid://btxixoo8wjobe" path="res://assets/models/standing_whiteboard/standing_whiteboard_texture.tres" id="15_nh78s"]
 [ext_resource type="PackedScene" uid="uid://2qvmv1ijxwoo" path="res://assets/models/big_pencil/pencil.glb" id="16_nh78s"]
-[ext_resource type="Resource" uid="uid://7hyntiag1ycs" path="res://game/entity/item/item_resources/tool/gym_shorts.tres" id="16_qf1e3"]
 [ext_resource type="PackedScene" uid="uid://cm0r6jfidsyc8" path="res://assets/models/desk/desk.glb" id="17_5npjy"]
-[ext_resource type="Resource" uid="uid://dhlcwfdiu3op" path="res://game/entity/item/item_resources/stats/blood_vial.tres" id="17_6vshp"]
 [ext_resource type="Material" path="res://assets/models/big_pencil/pencil_texture.tres" id="17_emyof"]
 [ext_resource type="Material" path="res://assets/models/desk/desk_texture.tres" id="18_emyof"]
 
@@ -125,6 +121,7 @@ shape = SubResource("ConcavePolygonShape3D_vleqm")
 transform = Transform3D(1.01, 0, 0, 0, 1, 0, 0, 0, 1.01, 0, 0, 0)
 
 [node name="Cube_001" parent="entrance_room_walls/entrance_room_floors_ceiling" index="0" unique_id=998772104]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014323055, 0.0017857552, 0.0074566007)
 material_override = ExtResource("11_ofujs")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="entrance_room_walls/entrance_room_floors_ceiling/Cube_001" index="0" unique_id=1411537327]
@@ -243,28 +240,12 @@ transform = Transform3D(-0.82665706, 0.050279245, -0.56045514, 0.09778119, 0.993
 material_override = ExtResource("15_nh78s")
 
 [node name="ItemPivot" type="Node3D" parent="Whiteboards/standing_whiteboard4" unique_id=1087441278]
-transform = Transform3D(-0.8999007, 0.09778115, 0.42499113, 0.064647004, 0.99368286, -0.0917373, -0.4312769, -0.055080082, -0.9005364, -0.06067288, -0.6165749, 0.034176826)
+transform = Transform3D(-0.8999006, 0.097781144, 0.42499104, 0.064647, 0.99368286, -0.0917373, -0.43127686, -0.055080082, -0.90053636, 0.0024863482, 0.025268078, -0.0014009476)
 script = ExtResource("12_8cp7p")
 
-[node name="Item" parent="Whiteboards/standing_whiteboard4/ItemPivot" unique_id=1116861116 instance=ExtResource("2_0aegq")]
-transform = Transform3D(-0.1120695, 0.048890617, -0.48481974, 0.03795588, 0.4968416, 0.041329112, 0.4857981, -0.027540045, -0.11507292, -0.10677409, 0.55, -3.9905512)
-_resource = ExtResource("3_vxwn0")
-
-[node name="Item2" parent="Whiteboards/standing_whiteboard4/ItemPivot" unique_id=1248684543 instance=ExtResource("2_0aegq")]
-transform = Transform3D(0.23373148, 0.04889061, 0.4392941, -0.047359295, 0.49684167, -0.030097164, -0.43946195, -0.027540047, 0.23688573, 0.17932922, 0.55, 3.9812264)
-_resource = ExtResource("14_emyof")
-
-[node name="Item3" parent="Whiteboards/standing_whiteboard4/ItemPivot" unique_id=529039477 instance=ExtResource("2_0aegq")]
-transform = Transform3D(-0.3511171, 0.04889061, 0.35259965, 0.014836397, 0.49684155, -0.05411677, -0.35566378, -0.027540045, -0.3503496, 4.0000005, 0.55, -0.04699999)
-_resource = ExtResource("5_y4ohd")
-
-[node name="Item4" parent="Whiteboards/standing_whiteboard4/ItemPivot" unique_id=1621111281 instance=ExtResource("2_0aegq")]
-transform = Transform3D(0.43929413, 0.048890635, -0.23373148, -0.030097123, 0.49684173, 0.04735931, 0.23688571, -0.027540063, 0.43946186, -3.966, 0.55, -0.019000001)
-_resource = ExtResource("16_qf1e3")
-
-[node name="Item5" parent="Whiteboards/standing_whiteboard4/ItemPivot" unique_id=696073096 instance=ExtResource("2_0aegq")]
-transform = Transform3D(0.43929413, 0.04889063, -0.23373148, -0.030097123, 0.49684173, 0.04735931, 0.23688571, -0.027540065, 0.43946183, -2.7489932, 0.5500001, 3.4230752)
-_resource = ExtResource("17_6vshp")
+[node name="StartItems" type="Node3D" parent="Whiteboards/standing_whiteboard4/ItemPivot" unique_id=1666414584]
+script = ExtResource("12_4m86l")
+ItemScene = ExtResource("2_0aegq")
 
 [node name="Label3D" type="Label3D" parent="Whiteboards/standing_whiteboard4" unique_id=2124146285]
 transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.039243698, 0, 3.4308414e-09)

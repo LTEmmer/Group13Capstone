@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://dsc2wuku35p6x"]
 
 [ext_resource type="Texture2D" uid="uid://ce3e6ylwtkc86" path="res://assets/sprites/item_sprites/ruler.png" id="1_ecs4u"]
-[ext_resource type="PackedScene" uid="uid://b75c8c64ruq6n" path="res://assets/models/item_models/ruler.glb" id="2_4rtdj"]
+[ext_resource type="PackedScene" uid="uid://bqdns7t14joco" path="res://assets/models/item_models/model_scenes/ruler.tscn" id="2_4rtdj"]
 [ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_ecs4u"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_4rtdj"]
 

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://bpxqeuxuo575j"]
 
-[ext_resource type="Texture2D" uid="uid://bollu6mcu4ubs" path="res://assets/sprites/item_sprites/hampter_ball.png" id="1_d8xvv"]
-[ext_resource type="Script" uid="uid://disq4r3ec5xdh" path="res://game/entity/item/effects/mod_components/ModBlock.cs" id="2_d8xvv"]
-[ext_resource type="PackedScene" uid="uid://dhtgj2nieuvtp" path="res://assets/models/item_models/hamster_ball.glb" id="3_d8xvv"]
-[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_rbv2w"]
+[ext_resource type="Texture2D" uid="uid://bollu6mcu4ubs" path="res://assets/sprites/item_sprites/hampter_ball.png" id="1_1ncqe"]
+[ext_resource type="PackedScene" uid="uid://dhtgj2nieuvtp" path="res://assets/models/item_models/hamster_ball.glb" id="2_pe720"]
+[ext_resource type="Script" uid="uid://disq4r3ec5xdh" path="res://game/entity/item/effects/mod_components/ModBlock.cs" id="3_jlx2q"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_mbtvh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgcsr"]
 albedo_color = Color(2.695322e-06, 0.5793161, 0.80100197, 1)
@@ -12,16 +12,16 @@ albedo_color = Color(2.695322e-06, 0.5793161, 0.80100197, 1)
 material = SubResource("StandardMaterial3D_qgcsr")
 
 [sub_resource type="Resource" id="Resource_r3w0g"]
-script = ExtResource("2_d8xvv")
+script = ExtResource("3_jlx2q")
 _block = 5
 metadata/_custom_type_script = "uid://disq4r3ec5xdh"
 
 [resource]
-script = ExtResource("3_rbv2w")
+script = ExtResource("4_mbtvh")
 Name = "Hamster Ball"
-Icon = ExtResource("1_d8xvv")
+Icon = ExtResource("1_1ncqe")
 Mesh = SubResource("CapsuleMesh_imnv4")
-ScenePrefab = ExtResource("3_d8xvv")
+ScenePrefab = ExtResource("2_pe720")
 SceneScale = 4.0
 Description = "Protection against the class pet.
 +10 Block"

@@ -39,8 +39,10 @@ public partial class ModHealth: ItemEffect
 			else health.TakeDamage(-hp, true);
 		}
 
+		GD.Print("TD: ", trueDefence);
 		health.TrueDefence += trueDefence;
-    	health.TrueDefence = Mathf.Max(health.TrueDefence, 2f);
+    	health.TrueDefence = Mathf.Min(health.TrueDefence, 2f);
+		GD.Print("TDA: ", health.TrueDefence);
     	health.MaxHealth = Mathf.Max(health.MaxHealth, 1);
 	}
 

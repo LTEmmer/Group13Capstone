@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://uhk7dp0fwur3"]
+
+[ext_resource type="PackedScene" uid="uid://csbxoqqg0svfh" path="res://assets/models/item_models/pants.glb" id="1_e1alc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6br0j"]
+albedo_color = Color(0.7076688, 0.54316336, 5.7756904e-07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_re8xh"]
+albedo_color = Color(0.17, 0.0884, 0.006800004, 1)
+
+[node name="pants" unique_id=2065446429 instance=ExtResource("1_e1alc")]
+
+[node name="13648_Polo_Pants_v2_L3" parent="." index="0" unique_id=332676590]
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0, -0.7748932, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_6br0j")
+surface_material_override/1 = SubResource("StandardMaterial3D_re8xh")

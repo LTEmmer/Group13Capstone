@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://g5r3gxyktolw"]
+
+[ext_resource type="PackedScene" uid="uid://j3nsdsqmpt8w" path="res://assets/models/item_models/tshirt_folded.glb" id="1_v865u"]
+
+[node name="tshirt_folded" unique_id=111917092 instance=ExtResource("1_v865u")]
+
+[node name="group1851623675" parent="." index="0" unique_id=2025355642]
+transform = Transform3D(1, 0, 0, 0, 0.5624153, 0.8268549, 0, -0.8268549, 0.5624153, 0.3221869, 0.2739309, 0.33042252)

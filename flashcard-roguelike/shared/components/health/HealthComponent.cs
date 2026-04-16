@@ -55,9 +55,12 @@ public partial class HealthComponent : Node
 			}
 
 			float def = TrueDefence;
-    		def = Mathf.Max(def, 0.8f);
-    		def = Mathf.Min(def, 0f);
+    		def = Mathf.Min(def, 0.8f);
+    		def = Mathf.Max(def, 0f);
+			GD.Print("True Def: ", def);
+			GD.Print("Dam pre: ", damage);
 			damage -= damage * def;
+			GD.Print("Dam pos: ", damage);
 		}
 
 		if(damage <= 0) return;

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://catlcfa3e1uwg"]
+
+[ext_resource type="PackedScene" uid="uid://ddmgsel3enjuj" path="res://assets/models/item_models/gym_shoe.glb" id="1_1an0h"]
+
+[node name="gym_shoe" unique_id=1338956195 instance=ExtResource("1_1an0h")]
+
+[node name="Trainers_Cube_025" parent="." index="0" unique_id=1268124107]
+transform = Transform3D(0.29, 0, 0, 0, 0.29, 0, 0, 0, 0.29, 0, 0, 0)

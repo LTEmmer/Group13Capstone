@@ -27,6 +27,59 @@ public partial class AllItems : Node
 
         Instance = this;
     }
+    
+    private readonly Random _rng = new();
+
+    /// <summary>
+    /// Returns a list of random items weighted by rarity.
+    /// allowDuplicates = false (default) guarantees all returned items are unique.
+    /// </summary>
+    public List<ItemResource> GetRandomItems(int count = 1, bool allowDuplicates = false)
+    {
+        if (ItemResources.Count == 0)
+        {
+            GD.PrintErr("[AllItems] GetRandomItems called but no items are loaded.");
+            return null;
+        }
+
+        if (!allowDuplicates && count > ItemResources.Count)
+        {
+            GD.PrintErr($"[AllItems] Requested {count} unique items but only {ItemResources.Count} exist. Clamping.");
+            count = ItemResources.Count;
+        }
+
+        var results = new List<ItemResource>();
+        var exclude = allowDuplicates ? null : new HashSet<ItemResource>();
+
+        for (int i = 0; i < count; i++)
+        {
+            int totalWeight = 0;
+            foreach (var item in ItemResources)
+            {
+                if (exclude != null && exclude.Contains(item)) continue;
+                totalWeight += 6 - item.Rarity;
+            }
+
+            if (totalWeight == 0) break;
+
+            int roll = _rng.Next(0, totalWeight);
+            int cumulative = 0;
+
+            foreach (var item in ItemResources)
+            {
+                if (exclude != null && exclude.Contains(item)) continue;
+                cumulative += 6 - item.Rarity;
+                if (roll < cumulative)
+                {
+                    results.Add(item);
+                    exclude?.Add(item);
+                    break;
+                }
+            }
+        }
+
+        return results;
+    }
 
     public override void _Ready()
     {

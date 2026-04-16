@@ -33,6 +33,10 @@ public partial class UsePage : InventoryPage<ItemResource>
 
     private void OnDropPressed()
     {
+        if (BattleManager.Instance.IsInCombat)
+        {
+           return; 
+        }
         if (_item == null) return;
         Drop(_item);
         _item = null;
