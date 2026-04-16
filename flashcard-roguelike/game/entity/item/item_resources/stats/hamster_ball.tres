@@ -11,11 +11,6 @@ albedo_color = Color(2.695322e-06, 0.5793161, 0.80100197, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_imnv4"]
 material = SubResource("StandardMaterial3D_qgcsr")
 
-[sub_resource type="Resource" id="Resource_uq543"]
-script = ExtResource("2_d8xvv")
-_block = 10
-metadata/_custom_type_script = "uid://disq4r3ec5xdh"
-
 [sub_resource type="Resource" id="Resource_r3w0g"]
 script = ExtResource("2_d8xvv")
 _block = 5
@@ -30,8 +25,9 @@ ScenePrefab = ExtResource("3_d8xvv")
 SceneScale = 4.0
 Description = "Protection against the class pet.
 +10 Block"
+Behavior = 1
 Rarity = 2
-AddToInventory = false
+MaxUses = 1
 UseEffects = Array[Object]([SubResource("Resource_r3w0g")])
-PickupEffects = Array[Object]([SubResource("Resource_uq543")])
+PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"

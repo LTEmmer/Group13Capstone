@@ -1,19 +1,26 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://c2em1gnrq08pp"]
 
 [ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="1_b8403"]
-[ext_resource type="Script" uid="uid://lrjx4e56cr5o" path="res://game/entity/item/effects/mod_battle/HealingOnAttack.cs" id="2_of8tf"]
-[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="3_iykbx"]
+[ext_resource type="Script" uid="uid://c83nrwbwfv6bh" path="res://game/entity/item/effects/mod_battle/OnAttackEffect.cs" id="2_advq4"]
+[ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="2_iykbx"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="3_shs84"]
+[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="4_5h0l1"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_shs84"]
 
-[sub_resource type="Resource" id="Resource_5h0l1"]
-script = ExtResource("2_of8tf")
-HealAmount = 2
-metadata/_custom_type_script = "uid://lrjx4e56cr5o"
-
 [sub_resource type="Resource" id="Resource_ehga5"]
-script = ExtResource("3_iykbx")
+script = ExtResource("3_shs84")
 _attack = 1
 metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[sub_resource type="Resource" id="Resource_6ldkn"]
+script = ExtResource("4_5h0l1")
+_hp = 2
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[sub_resource type="Resource" id="Resource_b8403"]
+script = ExtResource("2_advq4")
+OnAttackEffects = Array[ExtResource("2_iykbx")]([SubResource("Resource_ehga5"), SubResource("Resource_6ldkn")])
+metadata/_custom_type_script = "uid://c83nrwbwfv6bh"
 
 [resource]
 script = ExtResource("4_shs84")
@@ -22,8 +29,8 @@ Icon = ExtResource("1_b8403")
 SceneScale = 0.01
 Description = "It beats faster with every strike. 
 +2 Leech 
-+1 Attack"
++1 Leech Attack"
 Rarity = 5
-UseEffects = Array[Object]([SubResource("Resource_5h0l1"), SubResource("Resource_ehga5")])
+UseEffects = Array[Object]([SubResource("Resource_b8403")])
 PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"

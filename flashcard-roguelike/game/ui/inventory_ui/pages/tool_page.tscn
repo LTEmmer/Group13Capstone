@@ -215,7 +215,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer" unique_id=1983658615]
-custom_minimum_size = Vector2(450, 450)
+custom_minimum_size = Vector2(450, 540)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

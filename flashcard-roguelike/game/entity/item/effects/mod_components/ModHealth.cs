@@ -28,14 +28,16 @@ public partial class ModHealth: ItemEffect
 		var health = target.GetNodeOrNull<HealthComponent>("HealthComponent");
 		if (health == null)
 		{
-			GD.Print("ModHealth: Target has no health component");
+			GD.PrintErr("ModHealth: Target has no health component");
 			return;
 		}
 		
-		if(hp == 0)return;
 		health.MaxHealth += _maxHp;
-		if(hp >= 0) health.Heal(hp);
-		else health.TakeDamage(-hp, true);
+		if(hp != 0)
+		{
+			if(hp > 0) health.Heal(hp);
+			else health.TakeDamage(-hp, true);
+		}
 
 		health.TrueDefence += trueDefence;
     	health.TrueDefence = Mathf.Max(health.TrueDefence, 2f);

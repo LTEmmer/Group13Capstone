@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://d1k3ywv6qs5j8"]
 
-[ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="1_3bnc8"]
 [ext_resource type="Texture2D" uid="uid://dwlpm4aog00tj" path="res://assets/sprites/item_sprites/heart.png" id="1_mwtb2"]
 [ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="3_3bnc8"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_fm70t"]
@@ -14,7 +13,7 @@ material = SubResource("StandardMaterial3D_yfbec")
 
 [sub_resource type="Resource" id="Resource_mwtb2"]
 script = ExtResource("3_3bnc8")
-_hp = 20
+_hp = 40
 metadata/_custom_type_script = "uid://cslf8mk74f83c"
 
 [resource]
@@ -25,8 +24,9 @@ Mesh = SubResource("CylinderMesh_b80tv")
 ScenePrefab = ExtResource("4_mwtb2")
 SceneScale = 0.02
 Description = "Heals the player 
-+20 HP"
-AddToInventory = false
-UseEffects = null
-PickupEffects = Array[ExtResource("1_3bnc8")]([SubResource("Resource_mwtb2")])
++40 HP"
+Behavior = 1
+MaxUses = 1
+UseEffects = Array[Object]([SubResource("Resource_mwtb2")])
+PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"

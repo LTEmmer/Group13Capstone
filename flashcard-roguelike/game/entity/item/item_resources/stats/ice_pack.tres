@@ -17,7 +17,7 @@ Icon = ExtResource("1_kfg5d")
 Description = "Effective Cure All 
 +20 Max HP
 +40 HP"
-AddToInventory = false
-UseEffects = null
-PickupEffects = Array[Object]([SubResource("Resource_bnvft")])
+Behavior = 1
+UseEffects = Array[Object]([SubResource("Resource_bnvft")])
+PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"

@@ -1,13 +1,21 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://ce6e1who3gvtw"]
 
 [ext_resource type="Texture2D" uid="uid://ca3m2axlvykvc" path="res://assets/sprites/item_sprites/leet.png" id="1_c61nb"]
-[ext_resource type="Script" uid="uid://lrjx4e56cr5o" path="res://game/entity/item/effects/mod_battle/HealingOnAttack.cs" id="2_c61nb"]
 [ext_resource type="PackedScene" uid="uid://ca3c6odggg1os" path="res://assets/models/item_models/leek.glb" id="2_wumle"]
+[ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="3_f23tc"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_wumle"]
+[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="4_blujg"]
+[ext_resource type="Script" uid="uid://c83nrwbwfv6bh" path="res://game/entity/item/effects/mod_battle/OnAttackEffect.cs" id="5_d1kea"]
 
 [sub_resource type="Resource" id="Resource_f23tc"]
-script = ExtResource("2_c61nb")
-metadata/_custom_type_script = "uid://lrjx4e56cr5o"
+script = ExtResource("4_blujg")
+_hp = 5
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[sub_resource type="Resource" id="Resource_k8wae"]
+script = ExtResource("5_d1kea")
+OnAttackEffects = Array[ExtResource("3_f23tc")]([SubResource("Resource_f23tc")])
+metadata/_custom_type_script = "uid://c83nrwbwfv6bh"
 
 [resource]
 script = ExtResource("3_wumle")
@@ -20,6 +28,6 @@ Description = "Nothing is wasted.
 Behavior = 2
 Slot = 5
 Rarity = 4
-UseEffects = Array[Object]([SubResource("Resource_f23tc")])
+UseEffects = Array[Object]([SubResource("Resource_k8wae")])
 PickupEffects = null
 metadata/_custom_type_script = "uid://573w4ti026as"
