@@ -12,21 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://b0gi538rd7txo" path="res://assets/backgrounds/prettysleepy-stars-3750824.png" id="10_y1f5v"]
 [ext_resource type="PackedScene" uid="uid://dxdxbn1isdu44" path="res://game/entity/treasure/box_root.tscn" id="12_0ufai"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e5evu"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_0ufai"]
-sky_material = SubResource("ProceduralSkyMaterial_e5evu")
-
-[sub_resource type="Environment" id="Environment_jlue3"]
-sky = SubResource("Sky_0ufai")
-glow_enabled = true
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_emission_energy = 0.0
-volumetric_fog_anisotropy = -0.2
-
 [sub_resource type="FogMaterial" id="FogMaterial_ltfas"]
 density = 0.005
 height_falloff = 1e-05
@@ -398,9 +383,6 @@ radial_segments = 16
 rings = 16
 
 [node name="TreasureRoom" type="Node3D" unique_id=1298955981]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1465956821]
-environment = SubResource("Environment_jlue3")
 
 [node name="Light" type="SpotLight3D" parent="." unique_id=676288966]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.038681746, 20.164894, 0.12280822)

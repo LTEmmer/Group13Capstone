@@ -10,21 +10,22 @@
 [ext_resource type="PackedScene" uid="uid://273l427ermxg" path="res://game/entity/connections/room_connection.tscn" id="7_qh65i"]
 [ext_resource type="PackedScene" uid="uid://ceim8jmtkr6d5" path="res://game/entity/player/player.tscn" id="9_a7trn"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qj5ly"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a7trn"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_a7trn"]
-sky_material = SubResource("ProceduralSkyMaterial_qj5ly")
+[sub_resource type="Sky" id="Sky_0ufai"]
+sky_material = SubResource("ProceduralSkyMaterial_a7trn")
 
 [sub_resource type="Environment" id="Environment_wm4nc"]
-sky = SubResource("Sky_a7trn")
-tonemap_mode = 2
+sky = SubResource("Sky_0ufai")
 glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_anisotropy = -0.2
 
-[node name="Dungeon" type="Node3D" unique_id=1224795912]
+[node name="DungeonGenerator" type="Node3D" unique_id=1632115740]
 script = ExtResource("1_fs5hr")
 EntranceConfig = ExtResource("2_a7trn")
 ExitConfig = ExtResource("3_wm4nc")
@@ -34,5 +35,5 @@ TreasureConfigs = Array[Object]([ExtResource("7_6rcja")])
 ConnectionScene = ExtResource("7_qh65i")
 PlayerScene = ExtResource("9_a7trn")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=476425350]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1918506325]
 environment = SubResource("Environment_wm4nc")
