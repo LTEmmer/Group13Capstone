@@ -3,14 +3,16 @@ using Godot;
 public partial class HUD : CanvasLayer
 {
 	private Label _roomNameLabel;
-	private Label _healthLabel;
+	private Label _healthValueLabel;
+	private TextureProgressBar _healthBar;
 	private Player _player;
 	private HealthComponent _healthComponent;
 
 	public override void _Ready()
 	{
 		_roomNameLabel = GetNode<Label>("MarginContainer/VBoxContainer/RoomNameLabel");
-		_healthLabel = GetNode<Label>("MarginContainer/VBoxContainer/HealthLabel");
+		_healthValueLabel = GetNode<Label>("%HealthValueLabel");
+		_healthBar = GetNode<TextureProgressBar>("%HealthBar");
 
 		// HUD is under Camera3D -> CameraPivot -> Player
 		Node parent = GetParent();
@@ -25,13 +27,21 @@ public partial class HUD : CanvasLayer
 
 	public override void _Process(double delta)
 	{
-		// Health
 		if (_healthComponent != null)
-			_healthLabel.Text = $"HP: {_healthComponent.CurrentHealth:F0} / {_healthComponent.MaxHealth:F0}";
+		{
+			int cur = Mathf.CeilToInt(_healthComponent.CurrentHealth);
+			int max = Mathf.CeilToInt(_healthComponent.MaxHealth);
+			_healthValueLabel.Text = $"{cur}/{max}";
+			_healthBar.MaxValue = _healthComponent.MaxHealth;
+			_healthBar.Value = _healthComponent.CurrentHealth;
+		}
 		else
-			_healthLabel.Text = "HP: --";
+		{
+			_healthValueLabel.Text = "--/--";
+			_healthBar.MaxValue = 1.0;
+			_healthBar.Value = 0.0;
+		}
 
-		// Room name
 		if (CurrentRoomManager.Instance != null && CurrentRoomManager.Instance.CurrentRoomId >= 0)
 		{
 			DungeonGenerator gen = GetTree().Root.GetNodeOrNull<DungeonGenerator>("Dungeon");
