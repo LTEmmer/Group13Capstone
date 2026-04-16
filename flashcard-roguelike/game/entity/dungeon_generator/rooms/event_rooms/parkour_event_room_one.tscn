@@ -241,6 +241,9 @@ size = Vector3(0.18878174, 0.009796143, 0.21020508)
 [sub_resource type="BoxShape3D" id="BoxShape3D_omeqm"]
 size = Vector3(0.25727844, 0.009796143, 0.2774048)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xqdim"]
+size = Vector3(0.048891544, 0.014702797, 0.104286194)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_0famd"]
 size = Vector3(0.013437271, 0.24484634, 0.013824463)
 
@@ -518,8 +521,8 @@ transform = Transform3D(0.99993724, 0.0060163736, 0.009511001, 0.010161429, -0.1
 shape = SubResource("BoxShape3D_omeqm")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="MovingPlatforms/Desk1" unique_id=1026623660]
-transform = Transform3D(1, 0, 5.9604645e-08, 0, 0.9999999, 0, -5.9604645e-08, 0, 1, 0.09902954, 0.15751672, 0.056731224)
-shape = SubResource("BoxShape3D_0famd")
+transform = Transform3D(1, 0, 5.9604645e-08, 0, 0.9999999, 0, -5.9604645e-08, 0, 1, 0.09906125, 0.15504819, 0.057810307)
+shape = SubResource("BoxShape3D_xqdim")
 
 [node name="Desk2" type="AnimatableBody3D" parent="MovingPlatforms" unique_id=1929135128]
 transform = Transform3D(7.407353, -1.6771744e-06, -19.184637, 0, -20.564999, 1.7978494e-06, -19.184637, -6.475714e-07, -7.407353, 26.5213, 19.44553, 4.3392544)

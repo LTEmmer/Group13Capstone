@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomConfig" format=3 uid="uid://bfr5aycchi54d"]
+
+[ext_resource type="PackedScene" uid="uid://bggjji1cywnnh" path="res://game/entity/dungeon_generator/rooms/treasure_room.tscn" id="1_6gkdy"]
+[ext_resource type="Script" uid="uid://bgoqu1mfuaoyg" path="res://game/entity/dungeon_generator/room_configs/RoomConfig.cs" id="2_5hul8"]
+
+[resource]
+script = ExtResource("2_5hul8")
+RoomType = 3
+MaxConnections = 1
+Scene = ExtResource("1_6gkdy")
+metadata/_custom_type_script = "uid://bgoqu1mfuaoyg"

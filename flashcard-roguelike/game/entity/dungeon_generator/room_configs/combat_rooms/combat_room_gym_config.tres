@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RoomConfig" format=3 uid="uid://t1s1otnvdagb"]
+
+[ext_resource type="PackedScene" uid="uid://b2px6jxwb8r7o" path="res://game/entity/dungeon_generator/rooms/combat_room.tscn" id="1_mgr3v"]
+[ext_resource type="Script" uid="uid://bgoqu1mfuaoyg" path="res://game/entity/dungeon_generator/room_configs/RoomConfig.cs" id="2_7ot7i"]
+
+[resource]
+script = ExtResource("2_7ot7i")
+RoomType = 1
+MaxConnections = 3
+Scene = ExtResource("1_mgr3v")
+metadata/_custom_type_script = "uid://bgoqu1mfuaoyg"

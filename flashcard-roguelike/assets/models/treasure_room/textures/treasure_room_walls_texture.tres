@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ctwqc6y8tb51e"]
+
+[ext_resource type="Texture2D" uid="uid://ctf6n3ylyylsa" path="res://assets/models/treasure_room/textures/treasure_room_Material.009_BaseColor.png" id="1_3q5fx"]
+[ext_resource type="Texture2D" uid="uid://0nflw8a1f08y" path="res://assets/models/treasure_room/textures/treasure_room_Material.009_Roughness.png" id="2_xklx7"]
+
+[resource]
+albedo_texture = ExtResource("1_3q5fx")
+roughness_texture = ExtResource("2_xklx7")
