@@ -3,7 +3,17 @@
 [ext_resource type="Material" uid="uid://ddtvbhnxky0xy" path="res://assets/models/treasure_room/box/box_bottom_texture.tres" id="1_2177w"]
 [ext_resource type="Material" uid="uid://bhmnfrl721bn6" path="res://assets/models/treasure_room/box/box_junk_material.tres" id="1_xtdgc"]
 [ext_resource type="Material" uid="uid://bkqykn6oj2rq6" path="res://assets/models/treasure_room/box/box_lid_texture.tres" id="2_1jwbe"]
+[ext_resource type="Script" uid="uid://bmb23qe3hj2fc" path="res://shared/resources/ItemResource.cs" id="2_yqjpm"]
+[ext_resource type="Resource" uid="uid://c025ebyq1swtw" path="res://game/entity/item/item_resources/use/bonk_stick.tres" id="3_xelpo"]
+[ext_resource type="Resource" uid="uid://biapbeaft61wq" path="res://game/entity/item/item_resources/use/bandage.tres" id="4_5oboa"]
 [ext_resource type="Texture2D" uid="uid://ckkx4va82ysps" path="res://assets/models/treasure_room/box/lost-and-found-rubber-stamp-seal-free-vector-removebg-preview.png" id="4_epiam"]
+[ext_resource type="Script" uid="uid://bk7p3xjo8ru00" path="res://game/entity/treasure/TreasureChest.cs" id="5_chest"]
+[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/stats/health.tres" id="5_qjcd4"]
+[ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="6_item"]
+[ext_resource type="AudioStream" uid="uid://vyot2pb7j6qd" path="res://assets/audio/etc/orchestra_hit.mp3" id="7_xelpo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_chest"]
+size = Vector3(1.5, 0.85, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2untq"]
 resource_name = "Material"
@@ -44,6 +54,9 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ujasd")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lid"]
+size = Vector3(1.614, 0.16, 1.116)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc2dv"]
 resource_name = "Material.002"
@@ -125,13 +138,51 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xl4ve")
 
-[node name="BoxRoot" type="Node3D" unique_id=1286188714]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_burst"]
+angle_min = -70.19999
+angle_max = 69.40001
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 7.5
+initial_velocity_max = 9.25
+scale_min = 0.05
+scale_max = 0.12
+
+[sub_resource type="SphereMesh" id="SphereMesh_particle"]
+radius = 0.2
+height = 0.4
+radial_segments = 9
+rings = 2
+
+[node name="BoxRoot" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "_particles") groups=["Interactable"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_chest")
+LootPool = Array[ExtResource("2_yqjpm")]([ExtResource("3_xelpo"), ExtResource("4_5oboa"), ExtResource("5_qjcd4")])
+ItemScene = ExtResource("6_item")
+_label = NodePath("Label3D")
+_lidBody = NodePath("LidBody")
+OpenSound = ExtResource("7_xelpo")
+_openSoundPlayer = NodePath("OpenSoundPlayer")
+_particles = NodePath("BurstParticles")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1832437720]
+shape = SubResource("BoxShape3D_chest")
 
 [node name="Box" type="MeshInstance3D" parent="." unique_id=1708501638]
 material_override = ExtResource("1_2177w")
 mesh = SubResource("ArrayMesh_3vyn0")
 
-[node name="Lid" type="MeshInstance3D" parent="." unique_id=1014407360]
+[node name="LidBody" type="RigidBody3D" parent="." unique_id=511200093]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.384, 0)
+mass = 2.0
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LidBody" unique_id=1908530398]
+shape = SubResource("BoxShape3D_lid")
+
+[node name="Lid" type="MeshInstance3D" parent="LidBody" unique_id=1014407360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.384, 0)
 material_override = ExtResource("2_1jwbe")
 mesh = SubResource("ArrayMesh_7u1kl")
 
@@ -143,3 +194,21 @@ mesh = SubResource("ArrayMesh_cgmcj")
 transform = Transform3D(-0.15105894, 0.03473033, -1.3205993e-08, 0.03473033, 0.15105894, 3.036222e-09, 1.35505305e-08, 0, -0.155, 0, 0, -0.50191736)
 shaded = true
 texture = ExtResource("4_epiam")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=724166263]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+visible = false
+billboard = 1
+text = "Treasure Chest"
+font_size = 64
+
+[node name="OpenSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=404431657]
+
+[node name="BurstParticles" type="GPUParticles3D" parent="." unique_id=2090133904]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_burst")
+draw_pass_1 = SubResource("SphereMesh_particle")

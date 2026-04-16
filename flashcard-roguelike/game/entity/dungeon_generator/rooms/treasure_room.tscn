@@ -1,6 +1,5 @@
 [gd_scene format=4 uid="uid://bggjji1cywnnh"]
 
-[ext_resource type="PackedScene" uid="uid://c3kbm7x2yvqpn" path="res://game/entity/treasure/treasure_chest.tscn" id="1_chest"]
 [ext_resource type="Material" uid="uid://ctwqc6y8tb51e" path="res://assets/models/treasure_room/shelf_room/treasure_room_walls_texture.tres" id="2_8egqf"]
 [ext_resource type="Material" uid="uid://vcidmjraea5p" path="res://assets/models/treasure_room/shelf_room/treasure_room_floor_texture.tres" id="3_ym5nv"]
 [ext_resource type="Material" uid="uid://rr05vmx1qo2j" path="res://assets/models/treasure_room/shelf_room/treasure_room_ceiling_texture.tres" id="4_5woem"]
@@ -406,7 +405,7 @@ environment = SubResource("Environment_jlue3")
 [node name="Light" type="SpotLight3D" parent="." unique_id=676288966]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.038681746, 20.164894, 0.12280822)
 light_color = Color(0.9707342, 0, 0.42041865, 1)
-light_energy = 50.0
+light_energy = 30.0
 light_volumetric_fog_energy = 16.0
 shadow_enabled = true
 spot_range = 30.266
@@ -435,18 +434,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -13.484043)
 
 [node name="0" type="Marker3D" parent="Exits" unique_id=603689357]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.3658826, -0.36742306)
-
-[node name="Treasure" type="Node3D" parent="." unique_id=1150015518]
-visible = false
-
-[node name="TreasureChest1" parent="Treasure" unique_id=1582763372 instance=ExtResource("1_chest")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="TreasureChest2" parent="Treasure" unique_id=1169850034 instance=ExtResource("1_chest")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, -5)
-
-[node name="TreasureChest3" parent="Treasure" unique_id=418054516 instance=ExtResource("1_chest")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.5, -5)
 
 [node name="treasure_room" type="Node3D" parent="." unique_id=1602274846]
 transform = Transform3D(1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 3.503441, 0)
@@ -738,8 +725,10 @@ transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071
 light_energy = 0.322
 omni_range = 23.096
 
-[node name="BoxRoot" parent="." unique_id=1286188714 instance=ExtResource("12_0ufai")]
+[node name="Treasure" parent="." unique_id=1286188714 node_paths=PackedStringArray("ChestLight") instance=ExtResource("12_0ufai")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.43282324, 0)
+ChestLight = NodePath("../Light")
+LidImpulseUp = 25.0
 
 [editable path="treasure_room/Decor/Desks/Desk/desk"]
 [editable path="treasure_room/Decor/Desks/Desk5/desk"]
