@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c3kbm7x2yvqpn"]
 
-[ext_resource type="Script" uid="uid://bk7p3xjo8ru00" path="res://game/entity/treasure/TreasureChest.cs" id="1_chest"]
-[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_1gdil"]
+[ext_resource type="Script" uid="uid://bk7p3xjo8ru00" path="res://game/entity/treasure/TreasureChestOld.cs" id="1_chest"]
+[ext_resource type="Script" uid="uid://bmb23qe3hj2fc" path="res://shared/resources/ItemResource.cs" id="4_1gdil"]
 [ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/stats/health.tres" id="5_8ikyb"]
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="5_kpa80"]
 [ext_resource type="Resource" uid="uid://biapbeaft61wq" path="res://game/entity/item/item_resources/use/bandage.tres" id="5_lia74"]

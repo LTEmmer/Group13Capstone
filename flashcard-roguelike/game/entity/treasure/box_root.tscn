@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://c025ebyq1swtw" path="res://game/entity/item/item_resources/use/bonk_stick.tres" id="3_xelpo"]
 [ext_resource type="Resource" uid="uid://biapbeaft61wq" path="res://game/entity/item/item_resources/use/bandage.tres" id="4_5oboa"]
 [ext_resource type="Texture2D" uid="uid://ckkx4va82ysps" path="res://assets/models/treasure_room/box/lost-and-found-rubber-stamp-seal-free-vector-removebg-preview.png" id="4_epiam"]
-[ext_resource type="Script" uid="uid://bk7p3xjo8ru00" path="res://game/entity/treasure/TreasureChest.cs" id="5_chest"]
+[ext_resource type="Script" uid="uid://bk7p3xjo8ru00" path="res://game/entity/treasure/TreasureChestOld.cs" id="5_chest"]
 [ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/stats/health.tres" id="5_qjcd4"]
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="6_item"]
 [ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="7_xelpo"]
