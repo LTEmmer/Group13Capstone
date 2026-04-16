@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://h18wimcwtwvr" path="res://game/ui/main_menu/main_menu.tscn" id="2_1n6di"]
 [ext_resource type="Shader" uid="uid://d2ynk10hjyaab" path="res://game/ui/pause_menue/blur.gdshader" id="2_scxh3"]
 [ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="3_whiteboard"]
-[ext_resource type="PackedScene" uid="uid://08j36rswj4qd" path="res://game/entity/dungeon_generator/dungeon_generator.tscn" id="4_drmsv"]
 [ext_resource type="Script" uid="uid://bnbhifky1dd3h" path="res://game/ui/pause_menue/SettingsPanel.cs" id="5_1n6di"]
 [ext_resource type="PackedScene" uid="uid://xis5gf6wut10" path="res://game/ui/game_over/game_over_menu.tscn" id="6_stats"]
 
@@ -25,7 +24,6 @@ font_color = Color(0, 0, 0, 1)
 script = ExtResource("1_f48la")
 MainMenu = ExtResource("2_1n6di")
 EndRunStatsScene = ExtResource("6_stats")
-DungeonGenerator = ExtResource("4_drmsv")
 
 [node name="ButtonPanelContainer" type="Control" parent="." unique_id=1746979678]
 layout_mode = 3

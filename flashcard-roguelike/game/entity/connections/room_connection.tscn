@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://273l427ermxg"]
 
-[ext_resource type="Script" uid="uid://b0mniqdhlvyxn" path="res://game/entity/connections/RoomConnection.cs" id="1_ndbvl"]
+[ext_resource type="Script" uid="uid://dd32akpltkruj" path="res://game/entity/connections/RoomConnection.cs" id="1_ndbvl"]
 [ext_resource type="PackedScene" uid="uid://cyxldil5hs7k6" path="res://game/entity/connections/connection_types/sphere.tscn" id="2_dfhhp"]
 [ext_resource type="PackedScene" uid="uid://cqgcdegamf600" path="res://game/entity/connections/connection_types/donut.tscn" id="3_jjg55"]
 [ext_resource type="PackedScene" uid="uid://mcpr3xoc22ml" path="res://game/entity/connections/connection_types/cube.tscn" id="4_6qhxk"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="5_jjg55"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dfhhp"]
 radius = 0.7269047
@@ -23,5 +24,7 @@ shape = SubResource("SphereShape3D_dfhhp")
 [node name="Label" type="Label3D" parent="." unique_id=1356015597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1864083, 0)
 billboard = 1
+render_priority = 1
 text = "TEST"
+font = ExtResource("5_jjg55")
 font_size = 94

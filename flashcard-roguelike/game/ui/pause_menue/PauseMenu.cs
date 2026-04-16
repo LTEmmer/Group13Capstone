@@ -9,7 +9,6 @@ public partial class PauseMenu : CanvasLayer
 
 	[Export] PackedScene MainMenu;
 	[Export] PackedScene EndRunStatsScene;
-	[Export] PackedScene DungeonGenerator;
 	
 	private Control _buttonPanelContainer;
 	private SettingsPanel _settingsPanel;
@@ -119,8 +118,11 @@ public partial class PauseMenu : CanvasLayer
 	public void _on_quick_restart_pressed()
 	{
 		GD.Print("Abandon Run Pressed");
-		GetTree().Paused = false;
-		GetTree().ChangeSceneToPacked(DungeonGenerator);
+		// Needs to be by path to avoid circular dependencies
+		SceneTransition.FadeOut(this, () => {
+			GetTree().Paused = false;
+			GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
+		});
 	}
 
 	public void _on_main_menu_pressed()

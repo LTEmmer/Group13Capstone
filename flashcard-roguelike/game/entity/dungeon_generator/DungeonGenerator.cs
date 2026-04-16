@@ -219,7 +219,7 @@ public partial class DungeonGenerator : Node3D
 				connInstance.TargetRoomType = graph.GetRoom(incoming).RoomType;
 				connInstance.IsEntrance = true;
 				// Set the label to show the source room ID and type for debugging purposes
-				connInstance.SetLabel(true, incoming, graph.GetRoom(incoming).RoomType.ToString());
+				connInstance.SetLabel(graph.GetRoom(incoming).RoomType.ToString(), incoming);
 				// Add the connection to this room's entrances
 				entrances.GetChildOrNull<Marker3D>(entranceIndex++)?.AddChild(connInstance);
 				connInstance.connection_enabled = true;
@@ -234,7 +234,7 @@ public partial class DungeonGenerator : Node3D
 				connInstance.TargetRoomType = graph.GetRoom(outgoing).RoomType;
 				connInstance.IsEntrance = false;
 				// Set the label to show the target room ID and type for debugging purposes
-				connInstance.SetLabel(false, outgoing, graph.GetRoom(outgoing).RoomType.ToString());
+				connInstance.SetLabel(graph.GetRoom(outgoing).RoomType.ToString(), outgoing);
 				// Add the connection to this room's exits
 				exits.GetChildOrNull<Marker3D>(exitIndex++)?.AddChild(connInstance);
 
