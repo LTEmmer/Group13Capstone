@@ -9,6 +9,8 @@ public partial class PauseMenu : CanvasLayer
 
 	[Export] PackedScene MainMenu;
 	[Export] PackedScene EndRunStatsScene;
+	[Export] PackedScene DungeonGenerator;
+	
 	private Control _buttonPanelContainer;
 	private SettingsPanel _settingsPanel;
 	private Stack<Control> _panelStack = new Stack<Control>();
@@ -63,7 +65,7 @@ public partial class PauseMenu : CanvasLayer
 		const string btnPath = "ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/";
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Resume"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Settings"));
-		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Abandon Run"));
+		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "QuickRestart"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Main Menu"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Quit"));
 	}
@@ -103,10 +105,6 @@ public partial class PauseMenu : CanvasLayer
 		GetTree().Paused = false;
 	}
 
-	public void _on_view_flashcards_pressed()
-	{
-	}
-
 	public void _on_settings_pressed()
 	{
 		_settingsPanel.SyncFromAudioManager();
@@ -118,9 +116,11 @@ public partial class PauseMenu : CanvasLayer
 		PopPanel();
 	}
 
-	public void _on_abandon_run_pressed()
+	public void _on_quick_restart_pressed()
 	{
 		GD.Print("Abandon Run Pressed");
+		GetTree().Paused = false;
+		GetTree().ChangeSceneToPacked(DungeonGenerator);
 	}
 
 	public void _on_main_menu_pressed()
