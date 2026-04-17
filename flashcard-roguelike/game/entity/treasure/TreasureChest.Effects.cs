@@ -48,9 +48,9 @@ public partial class TreasureChest
 		_idleShakeTween?.Kill();
 		float half = ShakeDuration * 0.25f;
 		_idleShakeTween = CreateTween();
-		_idleShakeTween.TweenProperty(this, "rotation_degrees:z",  ShakeMagnitude, half);
-		_idleShakeTween.TweenProperty(this, "rotation_degrees:z", -ShakeMagnitude, half * 2f);
-		_idleShakeTween.TweenProperty(this, "rotation_degrees:z",  0f,             half);
+		_idleShakeTween.TweenProperty(_shakeNode, "rotation_degrees:z",  ShakeMagnitude, half);
+		_idleShakeTween.TweenProperty(_shakeNode, "rotation_degrees:z", -ShakeMagnitude, half * 2f);
+		_idleShakeTween.TweenProperty(_shakeNode, "rotation_degrees:z",  0f,             half);
 		_idleShakeTween.TweenCallback(Callable.From(() =>
 		{
 			if (!IsOpen)
@@ -76,9 +76,9 @@ public partial class TreasureChest
 
 		float half = ShakeDuration * 0.25f;
 		var tween = CreateTween();
-		tween.TweenProperty(this, "rotation_degrees:z",  ShakeMagnitude, half);
-		tween.TweenProperty(this, "rotation_degrees:z", -ShakeMagnitude, half * 2f);
-		tween.TweenProperty(this, "rotation_degrees:z",  0f,             half);
+		tween.TweenProperty(_shakeNode, "rotation_degrees:z",  ShakeMagnitude, half);
+		tween.TweenProperty(_shakeNode, "rotation_degrees:z", -ShakeMagnitude, half * 2f);
+		tween.TweenProperty(_shakeNode, "rotation_degrees:z",  0f,             half);
 		tween.TweenCallback(Callable.From(() => onComplete?.Invoke()));
 	}
 

@@ -724,10 +724,8 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/ufo/Sphere/StaticBody3D" unique_id=1650421250]
 shape = SubResource("ConvexPolygonShape3D_i6yls")
 
-[node name="Reward" parent="." unique_id=1286188714 node_paths=PackedStringArray("CameraAngles") instance=ExtResource("22_c241s")]
+[node name="Reward" parent="." unique_id=1286188714 instance=ExtResource("22_c241s")]
 transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071067, -28.431572, 19.037563, 9.016455)
-visible = false
-CameraAngles = []
 
 [editable path="cave"]
 [editable path="LightRotate"]
@@ -737,3 +735,4 @@ CameraAngles = []
 [editable path="Decor/desk2"]
 [editable path="Decor/pencil"]
 [editable path="Decor/ufo"]
+[editable path="Reward"]

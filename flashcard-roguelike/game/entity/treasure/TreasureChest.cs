@@ -28,6 +28,7 @@ public partial class TreasureChest : Interactable
 
 	private Node3D _sacrificeNode;
 	private bool _resolved = false;
+    private Node3D _shakeNode;
 
 	public override void _Ready()
 	{
@@ -64,6 +65,8 @@ public partial class TreasureChest : Interactable
 		particleMat.EmissionEnabled = true;
 		particleMat.Emission = RarityColors[_targetRarityIndex];
 		_particles.DrawPass1.SurfaceSetMaterial(0, particleMat);
+
+        _shakeNode = GetNodeOrNull<Node3D>("ShakeNode");
 	}
 
 	public override void Interact(Node caller) => OpenChest();
