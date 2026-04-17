@@ -12,8 +12,11 @@ load_path = "res://.godot/imported/erased.png-5e64f6c280d2e94b00a15110ca3798e0.c
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8mv14"]
 load_path = "res://.godot/imported/health_fill.png-883a86ab79707abf47806678b4a8f161.ctex"
 
-[node name="HUD" type="CanvasLayer" unique_id=1895084757]
+[node name="HUD" type="CanvasLayer" unique_id=1895084757 node_paths=PackedStringArray("_roomNameLabel", "_healthLabel", "_shieldlabel")]
 script = ExtResource("1_script")
+_roomNameLabel = NodePath("Background/MarginContainer/VBoxContainer/RoomNameLabel")
+_healthLabel = NodePath("Background/MarginContainer/VBoxContainer/HealthLabel")
+_shieldlabel = NodePath("Background/MarginContainer/VBoxContainer/ShieldLabel")
 
 [node name="HealthBarRoot" type="MarginContainer" parent="." unique_id=1895084758]
 anchors_preset = 3
@@ -27,6 +30,8 @@ offset_right = -20.0
 offset_bottom = -16.0
 grow_horizontal = 0
 grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 6
 
 [node name="HealthBarTrack" type="Control" parent="HealthBarRoot" unique_id=1895084762]
 custom_minimum_size = Vector2(260, 44)
@@ -39,6 +44,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+
 offset_left = -21.0
 offset_right = 19.0
 offset_bottom = 1.0
@@ -95,3 +101,14 @@ theme_override_font_sizes/font_size = 13
 text = "100/100"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RoomNameLabel" type="Label" parent="Background/MarginContainer/VBoxContainer" unique_id=110892469]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Room 0 (Entrance)"
+autowrap_mode = 2
+
+[node name="ShieldLabel" type="Label" parent="Background/MarginContainer/VBoxContainer" unique_id=290986463]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Shield: 0"

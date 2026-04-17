@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://csofmc3lbjdjl"]
+
+[ext_resource type="PackedScene" uid="uid://l1ldc5s8u7qs" path="res://assets/models/item_models/Pen.glb" id="1_ekpkn"]
+
+[node name="Pen" unique_id=1276991091 instance=ExtResource("1_ekpkn")]
+
+[node name="Node" parent="." index="0" unique_id=285072512]
+transform = Transform3D(1, 0, 0, 0, 0.4200698, -0.9074918, 0, 0.9074918, 0.4200698, 0, 0, 0)

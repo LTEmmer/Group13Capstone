@@ -51,7 +51,10 @@ public partial class EquipmentComponent : Node
                 && item.Resource.UseEffects != null)
             {
                 foreach (var effect in item.Resource.UseEffects)
+                {
+                    if(effect == null) continue;
                     effect.Apply(EffectTarget, item);
+                }
             }
 
             EmitSignal(SignalName.ItemEquipped, item);
@@ -81,7 +84,10 @@ public partial class EquipmentComponent : Node
             && item.Resource.UseEffects != null)
         {
             foreach (var effect in item.Resource.UseEffects)
+            {
+                if(effect == null) continue;
                 effect.Remove(EffectTarget);
+            }
         }
 
         EmitSignal(SignalName.ItemUnequipped, item);

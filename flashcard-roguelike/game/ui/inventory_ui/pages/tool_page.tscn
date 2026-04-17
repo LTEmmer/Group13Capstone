@@ -215,24 +215,23 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer" unique_id=1983658615]
-custom_minimum_size = Vector2(450, 450)
+custom_minimum_size = Vector2(450, 540)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_q06cc")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/Panel" unique_id=1422199099]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 44.0
-offset_right = 436.0
-offset_bottom = 382.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer" unique_id=540454333]
 layout_mode = 2
@@ -253,7 +252,7 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2076135542]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -281,7 +280,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=261843842]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -305,7 +304,7 @@ texture = ExtResource("2_ba4mf")
 expand_mode = 3
 
 [node name="Panel2" type="Panel" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=66269853]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -329,7 +328,7 @@ texture = ExtResource("2_ba4mf")
 expand_mode = 3
 
 [node name="Panel3" type="Panel" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1885118377]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -353,7 +352,7 @@ texture = ExtResource("2_ba4mf")
 expand_mode = 3
 
 [node name="Panel4" type="Panel" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=46486009]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -485,6 +484,7 @@ expand_mode = 3
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0.050980393, 0.050980393, 0.050980393, 1)
+text = "asdfasdfasdfdsf"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=2081939803]
 layout_mode = 2

@@ -43,6 +43,10 @@ public partial class ToolPage : InventoryPage<ItemResource>
 
     private void OnEquipPressed()
     {
+        if (BattleManager.Instance.IsInCombat)
+        {
+           return; 
+        }
         if (_item == null) return;
 
         if (_equipment.IsEquipped(_item))
@@ -61,6 +65,10 @@ public partial class ToolPage : InventoryPage<ItemResource>
 
     private void OnDropPressed()
     {
+        if (BattleManager.Instance.IsInCombat)
+        {
+           return; 
+        }
         if (_item == null) return;
         _dropButton.Disabled = true;
         _equipButton.Disabled  = true;

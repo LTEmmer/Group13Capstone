@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://c2em1gnrq08pp"]
+
+[ext_resource type="Texture2D" uid="uid://haky5gwyn2cl" path="res://assets/sprites/item_sprites/frenzy_heart.png" id="1_shs84"]
+[ext_resource type="PackedScene" uid="uid://dgqcb7dw82ljh" path="res://assets/models/item_models/model_scenes/frenzy_heart.tscn" id="2_5h0l1"]
+[ext_resource type="Script" uid="uid://c83nrwbwfv6bh" path="res://game/entity/item/effects/mod_battle/OnAttackEffect.cs" id="2_advq4"]
+[ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="2_iykbx"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="3_shs84"]
+[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="4_5h0l1"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_shs84"]
+
+[sub_resource type="Resource" id="Resource_ehga5"]
+script = ExtResource("3_shs84")
+_attack = 1
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[sub_resource type="Resource" id="Resource_6ldkn"]
+script = ExtResource("4_5h0l1")
+_hp = 2
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[sub_resource type="Resource" id="Resource_b8403"]
+script = ExtResource("2_advq4")
+OnAttackEffects = Array[ExtResource("2_iykbx")]([SubResource("Resource_ehga5"), SubResource("Resource_6ldkn")])
+metadata/_custom_type_script = "uid://c83nrwbwfv6bh"
+
+[resource]
+script = ExtResource("4_shs84")
+Name = "Frenzy Heart"
+Icon = ExtResource("1_shs84")
+ScenePrefab = ExtResource("2_5h0l1")
+SceneScale = 2.0
+Description = "It beats faster with every strike. 
++2 Leech 
++1 Leech Attack"
+Rarity = 5
+UseEffects = Array[Object]([SubResource("Resource_b8403")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"

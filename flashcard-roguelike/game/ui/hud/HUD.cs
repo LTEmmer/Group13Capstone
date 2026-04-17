@@ -2,9 +2,14 @@ using Godot;
 
 public partial class HUD : CanvasLayer
 {
-	private Label _roomNameLabel;
+
 	private Label _healthValueLabel;
 	private TextureProgressBar _healthBar;
+  
+	[Export] private Label _roomNameLabel;
+	[Export] private Label _healthLabel;
+	[Export] private Label _shieldlabel;
+
 	private Player _player;
 	private HealthComponent _healthComponent;
 
@@ -34,12 +39,14 @@ public partial class HUD : CanvasLayer
 			_healthValueLabel.Text = $"{cur}/{max}";
 			_healthBar.MaxValue = _healthComponent.MaxHealth;
 			_healthBar.Value = _healthComponent.CurrentHealth;
+      _shieldlabel.Text = $"Shield: {_healthComponent.Shield:F0}";
 		}
 		else
 		{
 			_healthValueLabel.Text = "--/--";
 			_healthBar.MaxValue = 1.0;
 			_healthBar.Value = 0.0;
+      _shieldlabel.Text = "Shield: --";
 		}
 
 		if (CurrentRoomManager.Instance != null && CurrentRoomManager.Instance.CurrentRoomId >= 0)
