@@ -5,10 +5,8 @@
 [ext_resource type="Material" uid="uid://bkqykn6oj2rq6" path="res://assets/models/treasure_room/box/box_lid_texture.tres" id="2_1jwbe"]
 [ext_resource type="Script" uid="uid://bmb23qe3hj2fc" path="res://shared/resources/ItemResource.cs" id="2_yqjpm"]
 [ext_resource type="Resource" uid="uid://c025ebyq1swtw" path="res://game/entity/item/item_resources/use/bonk_stick.tres" id="3_xelpo"]
-[ext_resource type="Resource" uid="uid://biapbeaft61wq" path="res://game/entity/item/item_resources/use/bandage.tres" id="4_5oboa"]
 [ext_resource type="Texture2D" uid="uid://ckkx4va82ysps" path="res://assets/models/treasure_room/box/lost-and-found-rubber-stamp-seal-free-vector-removebg-preview.png" id="4_epiam"]
 [ext_resource type="Script" uid="uid://bk7p3xjo8ru00" path="res://game/entity/treasure/TreasureChestOld.cs" id="5_chest"]
-[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/stats/health.tres" id="5_qjcd4"]
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="6_item"]
 [ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="7_xelpo"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="12_5oboa"]
@@ -159,17 +157,26 @@ height = 0.4
 radial_segments = 9
 rings = 2
 
-[node name="BoxRoot" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "_particles", "CameraAngles") groups=["Interactable"]]
+[sub_resource type="FogMaterial" id="FogMaterial_5oboa"]
+density = 0.005
+height_falloff = 1e-05
+edge_fade = 1e-05
+
+[node name="BoxRoot" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "ChestLight", "_particles", "RevealCamera", "CameraAngles") groups=["Interactable"]]
 script = ExtResource("5_chest")
-LootPool = Array[ExtResource("2_yqjpm")]([ExtResource("3_xelpo"), ExtResource("4_5oboa"), ExtResource("5_qjcd4")])
+LootPool = Array[ExtResource("2_yqjpm")]([ExtResource("3_xelpo")])
 ItemScene = ExtResource("6_item")
 _label = NodePath("Label3D")
 _lidBody = NodePath("LidBody")
 OpenSound = ExtResource("7_xelpo")
 _openSoundPlayer = NodePath("OpenSoundPlayer")
+ChestLight = NodePath("Light")
 RarityColors = PackedColorArray(0.5639733, 0.57363933, 0.549362, 1, 0.08478225, 0.6843731, 0, 1, 0, 0.39215687, 0.9843137, 1, 0.7480167, 0.0002950415, 0.7129954, 1, 0.85397196, 0, 0.13966635, 1)
 _particles = NodePath("BurstParticles")
-CameraAngles = []
+RevealCamera = NodePath("RevealCamera")
+CameraAngles = [NodePath("RevealCameraAngles/Marker"), NodePath("RevealCameraAngles/Marker2"), NodePath("RevealCameraAngles/Marker3"), NodePath("RevealCameraAngles/Marker4"), NodePath("RevealCameraAngles/Marker5")]
+LidImpulseUp = 25.0
+ShakeDuration = 0.2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1832437720]
 shape = SubResource("BoxShape3D_chest")
@@ -218,3 +225,40 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_burst")
 draw_pass_1 = SubResource("SphereMesh_particle")
+
+[node name="Light" type="SpotLight3D" parent="." unique_id=2023982208]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.038681746, 20.164894, 0.12280822)
+light_color = Color(0.85397196, 0, 0.13966635, 1)
+light_energy = 30.0
+light_volumetric_fog_energy = 16.0
+shadow_enabled = true
+spot_range = 30.266
+spot_angle = 6.013002
+spot_angle_attenuation = 0.0026680487
+
+[node name="FogVolume" type="FogVolume" parent="Light" unique_id=967009659]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 4.6938658e-07, -10.907723)
+size = Vector3(3.8, 18.61453, 3.8)
+shape = 1
+material = SubResource("FogMaterial_5oboa")
+
+[node name="RevealCamera" type="Camera3D" parent="." unique_id=507172474]
+transform = Transform3D(-0.5912456, -0.5210082, 0.6156128, -0.26697126, 0.8467245, 0.46019983, -0.7610224, 0.107740186, -0.6397164, 2.9685602, 2.706, -3.802)
+
+[node name="RevealCameraAngles" type="Node3D" parent="." unique_id=970828782]
+
+[node name="Marker" type="Marker3D" parent="RevealCameraAngles" unique_id=757069887]
+transform = Transform3D(0.8562671, -0.25513744, -0.44912308, 0, 0.8694949, -0.49394187, 0.5165333, 0.42294618, 0.7445199, -1.313, -0.193, 2.238)
+gizmo_extents = 0.17
+
+[node name="Marker2" type="Marker3D" parent="RevealCameraAngles" unique_id=1963969988]
+transform = Transform3D(0.7581343, 0.32209867, 0.5669962, 0, 0.86949486, -0.49394184, -0.6520984, 0.37447426, 0.6591939, 1.923, -0.153, 2.444)
+
+[node name="Marker3" type="Marker3D" parent="RevealCameraAngles" unique_id=201992797]
+transform = Transform3D(-0.6820382, 0.49783897, -0.53570527, 0.29530463, 0.85762686, 0.4210358, 0.66904336, 0.12896623, -0.73194855, -3.144, 2.831, -3.802)
+
+[node name="Marker4" type="Marker3D" parent="RevealCameraAngles" unique_id=482833852]
+transform = Transform3D(-0.59124553, -0.5210082, 0.6156128, -0.26697123, 0.8467245, 0.4601998, -0.7610223, 0.10774018, -0.6397164, 2.9685602, 2.706, -3.802)
+
+[node name="Marker5" type="Marker3D" parent="RevealCameraAngles" unique_id=515379441]
+transform = Transform3D(-1, 2.1613864e-08, -1.394363e-07, -3.3546858e-08, 0.9234448, 0.3837313, 1.3705564e-07, 0.3837313, -0.9234448, 0, 4.947082, -8.144059)

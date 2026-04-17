@@ -8,14 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cm0r6jfidsyc8" path="res://assets/models/desk/desk.glb" id="6_e5evu"]
 [ext_resource type="Material" uid="uid://cicbhcj8wuo0d" path="res://assets/models/desk/desk_texture.tres" id="7_0ufai"]
 [ext_resource type="Material" uid="uid://c6pv2i4awlv7m" path="res://assets/models/big_pencil/pencil_texture.tres" id="8_jlue3"]
-[ext_resource type="Shader" path="res://game/entity/dungeon_generator/rooms/event_rooms/shooting_event_room.gdshader" id="9_ltfas"]
+[ext_resource type="Shader" uid="uid://dq2h2yqhsu8fl" path="res://game/entity/dungeon_generator/rooms/event_rooms/shooting_event_room.gdshader" id="9_ltfas"]
 [ext_resource type="Texture2D" uid="uid://b0gi538rd7txo" path="res://assets/backgrounds/prettysleepy-stars-3750824.png" id="10_y1f5v"]
 [ext_resource type="PackedScene" uid="uid://dxdxbn1isdu44" path="res://game/entity/treasure/box_root.tscn" id="12_0ufai"]
-
-[sub_resource type="FogMaterial" id="FogMaterial_ltfas"]
-density = 0.005
-height_falloff = 1e-05
-edge_fade = 1e-05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtroa"]
 resource_name = "Material.009"
@@ -384,22 +379,6 @@ rings = 16
 
 [node name="TreasureRoom" type="Node3D" unique_id=1298955981]
 
-[node name="Light" type="SpotLight3D" parent="." unique_id=676288966]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.038681746, 20.164894, 0.12280822)
-light_color = Color(0.85397196, 0, 0.13966635, 1)
-light_energy = 30.0
-light_volumetric_fog_energy = 16.0
-shadow_enabled = true
-spot_range = 30.266
-spot_angle = 6.013002
-spot_angle_attenuation = 0.0026680487
-
-[node name="FogVolume" type="FogVolume" parent="Light" unique_id=46429933]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 4.6938658e-07, -10.907723)
-size = Vector3(3.8, 18.61453, 3.8)
-shape = 1
-material = SubResource("FogMaterial_ltfas")
-
 [node name="EnterPoint" type="Marker3D" parent="." unique_id=1595695969]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44763565, 10.506846)
 
@@ -708,33 +687,8 @@ transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071
 light_energy = 0.322
 omni_range = 23.096
 
-[node name="Treasure" parent="." unique_id=1286188714 node_paths=PackedStringArray("ChestLight", "RevealCamera", "CameraAngles") instance=ExtResource("12_0ufai")]
+[node name="Treasure" parent="." unique_id=1286188714 instance=ExtResource("12_0ufai")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.43282324, 0)
-ChestLight = NodePath("../Light")
-RevealCamera = NodePath("../RevealCamera")
-CameraAngles = [NodePath("../RevealCameraAngles/Marker"), NodePath("../RevealCameraAngles/Marker2"), NodePath("../RevealCameraAngles/Marker3"), NodePath("../RevealCameraAngles/Marker4"), NodePath("../RevealCameraAngles/Marker5")]
-LidImpulseUp = 25.0
-
-[node name="RevealCameraAngles" type="Node3D" parent="." unique_id=1944572144]
-
-[node name="Marker" type="Marker3D" parent="RevealCameraAngles" unique_id=981740992]
-transform = Transform3D(0.8562671, -0.25513744, -0.44912308, 0, 0.8694949, -0.49394187, 0.5165333, 0.42294618, 0.7445199, -1.433, 0.202, 2.238)
-gizmo_extents = 0.17
-
-[node name="Marker2" type="Marker3D" parent="RevealCameraAngles" unique_id=1564144361]
-transform = Transform3D(0.6372761, 0.38064918, 0.6700637, 2.6345193e-09, 0.8694949, -0.49394187, -0.77063555, 0.31477734, 0.5541083, 1.6700815, 0.202, 2.4441242)
-
-[node name="Marker3" type="Marker3D" parent="RevealCameraAngles" unique_id=906613426]
-transform = Transform3D(-0.8446924, 0.23406796, -0.4813595, -1.9115172e-08, 0.8993136, 0.43730417, 0.5352521, 0.3693875, -0.7596434, -1.9939985, 2.7060857, -3.8022652)
-
-[node name="Marker4" type="Marker3D" parent="RevealCameraAngles" unique_id=1699045465]
-transform = Transform3D(-0.844328, -0.23405008, 0.48200712, 0, 0.89955777, 0.4368018, -0.53582674, 0.36880398, -0.7595218, 2.9685602, 2.706, -3.802)
-
-[node name="Marker5" type="Marker3D" parent="RevealCameraAngles" unique_id=1770652319]
-transform = Transform3D(-1, 2.1613864e-08, -1.394363e-07, -3.3546858e-08, 0.9234448, 0.3837313, 1.3705564e-07, 0.3837313, -0.9234448, 0, 4.947082, -8.144059)
-
-[node name="RevealCamera" type="Camera3D" parent="." unique_id=1500331647]
-transform = Transform3D(-1, 0, -8.7422784e-08, -3.3546858e-08, 0.9234448, 0.3837313, 8.073011e-08, 0.3837313, -0.9234448, 0, 4.947082, -8.144059)
 
 [editable path="RoomMesh/Decor/Desks/Desk/desk"]
 [editable path="RoomMesh/Decor/Desks/Desk5/desk"]

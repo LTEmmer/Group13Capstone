@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://2qvmv1ijxwoo" path="res://assets/models/big_pencil/pencil.glb" id="19_xqdim"]
 [ext_resource type="PackedScene" uid="uid://cn4tm82kgsw57" path="res://assets/models/ufo/ufo.glb" id="20_c241s"]
 [ext_resource type="Material" uid="uid://drq58oyucx00r" path="res://assets/models/ufo/ufo_texture.tres" id="21_bw3q5"]
+[ext_resource type="PackedScene" uid="uid://dxdxbn1isdu44" path="res://game/entity/treasure/box_root.tscn" id="22_c241s"]
 [ext_resource type="PackedScene" uid="uid://cnitj3uodab4s" path="res://game/ui/battle_ui/flashcard_challenge_true_false.tscn" id="Scene_flashcard"]
 [ext_resource type="PackedScene" uid="uid://cm05m68d10agu" path="res://game/entity/npcs/base_npc.tscn" id="Scene_npc"]
 [ext_resource type="Script" uid="uid://ba07nbm5r86bb" path="res://game/entity/hazards/DamageZone.cs" id="Script_damage"]
@@ -344,15 +345,16 @@ points = PackedVector3Array(-0.5144066, 4.0288067, -0.00010073185, -0.36375034, 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i6yls"]
 points = PackedVector3Array(2.3101072, -6.341934e-05, -0.00045204163, 0.85340095, -0.38268346, 0.35320973, 0.92350006, -0.38268346, -0.00045204163, 0.85340095, -0.38268346, -0.35366154, 2.1341805, -6.341934e-05, -0.8841541, 0.3826058, 0.9238009, -0.00045204163, 2.1341805, -6.341934e-05, 0.8837023, 0.65305305, -0.38268346, 0.6530533, 0.65305305, -0.38268346, -0.6535051, 1.6330848, -6.341934e-05, -1.633537, 0.27044702, 0.9238009, -0.2708993, 0.35320926, 0.9238009, -0.14652967, -0.00045228004, 1, -0.00045204163, 0.35320926, 0.9238009, 0.14607787, 1.6330848, -6.341934e-05, 1.6330853, 0.27044702, 0.9238009, 0.2704475, 0.8837018, -6.341934e-05, 2.1341815, 0.35320926, -0.38268346, 0.8534014, 0.35320926, -0.38268346, -0.8538531, 0.8837018, -6.341934e-05, -2.134633, 0.14607763, 0.9238009, -0.35366154, -0.35366178, 0.9238009, 0.14607787, -0.27089953, 0.9238009, 0.2704475, -0.14652991, 0.9238009, 0.35320973, -0.00045228004, 0.9238009, 0.38260603, 0.14607763, 0.9238009, 0.35320973, -0.00045228004, 0.9238009, -0.38305795, -0.14652991, 0.9238009, -0.35366154, -0.27089953, 0.9238009, -0.2708993, -0.35366178, 0.9238009, -0.14652967, -0.3830582, 0.9238009, -0.00045204163, -0.00045228004, -6.341934e-05, 2.3101077, -0.00045228004, -0.38268346, 0.92350054, -0.00045228004, -0.38268346, -0.92395234, -0.00045228004, -6.341934e-05, -2.3101072, -2.134633, -6.341934e-05, 0.8837023, -1.633537, -6.341934e-05, 1.6330853, -0.8841542, -6.341934e-05, 2.1341815, -0.8841542, -6.341934e-05, -2.134633, -1.633537, -6.341934e-05, -1.633537, -2.134633, -6.341934e-05, -0.8841541, -2.3101072, -6.341934e-05, -0.00045204163, -0.35366178, -0.38268346, 0.8534014, -0.35366178, -0.38268346, -0.8538531, -0.85385334, -0.38268346, 0.35320973, -0.6535053, -0.38268346, 0.6530533, -0.6535053, -0.38268346, -0.6535051, -0.85385334, -0.38268346, -0.35366154, -0.92395246, -0.38268346, -0.00045204163)
 
-[node name="ParkourEventRoomOne" type="Node3D" unique_id=47384417 node_paths=PackedStringArray("Npc")]
+[node name="ParkourEventRoomOne" type="Node3D" unique_id=47384417 node_paths=PackedStringArray("Npc", "Reward")]
 script = ExtResource("Script_room")
 Npc = NodePath("NPC/BaseNPC")
 FlashcardTFScene = ExtResource("Scene_flashcard")
+Reward = NodePath("Reward")
 
 [node name="cave" parent="." unique_id=1561546874 instance=ExtResource("9_y432j")]
 transform = Transform3D(1.455, 0, 0, 0, 1.455, 0, 0, 0, 1.455, 0, 7.6004925, 0)
 
-[node name="Cube" parent="cave" index="0" unique_id=1823580782]
+[node name="Cube" parent="cave" index="0" unique_id=2112065862]
 material_override = ExtResource("4_y432j")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="cave/Cube" index="0" unique_id=1897514303]
@@ -721,6 +723,13 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/ufo/Sphere/StaticBody3D" unique_id=1650421250]
 shape = SubResource("ConvexPolygonShape3D_i6yls")
 
+[node name="Reward" parent="." unique_id=1286188714 instance=ExtResource("22_c241s")]
+transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071067, -28.431572, 19.037563, 9.016455)
+
+[node name="FogVolume" parent="Reward/Light" parent_id_path=PackedInt32Array(1286188714, 2023982208) index="0" unique_id=967009659]
+transform = Transform3D(1, 1.7763568e-15, 0, 0, -4.371139e-08, -1, -3.7303494e-14, 1, -4.371139e-08, 0, 0, -11.07074)
+size = Vector3(3.8, 18.940567, 3.8)
+
 [editable path="cave"]
 [editable path="LightRotate"]
 [editable path="NPC"]
@@ -729,3 +738,4 @@ shape = SubResource("ConvexPolygonShape3D_i6yls")
 [editable path="Decor/desk2"]
 [editable path="Decor/pencil"]
 [editable path="Decor/ufo"]
+[editable path="Reward"]

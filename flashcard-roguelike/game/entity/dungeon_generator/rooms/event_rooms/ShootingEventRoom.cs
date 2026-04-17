@@ -9,6 +9,8 @@ public partial class ShootingEventRoom : Room, IEventRoom
     [Export] public Turret RoomTurret;
     [Export] public AudioStream CorrectSound;
     [Export] public AudioStream WrongSound;
+    [Export] public TreasureChestOld Reward;
+    [Export] public int PenaltyDamage = 25;
 
     public bool IsCompleted { get; private set; }
     public float Difficulty { get; private set; }
@@ -54,6 +56,11 @@ public partial class ShootingEventRoom : Room, IEventRoom
         }
 
         GD.Print($"ShootingEventRoom ready with difficulty {Difficulty} and {_pairs} Q&A pairs.");
+
+        if (Reward == null)
+        {
+            GD.PrintErr("Reward not set, check inspector");
+        }
     }
 
     public void TriggerEvent()
@@ -122,11 +129,14 @@ public partial class ShootingEventRoom : Room, IEventRoom
     public void ApplyReward()
     {
         GD.Print("Reward have a treat :)");
+        Reward.Visible = true;
+        AudioManager.Instance.PlayGameVictorySound(); // temp until sound added
     }
 
     public void ApplyPenalty()
     {
         GD.Print("PENALTY 1 TRILLION LASHINGS");
+        _player.healthComponent.TakeDamage(PenaltyDamage);
     }
 
     public void OnPanelHit(QAPanel panel)
