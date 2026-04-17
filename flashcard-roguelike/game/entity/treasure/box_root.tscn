@@ -9,6 +9,11 @@
 [ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="7_xelpo"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="12_5oboa"]
 
+[sub_resource type="FogMaterial" id="FogMaterial_5oboa"]
+density = 0.005
+height_falloff = 1e-05
+edge_fade = 1e-05
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_chest"]
 size = Vector3(1.5, 0.85, 1)
 
@@ -155,11 +160,6 @@ height = 0.4
 radial_segments = 9
 rings = 2
 
-[sub_resource type="FogMaterial" id="FogMaterial_5oboa"]
-density = 0.005
-height_falloff = 1e-05
-edge_fade = 1e-05
-
 [node name="BoxRoot" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "ChestLight", "_particles", "RevealCamera", "CameraAngles") groups=["Interactable"]]
 script = ExtResource("1_n4d8g")
 ItemScene = ExtResource("6_item")
@@ -172,6 +172,22 @@ RarityColors = PackedColorArray(0.8848981, 0.8848981, 0.8848981, 1, 9.866804e-07
 _particles = NodePath("BurstParticles")
 RevealCamera = NodePath("RevealCamera")
 CameraAngles = [NodePath("RevealCameraAngles/Angle"), NodePath("RevealCameraAngles/Angle2"), NodePath("RevealCameraAngles/Angle3"), NodePath("RevealCameraAngles/Angle4"), NodePath("RevealCameraAngles/Angle5")]
+
+[node name="Light" type="SpotLight3D" parent="." unique_id=2023982208]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.038681746, 20.164894, 0.12280822)
+light_color = Color(0.86527705, 0.70930505, 2.3102762e-06, 1)
+light_energy = 30.0
+light_volumetric_fog_energy = 16.0
+shadow_enabled = true
+spot_range = 30.266
+spot_angle = 6.013002
+spot_angle_attenuation = 0.0026680487
+
+[node name="FogVolume" type="FogVolume" parent="Light" unique_id=967009659]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 4.6938658e-07, -10.907723)
+size = Vector3(3.8, 18.61453, 3.8)
+shape = 1
+material = SubResource("FogMaterial_5oboa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1832437720]
 shape = SubResource("BoxShape3D_chest")
@@ -220,22 +236,6 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_burst")
 draw_pass_1 = SubResource("SphereMesh_particle")
-
-[node name="Light" type="SpotLight3D" parent="." unique_id=2023982208]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.038681746, 20.164894, 0.12280822)
-light_color = Color(0.86527705, 0.70930505, 2.3102762e-06, 1)
-light_energy = 30.0
-light_volumetric_fog_energy = 16.0
-shadow_enabled = true
-spot_range = 30.266
-spot_angle = 6.013002
-spot_angle_attenuation = 0.0026680487
-
-[node name="FogVolume" type="FogVolume" parent="Light" unique_id=967009659]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 4.6938658e-07, -10.907723)
-size = Vector3(3.8, 18.61453, 3.8)
-shape = 1
-material = SubResource("FogMaterial_5oboa")
 
 [node name="RevealCamera" type="Camera3D" parent="." unique_id=507172474]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
