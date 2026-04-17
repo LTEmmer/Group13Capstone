@@ -102,10 +102,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Background_MarginContainer_VBoxContainer#RoomNameLabel" type="Label" parent="." unique_id=110892469]
+offset_top = 30.0
+offset_right = 300.0
+offset_bottom = 80.0
 theme_override_font_sizes/font_size = 24
 text = "Room 0 (Entrance)"
 autowrap_mode = 2
 
 [node name="Background_MarginContainer_VBoxContainer#ShieldLabel" type="Label" parent="." unique_id=290986463]
+offset_top = -1.0
+offset_right = 150.0
+offset_bottom = 33.0
 theme_override_font_sizes/font_size = 24
 text = "Shield: 0"
