@@ -1,9 +1,9 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://cot6row2i1kv4"]
 
-[ext_resource type="Texture2D" uid="uid://daqg7wq7t6xd5" path="res://assets/models/entrance_room/walls/entrance_room_walls_Material_BaseColor.png" id="1_yute7"]
-[ext_resource type="Texture2D" uid="uid://j5eg48my8xxk" path="res://assets/models/entrance_room/walls/entrance_room_walls_Material_Metallic.png" id="2_hksuk"]
-[ext_resource type="Texture2D" uid="uid://cxkilwkf8ertp" path="res://assets/models/entrance_room/walls/entrance_room_walls_Material_Normal.png" id="3_wq58j"]
-[ext_resource type="Texture2D" uid="uid://0a6w0qll440e" path="res://assets/models/entrance_room/walls/entrance_room_walls_Material_Roughness.png" id="4_npgvg"]
+[ext_resource type="Texture2D" uid="uid://bdjemh0kuk7v7" path="res://assets/models/entrance_room/walls/entrance_room_walls_Material_BaseColor.png" id="1_yute7"]
+[ext_resource type="Texture2D" uid="uid://oupxk3trd8kg" path="res://assets/models/entrance_room/walls/entrance_room_walls_Material_Metallic.png" id="2_hksuk"]
+[ext_resource type="Texture2D" uid="uid://yyq6o7s3gpr" path="res://assets/models/entrance_room/walls/entrance_room_walls_Material_Normal.png" id="3_wq58j"]
+[ext_resource type="Texture2D" uid="uid://b0kenxe1p51ds" path="res://assets/models/entrance_room/walls/entrance_room_walls_Material_Roughness.png" id="4_npgvg"]
 
 [resource]
 albedo_texture = ExtResource("1_yute7")

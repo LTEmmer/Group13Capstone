@@ -1,10 +1,7 @@
 [gd_resource type="Resource" script_class="RoomConfig" format=3 uid="uid://g47s4ysjb1cx"]
 
-[ext_resource type="PackedScene" uid="uid://vd10ptbbqu0x" path="res://game/entity/dungeon_generator/rooms/event_rooms/event_room.tscn" id="1_xl1rd"]
-[ext_resource type="Script" uid="uid://c82grg7jausf5" path="res://game/entity/dungeon_generator/room_configs/RoomConfig.cs" id="2_qqtck"]
+[ext_resource type="Script" uid="uid://bgoqu1mfuaoyg" path="res://game/entity/dungeon_generator/room_configs/RoomConfig.cs" id="2_qqtck"]
 
 [resource]
 script = ExtResource("2_qqtck")
 RoomType = 2
-Scene = ExtResource("1_xl1rd")
-metadata/_custom_type_script = "uid://c82grg7jausf5"

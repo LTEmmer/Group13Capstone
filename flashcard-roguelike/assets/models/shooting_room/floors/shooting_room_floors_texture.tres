@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dpp382t8mfbc6"]
+
+[ext_resource type="Texture2D" uid="uid://cmyqbupf86ytl" path="res://assets/models/shooting_room/floors/shooting_room_floors_Material.001_BaseColor.png" id="1_331mk"]
+[ext_resource type="Texture2D" uid="uid://bftup35ho8nhf" path="res://assets/models/shooting_room/floors/shooting_room_floors_Material.001_Roughness.png" id="3_ju2px"]
+
+[resource]
+albedo_texture = ExtResource("1_331mk")
+roughness_texture = ExtResource("3_ju2px")

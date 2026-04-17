@@ -1,30 +1,88 @@
+/**
+* Ported from the original unity shader by Erik Roystan Ross
+* https://roystan.net/articles/toon-water.html
+* https://github.com/IronWarrior/ToonWaterShader
+* Camera Depth taken from Bastiaan Olij's video on: https://www.youtube.com/watch?v=Jq3he9Lbj7M
+*/
+
 shader_type spatial;
-render_mode blend_mix, depth_draw_always, cull_back, diffuse_burley, specular_schlick_ggx;
 
-uniform vec4 shallow_color : source_color = vec4(0.1, 0.5, 0.8, 0.85);
-uniform vec4 deep_color    : source_color = vec4(0.02, 0.15, 0.4, 0.95);
-uniform float wave_speed   = 0.6;
-uniform float wave_scale   = 3.0;
-uniform float fresnel_power = 3.0;
-uniform float emission_strength = 0.2;
+const float SMOOTHSTEP_AA = 0.01;
 
-void fragment() {
-	vec2 uv1 = UV * wave_scale + vec2(TIME * wave_speed * 0.4, TIME * wave_speed * 0.2);
-	vec2 uv2 = UV * wave_scale * 1.3 - vec2(TIME * wave_speed * 0.3, TIME * wave_speed * 0.5);
+uniform sampler2D surfaceNoise;
+uniform sampler2D distortNoise;
+uniform sampler2D depth_texture : hint_depth_texture;
 
-	float nx = sin(uv1.x * 6.2832) * 0.08 + sin(uv2.x * 6.2832) * 0.05;
-	float ny = cos(uv1.y * 6.2832) * 0.08 + cos(uv2.y * 6.2832) * 0.05;
+uniform float beer_factor = 0.8;
 
-	vec3 n = normalize(vec3(nx, ny, 1.0));
-	NORMAL_MAP = n * 0.5 + 0.5;
+uniform float foam_distance = 0.01;
+uniform float foam_max_distance = 0.4;
+uniform float foam_min_distance = 0.04;
+uniform vec4 foam_color: source_color  = vec4(1.0);
 
-	float fresnel = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), fresnel_power);
-	vec4 water_color = mix(deep_color, shallow_color, fresnel);
+uniform vec2 surface_noise_tiling = vec2(1.0, 4.0);
+uniform vec3 surface_noise_scroll = vec3(0.03, 0.03, 0.0);
+uniform float surface_noise_cutoff: hint_range(0, 1) = 0.777;
+uniform float surface_distortion_amount: hint_range(0, 1) = 0.27;
 
-	ALBEDO = water_color.rgb;
-	ALPHA = water_color.a;
-	EMISSION = water_color.rgb * emission_strength;
-	ROUGHNESS = 0.05;
-	METALLIC = 0.3;
-	SPECULAR = 0.9;
+uniform vec4 _DepthGradientShallow: source_color = vec4(0.325, 0.807, 0.971, 0.725);
+uniform vec4 _DepthGradientDeep: source_color = vec4(0.086, 0.407, 1, 0.749);
+uniform float _DepthMaxDistance: hint_range(0, 1) = 1.0;
+uniform float _DepthFactor = 1.0;
+
+varying vec2 noiseUV;
+varying vec2 distortUV;
+varying vec3 viewNormal;
+
+vec4 alphaBlend(vec4 top, vec4 bottom)
+{
+	vec3 color = (top.rgb * top.a) + (bottom.rgb * (1.0 - top.a));
+	float alpha = top.a + bottom.a * (1.0 - top.a);
+	
+	return vec4(color, alpha);
+}
+
+void vertex() {
+	viewNormal = (MODELVIEW_MATRIX * vec4(NORMAL, 0.0)).xyz;
+	noiseUV = UV * surface_noise_tiling;
+	distortUV = UV;
+}
+
+void fragment(){
+	// https://www.youtube.com/watch?v=Jq3he9Lbj7M
+	float depth = texture(depth_texture, SCREEN_UV).r;
+	depth = PROJECTION_MATRIX[3][2] / (depth + PROJECTION_MATRIX[2][2]);
+	depth = depth + VERTEX.z;
+	depth = exp(-depth * beer_factor);
+	depth = 1.0 - depth;
+	
+	// Still unsure how to get properly the NORMAL from the camera
+	// this was my best attempt
+	vec3 existingNormal = vec3(dFdx(depth), dFdy(depth), 0);
+	
+	float normalDot = clamp(dot(existingNormal.xyz, viewNormal), 0.0, 1.0);
+	float foamDistance = mix(foam_max_distance, foam_min_distance, normalDot);
+	
+	float foamDepth = clamp(depth / foamDistance, 0.0, 1.0);
+	float surfaceNoiseCutoff = foamDepth * surface_noise_cutoff;
+	
+	vec4 distortNoiseSample = texture(distortNoise, distortUV);
+	vec2 distortAmount = (distortNoiseSample.xy * 2.0 -1.0) * surface_distortion_amount;
+	
+	vec2 noise_uv = vec2(
+		(noiseUV.x + TIME * surface_noise_scroll.x) + distortAmount.x , 
+		(noiseUV.y + TIME * surface_noise_scroll.y + distortAmount.y)
+	);
+	float surfaceNoiseSample = texture(surfaceNoise, noise_uv).r;
+	float surfaceNoiseAmount = smoothstep(surfaceNoiseCutoff - SMOOTHSTEP_AA, surfaceNoiseCutoff + SMOOTHSTEP_AA, surfaceNoiseSample);
+	
+	float waterDepth = clamp(depth / _DepthMaxDistance, 0.0, 1.0) * _DepthFactor;
+	vec4 waterColor = mix(_DepthGradientShallow, _DepthGradientDeep, waterDepth);
+
+	vec4 surfaceNoiseColor = foam_color;
+    surfaceNoiseColor.a *= surfaceNoiseAmount;
+	vec4 color = alphaBlend(surfaceNoiseColor, waterColor);
+	
+	ALBEDO = color.rgb;
+	ALPHA = color.a;
 }

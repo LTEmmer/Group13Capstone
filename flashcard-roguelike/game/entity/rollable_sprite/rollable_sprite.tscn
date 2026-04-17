@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://tka8xdh5srkl"]
 
-[ext_resource type="Script" uid="uid://4dxf18xuos81" path="res://game/entity/rollable_sprite/RollableSprite.cs" id="1_hn6vf"]
+[ext_resource type="Script" uid="uid://dyydsxgngm1rv" path="res://game/entity/rollable_sprite/RollableSprite.cs" id="1_hn6vf"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_oome4"]
 radius = 0.25
@@ -11,8 +11,9 @@ mass = 0.1
 script = ExtResource("1_hn6vf")
 
 [node name="Sprite" type="Sprite3D" parent="." unique_id=267344469]
+cast_shadow = 0
 billboard = 1
-shaded = true
+render_priority = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1292216117]
 shape = SubResource("SphereShape3D_oome4")

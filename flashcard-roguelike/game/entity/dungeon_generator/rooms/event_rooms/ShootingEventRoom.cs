@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class ShootingEventRoom : Room, IEventRoom
 {
@@ -8,6 +9,8 @@ public partial class ShootingEventRoom : Room, IEventRoom
     [Export] public Turret RoomTurret;
     [Export] public AudioStream CorrectSound;
     [Export] public AudioStream WrongSound;
+    [Export] public TreasureChestOld Reward;
+    [Export] public int PenaltyDamage = 25;
 
     public bool IsCompleted { get; private set; }
     public float Difficulty { get; private set; }
@@ -17,7 +20,7 @@ public partial class ShootingEventRoom : Room, IEventRoom
     private QAPanel[] _currentPair = new QAPanel[2]; // To track the current pair being evaluated
     private int _pairs;
     private int _matches;
-    private Node3D _panelsNode;
+    private Node3D[] _panelNodes;
 
     public override void _Ready()
     {
@@ -29,13 +32,16 @@ public partial class ShootingEventRoom : Room, IEventRoom
         TriggerNPC.OnInteraction += TriggerEvent;
         RoomTurret.OutOfAmmo += OnNoAmmo;
 
-        _panelsNode = GetNode<Node3D>("Panels");
-        foreach (Node3D panel in _panelsNode.GetChildren())
+        _panelNodes = GetNode<Node3D>("Panels").GetChildren().Cast<Node3D>().ToArray();
+        foreach (Node3D pivot in _panelNodes)
         {
-            if (panel is QAPanel qaPanel)
+            foreach (Node3D panel in pivot.GetChildren())
             {
-                _panelsToAssign.Add(qaPanel);
-                qaPanel.OnPanelHit += OnPanelHit;
+                if (panel is QAPanel qaPanel)
+                {
+                    _panelsToAssign.Add(qaPanel);
+                    qaPanel.OnPanelHit += OnPanelHit;
+                }
             }
         }
 
@@ -50,6 +56,11 @@ public partial class ShootingEventRoom : Room, IEventRoom
         }
 
         GD.Print($"ShootingEventRoom ready with difficulty {Difficulty} and {_pairs} Q&A pairs.");
+
+        if (Reward == null)
+        {
+            GD.PrintErr("Reward not set, check inspector");
+        }
     }
 
     public void TriggerEvent()
@@ -58,7 +69,10 @@ public partial class ShootingEventRoom : Room, IEventRoom
         _playerCamera = _player.GetNode<Camera3D>("CameraPivot/Camera3D");
         _player.Visible = false;
         RoomTurret.ActivateTurret(_playerCamera);
-        _panelsNode.Visible = true; // Show panels when event starts
+        foreach (Node3D pivot in _panelNodes)
+        {
+            pivot.Visible = true;
+        }
 
         // Get all active flashcards
         List<Flashcard> flashcards = FlashcardManager.Instance.GetActiveCards();
@@ -115,11 +129,14 @@ public partial class ShootingEventRoom : Room, IEventRoom
     public void ApplyReward()
     {
         GD.Print("Reward have a treat :)");
+        Reward.Visible = true;
+        AudioManager.Instance.PlayGameVictorySound(); // temp until sound added
     }
 
     public void ApplyPenalty()
     {
         GD.Print("PENALTY 1 TRILLION LASHINGS");
+        _player.healthComponent.TakeDamage(PenaltyDamage);
     }
 
     public void OnPanelHit(QAPanel panel)

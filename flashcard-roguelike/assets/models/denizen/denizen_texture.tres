@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bhimgy8ncowaj"]
+
+[ext_resource type="Texture2D" uid="uid://brmg7h8js3dt4" path="res://assets/models/denizen/denizen_DefaultMaterial_BaseColor.png" id="1_k77um"]
+[ext_resource type="Texture2D" uid="uid://cir3w2cmdv4e4" path="res://assets/models/denizen/denizen_DefaultMaterial_Metallic.png" id="2_3m2ud"]
+[ext_resource type="Texture2D" uid="uid://whh1fc7y3cwd" path="res://assets/models/denizen/denizen_DefaultMaterial_Roughness.png" id="3_cx754"]
+
+[resource]
+albedo_texture = ExtResource("1_k77um")
+metallic = 1.0
+metallic_texture = ExtResource("2_3m2ud")
+roughness_texture = ExtResource("3_cx754")

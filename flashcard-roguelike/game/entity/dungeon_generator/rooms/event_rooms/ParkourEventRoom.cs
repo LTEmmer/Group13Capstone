@@ -10,6 +10,9 @@ public partial class ParkourEventRoom : Room, IEventRoom
 	[Export] public float BoonSpeedMultiplier = .5f;
 	[Export] public float PenaltyMultiplier = .25f;
 
+	[Export] public TreasureChestOld Reward;
+	[Export] public int PenaltyDamage = 25;
+
 	public bool IsCompleted { get; private set; }
 	public float Difficulty { get; private set; }
 
@@ -50,6 +53,11 @@ public partial class ParkourEventRoom : Room, IEventRoom
 			if (child is BlinkingPlatform bp)
 				_blinkingPlatforms.Add(bp);
 		}
+
+		if (Reward == null)
+        {
+            GD.PrintErr("Reward not set, check inspector");
+        }
 	}
 
 	private void OnFlashcardAnswered(bool isCorrect)
@@ -136,15 +144,20 @@ public partial class ParkourEventRoom : Room, IEventRoom
 		{
 			ApplyPenalty();
 		}
+
+		EventManager.Instance.raise("on_room_clear", "test");
 	}
 
 	public void ApplyReward()
 	{
-		EventManager.Instance.raise("on_room_clear", "test");
+		GD.Print("have fun i guess");
+		Reward.Visible = true;
+		AudioManager.Instance.PlayGameVictorySound(); // temp until sound added
 	}
 
 	public void ApplyPenalty()
 	{
 		GD.Print("idk twenty lashings or something");
+		_player.healthComponent.TakeDamage(PenaltyDamage);
 	}
 }

@@ -68,7 +68,7 @@ public partial class RoomConnection : Interactable
 
 	public void TeleportPlayer(Node3D player)
 	{
-		DungeonGenerator gen = GetTree().Root.GetNodeOrNull<DungeonGenerator>("Dungeon");
+		DungeonGenerator gen = GetTree().Root.GetNodeOrNull<DungeonGenerator>("DungeonGenerator");
 		if (gen == null)        
 		{
 			GD.PushError("RoomConnection could not find DungeonGenerator in the scene tree. Teleportation failed.");
@@ -111,12 +111,13 @@ public partial class RoomConnection : Interactable
 			CurrentRoomManager.Instance.CurrentRoomId = TargetRoomId;
 	}
 
-	public void SetLabel(bool isEntrance, int id, string roomType)
+	public void SetLabel(string roomType, int id)
 	{
 		Label3D label = GetNodeOrNull<Label3D>("Label");
 		if (label != null)
 		{
-			label.Text = isEntrance ? $"From Room {id} : {roomType} (In)" : $"To Room {id} : {roomType} (Out)";
+			label.Text = roomType + ":" + id;
+			
 		}
 	}
 	

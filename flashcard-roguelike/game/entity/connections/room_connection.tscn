@@ -1,9 +1,15 @@
 [gd_scene format=3 uid="uid://273l427ermxg"]
 
-[ext_resource type="Script" uid="uid://b0mniqdhlvyxn" path="res://game/entity/connections/RoomConnection.cs" id="1_ndbvl"]
+[ext_resource type="Script" uid="uid://dd32akpltkruj" path="res://game/entity/connections/RoomConnection.cs" id="1_ndbvl"]
 [ext_resource type="PackedScene" uid="uid://cyxldil5hs7k6" path="res://game/entity/connections/connection_types/sphere.tscn" id="2_dfhhp"]
 [ext_resource type="PackedScene" uid="uid://cqgcdegamf600" path="res://game/entity/connections/connection_types/donut.tscn" id="3_jjg55"]
 [ext_resource type="PackedScene" uid="uid://mcpr3xoc22ml" path="res://game/entity/connections/connection_types/cube.tscn" id="4_6qhxk"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="5_jjg55"]
+[ext_resource type="PackedScene" uid="uid://cvynydrwcgntr" path="res://game/entity/connections/connection_types/entrance_connection.tscn" id="5_l2gpi"]
+[ext_resource type="PackedScene" uid="uid://bmxmb0c16cle7" path="res://game/entity/connections/connection_types/attack_connection.tscn" id="6_y4s2s"]
+[ext_resource type="PackedScene" uid="uid://ytjn7x1qeeta" path="res://game/entity/connections/connection_types/event_connection.tscn" id="7_fq3lm"]
+[ext_resource type="PackedScene" uid="uid://d0d2u3xisege5" path="res://game/entity/connections/connection_types/treasure_connection.tscn" id="8_khix4"]
+[ext_resource type="PackedScene" uid="uid://8rpq04gum1we" path="res://game/entity/connections/connection_types/exit_connection.tscn" id="9_ee1d5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dfhhp"]
 radius = 0.7269047
@@ -11,11 +17,11 @@ radius = 0.7269047
 [node name="RoomConnection" type="StaticBody3D" unique_id=98081723 groups=["Interactable"]]
 script = ExtResource("1_ndbvl")
 ConnectionVisuals = Array[PackedScene]([ExtResource("2_dfhhp"), ExtResource("3_jjg55"), ExtResource("4_6qhxk")])
-EntranceVisuals = Array[PackedScene]([])
-CombatVisuals = Array[PackedScene]([])
-EventVisuals = Array[PackedScene]([])
-TreasureVisuals = Array[PackedScene]([])
-ExitVisuals = Array[PackedScene]([])
+EntranceVisuals = Array[PackedScene]([ExtResource("5_l2gpi")])
+CombatVisuals = Array[PackedScene]([ExtResource("6_y4s2s")])
+EventVisuals = Array[PackedScene]([ExtResource("7_fq3lm")])
+TreasureVisuals = Array[PackedScene]([ExtResource("8_khix4")])
+ExitVisuals = Array[PackedScene]([ExtResource("9_ee1d5")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1057585435]
 shape = SubResource("SphereShape3D_dfhhp")
@@ -23,5 +29,7 @@ shape = SubResource("SphereShape3D_dfhhp")
 [node name="Label" type="Label3D" parent="." unique_id=1356015597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1864083, 0)
 billboard = 1
+render_priority = 1
 text = "TEST"
+font = ExtResource("5_jjg55")
 font_size = 94

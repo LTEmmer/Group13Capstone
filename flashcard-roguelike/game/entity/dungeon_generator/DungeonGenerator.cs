@@ -178,7 +178,7 @@ public partial class DungeonGenerator : Node3D
 		// Place each at a fixed distance apart on the x-axis.
 		for (int i = 0; i < roomCount; i++)
 		{
-			positions[i] = new Vector3(i * 100f, 0, 0);
+			positions[i] = new Vector3(i * 300f, 0, 0);
 		}
 
 		return positions;
@@ -219,7 +219,7 @@ public partial class DungeonGenerator : Node3D
 				connInstance.TargetRoomType = graph.GetRoom(incoming).RoomType;
 				connInstance.IsEntrance = true;
 				// Set the label to show the source room ID and type for debugging purposes
-				connInstance.SetLabel(true, incoming, graph.GetRoom(incoming).RoomType.ToString());
+				connInstance.SetLabel(graph.GetRoom(incoming).RoomType.ToString(), incoming);
 				// Add the connection to this room's entrances
 				entrances.GetChildOrNull<Marker3D>(entranceIndex++)?.AddChild(connInstance);
 				connInstance.connection_enabled = true;
@@ -234,7 +234,7 @@ public partial class DungeonGenerator : Node3D
 				connInstance.TargetRoomType = graph.GetRoom(outgoing).RoomType;
 				connInstance.IsEntrance = false;
 				// Set the label to show the target room ID and type for debugging purposes
-				connInstance.SetLabel(false, outgoing, graph.GetRoom(outgoing).RoomType.ToString());
+				connInstance.SetLabel(graph.GetRoom(outgoing).RoomType.ToString(), outgoing);
 				// Add the connection to this room's exits
 				exits.GetChildOrNull<Marker3D>(exitIndex++)?.AddChild(connInstance);
 
@@ -247,12 +247,14 @@ public partial class DungeonGenerator : Node3D
 			}
 
 			// Add a label in the middle of the room to show its ID and type for debugging purposes
+			/*
 			Label3D label = new Label3D();
 			label.Text = $"Room {room.Id} ({room.RoomType})";
 			label.Position = new Vector3(0, 3, 0);
 			label.Billboard = BaseMaterial3D.BillboardModeEnum.Enabled;
 			label.FontSize = 94;
 			roomNode.AddChild(label);
+			*/
 			
 			// Add the room to the Rooms node in the scene tree
 			roomsRoot.AddChild(roomNode);	

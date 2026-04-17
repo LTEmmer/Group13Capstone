@@ -1,16 +1,80 @@
 [gd_scene format=3 uid="uid://cm05m68d10agu"]
 
 [ext_resource type="Script" uid="uid://bpyixt7jhh8jd" path="res://game/entity/npcs/BaseNPC.cs" id="1_4jotm"]
+[ext_resource type="PackedScene" uid="uid://bxrsrt8mignpe" path="res://assets/models/denizen/denizen.glb" id="2_ee6ba"]
+[ext_resource type="Material" uid="uid://bhimgy8ncowaj" path="res://assets/models/denizen/denizen_texture.tres" id="3_2u3qs"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4jotm"]
+radius = 1.0
+height = 3.4785156
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_4jotm"]
+[sub_resource type="Animation" id="Animation_2u3qs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
-[node name="BaseNPC" type="StaticBody3D" unique_id=2015437748 groups=["Interactable"]]
+[sub_resource type="Animation" id="Animation_d5laf"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.34906584), Vector3(0, 0, 0), Vector3(0, 0, -0.34906584), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0), Vector3(-0.75, 0, 0), Vector3(0, 0.5, 0), Vector3(0.75, 0, 0), Vector3(0, 0.5, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7uok8"]
+_data = {
+&"RESET": SubResource("Animation_2u3qs"),
+&"idle": SubResource("Animation_d5laf")
+}
+
+[node name="NPCRoot" type="Node3D" unique_id=644826121]
+
+[node name="BaseNPC" type="StaticBody3D" parent="." unique_id=2015437748 groups=["Interactable"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_4jotm")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=507006833]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseNPC" unique_id=507006833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.060546875, 0)
 shape = SubResource("CapsuleShape3D_4jotm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=652919116]
-mesh = SubResource("CapsuleMesh_4jotm")
+[node name="denizen" parent="BaseNPC" unique_id=1395835347 instance=ExtResource("2_ee6ba")]
+
+[node name="Cube" parent="BaseNPC/denizen" index="0" unique_id=866048833]
+material_override = ExtResource("3_2u3qs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BaseNPC" unique_id=929286900]
+libraries/ = SubResource("AnimationLibrary_7uok8")
+autoplay = &"idle"
+
+[editable path="BaseNPC/denizen"]

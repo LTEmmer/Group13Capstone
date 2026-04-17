@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class ScalingPlatform : StaticBody3D
+public partial class ScalingPlatform : AnimatableBody3D
 {
 	[Export] public float MinScale = 0.25f;
 	[Export] public float MaxScale = 1.0f;

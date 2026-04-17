@@ -1,30 +1,36 @@
 [gd_scene format=3 uid="uid://cayaqtl6ocmoa"]
 
 [ext_resource type="Script" uid="uid://dercwou1yu8ty" path="res://game/entity/qa_panel/QAPanel.cs" id="1_auvah"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_o2wsp"]
-size = Vector3(12, 2.5, 0.5)
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_ekwxn"]
+[ext_resource type="PackedScene" uid="uid://bysrteg4qm0ty" path="res://assets/models/whiteboard/whiteboard.glb" id="3_6pgu2"]
+[ext_resource type="Material" uid="uid://mgn42cq7dm5h" path="res://assets/models/whiteboard/whiteboard_texture.tres" id="4_ie6x3"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_auvah"]
 points = PackedVector3Array(6, 1.25, 0.25, 6, 1.25, -0.25, -6, 1.25, 0.25, 6, -1.25, 0.25, 6, -1.25, -0.25, -6, 1.25, -0.25, -6, -1.25, 0.25, -6, -1.25, -0.25)
 
-[node name="QAPanel" type="Area3D" unique_id=487236728]
+[node name="QAPanel" type="Area3D" unique_id=487236728 node_paths=PackedStringArray("TargetMesh")]
 script = ExtResource("1_auvah")
+TargetMesh = NodePath("whiteboard/Cube")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=1868814699]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -0.3161323)
-shaded = true
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -0.074846745)
 double_sided = false
 text = "TEST"
+font = ExtResource("2_ekwxn")
 font_size = 112
 outline_size = 24
 autowrap_mode = 3
 width = 2250.0
 
-[node name="Panel" type="MeshInstance3D" parent="." unique_id=335669479]
-mesh = SubResource("BoxMesh_o2wsp")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=886622993]
 shape = SubResource("ConvexPolygonShape3D_auvah")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=53834061]
+
+[node name="whiteboard" parent="." unique_id=1837194685 instance=ExtResource("3_6pgu2")]
+transform = Transform3D(-4.371139e-08, 0, 4.04, 0, 2.46, 0, -1, 0, -1.7659401e-07, 0, 0, 0)
+
+[node name="Cube" parent="whiteboard" index="0" unique_id=892213354]
+surface_material_override/0 = ExtResource("4_ie6x3")
+
+[editable path="whiteboard"]

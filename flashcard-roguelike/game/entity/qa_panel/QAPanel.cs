@@ -7,6 +7,8 @@ public partial class QAPanel : Area3D
     [Signal]
     public delegate void OnPanelHitEventHandler(QAPanel panel);
 
+    [Export] public MeshInstance3D TargetMesh;
+
     
     private Label3D _label;
     private Flashcard _card;
@@ -55,22 +57,20 @@ public partial class QAPanel : Area3D
 
     public void ShowResult(bool correct)
     {
-        MeshInstance3D mesh = GetNode<MeshInstance3D>("Panel");
-        var mat = new StandardMaterial3D();
+        var mat = TargetMesh.GetSurfaceOverrideMaterial(0).Duplicate() as StandardMaterial3D;
         mat.EmissionEnabled = true;
         mat.Emission = correct ? new Color(0, 1, 0) : new Color(1, 0, 0); // green or red
         mat.EmissionEnergyMultiplier = 1f;
-        mesh.MaterialOverride = mat;
+        TargetMesh.SetSurfaceOverrideMaterial(0, mat);
     }
 
     public void GlowSelected()
     {
-        MeshInstance3D mesh = GetNode<MeshInstance3D>("Panel");
-        var mat = new StandardMaterial3D();
+        var mat = TargetMesh.GetSurfaceOverrideMaterial(0).Duplicate() as StandardMaterial3D;
         mat.EmissionEnabled = true;
-        mat.Emission = new Color(1, 1, 0); // yellow
+        mat.Emission = new Color(1, 1, 0); // yellow glow
         mat.EmissionEnergyMultiplier = 1f;
-        mesh.MaterialOverride = mat;
+        TargetMesh.SetSurfaceOverrideMaterial(0, mat);
     }
 
     public void SetAndPlaySound(AudioStream sound)

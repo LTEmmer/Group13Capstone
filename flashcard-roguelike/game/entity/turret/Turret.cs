@@ -11,6 +11,7 @@ public partial class Turret : Node3D
     [Export] public float PitchLimitDegrees = 80f;
     [Export] public float ZoomFov = 30f;
     [Export] public AudioStream[] ShootSounds;
+    [Export] public MeshInstance3D PaintMesh;
 
     private Node3D _turretBase;
     private Node3D _turretHead;
@@ -59,11 +60,10 @@ public partial class Turret : Node3D
             _audioPlayer.Play();
         }
 
-        // Create and initialize projectile
         Projectile projectile = ProjectileScene.Instantiate<Projectile>();
+        projectile.Initialize(direction);
         GetParent().AddChild(projectile);
         projectile.GlobalPosition = _barrelTip.GlobalPosition;
-        projectile.Initialize(direction);
 
         _ammo--;
 
@@ -84,7 +84,8 @@ public partial class Turret : Node3D
     public void DeactivateTurret(Camera3D playerCam)
     {
         _isActive = false;
-        _turretCamera.Current = false; // Disable turret camera
+        _turretCamera.Current = false; // Disable turret camera and remove it
+        _turretCamera.QueueFree();
         playerCam.Current = true; // Reactivate player camera
         _turretCamera.Fov = _defaultFov; // Reset FOV
     }
@@ -98,18 +99,18 @@ public partial class Turret : Node3D
             // Yaw: rotate the base horizontally
             _turretBase.RotateY(-motion.Relative.X * TurretSensitivity);
 
-            // Pitch: rotate the head vertically, clamped
+            // Pitch: rotate the head vertically around local Z (barrel is along local -X, so Z is the pitch axis)
             _currentPitch -= motion.Relative.Y * TurretSensitivity;
-            _currentPitch = Mathf.Clamp(_currentPitch, Mathf.DegToRad(-PitchLimitDegrees), Mathf.DegToRad(PitchLimitDegrees));
-            _turretHead.Rotation = new Vector3(_currentPitch, 0, 0);
+            _currentPitch = Mathf.Clamp(_currentPitch, Mathf.DegToRad(-8), Mathf.DegToRad(PitchLimitDegrees));
+            _turretHead.Rotation = new Vector3(0, 0, -_currentPitch);
         }
 
         if (@event is InputEventMouseButton mouse)
         {
             if (mouse.ButtonIndex == MouseButton.Left && mouse.Pressed)
             {
-                // Fire in the barrel's forward direction (-Z)
-                Vector3 direction = -_turretHead.GlobalTransform.Basis.Z;
+                // Fire in the barrel's forward direction (-X in local space)
+                Vector3 direction = -_turretHead.GlobalTransform.Basis.X;
                 Fire(direction);
             }
 

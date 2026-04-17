@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ddtvbhnxky0xy"]
+
+[ext_resource type="Texture2D" uid="uid://ciac3sd4tvly0" path="res://assets/models/treasure_room/box/box_Material_BaseColor.png" id="1_qmg13"]
+[ext_resource type="Texture2D" uid="uid://2cvlvbelosd8" path="res://assets/models/treasure_room/box/box_Material_Normal.png" id="2_hob58"]
+[ext_resource type="Texture2D" uid="uid://oyxcgoen50cb" path="res://assets/models/treasure_room/box/box_Material_Roughness.png" id="3_5drje"]
+
+[resource]
+albedo_texture = ExtResource("1_qmg13")
+roughness_texture = ExtResource("3_5drje")
+normal_enabled = true
+normal_texture = ExtResource("2_hob58")
