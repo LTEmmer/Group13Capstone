@@ -1,7 +1,7 @@
-[gd_scene format=4 uid="uid://bmxmb0c16cle7"]
+[gd_scene format=4 uid="uid://8rpq04gum1we"]
 
-[ext_resource type="Script" uid="uid://d21whjtbn8o5c" path="res://shared/components/hover/HoverComponent.cs" id="1_2lbhc"]
-[ext_resource type="Script" uid="uid://sjh56ix28es4" path="res://shared/components/rotate/RotateComponent.cs" id="2_1hshm"]
+[ext_resource type="Script" uid="uid://d21whjtbn8o5c" path="res://shared/components/hover/HoverComponent.cs" id="1_mjkyo"]
+[ext_resource type="Script" uid="uid://sjh56ix28es4" path="res://shared/components/rotate/RotateComponent.cs" id="2_20ofk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hau3w"]
 resource_name = "Material.001"
@@ -14,7 +14,7 @@ cull_mode = 2
 albedo_color = Color(0.53796774, 0, 0, 1)
 roughness = 0.5
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_dioga"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_mjkyo"]
 _surfaces = [{
 "aabb": AABB(-0.51428956, -1.8704513, -0.15073694, 1.0285791, 3.7542808, 0.30147398),
 "format": 34359742465,
@@ -68,17 +68,25 @@ _surfaces = [{
 "vertex_data": PackedByteArray("YNDzBP7//n9/+X0U/v/+f3nq+gv+//5/Cfy2Jv7//n+i/twd/v/+f1OXUAD+//5/naxsAf7//n+raFAA/v/+f/9/AAD+//5/ni/zBP7//n9hU2wB/v/+f1/hizX+//5/NPSNLf7//n9/Bn0U/v/+f4UV+gv+//5/YLTQOv7//n/ExqM5/v/+f55L0Dr+//5/9QO2Jv7//n9cAdwd/v/+f/9/jzz+//5/w5xUPP7//n87Y1Q8/v/+f58eizX+//5/yguNLf7//n86OaM5/v/+f/9/EU3+//5/pb+xTf7//n/SnRFN/v/+f2DtjlL+//5/PN5xT/7//n9ZQLFN/v/+fyxiEU3+//5/nhKOUv7//n/CIXFP/v/+f7kCGWD+//5/ewbXVv7//n8AANio/v/+fwAANIH+//5/AgQY4v///n9eAXfP///+fzlJ3fz///5/Rh5V8////n8qDfjp///+f6QwmPj///5/4me3/////n+PV9b+///+fxyYt/////5//3///////n+44VXz///+f8W23fz///5/b6jW/v///n9az5j4///+f0X9GWD+//5/g/nXVv7//n///9io/v/+f///NIH+//5//PsY4v///n/U8vjp///+f6D+d8////5/f/l9FAAA//9g0PMEAAD//3nq+gsAAP//U5dQAAAA//+drGwBAAD//wn8tiYAAP//ov7cHQAA//9f4Ys1AAD//zT0jS0AAP//YLTQOgAA///ExqM5AAD//6toUAAAAP///38AAAAA////f488AAD//8OcVDwAAP//ni/zBAAA//9hU2wBAAD///UDtiYAAP//nkvQOgAA//87Y1Q8AAD//38GfRQAAP//hRX6CwAA//9cAdwdAAD//58eizUAAP//OjmjOQAA///KC40tAAD//6W/sU0AAP///38RTQAA///SnRFNAAD//1lAsU0AAP//LGIRTQAA//9g7Y5SAAD//zzecU8AAP//Rf0ZYAAA//+D+ddWAAD/////2KgAAP////80gQAA///8+xjiAAD//6D+d88AAP//uOFV8wAA///U8vjpAAD//xyYt/8AAP//xbbd/AAA//9az5j4AAD//2+o1v4AAP//4me3/wAA////f///AAD//zlJ3fwAAP//j1fW/gAA//8CBBjiAAD//0YeVfMAAP//pDCY+AAA//8qDfjpAAD//54SjlIAAP//wiFxTwAA//+5AhlgAAD//3sG11YAAP//AADYqAAA//9eAXfPAAD//wAANIEAAP///3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f///////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_dioga")
+shadow_mesh = SubResource("ArrayMesh_mjkyo")
 
-[node name="BattleConnection" type="Node3D" unique_id=1177031266]
-script = ExtResource("1_2lbhc")
+[node name="ExitConnection" type="Node3D" unique_id=12767529]
+script = ExtResource("1_mjkyo")
 Amplitude = 0.225
 Frequency = 0.15
 
-[node name="Pivot" type="Node3D" parent="." unique_id=1923837317]
-script = ExtResource("2_1hshm")
+[node name="Pivot" type="Node3D" parent="." unique_id=985305764]
+script = ExtResource("2_20ofk")
 DegreesPerSecond = 5.0
 
 [node name="Plane" type="MeshInstance3D" parent="Pivot" unique_id=301752]
-transform = Transform3D(0.345, 0, 0, 0, 0.345, 0, 0, 0, 0.345, 0, 0.3, 0)
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.249, 0, 0.3, 0)
+mesh = SubResource("ArrayMesh_syl1o")
+
+[node name="Plane2" type="MeshInstance3D" parent="Pivot" unique_id=56388239]
+transform = Transform3D(0.18211076, -0.046686932, 0, 0.046686932, 0.18211076, 0, 0, 0, 0.134, -0.37892956, 0.121501476, 0)
+mesh = SubResource("ArrayMesh_syl1o")
+
+[node name="Plane3" type="MeshInstance3D" parent="Pivot" unique_id=2126800459]
+transform = Transform3D(0.22829753, 0.074028604, 0, -0.074028604, 0.22829753, 0, 0, 0, 0.171, 0.41422117, 0.36440212, 0)
 mesh = SubResource("ArrayMesh_syl1o")
