@@ -1,114 +1,202 @@
 using Godot;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class TreasureChest : Interactable
 {
-    [Export] public PackedScene ItemScene;
-    [Export] public int MinItems = 1;
-    [Export] public int MaxItems = 3;
-    [Export] public float SpawnRadius = 1.5f;
-    [Export] public float SpawnHeight = 0.5f;
-    [Export] public float SpawnArcStart = 90f;
-    [Export] public float SpawnArcEnd = 260f;
-    [Export] public bool IsOpen { get; private set; } = false;
+	[Export] public PackedScene ItemScene;
+	[Export] public int MinItems = 1;
+	[Export] public int MaxItems = 3;
+	[Export] public float SpawnRadius = 1.5f;
+	[Export] public float SpawnHeight = 0.5f;
+	[Export] public float SpawnArcStart = 90f;
+	[Export] public float SpawnArcEnd = 260f;
+	[Export] public bool IsOpen { get; private set; } = false;
 
-    [Signal] public delegate void ChestOpenedEventHandler(TreasureChest chest);
+	[Signal] public delegate void ChestOpenedEventHandler(TreasureChest chest);
 
-    [Export] private MeshInstance3D _lidMesh;
-    [Export] private Label3D _label;
+	[Export] private Label3D _label;
+	[Export] private RigidBody3D _lidBody;
 
-    private Node3D _sacrificeNode;
-    private bool _resolved = false;
+	[Export] public AudioStream OpenSound;
+	[Export] private AudioStreamPlayer3D _openSoundPlayer;
 
-    public override void _Ready()
-    {
-        base._Ready();
-        UpdateLabel();
-        if (_label != null)
-            _label.Visible = false;
-    }
+	private RandomNumberGenerator _rng = new();
+	private List<ItemResource> _rolledItems = new();
+	private int _targetRarityIndex = 0;
+	private Player _playerRef;
 
-    public override void Interact(Node caller) => OpenChest();
-    public override void HoverStart(Node caller) { if (_label != null) _label.Visible = true; }
-    public override void HoverEnd(Node caller)   { if (_label != null) _label.Visible = false; }
+	private Node3D _sacrificeNode;
+	private bool _resolved = false;
 
-    public void OpenChest()
-    {
-        if (IsOpen) return;
+	public override void _Ready()
+	{
+		base._Ready();
 
-        IsOpen = true;
-        TaloTelemetry.TrackChestsOpened();
+		if (RarityColors.Length != CameraAngles.Length)
+		{
+			GD.PushError($"RarityColors count ({RarityColors.Length}) must match CameraAngles count ({CameraAngles.Length}) in {Name}");
+			return;
+		}
 
-        if (_lidMesh != null)
-        {
-            var tween = CreateTween();
-            tween.TweenProperty(_lidMesh, "rotation_degrees:x", -110f, 0.5f)
-                .SetTrans(Tween.TransitionType.Bounce)
-                .SetEase(Tween.EaseType.Out);
-        }
+		_rng.Randomize();
+		UpdateLabel();
+		_label.Visible = false;
 
-        CreateSacrificeNode();
-        SpawnItems();
+		if (_openSoundPlayer != null && OpenSound != null)
+		{
+			_openSoundPlayer.Stream = OpenSound;
+		}
 
-        UpdateLabel();
-        EmitSignal(SignalName.ChestOpened, this);
-    }
+		StartIdleShake();
+		StartLightCycle();
 
-    private void CreateSacrificeNode()
-    {
-        _sacrificeNode = new Node3D { Name = "SacrificeNode" };
-        GetParent().AddChild(_sacrificeNode);
-        _sacrificeNode.GlobalPosition = GlobalPosition;
-        _sacrificeNode.ChildExitingTree += OnItemExiting;
-    }
+		var items = AllItems.Instance.GetRandomItems(_rng.RandiRange(MinItems, MaxItems), allowDuplicates: false);
+		if (items != null)
+			_rolledItems.AddRange(items);
 
-    private void OnItemExiting(Node node)
-    {
-        if (_resolved || node is not Item) return;
+		_targetRarityIndex = _rolledItems.Count > 0
+			? Mathf.Clamp(_rolledItems.Max(i => i.Rarity) - 1, 0, RarityColors.Length - 1)
+			: 0;
 
-        _resolved = true;
-        GD.Print("Chest resolved: one item selected");
+		StandardMaterial3D particleMat = new();
+		particleMat.AlbedoColor = RarityColors[_targetRarityIndex];
+		particleMat.EmissionEnabled = true;
+		particleMat.Emission = RarityColors[_targetRarityIndex];
+		_particles.DrawPass1.SurfaceSetMaterial(0, particleMat);
+	}
 
-        if (_sacrificeNode != null && IsInstanceValid(_sacrificeNode))
-        {
-            _sacrificeNode.QueueFree();
-            _sacrificeNode = null;
-        }
-    }
+	public override void Interact(Node caller) => OpenChest();
 
-    private void SpawnItems()
-    {
-        if (ItemScene == null)
-        {
-            GD.PushWarning("TreasureChest: Missing ItemScene");
-            return;
-        }
+	public void OpenChest()
+	{
+		if (IsOpen) return;
 
-        int itemCount = (int)GD.RandRange(MinItems, MaxItems);
-        var loot = AllItems.Instance.GetRandomItems(itemCount, allowDuplicates: false);
-        if (loot == null) return;
+		if (_playerRef == null)
+		{
+			_playerRef = GetTree().GetFirstNodeInGroup("player") as Player;
+			if (_playerRef == null)
+			{
+				GD.PushError("Could not find player.");
+				return;
+			}
+		}
 
-        for (int i = 0; i < loot.Count; i++)
-        {
-            var itemNode = ItemScene.Instantiate<Item>();
-            if (itemNode == null) continue;
+		IsOpen = true;
+		TaloTelemetry.TrackChestsOpened();
 
-            itemNode._resource = loot[i];
-            _sacrificeNode.AddChild(itemNode);
+		_idleShakeTween?.Kill();
+		_idleShakeTween = null;
+		_lightCycleTween?.Kill();
+		_lightCycleTween = null;
+		_hoverTween?.Kill();
+		_hoverTween = null;
 
-            float t = loot.Count > 1 ? i / (float)(loot.Count - 1) : 0.5f;
-            float angle = Mathf.DegToRad(Mathf.Lerp(SpawnArcStart, SpawnArcEnd, t));
+		if (ChestLight != null)
+		{
+			CreateTween().TweenProperty(ChestLight, "light_energy", ChestLight.LightEnergy * 2.5f, 0.3f)
+				.SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+		}
 
-            itemNode.GlobalPosition = GlobalPosition + new Vector3(
-                Mathf.Sin(angle) * SpawnRadius,
-                SpawnHeight,
-                -Mathf.Cos(angle) * SpawnRadius
-            );
-        }
-    }
+		DoAnticipationShake(FinishOpen);
+	}
 
-    private void UpdateLabel()
-    {
-        if (_label == null) return;
-        _label.Text = IsOpen ? "Treasure Chest (Empty)" : "Treasure Chest";
-    }
+	private void FinishOpen()
+	{
+		StartRarityReveal(_targetRarityIndex);
+		LaunchLid();
+
+		if (_particles != null)
+		{
+			_particles.Restart();
+		}
+
+		UpdateLabel();
+		EmitSignal(SignalName.ChestOpened, this);
+	}
+
+	private void SpawnItems()
+	{
+		AudioManager.Instance.PlayGameVictorySound();
+
+		if (ItemScene == null || _rolledItems.Count == 0)
+		{
+			GD.PushWarning($"TreasureChest: ItemScene={ItemScene != null}, _rolledItems.Count={_rolledItems.Count}");
+			return;
+		}
+
+		_sacrificeNode = new Node3D { Name = "SacrificeNode" };
+		GetParent().AddChild(_sacrificeNode);
+		_sacrificeNode.GlobalPosition = GlobalPosition;
+		_sacrificeNode.ChildExitingTree += OnItemExiting;
+
+		for (int i = 0; i < _rolledItems.Count; i++)
+		{
+			var entry = _rolledItems[i];
+			if (entry == null) { GD.PushWarning("TreasureChest: rolled item is null"); continue; }
+
+			var item = ItemScene.Instantiate<Item>();
+			if (item == null) { GD.PushWarning("TreasureChest: Instantiate<Item>() returned null — is the scene root typed as Item?"); continue; }
+
+			item._resource = entry;
+			_sacrificeNode.AddChild(item);
+
+			float t = _rolledItems.Count > 1 ? i / (float)(_rolledItems.Count - 1) : 0.5f;
+			float angle = Mathf.DegToRad(Mathf.Lerp(SpawnArcStart, SpawnArcEnd, t));
+			item.GlobalPosition = GlobalPosition + new Vector3(
+				Mathf.Sin(angle) * SpawnRadius,
+				SpawnHeight,
+				-Mathf.Cos(angle) * SpawnRadius
+			);
+		}
+
+		Timer delay = new();
+		delay.OneShot = true;
+		delay.WaitTime = 2f;
+		delay.Autostart = true;
+		delay.Timeout += () => { _playerRef.PlayerCamera.Current = true; };
+		AddChild(delay);
+	}
+
+	private void OnItemExiting(Node node)
+	{
+		if (_resolved || node is not Item) return;
+
+		_resolved = true;
+		GD.Print("Chest resolved: one item selected");
+
+		if (_sacrificeNode != null && IsInstanceValid(_sacrificeNode))
+		{
+			_sacrificeNode.QueueFree();
+			_sacrificeNode = null;
+		}
+	}
+
+	private void UpdateLabel()
+	{
+		if (_label == null) return;
+		_label.Text = IsOpen ? "Treasure Chest (Empty)" : "Treasure Chest";
+	}
+
+	public override void HoverStart(Node caller)
+	{
+		_label.Visible = true;
+
+		if (ChestLight == null || IsOpen) return;
+
+		_hoverTween?.Kill();
+		float baseEnergy = ChestLight.LightEnergy;
+		_hoverTween = CreateTween().SetLoops();
+		_hoverTween.TweenProperty(ChestLight, "light_energy", baseEnergy * 2f, 0.6f)
+			.SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
+		_hoverTween.TweenProperty(ChestLight, "light_energy", baseEnergy, 0.6f)
+			.SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.InOut);
+	}
+
+	public override void HoverEnd(Node caller)
+	{
+		_label.Visible = false;
+		_hoverTween?.Kill();
+		_hoverTween = null;
+	}
 }

@@ -10,7 +10,7 @@ public partial class ParkourEventRoom : Room, IEventRoom
 	[Export] public float BoonSpeedMultiplier = .5f;
 	[Export] public float PenaltyMultiplier = .25f;
 
-	[Export] public TreasureChestOld Reward;
+	[Export] public TreasureChest Reward;
 	[Export] public int PenaltyDamage = 25;
 
 	public bool IsCompleted { get; private set; }

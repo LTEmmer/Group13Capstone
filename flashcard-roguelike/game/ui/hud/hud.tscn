@@ -14,9 +14,9 @@ load_path = "res://.godot/imported/health_fill.png-883a86ab79707abf47806678b4a8f
 
 [node name="HUD" type="CanvasLayer" unique_id=1895084757 node_paths=PackedStringArray("_roomNameLabel", "_healthLabel", "_shieldlabel")]
 script = ExtResource("1_script")
-_roomNameLabel = NodePath("Background_MarginContainer_VBoxContainer#RoomNameLabel")
-_healthLabel = NodePath("HealthBarRoot/HealthBarTrack/HealthValueLabel")
-_shieldlabel = NodePath("Background_MarginContainer_VBoxContainer#ShieldLabel")
+_roomNameLabel = NodePath("HealthBarRoot/VBoxContainer/Background_MarginContainer_VBoxContainer#RoomNameLabel")
+_healthLabel = NodePath("HealthBarRoot/VBoxContainer/HealthBarTrack/HealthValueLabel")
+_shieldlabel = NodePath("HealthBarRoot/VBoxContainer/Background_MarginContainer_VBoxContainer#ShieldLabel")
 
 [node name="HealthBarRoot" type="MarginContainer" parent="." unique_id=1895084758]
 anchors_preset = 3
@@ -25,7 +25,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -300.0
-offset_top = -56.0
+offset_top = -60.0
 offset_right = -20.0
 offset_bottom = -16.0
 grow_horizontal = 0
@@ -33,12 +33,29 @@ grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="HealthBarTrack" type="Control" parent="HealthBarRoot" unique_id=1895084762]
+[node name="VBoxContainer" type="VBoxContainer" parent="HealthBarRoot" unique_id=2038360546]
+layout_mode = 2
+
+[node name="Background_MarginContainer_VBoxContainer#RoomNameLabel" type="Label" parent="HealthBarRoot/VBoxContainer" unique_id=110892469]
+custom_minimum_size = Vector2(280, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Room 0 (Entrance)"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Background_MarginContainer_VBoxContainer#ShieldLabel" type="Label" parent="HealthBarRoot/VBoxContainer" unique_id=290986463]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Shield: 0"
+horizontal_alignment = 2
+
+[node name="HealthBarTrack" type="Control" parent="HealthBarRoot/VBoxContainer" unique_id=1895084762]
 custom_minimum_size = Vector2(260, 44)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="WhiteboardBg" type="TextureRect" parent="HealthBarRoot/HealthBarTrack" unique_id=1895084765]
+[node name="WhiteboardBg" type="TextureRect" parent="HealthBarRoot/VBoxContainer/HealthBarTrack" unique_id=1895084765]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -53,7 +70,7 @@ mouse_filter = 2
 texture = SubResource("CompressedTexture2D_d4vpa")
 expand_mode = 1
 
-[node name="ErasedLayer" type="TextureRect" parent="HealthBarRoot/HealthBarTrack" unique_id=1895084763]
+[node name="ErasedLayer" type="TextureRect" parent="HealthBarRoot/VBoxContainer/HealthBarTrack" unique_id=1895084763]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -68,7 +85,7 @@ mouse_filter = 2
 texture = SubResource("CompressedTexture2D_l7e5k")
 expand_mode = 1
 
-[node name="HealthBar" type="TextureProgressBar" parent="HealthBarRoot/HealthBarTrack" unique_id=1895084759]
+[node name="HealthBar" type="TextureProgressBar" parent="HealthBarRoot/VBoxContainer/HealthBarTrack" unique_id=1895084759]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -84,7 +101,7 @@ mouse_filter = 2
 value = 100.0
 texture_progress = SubResource("CompressedTexture2D_8mv14")
 
-[node name="HealthValueLabel" type="Label" parent="HealthBarRoot/HealthBarTrack" unique_id=1895084764]
+[node name="HealthValueLabel" type="Label" parent="HealthBarRoot/VBoxContainer/HealthBarTrack" unique_id=1895084764]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -100,18 +117,3 @@ theme_override_font_sizes/font_size = 13
 text = "100/100"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Background_MarginContainer_VBoxContainer#RoomNameLabel" type="Label" parent="." unique_id=110892469]
-offset_top = 30.0
-offset_right = 300.0
-offset_bottom = 80.0
-theme_override_font_sizes/font_size = 24
-text = "Room 0 (Entrance)"
-autowrap_mode = 2
-
-[node name="Background_MarginContainer_VBoxContainer#ShieldLabel" type="Label" parent="." unique_id=290986463]
-offset_top = -1.0
-offset_right = 150.0
-offset_bottom = 33.0
-theme_override_font_sizes/font_size = 24
-text = "Shield: 0"
