@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://btfjb1kjvo6oi"]
+
+[ext_resource type="Texture2D" uid="uid://sf3splvr0oq0" path="res://assets/sprites/item_sprites/iron_core.png" id="1_frwcj"]
+[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="2_a4r3n"]
+[ext_resource type="PackedScene" uid="uid://hyiq0y77tq3y" path="res://assets/models/item_models/iron_core.glb" id="2_a4wu3"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_frwcj"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_tw5yo"]
+
+[sub_resource type="Resource" id="Resource_frwcj"]
+script = ExtResource("2_a4r3n")
+_maxHp = 15
+_trueDefence = 0.05
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[sub_resource type="Resource" id="Resource_a4wu3"]
+script = ExtResource("2_frwcj")
+_attack = -1
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[resource]
+script = ExtResource("4_tw5yo")
+Name = "Iron Core"
+Icon = ExtResource("1_frwcj")
+ScenePrefab = ExtResource("2_a4wu3")
+SceneScale = 0.5
+Description = "Heavy, but unyielding 
++15 Max HP 
++5% True Defence
+-1 attack
+
+"
+Rarity = 3
+UseEffects = Array[Object]([SubResource("Resource_frwcj"), SubResource("Resource_a4wu3")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"

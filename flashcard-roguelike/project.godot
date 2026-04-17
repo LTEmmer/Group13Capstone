@@ -29,6 +29,7 @@ BattleManager="*uid://b8g15b4a5ec36"
 EventManager="*uid://u328qtrmmpqj"
 DifficultyManager="*uid://cgpb16u2nxry2"
 GameDifficultyManager="*uid://cgpb16u2nxry2"
+AllItems="*uid://cttm205uvctmq"
 
 [display]
 

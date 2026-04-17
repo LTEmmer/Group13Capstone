@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://t13kffwtgybf"]
+
+[ext_resource type="Texture2D" uid="uid://dbulmcdxfgr3l" path="res://assets/sprites/item_sprites/pants.png" id="1_cm4qw"]
+[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="2_cm4qw"]
+[ext_resource type="PackedScene" uid="uid://uhk7dp0fwur3" path="res://assets/models/item_models/model_scenes/pants.tscn" id="2_nvagw"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="3_nvagw"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_68oa5"]
+
+[sub_resource type="Resource" id="Resource_3ocm1"]
+script = ExtResource("2_cm4qw")
+_trueDefence = 0.2
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[sub_resource type="Resource" id="Resource_lnr73"]
+script = ExtResource("3_nvagw")
+_attack_mult = -0.15
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[resource]
+script = ExtResource("4_68oa5")
+Name = "Dress Pants"
+Icon = ExtResource("1_cm4qw")
+ScenePrefab = ExtResource("2_nvagw")
+SceneScale = 1.5
+Description = "Restrictive, but composed
++20% True Defence
+-15% Attack Mult"
+Behavior = 2
+Slot = 3
+UseEffects = Array[Object]([SubResource("Resource_3ocm1"), SubResource("Resource_lnr73")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"

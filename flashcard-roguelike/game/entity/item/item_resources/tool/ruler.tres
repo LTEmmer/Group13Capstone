@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://dsc2wuku35p6x"]
+
+[ext_resource type="Texture2D" uid="uid://ce3e6ylwtkc86" path="res://assets/sprites/item_sprites/ruler.png" id="1_ecs4u"]
+[ext_resource type="PackedScene" uid="uid://bqdns7t14joco" path="res://assets/models/item_models/model_scenes/ruler.tscn" id="2_4rtdj"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_ecs4u"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_4rtdj"]
+
+[sub_resource type="Resource" id="Resource_5akpe"]
+script = ExtResource("2_ecs4u")
+_attack = 3
+_attack_mult = 0.1
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[resource]
+script = ExtResource("3_4rtdj")
+Name = "Ruler"
+Icon = ExtResource("1_ecs4u")
+ScenePrefab = ExtResource("2_4rtdj")
+SceneScale = 0.2
+Description = "You can still hear the SLAP.
++3 Attack
++10% Attack Mult"
+Behavior = 2
+Slot = 4
+UseEffects = Array[Object]([SubResource("Resource_5akpe")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"

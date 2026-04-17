@@ -40,8 +40,9 @@ public partial class BattleUI : Control
 		AudioManager.Instance?.RegisterButton(_itemsButton);
 
 		// Setup positions for sliding animation
-		_visiblePosition = _actionPanel.Position;
-		_hiddenPosition = new Vector2(_actionPanel.Position.X, GetViewportRect().Size.Y);
+		float screenHeight = GetViewportRect().Size.Y;
+		_visiblePosition = new Vector2(_actionPanel.Position.X, screenHeight - _actionPanel.Size.Y);
+		_hiddenPosition = new Vector2(_actionPanel.Position.X, screenHeight);
 		_actionPanel.Position = _hiddenPosition;
 
 		// Start hidden

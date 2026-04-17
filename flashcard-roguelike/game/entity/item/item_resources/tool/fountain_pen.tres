@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://ccqgj8gs5ctpl"]
+
+[ext_resource type="Texture2D" uid="uid://bprtmrh1g3v6l" path="res://assets/sprites/item_sprites/pen.png" id="1_hv5t5"]
+[ext_resource type="PackedScene" uid="uid://csofmc3lbjdjl" path="res://assets/models/item_models/model_scenes/pen.tscn" id="2_eac5n"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_hv5t5"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_eac5n"]
+
+[sub_resource type="Resource" id="Resource_w1yy0"]
+script = ExtResource("2_hv5t5")
+_attack = 4
+_crit_chance = 0.2
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[resource]
+script = ExtResource("3_eac5n")
+Name = "Fountain Pen"
+Icon = ExtResource("1_hv5t5")
+ScenePrefab = ExtResource("2_eac5n")
+SceneScale = 0.4
+Description = "Always marking in RED.
++4 Attack
++20% CC"
+Behavior = 2
+Slot = 4
+UseEffects = Array[Object]([SubResource("Resource_w1yy0")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"

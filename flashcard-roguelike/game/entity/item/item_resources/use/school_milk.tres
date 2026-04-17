@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://c0i2msij417db"]
+
+[ext_resource type="Texture2D" uid="uid://dm55o3ban8cmt" path="res://assets/sprites/item_sprites/milk.png" id="1_fycdj"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_fycdj"]
+[ext_resource type="PackedScene" uid="uid://bw0cm1q445nqn" path="res://assets/models/item_models/milk_carton.glb" id="2_yp1gu"]
+[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="3_yp1gu"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_cpx4c"]
+
+[sub_resource type="Resource" id="Resource_1nt3j"]
+script = ExtResource("2_fycdj")
+_attack = 5
+_crit_chance = 0.05
+_crit_mult = 0.05
+_attack_mult = 0.1
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[sub_resource type="Resource" id="Resource_0odih"]
+script = ExtResource("3_yp1gu")
+_hp = -5
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[resource]
+script = ExtResource("4_cpx4c")
+Name = "School Milk"
+Icon = ExtResource("1_fycdj")
+ScenePrefab = ExtResource("2_yp1gu")
+SceneScale = 4.0
+Description = "Its a bit...           chunky.
++5 Attack
++5% CC
++5% CM
++10% Attack Mult
+-5 HP
+"
+MaxUses = 2
+UseEffects = Array[Object]([SubResource("Resource_1nt3j"), SubResource("Resource_0odih")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"

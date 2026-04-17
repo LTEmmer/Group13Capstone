@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://ceim8jmtkr6d5"]
 
-[ext_resource type="Script" uid="uid://het36bkur8tc" path="res://game/entity/player/Player.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://bd1l7xc6cbgd5" path="res://game/entity/player/Player.cs" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="2_0b5cm"]
 [ext_resource type="Script" uid="uid://btg7o2uoiswpk" path="res://game/entity/player/InputGatherer.cs" id="2_7qfun"]
 [ext_resource type="AudioStream" uid="uid://b0mxhdoifrhp" path="res://assets/audio/player_sfx/footsteps_sfx/footstep_1.mp3" id="2_8um7f"]
@@ -19,18 +19,18 @@
 [ext_resource type="PackedScene" uid="uid://inventoryui" path="res://game/ui/inventory_ui/inventory_ui.tscn" id="6_inventory_ui"]
 [ext_resource type="AudioStream" uid="uid://ys4tjbtjgmvv" path="res://assets/audio/player_sfx/landing_sfx/landing_1.mp3" id="7_02rvq"]
 [ext_resource type="Script" uid="uid://dbyltosnfiqpd" path="res://game/entity/player/states/Sprint.cs" id="7_ewdpy"]
-[ext_resource type="AudioStream" uid="uid://dsbb5r1tmcop6" path="res://assets/audio/player_sfx/jumping_sfx/jump_3.mp3" id="7_ria7k"]
+[ext_resource type="AudioStream" uid="uid://da47s5ntl7a0w" path="res://assets/audio/player_sfx/jumping_sfx/jump_3.mp3" id="7_ria7k"]
 [ext_resource type="AudioStream" uid="uid://bcbobax6jptvr" path="res://assets/audio/player_sfx/landing_sfx/landing_2.mp3" id="8_20bnd"]
 [ext_resource type="Script" uid="uid://df41wfekyp1yg" path="res://game/entity/player/states/Jump.cs" id="8_vp686"]
 [ext_resource type="Script" uid="uid://dntnvhh4bccxr" path="res://game/entity/player/states/Midair.cs" id="9_ka5uw"]
 [ext_resource type="Script" uid="uid://sjpebhc72dj6" path="res://game/entity/player/states/Landing.cs" id="10_vqr5b"]
 [ext_resource type="AudioStream" uid="uid://b08qg74r2ar44" path="res://assets/audio/player_sfx/attack_sfx/attack_1.mp3" id="12_4j27x"]
 [ext_resource type="AudioStream" uid="uid://dmfepttsspixn" path="res://assets/audio/player_sfx/attack_sfx/attack_2.mp3" id="13_0jrw7"]
-[ext_resource type="AudioStream" uid="uid://dding6fpi3cb6" path="res://assets/audio/player_sfx/hurt_sfx/hurt_1.mp3" id="13_cawmy"]
-[ext_resource type="AudioStream" uid="uid://cphv00j3h8pll" path="res://assets/audio/player_sfx/hurt_sfx/hurt_2.mp3" id="14_chnj6"]
-[ext_resource type="AudioStream" uid="uid://dr5tnenaghfy5" path="res://assets/audio/player_sfx/death_sfx/death_1.mp3" id="15_kmnjn"]
+[ext_resource type="AudioStream" uid="uid://d2coynpsu6sb8" path="res://assets/audio/player_sfx/hurt_sfx/hurt_1.mp3" id="13_cawmy"]
+[ext_resource type="AudioStream" uid="uid://i8krsufunhyo" path="res://assets/audio/player_sfx/hurt_sfx/hurt_2.mp3" id="14_chnj6"]
+[ext_resource type="AudioStream" uid="uid://cm3fhaq8d5563" path="res://assets/audio/player_sfx/death_sfx/death_1.mp3" id="15_kmnjn"]
 [ext_resource type="PackedScene" uid="uid://c7ytlo0422m6u" path="res://shared/components/stamina/stamina_component.tscn" id="15_vqr5b"]
-[ext_resource type="AudioStream" uid="uid://dq1s5fc046wcj" path="res://assets/audio/player_sfx/death_sfx/death_2.mp3" id="16_4j27x"]
+[ext_resource type="AudioStream" uid="uid://burg4bbfb6ifw" path="res://assets/audio/player_sfx/death_sfx/death_2.mp3" id="16_4j27x"]
 [ext_resource type="Script" uid="uid://biabnuibn3bqn" path="res://game/entity/player/DownCast.cs" id="17_vp686"]
 [ext_resource type="AudioStream" uid="uid://e6xyt8kcsmyv" path="res://assets/audio/player_sfx/block_sfx/block_1.mp3" id="18_je5mu"]
 [ext_resource type="AudioStream" uid="uid://p4jp3pv4l32b" path="res://assets/audio/player_sfx/block_sfx/block_2.mp3" id="19_k8egu"]
@@ -18105,7 +18105,6 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_f4oo1")
 
 [node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("4_dmj0o")]
-BaseDamage = 100.0
 AttackSounds = Array[AudioStream]([ExtResource("12_4j27x"), ExtResource("13_0jrw7"), ExtResource("22_6rqdb"), ExtResource("23_l0vtf"), ExtResource("24_8vwb3")])
 MissSounds = Array[AudioStream]([])
 
@@ -18116,7 +18115,8 @@ BlockSounds = Array[AudioStream]([ExtResource("18_je5mu"), ExtResource("19_k8egu
 DeathSound = Array[AudioStream]([ExtResource("15_kmnjn"), ExtResource("16_4j27x"), ExtResource("39_yna46"), ExtResource("40_6qpfs")])
 PlayerCamera = NodePath("../CameraPivot/Camera3D")
 
-[node name="InventoryComponent" parent="." unique_id=288412274 instance=ExtResource("5_inventory")]
+[node name="InventoryComponent" parent="." unique_id=288412274 node_paths=PackedStringArray("EffectTarget") instance=ExtResource("5_inventory")]
+EffectTarget = NodePath("..")
 
 [node name="StaminaComponent" parent="." unique_id=671763882 node_paths=PackedStringArray("player") instance=ExtResource("15_vqr5b")]
 player = NodePath("..")
@@ -18164,9 +18164,10 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer/SubViewport" unique_id=117706074]
 
-[node name="InventoryUI" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer/SubViewport/Camera3D" unique_id=1987012151 node_paths=PackedStringArray("_inventory") instance=ExtResource("6_inventory_ui")]
+[node name="InventoryUI" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer/SubViewport/Camera3D" unique_id=1987012151 node_paths=PackedStringArray("_inventory", "_player") instance=ExtResource("6_inventory_ui")]
 transform = Transform3D(1, 0, 0, 0, 0.08336482, -0.99651915, 0, 0.99651915, 0.08336482, 0.004, 0.115, -2.386)
 _inventory = NodePath("../../../../../../../../InventoryComponent")
+_player = NodePath("../../../../../../../..")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="CameraPivot/Camera3D/Inventory/Control/SubViewportContainer/SubViewport" unique_id=2145213328]
 transform = Transform3D(0.87219733, -3.8990258e-08, 0.48915413, -0.19785658, 0.9145436, 0.3527928, -0.44735277, -0.40448728, 0.79766256, 0.912992, 1.6815484, 1.9366792)

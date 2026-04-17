@@ -1,10 +1,153 @@
 [gd_scene format=3 uid="uid://dj5diogm5gipf"]
 
 [ext_resource type="Script" uid="uid://dl85stya4bhaq" path="res://game/ui/inventory_ui/pages/UsePage.cs" id="1_4e057"]
+[ext_resource type="Theme" uid="uid://7f2b3p0maj6r" path="res://game/ui/inventory_ui/InventoryFont.tres" id="1_ib2od"]
 [ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="2_oobi1"]
-[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="3_ib2od"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="4_c4lbg"]
+[ext_resource type="Texture2D" uid="uid://dt2cje5lk82j2" path="res://assets/ui/highlighter.png" id="5_860if"]
 
-[node name="UsePage" type="Control" unique_id=1164067624 node_paths=PackedStringArray("_useButton", "_dropButton", "description")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.6, 0.6, 0.6, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.55, 0.52, 0.55)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.99, 0.99, 0.98010004, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.12, 0.12, 0.11, 0.95)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.08)
+shadow_size = 2
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_button_hover"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+texture = ExtResource("5_860if")
+region_rect = Rect2(0, 0, 750, 500)
+modulate_color = Color(1, 1, 1, 0.92)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.995, 0.99, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.2, 0.18, 0.35)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.06)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0007298906, 0.00072104554, 0.00040620685, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.2, 0.18, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.04)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_line_edit"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.995, 0.994, 0.99, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.22, 0.2, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 0.99, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.22, 0.2, 0.4)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.12)
+shadow_size = 3
+shadow_offset = Vector2(1, 2)
+
+[sub_resource type="Theme" id="Theme_tk47e"]
+default_base_scale = 1.0
+Button/colors/font_color = Color(0.06, 0.06, 0.06, 1)
+Button/colors/font_disabled_color = Color(0.3, 0.3, 0.3, 0.9)
+Button/colors/font_focus_color = Color(0.03, 0.03, 0.03, 1)
+Button/colors/font_hover_color = Color(0.03, 0.03, 0.03, 1)
+Button/colors/font_pressed_color = Color(0.03, 0.03, 0.03, 1)
+Button/constants/h_separation = 8
+Button/constants/icon_max_width = 0
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("4_c4lbg")
+Button/styles/disabled = SubResource("StyleBoxFlat_button_disabled")
+Button/styles/focus = SubResource("StyleBoxFlat_button_focus")
+Button/styles/hover = SubResource("StyleBoxTexture_button_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_button_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+Label/colors/font_color = Color(0.05, 0.05, 0.05, 1)
+Label/font_sizes/font_size = 28
+Label/fonts/font = ExtResource("4_c4lbg")
+LineEdit/colors/font_color = Color(0.05, 0.05, 0.05, 1)
+LineEdit/font_sizes/font_size = 20
+LineEdit/styles/focus = SubResource("StyleBoxFlat_line_edit")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_line_edit")
+Panel/styles/panel = SubResource("StyleBoxFlat_panel")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="UsePage" type="Control" unique_id=1164067624 node_paths=PackedStringArray("_useButton", "_dropButton", "_uses", "_description", "_name")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,10 +156,13 @@ offset_right = -656.0
 offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_ib2od")
 script = ExtResource("1_4e057")
 _useButton = NodePath("VBoxContainer/HBoxContainer2/Button")
 _dropButton = NodePath("VBoxContainer/HBoxContainer2/Button2")
-description = NodePath("VBoxContainer/HBoxContainer/RichTextLabel")
+_uses = NodePath("VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer/ItemUses")
+_description = NodePath("VBoxContainer/HBoxContainer/Panel2/MarginContainer/VBoxContainer/RichTextLabel")
+_name = NodePath("VBoxContainer/HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/Name")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=864304716]
 layout_mode = 1
@@ -25,6 +171,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer" unique_id=568267401]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Panel" unique_id=1181099320]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel/MarginContainer" unique_id=1521731728]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer" unique_id=385724428]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=922651623]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Uses Rmaining:"
+
+[node name="ItemUses" type="Label" parent="VBoxContainer/Panel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=596857670]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 42
+text = "99"
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1097373275]
 layout_mode = 2
@@ -35,11 +216,47 @@ layout_mode = 2
 texture = ExtResource("2_oobi1")
 stretch_mode = 5
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer" unique_id=1863345770]
+[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=729574670]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/Panel2" unique_id=1286248170]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Panel2/MarginContainer" unique_id=1705946922]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=972644810]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1121424621]
+layout_mode = 2
+text = "Name: "
+
+[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer" unique_id=485521472]
+layout_mode = 2
+text = "test"
+
+[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=1289300696]
+layout_mode = 2
+text = "Description:"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/Panel2/MarginContainer/VBoxContainer" unique_id=1863345770]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.050980393, 0.050980393, 0.050980393, 1)
 theme_override_font_sizes/normal_font_size = 32
-text = "asdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfasdfasdafasdfasdfasdfasdfa"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1658088587]
 layout_mode = 2
@@ -48,11 +265,13 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_ib2od")
+theme = SubResource("Theme_tk47e")
+theme_override_font_sizes/font_size = 42
 text = "Use"
 
 [node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=690660614]
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("3_ib2od")
+theme = SubResource("Theme_tk47e")
+theme_override_font_sizes/font_size = 42
 text = "Drop"

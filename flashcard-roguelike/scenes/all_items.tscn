@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cnycncg0uqrvt"]
+
+[ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="1_jb5a7"]
+[ext_resource type="Script" uid="uid://x8phyujup5h6" path="res://scenes/PlaceItems.cs" id="1_tvoay"]
+
+[node name="AllItems" type="Node3D" unique_id=818415985]
+script = ExtResource("1_tvoay")
+ItemScene = ExtResource("1_jb5a7")

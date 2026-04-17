@@ -4,7 +4,7 @@ public partial class UsePage : InventoryPage<ItemResource>
 {
     [Export] private Button _useButton;
     [Export] private Button _dropButton;
-	[Export] private RichTextLabel description;
+    [Export] private Label _uses;
 
     private new ItemInstance _item;
 
@@ -16,21 +16,41 @@ public partial class UsePage : InventoryPage<ItemResource>
 
     public override void SetItem(ItemInstance item)
     {
+        base.SetItem(item);
         _item = item;
-		description.Text = item.Resource.Description;
-		OnItemSet(_item);
-
+        _useButton.Visible = !item.Resource.OnlyCombat;
+        _dropButton.Disabled = false;
+        _useButton.Disabled = false;
+        RefreshUses();
     }
 
     private void OnUsePressed()
     {
         if (_item == null) return;
-        GD.Print($"[Consumable] Use: {_item}");
+        Use(_item);
+        RefreshUses();
     }
 
     private void OnDropPressed()
     {
+        if (BattleManager.Instance.IsInCombat)
+        {
+           return; 
+        }
         if (_item == null) return;
-        GD.Print($"[Consumable] Drop: {_item}");
+        Drop(_item);
+        _item = null;
+        _dropButton.Disabled = true;
+        _useButton.Disabled  = true;
+    }
+
+    private void RefreshUses()
+    {
+        if (_item == null) return;
+
+        bool limited = _item.Resource.MaxUses > 0;
+        _uses.Text           = limited ? _item.CurrentUses.ToString() : "∞";
+        _useButton.Disabled  = limited && _item.CurrentUses <= 0;
+        _dropButton.Disabled = limited && _item.CurrentUses <= 0;
     }
 }

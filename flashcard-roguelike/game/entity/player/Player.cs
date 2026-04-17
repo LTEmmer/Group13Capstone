@@ -83,12 +83,12 @@ public partial class Player : CharacterBody3D
 		if (@event.IsActionPressed("inventory_toggle"))
 		{
 			InventoryCanvas.SetVisible(true);
-			Input.MouseMode = Input.MouseModeEnum.Visible;
+			toggleMouseLock();
 		}
 		else if (@event.IsActionReleased("inventory_toggle"))
 		{
 			InventoryCanvas.SetVisible(false);
-			Input.MouseMode = Input.MouseModeEnum.Captured;
+			toggleMouseLock();
 		}
 
 		if (Input.MouseMode == Input.MouseModeEnum.Captured)

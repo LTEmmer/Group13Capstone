@@ -1,15 +1,159 @@
 [gd_scene format=4 uid="uid://inventoryui"]
 
 [ext_resource type="Script" uid="uid://cimbfn6l2mraq" path="res://game/ui/inventory_ui/InventoryUI.cs" id="1"]
+[ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="2_q2ccd"]
 [ext_resource type="Material" uid="uid://b3hfqrm7r7dtl" path="res://game/ui/inventory_ui/CoverMaterial.tres" id="3_be8hc"]
-[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="3_e77rp"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="3_e77rp"]
 [ext_resource type="PackedScene" uid="uid://qy5qpb6mote0" path="res://game/ui/inventory_ui/pages/stat_page.tscn" id="3_g3pns"]
+[ext_resource type="PackedScene" uid="uid://dgxxghbwa7qv2" path="res://shared/components/equipment/equipment_component.tscn" id="3_mmt0n"]
 [ext_resource type="ButtonGroup" uid="uid://bh2a2mgbhh88r" path="res://game/ui/inventory_ui/TabButtons.tres" id="3_q2ccd"]
 [ext_resource type="Material" uid="uid://q5c4854goi7h" path="res://game/ui/inventory_ui/PaperMaterial.tres" id="4_f70lu"]
 [ext_resource type="PackedScene" uid="uid://dj5diogm5gipf" path="res://game/ui/inventory_ui/pages/use_page.tscn" id="4_fhk5c"]
+[ext_resource type="Texture2D" uid="uid://dt2cje5lk82j2" path="res://assets/ui/highlighter.png" id="4_mmt0n"]
 [ext_resource type="PackedScene" uid="uid://mffc2ay0sxt8" path="res://game/ui/inventory_ui/pages/tool_page.tscn" id="5_pmruj"]
 [ext_resource type="Script" uid="uid://m3drfwmlmtxs" path="res://game/ui/inventory_ui/InputController.cs" id="10_fhk5c"]
 [ext_resource type="Material" uid="uid://cxyqlevo2mro1" path="res://game/ui/inventory_ui/PostItMaterial.tres" id="11_pmruj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.6, 0.6, 0.6, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.55, 0.52, 0.55)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.99, 0.99, 0.98010004, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.12, 0.12, 0.11, 0.95)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.08)
+shadow_size = 2
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_button_hover"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+texture = ExtResource("4_mmt0n")
+region_rect = Rect2(0, 0, 750, 500)
+modulate_color = Color(1, 1, 1, 0.92)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 0.995, 0.99, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.2, 0.18, 0.35)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.06)
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0007298906, 0.00072104554, 0.00040620685, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.2, 0.18, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_color = Color(0, 0, 0, 0.04)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_line_edit"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.995, 0.994, 0.99, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.22, 0.2, 0.4)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 0.99, 0.1254902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.22, 0.2, 0.4)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.12)
+shadow_size = 3
+shadow_offset = Vector2(1, 2)
+
+[sub_resource type="Theme" id="Theme_tk47e"]
+default_base_scale = 1.0
+Button/colors/font_color = Color(0.06, 0.06, 0.06, 1)
+Button/colors/font_disabled_color = Color(0.3, 0.3, 0.3, 0.9)
+Button/colors/font_focus_color = Color(0.03, 0.03, 0.03, 1)
+Button/colors/font_hover_color = Color(0.03, 0.03, 0.03, 1)
+Button/colors/font_pressed_color = Color(0.03, 0.03, 0.03, 1)
+Button/constants/h_separation = 8
+Button/constants/icon_max_width = 0
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("3_e77rp")
+Button/styles/disabled = SubResource("StyleBoxFlat_button_disabled")
+Button/styles/focus = SubResource("StyleBoxFlat_button_focus")
+Button/styles/hover = SubResource("StyleBoxTexture_button_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_button_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+Label/colors/font_color = Color(0.05, 0.05, 0.05, 1)
+Label/font_sizes/font_size = 28
+Label/fonts/font = ExtResource("3_e77rp")
+LineEdit/colors/font_color = Color(0.05, 0.05, 0.05, 1)
+LineEdit/font_sizes/font_size = 20
+LineEdit/styles/focus = SubResource("StyleBoxFlat_line_edit")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_line_edit")
+Panel/styles/panel = SubResource("StyleBoxFlat_panel")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_panel")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mmt0n"]
 content_margin_left = 18.0
@@ -215,18 +359,26 @@ viewport_path = NodePath("Node/Tabs/UseView")
 [sub_resource type="ViewportTexture" id="ViewportTexture_q2ccd"]
 viewport_path = NodePath("Node/Tabs/ToolsView")
 
-[node name="InventoryUI" type="Node3D" unique_id=2131535673 node_paths=PackedStringArray("_statPage", "_statItems", "_toolPage", "_toolItems", "_usePage", "_useItems", "_statList", "_useList", "_toolList")]
+[node name="InventoryUI" type="Node3D" unique_id=2131535673 node_paths=PackedStringArray("_equipment", "_statPage", "_toolPage", "_usePage", "_statItems", "_toolItems", "_useItems", "_statList", "_useList", "_toolList", "_statTab", "_useTab", "_toolTab")]
 transform = Transform3D(1, 0, 0, 0, 0.22309704, -0.97479624, 0, 0.97479624, 0.22309704, 0, 0, 0)
 script = ExtResource("1")
+_equipment = NodePath("EquipmentComponent")
+_equipHighlightColor = Color(0.6273333, 1, 0.13999999, 0.27058825)
+_itemScene = ExtResource("2_q2ccd")
 _statPage = NodePath("Node/RightPageView/StatPage")
-_statItems = NodePath("Node/LeftPageView/StatsItems")
 _toolPage = NodePath("Node/RightPageView/ToolPage")
-_toolItems = NodePath("Node/LeftPageView/ToolItems")
 _usePage = NodePath("Node/RightPageView/UsePage")
+_statItems = NodePath("Node/LeftPageView/StatsItems")
+_toolItems = NodePath("Node/LeftPageView/ToolItems")
 _useItems = NodePath("Node/LeftPageView/UseItems")
 _statList = NodePath("Node/LeftPageView/StatsItems/StatList")
 _useList = NodePath("Node/LeftPageView/UseItems/UseList")
 _toolList = NodePath("Node/LeftPageView/ToolItems/ToolList")
+_statTab = NodePath("Node/Tabs/StatsView/Label/Button")
+_useTab = NodePath("Node/Tabs/UseView/Label/Button")
+_toolTab = NodePath("Node/Tabs/ToolsView/Label/Button")
+
+[node name="EquipmentComponent" parent="." unique_id=443386136 instance=ExtResource("3_mmt0n")]
 
 [node name="Node" type="Node" parent="." unique_id=1869142780]
 
@@ -254,7 +406,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_e77rp")
+theme = SubResource("Theme_tk47e")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mmt0n")
 toggle_mode = true
 button_group = ExtResource("3_q2ccd")
@@ -281,7 +433,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_e77rp")
+theme = SubResource("Theme_tk47e")
 theme_override_styles/normal = SubResource("StyleBoxFlat_dblsh")
 toggle_mode = true
 button_group = ExtResource("3_q2ccd")
@@ -308,7 +460,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_e77rp")
+theme = SubResource("Theme_tk47e")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jjqwk")
 toggle_mode = true
 button_group = ExtResource("3_q2ccd")
@@ -408,9 +560,11 @@ visible = false
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="ToolPage" parent="Node/RightPageView" unique_id=1242328435 instance=ExtResource("5_pmruj")]
+[node name="ToolPage" parent="Node/RightPageView" unique_id=1242328435 node_paths=PackedStringArray("_equipment") instance=ExtResource("5_pmruj")]
+visible = false
 offset_right = 0.0
 offset_bottom = 0.0
+_equipment = NodePath("../../../EquipmentComponent")
 
 [node name="Book" type="Node3D" parent="." unique_id=1674903542]
 transform = Transform3D(1, 0, 0, 0, 1, 2.9802322e-08, 0, -2.9802322e-08, 1, 0, 0, 0)
@@ -522,7 +676,3 @@ script = ExtResource("10_fhk5c")
 head = NodePath("../../../../../..")
 _collider = NodePath("../ToolsColider")
 _viewport = NodePath("../../../../../../Node/Tabs/ToolsView")
-
-[connection signal="pressed" from="Node/Tabs/StatsView/Label/Button" to="." method="setRight" binds= [0]]
-[connection signal="pressed" from="Node/Tabs/UseView/Label/Button" to="." method="setRight" binds= [1]]
-[connection signal="pressed" from="Node/Tabs/ToolsView/Label/Button" to="." method="setRight" binds= [2]]

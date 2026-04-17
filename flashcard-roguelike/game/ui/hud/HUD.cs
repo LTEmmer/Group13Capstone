@@ -2,16 +2,14 @@ using Godot;
 
 public partial class HUD : CanvasLayer
 {
-	private Label _roomNameLabel;
-	private Label _healthLabel;
+	[Export] private Label _roomNameLabel;
+	[Export] private Label _healthLabel;
+	[Export] private Label _shieldlabel;
 	private Player _player;
 	private HealthComponent _healthComponent;
 
 	public override void _Ready()
 	{
-		_roomNameLabel = GetNode<Label>("MarginContainer/VBoxContainer/RoomNameLabel");
-		_healthLabel = GetNode<Label>("MarginContainer/VBoxContainer/HealthLabel");
-
 		// HUD is under Camera3D -> CameraPivot -> Player
 		Node parent = GetParent();
 		if (parent != null)
@@ -27,9 +25,16 @@ public partial class HUD : CanvasLayer
 	{
 		// Health
 		if (_healthComponent != null)
+		{
+			
 			_healthLabel.Text = $"HP: {_healthComponent.CurrentHealth:F0} / {_healthComponent.MaxHealth:F0}";
+			_shieldlabel.Text = $"Shield: {_healthComponent.Shield:F0}";
+		}
 		else
+		{
 			_healthLabel.Text = "HP: --";
+			_shieldlabel.Text = "Shield: --";
+		}
 
 		// Room name
 		if (CurrentRoomManager.Instance != null && CurrentRoomManager.Instance.CurrentRoomId >= 0)
