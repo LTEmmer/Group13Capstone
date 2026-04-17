@@ -1,20 +1,24 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://biapbeaft61wq"]
 
 [ext_resource type="Script" uid="uid://dnm5daublmlwi" path="res://game/entity/item/ItemEffect.cs" id="1_1dv1i"]
+[ext_resource type="Texture2D" uid="uid://cm6qvvl8b38rm" path="res://assets/sprites/item_sprites/bandage.png" id="1_ofixm"]
+[ext_resource type="PackedScene" uid="uid://dkw2l5pmyv36j" path="res://assets/models/item_models/bandage.glb" id="2_1dv1i"]
 [ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="3_45k22"]
-[ext_resource type="Texture2D" uid="uid://bktwg2fwo3flq" path="res://assets/sprites/heart-plus-yellow.svg" id="4_up4ha"]
 [ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="5_det7y"]
 
 [sub_resource type="Resource" id="Resource_1dv1i"]
 script = ExtResource("3_45k22")
-_hp = 5
+_hp = 10
 metadata/_custom_type_script = "uid://cslf8mk74f83c"
 
 [resource]
 script = ExtResource("5_det7y")
 Name = "Bandage"
-Icon = ExtResource("4_up4ha")
-Description = "sssCan heal the player for 5 hp on use."
+Icon = ExtResource("1_ofixm")
+ScenePrefab = ExtResource("2_1dv1i")
+SceneScale = 0.1
+Description = "Always check the medical cabnet.
++10 HP"
 Behavior = 1
 MaxUses = 5
 UseEffects = Array[ExtResource("1_1dv1i")]([SubResource("Resource_1dv1i")])

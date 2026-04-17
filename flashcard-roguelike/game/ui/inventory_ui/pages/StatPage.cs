@@ -21,6 +21,10 @@ public partial class StatPage : InventoryPage<ItemResource>
 
     private void OnDropPressed()
     {
+        if (BattleManager.Instance.IsInCombat)
+        {
+           return; 
+        }
         GD.Print("test");
         if (_item == null) return;
         GD.Print("dropping");

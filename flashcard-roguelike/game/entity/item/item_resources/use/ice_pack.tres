@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://bysevfq34nxa2"]
+
+[ext_resource type="Texture2D" uid="uid://bbmud6ukfei7r" path="res://assets/sprites/item_sprites/ice_pack.png" id="1_4ynwc"]
+[ext_resource type="PackedScene" uid="uid://rbt8oksmmwl7" path="res://assets/models/item_models/model_scenes/ice_cubes.tscn" id="2_0lm7m"]
+[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="3_y1gwm"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_yy7y3"]
+
+[sub_resource type="Resource" id="Resource_bnvft"]
+script = ExtResource("3_y1gwm")
+_hp = 40
+_maxHp = 20
+metadata/_custom_type_script = "uid://cslf8mk74f83c"
+
+[resource]
+script = ExtResource("4_yy7y3")
+Name = "Ice Pack"
+Icon = ExtResource("1_4ynwc")
+ScenePrefab = ExtResource("2_0lm7m")
+Description = "Effective Cure All 
++20 Max HP
++40 HP"
+Behavior = 1
+MaxUses = 1
+UseEffects = Array[Object]([SubResource("Resource_bnvft")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"

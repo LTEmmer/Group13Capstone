@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://rbt8oksmmwl7"]
+
+[ext_resource type="PackedScene" uid="uid://cw55iyunpjmih" path="res://assets/models/item_models/ice_cubes.glb" id="1_q815t"]
+
+[node name="ice_cubes" unique_id=770132062 instance=ExtResource("1_q815t")]
+
+[node name="Node" parent="." index="0" unique_id=2000282804]
+transform = Transform3D(4.43, 0, 0, 0, 4.43, 0, 0, 0, 4.43, 0, 0, 0)
+layers = 540673
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1" unique_id=660367892]
+layers = 540672
+light_energy = 0.25
+omni_range = 1.5439633

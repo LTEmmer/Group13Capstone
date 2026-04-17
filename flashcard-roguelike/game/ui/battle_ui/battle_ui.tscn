@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://f2j83gxk5lw2" path="res://game/ui/battle_ui/BattleUI.cs" id="1_battle_ui"]
 [ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_wbtheme"]
 [ext_resource type="Texture2D" uid="uid://b48xe6gkb0idd" path="res://assets/ui/main_menu_torn_paper.png" id="3_paper"]
-[ext_resource type="Script" uid="uid://dxrfb7cqdka2f" path="res://game/ui/main_menu/TornPaperMenuPanel.cs" id="4_tpaper"]
+[ext_resource type="Script" uid="uid://lq4wspjrvojx" path="res://game/ui/main_menu/TornPaperMenuPanel.cs" id="4_tpaper"]
 
 [node name="BattleUI" type="Control" unique_id=1960394992]
 layout_mode = 3

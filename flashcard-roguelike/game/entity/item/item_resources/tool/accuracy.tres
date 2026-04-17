@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://bi2uy0qvm6c43"]
+
+[ext_resource type="Texture2D" uid="uid://4bj1chprjfi5" path="res://assets/sprites/item_sprites/accuracy.png" id="1_1i1po"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_1i1po"]
+[ext_resource type="PackedScene" uid="uid://6jd7jdj0i3bm" path="res://assets/models/item_models/accuracy.glb" id="2_tj0m7"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="3_tj0m7"]
+
+[sub_resource type="Resource" id="Resource_uwrwh"]
+script = ExtResource("2_1i1po")
+_crit_chance = 0.5
+_crit_mult = 0.25
+metadata/_custom_type_script = "uid://crv315mdj71bb"
+
+[resource]
+script = ExtResource("3_tj0m7")
+Name = "Charm of Accuracy"
+Icon = ExtResource("1_1i1po")
+ScenePrefab = ExtResource("2_tj0m7")
+SceneScale = 3.0
+Description = "Everything is on target.
+50% CC
+25% CM"
+Behavior = 2
+Slot = 5
+Rarity = 3
+UseEffects = Array[Object]([SubResource("Resource_uwrwh")])
+PickupEffects = null
+metadata/_custom_type_script = "uid://573w4ti026as"

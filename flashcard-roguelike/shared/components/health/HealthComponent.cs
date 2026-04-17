@@ -13,6 +13,9 @@ public partial class HealthComponent : Node
 	public delegate void EnemyDiedEventHandler();
 	
 	[Export] public float MaxHealth = 100f;
+	public float Shield = 0f;
+	public float TrueDefence = 0f;
+
 	[Export] public bool IsPlayer = false;
 
 
@@ -36,9 +39,32 @@ public partial class HealthComponent : Node
 
 		GetParent().CallDeferred(Node.MethodName.AddChild, _audioPlayer);
 	}
-
-	public void TakeDamage(float damage)
+	public void TakeDamage(float damage, bool direct = false)
 	{
+		if (!direct)
+		{
+			if(Shield > 0)
+			{
+				GD.Print("Shield pre: ", Shield);
+				float tmp = damage;
+				damage -= Shield;
+				Shield -= tmp;
+				if(damage <= 0) return;
+    			Shield = Mathf.Max(Shield, 0);
+				GD.Print("Shield pos: ", Shield);
+			}
+
+			float def = TrueDefence;
+    		def = Mathf.Min(def, 0.8f);
+    		def = Mathf.Max(def, 0f);
+			GD.Print("True Def: ", def);
+			GD.Print("Dam pre: ", damage);
+			damage -= damage * def;
+			GD.Print("Dam pos: ", damage);
+		}
+
+		if(damage <= 0) return;
+
 		CurrentHealth -= damage;
 		GD.Print($"{GetParent().Name}: Health: {CurrentHealth}/{MaxHealth}");
 

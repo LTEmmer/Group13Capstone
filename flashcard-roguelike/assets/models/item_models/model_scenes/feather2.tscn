@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b81slfj5fjx2k"]
+
+[ext_resource type="PackedScene" uid="uid://p577j3hs8p23" path="res://assets/models/item_models/feather.glb" id="1_blkh7"]
+[ext_resource type="Material" uid="uid://cxyqlevo2mro1" path="res://game/ui/inventory_ui/PostItMaterial.tres" id="2_2wfjl"]
+
+[node name="feather" unique_id=1345465830 instance=ExtResource("1_blkh7")]
+
+[node name="group557217501" parent="." index="0" unique_id=137737837]
+material_override = ExtResource("2_2wfjl")

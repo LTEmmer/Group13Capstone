@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://d4jv7pimaq3wm"]
+
+[ext_resource type="Script" uid="uid://bm0qih7avtvnr" path="res://assets/sprites/item_sprites/extract_from_model/SubViewport2.cs" id="1_ig8e5"]
+[ext_resource type="PackedScene" uid="uid://cw55iyunpjmih" path="res://assets/models/item_models/ice_cubes.glb" id="2_ig8e5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ig8e5"]
+viewport_path = NodePath("SubViewport2")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1o1de"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_k7n5m"]
+sky_material = SubResource("ProceduralSkyMaterial_1o1de")
+
+[sub_resource type="Environment" id="Environment_2toni"]
+background_mode = 2
+sky = SubResource("Sky_k7n5m")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="TextureRect" unique_id=243001630]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_ig8e5")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="SubViewport2" type="SubViewport" parent="." unique_id=733515798]
+transparent_bg = true
+script = ExtResource("1_ig8e5")
+
+[node name="Node3D2" type="Node3D" parent="SubViewport2" unique_id=453049745]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport2/Node3D2" unique_id=245283405]
+environment = SubResource("Environment_2toni")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport2/Node3D2" unique_id=679526476]
+transform = Transform3D(-0.84965014, 0.07153264, 0.5224727, 0.4442206, -0.43683544, 0.7822038, 0.28418767, 0.89669275, 0.33938113, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Node3D2" type="Node3D" parent="SubViewport2/Node3D2" unique_id=2142322232]
+
+[node name="ice_cubes" parent="SubViewport2/Node3D2/Node3D2" unique_id=770132062 instance=ExtResource("2_ig8e5")]
+
+[node name="Node3D" type="Node3D" parent="SubViewport2/Node3D2" unique_id=1571357994]
+transform = Transform3D(0.88609016, 0, 0.46351257, 0, 0.9999998, 0, -0.46351248, 0, 0.88609034, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport2/Node3D2/Node3D" unique_id=2125932599]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.8785673, 0.47761884, 0, -0.4776189, 0.87856716, 0, 0.7395758, 1.470894)
+current = true
+fov = 30.40965

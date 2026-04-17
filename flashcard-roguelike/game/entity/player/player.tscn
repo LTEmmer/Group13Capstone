@@ -18064,7 +18064,6 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_f4oo1")
 
 [node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("4_dmj0o")]
-BaseDamage = 100.0
 AttackSounds = Array[AudioStream]([ExtResource("12_4j27x"), ExtResource("13_0jrw7"), ExtResource("22_6rqdb"), ExtResource("23_l0vtf"), ExtResource("24_8vwb3")])
 MissSounds = Array[AudioStream]([])
 
