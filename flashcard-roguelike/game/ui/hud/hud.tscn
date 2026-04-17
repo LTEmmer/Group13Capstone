@@ -1,6 +1,16 @@
 [gd_scene format=3 uid="uid://b3in5lpjk8qjr"]
 
 [ext_resource type="Script" uid="uid://dpg6u0hfi2o0f" path="res://game/ui/hud/HUD.cs" id="1_script"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_l7e5k"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d4vpa"]
+load_path = "res://.godot/imported/whiteboard.png-0b4dcad790b2dd74c6ead4d6e773052f.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l7e5k"]
+load_path = "res://.godot/imported/erased.png-5e64f6c280d2e94b00a15110ca3798e0.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8mv14"]
+load_path = "res://.godot/imported/health_fill.png-883a86ab79707abf47806678b4a8f161.ctex"
 
 [node name="HUD" type="CanvasLayer" unique_id=1895084757 node_paths=PackedStringArray("_roomNameLabel", "_healthLabel", "_shieldlabel")]
 script = ExtResource("1_script")
@@ -8,45 +18,95 @@ _roomNameLabel = NodePath("Background/MarginContainer/VBoxContainer/RoomNameLabe
 _healthLabel = NodePath("Background/MarginContainer/VBoxContainer/HealthLabel")
 _shieldlabel = NodePath("Background/MarginContainer/VBoxContainer/ShieldLabel")
 
-[node name="Background" type="Panel" parent="." unique_id=1552136995]
-anchors_preset = 2
+[node name="HealthBarRoot" type="MarginContainer" parent="." unique_id=1895084758]
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 19.0
-offset_top = -176.0
-offset_right = 280.0
-offset_bottom = -20.0
+offset_left = -300.0
+offset_top = -56.0
+offset_right = -20.0
+offset_bottom = -16.0
+grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="Background" unique_id=666212496]
+[node name="HealthBarTrack" type="Control" parent="HealthBarRoot" unique_id=1895084762]
+custom_minimum_size = Vector2(260, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="WhiteboardBg" type="TextureRect" parent="HealthBarRoot/HealthBarTrack" unique_id=1895084765]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+offset_left = -21.0
+offset_right = 19.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CompressedTexture2D_d4vpa")
+expand_mode = 1
+
+[node name="ErasedLayer" type="TextureRect" parent="HealthBarRoot/HealthBarTrack" unique_id=1895084763]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_right = 19.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("CompressedTexture2D_l7e5k")
+expand_mode = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="HealthBarRoot/HealthBarTrack" unique_id=1895084759]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -0.5
+offset_right = 20.0
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+value = 100.0
+texture_progress = SubResource("CompressedTexture2D_8mv14")
+
+[node name="HealthValueLabel" type="Label" parent="HealthBarRoot/HealthBarTrack" unique_id=1895084764]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer" unique_id=219611288]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 4
+theme_override_colors/font_color = Color(0.12, 0.12, 0.13, 1)
+theme_override_colors/font_outline_color = Color(0.96, 0.94, 0.9, 0.95)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_l7e5k")
+theme_override_font_sizes/font_size = 13
+text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RoomNameLabel" type="Label" parent="Background/MarginContainer/VBoxContainer" unique_id=110892469]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Room 0 (Entrance)"
 autowrap_mode = 2
-
-[node name="HealthLabel" type="Label" parent="Background/MarginContainer/VBoxContainer" unique_id=342355670]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "HP: 100 / 100"
 
 [node name="ShieldLabel" type="Label" parent="Background/MarginContainer/VBoxContainer" unique_id=290986463]
 layout_mode = 2
