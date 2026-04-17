@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b31w7r83d3ycp"]
 
-[ext_resource type="Script" uid="uid://byw06psy00eal" path="res://game/entity/item/Item.cs" id="1_7x45u"]
+[ext_resource type="Script" uid="uid://c7an01bvdh6hn" path="res://game/entity/item/Item.cs" id="1_7x45u"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nwg37"]
 radius = 1.6565362
@@ -24,5 +24,6 @@ mesh = SubResource("CylinderMesh_0ak7e")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=1603687644]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 2.840121, 0)
+render_priority = 1
 text = "asdfasdfsdf"
 font_size = 128

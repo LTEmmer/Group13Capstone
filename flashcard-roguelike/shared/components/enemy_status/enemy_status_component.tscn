@@ -4,21 +4,21 @@
 
 [node name="EnemyStatusComponent" type="Node3D" unique_id=153576658]
 script = ExtResource("1_enemy_status")
-NameOnScreenPos = Vector3(-1.0629346, 0.79999995, 0)
-StatsOnScreenPos = Vector3(-1.2463169, 0.45893145, 0)
-HealthOnScreenPos = Vector3(0.8737004, 0.79999995, 0)
 
 [node name="NameLabel" type="Label3D" parent="." unique_id=1158691251]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.88938904, 0.79999995, 0)
 billboard = 1
+render_priority = 1
 text = "Enemy"
 
 [node name="StatsLabel" type="Label3D" parent="." unique_id=432271192]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8321111, 0.45893145, 0)
 billboard = 1
+render_priority = 1
 text = "ATK: 0"
 
 [node name="HealthLabel" type="Label3D" parent="." unique_id=234038543]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.106883, 0.79999995, 0)
 billboard = 1
+render_priority = 1
 text = "HP: 0/0"

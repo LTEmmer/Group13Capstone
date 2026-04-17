@@ -27,6 +27,7 @@ public partial class BattleManager : Node
 	
 	// Victory menu
 	private VictoryMenu _victoryMenu;
+	private GameOverMenu _gameOverMenu;
 
 	// Cooldown management
 	private Timer _battleCooldownTimer;
@@ -61,6 +62,9 @@ public partial class BattleManager : Node
 
 		_victoryMenu = GD.Load<PackedScene>("res://game/ui/victory/victory_menu.tscn").Instantiate<VictoryMenu>();
 		AddChild(_victoryMenu);
+
+		_gameOverMenu = GD.Load<PackedScene>("res://game/ui/game_over/game_over_menu.tscn").Instantiate<GameOverMenu>();
+		AddChild(_gameOverMenu);
 
 		if (Transitions == null || ActiveUI == null || _flashcardChallenge == null || _flashcardChallengeTrueOrFalse == null || _flashcardChallengeMultipleChoice == null)
 		{
@@ -360,6 +364,7 @@ public partial class BattleManager : Node
 					if (victory && _state.IsBossBattle)
 					{
 						_victoryMenu.ShowVictory("You defeated the boss!\nCongratulations!");
+						_gameOverMenu.ShowSessionStats("You defeated the boss!", true, showVictory: true);
 						return;
 					}
 
