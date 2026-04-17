@@ -15,7 +15,6 @@ public partial class HUD : CanvasLayer
 
 	public override void _Ready()
 	{
-		_roomNameLabel = GetNode<Label>("MarginContainer/VBoxContainer/RoomNameLabel");
 		_healthValueLabel = GetNode<Label>("%HealthValueLabel");
 		_healthBar = GetNode<TextureProgressBar>("%HealthBar");
 
@@ -51,7 +50,7 @@ public partial class HUD : CanvasLayer
 
 		if (CurrentRoomManager.Instance != null && CurrentRoomManager.Instance.CurrentRoomId >= 0)
 		{
-			DungeonGenerator gen = GetTree().Root.GetNodeOrNull<DungeonGenerator>("Dungeon");
+			DungeonGenerator gen = GetTree().Root.GetNodeOrNull<DungeonGenerator>("DungeonGenerator");
 			if (gen != null)
 				_roomNameLabel.Text = gen.GetRoomDisplayName(CurrentRoomManager.Instance.CurrentRoomId);
 			else

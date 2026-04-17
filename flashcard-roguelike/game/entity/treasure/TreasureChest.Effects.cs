@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class TreasureChestOld
+public partial class TreasureChest
 {
 	// Rarity light — assign the room's spotlight in the Inspector
 	[Export] public Light3D ChestLight;
@@ -14,8 +14,8 @@ public partial class TreasureChestOld
 	[Export] public Marker3D[] CameraAngles;
 
 	// Tuning
-	[Export] public float LidImpulseUp       = 6f;
-	[Export] public float LidImpulseHoriz    = 1.5f;
+	[Export] public float LidImpulseUp       = 25f;
+	[Export] public float LidImpulseHoriz    = 5f;
 	[Export] public float ShakeDuration      = 0.25f;
 	[Export] public float ShakeMagnitude     = 3f;
 	[Export] public float IdleShakePause     = 1.0f;

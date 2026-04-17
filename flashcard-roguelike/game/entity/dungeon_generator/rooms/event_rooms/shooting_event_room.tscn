@@ -148,7 +148,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.700348, -2.7470727, 51.741
 [node name="shooting_room_walls1" parent="." unique_id=464377349 instance=ExtResource("7_dxxao")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
 
-[node name="Cylinder" parent="shooting_room_walls1" index="0" unique_id=333592520]
+[node name="Cylinder" parent="shooting_room_walls1" index="0" unique_id=1893645510]
 material_override = ExtResource("8_066kt")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="shooting_room_walls1/Cylinder" index="0" unique_id=516827396]
@@ -158,7 +158,7 @@ shape = SubResource("ConcavePolygonShape3D_c005r")
 
 [node name="shooting_room_floors" parent="shooting_room_walls1" unique_id=1927178391 instance=ExtResource("9_cauoo")]
 
-[node name="Cylinder_001" parent="shooting_room_walls1/shooting_room_floors" index="0" unique_id=1975440431]
+[node name="Cylinder_001" parent="shooting_room_walls1/shooting_room_floors" index="0" unique_id=1038068171]
 material_override = ExtResource("10_afmoe")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="shooting_room_walls1/shooting_room_floors/Cylinder_001" index="0" unique_id=955991690]

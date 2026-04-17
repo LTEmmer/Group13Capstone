@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://08j36rswj4qd"]
 
 [ext_resource type="Script" uid="uid://c10vqqj6pm34j" path="res://game/entity/dungeon_generator/DungeonGenerator.cs" id="1_fs5hr"]
-[ext_resource type="Resource" uid="uid://ct3ayvy705c8d" path="res://game/entity/dungeon_generator/room_configs/entrance_rooms/entrance_room_intro_config.tres" id="2_a7trn"]
+[ext_resource type="Resource" uid="uid://d21gdfwfppx0s" path="res://game/entity/dungeon_generator/room_configs/entrance_rooms/entrance_room_intro_config.tres" id="2_a7trn"]
 [ext_resource type="Resource" uid="uid://7m24lu8iit1o" path="res://game/entity/dungeon_generator/room_configs/exit_rooms/exit_room_cafe_config.tres" id="3_wm4nc"]
 [ext_resource type="Resource" uid="uid://t1s1otnvdagb" path="res://game/entity/dungeon_generator/room_configs/combat_rooms/combat_room_gym_config.tres" id="4_01r3o"]
 [ext_resource type="Resource" uid="uid://c2kbiufvcusr0" path="res://game/entity/dungeon_generator/room_configs/event_rooms/parkour_event_room_config.tres" id="5_qj5ly"]

@@ -354,7 +354,7 @@ Reward = NodePath("Reward")
 [node name="cave" parent="." unique_id=1561546874 instance=ExtResource("9_y432j")]
 transform = Transform3D(1.455, 0, 0, 0, 1.455, 0, 0, 0, 1.455, 0, 7.6004925, 0)
 
-[node name="Cube" parent="cave" index="0" unique_id=2112065862]
+[node name="Cube" parent="cave" index="0" unique_id=420097351]
 material_override = ExtResource("4_y432j")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="cave/Cube" index="0" unique_id=1897514303]
@@ -724,13 +724,10 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Decor/ufo/Sphere/StaticBody3D" unique_id=1650421250]
 shape = SubResource("ConvexPolygonShape3D_i6yls")
 
-[node name="Reward" parent="." unique_id=1286188714 instance=ExtResource("22_c241s")]
+[node name="Reward" parent="." unique_id=1286188714 node_paths=PackedStringArray("CameraAngles") instance=ExtResource("22_c241s")]
 transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071067, -28.431572, 19.037563, 9.016455)
 visible = false
-
-[node name="FogVolume" parent="Reward/Light" parent_id_path=PackedInt32Array(1286188714, 2023982208) index="0" unique_id=967009659]
-transform = Transform3D(1, 1.7763568e-15, 0, 0, -4.371139e-08, -1, -3.7303494e-14, 1, -4.371139e-08, 0, 0, -11.07074)
-size = Vector3(3.8, 18.940567, 3.8)
+CameraAngles = []
 
 [editable path="cave"]
 [editable path="LightRotate"]
@@ -740,4 +737,3 @@ size = Vector3(3.8, 18.940567, 3.8)
 [editable path="Decor/desk2"]
 [editable path="Decor/pencil"]
 [editable path="Decor/ufo"]
-[editable path="Reward"]

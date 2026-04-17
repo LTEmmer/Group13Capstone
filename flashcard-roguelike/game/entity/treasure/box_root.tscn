@@ -1,12 +1,10 @@
 [gd_scene format=4 uid="uid://dxdxbn1isdu44"]
 
 [ext_resource type="Material" uid="uid://ddtvbhnxky0xy" path="res://assets/models/treasure_room/box/box_bottom_texture.tres" id="1_2177w"]
+[ext_resource type="Script" uid="uid://dcech2bqq5xi5" path="res://game/entity/treasure/TreasureChest.cs" id="1_n4d8g"]
 [ext_resource type="Material" uid="uid://bhmnfrl721bn6" path="res://assets/models/treasure_room/box/box_junk_material.tres" id="1_xtdgc"]
 [ext_resource type="Material" uid="uid://bkqykn6oj2rq6" path="res://assets/models/treasure_room/box/box_lid_texture.tres" id="2_1jwbe"]
-[ext_resource type="Script" uid="uid://bmb23qe3hj2fc" path="res://shared/resources/ItemResource.cs" id="2_yqjpm"]
-[ext_resource type="Resource" uid="uid://c025ebyq1swtw" path="res://game/entity/item/item_resources/use/bonk_stick.tres" id="3_xelpo"]
 [ext_resource type="Texture2D" uid="uid://ckkx4va82ysps" path="res://assets/models/treasure_room/box/lost-and-found-rubber-stamp-seal-free-vector-removebg-preview.png" id="4_epiam"]
-[ext_resource type="Script" uid="uid://bk7p3xjo8ru00" path="res://game/entity/treasure/TreasureChestOld.cs" id="5_chest"]
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="6_item"]
 [ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="7_xelpo"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="12_5oboa"]
@@ -163,21 +161,17 @@ height_falloff = 1e-05
 edge_fade = 1e-05
 
 [node name="BoxRoot" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "ChestLight", "_particles", "RevealCamera", "CameraAngles") groups=["Interactable"]]
-script = ExtResource("5_chest")
-LootPool = Array[ExtResource("2_yqjpm")]([ExtResource("3_xelpo")])
+script = ExtResource("1_n4d8g")
 ItemScene = ExtResource("6_item")
 _label = NodePath("Label3D")
 _lidBody = NodePath("LidBody")
 OpenSound = ExtResource("7_xelpo")
 _openSoundPlayer = NodePath("OpenSoundPlayer")
 ChestLight = NodePath("Light")
-RarityColors = PackedColorArray(0.5639733, 0.57363933, 0.549362, 1, 0.08478225, 0.6843731, 0, 1, 0, 0.39215687, 0.9843137, 1, 0.7480167, 0.0002950415, 0.7129954, 1, 0.85397196, 0, 0.13966635, 1)
+RarityColors = PackedColorArray(0.8848981, 0.8848981, 0.8848981, 1, 9.866804e-07, 0.5114562, 0.103561275, 1, 0.23117456, 0.47789878, 1, 1, 0.8233584, 0.00080628635, 0.86872333, 1, 0.86527705, 0.70930505, 2.3102762e-06, 1)
 _particles = NodePath("BurstParticles")
 RevealCamera = NodePath("RevealCamera")
 CameraAngles = [NodePath("RevealCameraAngles/Angle"), NodePath("RevealCameraAngles/Angle2"), NodePath("RevealCameraAngles/Angle3"), NodePath("RevealCameraAngles/Angle4"), NodePath("RevealCameraAngles/Angle5")]
-LidImpulseUp = 25.0
-LidImpulseHoriz = 5.0
-ShakeDuration = 0.2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1832437720]
 shape = SubResource("BoxShape3D_chest")
@@ -229,7 +223,7 @@ draw_pass_1 = SubResource("SphereMesh_particle")
 
 [node name="Light" type="SpotLight3D" parent="." unique_id=2023982208]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.038681746, 20.164894, 0.12280822)
-light_color = Color(0.85397196, 0, 0.13966635, 1)
+light_color = Color(0.86527705, 0.70930505, 2.3102762e-06, 1)
 light_energy = 30.0
 light_volumetric_fog_energy = 16.0
 shadow_enabled = true
