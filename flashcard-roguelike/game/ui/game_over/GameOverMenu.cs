@@ -21,6 +21,7 @@ public partial class GameOverMenu : CanvasLayer
 	private Label _statsHeaderLabel;
 	private GridContainer _statsListContainer;
 	private bool _advanceRequested;
+	private bool _showVictory;
 
 	public override void _Ready()
 	{
@@ -85,7 +86,7 @@ public partial class GameOverMenu : CanvasLayer
 	/// <summary>
 	/// Shows the same end-of-run stats screen from non-death flows such as the pause menu.
 	/// </summary>
-	public void ShowSessionStats(string message = "Run summary", bool playAudio = false)
+	public void ShowSessionStats(string message = "Run summary", bool playAudio = false, bool showVictory = false)
 	{
 		if (!IsNodeReady())
 		{
@@ -95,11 +96,13 @@ public partial class GameOverMenu : CanvasLayer
 			return;
 		}
 
-		ShowStatsScreen(message, playAudio);
+		ShowStatsScreen(message, playAudio, showVictory);
 	}
 
-	private void ShowStatsScreen(string message, bool playAudio)
+	private void ShowStatsScreen(string message, bool playAudio, bool showVictory = false)
 	{
+		_showVictory = showVictory;
+
 		if (_messageLabel != null)
 		{
 			_messageLabel.Text = message;
@@ -110,10 +113,13 @@ public partial class GameOverMenu : CanvasLayer
 		BattleManager.Instance?.Transitions?.Hide();
 		BattleManager.Instance?.ActiveUI?.Hide();
 
-		AudioManager.Instance?.FadeOutMusic();
-		if (playAudio)
+		if (!showVictory)
 		{
-			AudioManager.Instance?.PlayGameOverSound();
+			AudioManager.Instance?.FadeOutMusic();
+			if (playAudio)
+			{
+				AudioManager.Instance?.PlayGameOverSound();
+			}
 		}
 
 		_advanceRequested = true;
@@ -140,6 +146,13 @@ public partial class GameOverMenu : CanvasLayer
 		}
 
 		_advanceRequested = false;
+
+		if (_showVictory)
+		{
+			SceneTransition.FadeOut(this, QueueFree);
+			return;
+		}
+
 		SceneTransition.FadeOut(this, () =>
 		{
 			GetTree().Paused = false;
