@@ -4,7 +4,6 @@
 [ext_resource type="Material" uid="uid://bhmnfrl721bn6" path="res://assets/models/treasure_room/box/box_junk_material.tres" id="1_xtdgc"]
 [ext_resource type="Material" uid="uid://bkqykn6oj2rq6" path="res://assets/models/treasure_room/box/box_lid_texture.tres" id="2_1jwbe"]
 [ext_resource type="Script" uid="uid://bmb23qe3hj2fc" path="res://shared/resources/ItemResource.cs" id="2_yqjpm"]
-[ext_resource type="Resource" uid="uid://c025ebyq1swtw" path="res://game/entity/item/item_resources/use/bonk_stick.tres" id="3_xelpo"]
 [ext_resource type="Texture2D" uid="uid://ckkx4va82ysps" path="res://assets/models/treasure_room/box/lost-and-found-rubber-stamp-seal-free-vector-removebg-preview.png" id="4_epiam"]
 [ext_resource type="Script" uid="uid://bk7p3xjo8ru00" path="res://game/entity/treasure/TreasureChestOld.cs" id="5_chest"]
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="6_item"]
@@ -164,7 +163,7 @@ edge_fade = 1e-05
 
 [node name="BoxRoot" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "ChestLight", "_particles", "RevealCamera", "CameraAngles") groups=["Interactable"]]
 script = ExtResource("5_chest")
-LootPool = Array[ExtResource("2_yqjpm")]([ExtResource("3_xelpo")])
+LootPool = Array[ExtResource("2_yqjpm")]([])
 ItemScene = ExtResource("6_item")
 _label = NodePath("Label3D")
 _lidBody = NodePath("LidBody")
