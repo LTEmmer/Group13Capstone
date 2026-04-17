@@ -174,8 +174,9 @@ ChestLight = NodePath("Light")
 RarityColors = PackedColorArray(0.5639733, 0.57363933, 0.549362, 1, 0.08478225, 0.6843731, 0, 1, 0, 0.39215687, 0.9843137, 1, 0.7480167, 0.0002950415, 0.7129954, 1, 0.85397196, 0, 0.13966635, 1)
 _particles = NodePath("BurstParticles")
 RevealCamera = NodePath("RevealCamera")
-CameraAngles = [NodePath("RevealCameraAngles/Marker"), NodePath("RevealCameraAngles/Marker2"), NodePath("RevealCameraAngles/Marker3"), NodePath("RevealCameraAngles/Marker4"), NodePath("RevealCameraAngles/Marker5")]
+CameraAngles = [NodePath("RevealCameraAngles/Angle"), NodePath("RevealCameraAngles/Angle2"), NodePath("RevealCameraAngles/Angle3"), NodePath("RevealCameraAngles/Angle4"), NodePath("RevealCameraAngles/Angle5")]
 LidImpulseUp = 25.0
+LidImpulseHoriz = 5.0
 ShakeDuration = 0.2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1832437720]
@@ -243,22 +244,22 @@ shape = 1
 material = SubResource("FogMaterial_5oboa")
 
 [node name="RevealCamera" type="Camera3D" parent="." unique_id=507172474]
-transform = Transform3D(-0.5912456, -0.5210082, 0.6156128, -0.26697126, 0.8467245, 0.46019983, -0.7610224, 0.107740186, -0.6397164, 2.9685602, 2.706, -3.802)
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="RevealCameraAngles" type="Node3D" parent="." unique_id=970828782]
 
-[node name="Marker" type="Marker3D" parent="RevealCameraAngles" unique_id=757069887]
+[node name="Angle" type="Marker3D" parent="RevealCameraAngles" unique_id=757069887]
 transform = Transform3D(0.8562671, -0.25513744, -0.44912308, 0, 0.8694949, -0.49394187, 0.5165333, 0.42294618, 0.7445199, -1.313, -0.193, 2.238)
 gizmo_extents = 0.17
 
-[node name="Marker2" type="Marker3D" parent="RevealCameraAngles" unique_id=1963969988]
-transform = Transform3D(0.7581343, 0.32209867, 0.5669962, 0, 0.86949486, -0.49394184, -0.6520984, 0.37447426, 0.6591939, 1.923, -0.153, 2.444)
-
-[node name="Marker3" type="Marker3D" parent="RevealCameraAngles" unique_id=201992797]
+[node name="Angle2" type="Marker3D" parent="RevealCameraAngles" unique_id=201992797]
 transform = Transform3D(-0.6820382, 0.49783897, -0.53570527, 0.29530463, 0.85762686, 0.4210358, 0.66904336, 0.12896623, -0.73194855, -3.144, 2.831, -3.802)
 
-[node name="Marker4" type="Marker3D" parent="RevealCameraAngles" unique_id=482833852]
-transform = Transform3D(-0.59124553, -0.5210082, 0.6156128, -0.26697123, 0.8467245, 0.4601998, -0.7610223, 0.10774018, -0.6397164, 2.9685602, 2.706, -3.802)
+[node name="Angle3" type="Marker3D" parent="RevealCameraAngles" unique_id=1963969988]
+transform = Transform3D(-0.7431448, 0.3305116, 0.5818056, 0, 0.86949486, -0.49394184, -0.6691306, -0.36707032, -0.6461606, 1.923, -0.153, -2.444)
 
-[node name="Marker5" type="Marker3D" parent="RevealCameraAngles" unique_id=515379441]
+[node name="Angle4" type="Marker3D" parent="RevealCameraAngles" unique_id=482833852]
+transform = Transform3D(0.90063274, 0.04929559, 0.43177605, -0.26697123, 0.8467245, 0.4601998, -0.34290954, -0.52974284, 0.7757484, 2.969, 2.706, 3.802)
+
+[node name="Angle5" type="Marker3D" parent="RevealCameraAngles" unique_id=515379441]
 transform = Transform3D(-1, 2.1613864e-08, -1.394363e-07, -3.3546858e-08, 0.9234448, 0.3837313, 1.3705564e-07, 0.3837313, -0.9234448, 0, 4.947082, -8.144059)
