@@ -65,10 +65,12 @@ _data = {
 [node name="BaseNPC" type="StaticBody3D" parent="." unique_id=2015437748 groups=["Interactable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_4jotm")
-_name = "TEST"
-_dialogText = "TEST"
+_name = "Bozoington"
+_dialogText = "Yes you like fortnite girl i got like at least 3000 vbucks also you should buy my crypto its gonna go crazy trust me"
 _npcIcon = ExtResource("2_7uok8")
 _voice = ExtResource("3_5v36d")
+_charsPerSecond = 20.0
+_needsResponse = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BaseNPC" unique_id=507006833]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.060546875, 0)

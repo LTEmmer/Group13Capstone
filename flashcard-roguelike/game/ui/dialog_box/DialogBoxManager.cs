@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using System.Transactions;
 using Godot;
 
@@ -13,9 +14,11 @@ public partial class DialogBoxManager : CanvasLayer
     [Export] private Label _continueText;
 
     private string _fullText;
-    private string _npcName;
-    private Texture2D _npcIconImage;
-    private AudioStream _npcVoice;
+    private int _totalVisibleChars = 0;
+    private float _charTimer = 0f;
+    private bool _isDoneRevealing = true;
+    private float _interval;
+    private bool _isJustTriggered = false;
 
 
     public static DialogBoxManager Instance; 
@@ -29,20 +32,74 @@ public partial class DialogBoxManager : CanvasLayer
         _noButton.Pressed += OnNoPressed;
     }
 
-    public void ShowDialog(string text, string npcName, Texture2D npcIcon, AudioStream npcVoice)
+    public void ShowDialog(string text, string npcName, Texture2D npcIcon, AudioStream npcVoice, 
+                           float charsPerSecond = 10f, bool needsResponse = false)
     {
         _fullText = text;
-        _npcName = npcName;
-        _npcIconImage = npcIcon;
-        _npcVoice = npcVoice;
 
         _dialogText.Text = _fullText;
-        _npcNameLabel.Text = _npcName;
-        _npcIcon.Texture = _npcIconImage;
-        _voicePlayer.Stream = _npcVoice;
+        _npcNameLabel.Text = npcName;
+        _npcIcon.Texture = npcIcon;
+        _voicePlayer.Stream = npcVoice;
+
+        _isDoneRevealing = false;
+        _totalVisibleChars = 0;
+        _charTimer = 0f;
+        _interval = 1f / charsPerSecond;
+
+        _dialogText.VisibleCharacters = 0;
+        _dialogText.Text = _fullText;
+
+        if (needsResponse)
+        {
+            _yesButton.Visible = true;
+            _noButton.Visible = true;
+            _continueText.Visible = false;
+        }
+        else
+        {
+            _yesButton.Visible = false;
+            _noButton.Visible = false;
+            _continueText.Visible = true;
+        }
 
         Visible = true;
         Input.MouseMode = Input.MouseModeEnum.Visible;
+
+        _isJustTriggered = true;
+    }
+
+    public override void _Process(double delta)
+    {
+        if (_isDoneRevealing)
+        {
+            return;
+        }
+
+        if (_isJustTriggered)
+        {
+            _isJustTriggered = false;
+        }
+
+        _charTimer += (float)delta;
+
+        if (_charTimer >= _interval)
+        {
+            _dialogText.VisibleCharacters++;
+            _totalVisibleChars++;
+            _charTimer = 0f;
+
+            if (_totalVisibleChars >= _fullText.Length)
+            {
+                _isDoneRevealing = true;
+            }
+
+            if (_totalVisibleChars % 3 == 0)
+            {
+                _voicePlayer.PitchScale = 1f + ((float)GD.RandRange(-.25, .25));
+                _voicePlayer.Play();
+            }
+        }
     }
 
     public void OnYesPressed()
@@ -58,6 +115,27 @@ public partial class DialogBoxManager : CanvasLayer
         Visible = false;
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (Visible)
+        {
+            if (@event.IsActionPressed("interact") && !_isJustTriggered)
+            {
+                if (!_isDoneRevealing)
+                {
+                    _dialogText.VisibleCharacters = _fullText.Length;
+                    _isDoneRevealing = true;
+                }
+                else if (_continueText.Visible)
+                {
+                    Visible = false;
+                    Input.MouseMode = Input.MouseModeEnum.Captured;
+                }
+            }
+        }
+    }
+
 
 
 
