@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://cm05m68d10agu"]
 
 [ext_resource type="Script" uid="uid://bpyixt7jhh8jd" path="res://game/entity/npcs/BaseNPC.cs" id="1_4jotm"]
+[ext_resource type="Texture2D" uid="uid://crdvrj75os4e4" path="res://assets/sprites/grafitti_etc/hamburger.png" id="2_7uok8"]
 [ext_resource type="PackedScene" uid="uid://bxrsrt8mignpe" path="res://assets/models/denizen/denizen.glb" id="2_ee6ba"]
 [ext_resource type="Material" uid="uid://bhimgy8ncowaj" path="res://assets/models/denizen/denizen_texture.tres" id="3_2u3qs"]
+[ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="3_5v36d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4jotm"]
 radius = 1.0
@@ -63,6 +65,10 @@ _data = {
 [node name="BaseNPC" type="StaticBody3D" parent="." unique_id=2015437748 groups=["Interactable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_4jotm")
+_name = "TEST"
+_dialogText = "TEST"
+_npcIcon = ExtResource("2_7uok8")
+_voice = ExtResource("3_5v36d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BaseNPC" unique_id=507006833]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.060546875, 0)
@@ -70,7 +76,7 @@ shape = SubResource("CapsuleShape3D_4jotm")
 
 [node name="denizen" parent="BaseNPC" unique_id=1395835347 instance=ExtResource("2_ee6ba")]
 
-[node name="Cube" parent="BaseNPC/denizen" index="0" unique_id=866048833]
+[node name="Cube" parent="BaseNPC/denizen" index="0" unique_id=257719758]
 material_override = ExtResource("3_2u3qs")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BaseNPC" unique_id=929286900]

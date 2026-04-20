@@ -30,6 +30,7 @@ EventManager="*uid://u328qtrmmpqj"
 DifficultyManager="*uid://cgpb16u2nxry2"
 GameDifficultyManager="*uid://cgpb16u2nxry2"
 AllItems="*uid://s33d0tb7oo4t"
+DialogBoxManager="*uid://b1co7sefs75kv"
 
 [display]
 

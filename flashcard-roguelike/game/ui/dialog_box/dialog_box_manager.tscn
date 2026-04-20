@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://b1co7sefs75kv"]
+
+[ext_resource type="Script" uid="uid://bpb71u1t8unxm" path="res://game/ui/dialog_box/DialogBoxManager.cs" id="1_olevk"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_xa73h"]
+[ext_resource type="Texture2D" uid="uid://crdvrj75os4e4" path="res://assets/sprites/grafitti_etc/hamburger.png" id="3_id3ot"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="4_i4iqo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohvxe"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qwk8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="DialogBox" type="CanvasLayer" unique_id=686415462 node_paths=PackedStringArray("_voicePlayer", "_npcNameLabel", "_npcIcon", "_dialogText", "_yesButton", "_noButton", "_continueText")]
+script = ExtResource("1_olevk")
+_voicePlayer = NodePath("DialogSounds")
+_npcNameLabel = NodePath("Panel/MarginContainer/VBoxContainer/NPCName")
+_npcIcon = NodePath("Panel/MarginContainer/VBoxContainer/DialogContainer/IconBackground/NPCIcon")
+_dialogText = NodePath("Panel/MarginContainer/VBoxContainer/DialogContainer/DialogText")
+_yesButton = NodePath("Panel/MarginContainer/VBoxContainer/ConfirmationContainer/YesButton")
+_noButton = NodePath("Panel/MarginContainer/VBoxContainer/ConfirmationContainer/NoButton")
+_continueText = NodePath("Panel/MarginContainer/VBoxContainer/ConfirmationContainer/ContinueText")
+
+[node name="Panel" type="Panel" parent="." unique_id=2039233317]
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.8
+anchor_right = 0.8
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_xa73h")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=2002275390]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=453929043]
+layout_mode = 2
+
+[node name="NPCName" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1889162818]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_ohvxe")
+text = "TEST"
+
+[node name="DialogContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=907325139]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="IconBackground" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer/DialogContainer" unique_id=1057397811]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="NPCIcon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/DialogContainer/IconBackground" unique_id=2021495263]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_id3ot")
+
+[node name="DialogText" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/DialogContainer" unique_id=1488607910]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/table_border = Color(0, 0, 0, 0)
+theme_override_fonts/normal_font = ExtResource("4_i4iqo")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_4qwk8")
+text = "TEST This message should never be seen TEST"
+
+[node name="ConfirmationContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=573544535]
+layout_mode = 2
+alignment = 2
+
+[node name="YesButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ConfirmationContainer" unique_id=19197602]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "YES"
+
+[node name="NoButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ConfirmationContainer" unique_id=1841442741]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+text = "NO"
+
+[node name="ContinueText" type="Label" parent="Panel/MarginContainer/VBoxContainer/ConfirmationContainer" unique_id=891252529]
+visible = false
+layout_mode = 2
+text = "Press [E] To Continue"
+
+[node name="DialogSounds" type="AudioStreamPlayer" parent="." unique_id=13613749]
