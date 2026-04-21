@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://cm05m68d10agu"]
 
 [ext_resource type="Script" uid="uid://bpyixt7jhh8jd" path="res://game/entity/npcs/BaseNPC.cs" id="1_4jotm"]
-[ext_resource type="Texture2D" uid="uid://crdvrj75os4e4" path="res://assets/sprites/grafitti_etc/hamburger.png" id="2_7uok8"]
 [ext_resource type="PackedScene" uid="uid://bxrsrt8mignpe" path="res://assets/models/denizen/denizen.glb" id="2_ee6ba"]
+[ext_resource type="Texture2D" uid="uid://c4sw6qb70tjlv" path="res://assets/sprites/denizen.png" id="2_htkx1"]
 [ext_resource type="Material" uid="uid://bhimgy8ncowaj" path="res://assets/models/denizen/denizen_texture.tres" id="3_2u3qs"]
-[ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="3_5v36d"]
+[ext_resource type="AudioStream" uid="uid://r62nu73lulmi" path="res://assets/audio/speech/speech_1.mp3" id="3_7uok8"]
+[ext_resource type="AudioStream" uid="uid://b4d1gplcqwdhr" path="res://assets/audio/speech/speech_2.mp3" id="4_htkx1"]
+[ext_resource type="AudioStream" uid="uid://ed3ilwmsl6e5" path="res://assets/audio/speech/speech_3.mp3" id="5_sxyk4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4jotm"]
 radius = 1.0
@@ -65,15 +67,16 @@ _data = {
 [node name="BaseNPC" type="StaticBody3D" parent="." unique_id=2015437748 groups=["Interactable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_4jotm")
-_name = "Bozoington"
-_dialogText = "Yes you like fortnite girl i got like at least 3000 vbucks also you should buy my crypto its gonna go crazy trust me"
-_npcIcon = ExtResource("2_7uok8")
-_voice = ExtResource("3_5v36d")
-_charsPerSecond = 20.0
+_name = "Bozo"
+_dialogText = "Yea you like fortnite girl i got like at least 3000 vbucks also you should buy my crypto its gonna go crazy trust me"
+_npcIcon = ExtResource("2_htkx1")
+_voices = Array[AudioStream]([ExtResource("3_7uok8"), ExtResource("4_htkx1"), ExtResource("5_sxyk4")])
+_charsPerSecond = 25.0
 _needsResponse = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BaseNPC" unique_id=507006833]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.060546875, 0)
+visible = false
 shape = SubResource("CapsuleShape3D_4jotm")
 
 [node name="denizen" parent="BaseNPC" unique_id=1395835347 instance=ExtResource("2_ee6ba")]

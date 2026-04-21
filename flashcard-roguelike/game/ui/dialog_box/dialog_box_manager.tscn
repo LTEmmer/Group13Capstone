@@ -3,7 +3,10 @@
 [ext_resource type="Script" uid="uid://bpb71u1t8unxm" path="res://game/ui/dialog_box/DialogBoxManager.cs" id="1_olevk"]
 [ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_xa73h"]
 [ext_resource type="Texture2D" uid="uid://crdvrj75os4e4" path="res://assets/sprites/grafitti_etc/hamburger.png" id="3_id3ot"]
+[ext_resource type="Texture2D" uid="uid://b48xe6gkb0idd" path="res://assets/ui/main_menu_torn_paper.png" id="3_xa73h"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="4_i4iqo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xa73h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohvxe"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -27,8 +30,10 @@ _dialogText = NodePath("Panel/MarginContainer/VBoxContainer/DialogContainer/Dial
 _yesButton = NodePath("Panel/MarginContainer/VBoxContainer/ConfirmationContainer/YesButton")
 _noButton = NodePath("Panel/MarginContainer/VBoxContainer/ConfirmationContainer/NoButton")
 _continueText = NodePath("Panel/MarginContainer/VBoxContainer/ConfirmationContainer/ContinueText")
+_speakEveryXChars = 4
 
 [node name="Panel" type="Panel" parent="." unique_id=2039233317]
+clip_contents = true
 anchors_preset = -1
 anchor_left = 0.2
 anchor_top = 0.8
@@ -40,6 +45,21 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("2_xa73h")
+
+[node name="TextureRect" type="TextureRect" parent="Panel" unique_id=352863975]
+material = SubResource("ShaderMaterial_xa73h")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -153.40001
+offset_top = -25.400024
+offset_right = 133.39996
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_xa73h")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=2002275390]
 layout_mode = 1
@@ -67,8 +87,10 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="IconBackground" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer/DialogContainer" unique_id=1057397811]
-custom_minimum_size = Vector2(72, 72)
+custom_minimum_size = Vector2(68, 68)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 color = Color(0, 0, 0, 1)
 
 [node name="NPCIcon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/DialogContainer/IconBackground" unique_id=2021495263]
@@ -103,12 +125,12 @@ alignment = 2
 [node name="YesButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ConfirmationContainer" unique_id=19197602]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-text = "YES"
+text = "Accept"
 
 [node name="NoButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ConfirmationContainer" unique_id=1841442741]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-text = "NO"
+text = "RUN!"
 
 [node name="ContinueText" type="Label" parent="Panel/MarginContainer/VBoxContainer/ConfirmationContainer" unique_id=891252529]
 visible = false
@@ -116,3 +138,4 @@ layout_mode = 2
 text = "Press [E] To Continue"
 
 [node name="DialogSounds" type="AudioStreamPlayer" parent="." unique_id=13613749]
+bus = &"SFX"

@@ -443,13 +443,12 @@ transform = Transform3D(0.49999997, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, 0.4999
 
 [node name="BaseNPC" parent="NPC" index="0" unique_id=2015437748]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53995764, 0.14002822, 0)
+_name = "Cave Dweller"
+_dialogText = "Hey... you... I can't get out of here but I may be able to help. But I won't just help you for free. Answer my ONE challenge and I'll slow everything down for ya. Careful though, if you get it wrong I will make everything faster because I hate you. Oh, and did I mention I left my treasure at the end?"
 
 [node name="Label3D" type="Label3D" parent="NPC" unique_id=1657950002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.915051, 0)
 billboard = 1
-text = "TEMP
-Succeed in this challenge and be rewarded
-However wrong answers bring only misery"
 
 [node name="MovingPlatforms" type="Node3D" parent="." unique_id=1132076645]
 

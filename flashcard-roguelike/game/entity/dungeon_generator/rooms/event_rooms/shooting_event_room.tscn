@@ -76,6 +76,8 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.00027179718, 0.05392
 
 [node name="BaseNPC" parent="BaseNPC" index="0" unique_id=2015437748]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31806302, 0.287958, 0)
+_name = "Failing Artist"
+_dialogText = "Hey, you see all these paintings? They're terrific huh? Unrelated but do you want to take part in a challenge? Simply shoot all the matching questions and answers. But be careful, you only have so many shots and you gotta hit them in order! Get at least half right for a special prize! (To shoot: LMB, To zoom: RMB)"
 
 [node name="Panels" type="Node3D" parent="." unique_id=917031636]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 54.21998)

@@ -9,7 +9,7 @@ public partial class BaseNPC : Interactable
     [Export] private string _name;
     [Export] private string _dialogText;
     [Export] private Texture2D _npcIcon;
-    [Export] private AudioStream _voice;
+    [Export] private AudioStream[] _voices;
     [Export] private float _charsPerSecond = 10f;
     [Export] private bool _needsResponse = false;
 
@@ -22,8 +22,7 @@ public partial class BaseNPC : Interactable
           return;
         }
 
-        DialogBoxManager.Instance.ShowDialog(_dialogText, _name, _npcIcon, _voice, _charsPerSecond, _needsResponse);
-        //EmitSignal(nameof(OnInteraction));
-        _interactionTriggered = true;
+        DialogBoxManager.Instance.ShowDialog(_dialogText, _name, _npcIcon, _voices, _charsPerSecond, _needsResponse,
+        onYes: () => { _interactionTriggered = true; EmitSignal(nameof(OnInteraction)); }, null);
     }
 }
