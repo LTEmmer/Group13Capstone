@@ -89,6 +89,8 @@ public partial class TreasureChest
 			return;
 		}
 
+		_lidBody.Freeze = false;
+
 		float angle = _rng.Randf() * Mathf.Tau;
 		_lidBody.ApplyCentralImpulse(new Vector3(
 			Mathf.Cos(angle) * LidImpulseHoriz,

@@ -17,6 +17,7 @@ public partial class TreasureChest : Interactable
 
 	[Export] private Label3D _label;
 	[Export] private RigidBody3D _lidBody;
+	[Export] private StaticBody3D _collisionBody;
 
 	[Export] public AudioStream OpenSound;
 	[Export] private AudioStreamPlayer3D _openSoundPlayer;
@@ -39,6 +40,8 @@ public partial class TreasureChest : Interactable
 			GD.PushError($"RarityColors count ({RarityColors.Length}) must match CameraAngles count ({CameraAngles.Length}) in {Name}");
 			return;
 		}
+
+		_lidBody.Freeze = true;
 
 		_rng.Randomize();
 		UpdateLabel();
@@ -201,5 +204,10 @@ public partial class TreasureChest : Interactable
 		_label.Visible = false;
 		_hoverTween?.Kill();
 		_hoverTween = null;
+	}
+
+	public void SetCollision(bool enabled)
+	{
+		_collisionBody.CollisionLayer = enabled ? (uint)1 : (uint)0;
 	}
 }

@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://2qvmv1ijxwoo" path="res://assets/models/big_pencil/pencil.glb" id="19_xqdim"]
 [ext_resource type="PackedScene" uid="uid://cn4tm82kgsw57" path="res://assets/models/ufo/ufo.glb" id="20_c241s"]
 [ext_resource type="Material" uid="uid://drq58oyucx00r" path="res://assets/models/ufo/ufo_texture.tres" id="21_bw3q5"]
-[ext_resource type="PackedScene" uid="uid://dxdxbn1isdu44" path="res://game/entity/treasure/box_root.tscn" id="22_c241s"]
+[ext_resource type="PackedScene" uid="uid://dxdxbn1isdu44" path="res://game/entity/treasure/treasure_chest_new.tscn" id="22_c241s"]
 [ext_resource type="PackedScene" uid="uid://cnitj3uodab4s" path="res://game/ui/battle_ui/flashcard_challenge_true_false.tscn" id="Scene_flashcard"]
 [ext_resource type="PackedScene" uid="uid://cm05m68d10agu" path="res://game/entity/npcs/base_npc.tscn" id="Scene_npc"]
 [ext_resource type="Script" uid="uid://ba07nbm5r86bb" path="res://game/entity/hazards/DamageZone.cs" id="Script_damage"]

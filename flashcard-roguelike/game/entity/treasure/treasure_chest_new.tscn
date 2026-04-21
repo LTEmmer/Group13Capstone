@@ -1,13 +1,13 @@
 [gd_scene format=4 uid="uid://dxdxbn1isdu44"]
 
-[ext_resource type="Material" uid="uid://ddtvbhnxky0xy" path="res://assets/models/treasure_room/box/box_bottom_texture.tres" id="1_2177w"]
-[ext_resource type="Script" uid="uid://dcech2bqq5xi5" path="res://game/entity/treasure/TreasureChest.cs" id="1_n4d8g"]
-[ext_resource type="Material" uid="uid://bhmnfrl721bn6" path="res://assets/models/treasure_room/box/box_junk_material.tres" id="1_xtdgc"]
-[ext_resource type="Material" uid="uid://bkqykn6oj2rq6" path="res://assets/models/treasure_room/box/box_lid_texture.tres" id="2_1jwbe"]
-[ext_resource type="Texture2D" uid="uid://ckkx4va82ysps" path="res://assets/models/treasure_room/box/lost-and-found-rubber-stamp-seal-free-vector-removebg-preview.png" id="4_epiam"]
-[ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="6_item"]
-[ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="7_xelpo"]
-[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="12_5oboa"]
+[ext_resource type="Script" uid="uid://dcech2bqq5xi5" path="res://game/entity/treasure/TreasureChest.cs" id="1_efa7t"]
+[ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="2_glrcb"]
+[ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="3_ox72p"]
+[ext_resource type="Material" uid="uid://bhmnfrl721bn6" path="res://assets/models/treasure_room/box/box_junk_material.tres" id="4_5iij2"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="5_7cjah"]
+[ext_resource type="Material" uid="uid://ddtvbhnxky0xy" path="res://assets/models/treasure_room/box/box_bottom_texture.tres" id="6_lcgp6"]
+[ext_resource type="Material" uid="uid://bkqykn6oj2rq6" path="res://assets/models/treasure_room/box/box_lid_texture.tres" id="7_0xjk1"]
+[ext_resource type="Texture2D" uid="uid://ckkx4va82ysps" path="res://assets/models/treasure_room/box/lost-and-found-rubber-stamp-seal-free-vector-removebg-preview.png" id="8_6ku4a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_chest"]
 size = Vector3(1.5, 0.85, 1)
@@ -160,12 +160,14 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0horb")
 
-[node name="BoxRoot" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "ChestLight", "_particles", "RevealCamera", "CameraAngles") groups=["Interactable"]]
-script = ExtResource("1_n4d8g")
-ItemScene = ExtResource("6_item")
+[node name="TreasureChest" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_collisionBody", "_openSoundPlayer", "ChestLight", "_particles", "RevealCamera", "CameraAngles") groups=["Interactable"]]
+collision_mask = 0
+script = ExtResource("1_efa7t")
+ItemScene = ExtResource("2_glrcb")
 _label = NodePath("Label3D")
 _lidBody = NodePath("ShakeNode/LidBody")
-OpenSound = ExtResource("7_xelpo")
+_collisionBody = NodePath(".")
+OpenSound = ExtResource("3_ox72p")
 _openSoundPlayer = NodePath("OpenSoundPlayer")
 ChestLight = NodePath("Light")
 RarityColors = PackedColorArray(0.8848981, 0.8848981, 0.8848981, 1, 9.866804e-07, 0.5114562, 0.103561275, 1, 0.23117456, 0.47789878, 1, 1, 0.8233584, 0.00080628635, 0.86872333, 1, 0.86527705, 0.70930505, 2.3102762e-06, 1)
@@ -193,7 +195,7 @@ shape = 1
 material = SubResource("FogMaterial_5oboa")
 
 [node name="Junk" type="MeshInstance3D" parent="." unique_id=1873621713]
-material_override = ExtResource("1_xtdgc")
+material_override = ExtResource("4_5iij2")
 mesh = SubResource("ArrayMesh_cgmcj")
 
 [node name="Label3D" type="Label3D" parent="." unique_id=724166263]
@@ -202,7 +204,7 @@ visible = false
 billboard = 1
 render_priority = 1
 text = "Treasure Chest"
-font = ExtResource("12_5oboa")
+font = ExtResource("5_7cjah")
 font_size = 64
 
 [node name="OpenSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=404431657]
@@ -240,7 +242,7 @@ transform = Transform3D(-1, 2.1613864e-08, -1.394363e-07, -3.3546858e-08, 0.9234
 [node name="ShakeNode" type="Node3D" parent="." unique_id=1276232546]
 
 [node name="Box" type="MeshInstance3D" parent="ShakeNode" unique_id=1708501638]
-material_override = ExtResource("1_2177w")
+material_override = ExtResource("6_lcgp6")
 mesh = SubResource("ArrayMesh_3vyn0")
 
 [node name="LidBody" type="RigidBody3D" parent="ShakeNode" unique_id=511200093]
@@ -252,10 +254,10 @@ shape = SubResource("BoxShape3D_lid")
 
 [node name="Lid" type="MeshInstance3D" parent="ShakeNode/LidBody" unique_id=1014407360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.384, 0)
-material_override = ExtResource("2_1jwbe")
+material_override = ExtResource("7_0xjk1")
 mesh = SubResource("ArrayMesh_7u1kl")
 
 [node name="Sprite3D" type="Sprite3D" parent="ShakeNode" unique_id=1424680401]
 transform = Transform3D(-0.15105894, 0.03473033, -1.3205993e-08, 0.03473033, 0.15105894, 3.036222e-09, 1.35505305e-08, 0, -0.155, 0, 0, -0.50191736)
 shaded = true
-texture = ExtResource("4_epiam")
+texture = ExtResource("8_6ku4a")

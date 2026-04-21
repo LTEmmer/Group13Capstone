@@ -58,6 +58,8 @@ public partial class ParkourEventRoom : Room, IEventRoom
         {
             GD.PrintErr("Reward not set, check inspector");
         }
+
+		Reward.SetCollision(false);
 	}
 
 	private void OnFlashcardAnswered(bool isCorrect)
@@ -152,6 +154,7 @@ public partial class ParkourEventRoom : Room, IEventRoom
 	{
 		GD.Print("have fun i guess");
 		Reward.Visible = true;
+		Reward.SetCollision(true); // Enable chest collision so player can interact with it
 		AudioManager.Instance.PlayGameVictorySound(); // temp until sound added
 	}
 
