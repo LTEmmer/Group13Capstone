@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("2_3lipx")
-MaxConnections = 2
+MaxConnections = 1
 Scene = ExtResource("1_sg7es")
 metadata/_custom_type_script = "uid://bgoqu1mfuaoyg"

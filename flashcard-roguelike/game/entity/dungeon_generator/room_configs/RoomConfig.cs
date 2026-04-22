@@ -5,5 +5,6 @@ public partial class RoomConfig : Resource
 {
     [Export] public RoomTypes RoomType;
     [Export] public int MaxConnections = 4;
+    [Export] public bool AllowBranch = false;
     [Export] public PackedScene Scene;
 }

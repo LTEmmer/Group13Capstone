@@ -349,7 +349,7 @@ points = PackedVector3Array(2.3101072, -6.341934e-05, -0.00045204163, 0.85340095
 script = ExtResource("Script_room")
 Npc = NodePath("NPC/BaseNPC")
 FlashcardTFScene = ExtResource("Scene_flashcard")
-Reward = NodePath("Reward")
+Reward = NodePath("Reward/TreasureChest")
 
 [node name="cave" parent="." unique_id=1561546874 instance=ExtResource("9_y432j")]
 transform = Transform3D(1.455, 0, 0, 0, 1.455, 0, 0, 0, 1.455, 0, 7.6004925, 0)
@@ -400,28 +400,22 @@ visible = false
 shape = SubResource("ConvexPolygonShape3D_0famd")
 
 [node name="EnterPoint" type="Marker3D" parent="." unique_id=551784145]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.212858, 5.647655, 29.327156)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.212858, 5.647655, 29.327156)
 
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=1106618029]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -31.05679, 19.265223, 4.809934)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -31.05679, 19.265223, 4.809934)
 
 [node name="Entrances" type="Node3D" parent="." unique_id=39189759]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.313736, 7.533313, 29.410686)
 
 [node name="0" type="Marker3D" parent="Entrances" unique_id=934156117]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.099, -1.806, 3.325)
-
-[node name="1" type="Marker3D" parent="Entrances" unique_id=411924845]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.098503, -1.8059998, 3.325386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07762909, -1.8059998, 3.3249998)
 
 [node name="Exits" type="Node3D" parent="." unique_id=1565686847]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -34.211308, 21.121094, 5.178354)
 
 [node name="0" type="Marker3D" parent="Exits" unique_id=18164182]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5186563, -1.8337665, -3.282116)
-
-[node name="1" type="Marker3D" parent="Exits" unique_id=682867691]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.519, -1.834, -3.282)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34333706, -1.8337669, -3.282116)
 
 [node name="WaterPlane" type="MeshInstance3D" parent="." unique_id=1660215050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -14.170574, 0)
@@ -734,4 +728,3 @@ transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710
 [editable path="Decor/desk2"]
 [editable path="Decor/pencil"]
 [editable path="Decor/ufo"]
-[editable path="Reward"]

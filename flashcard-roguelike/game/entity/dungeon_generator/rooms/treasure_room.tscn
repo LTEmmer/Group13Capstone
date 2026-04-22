@@ -416,7 +416,7 @@ rings = 16
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44763565, 10.506846)
 
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=2063903394]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65767527, -10.32686)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.65767527, -10.32686)
 
 [node name="Entrances" type="Node3D" parent="." unique_id=1488867071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.582191, 13.568403)

@@ -21,6 +21,8 @@ public sealed class DungeonRoom
 	public HashSet<int> OutgoingConnections { get; } = new HashSet<int>();
 	public int Depth { get; set; }
 	public float Difficulty { get; set; }
+	public bool IsOnMainPath { get; set; } = false;
+	public Vector2I MinimapGridPosition { get; set; } = Vector2I.Zero;
 
 	public DungeonRoom(int id, RoomConfig config, int depth)
 	{
@@ -50,6 +52,13 @@ public sealed class DungeonGraph
 	public DungeonRoom GetRoom(int id)
 	{
 		return Rooms[id];
+	}
+
+	public int AddBranchRoom(RoomConfig config, int depth)
+	{
+		int newId = Rooms.Count;
+		Rooms.Add(new DungeonRoom(newId, config, depth));
+		return newId;
 	}
 
 	public bool AreConnected(int from, int to)

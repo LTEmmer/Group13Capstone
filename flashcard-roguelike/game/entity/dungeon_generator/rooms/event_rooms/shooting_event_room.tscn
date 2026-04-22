@@ -66,7 +66,7 @@ TriggerNPC = NodePath("BaseNPC/BaseNPC")
 RoomTurret = NodePath("Turret")
 CorrectSound = ExtResource("2_dsngy")
 WrongSound = ExtResource("3_8ftga")
-Reward = NodePath("Reward")
+Reward = NodePath("Reward/TreasureChest")
 
 [node name="Turret" parent="." unique_id=2031055064 instance=ExtResource("2_bh6dk")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 2, 0)
@@ -142,10 +142,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.322784, -3.7744603, 51.895
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5115643, 0.47745728, -0.2607808)
 
 [node name="EnterPoint" type="Marker3D" parent="." unique_id=2008530178]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.4851, -2.7108965, 52.20393)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -34.4851, -2.7108965, 51.75355)
 
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=1219844045]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.700348, -2.7470727, 51.74106)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 33.700348, -2.7470727, 51.74106)
 
 [node name="shooting_room_walls1" parent="." unique_id=464377349 instance=ExtResource("7_dxxao")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18, 0)
@@ -296,7 +296,6 @@ transform = Transform3D(0.24586567, -0.9693039, 0, 0.9693039, 0.24586567, 0, 0, 
 
 [node name="Reward" parent="." unique_id=1286188714 instance=ExtResource("17_riex4")]
 transform = Transform3D(-1, 8.423145e-09, 8.7016055e-08, 1.6042542e-08, 0.99612606, 0.087938145, -8.5938225e-08, 0.087938145, -0.99612606, 0, -0.20434213, 38.66631)
-visible = false
 
 [editable path="Turret"]
 [editable path="Turret/TurretBase"]

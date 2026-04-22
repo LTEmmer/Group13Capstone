@@ -27,6 +27,18 @@ public partial class HUD : CanvasLayer
 		_player = parent as Player;
 		if (_player != null)
 			_healthComponent = _player.GetNodeOrNull<HealthComponent>("HealthComponent");
+
+		// Initialize the minimap now that the dungeon graph is fully built
+		// (DungeonGenerator._Ready completes before the player and the HUD is added to the tree)
+		Minimap minimap = GetNodeOrNull<Minimap>("MinimapContainer/MinimapPanel/MarginContainer/Minimap");
+		if (minimap != null)
+		{
+			DungeonGenerator gen = GetTree().Root.GetNodeOrNull<DungeonGenerator>("DungeonGenerator");
+			if (gen?.Graph != null)
+			{
+				minimap.Initialize(gen.Graph);
+			}
+		}
 	}
 
 	public override void _Process(double delta)

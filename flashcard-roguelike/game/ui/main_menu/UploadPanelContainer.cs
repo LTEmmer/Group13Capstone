@@ -7,7 +7,9 @@ public partial class UploadPanelContainer : Control
 	private Button _browseButton;
 	private Button _importButton;
 	private Button _backButton;
+	private Button _instructionsButton;
 	private FileDialog _csvFileDialog;
+	private Control _instructionsPanel;
 
 	public override void _Ready()
 	{
@@ -15,7 +17,13 @@ public partial class UploadPanelContainer : Control
 		_browseButton = GetNodeOrNull<Button>("WhiteboardPanel/MarginContainer/VBoxContainer/BrowseButton");
 		_importButton = GetNodeOrNull<Button>("WhiteboardPanel/MarginContainer/VBoxContainer/ImportButton");
 		_backButton = GetNodeOrNull<Button>("WhiteboardPanel/MarginContainer/VBoxContainer/BackButton");
+		_instructionsButton = GetNodeOrNull<Button>("WhiteboardPanel/MarginContainer/VBoxContainer/InstructionsButton");
 		_csvFileDialog = GetNodeOrNull<FileDialog>("CsvFileDialog");
+		_instructionsPanel = GetParent().GetNodeOrNull<Control>("InstructionsPanelContainer");
+
+		var closeButton = _instructionsPanel?.GetNodeOrNull<Button>("Panel/MarginContainer/VBoxContainer/CloseButton");
+		if (closeButton != null)
+			closeButton.Pressed += () => _instructionsPanel.Visible = false;
 
 		if (_browseButton != null)
 		{
@@ -32,9 +40,16 @@ public partial class UploadPanelContainer : Control
 			_backButton.Pressed += OnBackPressed;
 		}
 
+		if (_instructionsButton != null)
+		{
+			_instructionsButton.Pressed += OnInstructionsPressed;
+		}
+
 		AudioManager.Instance?.RegisterButton(_browseButton);
 		AudioManager.Instance?.RegisterButton(_importButton);
 		AudioManager.Instance?.RegisterButton(_backButton);
+		AudioManager.Instance?.RegisterButton(_instructionsButton);
+		AudioManager.Instance?.RegisterButton(closeButton);
 
 		if (_csvFileDialog != null)
 		{
@@ -107,8 +122,14 @@ public partial class UploadPanelContainer : Control
 	{
 		Visible = false;
 
-		var mainMenu = GetParent().GetNodeOrNull<Control>("CenterContainer");
+		var mainMenu = GetParent().GetNodeOrNull<Control>("ViewFlashcardsPanelContainer");
 		if (mainMenu != null)
 			mainMenu.Visible = true;
+	}
+
+	private void OnInstructionsPressed()
+	{
+		if (_instructionsPanel != null)
+			_instructionsPanel.Visible = true;
 	}
 }

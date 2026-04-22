@@ -17,7 +17,6 @@ public partial class TreasureChest : Interactable
 
 	[Export] private Label3D _label;
 	[Export] private RigidBody3D _lidBody;
-	[Export] private StaticBody3D _collisionBody;
 
 	[Export] public AudioStream OpenSound;
 	[Export] private AudioStreamPlayer3D _openSoundPlayer;
@@ -52,6 +51,8 @@ public partial class TreasureChest : Interactable
 			_openSoundPlayer.Stream = OpenSound;
 		}
 
+		_shakeNode = GetNodeOrNull<Node3D>("ShakeNode");
+
 		StartIdleShake();
 		StartLightCycle();
 
@@ -68,8 +69,6 @@ public partial class TreasureChest : Interactable
 		particleMat.EmissionEnabled = true;
 		particleMat.Emission = RarityColors[_targetRarityIndex];
 		_particles.DrawPass1.SurfaceSetMaterial(0, particleMat);
-
-        _shakeNode = GetNodeOrNull<Node3D>("ShakeNode");
 	}
 
 	public override void Interact(Node caller) => OpenChest();
@@ -208,6 +207,8 @@ public partial class TreasureChest : Interactable
 
 	public void SetCollision(bool enabled)
 	{
-		_collisionBody.CollisionLayer = enabled ? (uint)1 : (uint)0;
+		Set("collision_layer", enabled ? 1 : 0);
+		_lidBody.CollisionLayer = enabled ? (uint)1 : (uint)0;
+		Visible = enabled;
 	}
 }

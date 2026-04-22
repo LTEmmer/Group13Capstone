@@ -7,5 +7,6 @@
 script = ExtResource("2_7ot7i")
 RoomType = 1
 MaxConnections = 3
+AllowBranch = true
 Scene = ExtResource("1_mgr3v")
 metadata/_custom_type_script = "uid://bgoqu1mfuaoyg"

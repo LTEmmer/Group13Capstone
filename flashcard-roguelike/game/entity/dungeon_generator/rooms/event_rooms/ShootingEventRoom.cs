@@ -61,6 +61,10 @@ public partial class ShootingEventRoom : Room, IEventRoom
         {
             GD.PrintErr("Reward not set, check inspector");
         }
+        else        
+        {
+            Reward.SetCollision(false);
+        }
     }
 
     public void TriggerEvent()
@@ -130,6 +134,7 @@ public partial class ShootingEventRoom : Room, IEventRoom
     {
         GD.Print("Reward have a treat :)");
         Reward.Visible = true;
+        Reward.SetCollision(true);
         AudioManager.Instance.PlayGameVictorySound(); // temp until sound added
     }
 
