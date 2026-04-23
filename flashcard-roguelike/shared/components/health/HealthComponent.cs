@@ -50,13 +50,13 @@ public partial class HealthComponent : Node
 				damage -= Shield;
 				Shield -= tmp;
 				if(damage <= 0) return;
-    			Shield = Mathf.Max(Shield, 0);
+				Shield = Mathf.Max(Shield, 0);
 				GD.Print("Shield pos: ", Shield);
 			}
 
 			float def = TrueDefence;
-    		def = Mathf.Min(def, 0.8f);
-    		def = Mathf.Max(def, 0f);
+			def = Mathf.Min(def, 0.8f);
+			def = Mathf.Max(def, 0f);
 			GD.Print("True Def: ", def);
 			GD.Print("Dam pre: ", damage);
 			damage -= damage * def;

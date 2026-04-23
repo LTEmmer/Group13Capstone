@@ -56,7 +56,7 @@ public partial class RoomConnection : Interactable
 		EventManager.Instance.listen("on_room_clear", new Callable(this, MethodName.on_room_clear));
 	}
 
-    public override void Interact(Node caller)
+	public override void Interact(Node caller)
 	{
 		OnInteract(caller as Node3D);
 	}

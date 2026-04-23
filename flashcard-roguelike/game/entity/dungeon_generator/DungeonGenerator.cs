@@ -272,7 +272,7 @@ public partial class DungeonGenerator : Node3D
 					// In the future, we can use the difficulty score to determine the type and strength of enemies to spawn
 					// Maybe we define a list of enemies somewhere with associated difficulty ratings
 					//EnemyExample enemyInstance = GD.Load<PackedScene>("res://game/entity/enemy_example/enemy_example.tscn").Instantiate() as EnemyExample;
-					EnemyFSM enemyInstance = GD.Load<PackedScene>("res://game/entity/enemy_fsm/enemy_patroller.tscn").Instantiate() as EnemyFSM;
+					EnemyFSM enemyInstance = GD.Load<PackedScene>("res://game/entity/slime/enemy_slime.tscn").Instantiate() as EnemyFSM;
 					enemyInstance.Name = $"Enemy_{i}";
 					enemyNode.AddChild(enemyInstance);
 					enemyInstance.GlobalPosition = spawnPoints[i].GlobalPosition + new Vector3(0,0.9F,0); // Spawner was spawning enemy at waist height
