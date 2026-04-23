@@ -43,6 +43,7 @@ public partial class DungeonGenerator : Node3D
 		Node3D roomsRoot = GetOrCreateRoot("Rooms");
 		ClearChildren(roomsRoot);
 		RegenerateDungeon();
+		AudioManager.Instance?.PlayDungeonMusic();
 	}
 
 	private void RegenerateDungeon()

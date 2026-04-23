@@ -37,6 +37,7 @@ albedo_color = Color(0.2627451, 0.2627451, 0.2627451, 1)
 points = PackedVector3Array(-15, -0.5, -10, -15, 0.5, -10, 14.999998, -0.5, -10, -15, -0.5, 10, -15, 0.5, 10, 14.999998, 0.5, -10, 14.999998, -0.5, 10, 14.999998, 0.5, 10)
 
 [sub_resource type="BoxMesh" id="Mesh_exit"]
+lightmap_size_hint = Vector2i(184, 136)
 size = Vector3(24, 1, 12)
 
 [sub_resource type="BoxShape3D" id="Col_exit_trigger"]
@@ -366,12 +367,11 @@ visible = false
 shape = SubResource("ConcavePolygonShape3D_6skwy")
 
 [node name="LightRotate" parent="." unique_id=1455328766 instance=ExtResource("5_6skwy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.961504, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.831839, 0)
 
 [node name="OmniLight3D" parent="LightRotate/Light" parent_id_path=PackedInt32Array(1455328766, 2064956913) index="0" unique_id=308789193]
-transform = Transform3D(1.0000001, 1.4901161e-07, -8.940697e-08, 5.9604645e-08, 0, 1.0000001, 7.4505806e-08, -1.0000001, 0, -6.353393, -8.985052, 6.3533916)
+transform = Transform3D(1.0000001, 1.4901161e-07, -8.940697e-08, 5.9604645e-08, 0, 1.0000001, 7.4505806e-08, -1.0000001, 0, 0, 0, 0)
 light_energy = 20.0
-light_specular = 0.0
 omni_range = 500.0
 
 [node name="StartLedge" type="MeshInstance3D" parent="." unique_id=1099865566]
@@ -395,6 +395,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1557684, 0.9938965)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitLedge/ExitTrigger" unique_id=100000012]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0, -1.0057373)
+visible = false
 shape = SubResource("Col_exit_trigger")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ExitLedge" unique_id=822930195]
@@ -494,6 +495,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gv6lf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/Book2" unique_id=820706739]
 transform = Transform3D(1.0139732, 7.371881e-14, 0, -2.6645353e-15, 1.0139731, -5.3290705e-15, 0, 5.3290705e-15, 1.0139732, 0.0012197495, 0.0498271, -0.0013608932)
+visible = false
 shape = SubResource("BoxShape3D_gj8yi")
 
 [node name="Desk1" type="AnimatableBody3D" parent="MovingPlatforms" unique_id=1407880396]

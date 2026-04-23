@@ -337,10 +337,10 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.61
 [node name="Entrances" type="Node3D" parent="." unique_id=733062030]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8519258, 3, 9.699404)
 
-[node name="0" type="Marker3D" parent="Entrances" unique_id=1178486331]
+[node name="1" type="Marker3D" parent="Entrances" unique_id=1178486331]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6922398, -1.7729723, 4.9187107)
 
-[node name="1" type="Marker3D" parent="Entrances" unique_id=1718334669]
+[node name="0" type="Marker3D" parent="Entrances" unique_id=1718334669]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1328716, -1.7729723, 4.9187107)
 
 [node name="2" type="Marker3D" parent="Entrances" unique_id=274300184]

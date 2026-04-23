@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://chwms762c8lbe"]
+
+[ext_resource type="Script" uid="uid://bkfuknqyit8qf" path="res://game/ui/battle_ui/BattleItemSlot.cs" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwn2m"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0.34509805)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.099985994, 0.099985994, 0.099985994, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 5
+
+[node name="BattleItemSlot" type="VBoxContainer" unique_id=1085693377 node_paths=PackedStringArray("_nameLabel", "_spriteButton", "_usesLabel")]
+custom_minimum_size = Vector2(72, 0)
+theme_override_constants/separation = 2
+script = ExtResource("1_script")
+_nameLabel = NodePath("NameLabel")
+_spriteButton = NodePath("IconBG/SpriteButton")
+_usesLabel = NodePath("UsesLabel")
+
+[node name="NameLabel" type="Label" parent="." unique_id=1913345232]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "TEST"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="IconBG" type="Panel" parent="." unique_id=195019579]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uwn2m")
+
+[node name="SpriteButton" type="Button" parent="IconBG" unique_id=798022428]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+flat = true
+expand_icon = true
+
+[node name="UsesLabel" type="Label" parent="." unique_id=476892281]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "X USES"
+horizontal_alignment = 1

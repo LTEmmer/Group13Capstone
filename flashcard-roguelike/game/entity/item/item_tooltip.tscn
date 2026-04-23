@@ -21,6 +21,7 @@ transparent_bg = true
 render_target_update_mode = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="SubViewport" unique_id=665496369]
+anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 174.0
 theme = ExtResource("2_o7dnq")

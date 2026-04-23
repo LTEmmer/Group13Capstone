@@ -13,7 +13,23 @@ public partial class HealthComponent : Node
 	public delegate void EnemyDiedEventHandler();
 	
 	[Export] public float MaxHealth = 100f;
-	public float Shield = 0f;
+
+	private float _shield = 0f;
+	public float Shield
+	{
+		get => _shield;
+		set
+		{
+			// Only trigger when shield increases
+			if (value > _shield)
+			{
+				FlashEffectOverlay(true);
+			}
+
+			_shield = Mathf.Max(value, 0f);
+		}
+	}
+
 	public float TrueDefence = 0f;
 
 	[Export] public bool IsPlayer = false;
@@ -22,6 +38,7 @@ public partial class HealthComponent : Node
 	[Export] public AudioStream[] HurtSounds;
 	[Export] public AudioStream[] BlockSounds;
 	[Export] public AudioStream[] DeathSound;
+	[Export] public AudioStream[] HealSounds;
 
 	[Export] public Camera3D PlayerCamera;
 
@@ -76,7 +93,7 @@ public partial class HealthComponent : Node
 		if (IsPlayer)
 		{
 			ShakeCamera();
-			FlashDamageOverlay();
+			FlashEffectOverlay(false);
 		}
 		else
 		{
@@ -132,13 +149,15 @@ public partial class HealthComponent : Node
 		tween.TweenProperty(PlayerCamera, "h_offset", 0f, 0.05f);
 	}
 
-	private void FlashDamageOverlay()
+	private void FlashEffectOverlay(bool heal)
 	{
+		var color = heal ? new Color(0f, 1f, 0f, 0.35f) : new Color(1f, 0f, 0f, 0.35f);
 		ColorRect overlay = new ColorRect()
 		{
-			Color = new Color(1f, 0f, 0f, 0.35f),
+			Color = color,
 			MouseFilter = Control.MouseFilterEnum.Ignore
 		};
+
 		overlay.SetAnchorsPreset(Control.LayoutPreset.FullRect);
 
 		CanvasLayer canvasLayer = new CanvasLayer() { Layer = 10 };
@@ -147,12 +166,21 @@ public partial class HealthComponent : Node
 
 		var tween = overlay.CreateTween();
 		tween.TweenProperty(overlay, "color:a", 0f, 0.4f);
-		tween.TweenCallback(Callable.From(canvasLayer.QueueFree));
+		tween.TweenCallback(Callable.From(() => 
+		{
+			canvasLayer.QueueFree();
+			if (IsPlayer && heal)
+			{
+				_audioPlayer.Stream = HealSounds[GD.Randi() % HealSounds.Length];
+				_audioPlayer.Play();
+			}
+		}));
 	}
 
 	public void Heal(float amount)
 	{
 		CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
+		FlashEffectOverlay(true);
 		GD.Print($"{GetParent().Name}: Health: {CurrentHealth}/{MaxHealth}");
 	}
 

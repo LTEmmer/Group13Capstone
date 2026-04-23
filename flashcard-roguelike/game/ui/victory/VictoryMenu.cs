@@ -10,6 +10,11 @@ public partial class VictoryMenu : CanvasLayer
 {
 	[Export]
 	public PackedScene MainMenuScene { get; set; }
+
+	[Export] public Button NextFloorButton;
+	[Export] public Button NewRunButton;
+	[Export] public Button MainMenuButton;
+	[Export] public Button QuitButton;
 	
 	private Control _panel;
 	private Label _titleLabel;
@@ -20,6 +25,11 @@ public partial class VictoryMenu : CanvasLayer
 		_panel = GetNodeOrNull<Control>("Panel");
 		_titleLabel = GetNodeOrNull<Label>("Panel/VBoxContainer/TitleLabel");
 		_messageLabel = GetNodeOrNull<Label>("Panel/VBoxContainer/MessageLabel");
+
+		AudioManager.Instance?.RegisterButton(NextFloorButton);
+		AudioManager.Instance?.RegisterButton(NewRunButton);
+		AudioManager.Instance?.RegisterButton(MainMenuButton);
+		AudioManager.Instance?.RegisterButton(QuitButton);
 
 		// Ensure mouse is visible when victory shows
 		ProcessMode = ProcessModeEnum.Always;

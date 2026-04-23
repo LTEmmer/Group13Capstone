@@ -253,11 +253,27 @@ public class CombatResolver
         }
     }
     
-    // Use items (placeholder)
-    public void UseItems()
+    // Use a consumable item and end the player's turn
+    public void UseItem(ItemInstance item)
     {
-        // Currently not implemented, just logs a message and starts enemy turns
-        _uiCoordinator.LogMessage("No items available! (Not yet implemented, wasted turn)");
+        if (item?.Resource?.UseEffects != null)
+        {
+            foreach (var effect in item.Resource.UseEffects)
+            {
+                effect.Apply(_state.Player, item);
+            }
+        }
+
+        if (item.Resource.MaxUses > 0)
+        {
+            item.CurrentUses--;
+            if (item.CurrentUses <= 0)
+            {
+                _state.Player.inventoryComponent?.RemoveItem(item);
+            }
+        }
+
+        _uiCoordinator.UpdateHealthUI();
         _turnController.StartEnemyTurns();
     }
 }

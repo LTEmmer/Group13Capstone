@@ -25,6 +25,9 @@ public partial class BattleManager : Node
 	private FlashcardChallengeMultipleChoice _flashcardChallengeMultipleChoice;
 	private FlashcardChallengeManager _flashcardChallengeManager;
 	
+	// Items panel
+	private BattleItemsPanel _battleItemsPanel;
+
 	// Victory menu
 	private VictoryMenu _victoryMenu;
 	private GameOverMenu _gameOverMenu;
@@ -66,6 +69,9 @@ public partial class BattleManager : Node
 		_gameOverMenu = GD.Load<PackedScene>("res://game/ui/game_over/game_over_menu.tscn").Instantiate<GameOverMenu>();
 		AddChild(_gameOverMenu);
 
+		_battleItemsPanel = GD.Load<PackedScene>("res://game/ui/battle_ui/battle_items_panel.tscn").Instantiate<BattleItemsPanel>();
+		AddChild(_battleItemsPanel);
+
 		if (Transitions == null || ActiveUI == null || _flashcardChallenge == null || _flashcardChallengeTrueOrFalse == null || _flashcardChallengeMultipleChoice == null)
 		{
 			GD.PrintErr("BattleManager: Failed to load one or more UI scenes.");
@@ -86,6 +92,9 @@ public partial class BattleManager : Node
 		{
 			ActiveUI.OnActionSelected += OnPlayerActionSelected;
 		}
+
+		_battleItemsPanel.OnBack += OnItemsMenuBack;
+		_battleItemsPanel.OnItemUsed += OnPlayerItemUsed;
 
 		// Connect combat resolver events
 		_combatResolver.OnBattleEnded += (victory) => EndBattle(victory, false);
@@ -285,6 +294,12 @@ public partial class BattleManager : Node
 	{
 		if (!_state.WaitingForAction) return; // safety
 
+		if (action == "items")
+		{
+			OpenItemsMenu(); // Don't commit turn yet player may go back
+			return;
+		}
+
 		// Set state to wait for flashcard answer if action requires it, otherwise execute immediately
 		_state.WaitingForAction = false;
 		_state.PendingAction = action;
@@ -301,14 +316,32 @@ public partial class BattleManager : Node
 				_combatResolver.AttemptRun(GetTree());
 				break;
 
-			case "items":
-				_combatResolver.UseItems(); // Does nothing for now
-				break;
-
 			default: // Should never happen since UI only allows valid options, but log an error just in case
 				GD.PrintErr($"BattleManager: Unknown action '{action}' selected.");
 				break;
 		}
+	}
+
+	private void OpenItemsMenu()
+	{
+		var items = _state.Player.inventoryComponent?.UseItems;
+		_battleItemsPanel.Populate(items);
+		_battleItemsPanel.Visible = true;
+	}
+
+	private void OnItemsMenuBack()
+	{
+		_battleItemsPanel.Visible = false;
+		ActiveUI.SetActionsEnabled(true);
+	}
+
+	private void OnPlayerItemUsed(ItemInstance item)
+	{
+		_battleItemsPanel.Visible = false;
+		_state.WaitingForAction = false;
+		_state.PendingAction = "items";
+		_uiCoordinator.LogMessage($"Used {item.Resource.Name}!");
+		_combatResolver.UseItem(item);
 	}
 
 	private void OnFlashcardAnswered(bool isCorrect)
@@ -343,6 +376,7 @@ public partial class BattleManager : Node
 		_state.WaitingForAction = false;
 		_state.WaitingForFlashcard = false;
 		_flashcardChallengeManager.HideChallenge(); // Immediately clear any active flashcard (e.g. player died mid-challenge)
+		_battleItemsPanel.Visible = false;
 		_battleCooldownTimer.Start();
 		
 		

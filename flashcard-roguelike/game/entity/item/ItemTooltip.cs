@@ -73,7 +73,7 @@ public partial class ItemTooltip : Node3D
 
         var mesh = (QuadMesh)_quad.Mesh;
         mesh.Size = new Vector2(FixedWidth, height) / PixelsPerUnit;
-        _quad.Position = new Vector3(mesh.Size.X + 1f, 0, 0);
+        _quad.Position = new Vector3(mesh.Size.X + 2f, 0, 0);
     }
 
     private static Color GetRarityColor(int rarity) => rarity switch

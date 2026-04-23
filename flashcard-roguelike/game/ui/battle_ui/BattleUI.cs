@@ -75,7 +75,7 @@ public partial class BattleUI : Control
 		if (!_isVisible) return; // Already hidden, no need to slide out
 
 		_isVisible = false;
-        
+
         // Animate the panel sliding down off-screen with tween, then hide the UI and call onComplete if provided
 		Tween tween = CreateTween();
 		tween.TweenProperty(_actionPanel, "position", _hiddenPosition, SlideOutDuration)
@@ -107,9 +107,9 @@ public partial class BattleUI : Control
 
 	public void AddCombatLog(string message)
 	{
-        // Add a timestamp to each log entry and append it to the combat log label, 
+        // Add a timestamp to each log entry and append it to the combat log label,
         // also limit the number of lines to prevent overflow
-        
+
 		string timestamp = DateTime.Now.ToString("HH:mm:ss");
 		_combatLogLabel.Text += $"\n[{timestamp}] {message}";
 

@@ -137,6 +137,7 @@ public partial class ParkourEventRoom : Room, IEventRoom
 		TaloTelemetry.TrackFlashcardAnswer(isCorrect, "parkour_event", difficulty);
 		// Lock mouse
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+		GetTree().GetFirstNodeInGroup("player")?.Call("SetAcceptKeyboardInput", true);
 
 		// Remove challenge if it's still active
 		_challenge?.QueueFree();
@@ -175,6 +176,8 @@ public partial class ParkourEventRoom : Room, IEventRoom
 		{
 			return;
 		}
+
+		GetTree().GetFirstNodeInGroup("player")?.Call("SetAcceptKeyboardInput", false); // Disable player input when event starts
 
 		// Unlock mouse when event is triggered
 		Input.MouseMode = Input.MouseModeEnum.Visible;

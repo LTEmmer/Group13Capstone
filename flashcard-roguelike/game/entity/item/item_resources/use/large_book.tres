@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://v332y1tyceyu"]
 
-[ext_resource type="Texture2D" uid="uid://cdgnt3ciwnle1" path="res://assets/sprites/item_sprites/book.png" id="1_b1gqm"]
-[ext_resource type="PackedScene" uid="uid://bb1gunum2f151" path="res://assets/models/item_models/book.glb" id="2_onp6s"]
-[ext_resource type="Script" uid="uid://disq4r3ec5xdh" path="res://game/entity/item/effects/mod_components/ModBlock.cs" id="3_mvxo8"]
-[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_nrbad"]
+[ext_resource type="Texture2D" uid="uid://b0jcmdmmtitsd" path="res://assets/sprites/item_sprites/book.png" id="1_b1gqm"]
+[ext_resource type="PackedScene" uid="uid://bv0ibd22kju77" path="res://assets/models/item_models/book.glb" id="2_onp6s"]
+[ext_resource type="Script" uid="uid://dbmbysgwucst3" path="res://game/entity/item/effects/mod_components/ModBlock.cs" id="3_mvxo8"]
+[ext_resource type="Script" uid="uid://bmb23qe3hj2fc" path="res://shared/resources/ItemResource.cs" id="4_nrbad"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qgcsr"]
 albedo_color = Color(2.695322e-06, 0.5793161, 0.80100197, 1)
@@ -30,4 +30,3 @@ Rarity = 3
 MaxUses = 5
 UseEffects = Array[Object]([SubResource("Resource_dof1w")])
 PickupEffects = null
-metadata/_custom_type_script = "uid://573w4ti026as"
