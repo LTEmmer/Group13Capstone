@@ -27,6 +27,7 @@ volumetric_fog_anisotropy = -0.2
 
 [node name="DungeonGenerator" type="Node3D" unique_id=1632115740]
 script = ExtResource("1_fs5hr")
+BranchChance = 0.65
 EntranceConfig = ExtResource("2_a7trn")
 ExitConfig = ExtResource("3_wm4nc")
 CombatConfigs = Array[Object]([ExtResource("4_01r3o")])

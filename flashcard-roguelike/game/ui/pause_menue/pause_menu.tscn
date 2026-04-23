@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="3_whiteboard"]
 [ext_resource type="Script" uid="uid://bnbhifky1dd3h" path="res://game/ui/pause_menue/SettingsPanel.cs" id="5_1n6di"]
 [ext_resource type="PackedScene" uid="uid://xis5gf6wut10" path="res://game/ui/game_over/game_over_menu.tscn" id="6_stats"]
+[ext_resource type="Script" uid="uid://61a6qn7025nd" path="res://game/ui/pause_menue/CurrentStatsPanel.cs" id="7_stats"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1n6di"]
 shader = ExtResource("2_scxh3")
@@ -13,7 +14,7 @@ shader_parameter/radius = 2
 shader_parameter/strength = 2.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_1n6di"]
-font_size = 48
+font_size = 36
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_prr6f"]
@@ -89,6 +90,12 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Settings
 "
+
+[node name="Stats" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=312749001]
+custom_minimum_size = Vector2(240, 56)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Current Stats"
 
 [node name="QuickRestart" type="Button" parent="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer" unique_id=178363380]
 custom_minimum_size = Vector2(240, 56)
@@ -226,9 +233,78 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Back"
 
+[node name="StatsPanelContainer" type="Control" parent="." unique_id=423850112]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -250.0
+offset_right = 220.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_whiteboard")
+script = ExtResource("7_stats")
+
+[node name="StatsPanel" type="Panel" parent="StatsPanelContainer" unique_id=523850113]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="StatsPanelContainer/StatsPanel" unique_id=623850114]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsPanelContainer/StatsPanel/MarginContainer" unique_id=723850115]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="StatsPanelContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=823850116]
+layout_mode = 2
+text = "Current Run Stats"
+label_settings = SubResource("LabelSettings_1n6di")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="StatsPanelContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=923850117]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatsContainer" type="VBoxContainer" parent="StatsPanelContainer/StatsPanel/MarginContainer/VBoxContainer/ScrollContainer" unique_id=1023850118]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Spacer" type="Control" parent="StatsPanelContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=1123850119]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="Back" type="Button" parent="StatsPanelContainer/StatsPanel/MarginContainer/VBoxContainer" unique_id=1223850120]
+custom_minimum_size = Vector2(160, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Stats" to="." method="_on_stats_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/QuickRestart" to="." method="_on_quick_restart_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Main Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="SettingsPanelContainer/SettingsPanel/MarginContainer/SliderContainer/Back" to="." method="_on_settings_back_pressed"]
+[connection signal="pressed" from="StatsPanelContainer/StatsPanel/MarginContainer/VBoxContainer/Back" to="." method="_on_stats_back_pressed"]

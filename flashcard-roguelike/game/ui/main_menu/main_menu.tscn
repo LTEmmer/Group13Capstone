@@ -805,6 +805,10 @@ text = "CSV Set Upload"
 layout_mode = 2
 text = "Create New Set"
 
+[node name="InstructionsButton" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1286310044]
+layout_mode = 2
+text = "CSV Import Instructions"
+
 [node name="Back" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=2000000008]
 custom_minimum_size = Vector2(80, 24)
 layout_mode = 2
@@ -871,11 +875,6 @@ text = "Browse
 [node name="ImportButton" type="Button" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=636903067]
 layout_mode = 2
 text = "Import"
-
-[node name="InstructionsButton" type="Button" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1286310043]
-layout_mode = 2
-text = "Instructions
-"
 
 [node name="BackButton" type="Button" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1442279632]
 layout_mode = 2
@@ -969,13 +968,13 @@ Your file can optionally include a header row using any of these recognised name
 Header names are case-insensitive and surrounding whitespace is ignored.
 If no recognised header is found, the first column is treated as the question and the second as the answer.
 
-[b]Example — With Headers[/b]
+[b]Example With Headers[/b]
 [code]Front,Back
 What is 2+2?,4
 Capital of France?,Paris
 Largest planet?,Jupiter[/code]
 
-[b]Example — Without Headers[/b]
+[b]Example Without Headers[/b]
 [code]What is 2+2?,4
 Capital of France?,Paris
 Largest planet?,Jupiter[/code]

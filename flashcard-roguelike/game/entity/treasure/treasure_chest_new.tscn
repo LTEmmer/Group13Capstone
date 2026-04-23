@@ -247,6 +247,8 @@ mesh = SubResource("ArrayMesh_3vyn0")
 
 [node name="LidBody" type="RigidBody3D" parent="TreasureChest/ShakeNode" unique_id=511200093]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.384, 0)
+collision_layer = 0
+collision_mask = 0
 mass = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TreasureChest/ShakeNode/LidBody" unique_id=1908530398]

@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://6n2s3fnpy2qh"]
+
+[ext_resource type="Script" uid="uid://cn3evd2bgbfmv" path="res://game/ui/main_menu/FirstTimeInstructions.cs" id="1"]
+[ext_resource type="Texture2D" uid="uid://b48xe6gkb0idd" path="res://assets/ui/main_menu_torn_paper.png" id="2"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_v8gfm"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="4_i4upc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuofg"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 0.9882353, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.21960784, 0.21960784, 0.2, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.12)
+shadow_size = 3
+shadow_offset = Vector2(1, 2)
+
+[node name="FirstTimeInstructions" type="Control" unique_id=1672380589]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="DimRect" type="ColorRect" parent="." unique_id=1634602358]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=240105100]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_v8gfm")
+
+[node name="Panel" type="Panel" parent="CenterContainer" unique_id=1039440490]
+clip_contents = true
+custom_minimum_size = Vector2(650, 600)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fuofg")
+
+[node name="Paper" type="TextureRect" parent="CenterContainer/Panel" unique_id=370029613]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.065
+anchor_top = -0.065
+anchor_right = 1.065
+anchor_bottom = 1.065
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel" unique_id=1990005699]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 52
+theme_override_constants/margin_top = 44
+theme_override_constants/margin_right = 52
+theme_override_constants/margin_bottom = 44
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel/MarginContainer" unique_id=1177930860]
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/Panel/MarginContainer/VBoxContainer" unique_id=1389145313]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "First Time?"
+horizontal_alignment = 1
+
+[node name="InstructionsLabel" type="RichTextLabel" parent="CenterContainer/Panel/MarginContainer/VBoxContainer" unique_id=1017963708]
+custom_minimum_size = Vector2(0, 320)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_i4upc")
+theme_override_font_sizes/normal_font_size = 22
+text = "Welcome to Flashcard Roguelike!
+
+If you've never played before the main purpose of the game is to merge flashcards with roguelike gameplay.
+
+Before getting started, make sure to check the \"View Imported Flashcards\" menu and import or create your own sets. At least one set must be active for gameplay. The game comes with a couple sample sets so toggle them on and off as desired. Cards in gameplay will be selected randomly from all enabled sets.
+
+Good luck and happy studying!"
+horizontal_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="CenterContainer/Panel/MarginContainer/VBoxContainer" unique_id=1746660127]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Never show again?"
+alignment = 1
+
+[node name="CloseButton" type="Button" parent="CenterContainer/Panel/MarginContainer/VBoxContainer" unique_id=391478606]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Got it!"

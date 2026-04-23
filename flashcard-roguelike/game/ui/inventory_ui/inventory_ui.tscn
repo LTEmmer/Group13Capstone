@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dj5diogm5gipf" path="res://game/ui/inventory_ui/pages/use_page.tscn" id="4_fhk5c"]
 [ext_resource type="Texture2D" uid="uid://dt2cje5lk82j2" path="res://assets/ui/highlighter.png" id="4_mmt0n"]
 [ext_resource type="PackedScene" uid="uid://mffc2ay0sxt8" path="res://game/ui/inventory_ui/pages/tool_page.tscn" id="5_pmruj"]
-[ext_resource type="Script" uid="uid://m3drfwmlmtxs" path="res://game/ui/inventory_ui/InputController.cs" id="10_fhk5c"]
+[ext_resource type="Script" uid="uid://bvy5rey5wgcah" path="res://game/ui/inventory_ui/InputController.cs" id="10_fhk5c"]
 [ext_resource type="Material" uid="uid://cxyqlevo2mro1" path="res://game/ui/inventory_ui/PostItMaterial.tres" id="11_pmruj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]

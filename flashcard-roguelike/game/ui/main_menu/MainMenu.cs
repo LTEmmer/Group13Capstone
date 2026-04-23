@@ -35,6 +35,7 @@ public partial class MainMenu : Control
 		var viewFlashcardsButton = GetNodeOrNull<Button>("CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer/ViewImportedFlashcards");
 		var flashcardsBackButton = GetNodeOrNull<Button>("ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/Back");
 		var settingsButton = GetNodeOrNull<Button>("CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer/SettingsButton");
+		var instructionsButton = GetNodeOrNull<Button>("ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/InstructionsButton");
 		var createNewSetButton = GetNodeOrNull<Button>("ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer/CreateNewSet");
 
 		if (playButton != null) playButton.Pressed += OnPlayPressed;
@@ -43,6 +44,7 @@ public partial class MainMenu : Control
 		if (viewFlashcardsButton != null) viewFlashcardsButton.Pressed += OnViewFlashcardsPressed;
 		if (flashcardsBackButton != null) flashcardsBackButton.Pressed += OnFlashcardsBackPressed;
 		if (settingsButton != null) settingsButton.Pressed += OnSettingsPressed;
+		if (instructionsButton != null) instructionsButton.Pressed += OnInstructionsPressed;
 		if (createNewSetButton != null) createNewSetButton.Pressed += OnCreateNewSetPressed;
 
 		AudioManager.Instance?.RegisterButton(playButton);
@@ -51,7 +53,15 @@ public partial class MainMenu : Control
 		AudioManager.Instance?.RegisterButton(viewFlashcardsButton);
 		AudioManager.Instance?.RegisterButton(flashcardsBackButton);
 		AudioManager.Instance?.RegisterButton(settingsButton);
+		AudioManager.Instance?.RegisterButton(instructionsButton);
 		AudioManager.Instance?.RegisterButton(createNewSetButton);
+
+		var instructionsCloseButton = GetNodeOrNull<Button>("InstructionsPanelContainer/Panel/MarginContainer/VBoxContainer/CloseButton");
+		if (instructionsCloseButton != null)
+		{
+			instructionsCloseButton.Pressed += OnInstructionsClosePressed;
+		}
+		AudioManager.Instance?.RegisterButton(instructionsCloseButton);
 
 		if (_uploadPanelContainer != null)
 			_uploadPanelContainer.Visible = false;
@@ -61,6 +71,10 @@ public partial class MainMenu : Control
 
 		if (_createSetPanelContainer != null)
 			_createSetPanelContainer.Visible = false;
+
+		var instructionsScene = GD.Load<PackedScene>("res://game/ui/main_menu/first_time_instructions.tscn");
+		if (instructionsScene != null)
+			AddChild(instructionsScene.Instantiate());
 	}
 
 	public override void _EnterTree()
@@ -167,6 +181,28 @@ public partial class MainMenu : Control
 		dialog.AddThemeStyleboxOverride("panel", style);
 	}
 
+	private void OnInstructionsPressed()
+	{
+		var instructionsPanel = GetNodeOrNull<Control>("InstructionsPanelContainer");
+		if (instructionsPanel != null)
+		{
+			if (_viewFlashcardsPanelContainer != null)
+				_viewFlashcardsPanelContainer.Visible = false;
+				
+			instructionsPanel.Visible = true;
+		}
+	}
+
+	private void OnInstructionsClosePressed()
+	{
+		var instructionsPanel = GetNodeOrNull<Control>("InstructionsPanelContainer");
+		if (instructionsPanel != null)
+			instructionsPanel.Visible = false;
+
+		if (_viewFlashcardsPanelContainer != null)
+			_viewFlashcardsPanelContainer.Visible = true;
+	}
+
 	private void OnCreateNewSetPressed()
 	{
 		if (_viewFlashcardsPanelContainer != null)
@@ -256,13 +292,30 @@ public partial class MainMenu : Control
 			var setHeaderContainer = new HBoxContainer();
 			_flashcardListContainer.AddChild(setHeaderContainer);
 
+			var cardsContainer = new VBoxContainer();
+			cardsContainer.Visible = false;
+			_flashcardListContainer.AddChild(cardsContainer);
+
 			var activeCheckBox = new CheckBox()
 			{
 				ButtonPressed = set.IsActive,
+				CustomMinimumSize = new Vector2(28, 28),
 			};
 			string checkSetName = set.DisplayName;
 			activeCheckBox.Toggled += (pressed) => FlashcardManager.Instance.SetActive(checkSetName, pressed);
 			setHeaderContainer.AddChild(activeCheckBox);
+
+			var toggleButton = new Button();
+			toggleButton.Text = "▶";
+			toggleButton.CustomMinimumSize = new Vector2(28, 28);
+			toggleButton.AddThemeFontSizeOverride("font_size", 14);
+			AudioManager.Instance?.RegisterButton(toggleButton);
+			toggleButton.Pressed += () =>
+			{
+				cardsContainer.Visible = !cardsContainer.Visible;
+				toggleButton.Text = cardsContainer.Visible ? "▼" : "▶";
+			};
+			setHeaderContainer.AddChild(toggleButton);
 
 			var setNameLabel = new Label();
 			setNameLabel.Text = set.DisplayName ?? "(Unnamed set)";
@@ -280,7 +333,12 @@ public partial class MainMenu : Control
 			setHeaderContainer.AddChild(deleteButton);
 
 			if (set.Cards == null)
+			{
+				var spacer2 = new Control();
+				spacer2.CustomMinimumSize = new Vector2(0, 8);
+				_flashcardListContainer.AddChild(spacer2);
 				continue;
+			}
 
 			int cardIndex = 0;
 
@@ -297,11 +355,11 @@ public partial class MainMenu : Control
 
 				cardLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
 				cardLabel.CustomMinimumSize = new Vector2(620, 0);
-				_flashcardListContainer.AddChild(cardLabel);
+				cardsContainer.AddChild(cardLabel);
 			}
 
 			var spacer = new Control();
-			spacer.CustomMinimumSize = new Vector2(0, 24);
+			spacer.CustomMinimumSize = new Vector2(0, 8);
 			_flashcardListContainer.AddChild(spacer);
 		}
 

@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://cutbohat4yfdk"]
 
+[ext_resource type="PackedScene" path="res://game/entity/dungeon_generator/rooms/event_rooms/skip_prompt.tscn" id="3_bw3q5"]
 [ext_resource type="Material" uid="uid://c22qf27w2ujjv" path="res://assets/models/parkour_room/cave_texture.tres" id="4_y432j"]
 [ext_resource type="PackedScene" uid="uid://c175n268mh5vw" path="res://game/entity/light/floating_light.tscn" id="5_6skwy"]
 [ext_resource type="Script" uid="uid://bvs732ljwgra3" path="res://game/entity/hazards/ScalingPlatform.cs" id="8_8jd16"]
@@ -350,6 +351,7 @@ script = ExtResource("Script_room")
 Npc = NodePath("NPC/BaseNPC")
 FlashcardTFScene = ExtResource("Scene_flashcard")
 Reward = NodePath("Reward/TreasureChest")
+SkipPromptScene = ExtResource("3_bw3q5")
 
 [node name="cave" parent="." unique_id=1561546874 instance=ExtResource("9_y432j")]
 transform = Transform3D(1.455, 0, 0, 0, 1.455, 0, 0, 0, 1.455, 0, 7.6004925, 0)

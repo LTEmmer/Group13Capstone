@@ -12,11 +12,13 @@ public partial class Turret : Node3D
     [Export] public float ZoomFov = 30f;
     [Export] public AudioStream[] ShootSounds;
     [Export] public MeshInstance3D PaintMesh;
+    [Export] public Label3D AmmoLabel;
 
     private Node3D _turretBase;
     private Node3D _turretHead;
     private Camera3D _turretCamera;
-    private int _ammo;
+    private int _currentAmmo;
+    private int _maxAmmo;
     private Marker3D _barrelTip;
     private float _defaultFov;
     private float _currentPitch = 0f;
@@ -36,17 +38,26 @@ public partial class Turret : Node3D
 
     public void SetAmmo(int ammo)
     {
-        _ammo = ammo;
+        _maxAmmo = ammo;
+        _currentAmmo = ammo;
     }
 
     public int GetAmmo()
     {
-        return _ammo;
+        return _currentAmmo;
+    }
+
+    public void UpdateAmmoDisplay()
+    {
+        if (AmmoLabel != null)
+        {
+            AmmoLabel.Text = $"Ammo: {_currentAmmo}/{_maxAmmo}";
+        }
     }
 
     public void Fire(Vector3 direction)
     {
-        if (_ammo <= 0) // failsafe
+        if (_currentAmmo <= 0) // failsafe
         {
             EmitSignal(nameof(OutOfAmmo));
             return;
@@ -65,10 +76,12 @@ public partial class Turret : Node3D
         GetParent().AddChild(projectile);
         projectile.GlobalPosition = _barrelTip.GlobalPosition;
 
-        _ammo--;
+        _currentAmmo--;
+
+        UpdateAmmoDisplay();
 
         // Signal when out of ammo
-        if (_ammo <= 0)
+        if (_currentAmmo <= 0)
         {
             EmitSignal(nameof(OutOfAmmo));
         }
@@ -79,6 +92,7 @@ public partial class Turret : Node3D
         _isActive = true;
         playerCam.Current = false; // Deactivate player camera
         _turretCamera.Current = true; // Enable turret camera
+        UpdateAmmoDisplay();
     }
 
     public void DeactivateTurret(Camera3D playerCam)
