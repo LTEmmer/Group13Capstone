@@ -19,6 +19,7 @@ public partial class TreasureChest : Interactable
 	[Export] private RigidBody3D _lidBody;
 
 	[Export] public AudioStream OpenSound;
+	[Export] public AudioStream ItemSpawnSound;
 	[Export] private AudioStreamPlayer3D _openSoundPlayer;
 
 	private RandomNumberGenerator _rng = new();
@@ -99,8 +100,7 @@ public partial class TreasureChest : Interactable
 
 		if (ChestLight != null)
 		{
-			CreateTween().TweenProperty(ChestLight, "light_energy", ChestLight.LightEnergy * 2.5f, 0.3f)
-				.SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+			CreateTween().TweenProperty(ChestLight, "light_energy", ChestLight.LightEnergy * 2.5f, 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
 		}
 
 		DoAnticipationShake(FinishOpen);
@@ -135,32 +135,66 @@ public partial class TreasureChest : Interactable
 		_sacrificeNode.GlobalPosition = GlobalPosition;
 		_sacrificeNode.ChildExitingTree += OnItemExiting;
 
+		var tween = CreateTween();
+
 		for (int i = 0; i < _rolledItems.Count; i++)
 		{
-			var entry = _rolledItems[i];
-			if (entry == null) { GD.PushWarning("TreasureChest: rolled item is null"); continue; }
-
-			var item = ItemScene.Instantiate<Item>();
-			if (item == null) { GD.PushWarning("TreasureChest: Instantiate<Item>() returned null — is the scene root typed as Item?"); continue; }
-
-			item._resource = entry;
-			_sacrificeNode.AddChild(item);
-
-			float t = _rolledItems.Count > 1 ? i / (float)(_rolledItems.Count - 1) : 0.5f;
-			float angle = Mathf.DegToRad(Mathf.Lerp(SpawnArcStart, SpawnArcEnd, t));
-			item.GlobalPosition = GlobalPosition + new Vector3(
-				Mathf.Sin(angle) * SpawnRadius,
-				SpawnHeight,
-				-Mathf.Cos(angle) * SpawnRadius
-			);
+			int idx = i;
+			tween.TweenCallback(Callable.From(() => SpawnSingleItem(idx)));
+			if (i < _rolledItems.Count - 1)
+			{
+				tween.TweenInterval(1f);
+			}
 		}
 
-		Timer delay = new();
-		delay.OneShot = true;
-		delay.WaitTime = 2f;
-		delay.Autostart = true;
-		delay.Timeout += () => { _playerRef.PlayerCamera.Current = true; };
-		AddChild(delay);
+		tween.TweenInterval(2f);
+		tween.TweenCallback(Callable.From(() => { _playerRef.PlayerCamera.Current = true; }));
+	}
+
+	private void SpawnSingleItem(int i)
+	{
+		if (!IsInsideTree() || _resolved) return;
+
+		var entry = _rolledItems[i];
+		if (entry == null)
+		{
+			GD.PushWarning("TreasureChest: rolled item is null"); return;
+		}
+
+		var item = ItemScene.Instantiate<Item>();
+		if (item == null)
+		{
+			GD.PushWarning("TreasureChest: Instantiate<Item>() returned null — is the scene root typed as Item?"); return;
+		}
+
+		item._resource = entry;
+		_sacrificeNode.AddChild(item);
+
+		float t = _rolledItems.Count > 1 ? i / (float)(_rolledItems.Count - 1) : 0.5f;
+		float angle = Mathf.DegToRad(Mathf.Lerp(SpawnArcStart, SpawnArcEnd, t));
+		Vector3 finalPos = GlobalPosition + new Vector3(
+			Mathf.Sin(angle) * SpawnRadius,
+			SpawnHeight,
+			-Mathf.Cos(angle) * SpawnRadius
+		);
+
+		// Launch from chest opening with ballistic arc
+		Vector3 startPos = GlobalPosition + Vector3.Up * 0.5f;
+		item.GlobalPosition = startPos;
+
+		Vector3 peak = (startPos + finalPos) * 0.5f;
+		peak.Y = Mathf.Max(startPos.Y, finalPos.Y) + 1.5f;
+
+		var launchTween = item.CreateTween();
+		launchTween.TweenProperty(item, "global_position", peak, 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.Out);
+		launchTween.TweenProperty(item, "global_position", finalPos, 0.3f).SetTrans(Tween.TransitionType.Quad).SetEase(Tween.EaseType.In);
+
+		if (ItemSpawnSound != null && _openSoundPlayer != null)
+		{
+			_openSoundPlayer.Stream = ItemSpawnSound;
+			_openSoundPlayer.PitchScale = 1f + (float)GD.RandRange(-.25f, .25f);
+			_openSoundPlayer.Play();
+		}
 	}
 
 	private void OnItemExiting(Node node)

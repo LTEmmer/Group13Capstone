@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="2_glrcb"]
 [ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="3_ox72p"]
 [ext_resource type="Material" uid="uid://bhmnfrl721bn6" path="res://assets/models/treasure_room/box/box_junk_material.tres" id="4_5iij2"]
+[ext_resource type="AudioStream" uid="uid://0don4ygbr41o" path="res://assets/audio/etc/item_spawn.mp3" id="4_glrcb"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="5_7cjah"]
 [ext_resource type="Material" uid="uid://ddtvbhnxky0xy" path="res://assets/models/treasure_room/box/box_bottom_texture.tres" id="6_lcgp6"]
 [ext_resource type="Material" uid="uid://bkqykn6oj2rq6" path="res://assets/models/treasure_room/box/box_lid_texture.tres" id="7_0xjk1"]
@@ -168,6 +169,7 @@ ItemScene = ExtResource("2_glrcb")
 _label = NodePath("Label3D")
 _lidBody = NodePath("ShakeNode/LidBody")
 OpenSound = ExtResource("3_ox72p")
+ItemSpawnSound = ExtResource("4_glrcb")
 _openSoundPlayer = NodePath("OpenSoundPlayer")
 ChestLight = NodePath("Light")
 RarityColors = PackedColorArray(0.8848981, 0.8848981, 0.8848981, 1, 9.866804e-07, 0.5114562, 0.103561275, 1, 0.23117456, 0.47789878, 1, 1, 0.8233584, 0.00080628635, 0.86872333, 1, 0.86527705, 0.70930505, 2.3102762e-06, 1)

@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bbr3j5hxqxmho" path="res://game/entity/dungeon_generator/rooms/StartItems.cs" id="12_4m86l"]
 [ext_resource type="Script" uid="uid://sjh56ix28es4" path="res://shared/components/rotate/RotateComponent.cs" id="12_8cp7p"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="12_nh78s"]
-[ext_resource type="Script" uid="uid://d21whjtbn8o5c" path="res://shared/components/hover/HoverComponent.cs" id="12_ofujs"]
 [ext_resource type="PackedScene" uid="uid://dwl8vaw2iy8ke" path="res://assets/models/standing_whiteboard/standing_whiteboard.glb" id="14_qryxv"]
 [ext_resource type="Material" uid="uid://btxixoo8wjobe" path="res://assets/models/standing_whiteboard/standing_whiteboard_texture.tres" id="15_nh78s"]
 [ext_resource type="PackedScene" uid="uid://2qvmv1ijxwoo" path="res://assets/models/big_pencil/pencil.glb" id="16_nh78s"]
@@ -45,14 +44,6 @@ data = PackedVector3Array(10, 0.1568, 20, -10, 2, 20, -10, 0.1568, 20, 10, 0.156
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8cp7p"]
 data = PackedVector3Array(10, 2, -20, -10, 2, 20, 10, 2, 20, 0.9999, 2, -20, -10, 2, 20, 10, 2, -20, -10, 2, 20, 0.9999, 2, -20, -1.0002, 2, -20, -10, 2, 20, -1.0002, 2, -20, -10, 2, -20, -0.9932, -2, -19.9341, -9.9295, -2, 19.917599, -9.9295, -2, -19.9341, 0.99289995, -2, -19.9341, -9.9295, -2, 19.917599, -0.9932, -2, -19.9341, -9.9295, -2, 19.917599, 0.99289995, -2, -19.9341, 9.9292, -2, -19.9341, -9.9295, -2, 19.917599, 9.9292, -2, -19.9341, 9.9292, -2, 19.917599)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofujs"]
-shading_mode = 0
-albedo_color = Color(1, 1, 0.5529412, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_8cp7p"]
-material = SubResource("StandardMaterial3D_ofujs")
-size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6vshp"]
 points = PackedVector3Array(0.0728759, 0.52414894, 1.5236052, -0.025390174, -1.195844, -1.572873, 0.023742862, -1.195844, -1.572873, -0.025390174, -1.195844, 1.572873, -0.0745617, 0.52414894, -1.5236052, 0.122047424, -0.458608, -1.5236052, -0.0745617, 0.52414894, 1.5236052, 0.122047424, -0.55695105, 1.5236052, 0.0728759, 0.52414894, -1.5236052, -0.0745617, -0.55695105, 1.5236052, -0.0745617, -0.55695105, -1.5236052, 0.023742862, -1.195844, 1.572873, 0.122047424, -0.55695105, -1.5236052, 0.0728759, 0.3276312, -1.572873, 0.0728759, 0.3276312, 1.572873, 0.122047424, -0.458608, 1.5236052, 0.0728759, 0.22928819, -1.572873, 0.0728759, 0.22928819, 1.572873)
@@ -128,7 +119,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2
 material_override = ExtResource("9_38i74")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="entrance_room_walls/Cube" index="0" unique_id=638059734]
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="entrance_room_walls/Cube/StaticBody3D" unique_id=458166598]
 shape = SubResource("ConcavePolygonShape3D_vleqm")
@@ -147,39 +137,25 @@ visible = false
 shape = SubResource("ConcavePolygonShape3D_8cp7p")
 
 [node name="LightRotate" parent="entrance_room_walls/entrance_room_floors_ceiling" unique_id=1455328766 instance=ExtResource("7_6vshp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27817535, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80005264, 0)
 
-[node name="LightRotate2" type="Node3D" parent="entrance_room_walls/entrance_room_floors_ceiling" unique_id=1747477280]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6781034, -0.102063894, -17.579172)
-script = ExtResource("12_8cp7p")
-DegreesPerSecond = 10.0
+[node name="Light" parent="entrance_room_walls/entrance_room_floors_ceiling/LightRotate" index="0" unique_id=2064956913]
+transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071067, -0.4999999, -0.4999999, 0.70710677, 0.49999973, 0, -0.070670605, 0)
 
-[node name="Light" type="MeshInstance3D" parent="entrance_room_walls/entrance_room_floors_ceiling/LightRotate2" unique_id=567788279]
-transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071067, -0.4999999, -0.4999999, 0.70710677, 0.49999967, 0, 0, 0)
-mesh = SubResource("BoxMesh_8cp7p")
-script = ExtResource("12_ofujs")
-Amplitude = 0.1
+[node name="OmniLight3D" parent="entrance_room_walls/entrance_room_floors_ceiling/LightRotate/Light" index="0" unique_id=308789193]
+light_specular = 0.1
 
-[node name="OmniLight3D" type="OmniLight3D" parent="entrance_room_walls/entrance_room_floors_ceiling/LightRotate2/Light" unique_id=57452699]
-transform = Transform3D(1, 4.371138e-08, 1.9106853e-15, 0, -4.371139e-08, 1, 4.371138e-08, -1, -4.371139e-08, 0, 0, 0)
-light_energy = 2.0
-omni_range = 24.867853
+[node name="LightRotate4" parent="entrance_room_walls/entrance_room_floors_ceiling" unique_id=742422889 instance=ExtResource("7_6vshp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6781034, -0.91932464, -17.579172)
 
-[node name="LightRotate3" type="Node3D" parent="entrance_room_walls/entrance_room_floors_ceiling" unique_id=1475264000]
+[node name="OmniLight3D" parent="entrance_room_walls/entrance_room_floors_ceiling/LightRotate4/Light" parent_id_path=PackedInt32Array(742422889, 2064956913) index="0" unique_id=308789193]
+light_energy = 3.25
+
+[node name="LightRotate2" parent="entrance_room_walls/entrance_room_floors_ceiling" unique_id=499066397 instance=ExtResource("7_6vshp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.53943, 0.38371444, 17.235163)
-script = ExtResource("12_8cp7p")
-DegreesPerSecond = 10.0
 
-[node name="Light" type="MeshInstance3D" parent="entrance_room_walls/entrance_room_floors_ceiling/LightRotate3" unique_id=1663228432]
-transform = Transform3D(0.7071067, -1.7655738e-08, 0.7071068, 0.50000006, 0.7071067, -0.4999999, -0.4999999, 0.70710677, 0.49999985, 0, 0.69718575, 0)
-mesh = SubResource("BoxMesh_8cp7p")
-script = ExtResource("12_ofujs")
-Amplitude = 0.1
-
-[node name="OmniLight3D" type="OmniLight3D" parent="entrance_room_walls/entrance_room_floors_ceiling/LightRotate3/Light" unique_id=1878118887]
-transform = Transform3D(1, 4.371138e-08, 1.9106853e-15, 0, -4.371139e-08, 1, 4.371138e-08, -1, -4.371139e-08, 0, 0, 0)
-light_energy = 2.0
-omni_range = 24.867853
+[node name="OmniLight3D" parent="entrance_room_walls/entrance_room_floors_ceiling/LightRotate2/Light" parent_id_path=PackedInt32Array(499066397, 2064956913) index="0" unique_id=308789193]
+light_energy = 1.842
 
 [node name="Whiteboards" type="Node3D" parent="." unique_id=407099243]
 
@@ -1009,6 +985,9 @@ material_override = ExtResource("18_emyof")
 [editable path="entrance_tunnel"]
 [editable path="entrance_room_walls"]
 [editable path="entrance_room_walls/entrance_room_floors_ceiling"]
+[editable path="entrance_room_walls/entrance_room_floors_ceiling/LightRotate"]
+[editable path="entrance_room_walls/entrance_room_floors_ceiling/LightRotate4"]
+[editable path="entrance_room_walls/entrance_room_floors_ceiling/LightRotate2"]
 [editable path="Whiteboards/standing_whiteboard"]
 [editable path="Whiteboards/standing_whiteboard2"]
 [editable path="Whiteboards/standing_whiteboard3"]

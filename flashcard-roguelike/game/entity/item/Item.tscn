@@ -1,19 +1,29 @@
 [gd_scene format=3 uid="uid://b31w7r83d3ycp"]
 
 [ext_resource type="Script" uid="uid://c7an01bvdh6hn" path="res://game/entity/item/Item.cs" id="1_7x45u"]
+[ext_resource type="PackedScene" uid="uid://bmao7v6x5xx46" path="res://game/entity/item/item_tooltip.tscn" id="2_qbtws"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nwg37"]
 radius = 1.6565362
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0ak7e"]
 
-[node name="Item" type="StaticBody3D" unique_id=696073096 node_paths=PackedStringArray("_meshInstance", "label") groups=["Interactable"]]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qbtws"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_qbtws"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_asawj"]
+density = 0.255
+albedo = Color(1.1755697, 1.1755697, 1.1755697, 1)
+density_texture = SubResource("NoiseTexture3D_qbtws")
+
+[node name="Item" type="StaticBody3D" unique_id=696073096 node_paths=PackedStringArray("_meshInstance") groups=["Interactable"]]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_7x45u")
 _meshInstance = NodePath("MeshInstance3D")
-label = NodePath("Label3D")
+_tooltipScene = ExtResource("2_qbtws")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2085220173]
 shape = SubResource("SphereShape3D_nwg37")
@@ -21,9 +31,16 @@ shape = SubResource("SphereShape3D_nwg37")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1647908511]
 transform = Transform3D(0.83045584, -0.24577151, 0.4999395, 0.28378105, 0.9588891, 0, -0.47938654, 0.14187336, 0.8660603, 0, 0, 0)
 mesh = SubResource("CylinderMesh_0ak7e")
+surface_material_override/0 = SubResource("ShaderMaterial_qbtws")
 
-[node name="Label3D" type="Label3D" parent="." unique_id=1603687644]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 2.840121, 0)
-render_priority = 1
-text = "asdfasdfsdf"
-font_size = 128
+[node name="FogVolume" type="FogVolume" parent="." unique_id=172414186]
+transform = Transform3D(3.3333325, 0, 0, 0, 3.3333325, 0, 0, 0, 3.3333325, 0, 13.979871, 0)
+size = Vector3(1, 10, 1)
+shape = 2
+material = SubResource("FogMaterial_asawj")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1181572240]
+transform = Transform3D(3.333333, 0, 0, 0, -1.4570463e-07, 3.333333, 0, -3.333333, -1.4570463e-07, 0, 37.52995, 0)
+light_energy = 16.0
+spot_range = 12.107336
+spot_angle = 4.334572

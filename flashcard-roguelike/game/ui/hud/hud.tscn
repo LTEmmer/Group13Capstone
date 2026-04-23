@@ -31,12 +31,14 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 2
 
-[node name="HUD" type="CanvasLayer" unique_id=1895084757 node_paths=PackedStringArray("_roomNameLabel", "_healthLabel", "_shieldlabel")]
+[node name="HUD" type="CanvasLayer" unique_id=1895084757 node_paths=PackedStringArray("_roomNameLabel", "_healthLabel", "_shieldlabel", "_minimapContainer", "_healthbarRoot")]
 layer = -1
 script = ExtResource("1_script")
 _roomNameLabel = NodePath("HealthBarRoot/VBoxContainer/Background_MarginContainer_VBoxContainer#RoomNameLabel")
 _healthLabel = NodePath("HealthBarRoot/VBoxContainer/HealthBarTrack/HealthValueLabel")
 _shieldlabel = NodePath("HealthBarRoot/VBoxContainer/Background_MarginContainer_VBoxContainer#ShieldLabel")
+_minimapContainer = NodePath("MinimapContainer")
+_healthbarRoot = NodePath("HealthBarRoot")
 
 [node name="HealthBarRoot" type="MarginContainer" parent="." unique_id=1895084758]
 anchors_preset = 3
@@ -141,6 +143,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MinimapContainer" type="VBoxContainer" parent="." unique_id=497374013]
+visible = false
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 86.0
@@ -154,6 +157,7 @@ theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("2_l7e5k")
 theme_override_font_sizes/font_size = 24
 text = "MINIMAP"
+horizontal_alignment = 1
 
 [node name="MinimapPanel" type="PanelContainer" parent="MinimapContainer" unique_id=335459436]
 clip_children = 2

@@ -20,10 +20,10 @@ public partial class VictoryMenu : CanvasLayer
 		_panel = GetNodeOrNull<Control>("Panel");
 		_titleLabel = GetNodeOrNull<Label>("Panel/VBoxContainer/TitleLabel");
 		_messageLabel = GetNodeOrNull<Label>("Panel/VBoxContainer/MessageLabel");
-		
+
 		// Ensure mouse is visible when victory shows
 		ProcessMode = ProcessModeEnum.Always;
-		
+
 		// If running this scene directly (for preview), show immediately
 		if (GetTree().CurrentScene == this)
 		{
@@ -35,39 +35,49 @@ public partial class VictoryMenu : CanvasLayer
 			Visible = false;
 		}
 	}
-	
-	/// <summary>
-	/// Shows the victory screen with an optional custom message.
-	/// </summary>
-	public void ShowVictory(string message = "Congratulations! You conquered the dungeon!")
+
+	public void ShowVictory(string message = null)
 	{
+		int floor = GameDifficultyManager.Instance?.CurrentFloor ?? 1;
+
+		if (_titleLabel != null)
+			_titleLabel.Text = $"FLOOR {floor} COMPLETE!";
+
+		if (_messageLabel != null)
+			_messageLabel.Text = message ?? $"You cleared Floor {floor}! Proceed deeper?";
+
 		AudioManager.Instance?.FadeOutMusic();
 		AudioManager.Instance?.PlayGameVictorySound();
 
-		if (_messageLabel != null)
-		{
-			_messageLabel.Text = message;
-		}
-		
 		Visible = true;
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		GetTree().Paused = true;
 	}
-	
+
+	public void _on_next_floor_pressed()
+	{
+		GD.Print("Advancing to next floor...");
+		GetTree().Paused = false;
+		Visible = false;
+		DungeonGenerator gen = GetTree().GetFirstNodeInGroup("dungeon_generator") as DungeonGenerator;
+		gen?.GoToNextFloor();
+	}
+
 	public void _on_new_run_pressed()
 	{
 		GD.Print("Starting new run...");
+		GameDifficultyManager.Instance?.ResetGame();
 		GetTree().Paused = false;
 		GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
-
 		Visible = false;
 	}
-	
+
 	public void _on_main_menu_pressed()
 	{
 		GD.Print("Returning to main menu...");
+		GameDifficultyManager.Instance?.ResetGame();
 		GetTree().Paused = false;
-		
+
 		if (MainMenuScene != null)
 		{
 			GetTree().ChangeSceneToPacked(MainMenuScene);

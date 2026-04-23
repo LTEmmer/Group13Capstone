@@ -45,6 +45,8 @@ public partial class DialogBoxManager : CanvasLayer
             return;
         }
 
+        
+
         _fullText = text;
 
         _dialogText.Text = _fullText;
@@ -77,6 +79,7 @@ public partial class DialogBoxManager : CanvasLayer
 
         _savedMouseMode = Input.MouseMode;
         Input.MouseMode = Input.MouseModeEnum.Visible;
+        GetTree().GetFirstNodeInGroup("player")?.Call("SetAcceptKeyboardInput", false);
         Visible = true;
         _isJustTriggered = true;
     }
@@ -130,7 +133,8 @@ public partial class DialogBoxManager : CanvasLayer
     private void ButtonPressed()
     {
         Visible = false;
-        Input.MouseMode = _savedMouseMode; 
+        Input.MouseMode = _savedMouseMode;
+        GetTree().GetFirstNodeInGroup("player")?.Call("SetAcceptKeyboardInput", true);
         _isDoneRevealing = true;
     }
 
@@ -149,6 +153,7 @@ public partial class DialogBoxManager : CanvasLayer
                 {
                     Visible = false;
                     Input.MouseMode = _savedMouseMode;
+                    GetTree().GetFirstNodeInGroup("player")?.Call("SetAcceptKeyboardInput", true);
                 }
             }
         }

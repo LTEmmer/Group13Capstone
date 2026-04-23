@@ -29,9 +29,24 @@ public partial class DungeonGenerator : Node3D
 
 	public override void _Ready()
 	{
+		AddToGroup("dungeon_generator");
 		TaloTelemetry.ResetSessionStats();
 		AudioManager.Instance?.PlayDungeonMusic();
-		GameDifficultyManager.Instance?.ResetDifficulty();
+		RegenerateDungeon();
+	}
+
+	// Called by VictoryMenu to advance to the next floor without reloading the scene.
+	// Clears the current dungeon, bumps difficulty/floor, then regenerates in place.
+	public void GoToNextFloor()
+	{
+		GameDifficultyManager.Instance?.AdvanceFloor();
+		Node3D roomsRoot = GetOrCreateRoot("Rooms");
+		ClearChildren(roomsRoot);
+		RegenerateDungeon();
+	}
+
+	private void RegenerateDungeon()
+	{
 		// Initialize random number generator with seed
 		if (UseRandomSeed)
 		{
@@ -302,17 +317,30 @@ public partial class DungeonGenerator : Node3D
 				int enemyCount = GameDifficultyManager.Instance.getEnemyCount();
 				var enemyNode = roomNode.GetNodeOrNull<Node3D>("Enemies");
 				List<Marker3D> spawnPoints = roomNode.GetNodeOrNull<Node3D>("EnemySpawnArea").GetChildren().OfType<Marker3D>().ToList();
+				enemyCount = Math.Min(enemyCount, spawnPoints.Count);
+
+				int floor = GameDifficultyManager.Instance.CurrentFloor;
+				float floorMult = 1.0f + (floor - 1) * 0.35f;
 
 				for (int i = 0; i < enemyCount; i++)
 				{
-					// In the future, we can use the difficulty score to determine the type and strength of enemies to spawn
 					EnemyFSM enemyInstance = GD.Load<PackedScene>("res://game/entity/enemy_fsm/enemy_patroller.tscn").Instantiate() as EnemyFSM;
 					enemyInstance.Name = $"Enemy_{i}";
+
+					if (enemyInstance.healthComponent != null)
+					{
+						enemyInstance.healthComponent.MaxHealth *= floorMult;
+					}
+					if (enemyInstance.attackComponent != null)
+					{
+						enemyInstance.attackComponent.BaseDamage *= floorMult;
+					}
+
 					enemyNode.AddChild(enemyInstance);
-					enemyInstance.GlobalPosition = spawnPoints[i].GlobalPosition + new Vector3(0, 0.9F, 0); // Spawner was spawning enemy at waist height
+					enemyInstance.GlobalPosition = spawnPoints[i].GlobalPosition + new Vector3(0, 0.9F, 0);
 				}
 
-				GD.Print($"Spawned {enemyCount} enemies in Room {room.Id} based on difficulty score of {GameDifficultyManager.Instance.getCurrentDifficultyScore()}.");
+				GD.Print($"[Floor {floor}] Spawned {enemyCount} enemies in Room {room.Id} (difficulty {GameDifficultyManager.Instance.getCurrentDifficultyScore():F2}, floor mult {floorMult:F2}x).");
 			}
 		}
 	}
