@@ -33,7 +33,7 @@ public class FlashcardChallengeManager
 	}
 
 	// Show a challenge with difficulty parameter (default 0 = T/F, 1 = MC, 2 = Text)
-	public void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...", float difficulty = 0)
+	public void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...", float difficulty = 0, bool combat = true)
 	{
 		if (card == null) return;
 
@@ -48,7 +48,7 @@ public class FlashcardChallengeManager
 
 		// Show the selected challenge
 		_currentChallenge = challengeToShow;
-		_currentChallenge.ShowChallenge(card, context);
+		_currentChallenge.ShowChallenge(card, context, combat);
 	}
 
 	// Hide the current active challenge

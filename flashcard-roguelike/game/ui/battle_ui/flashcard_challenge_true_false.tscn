@@ -63,13 +63,13 @@ theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=391179865]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 32
 text = "True or False?"
 horizontal_alignment = 1
 
 [node name="ContextLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=761066353]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Answer correctly to continue"
 horizontal_alignment = 1
 
@@ -102,13 +102,11 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="TrueButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=978703684]
-custom_minimum_size = Vector2(140, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "TRUE"
 
 [node name="FalseButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=46954838]
-custom_minimum_size = Vector2(140, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "FALSE"

@@ -35,7 +35,7 @@ public class CombatResolver
 			{
 				// Set state to wait for flashcard answer and show challenge with difficulty
 				_state.WaitingForFlashcard = true;
-				_flashcardChallengeManager.ShowChallenge(card, "Answer correctly to attack!", difficulty);
+				_flashcardChallengeManager.ShowChallenge(card, "Answer correctly to attack!", difficulty, true);
 			}
 			else
 			{
@@ -74,7 +74,7 @@ public class CombatResolver
                 // Set state to wait for flashcard answer and show challenge with default difficulty (0 = text)
                 _state.WaitingForFlashcard = true;
                 // Use the current game difficulty so defense challenges scale like attacks
-                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to defend!", GameDifficultyManager.Instance.getCurrentDifficultyScore());
+                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to defend!", GameDifficultyManager.Instance.getCurrentDifficultyScore(), false);
             }
             else
             {
@@ -133,13 +133,13 @@ public class CombatResolver
                         if (_state.ConsecutiveCorrect != _state.BossStreakRequired - 1)
                         {
                             _uiCoordinator.LogMessage($"Keep it up! {_state.BossStreakRequired - _state.ConsecutiveCorrect} more to go.");
-                            _flashcardChallengeManager.ShowChallenge(card, $"Keep it up! {_state.BossStreakRequired - _state.ConsecutiveCorrect} more correct answers to go!", difficulty);
+                            _flashcardChallengeManager.ShowChallenge(card, $"Keep it up! {_state.BossStreakRequired - _state.ConsecutiveCorrect} more correct answers to go!", difficulty, true);
                             
                         }
                         else
                         {
                             _uiCoordinator.LogMessage($"Last hit needed! You best not miss you hear.");
-                            _flashcardChallengeManager.ShowChallenge(card, $"Last hit needed! You best not miss you hear.", difficulty);
+                            _flashcardChallengeManager.ShowChallenge(card, $"Last hit needed! You best not miss you hear.", difficulty, true);
                         }
                     }
                     else

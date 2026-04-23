@@ -53,7 +53,7 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 		_onAnswerSubmitted = callback;
 	}
 
-	public void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...")
+	public void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...", bool combat = true)
 	{
 		if (_isActive || card == null) return;
 
@@ -80,6 +80,15 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 		}
 
 		_contextLabel.Text = context;
+		if (combat)
+		{
+			_contextLabel.AddThemeColorOverride("font_color", Colors.Red);
+		}
+		else
+		{
+			_contextLabel.AddThemeColorOverride("font_color", Colors.Green);
+		}
+
 		_trueButton.Disabled = false;
 		_falseButton.Disabled = false;
 

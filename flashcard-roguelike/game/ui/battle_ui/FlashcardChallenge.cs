@@ -48,7 +48,7 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 		_onAnswerSubmittedCallback = callback;
 	}
 
-	public void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...")
+	public void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...", bool combat = true)
 	{
 		if (_isActive || card == null) return; // Already active or no card to show
 
@@ -58,6 +58,15 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 		// Setup UI
 		_questionLabel.Text = card.Question;
 		_contextLabel.Text = context;
+		if (combat)
+		{
+			_contextLabel.AddThemeColorOverride("font_color", Colors.Red);
+		}
+		else
+		{
+			_contextLabel.AddThemeColorOverride("font_color", Colors.Green);
+		}
+
 		_answerInput.Text = "";
         _answerLabel.Text = "Your Answer:";
 		_answerInput.Editable = true;

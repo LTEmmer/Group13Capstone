@@ -1,7 +1,7 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://ddtvbhnxky0xy"]
 
 [ext_resource type="Texture2D" uid="uid://ciac3sd4tvly0" path="res://assets/models/treasure_room/box/box_Material_BaseColor.png" id="1_qmg13"]
-[ext_resource type="Shader" uid="uid://q0jllp6wui10" path="res://game/ui/inventory_ui/highlight.gdshader" id="2_5drje"]
+[ext_resource type="Shader" path="res://game/ui/inventory_ui/highlight.gdshader" id="2_5drje"]
 [ext_resource type="Texture2D" uid="uid://2cvlvbelosd8" path="res://assets/models/treasure_room/box/box_Material_Normal.png" id="2_hob58"]
 [ext_resource type="Texture2D" uid="uid://oyxcgoen50cb" path="res://assets/models/treasure_room/box/box_Material_Roughness.png" id="3_5drje"]
 
