@@ -14,7 +14,7 @@ public partial class AttackComponent : Node
 	[Signal] public delegate void OnAttackMissedEventHandler();
 
 	private AudioStreamPlayer3D _audioPlayer;
-    private RandomNumberGenerator rng = new RandomNumberGenerator();
+	private RandomNumberGenerator rng = new RandomNumberGenerator();
 
 	public override void _Ready()
 	{
@@ -55,11 +55,11 @@ public partial class AttackComponent : Node
 	}
 
 	private float TryCrit(float damage)
-    {
-        if (rng.Randf() >= CritChance) return damage;
-        GD.Print("CritChance: Critical Hit!");
+	{
+		if (rng.Randf() >= CritChance) return damage;
+		GD.Print("CritChance: Critical Hit!");
 		return damage * CritMult;
-    }
+	}
 
 	public void Miss()
 	{

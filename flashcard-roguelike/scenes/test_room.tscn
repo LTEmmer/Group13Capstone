@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="4_503t6"]
 [ext_resource type="PackedScene" uid="uid://b1awrh787m3pg" path="res://game/entity/enemy_example/enemy_example.tscn" id="4_enemy"]
 [ext_resource type="PackedScene" uid="uid://c3kbm7x2yvqpn" path="res://game/entity/treasure/treasure_chest.tscn" id="12_w86v4"]
-[ext_resource type="PackedScene" uid="uid://cnycncg0uqrvt" path="res://scenes/all_items.tscn" id="14_l3qxk"]
+[ext_resource type="PackedScene" path="res://scenes/all_items.tscn" id="14_l3qxk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_im37l"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

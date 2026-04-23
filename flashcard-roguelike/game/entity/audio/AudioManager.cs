@@ -4,73 +4,73 @@ using GodotPlugins.Game;
 
 public partial class AudioManager : Node
 {
-    public static AudioManager Instance { get; private set; }
+	public static AudioManager Instance { get; private set; }
 
-    private const string MusicBusName = "Music";
-    private const string SFXBusName   = "SFX";
+	private const string MusicBusName = "Music";
+	private const string SFXBusName   = "SFX";
 
-    // UI sounds
-    [Export] public AudioStream HoverSound;
-    [Export] public AudioStream ClickSound;
-    [Export] public AudioStream[] ItemPickupSounds;
+	// UI sounds
+	[Export] public AudioStream HoverSound;
+	[Export] public AudioStream ClickSound;
+	[Export] public AudioStream[] ItemPickupSounds;
 
-    // Flashcard feedback
-    [Export] public AudioStream CorrectSound;
-    [Export] public AudioStream WrongSound;
+	// Flashcard feedback
+	[Export] public AudioStream CorrectSound;
+	[Export] public AudioStream WrongSound;
 
-    // Game condition sounds
-    [Export] public AudioStream GameOverSound;
-    [Export] public AudioStream GameVictorySound;
+	// Game condition sounds
+	[Export] public AudioStream GameOverSound;
+	[Export] public AudioStream GameVictorySound;
 
-    // Music tracks
-    [Export] public AudioStream MainMenuMusic;
-    [Export] public AudioStream[] AmbientMusic;
-    [Export] public AudioStream BattleMusic;
+	// Music tracks
+	[Export] public AudioStream MainMenuMusic;
+	[Export] public AudioStream[] AmbientMusic;
+	[Export] public AudioStream BattleMusic;
 
-    // Battle stinger — plays on top of music when entering battle
-    [Export] public AudioStream BattleStinger;
+	// Battle stinger — plays on top of music when entering battle
+	[Export] public AudioStream BattleStinger;
 
-    [Export] public float SoundReduction = -12.5f; // Currently does nothing
+	[Export] public float SoundReduction = -12.5f; // Currently does nothing
 
-    private AudioStreamPlayer _buttonSoundsPlayer;
-    private AudioStreamPlayer _correctSoundsPlayer;
-    private AudioStreamPlayer _gameConditionsPlayer;
-    private AudioStreamPlayer _itemPickupSoundsPlayer;
-    private AudioStreamPlayer _stingerPlayer;
+	private AudioStreamPlayer _buttonSoundsPlayer;
+	private AudioStreamPlayer _correctSoundsPlayer;
+	private AudioStreamPlayer _gameConditionsPlayer;
+	private AudioStreamPlayer _itemPickupSoundsPlayer;
+	private AudioStreamPlayer _stingerPlayer;
 
-    // Two music players for crossfading
-    private AudioStreamPlayer _musicPlayerA;
-    private AudioStreamPlayer _musicPlayerB;
-    private bool _usingPlayerA = true;
+	// Two music players for crossfading
+	private AudioStreamPlayer _musicPlayerA;
+	private AudioStreamPlayer _musicPlayerB;
+	private bool _usingPlayerA = true;
 
 
 
-    public override void _Ready()
-    {
-        Instance = this;
-        ProcessMode = ProcessModeEnum.Always;
+	public override void _Ready()
+	{
+		Instance = this;
+		ProcessMode = ProcessModeEnum.Always;
 
-        _buttonSoundsPlayer = GetNode<AudioStreamPlayer>("ButtonSounds");
-        _correctSoundsPlayer = GetNode<AudioStreamPlayer>("CorrectSounds");
-        _gameConditionsPlayer = GetNode<AudioStreamPlayer>("GameConditions");
-        _itemPickupSoundsPlayer = GetNode<AudioStreamPlayer>("ItemPickupSounds");
-        _stingerPlayer = GetNode<AudioStreamPlayer>("Stinger");
-        _musicPlayerA = GetNode<AudioStreamPlayer>("MusicPlayerA");
-        _musicPlayerB = GetNode<AudioStreamPlayer>("MusicPlayerB");
+		_buttonSoundsPlayer = GetNode<AudioStreamPlayer>("ButtonSounds");
+		_correctSoundsPlayer = GetNode<AudioStreamPlayer>("CorrectSounds");
+		_gameConditionsPlayer = GetNode<AudioStreamPlayer>("GameConditions");
+		_itemPickupSoundsPlayer = GetNode<AudioStreamPlayer>("ItemPickupSounds");
+		_stingerPlayer = GetNode<AudioStreamPlayer>("Stinger");
+		_musicPlayerA = GetNode<AudioStreamPlayer>("MusicPlayerA");
+		_musicPlayerB = GetNode<AudioStreamPlayer>("MusicPlayerB");
 
-        _musicPlayerA.Bus = MusicBusName;
-        _musicPlayerB.Bus = MusicBusName;
-        _stingerPlayer.Bus = MusicBusName;
-        _gameConditionsPlayer.Bus = MusicBusName;
-        _buttonSoundsPlayer.Bus = SFXBusName;
-        _correctSoundsPlayer.Bus = SFXBusName;
-        _itemPickupSoundsPlayer.Bus = SFXBusName;
+		_musicPlayerA.Bus = MusicBusName;
+		_musicPlayerB.Bus = MusicBusName;
+		_stingerPlayer.Bus = MusicBusName;
+		_gameConditionsPlayer.Bus = MusicBusName;
+		_buttonSoundsPlayer.Bus = SFXBusName;
+		_correctSoundsPlayer.Bus = SFXBusName;
+		_itemPickupSoundsPlayer.Bus = SFXBusName;
 
-        GetTree().NodeAdded += OnNodeAddedToTree;
-    }
+		GetTree().NodeAdded += OnNodeAddedToTree;
+	}
 
-    // Automatically routes any AudioStreamPlayer added to the scene tree to the SFX bus
-    // Anything new that isn't explicitly set to the Music bus will be assumed to be a sound effect
+	// Automatically routes any AudioStreamPlayer added to the scene tree to the SFX bus
+	// Anything new that isn't explicitly set to the Music bus will be assumed to be a sound effect
     private void OnNodeAddedToTree(Node node)
     {
         if (node is AudioStreamPlayer p && p.Bus == "Master")
@@ -88,160 +88,160 @@ public partial class AudioManager : Node
     public void SetBusVolume(string busName, float linear)
     {
         int idx = AudioServer.GetBusIndex(busName);
-        if (idx < 0) // If the bus doesn't exist, just ignore it.
-        {
-            return;
-        }
+		if (idx < 0) // If the bus doesn't exist, just ignore it.
+		{
+			return;
+		}
 
-        // Clamp the value to ensure valid input for LinearToDb, and set the bus volume.
-        AudioServer.SetBusVolumeDb(idx, Mathf.LinearToDb(Mathf.Clamp(linear, 0, 1)));
-    }
+		// Clamp the value to ensure valid input for LinearToDb, and set the bus volume.
+		AudioServer.SetBusVolumeDb(idx, Mathf.LinearToDb(Mathf.Clamp(linear, 0, 1)));
+	}
 
-    public float GetBusVolume(string busName)
-    {
-        int idx = AudioServer.GetBusIndex(busName);
-        return idx < 0 ? 1f : Mathf.DbToLinear(AudioServer.GetBusVolumeDb(idx));
-    }
+	public float GetBusVolume(string busName)
+	{
+		int idx = AudioServer.GetBusIndex(busName);
+		return idx < 0 ? 1f : Mathf.DbToLinear(AudioServer.GetBusVolumeDb(idx));
+	}
 
-    // --- Music ---
-    
-    /// Crossfades from the currently playing music track to a new one.
-    public void TransitionToMusic(AudioStream newTrack, float fadeDuration = 1.0f)
-    {
-        if (newTrack == null) return;
+	// --- Music ---
+	
+	/// Crossfades from the currently playing music track to a new one.
+	public void TransitionToMusic(AudioStream newTrack, float fadeDuration = 1.0f)
+	{
+		if (newTrack == null) return;
 
-        var fadeOut = _usingPlayerA ? _musicPlayerA : _musicPlayerB;
-        var fadeIn  = _usingPlayerA ? _musicPlayerB : _musicPlayerA;
+		var fadeOut = _usingPlayerA ? _musicPlayerA : _musicPlayerB;
+		var fadeIn  = _usingPlayerA ? _musicPlayerB : _musicPlayerA;
 
-        fadeIn.Stream = newTrack;
-        fadeIn.VolumeDb = -80f;
-        fadeIn.Play();
+		fadeIn.Stream = newTrack;
+		fadeIn.VolumeDb = -80f;
+		fadeIn.Play();
 
-        var tween = CreateTween();
-        tween.SetParallel(true);
-        tween.TweenProperty(fadeOut, "volume_db", -80f, fadeDuration);
-        tween.TweenProperty(fadeIn,  "volume_db", 0, fadeDuration);
-        tween.Chain().TweenCallback(Callable.From(() =>
-        {
-            fadeOut.Stop();
-        }));
+		var tween = CreateTween();
+		tween.SetParallel(true);
+		tween.TweenProperty(fadeOut, "volume_db", -80f, fadeDuration);
+		tween.TweenProperty(fadeIn,  "volume_db", 0, fadeDuration);
+		tween.Chain().TweenCallback(Callable.From(() =>
+		{
+			fadeOut.Stop();
+		}));
 
-        _usingPlayerA = !_usingPlayerA;
-    }
+		_usingPlayerA = !_usingPlayerA;
+	}
 
-    public void PlayMainMenuMusic(float fadeDuration = 1.0f)
-    {
-        TransitionToMusic(MainMenuMusic, fadeDuration);
-    }
+	public void PlayMainMenuMusic(float fadeDuration = 1.0f)
+	{
+		TransitionToMusic(MainMenuMusic, fadeDuration);
+	}
 
-    public void PlayDungeonMusic(float fadeDuration = 1.0f)
-    {
-        if (AmbientMusic == null || AmbientMusic.Length == 0) return;
-        TransitionToMusic(AmbientMusic[GD.Randi() % (uint)AmbientMusic.Length], fadeDuration);
-    }
+	public void PlayDungeonMusic(float fadeDuration = 1.0f)
+	{
+		if (AmbientMusic == null || AmbientMusic.Length == 0) return;
+		TransitionToMusic(AmbientMusic[GD.Randi() % (uint)AmbientMusic.Length], fadeDuration);
+	}
 
-    public void PlayBattleMusic(float fadeDuration = 0.5f)
-    {
-        TransitionToMusic(BattleMusic, fadeDuration);
-    }
+	public void PlayBattleMusic(float fadeDuration = 0.5f)
+	{
+		TransitionToMusic(BattleMusic, fadeDuration);
+	}
 
-    /// Fades the current music out to silence without starting a new track.
-    public void FadeOutMusic(float fadeDuration = 1.5f)
-    {
-        var active = _usingPlayerA ? _musicPlayerA : _musicPlayerB;
-        var tween = CreateTween();
-        tween.TweenProperty(active, "volume_db", -80f, fadeDuration);
-        tween.TweenCallback(Callable.From(active.Stop));
-    }
+	/// Fades the current music out to silence without starting a new track.
+	public void FadeOutMusic(float fadeDuration = 1.5f)
+	{
+		var active = _usingPlayerA ? _musicPlayerA : _musicPlayerB;
+		var tween = CreateTween();
+		tween.TweenProperty(active, "volume_db", -80f, fadeDuration);
+		tween.TweenCallback(Callable.From(active.Stop));
+	}
 
-    /// Plays the one-shot stinger sound on top of whatever music is currently playing.
-    /// Call this when entering battle, alongside PlayBattleMusic.
-    public void PlayBattleStinger()
-    {
-        if (BattleStinger == null) return;
-        _stingerPlayer.Stream = BattleStinger;
-        _stingerPlayer.Play();
-    }
+	/// Plays the one-shot stinger sound on top of whatever music is currently playing.
+	/// Call this when entering battle, alongside PlayBattleMusic.
+	public void PlayBattleStinger()
+	{
+		if (BattleStinger == null) return;
+		_stingerPlayer.Stream = BattleStinger;
+		_stingerPlayer.Play();
+	}
 
-    // --- UI sounds ---
+	// --- UI sounds ---
 
-    public void RegisterButton(Button button)
-    {
-        if (button == null) return;
-        button.MouseEntered += () => PlayButtonHover(button);
-        button.Pressed += PlayButtonClick;
-    }
+	public void RegisterButton(Button button)
+	{
+		if (button == null) return;
+		button.MouseEntered += () => PlayButtonHover(button);
+		button.Pressed += PlayButtonClick;
+	}
 
-    public void PlayButtonHover(Button button = null)
-    {
-        if (button?.Disabled == true) 
-        {
-            return;
-        }
+	public void PlayButtonHover(Button button = null)
+	{
+		if (button?.Disabled == true) 
+		{
+			return;
+		}
 
-        if (_buttonSoundsPlayer.Stream == ClickSound && _buttonSoundsPlayer.Playing) return;
-        if (HoverSound != null)
-        {
-            _buttonSoundsPlayer.Stream = HoverSound;
-            _buttonSoundsPlayer.Play();
-        }
-    }
+		if (_buttonSoundsPlayer.Stream == ClickSound && _buttonSoundsPlayer.Playing) return;
+		if (HoverSound != null)
+		{
+			_buttonSoundsPlayer.Stream = HoverSound;
+			_buttonSoundsPlayer.Play();
+		}
+	}
 
-    public void PlayButtonClick()
-    {
-        if (ClickSound != null)
-        {
-            _buttonSoundsPlayer.Stream = ClickSound;
-            _buttonSoundsPlayer.Play();
-        }
-    }
+	public void PlayButtonClick()
+	{
+		if (ClickSound != null)
+		{
+			_buttonSoundsPlayer.Stream = ClickSound;
+			_buttonSoundsPlayer.Play();
+		}
+	}
 
-    public void PlayItemPickupSound()
-    {
-        if (ItemPickupSounds.Length > 0)
-        {
-            _itemPickupSoundsPlayer.Stream = ItemPickupSounds[GD.Randi() % (uint)ItemPickupSounds.Length];
-            _itemPickupSoundsPlayer.Play();
-        }
-    }
+	public void PlayItemPickupSound()
+	{
+		if (ItemPickupSounds.Length > 0)
+		{
+			_itemPickupSoundsPlayer.Stream = ItemPickupSounds[GD.Randi() % (uint)ItemPickupSounds.Length];
+			_itemPickupSoundsPlayer.Play();
+		}
+	}
 
-    // --- Flashcard feedback ---
+	// --- Flashcard feedback ---
 
-    public void PlayCorrectSound()
-    {
-        if (CorrectSound != null)
-        {
-            _correctSoundsPlayer.Stream = CorrectSound;
-            _correctSoundsPlayer.Play();
-        }
-    }
+	public void PlayCorrectSound()
+	{
+		if (CorrectSound != null)
+		{
+			_correctSoundsPlayer.Stream = CorrectSound;
+			_correctSoundsPlayer.Play();
+		}
+	}
 
-    public void PlayWrongSound()
-    {
-        if (WrongSound != null)
-        {
-            _correctSoundsPlayer.Stream = WrongSound;
-            _correctSoundsPlayer.Play();
-        }
-    }
+	public void PlayWrongSound()
+	{
+		if (WrongSound != null)
+		{
+			_correctSoundsPlayer.Stream = WrongSound;
+			_correctSoundsPlayer.Play();
+		}
+	}
 
-    // --- Game conditions ---
+	// --- Game conditions ---
 
-    public void PlayGameOverSound()
-    {
-        if (GameOverSound != null)
-        {
-            _gameConditionsPlayer.Stream = GameOverSound;
-            _gameConditionsPlayer.Play();
-        }
-    }
+	public void PlayGameOverSound()
+	{
+		if (GameOverSound != null)
+		{
+			_gameConditionsPlayer.Stream = GameOverSound;
+			_gameConditionsPlayer.Play();
+		}
+	}
 
-    public void PlayGameVictorySound()
-    {
-        if (GameVictorySound != null)
-        {
-            _gameConditionsPlayer.Stream = GameVictorySound;
-            _gameConditionsPlayer.Play();
-        }
-    }
+	public void PlayGameVictorySound()
+	{
+		if (GameVictorySound != null)
+		{
+			_gameConditionsPlayer.Stream = GameVictorySound;
+			_gameConditionsPlayer.Play();
+		}
+	}
 }

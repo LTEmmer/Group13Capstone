@@ -62,11 +62,11 @@ public partial class Player : CharacterBody3D
 
 	private Interactable oldInteractable = null;
 
-    public override void _EnterTree()
-    {
-        base._EnterTree();
+	public override void _EnterTree()
+	{
+		base._EnterTree();
 		AddToGroup("player");
-    }
+	}
 
 	public override void _Ready()
 	{
@@ -111,9 +111,9 @@ public partial class Player : CharacterBody3D
 			var colider = sightline.GetCollider() as Node;
 			if (colider.IsInGroup("Interactable"))
 			{
-        		if (colider is Interactable interactable){
-            		interactable.Interact(this);
-        		}
+				if (colider is Interactable interactable){
+					interactable.Interact(this);
+				}
 			}
 		}
 	}
@@ -174,22 +174,22 @@ public partial class Player : CharacterBody3D
 	{
 		Interactable newInteractable = null;
 
-    	if (sightline.IsColliding())
-    	{
-        	var collider = sightline.GetCollider() as Node;
-        	if (collider is Interactable interactable)
-            	newInteractable = interactable;
-    	}
+		if (sightline.IsColliding())
+		{
+			var collider = sightline.GetCollider() as Node;
+			if (collider is Interactable interactable)
+				newInteractable = interactable;
+		}
 
-    	if (newInteractable != oldInteractable)
-    	{
-        	if (IsInstanceValid(oldInteractable))
-            	oldInteractable?.HoverEnd(this);
-        	if (IsInstanceValid(newInteractable))
-            	newInteractable?.HoverStart(this);
+		if (newInteractable != oldInteractable)
+		{
+			if (IsInstanceValid(oldInteractable))
+				oldInteractable?.HoverEnd(this);
+			if (IsInstanceValid(newInteractable))
+				newInteractable?.HoverStart(this);
 
-        	oldInteractable = newInteractable;
-    	}
+			oldInteractable = newInteractable;
+		}
 
 		//Get input
 		if (_acceptKeyboardInput){

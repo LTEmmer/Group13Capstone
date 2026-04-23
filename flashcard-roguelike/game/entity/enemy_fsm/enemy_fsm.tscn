@@ -7,11 +7,11 @@
 [ext_resource type="Script" uid="uid://d3k53cusqoiuv" path="res://game/entity/enemy_fsm/EnemyIdle.cs" id="4_6itrs"]
 [ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="4_c8svq"]
 [ext_resource type="Script" uid="uid://f41526eebk7j" path="res://game/entity/enemy_fsm/Death.cs" id="5_lff4f"]
-[ext_resource type="Script" uid="uid://cshfx8jhxpo8j" path="res://game/entity/enemy_fsm/Attack.cs" id="6_6ln87"]
-[ext_resource type="Script" uid="uid://c66kj0wivlrab" path="res://game/entity/enemy_fsm/IdleBattle.cs" id="7_enuts"]
-[ext_resource type="Script" uid="uid://jsrrmly4t05t" path="res://game/entity/enemy_fsm/MoveIn.cs" id="8_7d5fg"]
+[ext_resource type="Script" uid="uid://dbi84gy5bv2m1" path="res://game/entity/enemy_fsm/Attack.cs" id="6_6ln87"]
+[ext_resource type="Script" uid="uid://vtk5k5eh25lc" path="res://game/entity/enemy_fsm/IdleBattle.cs" id="7_enuts"]
+[ext_resource type="Script" uid="uid://cseiqj66a5vmt" path="res://game/entity/enemy_fsm/MoveIn.cs" id="8_7d5fg"]
 [ext_resource type="PackedScene" uid="uid://c6v5m2qas1t4q" path="res://shared/components/enemy_status/enemy_status_component.tscn" id="8_vplvm"]
-[ext_resource type="Script" uid="uid://bwnpn4bxqaqi4" path="res://game/entity/enemy_fsm/MoveBack.cs" id="9_3j25r"]
+[ext_resource type="Script" uid="uid://sxa7g5h3u2b1" path="res://game/entity/enemy_fsm/MoveBack.cs" id="9_3j25r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43spn"]
 resource_name = "M_Main"

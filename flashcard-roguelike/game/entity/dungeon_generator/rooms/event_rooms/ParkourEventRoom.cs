@@ -55,9 +55,9 @@ public partial class ParkourEventRoom : Room, IEventRoom
 		}
 
 		if (Reward == null)
-        {
-            GD.PrintErr("Reward not set, check inspector");
-        }
+		{
+			GD.PrintErr("Reward not set, check inspector");
+		}
 	}
 
 	private void OnFlashcardAnswered(bool isCorrect)
