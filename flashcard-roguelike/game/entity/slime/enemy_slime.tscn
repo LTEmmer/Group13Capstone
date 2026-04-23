@@ -20,7 +20,7 @@ resource_name = "Material.001"
 cull_mode = 2
 albedo_color = Color(0.056847565, 0.9063355, 0, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_u0jcg"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_lpe6h"]
 resource_name = "slime_Sphere"
 _surfaces = [{
 "aabb": AABB(-0.99999905, -0.00065660477, -1, 1.9999988, 1.3847036, 1.9999993),
@@ -40,7 +40,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="Skin" id="Skin_nsqo2"]
+[sub_resource type="Skin" id="Skin_y1n8d"]
 resource_name = "Skin"
 bind_count = 1
 bind/0/name = &"Bone"
@@ -71,6 +71,20 @@ tracks/2/path = NodePath("Root/Skeleton3D:Bone")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.033333335, 1, 1.0072006, 0.99126214, 1, 0.06666667, 1, 1.0269674, 0.9672757, 1, 0.1, 1, 1.0584623, 0.92905736, 1, 0.13333334, 1, 1.0984865, 0.88048863, 1, 0.16666667, 1, 1.1414807, 0.82831615, 1, 0.2, 1, 1.177925, 0.78409195, 1, 0.23333333, 1, 1.2072775, 0.74847317, 1, 0.26666668, 1, 1.2300245, 0.72087014, 1, 0.3, 1, 1.2468201, 0.7004889, 1, 0.33333334, 1, 1.258487, 0.6863316, 1, 0.36666667, 1, 1.2647268, 0.67875963, 1, 0.4, 1, 1.2677034, 0.67514753, 1, 0.41666666, 1, 1.2686479, 0.67400146, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Root")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Root")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_0jx6u"]
 resource_name = "slime-jumpendbaked"
@@ -96,8 +110,100 @@ tracks/2/path = NodePath("Root/Skeleton3D:Bone")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 0.99999994, 0.99999994, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Root")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Root")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_3f8mg"]
+resource_name = "slime_death"
+length = 0.875
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/Skeleton3D:Bone")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Root/Skeleton3D:Bone")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/2/type = "scale_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("Root/Skeleton3D:Bone")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Root")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.033333335, 1, 0, 0.0066618854, -0.007910837, 0.06666667, 1, 0, 0.023845077, -0.027741319, 0.1, 1, 0, 0.052078046, -0.059544824, 0.13333334, 1, 0, 0.091889285, -0.10337475, 0.16666667, 1, 0, 0.14380725, -0.15928446, 0.2, 1, 0, 0.21292448, -0.23140734, 0.23333333, 1, 0, 0.2957339, -0.31577018, 0.26666668, 1, 0, 0.39172065, -0.41126367, 0.3, 1, 0, 0.49828312, -0.51445293, 0.33333334, 1, 0, 0.61073303, -0.6195777, 0.36666667, 1, 0, 0.71956986, -0.7134373, 0.4, 1, 0, 0.8170995, -0.78846365, 0.43333334, 1, 0, 0.8994752, -0.8408899, 0.46666667, 1, 0, 0.96662027, -0.8732618, 0.53333336, 1, 0, 1.0736074, -0.9247159, 0.56666666, 1, 0, 1.1301835, -0.979842, 0.6, 1, 0, 1.1975337, -1.0718315, 0.6333333, 1, 0, 1.2791333, -1.2079866, 0.6666667, 1, 0, 1.3763555, -1.3908994, 0.7, 1, 0, 1.4635127, -1.5659511, 0.73333335, 1, 0, 1.5136422, -1.6683189, 0.76666665, 1, 0, 1.516536, -1.7073886, 0.8, 1, 0, 1.4776797, -1.7073886, 0.8333333, 1, 0, 1.4182525, -1.7073886, 0.875, 1, 0, 1.3782535, -1.7073886)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Root")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, -0.05226808, 0.9986331, 0.033333335, 1, -0.016705934, -0.0008677725, -0.052123792, 0.9985006, 0.06666667, 1, -0.05029036, -0.0026216826, -0.051956095, 0.99737895, 0.1, 1, -0.09251867, -0.0048352024, -0.051866107, 0.99434745, 0.13333334, 1, -0.13622591, -0.0071308445, -0.051854488, 0.9892942, 0.2, 1, -0.21402723, -0.011182928, -0.05142386, 0.97540915, 0.23333333, 1, -0.25922045, -0.013557494, -0.05062419, 0.9643952, 0.26666668, 1, -0.31381705, -0.01652616, -0.049552634, 0.9480456, 0.3, 1, -0.37724394, -0.020061415, -0.048313517, 0.9246353, 0.36666667, 1, -0.5123405, -0.027423631, -0.045575414, 0.8571336, 0.4, 1, -0.5707319, -0.030118711, -0.043219365, 0.819445, 0.43333334, 1, -0.61916625, -0.03241253, -0.040037964, 0.7835685, 0.46666667, 1, -0.65930283, -0.034728594, -0.03635336, 0.7501948, 0.5, 1, -0.6954626, -0.03744835, -0.03269778, 0.7168405, 0.53333336, 1, -0.7367575, -0.040173292, -0.029363617, 0.67432356, 0.56666666, 1, -0.78672755, -0.04271505, -0.026583439, 0.61524683, 0.6, 1, -0.8455961, -0.045095522, -0.02467335, 0.5313426, 0.6333333, 1, -0.9079163, -0.046893083, -0.022475518, 0.41591343, 0.6666667, 1, -0.9627511, -0.047275554, -0.017415429, 0.26565415, 0.7, 1, -0.9910521, -0.04935499, -0.008492029, 0.123724796, 0.73333335, 1, -0.9978566, -0.051283427, -0.0027770011, 0.040553197, 0.76666665, 1, -0.99859214, -0.052265935, -0.00047383754, 0.009053105, 0.875, 1, -0.9985921, -0.05226593, -0.00047383746, 0.009053104)
+
+[sub_resource type="Animation" id="Animation_gp7t1"]
+resource_name = "slime_death_2_001"
+length = 0.6333333
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Root/Skeleton3D:Bone")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Root/Skeleton3D:Bone")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/2/type = "scale_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("Root/Skeleton3D:Bone")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 1, 1, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Root")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.033333335, 1, 0, 0, 0.002, 0.06666667, 1, 0, 0, 0.011, 0.1, 1, 0, 0, 0.033, 0.13333334, 1, 0, 0, 0.073, 0.16666667, 1, 0, 0.2, 0.135, 0.2, 1, 0, 0.2, 0.295, 0.23333333, 1, 0, 0.3, 0.487, 0.26666668, 1, 0, 0.5, 0.652, 0.3, 1, 0, 0.7, 0.765, 0.33333334, 1, 0, 0.6, 0.831, 0.36666667, 1, 0, 0.6, 0.855, 0.4, 1, 0, 0.6, 0.864, 0.43333334, 1, 0, 0.6, 0.865, 0.46666667, 1, 0, 0.6, 0.865, 0.5, 1, 0, 0.6, 0.865, 0.5833333, 1, 0, 0.6, 0.865)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Root")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.033333335, 1, 0.01535278, 0.0011516397, -0.020756828, 0.999666, 0.06666667, 1, 0.04745311, 0.0026577786, -0.041683473, 0.9979999, 0.1, 1, 0.092237756, 0.004946575, -0.052214086, 0.99435484, 0.13333334, 1, 0.14955136, 0.008065215, -0.05201745, 0.98735183, 0.16666667, 1, 0.22290213, 0.011666614, -0.05094942, 0.9734386, 0.2, 1, 0.31858125, 0.01602467, -0.049193185, 0.94648254, 0.23333333, 1, 0.40170223, 0.020699842, -0.04768102, 0.91429394, 0.26666668, 1, 0.45881236, 0.025236204, -0.046160333, 0.88697445, 0.3, 1, 0.4935502, 0.029317578, -0.044309627, 0.86809295, 0.33333334, 1, 0.5240747, 0.03263663, -0.041496515, 0.8500345, 0.36666667, 1, 0.59621847, 0.035220835, -0.037411723, 0.8011762, 0.4, 1, 0.72245234, 0.03931021, -0.034110058, 0.6894592, 0.43333334, 1, 0.877156, 0.043040574, -0.02596275, 0.47756755, 0.46666667, 1, 0.9786013, 0.045596965, -0.012376885, 0.20026845, 0.5, 1, 0.9986108, 0.05226691, -0.00034953424, 0.0066780294, 0.5833333, 1, 0.9986108, 0.05226691, -0.00034953424, 0.0066780294)
+
+[sub_resource type="Animation" id="Animation_32u6s"]
 resource_name = "slime_idle"
 length = 2.5
 loop_mode = 1
@@ -122,8 +228,22 @@ tracks/2/path = NodePath("Root/Skeleton3D:Bone")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 0.99999994, 0.99999994, 1, 0.033333335, 1, 1.0001535, 0.9982307, 0.99960047, 0.06666667, 1, 1.0017955, 0.995189, 0.9992627, 0.1, 1, 1.0048586, 0.9909326, 0.9989838, 0.13333334, 1, 1.0092748, 0.9855193, 0.99876076, 0.16666667, 1, 1.014976, 0.9790075, 0.9985908, 0.2, 1, 1.0222527, 0.9711489, 0.99848574, 0.23333333, 1, 1.0306062, 0.96236986, 0.9984249, 0.26666668, 1, 1.0399659, 0.9527304, 0.99840534, 0.3, 1, 1.0502613, 0.94229096, 0.99842423, 0.33333334, 1, 1.0614218, 0.93111235, 0.99847865, 0.36666667, 1, 1.0735923, 0.91906995, 0.9985745, 0.4, 1, 1.0864129, 0.9064719, 0.99869704, 0.43333334, 1, 1.0998114, 0.89337987, 0.99884325, 0.46666667, 1, 1.1137158, 0.8798554, 0.99901026, 0.5, 1, 1.1280538, 0.86596036, 0.99919516, 0.53333336, 1, 1.142825, 0.85169476, 0.99939775, 0.6, 1, 1.1729445, 0.82267016, 0.9998271, 0.6333333, 1, 1.1807759, 0.8155639, 1.0000477, 0.7, 1, 1.1523225, 0.84638184, 1.0004834, 0.73333335, 1, 1.1383344, 0.86149937, 1.0006896, 0.76666665, 1, 1.1245849, 0.87632555, 1.0008839, 0.8, 1, 1.1111338, 0.89078754, 1.0010636, 0.8333333, 1, 1.0980406, 0.9048125, 1.0012256, 0.8666667, 1, 1.085544, 0.918109, 1.0013579, 0.9, 1, 1.0735843, 0.93075, 1.0014638, 0.93333334, 1, 1.0622212, 0.9426626, 1.0015401, 0.96666664, 1, 1.0515143, 0.953774, 1.0015839, 1, 1, 1.0415233, 0.96401125, 1.0015923, 1.0333333, 1, 1.0326062, 0.9729373, 1.0015473, 1.0666667, 1, 1.024584, 0.9807709, 1.001458, 1.1, 1, 1.0175163, 0.9874389, 1.0013217, 1.1333333, 1, 1.0114628, 0.9928687, 1.001135, 1.1666666, 1, 1.0064832, 0.9969873, 1.0008951, 1.2, 1, 1.0030547, 0.9992121, 1.0005785, 1.2333333, 1, 1.000879, 0.99990726, 1.0001998, 1.2666667, 1, 1.0000768, 0.9991153, 0.9997845, 1.3, 1, 1.0007265, 0.9969219, 0.99936014, 1.3333334, 1, 1.0028646, 0.9934561, 0.9989555, 1.3666667, 1, 1.0068526, 0.98840904, 0.9985825, 1.4, 1, 1.0121255, 0.9822634, 0.9982385, 1.4333333, 1, 1.0186143, 0.9750782, 0.99792844, 1.4666667, 1, 1.0262499, 0.9669128, 0.99765795, 1.5, 1, 1.0349623, 0.95782685, 0.9974333, 1.5333333, 1, 1.0449694, 0.94763386, 0.9972877, 1.5666667, 1, 1.0558416, 0.93670166, 0.9972187, 1.6, 1, 1.067507, 0.92509115, 0.9972404, 1.6333333, 1, 1.0798942, 0.9128635, 0.99736524, 1.6666666, 1, 1.0929315, 0.9000803, 0.9976045, 1.7, 1, 1.1066914, 0.88667935, 0.9979862, 1.7333333, 1, 1.1208848, 0.8729079, 0.9984248, 1.7666667, 1, 1.1354394, 0.8588276, 0.998874, 1.8, 1, 1.1502827, 0.8445003, 0.9992952, 1.8666667, 1, 1.1805465, 0.8153524, 0.9999256, 1.9, 1, 1.1736327, 0.82330483, 1.0001932, 1.9666667, 1, 1.1452987, 0.853977, 1.0008894, 2, 1, 1.1313702, 0.8690217, 1.0013292, 2.0333333, 1, 1.1177998, 0.8836293, 1.0017865, 2.0666666, 1, 1.1045872, 0.8978, 1.0021877, 2.1, 1, 1.0917923, 0.91146076, 1.0024997, 2.1333334, 1, 1.0794747, 0.9245388, 1.0027031, 2.1666667, 1, 1.0676938, 0.93696123, 1.0027925, 2.2, 1, 1.0567484, 0.948364, 1.0027515, 2.2333333, 1, 1.0465188, 0.95889264, 1.0026335, 2.2666667, 1, 1.0370648, 0.96847427, 1.00245, 2.3, 1, 1.0284461, 0.9770361, 1.0022115, 2.3333333, 1, 1.020722, 0.98450553, 1.0019267, 2.3666666, 1, 1.0143106, 0.99037236, 1.0015931, 2.4, 1, 1.008973, 0.994928, 1.0012305, 2.4333334, 1, 1.004769, 0.9980997, 1.0008421, 2.4666667, 1, 1.0017581, 0.99981457, 1.000431, 2.5, 1, 0.99999994, 0.99999994, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Root")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Root")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_gp7t1"]
+[sub_resource type="Animation" id="Animation_p0scq"]
 resource_name = "slime_idlebaked"
 length = 2.5
 tracks/0/type = "position_3d"
@@ -147,8 +267,22 @@ tracks/2/path = NodePath("Root/Skeleton3D:Bone")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 0.9999999, 0.9999999, 1, 0.033333335, 1, 1.0001535, 0.9982307, 0.99960047, 0.06666667, 1, 1.0017955, 0.995189, 0.9992627, 0.1, 1, 1.0048586, 0.9909326, 0.9989838, 0.13333334, 1, 1.0092748, 0.9855193, 0.99876076, 0.16666667, 1, 1.014976, 0.9790075, 0.9985908, 0.2, 1, 1.0222527, 0.9711489, 0.99848574, 0.23333333, 1, 1.0306062, 0.9623699, 0.9984249, 0.26666668, 1, 1.0399659, 0.9527304, 0.99840534, 0.3, 1, 1.0502613, 0.94229096, 0.99842423, 0.33333334, 1, 1.0614218, 0.93111235, 0.99847865, 0.36666667, 1, 1.0735923, 0.91906995, 0.9985745, 0.4, 1, 1.0864129, 0.9064719, 0.99869704, 0.43333334, 1, 1.0998114, 0.89337987, 0.99884325, 0.46666667, 1, 1.1137158, 0.8798554, 0.99901026, 0.5, 1, 1.1280539, 0.86596036, 0.99919516, 0.53333336, 1, 1.1428251, 0.85169476, 0.99939775, 0.6, 1, 1.1729445, 0.82267016, 0.9998271, 0.6333333, 1, 1.1807759, 0.8155639, 1.0000477, 0.7, 1, 1.1523225, 0.84638184, 1.0004834, 0.73333335, 1, 1.1383344, 0.8614994, 1.0006896, 0.76666665, 1, 1.1245849, 0.87632555, 1.0008839, 0.8, 1, 1.1111338, 0.89078754, 1.0010636, 0.8333333, 1, 1.0980406, 0.9048125, 1.0012256, 0.8666667, 1, 1.085544, 0.918109, 1.0013579, 0.9, 1, 1.0735843, 0.93075, 1.0014638, 0.93333334, 1, 1.0622212, 0.9426626, 1.0015401, 0.96666664, 1, 1.0515143, 0.953774, 1.0015839, 1, 1, 1.0415233, 0.9640113, 1.0015923, 1.0333333, 1, 1.0326062, 0.97293735, 1.0015473, 1.0666667, 1, 1.024584, 0.9807709, 1.001458, 1.1, 1, 1.0175163, 0.987439, 1.0013217, 1.1333333, 1, 1.0114628, 0.99286866, 1.001135, 1.1666666, 1, 1.0064832, 0.9969872, 1.0008951, 1.2, 1, 1.0030547, 0.9992121, 1.0005785, 1.2333333, 1, 1.000879, 0.9999073, 1.0001998, 1.2666667, 1, 1.0000768, 0.9991153, 0.9997845, 1.3, 1, 1.0007265, 0.9969219, 0.99936014, 1.3333334, 1, 1.0028646, 0.9934561, 0.9989555, 1.3666667, 1, 1.0068526, 0.98840904, 0.9985825, 1.4, 1, 1.0121255, 0.9822634, 0.9982385, 1.4333333, 1, 1.0186143, 0.9750782, 0.99792844, 1.4666667, 1, 1.0262499, 0.9669128, 0.99765795, 1.5, 1, 1.0349624, 0.9578269, 0.9974333, 1.5333333, 1, 1.0449694, 0.9476339, 0.9972877, 1.5666667, 1, 1.0558416, 0.93670166, 0.9972187, 1.6, 1, 1.067507, 0.92509115, 0.9972404, 1.6333333, 1, 1.0798942, 0.9128635, 0.99736524, 1.6666666, 1, 1.0929315, 0.9000803, 0.9976045, 1.7, 1, 1.1066914, 0.88667935, 0.9979862, 1.7333333, 1, 1.1208849, 0.8729079, 0.9984248, 1.7666667, 1, 1.1354395, 0.8588276, 0.998874, 1.8, 1, 1.1502829, 0.8445003, 0.9992952, 1.8666667, 1, 1.1805465, 0.8153524, 0.9999256, 1.9, 1, 1.1736327, 0.82330483, 1.0001932, 1.9666667, 1, 1.1452987, 0.8539771, 1.0008894, 2, 1, 1.1313702, 0.8690217, 1.0013292, 2.0333333, 1, 1.1177998, 0.8836293, 1.0017865, 2.0666666, 1, 1.1045872, 0.8978, 1.0021877, 2.1, 1, 1.0917923, 0.91146076, 1.0024997, 2.1333334, 1, 1.0794747, 0.9245388, 1.0027031, 2.1666667, 1, 1.0676938, 0.93696123, 1.0027925, 2.2, 1, 1.0567484, 0.948364, 1.0027515, 2.2333333, 1, 1.0465188, 0.95889264, 1.0026335, 2.2666667, 1, 1.0370648, 0.9684743, 1.00245, 2.3, 1, 1.0284461, 0.9770362, 1.0022115, 2.3333333, 1, 1.020722, 0.9845056, 1.0019267, 2.3666666, 1, 1.0143106, 0.99037236, 1.0015931, 2.4, 1, 1.008973, 0.99492794, 1.0012305, 2.4333334, 1, 1.004769, 0.9980997, 1.0008421, 2.4666667, 1, 1.0017581, 0.9998146, 1.000431, 2.5, 1, 0.99999994, 0.99999994, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Root")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Root")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_32u6s"]
+[sub_resource type="Animation" id="Animation_y17ev"]
 resource_name = "slime_jumpbaked"
 length = 3.875
 tracks/0/type = "position_3d"
@@ -172,8 +306,22 @@ tracks/2/path = NodePath("Root/Skeleton3D:Bone")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 0.99999994, 0.99999994, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Root")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Root")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_p0scq"]
+[sub_resource type="Animation" id="Animation_0g1vm"]
 resource_name = "slime_jumpend"
 length = 0.5
 tracks/0/type = "position_3d"
@@ -197,8 +345,22 @@ tracks/2/path = NodePath("Root/Skeleton3D:Bone")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 0.7732756, 1.2098495, 1, 0.2, 1, 1.0855795, 0.68041396, 1, 0.23333333, 1, 1.0860023, 0.70198125, 1, 0.26666668, 1, 1.0695608, 0.7589555, 1, 0.3, 1, 1.0538089, 0.8135391, 1, 0.33333334, 1, 1.039092, 0.86453694, 1, 0.36666667, 1, 1.0264446, 0.9083632, 1, 0.4, 1, 1.0158668, 0.94501793, 1, 0.43333334, 1, 1.0077034, 0.97330576, 1, 0.46666667, 1, 1.0022995, 0.9920316, 1, 0.5, 1, 1, 1, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Root")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Root")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_y17ev"]
+[sub_resource type="Animation" id="Animation_p1myi"]
 resource_name = "slime_jumploop"
 loop_mode = 1
 tracks/0/type = "position_3d"
@@ -222,8 +384,22 @@ tracks/2/path = NodePath("Root/Skeleton3D:Bone")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 1.2505909, 0.7049173, 1, 0.033333335, 1, 1.2505909, 0.7049173, 1, 0.06666667, 1, 1.0115865, 0.91250664, 1, 0.1, 1, 0.6929141, 1.1892924, 1, 0.13333334, 1, 0.45390975, 1.3968818, 1, 0.33333334, 1, 0.45390975, 1.3968818, 1, 0.36666667, 1, 0.5641556, 1.3068347, 1, 0.4, 1, 0.6697649, 1.2205745, 1, 0.43333334, 1, 0.7676467, 1.1406262, 1, 0.46666667, 1, 0.8547099, 1.0695142, 1, 0.5, 1, 0.9278637, 1.0097632, 1, 0.53333336, 1, 0.9762895, 0.9702098, 1, 0.56666666, 1, 1.0015327, 0.9495915, 1, 0.6, 1, 1.0015327, 0.9495915, 1, 0.6333333, 1, 0.9762895, 0.9702098, 1, 0.6666667, 1, 0.9278637, 1.0097632, 1, 0.7, 1, 0.8547099, 1.0695142, 1, 0.73333335, 1, 0.76764655, 1.1406262, 1, 0.76666665, 1, 0.66976494, 1.2205745, 1, 0.8, 1, 0.5641556, 1.3068347, 1, 0.8333333, 1, 0.45390975, 1.3968818, 1, 0.9, 1, 1.0912544, 0.8433105, 1, 0.93333334, 1, 1.1816784, 0.78606504, 1, 0.96666664, 1, 1.0626477, 0.9262293, 1, 1, 1, 1, 1, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Root")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Root")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_0g1vm"]
+[sub_resource type="Animation" id="Animation_0jnt0"]
 resource_name = "slime_jumpstartbaked"
 length = 2.9166667
 tracks/0/type = "position_3d"
@@ -247,20 +423,36 @@ tracks/2/path = NodePath("Root/Skeleton3D:Bone")
 tracks/2/interp = 0
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, 0.99999994, 0.99999994, 1)
+tracks/3/type = "position_3d"
+tracks/3/imported = true
+tracks/3/enabled = true
+tracks/3/path = NodePath("Root")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = true
+tracks/4/enabled = true
+tracks/4/path = NodePath("Root")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_p1myi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_81e5a"]
 _data = {
 &"slim_jumpstart": SubResource("Animation_ab3hk"),
 &"slime-jumpendbaked": SubResource("Animation_0jx6u"),
-&"slime_idle": SubResource("Animation_3f8mg"),
-&"slime_idlebaked": SubResource("Animation_gp7t1"),
-&"slime_jumpbaked": SubResource("Animation_32u6s"),
-&"slime_jumpend": SubResource("Animation_p0scq"),
-&"slime_jumploop": SubResource("Animation_y17ev"),
-&"slime_jumpstartbaked": SubResource("Animation_0g1vm")
+&"slime_death": SubResource("Animation_3f8mg"),
+&"slime_death_2_001": SubResource("Animation_gp7t1"),
+&"slime_idle": SubResource("Animation_32u6s"),
+&"slime_idlebaked": SubResource("Animation_p0scq"),
+&"slime_jumpbaked": SubResource("Animation_y17ev"),
+&"slime_jumpend": SubResource("Animation_0g1vm"),
+&"slime_jumploop": SubResource("Animation_p1myi"),
+&"slime_jumpstartbaked": SubResource("Animation_0jnt0")
 }
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_qj10w"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_lpe6h"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vplvm"]
 radius = 3.0
@@ -268,7 +460,7 @@ radius = 3.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_le0tf"]
 radius = 3.0
 
-[node name="EnemyFSM" type="CharacterBody3D" unique_id=1279096522 node_paths=PackedStringArray("attackComponent", "healthComponent", "EnemyModel", "DetectionArea")]
+[node name="EnemyFSM" type="CharacterBody3D" unique_id=48116636 node_paths=PackedStringArray("attackComponent", "healthComponent", "EnemyModel", "DetectionArea")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_lpe6h")
 attackComponent = NodePath("AttackComponent")
@@ -276,119 +468,121 @@ healthComponent = NodePath("HealthComponent")
 EnemyModel = NodePath("EModel")
 DetectionArea = NodePath("IntiateBattleDetector")
 
-[node name="EModel" type="Node3D" parent="." unique_id=1303374576 node_paths=PackedStringArray("enemy", "animator", "StateContainer")]
+[node name="EModel" type="Node3D" parent="." unique_id=319340447 node_paths=PackedStringArray("enemy", "animator", "StateContainer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.852177, 0)
 script = ExtResource("2_y1n8d")
 enemy = NodePath("..")
-animator = NodePath("../EnemyVisuals/slime/AnimationPlayer")
+animator = NodePath("../EnemyVisuals/AnimationPlayer")
 StateContainer = NodePath("States")
 
-[node name="States" type="Node" parent="EModel" unique_id=1855447504]
+[node name="States" type="Node" parent="EModel" unique_id=770834945]
 
-[node name="EnemyBaseState" type="Node" parent="EModel/States" unique_id=1912465692]
+[node name="EnemyBaseState" type="Node" parent="EModel/States" unique_id=1939439234]
 script = ExtResource("3_81e5a")
 StateName = "base_state"
 
-[node name="Idle" type="Node" parent="EModel/States" unique_id=155396637 node_paths=PackedStringArray("PursuitDetector", "animator")]
+[node name="Idle" type="Node" parent="EModel/States" unique_id=1379222059 node_paths=PackedStringArray("PursuitDetector", "animator")]
 script = ExtResource("4_nlvmo")
 _staticEnemy = false
 PursuitDetector = NodePath("../../../PursuitDetector")
 StateName = "idle"
 StateAnimation = "slime_idle"
-animator = NodePath("../../../EnemyVisuals/slime/AnimationPlayer")
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="Wander" type="Node" parent="EModel/States" unique_id=390169253 node_paths=PackedStringArray("PursuitDetector", "navAgent", "animator")]
+[node name="Wander" type="Node" parent="EModel/States" unique_id=1454591876 node_paths=PackedStringArray("PursuitDetector", "navAgent", "animator")]
 script = ExtResource("5_als55")
 PursuitDetector = NodePath("../../../PursuitDetector")
 WanderSpeed = 1.5
 navAgent = NodePath("../../../NavigationAgent3D")
 StateName = "wander"
 StateAnimation = "slime_jumploop"
-animator = NodePath("../../../EnemyVisuals/slime/AnimationPlayer")
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="Pursue" type="Node" parent="EModel/States" unique_id=41970048 node_paths=PackedStringArray("PursuitDetector", "animator")]
+[node name="Pursue" type="Node" parent="EModel/States" unique_id=1336795206 node_paths=PackedStringArray("PursuitDetector", "animator")]
 script = ExtResource("6_ash81")
 PursuitDetector = NodePath("../../../PursuitDetector")
 PursuitSpeed = 5.0
 StateName = "pursue"
 StateAnimation = "slime_jumploop"
-animator = NodePath("../../../EnemyVisuals/slime/AnimationPlayer")
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="IdleBattle" type="Node" parent="EModel/States" unique_id=95648371 node_paths=PackedStringArray("animator")]
+[node name="IdleBattle" type="Node" parent="EModel/States" unique_id=1255398864 node_paths=PackedStringArray("Rig", "animator")]
 script = ExtResource("7_ciyvf")
+Rig = NodePath("../../../EnemyVisuals/Root")
 StateName = "idlebattle"
 StateAnimation = "slime_idle"
-animator = NodePath("../../../EnemyVisuals/slime/AnimationPlayer")
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="Attack" type="Node" parent="EModel/States" unique_id=2084487136 node_paths=PackedStringArray("animator")]
+[node name="Attack" type="Node" parent="EModel/States" unique_id=1761478077 node_paths=PackedStringArray("animator")]
 script = ExtResource("8_m6w4y")
 StateName = "attack"
 StateAnimation = "slime_idle"
-animator = NodePath("../../../EnemyVisuals/slime/AnimationPlayer")
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="MoveIn" type="Node" parent="EModel/States" unique_id=749672967 node_paths=PackedStringArray("animator")]
+[node name="MoveIn" type="Node" parent="EModel/States" unique_id=1978656120 node_paths=PackedStringArray("animator")]
 script = ExtResource("9_pm3q0")
 StateName = "movein"
 StateAnimation = "slime_jumploop"
-animator = NodePath("../../../EnemyVisuals/slime/AnimationPlayer")
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="MoveBack" type="Node" parent="EModel/States" unique_id=331137759 node_paths=PackedStringArray("moveIn", "animator")]
+[node name="MoveBack" type="Node" parent="EModel/States" unique_id=1192325620 node_paths=PackedStringArray("moveIn", "animator")]
 script = ExtResource("10_2h763")
 moveIn = NodePath("../MoveIn")
 StateName = "moveback"
 StateAnimation = "slime_jumploop"
-animator = NodePath("../../../EnemyVisuals/slime/AnimationPlayer")
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="Death" type="Node" parent="EModel/States" unique_id=810610469]
+[node name="Death" type="Node" parent="EModel/States" unique_id=1890597678 node_paths=PackedStringArray("animator")]
 script = ExtResource("11_674l2")
+_deathTimer = 5.0
 StateName = "death"
-StateAnimation = "Death01"
+StateAnimation = "slime_death_2_001"
+animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 
-[node name="EnemyVisuals" type="Node3D" parent="." unique_id=441791211]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0319388, 0)
+[node name="EnemyVisuals" type="Node3D" parent="." unique_id=1358387119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
-[node name="slime" type="Node3D" parent="EnemyVisuals" unique_id=1638320750]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+[node name="Root" type="Node3D" parent="EnemyVisuals" unique_id=27558591]
+transform = Transform3D(0.49726805, 0.05219667, 4.370748e-08, 0.052192003, -0.4972236, -0.0066870213, -0.00069803704, 0.006650489, -0.4999553, 0, 0.6, 0.865)
 
-[node name="Root" type="Node3D" parent="EnemyVisuals/slime" unique_id=1825291682]
-
-[node name="Skeleton3D" type="Skeleton3D" parent="EnemyVisuals/slime/Root" unique_id=2125116957]
+[node name="Skeleton3D" type="Skeleton3D" parent="EnemyVisuals/Root" unique_id=1664179994]
 bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(0, 0, 0.049937632, 0.99875236)
-bones/0/scale = Vector3(0.99999994, 0.99999994, 1)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/scale = Vector3(1, 1, 1)
 
-[node name="Sphere" type="MeshInstance3D" parent="EnemyVisuals/slime/Root/Skeleton3D" unique_id=398773291]
-mesh = SubResource("ArrayMesh_u0jcg")
-skin = SubResource("Skin_nsqo2")
+[node name="Sphere" type="MeshInstance3D" parent="EnemyVisuals/Root/Skeleton3D" unique_id=625514074]
+mesh = SubResource("ArrayMesh_lpe6h")
+skin = SubResource("Skin_y1n8d")
 skeleton = NodePath("..")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemyVisuals/slime" unique_id=2010472493]
-libraries/ = SubResource("AnimationLibrary_p1myi")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EnemyVisuals" unique_id=589969628]
+libraries/ = SubResource("AnimationLibrary_81e5a")
 
 [node name="AttackComponent" parent="." unique_id=613004080 instance=ExtResource("12_rg72q")]
 
 [node name="HealthComponent" parent="." unique_id=495182273 instance=ExtResource("13_3oy2u")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=865395921]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.71995544, 0)
-shape = SubResource("SphereShape3D_qj10w")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1658152363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7313956, 0)
+shape = SubResource("SphereShape3D_lpe6h")
 
 [node name="EnemyStatusComponent" parent="." unique_id=153576658 instance=ExtResource("14_3xdvp")]
 
-[node name="IntiateBattleDetector" type="Area3D" parent="." unique_id=1538384403]
+[node name="IntiateBattleDetector" type="Area3D" parent="." unique_id=1379419047]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="IntiateBattleDetector" unique_id=1427658847]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="IntiateBattleDetector" unique_id=354557301]
 shape = SubResource("SphereShape3D_vplvm")
 debug_color = Color(0.9939484, 0.07460917, 1.92523e-07, 0.41960785)
 
-[node name="PursuitDetector" type="Area3D" parent="." unique_id=1067840584]
+[node name="PursuitDetector" type="Area3D" parent="." unique_id=1859440860]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PursuitDetector" unique_id=2072817506]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PursuitDetector" unique_id=1689116724]
 shape = SubResource("SphereShape3D_le0tf")
 debug_color = Color(0.69111603, 0.49548668, 0.057940416, 0.41960785)
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1045361093]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1949045604]

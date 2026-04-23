@@ -4,7 +4,8 @@ using Array = Godot.Collections.Array;
 [Tool]
 public partial class Death : EnemyBaseState
 {
-	private double _deathTimer = 2.5; //length of death animation
+	[Export]
+	public double _deathTimer = 2.5; //length of death animation
 	public override Array CheckRelevance(double delta)
 	{
 		if(WorksLongerThan(_deathTimer)){
