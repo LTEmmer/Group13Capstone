@@ -42,7 +42,7 @@ points = PackedVector3Array(-3.0470226, -0.5476191, 0.59512615, 3.0470226, 1.452
 [node name="ExitRoom" type="Node3D" unique_id=1298955981]
 
 [node name="EnterPoint" type="Marker3D" parent="." unique_id=2063903394]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -5.9612284, 0.59409785, 12.818399)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59409785, 11.409939)
 
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=1595695969]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.44763565, -27.348717)
