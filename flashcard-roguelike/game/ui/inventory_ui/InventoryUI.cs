@@ -224,6 +224,8 @@ public partial class InventoryUI : Node3D
 
 	private void ShowPage(Control page, Control items)
 	{
+        AudioManager.Instance.PlayButtonClick();
+		
 		_toolPage.Visible = false;
 		_toolItems.Visible = false;
 		_statPage.Visible = false;
