@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cnitj3uodab4s"]
 
-[ext_resource type="Script" uid="uid://dpfa5elccyad0" path="res://game/ui/battle_ui/FlashcardChallengeTrueOrFalse.cs" id="1_true_false"]
+[ext_resource type="Script" uid="uid://ub82fvhtmmsq" path="res://game/ui/battle_ui/FlashcardChallengeTrueOrFalse.cs" id="1_true_false"]
 [ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_wbtheme"]
 [ext_resource type="Texture2D" uid="uid://b48xe6gkb0idd" path="res://assets/ui/main_menu_torn_paper.png" id="3_paper"]
 [ext_resource type="Script" uid="uid://lq4wspjrvojx" path="res://game/ui/main_menu/TornPaperMenuPanel.cs" id="4_tpaper"]
@@ -63,13 +63,13 @@ theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=391179865]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 32
 text = "True or False?"
 horizontal_alignment = 1
 
 [node name="ContextLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=761066353]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Answer correctly to continue"
 horizontal_alignment = 1
 
@@ -102,13 +102,11 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="TrueButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=978703684]
-custom_minimum_size = Vector2(140, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "TRUE"
 
 [node name="FalseButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=46954838]
-custom_minimum_size = Vector2(140, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "FALSE"

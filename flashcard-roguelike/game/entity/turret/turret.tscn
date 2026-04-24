@@ -9,7 +9,8 @@
 [ext_resource type="Material" uid="uid://dw0br45ds3m32" path="res://assets/models/turret/turret_barrel_texture/turret_barrel_texture.tres" id="7_33esb"]
 [ext_resource type="Material" uid="uid://6rsymws4j3rj" path="res://assets/models/turret/turret_barrel_texture/turret_paint_funnel.tres" id="8_7v48q"]
 [ext_resource type="Material" uid="uid://indlcgroms3r" path="res://assets/models/turret/turret_barrel_texture/paint_can_texture.tres" id="9_vxhw0"]
-[ext_resource type="Shader" uid="uid://dap2t00nu1c2y" path="res://game/entity/turret/turret.gdshader" id="10_avxgg"]
+[ext_resource type="Shader" uid="uid://inief732gbay" path="res://game/entity/turret/turret.gdshader" id="10_avxgg"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="11_vxhw0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7v48q"]
 albedo_color = Color(0, 0, 0, 1)
@@ -77,31 +78,32 @@ height = 0.1
 radial_segments = 9
 rings = 2
 
-[node name="Turret" type="Node3D" unique_id=2031055064 node_paths=PackedStringArray("PaintMesh")]
+[node name="Turret" type="Node3D" unique_id=2031055064 node_paths=PackedStringArray("PaintMesh", "AmmoLabel")]
 script = ExtResource("1_n4edd")
 ProjectileScene = ExtResource("2_o55bp")
 ShootSounds = Array[AudioStream]([ExtResource("3_rt8cg")])
 PaintMesh = NodePath("TurretBase/TurretHead/Paint Can/Paint")
+AmmoLabel = NodePath("TurretBase/TurretHead/Paint Can/AmmoCount")
 
 [node name="TurretBase" parent="." unique_id=1629050873 instance=ExtResource("4_jdhb6")]
 
-[node name="Base" parent="TurretBase" index="0" unique_id=255014070]
+[node name="Base" parent="TurretBase" index="0" unique_id=1469019592]
 material_override = ExtResource("5_33esb")
 
 [node name="TurretHead" parent="TurretBase" unique_id=284799254 instance=ExtResource("5_3y7jk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8605933, 0, 0)
 
-[node name="Barrel" parent="TurretBase/TurretHead" index="0" unique_id=327579353]
+[node name="Barrel" parent="TurretBase/TurretHead" index="0" unique_id=1943966730]
 material_override = ExtResource("7_33esb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TurretBase/TurretHead/Barrel" index="0" unique_id=1324777060]
 transform = Transform3D(-4.3711385e-08, -1, 4.371139e-08, 1, -4.371139e-08, -4.371139e-08, 4.3711395e-08, 4.371139e-08, 1, -8.198308, 0, 3.583594e-07)
 mesh = SubResource("PlaneMesh_vxhw0")
 
-[node name="Paint Funnel" parent="TurretBase/TurretHead" index="1" unique_id=553697328]
+[node name="Paint Funnel" parent="TurretBase/TurretHead" index="1" unique_id=375992049]
 material_override = ExtResource("8_7v48q")
 
-[node name="Paint Can" parent="TurretBase/TurretHead" index="2" unique_id=538736766]
+[node name="Paint Can" parent="TurretBase/TurretHead" index="2" unique_id=1226863003]
 material_override = ExtResource("9_vxhw0")
 
 [node name="Paint" type="MeshInstance3D" parent="TurretBase/TurretHead/Paint Can" index="0" unique_id=588118585]
@@ -109,11 +111,18 @@ transform = Transform3D(0.865, 0, 0, 0, 0.865, 0, 0, 0, 0.865, -0.21940851, 0, 0
 mesh = SubResource("ArrayMesh_h210l")
 surface_material_override/0 = SubResource("ShaderMaterial_7v48q")
 
+[node name="AmmoCount" type="Label3D" parent="TurretBase/TurretHead/Paint Can" index="1" unique_id=837641849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.343, 0.545, 0.613)
+pixel_size = 0.0025
+billboard = 1
+text = "test"
+font = ExtResource("11_vxhw0")
+
 [node name="BarrelTip" type="Marker3D" parent="TurretBase/TurretHead" unique_id=419912479]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2484045, 0, 3.6054922e-07)
 
 [node name="TurretView" type="Camera3D" parent="TurretBase/TurretHead" unique_id=1426981805]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.445, 0.845, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.48, 0.585, 0)
 
 [node name="FiringFX" type="GPUParticles3D" parent="TurretBase/TurretHead" unique_id=1277481673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2484045, 0, 3.6054922e-07)

@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://c175n268mh5vw" path="res://game/entity/light/floating_light.tscn" id="4_7141h"]
 [ext_resource type="PackedScene" uid="uid://tka8xdh5srkl" path="res://game/entity/rollable_sprite/rollable_sprite.tscn" id="4_wp6t5"]
 [ext_resource type="Texture2D" uid="uid://d3h8atxxlp80" path="res://assets/models/combat_room/basketball.png" id="5_lkt2s"]
-[ext_resource type="Texture2D" uid="uid://qwdbikde6v7e" path="res://assets/models/combat_room/dodgeball.png" id="6_ug7i1"]
-[ext_resource type="Texture2D" uid="uid://dy6bptv5r13xi" path="res://assets/models/combat_room/volleyball.png" id="7_uitwt"]
+[ext_resource type="Texture2D" uid="uid://eghf0b4nuvuu" path="res://assets/models/combat_room/dodgeball.png" id="6_ug7i1"]
+[ext_resource type="Texture2D" uid="uid://c4fcednxx8hro" path="res://assets/models/combat_room/volleyball.png" id="7_uitwt"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_p3pul"]
 vertices = PackedVector3Array(9.25, 0.970736, -13.25, 10.5, 0.970736, -14, 11.25, 0.970736, -15.25, 13.75, 0.970736, -0.75, 15.25, 0.970736, -0.25, 15.25, 0.970736, -3.25, 13.25, 0.970736, -3, 9.25, 0.970736, 13.75, -10.75, 0.970736, 4.5, -12.5, 0.970736, 9.5, 10, 0.970736, 14.75, 12.5, 0.970736, 0.25, 12.25, 0.970736, -3.75, 9, 0.970736, -11.25, -10.75, 0.970736, -11.5, -14, 0.970736, 10.75, -15.25, 0.970736, 11, -15.25, 0.970736, 15.25, 11.25, 0.970736, -8.25, 9.75, 0.970736, -9.25, -11.25, 0.970736, -11, -12, 0.970736, -3, -10.75, 0.970736, 1.25, 9.5, 0.970736, 7.25, 12, 0.970736, 15.25, -11.5, 0.970736, -15.25)
@@ -122,7 +122,7 @@ navigation_mesh = SubResource("NavigationMesh_p3pul")
 [node name="combat_room_1" parent="." unique_id=1932577240 instance=ExtResource("2_qfvwg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.125275, 0)
 
-[node name="Cube" parent="combat_room_1" index="0" unique_id=1525419277]
+[node name="Cube" parent="combat_room_1" index="0" unique_id=531127597]
 material_override = ExtResource("3_7141h")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="combat_room_1/Cube" index="0" unique_id=101833704]
@@ -329,7 +329,7 @@ SpriteTexture = ExtResource("7_uitwt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1661582, 11.308075)
 
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=1595695969]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.050953984, 1.4637265, -12.505764)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.050953984, 1.4637265, -12.505764)
 
 [node name="BattleArea" parent="." unique_id=1408501426 instance=ExtResource("2_p3pul")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.6105385, 0.5980625, -2.090129)
@@ -337,14 +337,8 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.61
 [node name="Entrances" type="Node3D" parent="." unique_id=733062030]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8519258, 3, 9.699404)
 
-[node name="0" type="Marker3D" parent="Entrances" unique_id=1178486331]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6922398, -1.7729723, 4.9187107)
-
-[node name="1" type="Marker3D" parent="Entrances" unique_id=1718334669]
+[node name="0" type="Marker3D" parent="Entrances" unique_id=1718334669]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1328716, -1.7729723, 4.9187107)
-
-[node name="2" type="Marker3D" parent="Entrances" unique_id=274300184]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.53748, -1.7729723, 4.9187107)
 
 [node name="Exits" type="Node3D" parent="." unique_id=1524863286]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1989384, 3, -7.532611)

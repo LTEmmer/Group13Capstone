@@ -28,9 +28,16 @@ public partial class InventoryUI : Node3D
 	[Export] private Button _useTab;
 	[Export] private Button _toolTab;
 
-	public override void _Ready()
-	{
-		ProcessMode = ProcessModeEnum.Always;
+    [Export] private Label _statHP;
+    [Export] private Label _statShield;
+    [Export] private Label _statDef;
+    [Export] private Label _statAtk;
+    [Export] private Label _statCrit;
+    [Export] private Label _statCritMult;
+
+    public override void _Ready()
+    {
+        ProcessMode = ProcessModeEnum.Always;
 
 		_inventory.ItemAdded += OnItemAdded;
 		_inventory.ItemRemoved += OnItemRemoved;
@@ -49,14 +56,17 @@ public partial class InventoryUI : Node3D
 		_useTab.Pressed  += () => ShowPage(_usePage,  _useItems);
 		_toolTab.Pressed += () => ShowPage(_toolPage, _toolItems);
 
-		if (_equipment != null)
-		{
-			_equipment.ItemEquipped   += _ => RefreshEquipHighlights();
-			_equipment.ItemUnequipped += _ => RefreshEquipHighlights();
-			_equipment.EffectTarget = _player;
-		}
+        if (_equipment != null)
+        {
+            _equipment.ItemEquipped   += _ => { RefreshEquipHighlights(); RefreshStats(); };
+            _equipment.ItemUnequipped += _ => { RefreshEquipHighlights(); RefreshStats(); };
+            _equipment.EffectTarget = _player;
+        }
 
-		RefreshUILists();
+        _player.healthComponent.HealthChanged += RefreshStats;
+
+        RefreshUILists();
+        RefreshStats();
 
 		ShowPage(_toolPage, _toolItems);
 		Visible = true;
@@ -99,9 +109,10 @@ public partial class InventoryUI : Node3D
 				effect.Apply(_player, item);
 		}
 
-		RefreshUILists();
-		RefreshEquipHighlights();
-	}
+        RefreshUILists();
+        RefreshEquipHighlights();
+        RefreshStats();
+    }
 
 	private void OnItemRemoved(ItemInstance item)
 	{
@@ -113,9 +124,10 @@ public partial class InventoryUI : Node3D
 				effect.Remove(_player);
 		}
 
-		RefreshUILists();
-		RefreshEquipHighlights();
-	}
+        RefreshUILists();
+        RefreshEquipHighlights();
+        RefreshStats();
+    }
 
 	// ───────────────────────── SELECTION ─────────────────────────
 
@@ -233,7 +245,23 @@ public partial class InventoryUI : Node3D
 		_usePage.Visible = false;
 		_useItems.Visible = false;
 
-		page.Visible = true;
-		items.Visible = true;
-	}
+        page.Visible = true;
+        items.Visible = true;
+    }
+
+	// ───────────────────────── STATS DISPLAY ─────────────────────────
+
+    private void RefreshStats()
+    {
+        if (_player == null) return;
+        var hp = _player.healthComponent;
+        var atk = _player.attackComponent;
+
+        _statHP.Text = $"HP: {Mathf.CeilToInt(hp.CurrentHealth)} / {Mathf.CeilToInt(hp.MaxHealth)}";
+        _statShield.Text = $"Shield: {Mathf.CeilToInt(hp.Shield)}";
+        _statDef.Text = $"DEF: {Mathf.RoundToInt(hp.TrueDefence * 100)}%";
+        _statAtk.Text = $"ATK: {Mathf.CeilToInt(atk.BaseDamage * atk.BaseMult)}";
+        _statCrit.Text = $"Crit: {Mathf.RoundToInt(atk.CritChance * 100)}%";
+        _statCritMult.Text = $"Crit×: {atk.CritMult:F1}";
+    }
 }

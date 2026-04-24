@@ -12,6 +12,8 @@ public partial class ParkourEventRoom : Room, IEventRoom
 
 	[Export] public TreasureChest Reward;
 	[Export] public int PenaltyDamage = 25;
+	[Export] public PackedScene SkipPromptScene;
+	[Export] public int FallsToShowSkip = 3;
 
 	public bool IsCompleted { get; private set; }
 	public float Difficulty { get; private set; }
@@ -22,6 +24,9 @@ public partial class ParkourEventRoom : Room, IEventRoom
 	private Area3D _exitTrigger;
 	private bool _npcUsed = false;
 	private FlashcardChallengeTrueOrFalse _challenge;
+	private int _fallCount = 0;
+	private bool _skipShown = false;
+	private SkipPrompt _skipPrompt;
 
 	public override void _Ready()
 	{
@@ -55,9 +60,73 @@ public partial class ParkourEventRoom : Room, IEventRoom
 		}
 
 		if (Reward == null)
+        {
+            GD.PrintErr("Reward not set, check inspector");
+        }
+
+		Reward.SetCollision(false);
+
+		var damageZone = GetNodeOrNull<DamageZone>("WaterPlane/DamageZone");
+		if (damageZone != null)
 		{
-			GD.PrintErr("Reward not set, check inspector");
+			damageZone.Connect("PlayerFell", Callable.From(OnPlayerFell));
 		}
+		else
+		{
+			GD.PrintErr("DamageZone not found at WaterPlane/DamageZone, skip prompt won't work");
+		}
+	}
+
+	private void OnPlayerFell()
+	{
+		if (IsCompleted || _skipShown) 
+		{
+			return;
+		}
+
+		_fallCount++;
+		if (_fallCount >= FallsToShowSkip)
+		{
+			ShowSkipPrompt();
+		}
+	}
+
+	private void ShowSkipPrompt()
+	{
+		if (SkipPromptScene == null)
+		{
+			GD.PrintErr("SkipPromptScene not set, check inspector");
+			return;
+		}
+
+		_skipShown = true;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
+
+		_skipPrompt = SkipPromptScene.Instantiate<SkipPrompt>();
+		AddChild(_skipPrompt);
+		_skipPrompt.Visible = true;
+		_skipPrompt.Connect("SkipPressed", Callable.From(OnSkipPressed));
+		_skipPrompt.Connect("KeepTryingPressed", Callable.From(OnKeepTryingPressed));
+	}
+
+	private void OnSkipPressed()
+	{
+		_skipPrompt?.QueueFree();
+		_skipPrompt = null;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		var exitPoint = GetNodeOrNull<Marker3D>("ExitPoint");
+		if (exitPoint != null && _player != null)
+			_player.GlobalPosition = exitPoint.GlobalPosition;
+
+		CompleteEvent(false);
+	}
+
+	private void OnKeepTryingPressed()
+	{
+		_skipPrompt?.QueueFree();
+		_skipPrompt = null;
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	private void OnFlashcardAnswered(bool isCorrect)
@@ -68,6 +137,7 @@ public partial class ParkourEventRoom : Room, IEventRoom
 		TaloTelemetry.TrackFlashcardAnswer(isCorrect, "parkour_event", difficulty);
 		// Lock mouse
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+		GetTree().GetFirstNodeInGroup("player")?.Call("SetAcceptKeyboardInput", true);
 
 		// Remove challenge if it's still active
 		_challenge?.QueueFree();
@@ -106,6 +176,8 @@ public partial class ParkourEventRoom : Room, IEventRoom
 		{
 			return;
 		}
+
+		GetTree().GetFirstNodeInGroup("player")?.Call("SetAcceptKeyboardInput", false); // Disable player input when event starts
 
 		// Unlock mouse when event is triggered
 		Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -152,6 +224,7 @@ public partial class ParkourEventRoom : Room, IEventRoom
 	{
 		GD.Print("have fun i guess");
 		Reward.Visible = true;
+		Reward.SetCollision(true); // Enable chest collision so player can interact with it
 		AudioManager.Instance.PlayGameVictorySound(); // temp until sound added
 	}
 

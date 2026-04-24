@@ -5,6 +5,8 @@ public partial class DamageZone : Area3D
 	[Export] public float Damage = 50f;
 	[Export] public NodePath RespawnPointPath; // Set to the room's EnterPoint in the inspector
 
+	[Signal] public delegate void PlayerFellEventHandler();
+
 	public override void _Ready()
 	{
 		BodyEntered += OnBodyEntered;
@@ -26,5 +28,7 @@ public partial class DamageZone : Area3D
 			if (respawn != null)
 				body.GlobalPosition = respawn.GlobalPosition;
 		}
+
+		EmitSignal("PlayerFell");
 	}
 }

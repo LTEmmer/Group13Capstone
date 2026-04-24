@@ -80,12 +80,12 @@ public partial class Player : CharacterBody3D
 	
 	public override void _Input(InputEvent @event)
 	{
-		if (@event.IsActionPressed("inventory_toggle"))
+		if (@event.IsActionPressed("inventory_toggle") && _acceptKeyboardInput)
 		{
 			InventoryCanvas.SetVisible(true);
 			toggleMouseLock();
 		}
-		else if (@event.IsActionReleased("inventory_toggle"))
+		else if (@event.IsActionReleased("inventory_toggle") && InventoryCanvas.Visible)
 		{
 			InventoryCanvas.SetVisible(false);
 			toggleMouseLock();

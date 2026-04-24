@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://c6pv2i4awlv7m" path="res://assets/models/big_pencil/pencil_texture.tres" id="8_jlue3"]
 [ext_resource type="Shader" uid="uid://dq2h2yqhsu8fl" path="res://game/entity/dungeon_generator/rooms/event_rooms/shooting_event_room.gdshader" id="9_ltfas"]
 [ext_resource type="Texture2D" uid="uid://b0gi538rd7txo" path="res://assets/backgrounds/prettysleepy-stars-3750824.png" id="10_y1f5v"]
-[ext_resource type="PackedScene" uid="uid://dxdxbn1isdu44" path="res://game/entity/treasure/box_root.tscn" id="12_0ufai"]
+[ext_resource type="PackedScene" uid="uid://dxdxbn1isdu44" path="res://game/entity/treasure/treasure_chest_new.tscn" id="12_0ufai"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtroa"]
 resource_name = "Material.009"
@@ -416,7 +416,7 @@ rings = 16
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44763565, 10.506846)
 
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=2063903394]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65767527, -10.32686)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.65767527, -10.32686)
 
 [node name="Entrances" type="Node3D" parent="." unique_id=1488867071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.582191, 13.568403)

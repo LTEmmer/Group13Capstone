@@ -12,6 +12,7 @@ public partial class PauseMenu : CanvasLayer
 	
 	private Control _buttonPanelContainer;
 	private SettingsPanel _settingsPanel;
+	private CurrentStatsPanel _statsPanel;
 	private Stack<Control> _panelStack = new Stack<Control>();
 
 	/*
@@ -57,13 +58,22 @@ public partial class PauseMenu : CanvasLayer
 		ProcessMode = ProcessModeEnum.Always;
 		_buttonPanelContainer = GetNode<Control>("ButtonPanelContainer");
 		_settingsPanel = GetNode<SettingsPanel>("SettingsPanelContainer");
+		_statsPanel = GetNodeOrNull<CurrentStatsPanel>("StatsPanelContainer");
+
+		if (_statsPanel == null || _settingsPanel == null || _buttonPanelContainer == null)
+		{
+			GD.PushError("One or more required panels are missing from the PauseMenu scene.");
+			return;
+		}
 
 		_buttonPanelContainer.ProcessMode = ProcessModeEnum.Always;
 		_settingsPanel.ProcessMode = ProcessModeEnum.Always;
+		_statsPanel.ProcessMode = ProcessModeEnum.Always;
 
 		const string btnPath = "ButtonPanelContainer/ButtonPanel/MarginContainer/ButtonContainer/";
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Resume"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Settings"));
+		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Stats"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "QuickRestart"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Main Menu"));
 		AudioManager.Instance?.RegisterButton(GetNodeOrNull<Button>(btnPath + "Quit"));
@@ -111,6 +121,18 @@ public partial class PauseMenu : CanvasLayer
 	}
 
 	public void _on_settings_back_pressed()
+	{
+		PopPanel();
+	}
+
+	public void _on_stats_pressed()
+	{
+		_statsPanel?.PopulateStats();
+		if (_statsPanel != null)
+			PushPanel(_statsPanel);
+	}
+
+	public void _on_stats_back_pressed()
 	{
 		PopPanel();
 	}

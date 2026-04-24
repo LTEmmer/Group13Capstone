@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://clnkys7l1ffht"]
 
-[ext_resource type="Script" uid="uid://d3k7nan2q5p8r" path="res://game/ui/battle_ui/FlashcardChallenge.cs" id="1_flashcard_challenge"]
+[ext_resource type="Script" uid="uid://d2aswbknp3pqv" path="res://game/ui/battle_ui/FlashcardChallenge.cs" id="1_flashcard_challenge"]
 [ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_wbtheme"]
 [ext_resource type="Texture2D" uid="uid://b48xe6gkb0idd" path="res://assets/ui/main_menu_torn_paper.png" id="3_paper"]
 [ext_resource type="Script" uid="uid://lq4wspjrvojx" path="res://game/ui/main_menu/TornPaperMenuPanel.cs" id="4_tpaper"]
@@ -63,13 +63,13 @@ theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=842595799]
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 32
 text = "Flashcard Challenge"
 horizontal_alignment = 1
 
 [node name="ContextLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=1315365415]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Answer correctly to continue"
 horizontal_alignment = 1
 

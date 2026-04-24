@@ -3,19 +3,47 @@
 [ext_resource type="Script" uid="uid://d21whjtbn8o5c" path="res://shared/components/hover/HoverComponent.cs" id="1_7csca"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="1_ywsfu"]
 [ext_resource type="Script" uid="uid://sjh56ix28es4" path="res://shared/components/rotate/RotateComponent.cs" id="2_uuff6"]
+[ext_resource type="Shader" path="res://game/ui/inventory_ui/highlight.gdshader" id="3_uuff6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dq5we"]
+render_priority = 0
+shader = ExtResource("3_uuff6")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/cycle_interval = 1.0
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_width = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_manhm"]
 resource_name = "Material.005"
+next_pass = SubResource("ShaderMaterial_dq5we")
 cull_mode = 2
 albedo_color = Color(0.26666978, 0.16078487, 0.12549002, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5t2rr"]
+render_priority = 0
+shader = ExtResource("3_uuff6")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/cycle_interval = 1.0
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_width = 3.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eetmw"]
 resource_name = "Material.006"
+next_pass = SubResource("ShaderMaterial_5t2rr")
 cull_mode = 2
 albedo_color = Color(0.33543277, 0.31336448, 0.32850173, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ikpv"]
+render_priority = 0
+shader = ExtResource("3_uuff6")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/cycle_interval = 1.0
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_width = 3.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7jwt"]
 resource_name = "Material.007"
+next_pass = SubResource("ShaderMaterial_1ikpv")
 cull_mode = 2
 albedo_color = Color(0, 0, 0, 1)
 

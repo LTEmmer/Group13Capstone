@@ -82,24 +82,24 @@ public partial class RoomConnection : Interactable
 			return;
 		}
 
-		Vector3 dest = Vector3.Zero;
+		Transform3D dest = Transform3D.Identity;
 		if (IsEntrance)
 		{
-			dest = (Vector3)targetRoom.GetNodeOrNull<Node3D>("ExitPoint")?.GlobalPosition;
+			dest = targetRoom.GetNodeOrNull<Node3D>("ExitPoint")?.GlobalTransform ?? Transform3D.Identity;
 		}
 		else
 		{
-			dest = (Vector3)targetRoom.GetNodeOrNull<Node3D>("EnterPoint")?.GlobalPosition;
+			dest = targetRoom.GetNodeOrNull<Node3D>("EnterPoint")?.GlobalTransform ?? Transform3D.Identity;
 		}
 
-		if (dest == Vector3.Zero)
+		if (dest == Transform3D.Identity)
 		{
 			GD.PushError($"RoomConnection could not find an 'EnterPoint' or 'ExitPoint' in the target room {TargetRoomId}. Teleportation failed.");
 			return;
 		}
 		GetParent().GetParent().GetParent().RemoveChild(player);
 		targetRoom.AddChild(player);
-		player.GlobalPosition = dest;
+		player.GlobalTransform = dest;
 
 		// Disable landing sound for next connection
 		if (player is Player p)
@@ -111,13 +111,15 @@ public partial class RoomConnection : Interactable
 			CurrentRoomManager.Instance.CurrentRoomId = TargetRoomId;
 	}
 
-	public void SetLabel(string roomType, int id)
+	public void SetLabel(string roomType, bool onMainPath)
 	{
 		Label3D label = GetNodeOrNull<Label3D>("Label");
 		if (label != null)
 		{
-			label.Text = roomType + ":" + id;
-			
+			label.Text = roomType;
+
+			// Set label to white if on main path, green if on branch
+			label.Modulate = onMainPath ? new Color(255, 255, 255, 1f) : new Color(0, 119, 0, 1f);
 		}
 	}
 	

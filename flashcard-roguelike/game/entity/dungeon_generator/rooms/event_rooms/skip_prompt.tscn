@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://dqhf73mbn24rs"]
+
+[ext_resource type="Script" uid="uid://dc0ohdqu3xvbq" path="res://game/entity/dungeon_generator/rooms/event_rooms/SkipPrompt.cs" id="1_script"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_theme"]
+
+[node name="SkipPrompt" type="Control" unique_id=1241030244 node_paths=PackedStringArray("SkipButton", "KeepTryingButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+SkipButton = NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/SkipButton")
+KeepTryingButton = NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/KeepTryingButton")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=233770547]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11372549, 0.11372549, 0.11372549, 0.40392157)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2002723850]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1350450877]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=1275469361]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=371580675]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=11037496]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Having Trouble?"
+horizontal_alignment = 1
+
+[node name="MessageLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1882647402]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "You can skip to the end of the parkour course, but you won't receive a reward. :("
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=973194739]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=422890125]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="SkipButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=682156808]
+custom_minimum_size = Vector2(180, 56)
+layout_mode = 2
+text = "Skip (No Reward)"
+
+[node name="KeepTryingButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=611080540]
+custom_minimum_size = Vector2(140, 56)
+layout_mode = 2
+text = "Keep Trying"

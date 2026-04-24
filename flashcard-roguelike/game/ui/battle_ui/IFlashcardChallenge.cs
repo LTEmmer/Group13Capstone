@@ -8,7 +8,7 @@ public interface IFlashcardChallenge
     void ConnectAnswerSubmitted(Action<bool> callback);
     
     // Show the challenge with a flashcard and optional context
-    void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...");
+    void ShowChallenge(Flashcard card, string context = "Answer correctly or bad things happen...", bool combat = true);
     
     // Hide the challenge with optional completion callback
     void HideChallenge(Action onComplete = null);

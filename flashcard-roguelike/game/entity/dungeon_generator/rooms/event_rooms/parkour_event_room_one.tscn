@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://cutbohat4yfdk"]
 
+[ext_resource type="PackedScene" uid="uid://dqhf73mbn24rs" path="res://game/entity/dungeon_generator/rooms/event_rooms/skip_prompt.tscn" id="3_bw3q5"]
 [ext_resource type="Material" uid="uid://c22qf27w2ujjv" path="res://assets/models/parkour_room/cave_texture.tres" id="4_y432j"]
 [ext_resource type="PackedScene" uid="uid://c175n268mh5vw" path="res://game/entity/light/floating_light.tscn" id="5_6skwy"]
 [ext_resource type="Script" uid="uid://bvs732ljwgra3" path="res://game/entity/hazards/ScalingPlatform.cs" id="8_8jd16"]
@@ -15,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://2qvmv1ijxwoo" path="res://assets/models/big_pencil/pencil.glb" id="19_xqdim"]
 [ext_resource type="PackedScene" uid="uid://cn4tm82kgsw57" path="res://assets/models/ufo/ufo.glb" id="20_c241s"]
 [ext_resource type="Material" uid="uid://drq58oyucx00r" path="res://assets/models/ufo/ufo_texture.tres" id="21_bw3q5"]
-[ext_resource type="PackedScene" uid="uid://dxdxbn1isdu44" path="res://game/entity/treasure/box_root.tscn" id="22_c241s"]
+[ext_resource type="PackedScene" uid="uid://dxdxbn1isdu44" path="res://game/entity/treasure/treasure_chest_new.tscn" id="22_c241s"]
 [ext_resource type="PackedScene" uid="uid://cnitj3uodab4s" path="res://game/ui/battle_ui/flashcard_challenge_true_false.tscn" id="Scene_flashcard"]
 [ext_resource type="PackedScene" uid="uid://cm05m68d10agu" path="res://game/entity/npcs/base_npc.tscn" id="Scene_npc"]
 [ext_resource type="Script" uid="uid://ba07nbm5r86bb" path="res://game/entity/hazards/DamageZone.cs" id="Script_damage"]
@@ -36,10 +37,11 @@ albedo_color = Color(0.2627451, 0.2627451, 0.2627451, 1)
 points = PackedVector3Array(-15, -0.5, -10, -15, 0.5, -10, 14.999998, -0.5, -10, -15, -0.5, 10, -15, 0.5, 10, 14.999998, 0.5, -10, 14.999998, -0.5, 10, 14.999998, 0.5, 10)
 
 [sub_resource type="BoxMesh" id="Mesh_exit"]
+lightmap_size_hint = Vector2i(184, 136)
 size = Vector3(24, 1, 12)
 
 [sub_resource type="BoxShape3D" id="Col_exit_trigger"]
-size = Vector3(24, 3, 12.022217)
+size = Vector3(5.7373047, 3, 12.022217)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0famd"]
 points = PackedVector3Array(-12, -0.5, -6, -12, 0.5, -6, 12, -0.5, -6, -12, -0.5, 6, -12, 0.5, 6, 12, 0.5, -6, 12, -0.5, 6, 12, 0.5, 6)
@@ -349,7 +351,8 @@ points = PackedVector3Array(2.3101072, -6.341934e-05, -0.00045204163, 0.85340095
 script = ExtResource("Script_room")
 Npc = NodePath("NPC/BaseNPC")
 FlashcardTFScene = ExtResource("Scene_flashcard")
-Reward = NodePath("Reward")
+Reward = NodePath("Reward/TreasureChest")
+SkipPromptScene = ExtResource("3_bw3q5")
 
 [node name="cave" parent="." unique_id=1561546874 instance=ExtResource("9_y432j")]
 transform = Transform3D(1.455, 0, 0, 0, 1.455, 0, 0, 0, 1.455, 0, 7.6004925, 0)
@@ -364,10 +367,11 @@ visible = false
 shape = SubResource("ConcavePolygonShape3D_6skwy")
 
 [node name="LightRotate" parent="." unique_id=1455328766 instance=ExtResource("5_6skwy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.961504, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.831839, 0)
 
 [node name="OmniLight3D" parent="LightRotate/Light" parent_id_path=PackedInt32Array(1455328766, 2064956913) index="0" unique_id=308789193]
-light_energy = 15.695
+transform = Transform3D(1.0000001, 1.4901161e-07, -8.940697e-08, 5.9604645e-08, 0, 1.0000001, 7.4505806e-08, -1.0000001, 0, 0, 0, 0)
+light_energy = 20.0
 omni_range = 500.0
 
 [node name="StartLedge" type="MeshInstance3D" parent="." unique_id=1099865566]
@@ -390,38 +394,31 @@ surface_material_override/0 = SubResource("Mat_ledge")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1557684, 0.9938965)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitLedge/ExitTrigger" unique_id=100000012]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9073486e-06, 0, -1.0057373)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.13135, 0, -1.0057373)
 shape = SubResource("Col_exit_trigger")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ExitLedge" unique_id=822930195]
-visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ExitLedge/StaticBody3D" unique_id=549947479]
 shape = SubResource("ConvexPolygonShape3D_0famd")
 
 [node name="EnterPoint" type="Marker3D" parent="." unique_id=551784145]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.212858, 5.647655, 29.327156)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.212858, 5.647655, 29.327156)
 
 [node name="ExitPoint" type="Marker3D" parent="." unique_id=1106618029]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -31.05679, 19.265223, 4.809934)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -31.05679, 19.265223, 4.809934)
 
 [node name="Entrances" type="Node3D" parent="." unique_id=39189759]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.313736, 7.533313, 29.410686)
 
 [node name="0" type="Marker3D" parent="Entrances" unique_id=934156117]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.099, -1.806, 3.325)
-
-[node name="1" type="Marker3D" parent="Entrances" unique_id=411924845]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.098503, -1.8059998, 3.325386)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07762909, -1.8059998, 3.3249998)
 
 [node name="Exits" type="Node3D" parent="." unique_id=1565686847]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, -34.211308, 21.121094, 5.178354)
 
 [node name="0" type="Marker3D" parent="Exits" unique_id=18164182]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5186563, -1.8337665, -3.282116)
-
-[node name="1" type="Marker3D" parent="Exits" unique_id=682867691]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.519, -1.834, -3.282)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34333706, -1.8337669, -3.282116)
 
 [node name="WaterPlane" type="MeshInstance3D" parent="." unique_id=1660215050]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -14.170574, 0)
@@ -443,13 +440,12 @@ transform = Transform3D(0.49999997, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, 0.4999
 
 [node name="BaseNPC" parent="NPC" index="0" unique_id=2015437748]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53995764, 0.14002822, 0)
+_name = "Cave Dweller"
+_dialogText = "Hey... you... I can't get out of here but I may be able to help. But I won't just help you for free. Answer my ONE challenge and I'll slow everything down for ya. Careful though, if you get it wrong I will make everything faster because I hate you. Oh, and did I mention I left my treasure at the end?"
 
 [node name="Label3D" type="Label3D" parent="NPC" unique_id=1657950002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.915051, 0)
 billboard = 1
-text = "TEMP
-Succeed in this challenge and be rewarded
-However wrong answers bring only misery"
 
 [node name="MovingPlatforms" type="Node3D" parent="." unique_id=1132076645]
 
@@ -497,6 +493,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gv6lf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovingPlatforms/Book2" unique_id=820706739]
 transform = Transform3D(1.0139732, 7.371881e-14, 0, -2.6645353e-15, 1.0139731, -5.3290705e-15, 0, 5.3290705e-15, 1.0139732, 0.0012197495, 0.0498271, -0.0013608932)
+visible = false
 shape = SubResource("BoxShape3D_gj8yi")
 
 [node name="Desk1" type="AnimatableBody3D" parent="MovingPlatforms" unique_id=1407880396]
@@ -735,4 +732,3 @@ transform = Transform3D(0.7071067, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710
 [editable path="Decor/desk2"]
 [editable path="Decor/pencil"]
 [editable path="Decor/ufo"]
-[editable path="Reward"]

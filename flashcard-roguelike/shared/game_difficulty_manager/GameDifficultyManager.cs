@@ -8,19 +8,21 @@ public partial class GameDifficultyManager : Node
 
 	private float _currentDifficultyScore = 0.0F;
 	private float _baselineDifficultyScore = 1.0F;
-	private float _difficultyScoreIncrease = 0.15F;  // 0.25 per victory — slower difficulty ramp
-	private float _difficultyScoreDecrease = 0.50F; 
+	private float _difficultyScoreIncrease = 0.15F;  // 0.15 per combat victory, slower difficulty ramp
+	private float _difficultyScoreDecrease = 0.50F; // Used for running
+	private int _currentFloor = 1;
+	private const float _baselineFloorIncrement = .5f;
+
+	public int CurrentFloor => _currentFloor;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Instance = this; 
+		Instance = this;
 
 		EventManager.Instance.listen("on_battle_victory", new Callable(this, MethodName.on_battle_victory));
 		EventManager.Instance.listen("on_ran_from_battle", new Callable(this, MethodName.on_ran_from_battle));
 		EventManager.Instance.listen("on_battle_lost", new Callable(this, MethodName.on_battle_lost));
-		// Add one more event when player reaches new floor update _baselineDiffcultyScore, floors wont be implemented this sprint
-		// Most likely will just increase by flat 1.0 value every floor
 		_currentDifficultyScore = _baselineDifficultyScore;
 	}
 	
@@ -40,6 +42,20 @@ public partial class GameDifficultyManager : Node
 	public void ResetDifficulty(){
 		_currentDifficultyScore = _baselineDifficultyScore;
 	}
+
+	public void AdvanceFloor()
+	{
+		_currentFloor++;
+		_baselineDifficultyScore += _baselineFloorIncrement;
+		_currentDifficultyScore += _baselineFloorIncrement;
+	}
+
+	public void ResetGame()
+	{
+		_currentFloor = 1;
+		_baselineDifficultyScore = 1.0f;
+		_currentDifficultyScore = 1.0f;
+	}
 	
 	public float getCurrentDifficultyScore(){
 		return _currentDifficultyScore;
@@ -51,7 +67,8 @@ public partial class GameDifficultyManager : Node
 
 	public void on_ran_from_battle(string test){
 		_currentDifficultyScore -= _difficultyScoreDecrease;
-		if(_currentDifficultyScore < _baselineDifficultyScore){ 
+		if(_currentDifficultyScore < _baselineDifficultyScore)
+		{ 
 			_currentDifficultyScore = _baselineDifficultyScore;
 		}
 	}

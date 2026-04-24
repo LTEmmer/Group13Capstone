@@ -33,7 +33,7 @@
 [ext_resource type="Material" uid="uid://drq58oyucx00r" path="res://assets/models/ufo/ufo_texture.tres" id="26_wwtvc"]
 [ext_resource type="Script" uid="uid://bnbhifky1dd3h" path="res://game/ui/pause_menue/SettingsPanel.cs" id="31_nekgt"]
 [ext_resource type="Script" uid="uid://c6mb8jerb70d6" path="res://game/ui/main_menu/CreateSetPanel.cs" id="32_73pe5"]
-[ext_resource type="Shader" uid="uid://q5mlok32oygd" path="res://game/entity/player/camera.gdshader" id="33_wwtvc"]
+[ext_resource type="Shader" uid="uid://lsc1hmg6pjdt" path="res://game/entity/player/camera.gdshader" id="33_wwtvc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vt321"]
 shader = ExtResource("5_wwtvc")
@@ -86,7 +86,7 @@ shader_parameter/outlineColor = Color(0, 0, 0, 1)
 shader_parameter/depth_threshold = 0.025
 shader_parameter/normal_threshold = 0.5
 shader_parameter/normal_smoothing = 0.25
-shader_parameter/max_thickness = 1.5000000712500001
+shader_parameter/max_thickness = 1.50000007125
 shader_parameter/min_thickness = 0.0
 shader_parameter/max_distance = 100.0
 shader_parameter/min_distance = 2.0
@@ -714,12 +714,6 @@ custom_minimum_size = Vector2(320, 56)
 layout_mode = 2
 text = "Start Game"
 
-[node name="CardUpload" type="Button" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=455458912]
-custom_minimum_size = Vector2(320, 56)
-layout_mode = 2
-text = "Card Upload
-"
-
 [node name="ViewImportedFlashcards" type="Button" parent="CenterContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=2000000000]
 custom_minimum_size = Vector2(320, 56)
 layout_mode = 2
@@ -803,9 +797,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="CardUpload" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=218322147]
+layout_mode = 2
+text = "CSV Set Upload"
+
 [node name="CreateNewSet" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=701770794]
 layout_mode = 2
 text = "Create New Set"
+
+[node name="InstructionsButton" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1286310044]
+layout_mode = 2
+text = "CSV Import Instructions"
 
 [node name="Back" type="Button" parent="ViewFlashcardsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=2000000008]
 custom_minimum_size = Vector2(80, 24)
@@ -862,26 +864,132 @@ text = "Upload CSV File"
 horizontal_alignment = 1
 
 [node name="LineEdit" type="LineEdit" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1658352499]
-custom_minimum_size = Vector2(420, 50)
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 
 [node name="BrowseButton" type="Button" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=926566108]
-custom_minimum_size = Vector2(240, 54)
 layout_mode = 2
 text = "Browse 
 "
 
 [node name="ImportButton" type="Button" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=636903067]
-custom_minimum_size = Vector2(240, 54)
 layout_mode = 2
 text = "Import"
 
 [node name="BackButton" type="Button" parent="UploadPanelContainer/WhiteboardPanel/MarginContainer/VBoxContainer" unique_id=1442279632]
-custom_minimum_size = Vector2(240, 54)
 layout_mode = 2
 text = "Back"
 
 [node name="CsvFileDialog" type="FileDialog" parent="UploadPanelContainer" unique_id=1313515291]
+
+[node name="InstructionsPanelContainer" type="Control" parent="." unique_id=1900000001]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = -320.0
+offset_right = 380.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Paper" type="TextureRect" parent="InstructionsPanelContainer" unique_id=1900000002]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.065
+anchor_top = -0.065
+anchor_right = 1.065
+anchor_bottom = 1.065
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_paper_tex")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Panel" type="Control" parent="InstructionsPanelContainer" unique_id=1900000003]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_tpaper")
+
+[node name="MarginContainer" type="MarginContainer" parent="InstructionsPanelContainer/Panel" unique_id=1900000004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InstructionsPanelContainer/Panel/MarginContainer" unique_id=1900000005]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="InstructionsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1900000006]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "CSV Import Instructions"
+horizontal_alignment = 1
+
+[node name="InstructionsLabel" type="RichTextLabel" parent="InstructionsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1900000007]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[b]How to Import a CSV Set[/b]
+1. From the main menu, click [b]View Imported Flashcards[/b].
+2. Click [b]CSV Set Upload[/b] to open the upload panel.
+3. Click [b]Browse[/b] and select your CSV file from your computer.
+4. The file path will appear in the text box once selected.
+5. Click [b]Import[/b] to add the set. It will appear in your flashcard list immediately.
+6. Use the toggle next to a set to activate or deactivate it for gameplay.
+
+[b]CSV File Format[/b]
+A plain CSV file with exactly [b]2 columns[/b]: one for the question, one for the answer.
+Each row is one flashcard. Commas separate the two columns.
+
+[b]Optional Header Row[/b]
+Your file can optionally include a header row using any of these recognised names:
+  [i]Question column:[/i]  [code]question[/code]   [code]front[/code]   [code]q[/code]   [code]term[/code]
+  [i]Answer column:[/i]    [code]answer[/code]   [code]back[/code]   [code]a[/code]   [code]definition[/code]
+Header names are case-insensitive and surrounding whitespace is ignored.
+If no recognised header is found, the first column is treated as the question and the second as the answer.
+
+[b]Example With Headers[/b]
+[code]Front,Back
+What is 2+2?,4
+Capital of France?,Paris
+Largest planet?,Jupiter[/code]
+
+[b]Example Without Headers[/b]
+[code]What is 2+2?,4
+Capital of France?,Paris
+Largest planet?,Jupiter[/code]
+
+[b]Rules & Gotchas[/b]
+  • A set name cannot be the same as one already imported, duplicates are skipped.
+  • Rows where either the question or answer is blank are skipped automatically.
+  • Only [b]2 columns[/b] are allowed. Files with more columns will be rejected.
+  • Avoid emojis and unescaped quote characters (\") inside field values.
+  • Leading and trailing whitespace around values is trimmed automatically.
+  • The set name is taken from the file name (without the .csv extension)."
+
+[node name="CloseButton" type="Button" parent="InstructionsPanelContainer/Panel/MarginContainer/VBoxContainer" unique_id=1900000008]
+layout_mode = 2
+text = "Close"
 
 [node name="SettingsPanelContainer" type="Control" parent="." unique_id=402845879]
 visible = false

@@ -1,13 +1,14 @@
 [gd_scene format=4 uid="uid://dxdxbn1isdu44"]
 
-[ext_resource type="Material" uid="uid://ddtvbhnxky0xy" path="res://assets/models/treasure_room/box/box_bottom_texture.tres" id="1_2177w"]
-[ext_resource type="Script" uid="uid://dcech2bqq5xi5" path="res://game/entity/treasure/TreasureChest.cs" id="1_n4d8g"]
-[ext_resource type="Material" uid="uid://bhmnfrl721bn6" path="res://assets/models/treasure_room/box/box_junk_material.tres" id="1_xtdgc"]
-[ext_resource type="Material" uid="uid://bkqykn6oj2rq6" path="res://assets/models/treasure_room/box/box_lid_texture.tres" id="2_1jwbe"]
-[ext_resource type="Texture2D" uid="uid://ckkx4va82ysps" path="res://assets/models/treasure_room/box/lost-and-found-rubber-stamp-seal-free-vector-removebg-preview.png" id="4_epiam"]
-[ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="6_item"]
-[ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="7_xelpo"]
-[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="12_5oboa"]
+[ext_resource type="Script" uid="uid://dcech2bqq5xi5" path="res://game/entity/treasure/TreasureChest.cs" id="1_efa7t"]
+[ext_resource type="PackedScene" uid="uid://b31w7r83d3ycp" path="res://game/entity/item/Item.tscn" id="2_glrcb"]
+[ext_resource type="AudioStream" uid="uid://ceibrh374wpxe" path="res://assets/audio/etc/orchestra_hit.mp3" id="3_ox72p"]
+[ext_resource type="Material" uid="uid://bhmnfrl721bn6" path="res://assets/models/treasure_room/box/box_junk_material.tres" id="4_5iij2"]
+[ext_resource type="AudioStream" uid="uid://0don4ygbr41o" path="res://assets/audio/etc/item_spawn.mp3" id="4_glrcb"]
+[ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="5_7cjah"]
+[ext_resource type="Material" uid="uid://ddtvbhnxky0xy" path="res://assets/models/treasure_room/box/box_bottom_texture.tres" id="6_lcgp6"]
+[ext_resource type="Material" uid="uid://bkqykn6oj2rq6" path="res://assets/models/treasure_room/box/box_lid_texture.tres" id="7_0xjk1"]
+[ext_resource type="Texture2D" uid="uid://ckkx4va82ysps" path="res://assets/models/treasure_room/box/lost-and-found-rubber-stamp-seal-free-vector-removebg-preview.png" id="8_6ku4a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_chest"]
 size = Vector3(1.5, 0.85, 1)
@@ -160,12 +161,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0horb")
 
-[node name="BoxRoot" type="StaticBody3D" unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "ChestLight", "_particles", "RevealCamera", "CameraAngles") groups=["Interactable"]]
-script = ExtResource("1_n4d8g")
-ItemScene = ExtResource("6_item")
+[node name="TreasureRoot" type="Node3D" unique_id=2066529300]
+
+[node name="TreasureChest" type="StaticBody3D" parent="." unique_id=1286188714 node_paths=PackedStringArray("_label", "_lidBody", "_openSoundPlayer", "ChestLight", "_particles", "RevealCamera", "CameraAngles") groups=["Interactable"]]
+script = ExtResource("1_efa7t")
+ItemScene = ExtResource("2_glrcb")
 _label = NodePath("Label3D")
 _lidBody = NodePath("ShakeNode/LidBody")
-OpenSound = ExtResource("7_xelpo")
+OpenSound = ExtResource("3_ox72p")
+ItemSpawnSound = ExtResource("4_glrcb")
 _openSoundPlayer = NodePath("OpenSoundPlayer")
 ChestLight = NodePath("Light")
 RarityColors = PackedColorArray(0.8848981, 0.8848981, 0.8848981, 1, 9.866804e-07, 0.5114562, 0.103561275, 1, 0.23117456, 0.47789878, 1, 1, 0.8233584, 0.00080628635, 0.86872333, 1, 0.86527705, 0.70930505, 2.3102762e-06, 1)
@@ -173,10 +177,10 @@ _particles = NodePath("BurstParticles")
 RevealCamera = NodePath("RevealCamera")
 CameraAngles = [NodePath("RevealCameraAngles/Angle"), NodePath("RevealCameraAngles/Angle2"), NodePath("RevealCameraAngles/Angle3"), NodePath("RevealCameraAngles/Angle4"), NodePath("RevealCameraAngles/Angle5")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1832437720]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TreasureChest" unique_id=1832437720]
 shape = SubResource("BoxShape3D_chest")
 
-[node name="Light" type="SpotLight3D" parent="." unique_id=2023982208]
+[node name="Light" type="SpotLight3D" parent="TreasureChest" unique_id=2023982208]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.038681746, 20.164894, 0.12280822)
 light_color = Color(0.86527705, 0.70930505, 2.3102762e-06, 1)
 light_energy = 30.0
@@ -186,28 +190,28 @@ spot_range = 30.266
 spot_angle = 6.013002
 spot_angle_attenuation = 0.0026680487
 
-[node name="FogVolume" type="FogVolume" parent="Light" unique_id=967009659]
+[node name="FogVolume" type="FogVolume" parent="TreasureChest/Light" unique_id=967009659]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 4.6938658e-07, -10.907723)
 size = Vector3(3.8, 18.61453, 3.8)
 shape = 1
 material = SubResource("FogMaterial_5oboa")
 
-[node name="Junk" type="MeshInstance3D" parent="." unique_id=1873621713]
-material_override = ExtResource("1_xtdgc")
+[node name="Junk" type="MeshInstance3D" parent="TreasureChest" unique_id=1873621713]
+material_override = ExtResource("4_5iij2")
 mesh = SubResource("ArrayMesh_cgmcj")
 
-[node name="Label3D" type="Label3D" parent="." unique_id=724166263]
+[node name="Label3D" type="Label3D" parent="TreasureChest" unique_id=724166263]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 visible = false
 billboard = 1
 render_priority = 1
 text = "Treasure Chest"
-font = ExtResource("12_5oboa")
+font = ExtResource("5_7cjah")
 font_size = 64
 
-[node name="OpenSoundPlayer" type="AudioStreamPlayer3D" parent="." unique_id=404431657]
+[node name="OpenSoundPlayer" type="AudioStreamPlayer3D" parent="TreasureChest" unique_id=404431657]
 
-[node name="BurstParticles" type="GPUParticles3D" parent="." unique_id=2090133904]
+[node name="BurstParticles" type="GPUParticles3D" parent="TreasureChest" unique_id=2090133904]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 emitting = false
 amount = 64
@@ -216,46 +220,48 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_burst")
 draw_pass_1 = SubResource("SphereMesh_particle")
 
-[node name="RevealCamera" type="Camera3D" parent="." unique_id=507172474]
+[node name="RevealCamera" type="Camera3D" parent="TreasureChest" unique_id=507172474]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="RevealCameraAngles" type="Node3D" parent="." unique_id=970828782]
+[node name="RevealCameraAngles" type="Node3D" parent="TreasureChest" unique_id=970828782]
 
-[node name="Angle" type="Marker3D" parent="RevealCameraAngles" unique_id=757069887]
+[node name="Angle" type="Marker3D" parent="TreasureChest/RevealCameraAngles" unique_id=757069887]
 transform = Transform3D(0.8562671, -0.25513744, -0.44912308, 0, 0.8694949, -0.49394187, 0.5165333, 0.42294618, 0.7445199, -1.313, -0.193, 2.238)
 gizmo_extents = 0.17
 
-[node name="Angle2" type="Marker3D" parent="RevealCameraAngles" unique_id=201992797]
+[node name="Angle2" type="Marker3D" parent="TreasureChest/RevealCameraAngles" unique_id=201992797]
 transform = Transform3D(-0.6820382, 0.49783897, -0.53570527, 0.29530463, 0.85762686, 0.4210358, 0.66904336, 0.12896623, -0.73194855, -3.144, 2.831, -3.802)
 
-[node name="Angle3" type="Marker3D" parent="RevealCameraAngles" unique_id=1963969988]
+[node name="Angle3" type="Marker3D" parent="TreasureChest/RevealCameraAngles" unique_id=1963969988]
 transform = Transform3D(-0.7431448, 0.3305116, 0.5818056, 0, 0.86949486, -0.49394184, -0.6691306, -0.36707032, -0.6461606, 1.923, -0.153, -2.444)
 
-[node name="Angle4" type="Marker3D" parent="RevealCameraAngles" unique_id=482833852]
+[node name="Angle4" type="Marker3D" parent="TreasureChest/RevealCameraAngles" unique_id=482833852]
 transform = Transform3D(0.90063274, 0.04929559, 0.43177605, -0.26697123, 0.8467245, 0.4601998, -0.34290954, -0.52974284, 0.7757484, 2.969, 2.706, 3.802)
 
-[node name="Angle5" type="Marker3D" parent="RevealCameraAngles" unique_id=515379441]
+[node name="Angle5" type="Marker3D" parent="TreasureChest/RevealCameraAngles" unique_id=515379441]
 transform = Transform3D(-1, 2.1613864e-08, -1.394363e-07, -3.3546858e-08, 0.9234448, 0.3837313, 1.3705564e-07, 0.3837313, -0.9234448, 0, 4.947082, -8.144059)
 
-[node name="ShakeNode" type="Node3D" parent="." unique_id=1276232546]
+[node name="ShakeNode" type="Node3D" parent="TreasureChest" unique_id=1276232546]
 
-[node name="Box" type="MeshInstance3D" parent="ShakeNode" unique_id=1708501638]
-material_override = ExtResource("1_2177w")
+[node name="Box" type="MeshInstance3D" parent="TreasureChest/ShakeNode" unique_id=1708501638]
+material_override = ExtResource("6_lcgp6")
 mesh = SubResource("ArrayMesh_3vyn0")
 
-[node name="LidBody" type="RigidBody3D" parent="ShakeNode" unique_id=511200093]
+[node name="LidBody" type="RigidBody3D" parent="TreasureChest/ShakeNode" unique_id=511200093]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.384, 0)
+collision_layer = 0
+collision_mask = 0
 mass = 2.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ShakeNode/LidBody" unique_id=1908530398]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TreasureChest/ShakeNode/LidBody" unique_id=1908530398]
 shape = SubResource("BoxShape3D_lid")
 
-[node name="Lid" type="MeshInstance3D" parent="ShakeNode/LidBody" unique_id=1014407360]
+[node name="Lid" type="MeshInstance3D" parent="TreasureChest/ShakeNode/LidBody" unique_id=1014407360]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.384, 0)
-material_override = ExtResource("2_1jwbe")
+material_override = ExtResource("7_0xjk1")
 mesh = SubResource("ArrayMesh_7u1kl")
 
-[node name="Sprite3D" type="Sprite3D" parent="ShakeNode" unique_id=1424680401]
+[node name="Sprite3D" type="Sprite3D" parent="TreasureChest/ShakeNode" unique_id=1424680401]
 transform = Transform3D(-0.15105894, 0.03473033, -1.3205993e-08, 0.03473033, 0.15105894, 3.036222e-09, 1.35505305e-08, 0, -0.155, 0, 0, -0.50191736)
 shaded = true
-texture = ExtResource("4_epiam")
+texture = ExtResource("8_6ku4a")

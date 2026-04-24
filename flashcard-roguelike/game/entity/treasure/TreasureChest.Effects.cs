@@ -89,6 +89,8 @@ public partial class TreasureChest
 			return;
 		}
 
+		_lidBody.Freeze = false;
+
 		float angle = _rng.Randf() * Mathf.Tau;
 		_lidBody.ApplyCentralImpulse(new Vector3(
 			Mathf.Cos(angle) * LidImpulseHoriz,
@@ -101,6 +103,10 @@ public partial class TreasureChest
 			_rng.RandfRange(-1f, 1f),
 			_rng.RandfRange(-2f, 2f)
 		));
+
+		var tween = CreateTween();
+		tween.TweenInterval(5f);
+		tween.TweenCallback(Callable.From(_lidBody.QueueFree));
 	}
 
 	private void StartRarityReveal(int targetIndex)
@@ -141,8 +147,7 @@ public partial class TreasureChest
 			SpawnItems();
 			if (ChestLight != null)
 			{
-				CreateTween().TweenProperty(ChestLight, "light_energy", 0f, 0.5f)
-					.SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
+				CreateTween().TweenProperty(ChestLight, "light_energy", 0f, 0.5f).SetTrans(Tween.TransitionType.Sine).SetEase(Tween.EaseType.In);
 			}
 		}));
 	}

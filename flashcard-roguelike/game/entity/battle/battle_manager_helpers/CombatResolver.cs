@@ -35,7 +35,7 @@ public class CombatResolver
 			{
 				// Set state to wait for flashcard answer and show challenge with difficulty
 				_state.WaitingForFlashcard = true;
-				_flashcardChallengeManager.ShowChallenge(card, "Answer correctly to attack!", difficulty);
+				_flashcardChallengeManager.ShowChallenge(card, "Answer correctly to attack!", difficulty, true);
 			}
 			else
 			{
@@ -74,7 +74,7 @@ public class CombatResolver
                 // Set state to wait for flashcard answer and show challenge with default difficulty (0 = text)
                 _state.WaitingForFlashcard = true;
                 // Use the current game difficulty so defense challenges scale like attacks
-                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to defend!", GameDifficultyManager.Instance.getCurrentDifficultyScore());
+                _flashcardChallengeManager.ShowChallenge(card, "Answer correctly to defend!", GameDifficultyManager.Instance.getCurrentDifficultyScore(), false);
             }
             else
             {
@@ -133,13 +133,13 @@ public class CombatResolver
                         if (_state.ConsecutiveCorrect != _state.BossStreakRequired - 1)
                         {
                             _uiCoordinator.LogMessage($"Keep it up! {_state.BossStreakRequired - _state.ConsecutiveCorrect} more to go.");
-                            _flashcardChallengeManager.ShowChallenge(card, $"Keep it up! {_state.BossStreakRequired - _state.ConsecutiveCorrect} more correct answers to go!", difficulty);
+                            _flashcardChallengeManager.ShowChallenge(card, $"Keep it up! {_state.BossStreakRequired - _state.ConsecutiveCorrect} more correct answers to go!", difficulty, true);
                             
                         }
                         else
                         {
                             _uiCoordinator.LogMessage($"Last hit needed! You best not miss you hear.");
-                            _flashcardChallengeManager.ShowChallenge(card, $"Last hit needed! You best not miss you hear.", difficulty);
+                            _flashcardChallengeManager.ShowChallenge(card, $"Last hit needed! You best not miss you hear.", difficulty, true);
                         }
                     }
                     else
@@ -253,11 +253,27 @@ public class CombatResolver
         }
     }
     
-    // Use items (placeholder)
-    public void UseItems()
+    // Use a consumable item and end the player's turn
+    public void UseItem(ItemInstance item)
     {
-        // Currently not implemented, just logs a message and starts enemy turns
-        _uiCoordinator.LogMessage("No items available! (Not yet implemented, wasted turn)");
+        if (item?.Resource?.UseEffects != null)
+        {
+            foreach (var effect in item.Resource.UseEffects)
+            {
+                effect.Apply(_state.Player, item);
+            }
+        }
+
+        if (item.Resource.MaxUses > 0)
+        {
+            item.CurrentUses--;
+            if (item.CurrentUses <= 0)
+            {
+                _state.Player.inventoryComponent?.RemoveItem(item);
+            }
+        }
+
+        _uiCoordinator.UpdateHealthUI();
         _turnController.StartEnemyTurns();
     }
 }

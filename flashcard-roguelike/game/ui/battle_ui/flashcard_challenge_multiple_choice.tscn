@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bd8e25jian5kb"]
 
-[ext_resource type="Script" uid="uid://dm8j7r7y27bgm" path="res://game/ui/battle_ui/FlashcardChallengeMultipleChoice.cs" id="1_multiple_choice"]
+[ext_resource type="Script" uid="uid://d1g7r63oxtwxa" path="res://game/ui/battle_ui/FlashcardChallengeMultipleChoice.cs" id="1_multiple_choice"]
 [ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_wbtheme"]
 [ext_resource type="Texture2D" uid="uid://b48xe6gkb0idd" path="res://assets/ui/main_menu_torn_paper.png" id="3_paper"]
 [ext_resource type="Script" uid="uid://lq4wspjrvojx" path="res://game/ui/main_menu/TornPaperMenuPanel.cs" id="4_tpaper"]
 
-[node name="FlashcardChallengeMultipleChoice" type="Control"]
+[node name="FlashcardChallengeMultipleChoice" type="Control" unique_id=916868291]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ mouse_filter = 2
 theme = ExtResource("2_wbtheme")
 script = ExtResource("1_multiple_choice")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1623180884]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,12 +24,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ChallengePanel" type="Control" parent="CenterContainer"]
+[node name="ChallengePanel" type="Control" parent="CenterContainer" unique_id=219005178]
 clip_contents = true
 layout_mode = 2
 script = ExtResource("4_tpaper")
 
-[node name="Paper" type="TextureRect" parent="CenterContainer/ChallengePanel"]
+[node name="Paper" type="TextureRect" parent="CenterContainer/ChallengePanel" unique_id=99312967]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,7 +45,7 @@ texture = ExtResource("3_paper")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/ChallengePanel"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/ChallengePanel" unique_id=504470421]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,60 +57,57 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ChallengePanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ChallengePanel/MarginContainer" unique_id=1454097848]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=310190832]
 layout_mode = 2
-mouse_filter = 2
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 32
 text = "Multiple Choice"
 horizontal_alignment = 1
 
-[node name="ContextLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer"]
+[node name="ContextLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=1592039477]
 layout_mode = 2
-mouse_filter = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 20
 text = "Answer correctly to continue"
 horizontal_alignment = 1
 
-[node name="Separator1" type="HSeparator" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer"]
+[node name="Separator1" type="HSeparator" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=1605280842]
 layout_mode = 2
 
-[node name="QuestionLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer"]
+[node name="QuestionLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=825811845]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
-mouse_filter = 2
 theme_override_font_sizes/font_size = 22
 text = "Question will appear here"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Separator2" type="HSeparator" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer"]
+[node name="Separator2" type="HSeparator" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=109810818]
 layout_mode = 2
 
-[node name="OptionsContainer" type="VBoxContainer" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer"]
+[node name="OptionsContainer" type="VBoxContainer" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=2108685470]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="OptionAButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer"]
+[node name="OptionAButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer" unique_id=2009492892]
 custom_minimum_size = Vector2(520, 56)
 layout_mode = 2
 text = "Option A"
 
-[node name="OptionBButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer"]
+[node name="OptionBButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer" unique_id=515342730]
 custom_minimum_size = Vector2(520, 56)
 layout_mode = 2
 text = "Option B"
 
-[node name="OptionCButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer"]
+[node name="OptionCButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer" unique_id=1115939319]
 custom_minimum_size = Vector2(520, 56)
 layout_mode = 2
 text = "Option C"
 
-[node name="OptionDButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer"]
+[node name="OptionDButton" type="Button" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer" unique_id=438471767]
 custom_minimum_size = Vector2(520, 56)
 layout_mode = 2
 text = "Option D"

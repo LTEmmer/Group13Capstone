@@ -1,28 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://victory_menu"]
+[gd_scene format=3 uid="uid://oug0cunoi1ad"]
 
-[ext_resource type="Script" path="res://game/ui/victory/VictoryMenu.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://7h11cueoepds" path="res://game/ui/victory/VictoryMenu.cs" id="1_script"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_cmc7d"]
 
-[node name="VictoryMenu" type="CanvasLayer"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmc7d"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.06302797, 0.17108461, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="VictoryMenu" type="CanvasLayer" unique_id=340248860]
 process_mode = 3
 script = ExtResource("1_script")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=1454765509]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cmc7d")
 
-[node name="ColorRect" type="ColorRect" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.05, 0.1, 0.05, 0.85)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1305473871]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -35,46 +40,55 @@ offset_right = 200.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_cmc7d")
 theme_override_constants/separation = 20
 
-[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1965121212]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
 theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_font_sizes/font_size = 48
 text = "VICTORY!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MessageLabel" type="Label" parent="Panel/VBoxContainer"]
+[node name="MessageLabel" type="Label" parent="Panel/VBoxContainer" unique_id=1079567617]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0.8509804, 0.2, 1)
+theme_override_font_sizes/font_size = 28
 text = "Congratulations! You conquered the dungeon!"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Spacer" type="Control" parent="Panel/VBoxContainer"]
+[node name="Spacer" type="Control" parent="Panel/VBoxContainer" unique_id=144176361]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="NewRunButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="NextFloorButton" type="Button" parent="Panel/VBoxContainer" unique_id=2100961256]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Next Floor"
+
+[node name="NewRunButton" type="Button" parent="Panel/VBoxContainer" unique_id=446580107]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "New Run"
 
-[node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer" unique_id=1070711955]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Main Menu"
 
-[node name="QuitButton" type="Button" parent="Panel/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="Panel/VBoxContainer" unique_id=1970553099]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Quit Game"
 
+[connection signal="pressed" from="Panel/VBoxContainer/NextFloorButton" to="." method="_on_next_floor_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/NewRunButton" to="." method="_on_new_run_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]

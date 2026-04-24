@@ -3,13 +3,17 @@ using Godot;
 
 public partial class Item : Interactable
 {
-	[Export] private MeshInstance3D _meshInstance;
-	[Export] public ItemResource _resource;
-	[Export] public ItemInstance _itemInstance;
-	[Export] private Label3D label;
+    [Export] private MeshInstance3D _meshInstance;
+    [Export] public ItemResource _resource;
+    [Export] public ItemInstance _itemInstance;
+    [Export] private PackedScene _tooltipScene;
 
 	[Export] public float DegreesPerSecond = 15.0f;
 	[Export] public Vector3 Axis = Vector3.Up;
+
+    private ItemTooltip _tooltip;
+
+    private static ShaderMaterial _highlightMaterial;
 
 	public override void _Process(double delta)
 	{
@@ -36,26 +40,28 @@ public partial class Item : Interactable
 		_itemInstance = instance;
 		_resource     = instance.Resource;
 
-		if (_resource.ScenePrefab != null)
-		{
-			var sceneInstance = _resource.ScenePrefab.Instantiate<Node3D>();
-			sceneInstance.Scale = Vector3.One * _resource.SceneScale;
-			sceneInstance.RotationDegrees = new Vector3(0, GD.Randf() * 180f, 0);
-			AddChild(sceneInstance);
-			if(_meshInstance != null) _meshInstance.Visible = false;
-		}
-		else if (_meshInstance != null && _resource.Mesh != null)
-		{
-			_meshInstance.Mesh = _resource.Mesh;
-		}
+        if (_resource.ScenePrefab != null)
+        {
+            var sceneInstance = _resource.ScenePrefab.Instantiate<Node3D>();
+            sceneInstance.Scale = Vector3.One * _resource.SceneScale;
+            sceneInstance.RotationDegrees = new Vector3(0, GD.Randf() * 180f, 0);
+            AddChild(sceneInstance);
+            if(_meshInstance != null) _meshInstance.Visible = false;
+            ApplyHighlight(sceneInstance);
+        }
+        else if (_meshInstance != null && _resource.Mesh != null)
+        {
+            _meshInstance.Mesh = _resource.Mesh;
+            ApplyHighlight(_meshInstance);
+        }
 
-		if (label != null)
-		{
-			label.Text      = _resource.Name;
-			label.Visible   = false;
-			label.Billboard = BaseMaterial3D.BillboardModeEnum.Enabled;
-		}
-	}
+        if (_tooltipScene != null)
+        {
+            _tooltip = _tooltipScene.Instantiate<ItemTooltip>();
+            AddChild(_tooltip);
+            _tooltip.Init(_resource);
+        }
+    }
 
 	public override void _Ready()
 	{
@@ -83,12 +89,42 @@ public partial class Item : Interactable
 		inventory.AddItem(_itemInstance);
 		GD.Print($"Added '{_resource.Name}' to {player.Name}'s inventory.");
 
-		TaloTelemetry.TrackItemsPickedUp();
-		QueueFree();
-	}
+        TaloTelemetry.TrackItemsPickedUp();
+        QueueFree();
+    }
 
-	// ───────────────────────── HOVER ─────────────────────────
+    private static void ApplyHighlight(Node3D root)
+    {
+        if (_highlightMaterial == null)
+        {
+            var shader = GD.Load<Shader>("res://game/ui/inventory_ui/highlight.gdshader");
+            _highlightMaterial = new ShaderMaterial { Shader = shader };
+        }
 
-	public override void HoverStart(Node caller) => label.Visible = true;
-	public override void HoverEnd(Node caller)   => label.Visible = false;
+        if (root is MeshInstance3D mi)
+        {
+            mi.MaterialOverlay = _highlightMaterial;
+            return;
+        }
+
+        foreach (var node in root.FindChildren("*", "MeshInstance3D", recursive: true, owned: false))
+        {
+            if (node is MeshInstance3D mesh)
+            {
+                mesh.MaterialOverlay = _highlightMaterial;
+            }
+        }
+    }
+
+    // ───────────────────────── HOVER ─────────────────────────
+
+    public override void HoverStart(Node caller)
+    {
+        if (_tooltip != null) _tooltip.Visible = true;
+    }
+
+    public override void HoverEnd(Node caller)
+    {
+        if (_tooltip != null) _tooltip.Visible = false;
+    }
 }

@@ -107,8 +107,9 @@ public partial class UploadPanelContainer : Control
 	{
 		Visible = false;
 
-		var mainMenu = GetParent().GetNodeOrNull<Control>("CenterContainer");
+		var mainMenu = GetParent().GetNodeOrNull<Control>("ViewFlashcardsPanelContainer");
 		if (mainMenu != null)
 			mainMenu.Visible = true;
 	}
+
 }

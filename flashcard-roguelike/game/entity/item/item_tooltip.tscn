@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://bmao7v6x5xx46"]
+
+[ext_resource type="Script" uid="uid://dub3cv2qoe30i" path="res://game/entity/item/ItemTooltip.cs" id="1_tooltip"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="2_o7dnq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_1"]
+
+[node name="ItemTooltip" type="Node3D" unique_id=290616380 node_paths=PackedStringArray("_viewport", "_panel", "_nameLabel", "_rarityLabel", "_typeLabel", "_separator", "_descLabel", "_quad")]
+script = ExtResource("1_tooltip")
+_viewport = NodePath("SubViewport")
+_panel = NodePath("SubViewport/PanelContainer")
+_nameLabel = NodePath("SubViewport/PanelContainer/MarginContainer/VBoxContainer/NameLabel")
+_rarityLabel = NodePath("SubViewport/PanelContainer/MarginContainer/VBoxContainer/RarityLabel")
+_typeLabel = NodePath("SubViewport/PanelContainer/MarginContainer/VBoxContainer/TypeLabel")
+_separator = NodePath("SubViewport/PanelContainer/MarginContainer/VBoxContainer/Separator")
+_descLabel = NodePath("SubViewport/PanelContainer/MarginContainer/VBoxContainer/DescLabel")
+_quad = NodePath("Quad")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1956229951]
+transparent_bg = true
+render_target_update_mode = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="SubViewport" unique_id=665496369]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 174.0
+theme = ExtResource("2_o7dnq")
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport/PanelContainer" unique_id=719903945]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/PanelContainer/MarginContainer" unique_id=1389135933]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="NameLabel" type="Label" parent="SubViewport/PanelContainer/MarginContainer/VBoxContainer" unique_id=2074069807]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="RarityLabel" type="Label" parent="SubViewport/PanelContainer/MarginContainer/VBoxContainer" unique_id=1782587498]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="TypeLabel" type="Label" parent="SubViewport/PanelContainer/MarginContainer/VBoxContainer" unique_id=18089027]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="SubViewport/PanelContainer/MarginContainer/VBoxContainer" unique_id=748840748]
+layout_mode = 2
+
+[node name="DescLabel" type="Label" parent="SubViewport/PanelContainer/MarginContainer/VBoxContainer" unique_id=402606806]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+autowrap_mode = 3
+
+[node name="Quad" type="MeshInstance3D" parent="." unique_id=1337492907]
+mesh = SubResource("QuadMesh_1")

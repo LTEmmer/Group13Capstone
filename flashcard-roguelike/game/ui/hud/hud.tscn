@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dpg6u0hfi2o0f" path="res://game/ui/hud/HUD.cs" id="1_script"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_l7e5k"]
+[ext_resource type="Script" uid="uid://6ivo1uc03nnh" path="res://game/ui/hud/Minimap.cs" id="3_8mv14"]
+[ext_resource type="Texture2D" uid="uid://dbvamkfos67eg" path="res://assets/sprites/crosshair006.png" id="4_c644b"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d4vpa"]
 load_path = "res://.godot/imported/whiteboard.png-0b4dcad790b2dd74c6ead4d6e773052f.ctex"
@@ -12,11 +14,31 @@ load_path = "res://.godot/imported/erased.png-5e64f6c280d2e94b00a15110ca3798e0.c
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8mv14"]
 load_path = "res://.godot/imported/health_fill.png-883a86ab79707abf47806678b4a8f161.ctex"
 
-[node name="HUD" type="CanvasLayer" unique_id=1895084757 node_paths=PackedStringArray("_roomNameLabel", "_healthLabel", "_shieldlabel")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mv14"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.85490197, 0.8392157, 0.83137256, 0.9098039)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 2
+
+[node name="HUD" type="CanvasLayer" unique_id=1895084757 node_paths=PackedStringArray("_roomNameLabel", "_healthLabel", "_shieldlabel", "_minimapContainer", "_healthbarRoot")]
+layer = -1
 script = ExtResource("1_script")
 _roomNameLabel = NodePath("HealthBarRoot/VBoxContainer/Background_MarginContainer_VBoxContainer#RoomNameLabel")
 _healthLabel = NodePath("HealthBarRoot/VBoxContainer/HealthBarTrack/HealthValueLabel")
 _shieldlabel = NodePath("HealthBarRoot/VBoxContainer/Background_MarginContainer_VBoxContainer#ShieldLabel")
+_minimapContainer = NodePath("MinimapContainer")
+_healthbarRoot = NodePath("HealthBarRoot")
 
 [node name="HealthBarRoot" type="MarginContainer" parent="." unique_id=1895084758]
 anchors_preset = 3
@@ -37,8 +59,9 @@ size_flags_vertical = 6
 layout_mode = 2
 
 [node name="Background_MarginContainer_VBoxContainer#RoomNameLabel" type="Label" parent="HealthBarRoot/VBoxContainer" unique_id=110892469]
-custom_minimum_size = Vector2(280, 34)
+custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_l7e5k")
 theme_override_font_sizes/font_size = 24
 text = "Room 0 (Entrance)"
 horizontal_alignment = 2
@@ -46,6 +69,7 @@ autowrap_mode = 2
 
 [node name="Background_MarginContainer_VBoxContainer#ShieldLabel" type="Label" parent="HealthBarRoot/VBoxContainer" unique_id=290986463]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_l7e5k")
 theme_override_font_sizes/font_size = 24
 text = "Shield: 0"
 horizontal_alignment = 2
@@ -117,3 +141,54 @@ theme_override_font_sizes/font_size = 13
 text = "100/100"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MinimapContainer" type="VBoxContainer" parent="." unique_id=497374013]
+visible = false
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 86.0
+offset_bottom = 68.0
+
+[node name="MapLabel" type="Label" parent="MinimapContainer" unique_id=51030367]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_l7e5k")
+theme_override_font_sizes/font_size = 24
+text = "MINIMAP"
+horizontal_alignment = 1
+
+[node name="MinimapPanel" type="PanelContainer" parent="MinimapContainer" unique_id=335459436]
+clip_children = 2
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8mv14")
+
+[node name="MarginContainer" type="MarginContainer" parent="MinimapContainer/MinimapPanel" unique_id=970547077]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Minimap" type="Control" parent="MinimapContainer/MinimapPanel/MarginContainer" unique_id=523652878]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("3_8mv14")
+
+[node name="Crosshair" type="TextureRect" parent="." unique_id=94652502]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_c644b")
+stretch_mode = 3
