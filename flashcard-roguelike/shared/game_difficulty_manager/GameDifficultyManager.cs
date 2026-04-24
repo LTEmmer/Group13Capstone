@@ -8,10 +8,10 @@ public partial class GameDifficultyManager : Node
 
 	private float _currentDifficultyScore = 0.0F;
 	private float _baselineDifficultyScore = 1.0F;
-	private float _difficultyScoreIncrease = 0.15F;  // 0.25 per victory — slower difficulty ramp
+	private float _difficultyScoreIncrease = 0.15F;  // 0.15 per combat victory, slower difficulty ramp
 	private float _difficultyScoreDecrease = 0.50F; // Used for running
 	private int _currentFloor = 1;
-	private const float _baselineFloorIncrement = 1.0f;
+	private const float _baselineFloorIncrement = .5f;
 
 	public int CurrentFloor => _currentFloor;
 

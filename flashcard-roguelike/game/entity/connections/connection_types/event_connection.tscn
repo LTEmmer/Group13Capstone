@@ -2,14 +2,33 @@
 
 [ext_resource type="Script" uid="uid://d21whjtbn8o5c" path="res://shared/components/hover/HoverComponent.cs" id="1_68gw7"]
 [ext_resource type="Script" uid="uid://sjh56ix28es4" path="res://shared/components/rotate/RotateComponent.cs" id="2_vkkwg"]
+[ext_resource type="Shader" path="res://game/ui/inventory_ui/highlight.gdshader" id="3_vkkwg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qe36r"]
+render_priority = 0
+shader = ExtResource("3_vkkwg")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/cycle_interval = 1.0
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_width = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_077h0"]
 resource_name = "Material.003"
+next_pass = SubResource("ShaderMaterial_qe36r")
 cull_mode = 2
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gyepj"]
+render_priority = 0
+shader = ExtResource("3_vkkwg")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/cycle_interval = 1.0
+shader_parameter/shine_speed = 3.0
+shader_parameter/shine_width = 3.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w52qj"]
 resource_name = "Material.004"
+next_pass = SubResource("ShaderMaterial_gyepj")
 cull_mode = 2
 albedo_color = Color(0.0076660225, 0.18403083, 0.90633965, 1)
 roughness = 0.5

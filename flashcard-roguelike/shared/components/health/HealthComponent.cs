@@ -5,12 +5,15 @@ public partial class HealthComponent : Node
 {
 	[Signal]
 	public delegate void _OnDeathEventHandler();
-	
+
 	[Signal]
 	public delegate void PlayerDiedEventHandler();
-	
+
 	[Signal]
 	public delegate void EnemyDiedEventHandler();
+
+	[Signal]
+	public delegate void HealthChangedEventHandler();
 	
 	[Export] public float MaxHealth = 100f;
 
@@ -83,6 +86,7 @@ public partial class HealthComponent : Node
 		if(damage <= 0) return;
 
 		CurrentHealth -= damage;
+		EmitSignal(SignalName.HealthChanged);
 		GD.Print($"{GetParent().Name}: Health: {CurrentHealth}/{MaxHealth}");
 
 		if (IsPlayer)
@@ -166,21 +170,20 @@ public partial class HealthComponent : Node
 
 		var tween = overlay.CreateTween();
 		tween.TweenProperty(overlay, "color:a", 0f, 0.4f);
-		tween.TweenCallback(Callable.From(() => 
-		{
-			canvasLayer.QueueFree();
-			if (IsPlayer && heal)
-			{
-				_audioPlayer.Stream = HealSounds[GD.Randi() % HealSounds.Length];
-				_audioPlayer.Play();
-			}
-		}));
+		tween.TweenCallback(Callable.From(canvasLayer.QueueFree));
 	}
 
 	public void Heal(float amount)
 	{
+		if (CurrentHealth >= MaxHealth) return;
 		CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
+		EmitSignal(SignalName.HealthChanged);
 		FlashEffectOverlay(true);
+		if (IsPlayer && HealSounds != null && HealSounds.Length > 0)
+		{
+			_audioPlayer.Stream = HealSounds[GD.Randi() % HealSounds.Length];
+			_audioPlayer.Play();
+		}
 		GD.Print($"{GetParent().Name}: Health: {CurrentHealth}/{MaxHealth}");
 	}
 

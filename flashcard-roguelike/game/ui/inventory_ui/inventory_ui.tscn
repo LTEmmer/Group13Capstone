@@ -359,7 +359,7 @@ viewport_path = NodePath("Node/Tabs/UseView")
 [sub_resource type="ViewportTexture" id="ViewportTexture_q2ccd"]
 viewport_path = NodePath("Node/Tabs/ToolsView")
 
-[node name="InventoryUI" type="Node3D" unique_id=2131535673 node_paths=PackedStringArray("_equipment", "_statPage", "_toolPage", "_usePage", "_statItems", "_toolItems", "_useItems", "_statList", "_useList", "_toolList", "_statTab", "_useTab", "_toolTab")]
+[node name="InventoryUI" type="Node3D" unique_id=2131535673 node_paths=PackedStringArray("_equipment", "_statPage", "_toolPage", "_usePage", "_statItems", "_toolItems", "_useItems", "_statList", "_useList", "_toolList", "_statTab", "_useTab", "_toolTab", "_statHP", "_statShield", "_statDef", "_statAtk", "_statCrit", "_statCritMult")]
 transform = Transform3D(1, 0, 0, 0, 0.22309704, -0.97479624, 0, 0.97479624, 0.22309704, 0, 0, 0)
 script = ExtResource("1")
 _equipment = NodePath("EquipmentComponent")
@@ -377,6 +377,12 @@ _toolList = NodePath("Node/LeftPageView/ToolItems/ToolList")
 _statTab = NodePath("Node/Tabs/StatsView/Label/Button")
 _useTab = NodePath("Node/Tabs/UseView/Label/Button")
 _toolTab = NodePath("Node/Tabs/ToolsView/Label/Button")
+_statHP = NodePath("Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer/StatHP")
+_statShield = NodePath("Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer/StatShield")
+_statDef = NodePath("Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer/StatDef")
+_statAtk = NodePath("Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer/StatAtk")
+_statCrit = NodePath("Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer/StatCrit")
+_statCritMult = NodePath("Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer/StatCritMult")
 
 [node name="EquipmentComponent" parent="." unique_id=443386136 instance=ExtResource("3_mmt0n")]
 
@@ -475,6 +481,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -220.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -501,6 +508,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -220.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -526,6 +534,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -220.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -545,6 +554,66 @@ theme_override_styles/selected = SubResource("StyleBoxFlat_fhk5c")
 max_columns = 10
 same_column_width = true
 fixed_icon_size = Vector2i(64, 64)
+
+[node name="StatsPanel" type="Panel" parent="Node/LeftPageView" unique_id=-1183856185]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -220.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="Node/LeftPageView/StatsPanel" unique_id=-1183856184]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node/LeftPageView/StatsPanel/MarginContainer" unique_id=-1183856183]
+layout_mode = 2
+
+[node name="StatHP" type="Label" parent="Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer" unique_id=-1183856182]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_e77rp")
+theme_override_font_sizes/font_size = 22
+
+[node name="StatShield" type="Label" parent="Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer" unique_id=-1183856181]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_e77rp")
+theme_override_font_sizes/font_size = 22
+
+[node name="StatDef" type="Label" parent="Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer" unique_id=-1183856180]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_e77rp")
+theme_override_font_sizes/font_size = 22
+
+[node name="StatAtk" type="Label" parent="Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer" unique_id=-1183856179]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_e77rp")
+theme_override_font_sizes/font_size = 22
+
+[node name="StatCrit" type="Label" parent="Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer" unique_id=-1183856178]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_e77rp")
+theme_override_font_sizes/font_size = 22
+
+[node name="StatCritMult" type="Label" parent="Node/LeftPageView/StatsPanel/MarginContainer/VBoxContainer" unique_id=-1183856177]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_e77rp")
+theme_override_font_sizes/font_size = 22
 
 [node name="RightPageView" type="SubViewport" parent="Node" unique_id=732024750]
 transparent_bg = true

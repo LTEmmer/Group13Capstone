@@ -40,6 +40,10 @@ public partial class DungeonGenerator : Node3D
 	public void GoToNextFloor()
 	{
 		GameDifficultyManager.Instance?.AdvanceFloor();
+
+		// Detach player before clearing rooms so it isn't freed along with them
+		_player?.GetParent()?.RemoveChild(_player);
+
 		Node3D roomsRoot = GetOrCreateRoot("Rooms");
 		ClearChildren(roomsRoot);
 		RegenerateDungeon();
@@ -363,12 +367,6 @@ public partial class DungeonGenerator : Node3D
 
 	private void SpawnPlayer()
 	{
-		if (PlayerScene == null)
-		{
-			GD.PushError("DungeonGenerator: PlayerScene is not assigned.");
-			return;
-		}
-
 		Node3D entranceRoom = GetRoomNode(0);
 		if (entranceRoom == null)
 		{
@@ -383,9 +381,23 @@ public partial class DungeonGenerator : Node3D
 			return;
 		}
 
-		_player = PlayerScene.Instantiate<Player>();
-		_player.Transform = enterPoint.Transform;
+		if (_player == null || !IsInstanceValid(_player))
+		{
+			if (PlayerScene == null)
+			{
+				GD.PushError("DungeonGenerator: PlayerScene is not assigned.");
+				return;
+			}
+			_player = PlayerScene.Instantiate<Player>();
+		}
+
 		entranceRoom.AddChild(_player);
+		_player.Transform = enterPoint.Transform;
+
+		// Boss-victory path in BattleManager skips the normal input/mouse reset, so do it here
+		_player.Velocity = Vector3.Zero;
+		_player.SetAcceptKeyboardInput(true);
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	private Node3D GetOrCreateRoot(string name)

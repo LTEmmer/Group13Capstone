@@ -39,8 +39,9 @@ public partial class FlashcardManager : Node
 
 		// Sample sets
 		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/BasicComputerScienceCards.csv"));
-		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/BasicGeographyCards.csv"));
-		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/RandomTriviaCards.csv"));
+		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/FoodCards.csv"));
+		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/GeographyCards.csv"));
+		ImportAndSave(ProjectSettings.GlobalizePath("res://game/ui/flashcard_menu/example_csv/ArtCards.csv"));
 	}
 
 	// Singleton method to handle importing and saving flashcards from CSV files and add them to the available sets

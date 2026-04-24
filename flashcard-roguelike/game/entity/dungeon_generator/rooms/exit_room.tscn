@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ho30grmj7jcn"]
 
-[ext_resource type="PackedScene" uid="uid://ds5f3mbj7qseo" path="res://game/entity/boss_fsm/boss.tscn" id="2_1on2c"]
 [ext_resource type="PackedScene" uid="uid://dtutg34hih1q2" path="res://scenes/battle_scene/battle_area.tscn" id="2_2ddii"]
+[ext_resource type="PackedScene" uid="uid://bv31ussi31x02" path="res://game/entity/boss_fsm/slime_boss.tscn" id="2_2lfoa"]
 [ext_resource type="PackedScene" uid="uid://b3l8sn5fx3rfr" path="res://assets/models/exit_room/cafeteria/walls/exit_cafeteria_walls.glb" id="3_m2y4s"]
 [ext_resource type="Material" uid="uid://u05v56fskb4q" path="res://assets/models/exit_room/cafeteria/walls/exit_cafeteria_walls_texture.tres" id="4_81sre"]
 [ext_resource type="PackedScene" uid="uid://cxcrmis5wpem5" path="res://assets/models/exit_room/cafeteria/ceiling_floor/exit_cafeteria_ceiling_floor.glb" id="5_63vvc"]
@@ -60,13 +60,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0842962, -31.199)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28502846, 0)
 
 [node name="BattleArea" parent="." unique_id=1408501426 instance=ExtResource("2_2ddii")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21.604242)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20.217945)
 
 [node name="Boss" type="Node3D" parent="." unique_id=1784541584]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.078375)
 
-[node name="Boss" parent="Boss" unique_id=1938171652 instance=ExtResource("2_1on2c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.000926, 0)
+[node name="Boss" parent="Boss" unique_id=1938171652 instance=ExtResource("2_2lfoa")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.764181, 2.408865)
 
 [node name="exit_cafeteria_walls" parent="." unique_id=1525600554 instance=ExtResource("3_m2y4s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)

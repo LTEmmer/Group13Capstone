@@ -122,6 +122,10 @@ text = "TEST This message should never be seen TEST"
 layout_mode = 2
 alignment = 2
 
+[node name="SkipText" type="Label" parent="Panel/MarginContainer/VBoxContainer/ConfirmationContainer" unique_id=1531034181]
+layout_mode = 2
+text = "Press [E] To Skip"
+
 [node name="YesButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ConfirmationContainer" unique_id=19197602]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2

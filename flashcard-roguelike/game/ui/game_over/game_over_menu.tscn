@@ -58,7 +58,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.78, 0.18, 0.16, 1)
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 48
-text = "GAME OVER"
+text = "Stats So Far"
 horizontal_alignment = 1
 
 [node name="MessageLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=180056133]

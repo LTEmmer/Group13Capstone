@@ -99,7 +99,7 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 		}
 		else
 		{
-			_contextLabel.AddThemeColorOverride("font_color", Colors.Green);
+			_contextLabel.AddThemeColorOverride("font_color", Colors.Blue);
 		}
 
 		// Show with fade-in animation

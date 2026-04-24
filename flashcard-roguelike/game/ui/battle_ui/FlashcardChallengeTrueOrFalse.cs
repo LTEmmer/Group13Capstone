@@ -86,7 +86,7 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 		}
 		else
 		{
-			_contextLabel.AddThemeColorOverride("font_color", Colors.Green);
+			_contextLabel.AddThemeColorOverride("font_color", Colors.Blue);
 		}
 
 		_trueButton.Disabled = false;

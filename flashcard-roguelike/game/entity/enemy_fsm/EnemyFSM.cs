@@ -14,7 +14,9 @@ public partial class EnemyFSM : CharacterBody3D
 	[Export] public Area3D DetectionArea;
 	public override void _Ready(){
 		healthComponent.EnemyDied += OnEnemyDeath;
+		DetectionArea.Monitoring = false;
 		DetectionArea.BodyEntered += OnBodyEntered;
+		Callable.From(() => DetectionArea.Monitoring = true).CallDeferred();
 	}
 
 	public override void _PhysicsProcess(double delta)

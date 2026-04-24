@@ -64,7 +64,7 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 		}
 		else
 		{
-			_contextLabel.AddThemeColorOverride("font_color", Colors.Green);
+			_contextLabel.AddThemeColorOverride("font_color", Colors.Blue);
 		}
 
 		_answerInput.Text = "";

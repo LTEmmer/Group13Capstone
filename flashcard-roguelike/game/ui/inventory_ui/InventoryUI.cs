@@ -28,6 +28,13 @@ public partial class InventoryUI : Node3D
     [Export] private Button _useTab;
     [Export] private Button _toolTab;
 
+    [Export] private Label _statHP;
+    [Export] private Label _statShield;
+    [Export] private Label _statDef;
+    [Export] private Label _statAtk;
+    [Export] private Label _statCrit;
+    [Export] private Label _statCritMult;
+
     public override void _Ready()
     {
         ProcessMode = ProcessModeEnum.Always;
@@ -51,12 +58,15 @@ public partial class InventoryUI : Node3D
 
         if (_equipment != null)
         {
-            _equipment.ItemEquipped   += _ => RefreshEquipHighlights();
-            _equipment.ItemUnequipped += _ => RefreshEquipHighlights();
+            _equipment.ItemEquipped   += _ => { RefreshEquipHighlights(); RefreshStats(); };
+            _equipment.ItemUnequipped += _ => { RefreshEquipHighlights(); RefreshStats(); };
             _equipment.EffectTarget = _player;
         }
 
+        _player.healthComponent.HealthChanged += RefreshStats;
+
         RefreshUILists();
+        RefreshStats();
 
         ShowPage(_toolPage, _toolItems);
         Visible = true;
@@ -101,6 +111,7 @@ public partial class InventoryUI : Node3D
 
         RefreshUILists();
         RefreshEquipHighlights();
+        RefreshStats();
     }
 
     private void OnItemRemoved(ItemInstance item)
@@ -115,6 +126,7 @@ public partial class InventoryUI : Node3D
 
         RefreshUILists();
         RefreshEquipHighlights();
+        RefreshStats();
     }
 
     // ───────────────────────── SELECTION ─────────────────────────
@@ -233,5 +245,21 @@ public partial class InventoryUI : Node3D
 
         page.Visible = true;
         items.Visible = true;
+    }
+
+    // ───────────────────────── STATS DISPLAY ─────────────────────────
+
+    private void RefreshStats()
+    {
+        if (_player == null) return;
+        var hp = _player.healthComponent;
+        var atk = _player.attackComponent;
+
+        _statHP.Text = $"HP: {Mathf.CeilToInt(hp.CurrentHealth)} / {Mathf.CeilToInt(hp.MaxHealth)}";
+        _statShield.Text = $"Shield: {Mathf.CeilToInt(hp.Shield)}";
+        _statDef.Text = $"DEF: {Mathf.RoundToInt(hp.TrueDefence * 100)}%";
+        _statAtk.Text = $"ATK: {Mathf.CeilToInt(atk.BaseDamage * atk.BaseMult)}";
+        _statCrit.Text = $"Crit: {Mathf.RoundToInt(atk.CritChance * 100)}%";
+        _statCritMult.Text = $"Crit×: {atk.CritMult:F1}";
     }
 }

@@ -13,7 +13,6 @@ public partial class Room : Node3D
 	{
 		this.Connect("child_entered_tree", Callable.From<Node>(OnChildEnteredTree));
 		this.Connect("child_exited_tree", Callable.From<Node>(OnChildExitedTree));
-
 	}
 
 	public void OnChildEnteredTree(Node body){

@@ -28,7 +28,7 @@ public partial class EnemyIdle : EnemyBaseState
 		if(_currentTimer <= 0.0F && _staticEnemy == false){
 			return [true, StateNames.wander];
 		}
-		if (_playerDetected)
+		if (_playerDetected && !_staticEnemy)
 		{
 			return [true, StateNames.pursue];
 		}

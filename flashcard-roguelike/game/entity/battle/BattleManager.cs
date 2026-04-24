@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 // Main coordinator for the battle system. Delegates responsibilities to specialized managers
@@ -35,6 +34,7 @@ public partial class BattleManager : Node
 	// Cooldown management
 	private Timer _battleCooldownTimer;
 	private bool _canEnterBattle = true;
+
 
 	public override void _Ready()
 	{
@@ -397,8 +397,9 @@ public partial class BattleManager : Node
 					// Boss victory: show victory screen instead of returning to dungeon
 					if (victory && _state.IsBossBattle)
 					{
-						_victoryMenu.ShowVictory("You defeated the boss!\nCongratulations!");
+						_state.Reset();
 						_gameOverMenu.ShowSessionStats("You defeated the boss!", true, showVictory: true);
+						_victoryMenu.ShowVictory("You defeated the boss!\nCongratulations!");
 						return;
 					}
 
