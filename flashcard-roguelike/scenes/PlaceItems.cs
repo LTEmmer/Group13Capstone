@@ -15,7 +15,7 @@ public partial class PlaceItems : Node3D
     {
         int index = 0;
 
-        foreach (var resource in AllItems.Instance.ItemResources)
+        foreach (var resource in AllItemsManager.Instance.ItemResources)
         {
             SpawnItem(resource, index);
             index++;

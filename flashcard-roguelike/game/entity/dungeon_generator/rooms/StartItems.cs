@@ -13,10 +13,10 @@ public partial class StartItems : Node3D
 
 	private void SpawnItems()
 	{
-    	if (AllItems.Instance == null) { GD.PrintErr("[StartItems] AllItems not ready."); return; }
+    	if (AllItemsManager.Instance == null) { GD.PrintErr("[StartItems] AllItems not ready."); return; }
     	if (ItemScene == null)         { GD.PrintErr("[StartItems] ItemScene not assigned."); return; }
 
-    	var items = AllItems.Instance.GetRandomItems(ItemCount, allowDuplicates: false);
+    	var items = AllItemsManager.Instance.GetRandomItems(ItemCount, allowDuplicates: false);
     	if (items == null) return;
 
     	for (int i = 0; i < items.Count; i++)

@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ItemResource" format=3 uid="uid://c0i2msij417db"]
 
-[ext_resource type="Texture2D" uid="uid://b7hbaji6edgmx" path="res://assets/sprites/item_sprites/milk.png" id="1_fycdj"]
-[ext_resource type="Script" uid="uid://otpise5by8no" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_fycdj"]
-[ext_resource type="PackedScene" uid="uid://dcl4t2xk715dc" path="res://assets/models/item_models/milk_carton.glb" id="2_yp1gu"]
-[ext_resource type="Script" uid="uid://3d8wv0hhafrq" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="3_yp1gu"]
-[ext_resource type="Script" uid="uid://bmb23qe3hj2fc" path="res://shared/resources/ItemResource.cs" id="4_cpx4c"]
+[ext_resource type="Texture2D" uid="uid://dm55o3ban8cmt" path="res://assets/sprites/item_sprites/milk.png" id="1_fycdj"]
+[ext_resource type="Script" uid="uid://crv315mdj71bb" path="res://game/entity/item/effects/mod_components/ModAttack.cs" id="2_fycdj"]
+[ext_resource type="PackedScene" uid="uid://bw0cm1q445nqn" path="res://assets/models/item_models/milk_carton.glb" id="2_yp1gu"]
+[ext_resource type="Script" uid="uid://cslf8mk74f83c" path="res://game/entity/item/effects/mod_components/ModHealth.cs" id="3_yp1gu"]
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="4_cpx4c"]
 
 [sub_resource type="Resource" id="Resource_1nt3j"]
 script = ExtResource("2_fycdj")
