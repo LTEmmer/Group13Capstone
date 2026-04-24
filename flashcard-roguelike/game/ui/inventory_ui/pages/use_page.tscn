@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dl85stya4bhaq" path="res://game/ui/inventory_ui/pages/UsePage.cs" id="1_4e057"]
 [ext_resource type="Theme" uid="uid://7f2b3p0maj6r" path="res://game/ui/inventory_ui/InventoryFont.tres" id="1_ib2od"]
-[ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="2_oobi1"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="4_c4lbg"]
 [ext_resource type="Texture2D" uid="uid://dt2cje5lk82j2" path="res://assets/ui/highlighter.png" id="5_860if"]
 
@@ -204,17 +203,11 @@ text = "Uses Rmaining:"
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 42
-text = "99"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1097373275]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1776191051]
-layout_mode = 2
-texture = ExtResource("2_oobi1")
-stretch_mode = 5
 
 [node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer" unique_id=729574670]
 layout_mode = 2

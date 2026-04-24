@@ -2,7 +2,6 @@
 
 [ext_resource type="Theme" uid="uid://7f2b3p0maj6r" path="res://game/ui/inventory_ui/InventoryFont.tres" id="1_gvg4i"]
 [ext_resource type="Script" uid="uid://rxbaww6ktbg1" path="res://game/ui/inventory_ui/pages/StatPage.cs" id="1_rmbdi"]
-[ext_resource type="Texture2D" uid="uid://der043n8sxcql" path="res://assets/sprites/icon.svg" id="2_gvg4i"]
 
 [node name="StatPage" type="Control" unique_id=758058895 node_paths=PackedStringArray("_dropButton", "_description", "_name")]
 layout_mode = 3
@@ -31,11 +30,6 @@ grow_vertical = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1963459934]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1330005620]
-layout_mode = 2
-texture = ExtResource("2_gvg4i")
-stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=2040326404]
 layout_mode = 2
