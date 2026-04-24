@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemDatabase" format=3 uid="uid://64qt6mupv8k5"]
+
+[ext_resource type="Script" uid="uid://573w4ti026as" path="res://shared/resources/ItemResource.cs" id="1_m8fmr"]
+[ext_resource type="Resource" uid="uid://dhlcwfdiu3op" path="res://game/entity/item/item_resources/stats/blood_vial.tres" id="2_i54qp"]
+[ext_resource type="Resource" uid="uid://wkqtbebu1dkd" path="res://game/entity/item/item_resources/stats/cheat_sheet.tres" id="3_qicd6"]
+[ext_resource type="Resource" uid="uid://c2em1gnrq08pp" path="res://game/entity/item/item_resources/stats/frenzy_heart.tres" id="4_mp2wi"]
+[ext_resource type="Resource" uid="uid://btfjb1kjvo6oi" path="res://game/entity/item/item_resources/stats/iron_core.tres" id="5_mr3d4"]
+[ext_resource type="Resource" uid="uid://bw1ic7d7d66yq" path="res://game/entity/item/item_resources/stats/lucky_feather.tres" id="6_ssoar"]
+[ext_resource type="Resource" uid="uid://bi2uy0qvm6c43" path="res://game/entity/item/item_resources/tool/accuracy.tres" id="7_hpw7b"]
+[ext_resource type="Resource" uid="uid://t13kffwtgybf" path="res://game/entity/item/item_resources/tool/dress_pants.tres" id="8_0t83b"]
+[ext_resource type="Resource" uid="uid://ccqgj8gs5ctpl" path="res://game/entity/item/item_resources/tool/fountain_pen.tres" id="9_3lo6c"]
+[ext_resource type="Resource" uid="uid://c7ray2ai11y52" path="res://game/entity/item/item_resources/tool/graduation_cap.tres" id="10_ko3uy"]
+[ext_resource type="Resource" uid="uid://7hyntiag1ycs" path="res://game/entity/item/item_resources/tool/gym_shoe.tres" id="11_1kyjv"]
+[ext_resource type="Resource" uid="uid://ce6e1who3gvtw" path="res://game/entity/item/item_resources/tool/leeching_charm.tres" id="12_ug4yv"]
+[ext_resource type="Resource" uid="uid://b5u3fjuqyw1dk" path="res://game/entity/item/item_resources/tool/precision.tres" id="13_wcf58"]
+[ext_resource type="Resource" uid="uid://dsc2wuku35p6x" path="res://game/entity/item/item_resources/tool/ruler.tres" id="14_cv71l"]
+[ext_resource type="Resource" uid="uid://qq2u666tcbrb" path="res://game/entity/item/item_resources/tool/school_uniform.tres" id="15_8d3w1"]
+[ext_resource type="Resource" uid="uid://dmdi1gagqqbm7" path="res://game/entity/item/item_resources/tool/sturdy_headphones.tres" id="16_64wii"]
+[ext_resource type="Resource" uid="uid://biapbeaft61wq" path="res://game/entity/item/item_resources/use/bandage.tres" id="17_y77hx"]
+[ext_resource type="Resource" uid="uid://bpxqeuxuo575j" path="res://game/entity/item/item_resources/use/hamster_ball.tres" id="18_cqx4f"]
+[ext_resource type="Resource" uid="uid://d1k3ywv6qs5j8" path="res://game/entity/item/item_resources/use/health.tres" id="19_t1jfk"]
+[ext_resource type="Resource" uid="uid://bysevfq34nxa2" path="res://game/entity/item/item_resources/use/ice_pack.tres" id="20_xy1ev"]
+[ext_resource type="Resource" uid="uid://v332y1tyceyu" path="res://game/entity/item/item_resources/use/large_book.tres" id="21_57l6b"]
+[ext_resource type="Resource" uid="uid://b6uc17l4awchb" path="res://game/entity/item/item_resources/use/medicine.tres" id="22_wy8i6"]
+[ext_resource type="Resource" uid="uid://c0i2msij417db" path="res://game/entity/item/item_resources/use/school_milk.tres" id="23_1ar3y"]
+[ext_resource type="Script" uid="uid://co4dt3c3ih2oj" path="res://shared/resources/ItemDatabase.cs" id="24_ffx0k"]
+
+[resource]
+script = ExtResource("24_ffx0k")
+Items = Array[ExtResource("1_m8fmr")]([ExtResource("2_i54qp"), ExtResource("3_qicd6"), ExtResource("4_mp2wi"), ExtResource("5_mr3d4"), ExtResource("6_ssoar"), ExtResource("7_hpw7b"), ExtResource("8_0t83b"), ExtResource("9_3lo6c"), ExtResource("10_ko3uy"), ExtResource("11_1kyjv"), ExtResource("12_ug4yv"), ExtResource("13_wcf58"), ExtResource("14_cv71l"), ExtResource("15_8d3w1"), ExtResource("16_64wii"), ExtResource("17_y77hx"), ExtResource("18_cqx4f"), ExtResource("19_t1jfk"), ExtResource("20_xy1ev"), ExtResource("21_57l6b"), ExtResource("22_wy8i6"), ExtResource("23_1ar3y")])
+metadata/_custom_type_script = "uid://co4dt3c3ih2oj"

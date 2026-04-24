@@ -29,8 +29,8 @@ BattleManager="*uid://b8g15b4a5ec36"
 EventManager="*uid://u328qtrmmpqj"
 DifficultyManager="*uid://cgpb16u2nxry2"
 GameDifficultyManager="*uid://cgpb16u2nxry2"
-AllItems="*uid://s33d0tb7oo4t"
 DialogBoxManager="*uid://b1co7sefs75kv"
+AllItemsManager="*uid://ct8j4gsivqnl0"
 
 [display]
 
@@ -99,5 +99,7 @@ common/physics_interpolation=true
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+textures/vram_compression/import_s3tc_bptc=true
+textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/msaa_3d=3
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

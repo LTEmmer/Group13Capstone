@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ct8j4gsivqnl0"]
+
+[ext_resource type="Script" uid="uid://cttm205uvctmq" path="res://shared/all_items/AllItemsManager.cs" id="1_7hsuu"]
+
+[node name="AllItemsManager" type="Node" unique_id=1828130121]
+script = ExtResource("1_7hsuu")

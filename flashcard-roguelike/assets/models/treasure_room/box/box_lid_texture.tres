@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://da38vvqexdveu" path="res://assets/models/treasure_room/box/box_Material.002_BaseColor.png" id="1_3lymu"]
 [ext_resource type="Texture2D" uid="uid://bxwy5lfnkghlk" path="res://assets/models/treasure_room/box/box_Material.002_Normal.png" id="2_qap0w"]
-[ext_resource type="Shader" path="res://game/ui/inventory_ui/highlight.gdshader" id="2_uwemo"]
+[ext_resource type="Shader" uid="uid://bgg0ppwpces6b" path="res://game/ui/inventory_ui/highlight.gdshader" id="2_uwemo"]
 [ext_resource type="Texture2D" uid="uid://bkl06ilr3ya6s" path="res://assets/models/treasure_room/box/box_Material.002_Roughness.png" id="3_uwemo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ujxgx"]

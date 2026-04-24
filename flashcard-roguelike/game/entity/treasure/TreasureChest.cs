@@ -57,7 +57,7 @@ public partial class TreasureChest : Interactable
 		StartIdleShake();
 		StartLightCycle();
 
-		var items = AllItems.Instance.GetRandomItems(_rng.RandiRange(MinItems, MaxItems), allowDuplicates: false);
+		var items = AllItemsManager.Instance.GetRandomItems(_rng.RandiRange(MinItems, MaxItems), allowDuplicates: false);
 		if (items != null)
 			_rolledItems.AddRange(items);
 
