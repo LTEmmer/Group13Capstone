@@ -25,6 +25,7 @@ public abstract partial class InventoryPage<T> : Control where T : ItemResource
     // ── Protected helpers ───────────────────────────────────────────────────
     protected virtual void OnItemSet(ItemInstance item)
     {
+        AudioManager.Instance.PlayButtonHover();
         _item = item;
         _description.Text = item.Resource.Description;
         _name.Text = item.Resource.Name;
@@ -37,6 +38,7 @@ public abstract partial class InventoryPage<T> : Control where T : ItemResource
             GD.PrintErr("RequestDrop called with null item");
             return;
         }
+        AudioManager.Instance.PlayItemPickupSound();
 
         DropRequested?.Invoke(item);
     }
@@ -47,6 +49,7 @@ public abstract partial class InventoryPage<T> : Control where T : ItemResource
             GD.PrintErr("RequestDrop called with null item");
             return;
         }
+        AudioManager.Instance.PlayButtonHover();
 
         UseRequested?.Invoke(item);
     }
@@ -57,6 +60,7 @@ public abstract partial class InventoryPage<T> : Control where T : ItemResource
             GD.PrintErr("RequestDrop called with null item");
             return;
         }
+        AudioManager.Instance.PlayButtonHover();
 
         EquipRequested?.Invoke(item);
     }

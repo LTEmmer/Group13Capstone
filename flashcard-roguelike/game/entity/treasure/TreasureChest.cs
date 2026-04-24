@@ -29,7 +29,7 @@ public partial class TreasureChest : Interactable
 
 	private Node3D _sacrificeNode;
 	private bool _resolved = false;
-    private Node3D _shakeNode;
+	private Node3D _shakeNode;
 
 	public override void _Ready()
 	{

@@ -19,26 +19,26 @@ public partial class Item : Interactable
 	{
 		RotateObjectLocal(Axis.Normalized(), Mathf.DegToRad(DegreesPerSecond) * (float)delta);
 	}
-    // ───────────────────────── INIT ─────────────────────────
+	// ───────────────────────── INIT ─────────────────────────
 
-    /// <summary>Spawns with a specific instance (e.g. dropped from inventory).</summary>
-    public void Init(ItemInstance instance)
-    {
-        if (instance == null) throw new ArgumentNullException(nameof(instance));
-        Setup(instance);
-    }
+	/// <summary>Spawns with a specific instance (e.g. dropped from inventory).</summary>
+	public void Init(ItemInstance instance)
+	{
+		if (instance == null) throw new ArgumentNullException(nameof(instance));
+		Setup(instance);
+	}
 
-    /// <summary>Spawns from a resource alone creates a instance with Count 1.</summary>
-    public void Init(ItemResource resource)
-    {
-        if (resource == null) throw new ArgumentNullException(nameof(resource));
-        Setup(new ItemInstance(resource));
-    }
+	/// <summary>Spawns from a resource alone creates a instance with Count 1.</summary>
+	public void Init(ItemResource resource)
+	{
+		if (resource == null) throw new ArgumentNullException(nameof(resource));
+		Setup(new ItemInstance(resource));
+	}
 
-    private void Setup(ItemInstance instance)
-    {
-        _itemInstance = instance;
-        _resource     = instance.Resource;
+	private void Setup(ItemInstance instance)
+	{
+		_itemInstance = instance;
+		_resource     = instance.Resource;
 
         if (_resource.ScenePrefab != null)
         {
@@ -63,31 +63,31 @@ public partial class Item : Interactable
         }
     }
 
-    public override void _Ready()
-    {
-        if (_itemInstance == null && _resource != null)
-            Setup(new ItemInstance(_resource));
-        else if (_itemInstance != null)
-            Setup(_itemInstance);
-    }
+	public override void _Ready()
+	{
+		if (_itemInstance == null && _resource != null)
+			Setup(new ItemInstance(_resource));
+		else if (_itemInstance != null)
+			Setup(_itemInstance);
+	}
 
-    public override void Interact(Node caller)
-    {
-        if (_resource == null || caller is not Player player) return;
+	public override void Interact(Node caller)
+	{
+		if (_resource == null || caller is not Player player) return;
 
-        AudioManager.Instance.PlayItemPickupSound();
+		AudioManager.Instance.PlayItemPickupSound();
 
-        if (_resource.UseEffects == null && _resource.PickupEffects == null)
-            GD.Print(_resource.Name + ": has no effects");
+		if (_resource.UseEffects == null && _resource.PickupEffects == null)
+			GD.Print(_resource.Name + ": has no effects");
 
-        var inventoryNode = player.FindChild("InventoryComponent");
-        GD.Print("Found node: " + inventoryNode?.Name ?? "null");
-        var inventory = inventoryNode as InventoryComponent;
-        if (inventory == null)
-            throw new ArgumentNullException("Player has no inventory!");
+		var inventoryNode = player.FindChild("InventoryComponent");
+		GD.Print("Found node: " + inventoryNode?.Name ?? "null");
+		var inventory = inventoryNode as InventoryComponent;
+		if (inventory == null)
+			throw new ArgumentNullException("Player has no inventory!");
 
-        inventory.AddItem(_itemInstance);
-        GD.Print($"Added '{_resource.Name}' to {player.Name}'s inventory.");
+		inventory.AddItem(_itemInstance);
+		GD.Print($"Added '{_resource.Name}' to {player.Name}'s inventory.");
 
         TaloTelemetry.TrackItemsPickedUp();
         QueueFree();

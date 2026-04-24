@@ -329,7 +329,11 @@ public partial class DungeonGenerator : Node3D
 
 				for (int i = 0; i < enemyCount; i++)
 				{
-					EnemyFSM enemyInstance = GD.Load<PackedScene>("res://game/entity/enemy_fsm/enemy_patroller.tscn").Instantiate() as EnemyFSM;
+					// For testing purposes we will just spawn generic enemy instances at random positions in the enemy area
+					// In the future, we can use the difficulty score to determine the type and strength of enemies to spawn
+					// Maybe we define a list of enemies somewhere with associated difficulty ratings
+					//EnemyExample enemyInstance = GD.Load<PackedScene>("res://game/entity/enemy_example/enemy_example.tscn").Instantiate() as EnemyExample;
+					EnemyFSM enemyInstance = GD.Load<PackedScene>("res://game/entity/slime/enemy_slime.tscn").Instantiate() as EnemyFSM;
 					enemyInstance.Name = $"Enemy_{i}";
 
 					if (enemyInstance.healthComponent != null)
