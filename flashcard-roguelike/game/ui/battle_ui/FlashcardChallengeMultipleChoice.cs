@@ -32,7 +32,7 @@ public partial class FlashcardChallengeMultipleChoice : Control, IFlashcardChall
 	{
 		// Get UI elements
 		_challengePanel = GetNode<Control>("CenterContainer/ChallengePanel");
-		_questionLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/QuestionLabel");
+		_questionLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/QuestionScroll/QuestionLabel");
 		_contextLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
 		_optionAButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionAButton");
 		_optionBButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/OptionsContainer/OptionBButton");

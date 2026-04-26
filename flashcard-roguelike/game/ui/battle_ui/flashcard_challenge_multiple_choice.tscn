@@ -76,7 +76,12 @@ horizontal_alignment = 1
 [node name="Separator1" type="HSeparator" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=1605280842]
 layout_mode = 2
 
-[node name="QuestionLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=825811845]
+[node name="QuestionScroll" type="ScrollContainer" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer" unique_id=100000002]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="QuestionLabel" type="Label" parent="CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/QuestionScroll" unique_id=825811845]
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22

@@ -31,7 +31,7 @@ public partial class FlashcardChallengeTrueOrFalse : Control, IFlashcardChalleng
 	{
 		// Get UI elements
 		_challengePanel = GetNode<Control>("CenterContainer/ChallengePanel");
-		_questionLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/QuestionLabel");
+		_questionLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/QuestionScroll/QuestionLabel");
         _answerLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/AnswerLabel");
 		_contextLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
 		_trueButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ButtonContainer/TrueButton");

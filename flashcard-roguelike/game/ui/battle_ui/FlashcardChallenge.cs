@@ -26,7 +26,7 @@ public partial class FlashcardChallenge : Control, IFlashcardChallenge
 	{
 		// Get UI elements
 		_challengePanel = GetNode<Control>("CenterContainer/ChallengePanel");
-		_questionLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/QuestionLabel");
+		_questionLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/QuestionScroll/QuestionLabel");
 		_answerInput = GetNode<LineEdit>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/AnswerInput");
 		_contextLabel = GetNode<Label>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/ContextLabel");
 		_submitButton = GetNode<Button>("CenterContainer/ChallengePanel/MarginContainer/VBoxContainer/SubmitButton");
