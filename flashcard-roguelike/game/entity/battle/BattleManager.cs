@@ -462,6 +462,29 @@ public partial class BattleManager : Node
 		_canEnterBattle = true;
 	}
 
+	public void ForceHideUI()
+	{
+		if (!_state.InCombat) return;
+
+		_state.InCombat = false;
+		_state.WaitingForAction = false;
+		_state.WaitingForFlashcard = false;
+
+		_flashcardChallengeManager.HideChallenge();
+		_battleItemsPanel.Visible = false;
+		ActiveUI.Visible = false;
+		Transitions.Visible = false;
+
+		if (_state.PlayerHealth != null)
+			_state.PlayerHealth._OnDeath -= OnPlayerDeath;
+
+		if (_battleCooldownTimer.TimeLeft > 0)
+			_battleCooldownTimer.Stop();
+
+		_canEnterBattle = true;
+		_state.Reset();
+	}
+
 	/* For testing purposes, can be removed later
 	public override void _Input(InputEvent @event)
 	{

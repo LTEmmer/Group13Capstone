@@ -76,6 +76,7 @@ public partial class VictoryMenu : CanvasLayer
 	public void _on_new_run_pressed()
 	{
 		GD.Print("Starting new run...");
+		BattleManager.Instance?.Transitions?.Hide();
 		GameDifficultyManager.Instance?.ResetGame();
 		GetTree().Paused = false;
 		GetTree().ChangeSceneToFile("res://game/entity/dungeon_generator/dungeon_generator.tscn");
@@ -85,6 +86,7 @@ public partial class VictoryMenu : CanvasLayer
 	public void _on_main_menu_pressed()
 	{
 		GD.Print("Returning to main menu...");
+		BattleManager.Instance?.Transitions?.Hide();
 		GameDifficultyManager.Instance?.ResetGame();
 		GetTree().Paused = false;
 

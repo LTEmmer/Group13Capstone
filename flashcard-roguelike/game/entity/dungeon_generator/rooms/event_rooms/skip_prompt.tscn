@@ -57,7 +57,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "You can skip to the end of the parkour course, but you won't receive a reward. :("
+text = "You can skip to the end of the parkour course, but you won't receive a reward and you will take a penalty of 25 damage! :("
 horizontal_alignment = 1
 autowrap_mode = 3
 

@@ -140,6 +140,7 @@ public partial class PauseMenu : CanvasLayer
 	public void _on_quick_restart_pressed()
 	{
 		GD.Print("Abandon Run Pressed");
+		BattleManager.Instance?.ForceHideUI();
 		// Needs to be by path to avoid circular dependencies
 		SceneTransition.FadeOut(this, () => {
 			GetTree().Paused = false;
@@ -155,6 +156,7 @@ public partial class PauseMenu : CanvasLayer
 
 	private void ShowEndRunStats(string message)
 	{
+		BattleManager.Instance?.ForceHideUI();
 		CloseAll();
 		_buttonPanelContainer.Hide();
 		Visible = false;
