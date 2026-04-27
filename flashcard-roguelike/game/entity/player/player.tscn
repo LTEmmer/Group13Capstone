@@ -1,5 +1,4 @@
 [gd_scene format=4 uid="uid://ceim8jmtkr6d5"]
-
 [ext_resource type="Script" uid="uid://uc2jvp48gwdm" path="res://game/entity/player/Player.cs" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://b7hgirpfx6iw2" path="res://game/ui/pause_menue/pause_menu.tscn" id="2_0b5cm"]
 [ext_resource type="Script" uid="uid://btg7o2uoiswpk" path="res://game/entity/player/InputGatherer.cs" id="2_7qfun"]
@@ -1050,7 +1049,7 @@ size = Vector2(2, 2)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0b5cm"]
 
-[node name="Player" type="CharacterBody3D" unique_id=249236073 node_paths=PackedStringArray("PauseMenu", "InventoryCanvas", "CameraMount", "sightline", "inputGatherer", "playerModel", "attackComponent", "healthComponent", "inventoryComponent", "staminaComponent")]
+[node name="Player" type="CharacterBody3D" unique_id=249236073 node_paths=PackedStringArray("PauseMenu", "InventoryCanvas", "CameraMount", "sightline", "inputGatherer", "playerModel", "PlayerVisuals", "attackComponent", "healthComponent", "inventoryComponent", "staminaComponent")]
 script = ExtResource("1_script")
 PauseMenu = NodePath("CameraPivot/Camera3D/PauseMenu")
 InventoryCanvas = NodePath("CameraPivot/Camera3D/Inventory")
@@ -1058,6 +1057,7 @@ CameraMount = NodePath("CameraPivot")
 sightline = NodePath("CameraPivot/Camera3D/SightLine")
 inputGatherer = NodePath("InputGatherer")
 playerModel = NodePath("Model")
+PlayerVisuals = NodePath("PlayerVisuals")
 attackComponent = NodePath("AttackComponent")
 healthComponent = NodePath("HealthComponent")
 inventoryComponent = NodePath("InventoryComponent")
@@ -1424,7 +1424,6 @@ IsPlayer = true
 HurtSounds = Array[AudioStream]([ExtResource("13_cawmy"), ExtResource("14_chnj6"), ExtResource("28_5jc0j"), ExtResource("29_h2rmy"), ExtResource("30_l4byk"), ExtResource("31_h2xdj")])
 BlockSounds = Array[AudioStream]([ExtResource("18_je5mu"), ExtResource("19_k8egu"), ExtResource("34_6wk8s"), ExtResource("35_0vqd7"), ExtResource("36_icsuc")])
 DeathSound = Array[AudioStream]([ExtResource("15_kmnjn"), ExtResource("16_4j27x"), ExtResource("39_yna46"), ExtResource("40_6qpfs")])
-HealSounds = Array[AudioStream]([ExtResource("42_l4byk"), ExtResource("43_h2xdj"), ExtResource("44_6wk8s")])
 PlayerCamera = NodePath("../CameraPivot/Camera3D")
 
 [node name="InventoryComponent" parent="." unique_id=288412274 node_paths=PackedStringArray("EffectTarget") instance=ExtResource("5_inventory")]
