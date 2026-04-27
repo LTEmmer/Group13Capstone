@@ -58,6 +58,7 @@ public partial class EnemyFSM : CharacterBody3D
 		}
 	}
 	private void OnEnemyDeath(){
+		DetectionArea.Monitoring = false;
 		EnemyModel.SwitchTo(StateNames.death);
 	}
 }

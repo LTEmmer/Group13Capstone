@@ -149,7 +149,7 @@ public partial class GameOverMenu : CanvasLayer
 
 		if (_showVictory)
 		{
-			SceneTransition.FadeOut(this, QueueFree);
+			Visible = false;
 			return;
 		}
 
