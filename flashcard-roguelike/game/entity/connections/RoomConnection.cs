@@ -100,6 +100,7 @@ public partial class RoomConnection : Interactable
 		GetParent().GetParent().GetParent().RemoveChild(player);
 		targetRoom.AddChild(player);
 		player.GlobalTransform = dest;
+		TaloTelemetry.TrackFloorsCleared();
 
 		// Disable landing sound for next connection
 		if (player is Player p)
