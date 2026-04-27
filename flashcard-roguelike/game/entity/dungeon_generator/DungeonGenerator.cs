@@ -39,6 +39,7 @@ public partial class DungeonGenerator : Node3D
 	// Clears the current dungeon, bumps difficulty/floor, then regenerates in place.
 	public void GoToNextFloor()
 	{
+		TaloTelemetry.TrackFloorsCleared();
 		GameDifficultyManager.Instance?.AdvanceFloor();
 
 		// Detach player before clearing rooms so it isn't freed along with them
