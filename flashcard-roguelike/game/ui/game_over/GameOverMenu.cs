@@ -177,53 +177,50 @@ public partial class GameOverMenu : CanvasLayer
 		}
 
 		var card = new PanelContainer();
-		card.CustomMinimumSize = new Vector2(0, 72);
-		card.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+		card.CustomMinimumSize = new Vector2(500, 62);
 		card.AddThemeStyleboxOverride("panel", CreateCardStyle());
 		parent.AddChild(card);
 
 		var margin = new MarginContainer();
-		margin.AddThemeConstantOverride("margin_left", 16);
-		margin.AddThemeConstantOverride("margin_top", 14);
-		margin.AddThemeConstantOverride("margin_right", 16);
-		margin.AddThemeConstantOverride("margin_bottom", 14);
+		margin.AddThemeConstantOverride("margin_left", 12);
+		margin.AddThemeConstantOverride("margin_top", 8);
+		margin.AddThemeConstantOverride("margin_right", 12);
+		margin.AddThemeConstantOverride("margin_bottom", 8);
 		card.AddChild(margin);
 
 		var row = new HBoxContainer();
-		row.AddThemeConstantOverride("separation", 16);
+		row.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
+		row.AddThemeConstantOverride("separation", 10);
 		margin.AddChild(row);
-
-		var textColumn = new VBoxContainer();
-		textColumn.SizeFlagsHorizontal = Control.SizeFlags.ExpandFill;
-		textColumn.AddThemeConstantOverride("separation", 2);
-		row.AddChild(textColumn);
 
 		var labelNode = new Label
 		{
 			Text = label,
+			SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
 			AutowrapMode = TextServer.AutowrapMode.WordSmart
 		};
 		labelNode.AddThemeFontSizeOverride("font_size", 15);
-		labelNode.AddThemeColorOverride("font_color", new Color(0.24f, 0.18f, 0.13f));
+		labelNode.AddThemeColorOverride("font_color", new Color(0.06f, 0.06f, 0.06f));
 		if (_markerFont != null)
 		{
 			labelNode.AddThemeFontOverride("font", _markerFont);
 		}
-		textColumn.AddChild(labelNode);
+		row.AddChild(labelNode);
 
 		var valueNode = new Label
 		{
 			Text = value,
 			HorizontalAlignment = HorizontalAlignment.Right,
-			AutowrapMode = TextServer.AutowrapMode.WordSmart
+			VerticalAlignment = VerticalAlignment.Center,
+			CustomMinimumSize = new Vector2(88, 0)
 		};
-		valueNode.AddThemeFontSizeOverride("font_size", 24);
-		valueNode.AddThemeColorOverride("font_color", new Color(0.63f, 0.29f, 0.12f));
+		valueNode.AddThemeFontSizeOverride("font_size", 20);
+		valueNode.AddThemeColorOverride("font_color", new Color(0.06f, 0.06f, 0.06f));
 		if (_markerFont != null)
 		{
 			valueNode.AddThemeFontOverride("font", _markerFont);
 		}
-		textColumn.AddChild(valueNode);
+		row.AddChild(valueNode);
 	}
 
 	private static void ClearContainer(Container container)
@@ -262,22 +259,24 @@ public partial class GameOverMenu : CanvasLayer
 	{
 		return new StyleBoxFlat
 		{
-			BgColor = new Color(0.97f, 0.94f, 0.86f, 0.98f),
+			ContentMarginLeft = 14,
+			ContentMarginTop = 14,
+			ContentMarginRight = 14,
+			ContentMarginBottom = 14,
+			BgColor = new Color(0.995f, 0.994f, 0.99f, 0.95f),
 			BorderWidthLeft = 2,
 			BorderWidthTop = 2,
 			BorderWidthRight = 2,
 			BorderWidthBottom = 2,
-			BorderColor = new Color(0.46f, 0.32f, 0.18f, 0.9f),
-			CornerRadiusTopLeft = 20,
-			CornerRadiusTopRight = 20,
-			CornerRadiusBottomLeft = 20,
-			CornerRadiusBottomRight = 20,
-			ShadowSize = 5,
-			ShadowColor = new Color(0, 0, 0, 0.14f),
-			ContentMarginLeft = 2,
-			ContentMarginTop = 2,
-			ContentMarginRight = 2,
-			ContentMarginBottom = 2
+			BorderColor = new Color(0.22f, 0.22f, 0.2f, 0.4f),
+			CornerRadiusTopLeft = 6,
+			CornerRadiusTopRight = 6,
+			CornerRadiusBottomLeft = 6,
+			CornerRadiusBottomRight = 6,
+			ShadowColor = new Color(0, 0, 0, 0.12f),
+			ShadowSize = 3,
+			ShadowOffset = new Vector2(1, 2)
 		};
 	}
+
 }
