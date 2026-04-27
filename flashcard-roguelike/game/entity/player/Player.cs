@@ -103,7 +103,7 @@ public partial class Player : CharacterBody3D
 
 				// Vertical: rotate only the camera (pitch)
 				_pitch -= motion.Relative.Y * MouseSensitivity;
-				if (Mathf.RadToDeg(_pitch) > 70.0f)
+				if (Mathf.RadToDeg(_pitch) > 60.0f)
 				{
 					PlayerVisuals.Visible = false;
 					
@@ -112,7 +112,7 @@ public partial class Player : CharacterBody3D
 				{
 					PlayerVisuals.Visible = true;
 				}
-
+ 
 				_pitch = Mathf.Clamp(_pitch, -Mathf.DegToRad(MaxPitchDegrees), Mathf.DegToRad(MaxPitchDegrees));
 				_cameraPivot.Rotation = new Vector3(_pitch, 0, 0);
 			}
