@@ -2,20 +2,27 @@
 
 [ext_resource type="Script" uid="uid://b8bystywoxvc" path="res://game/ui/game_over/GameOverMenu.cs" id="1_script"]
 [ext_resource type="FontFile" uid="uid://bwy3w3j0me71b" path="res://assets/fonts/DryWhiteboardMarker-Regular.ttf" id="2_font"]
+[ext_resource type="Theme" uid="uid://byifovnma6qe7" path="res://game/ui/main_menu/WhiteboardMenuTheme.tres" id="3_theme"]
+[ext_resource type="Texture2D" uid="uid://b48xe6gkb0idd" path="res://assets/ui/main_menu_torn_paper.png" id="4_paper"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main"]
-bg_color = Color(0.98, 0.95, 0.88, 0.98)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_clear"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(1, 1, 0.99, 0)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.38, 0.26, 0.15, 0.9)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-shadow_color = Color(0, 0, 0, 0.18)
-shadow_size = 10
+border_color = Color(0.22, 0.22, 0.2, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.12)
+shadow_size = 3
+shadow_offset = Vector2(1, 2)
 
 [node name="GameOverMenu" type="CanvasLayer" unique_id=395216041]
 process_mode = 3
@@ -36,26 +43,42 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_theme")
 
 [node name="MainPanel" type="PanelContainer" parent="CenterContainer" unique_id=361003437]
-custom_minimum_size = Vector2(1040, 720)
+clip_contents = true
+custom_minimum_size = Vector2(1560, 1020)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_main")
+theme_override_styles/panel = SubResource("StyleBoxFlat_clear")
+
+[node name="Paper" type="TextureRect" parent="CenterContainer/MainPanel" unique_id=1917393572]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.065
+anchor_top = -0.065
+anchor_right = 1.065
+anchor_bottom = 1.065
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_paper")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MainPanel" unique_id=1479757156]
 layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
+theme_override_constants/margin_left = 112
+theme_override_constants/margin_top = 76
+theme_override_constants/margin_right = 112
+theme_override_constants/margin_bottom = 72
 
 [node name="MainVBox" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer" unique_id=766003528]
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 10
 
 [node name="TitleLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=182607670]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.78, 0.18, 0.16, 1)
+theme_override_colors/font_color = Color(0.07, 0.07, 0.07, 1)
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 48
 text = "Stats So Far"
@@ -63,7 +86,7 @@ horizontal_alignment = 1
 
 [node name="MessageLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=180056133]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.16, 0.13, 1)
+theme_override_colors/font_color = Color(0.08, 0.08, 0.08, 1)
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 18
 text = "Press anywhere to return to the main menu."
@@ -72,22 +95,24 @@ autowrap_mode = 2
 
 [node name="StatsHeaderLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=1637770715]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.22, 0.15, 0.09, 1)
+theme_override_colors/font_color = Color(0.08, 0.08, 0.08, 1)
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 22
 text = "Session Stats"
+horizontal_alignment = 1
 
 [node name="StatsListContainer" type="GridContainer" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=792468478]
+custom_minimum_size = Vector2(1040, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 10
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 8
 columns = 2
 
 [node name="FooterLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/MainVBox" unique_id=1117936091]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.32, 0.24, 0.18, 1)
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 13
 text = "Click, tap, or press any key to continue."
