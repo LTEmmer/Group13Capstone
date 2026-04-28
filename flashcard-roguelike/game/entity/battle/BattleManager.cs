@@ -352,6 +352,11 @@ public partial class BattleManager : Node
 
 	private void OnEnemyDeath(EnemyFSM enemy)
 	{
+		if (enemy is IBossEnemy)
+		{
+			TaloTelemetry.TrackFloorsCleared();
+		}
+
 		TaloTelemetry.TrackEnemiesDefeated();
 		_uiCoordinator.LogMessage($"{enemy.Name} was defeated!");
 		_uiCoordinator.UpdateHealthUI();

@@ -15,6 +15,7 @@ public static class TaloTelemetry
 	private const string EnemiesFacedTotalStat = "enemies_faced_total";
 	private const string EnemiesDefeatedTotalStat = "enemies_defeated_total";
 	private const string RoomsEnteredTotalStat = "rooms_entered_total";
+	private const string FloorsClearedTotalStat = "floors_cleared_total";
 	private const string ChestsOpenedTotalStat = "chests_opened_total";
 	private const string DamageTakenTotalStat = "damage_taken_total";
 	private const string DamageDealtTotalStat = "damage_dealt_total";
@@ -53,6 +54,11 @@ public static class TaloTelemetry
 	public static void TrackRoomsEntered(int count = 1)
 	{
 		TrackCountStat(RoomsEnteredTotalStat, count, trackToTalo: true);
+	}
+
+	public static void TrackFloorsCleared(int count = 1)
+	{
+		TrackCountStat(FloorsClearedTotalStat, count, trackToTalo: true);
 	}
 
 	public static void TrackChestsOpened(int count = 1)
@@ -106,6 +112,7 @@ public static class TaloTelemetry
 		{
 			new(FlashcardAnswersTotalStat, "Total questions answered", FormatCount(GetSessionValue(FlashcardAnswersTotalStat))),
 			new(RoomsEnteredTotalStat, "Rooms entered", FormatCount(GetSessionValue(RoomsEnteredTotalStat))),
+			new(FloorsClearedTotalStat, "Floors cleared", FormatCount(GetSessionValue(FloorsClearedTotalStat))),
 			new(FlashcardAnswersCorrectStat, "Questions answered correctly", FormatCount(GetSessionValue(FlashcardAnswersCorrectStat))),
 			new(FlashcardAnswersIncorrectStat, "Questions answered incorrectly", FormatCount(GetSessionValue(FlashcardAnswersIncorrectStat))),
 			new(EnemiesFacedTotalStat, "Enemies faced", FormatCount(GetSessionValue(EnemiesFacedTotalStat))),
