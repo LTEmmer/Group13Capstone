@@ -53,6 +53,7 @@ public class BattleState
 	{
 		Player = player;
 		AliveEnemies = new List<EnemyFSM>(enemies);
+		IsBossBattle = false;
 	}
 	
 	// Remove a defeated enemy from all tracking
