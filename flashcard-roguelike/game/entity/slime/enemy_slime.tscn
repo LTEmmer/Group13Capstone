@@ -12,13 +12,12 @@
 [ext_resource type="Script" uid="uid://sxa7g5h3u2b1" path="res://game/entity/enemy_fsm/MoveBack.cs" id="10_2h763"]
 [ext_resource type="Script" uid="uid://f41526eebk7j" path="res://game/entity/enemy_fsm/Death.cs" id="11_674l2"]
 [ext_resource type="PackedScene" uid="uid://ci0hdg6g3o0ny" path="res://shared/components/attack/attack_component.tscn.tscn" id="12_rg72q"]
+[ext_resource type="Material" uid="uid://dji8is33c1bo4" path="res://assets/models/slime_enemy/slime_shader.tres" id="12_y1n8d"]
 [ext_resource type="PackedScene" uid="uid://b5eif6k48kp5t" path="res://shared/components/health/health_component.tscn" id="13_3oy2u"]
 [ext_resource type="PackedScene" uid="uid://c6v5m2qas1t4q" path="res://shared/components/enemy_status/enemy_status_component.tscn" id="14_3xdvp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkwvb"]
 resource_name = "Material.001"
-cull_mode = 2
-albedo_color = Color(0.056847565, 0.9063355, 0, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lpe6h"]
 resource_name = "slime_Sphere"
@@ -543,7 +542,7 @@ animator = NodePath("../../../EnemyVisuals/AnimationPlayer")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Root" type="Node3D" parent="EnemyVisuals" unique_id=27558591]
-transform = Transform3D(0.49726805, 0.05219667, 4.370748e-08, 0.052192003, -0.4972236, -0.0066870213, -0.00069803704, 0.006650489, -0.4999553, 0, 0.6, 0.865)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Skeleton3D" type="Skeleton3D" parent="EnemyVisuals/Root" unique_id=1664179994]
 bones/0/name = "Bone"
@@ -551,13 +550,14 @@ bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bones/0/enabled = true
 bones/0/position = Vector3(0, 0, 0)
-bones/0/rotation = Quaternion(0, 0, 0, 1)
-bones/0/scale = Vector3(1, 1, 1)
+bones/0/rotation = Quaternion(0, 0, 0.049937632, 0.99875236)
+bones/0/scale = Vector3(0.99999994, 0.99999994, 1)
 
 [node name="Sphere" type="MeshInstance3D" parent="EnemyVisuals/Root/Skeleton3D" unique_id=625514074]
 mesh = SubResource("ArrayMesh_lpe6h")
 skin = SubResource("Skin_y1n8d")
 skeleton = NodePath("..")
+surface_material_override/0 = ExtResource("12_y1n8d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="EnemyVisuals" unique_id=589969628]
 libraries/ = SubResource("AnimationLibrary_81e5a")

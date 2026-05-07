@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dji8is33c1bo4"]
+
+[ext_resource type="Shader" uid="uid://cw64g7k6jefs3" path="res://assets/models/boss_slime/boss_slime.gdshader" id="1_pfltj"]
+
+[resource]
+render_priority = 1
+shader = ExtResource("1_pfltj")
+shader_parameter/Specular = 0.1750000083125
+shader_parameter/Hardness = 115.0
+shader_parameter/BaseColor = Color(0.20402801, 0.7907434, 0.061519176, 1)
+shader_parameter/HighlightColor = Color(0.48235294, 0.99215686, 0.59607846, 1)
+shader_parameter/Opacity = 0.0
+shader_parameter/refraction = 18000.00038
+shader_parameter/time_scale = 0.45
+shader_parameter/motion_strength = 0.315

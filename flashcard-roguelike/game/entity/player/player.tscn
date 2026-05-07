@@ -34,7 +34,7 @@
 [ext_resource type="Script" uid="uid://biabnuibn3bqn" path="res://game/entity/player/DownCast.cs" id="17_vp686"]
 [ext_resource type="AudioStream" uid="uid://fbhde411ex8k" path="res://assets/audio/player_sfx/block_sfx/block_1.mp3" id="18_je5mu"]
 [ext_resource type="AudioStream" uid="uid://bdb8ackwhyxg3" path="res://assets/audio/player_sfx/block_sfx/block_2.mp3" id="19_k8egu"]
-[ext_resource type="AnimationLibrary" path="res://assets/animations/animationlibrary_anims.res" id="20_5jc0j"]
+[ext_resource type="AnimationLibrary" uid="uid://dhsnbo8ihrcnh" path="res://assets/animations/animationlibrary_anims.res" id="20_5jc0j"]
 [ext_resource type="AudioStream" uid="uid://dxgxw887g5dj8" path="res://assets/audio/player_sfx/attack_sfx/attack_3.mp3" id="22_6rqdb"]
 [ext_resource type="AudioStream" uid="uid://dj27x1qfpftn7" path="res://assets/audio/player_sfx/attack_sfx/attack_4.mp3" id="23_l0vtf"]
 [ext_resource type="AudioStream" uid="uid://u5x5gsvoude8" path="res://assets/audio/player_sfx/attack_sfx/attack_5.mp3" id="24_8vwb3"]
@@ -47,6 +47,9 @@
 [ext_resource type="AudioStream" uid="uid://dg07axa061o8a" path="res://assets/audio/player_sfx/block_sfx/block_5.mp3" id="36_icsuc"]
 [ext_resource type="AudioStream" uid="uid://chl7k76fobosi" path="res://assets/audio/player_sfx/death_sfx/death_3.mp3" id="39_yna46"]
 [ext_resource type="AudioStream" uid="uid://b4ya4iobl34pn" path="res://assets/audio/player_sfx/death_sfx/death_4.mp3" id="40_6qpfs"]
+[ext_resource type="AudioStream" uid="uid://bv6mxfm55uv2t" path="res://assets/audio/player_sfx/heal_sfx/heal_1.mp3" id="43_h2xdj"]
+[ext_resource type="AudioStream" uid="uid://bqxscpebo2g5n" path="res://assets/audio/player_sfx/heal_sfx/heal_2.mp3" id="44_6wk8s"]
+[ext_resource type="AudioStream" uid="uid://d4dbasn6fjxbp" path="res://assets/audio/player_sfx/heal_sfx/heal_3.mp3" id="45_0vqd7"]
 [ext_resource type="Script" uid="uid://bs2vym380rd2d" path="res://game/entity/player/Inventory.cs" id="45_6rqdb"]
 [ext_resource type="Shader" uid="uid://lsc1hmg6pjdt" path="res://game/entity/player/camera.gdshader" id="47_l0vtf"]
 [ext_resource type="Shader" uid="uid://b4oe5g5w505u5" path="res://game/entity/player/ps1Shader.gdshader" id="48_l0vtf"]
@@ -1428,6 +1431,7 @@ IsPlayer = true
 HurtSounds = Array[AudioStream]([ExtResource("13_cawmy"), ExtResource("14_chnj6"), ExtResource("28_5jc0j"), ExtResource("29_h2rmy"), ExtResource("30_l4byk"), ExtResource("31_h2xdj")])
 BlockSounds = Array[AudioStream]([ExtResource("18_je5mu"), ExtResource("19_k8egu"), ExtResource("34_6wk8s"), ExtResource("35_0vqd7"), ExtResource("36_icsuc")])
 DeathSound = Array[AudioStream]([ExtResource("15_kmnjn"), ExtResource("16_4j27x"), ExtResource("39_yna46"), ExtResource("40_6qpfs")])
+HealSounds = Array[AudioStream]([ExtResource("43_h2xdj"), ExtResource("44_6wk8s"), ExtResource("45_0vqd7")])
 PlayerCamera = NodePath("../CameraPivot/Camera3D")
 
 [node name="InventoryComponent" parent="." unique_id=288412274 node_paths=PackedStringArray("EffectTarget") instance=ExtResource("5_inventory")]
