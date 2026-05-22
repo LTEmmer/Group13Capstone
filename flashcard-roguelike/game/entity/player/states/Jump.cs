@@ -12,7 +12,7 @@ public partial class Jump : BaseState
 	[Export]
 	public float AngularSpeed = 7.0F;
 	[Export]
-	public double TransitionTiming = 0.5;
+	public double TransitionTiming = 0.3;
 	[Export]
 	public double JumpTiming = 0.2;
 	

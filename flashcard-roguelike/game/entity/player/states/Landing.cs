@@ -4,7 +4,7 @@ using Array = Godot.Collections.Array;
 [Tool]
 public partial class Landing : BaseState
 {
-	private const float TRANSITION_TIME = 0.2F;
+	private const float TRANSITION_TIME = 0.1F;
 	private const float GRAVITY_GOING_DOWN = 29.4F;
 
 	private const float PitchVariance = 0.08f;
@@ -30,6 +30,11 @@ public partial class Landing : BaseState
 		if (WorksLongerThan(TRANSITION_TIME))
 		{
 			return BestNextInput(input);
+		}
+
+		if (player.IsOnFloor())
+		{
+			return [true, StateNames.idle];
 		}
 		else
 		{
